@@ -66,6 +66,7 @@ class gtld extends Whois {
 		"TUCOWS, INC." => "opensrsnet",
 		"R11-LROR"  => "opensrsnet",
 		"IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM" => "dotregistrar",
+		"R114-LROR" => "dotregistrar",
 		"INTERDOMAIN, S.A." => "interdomain"
 		);
 
