@@ -161,7 +161,7 @@ if (!isset($r["name"]))
      unset($array[0]);
    }
 
-$r["address"]=$array;
+if (!empty($array)) $r["address"]=$array;
 
 return $r;
 }
