@@ -25,7 +25,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* brnic.whois	      2.0        David Saez <david@ols.es> 
+/* brnic.whois        2.1        David Saez <david@ols.es>
+/* brnic.whois	      2.0        David Saez <david@ols.es> */
 /* brnic.whois        1.0        by Marcelo Sanches  msanches@sitebox.com.br */
 
 include_once("generic.whois");
@@ -40,18 +41,33 @@ function brnic($data) {
 
 function parse ($data_str) 
 {
+$translate = array (
+                        "fax-no" => "fax",
+                        "e-mail" => "email",
+                        "nic-hdl-br" => "handle",
+                        "person" => "name"
+                   );
+
+$contacts = array (
+			"owner-c" => "owner",
+			"admin-c" => "admin",
+			"tech-c" => "tech",
+			"billing-c" => "billing"
+	          );
+
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array( "whois"=>"whois.registro.br", "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");
-$reg=generic_whois($data_str["rawdata"]);
 
-unset($reg["owner"]["nsstat"]);
-unset($reg["owner"]["nslastaa"]);
+$reg=generic_whois($data_str["rawdata"],$translate,$contacts);
 
-$reg["owner"]["organization"]=$reg["owner"]["owner"];
-unset($reg["owner"]["owner"]);
+unset($reg["domain"]["nsstat"]);
+unset($reg["domain"]["nslastaa"]);
+unset($reg["domain"]["responsible"]);
+unset($reg["domain"]["address"]);
+unset($reg["domain"]["phone"]);
 
-$reg["domain"]["status"]=$reg["owner"]["status"];
-unset($reg["owner"]["status"]);
+$reg["owner"]["organization"]=$reg["domain"]["owner"];
+unset($reg["domain"]["owner"]);
 
 $r["regrinfo"]=$reg;
 

@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-function generic_whois ($rawdata)
+function generic_whois ($rawdata,$translate,$contacts)
 {
 $r=array();
 $newblock=false;
@@ -55,18 +55,18 @@ while (list($key,$val)=each($rawdata))
 	$k=trim(strtok($val,":"));
         $v=trim(substr(strstr($val,":"),1));
 
-	switch ($k)
-               { case "fax-no":  $k="fax";
-				 break;
-                 case "e-mail":  $k="email";
-				 break;
-                 case "nic-hdl-br":
-                 case "nic-hdl": $gkey=$v;
-				 $k="handle"; 
-				 break;
-                 case "person":  $k="name";
-				 break;
-	       }
+	if (isset($translate[$k])) 
+           {
+             $k=$translate[$k];
+	     if (strstr($k,"."))
+                {
+                  eval("\$block".getvarname($k)."=\$v;");
+                  continue;
+                }
+           }
+	else $k=strtolower($k);
+
+	if ($k=="handle") $gkey=$v;
 
 	if (isset($block[$k]) && is_array($block[$k]))
     	     $block[$k][]=$v;
@@ -92,35 +92,19 @@ $r=$blocks["main"];
 
 $ret["registered"]="yes";
 
-if (isset($r["admin-c"])) 
-   { $ret["admin"]=$blocks[$r["admin-c"]];
-     unset($r["admin-c"]);
-   }
+while (list($key,$val)=each($contacts))
+       if (isset($r[$key]))
+	 {
+	   $ret[$val]=$blocks[$r[$key]];
+	   unset($r[$key]); 
+         }
 
-if (isset($r["tech-c"]))  
-   { $ret["tech"]=$blocks[$r["tech-c"]];
-     unset($r["tech-c"]);
-   }
-
-if (isset($r["zone-c"]))
-   { $ret["zone"]=$blocks[$r["zone-c"]];
-     unset($r["zone-c"]);
-   }
-
-if (isset($r["billing-c"]))
-   { $ret["billing"]=$blocks[$r["billing-c"]];
-     unset($r["billing-c"]);
-   }
-
-if (isset($r["owner-c"]))
-   { $ret["owner"]=$blocks[$r["owner-c"]];
-     unset($r["owner-c"]);
-   }
-
+/*
 if (is_array($r["descr"]))
    { $ret["owner"]["address"]=$r["descr"];
      unset($r["descr"]);
    }
+
 
 while (list($key,$val)=each($r))
       { switch ($key)
@@ -130,8 +114,23 @@ while (list($key,$val)=each($r))
 		 default:        $ret["owner"][$key]=$val;
                } 
       }
+*/
 
+$ret["domain"]=$r;
 return $ret;
+}
+
+function getvarname ( $vdef )
+{
+$parts=explode(".",$vdef);
+$var="";
+
+while (list($fn,$mn)=each($parts))
+       if ($mn=="")
+            $var=$var."[]";
+       else $var=$var."[\"".$mn."\"]";
+
+return $var;
 }
 
 ?>

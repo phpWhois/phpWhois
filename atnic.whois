@@ -40,34 +40,51 @@ class atnic extends Whois
 
 function parse ($data_str) {
 
+$translate = array (
+			"fax-no" => "fax",
+			"e-mail" => "email",
+			"nic-hdl" => "handle",
+			"person" => "name"
+		   );
+
+$contacts = array (
+                        "owner-c" => "owner",
+                        "admin-c" => "admin",
+                        "tech-c" => "tech",
+                        "billing-c" => "billing",
+			"zone-c" => "zone"
+                  );
+
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array("whois"=>"whois.nic.at","referer"=>"www.nic.at","registrar"=>"NIC-AT");
 
-$reg=generic_whois($data_str["rawdata"]);
+$reg=generic_whois($data_str["rawdata"],$translate,$contacts);
 
-unset($reg["remarks"]);
+unset($reg["domain"]["remarks"]);
 
-while (list($key,$val)=each($reg["owner"]["address"]))
+while (list($key,$val)=each($reg["domain"]["descr"]))
       { $v=trim(substr(strstr($val,":"),1));
-        if (strstr($val,"[organization]:")) $reg["owner"]["organization"]=$v;
+        if (strstr($val,"[organization]:")) 
+           { $reg["owner"]["organization"]=$v;
+             continue;
+           }
 	if (strstr($val,"[phone]:"))
            { $reg["owner"]["phone"]=$v;
-	     unset($reg["owner"]["address"][$key]);
              continue;
            }
         if (strstr($val,"[fax-no]:"))
            { $reg["owner"]["fax"]=$v;
-             unset($reg["owner"]["address"][$key]);
              continue;
            }
         if (strstr($val,"[e-mail]:"))
            { $reg["owner"]["email"]=$v;
-             unset($reg["owner"]["address"][$key]);
              continue;
            }
 
 	$reg["owner"]["address"][$key]=$v;
       }
+
+unset($reg["domain"]["descr"]);
 
 $r["regrinfo"]=$reg;
 return($r);
