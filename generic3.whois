@@ -95,6 +95,7 @@ function get_contact ( $array )
 $items = array (
 		"phone:" => "phone",
 		"fax..:" => "fax",
+		"fax-" => "fax",
 		"fax:"   => "fax",
 		"email:" => "email"
                );
@@ -118,7 +119,7 @@ while (list($key,$val)=each($array))
 
 	if ($val=="") continue;
 
-	if (!preg_match("/[^0-9\(\)\-\. ]/", $val))
+	if (!preg_match("/[^0-9\(\)\-\.\+ ]/", $val))
            {
 	     if (isset($r["phone"]))
 	          $r["fax"]=$val;	
@@ -132,7 +133,9 @@ while (list($key,$val)=each($array))
              $top=count($parts)-1;
              $r["email"]=$parts[$top];
              array_pop($parts);
-             $r["name"]=implode(" ",$parts);
+             $val=implode(" ",$parts);
+	     if ($val=="") continue;
+             $r["name"]=$val;
              unset($array[$key]);
 	     if ($key==1)
                 {
