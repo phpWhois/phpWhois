@@ -1,3 +1,7 @@
+2003/10/27  David Saez <david@ols.es>
+		- minor improvments to main.whois
+		- fix for .in domains
+
 2003/09/20  David Saez <david@ols.es>
 		- minor improvment to esnic.whois
 
