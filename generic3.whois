@@ -132,6 +132,7 @@ $items = array (
 		"fax..:" => "fax",
 		"fax-" => "fax",
 		"fax:"   => "fax",
+		"[fax]" => "fax",
 		"email:" => "email"
                );
 
