@@ -1,3 +1,14 @@
+2003/03/04  David Saez <david@ols.es>
+		- improvments on ripe.whois
+		- implemented arin.whois and brnic.whois
+		- added ip's for testing on ipw.whois
+
+2003/03/03  David Saez <david@ols.es>
+		- some fixes to ip whois
+		- some fixes to uknic.whois
+		- implemented ripe.whois
+		- improved code for html2text for web based whois
+
 2003/02/26  David Saez <david@ols.es>
 		- common object model changes in some handlers
 		- removed warning in gtld.whois when domain does not exist
