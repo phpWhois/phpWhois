@@ -44,7 +44,9 @@ $translate = array (
                         "fax-no" => "fax",
                         "e-mail" => "email",
                         "nic-hdl" => "handle",
-                        "person" => "name"
+                        "person" => "name",
+			"netname" => "name",
+			"descr" => "desc"
                    );
 
 $contacts = array (
@@ -52,8 +54,12 @@ $contacts = array (
                         "tech-c" => "tech"
                   );
 
-return generic_whois($data_str,$translate,$contacts,"network");
+$r = generic_whois($data_str,$translate,$contacts,"network");
 
+$r["owner"]["organization"] = $r["network"]["desc"];
+unset($r["network"]["desc"]);
+
+return $r;
 }
 
 }
