@@ -42,6 +42,7 @@ $this->DATA = array(
 	"info"=>"info",
 	"li"=>"chnic",
 	"lu"=>"lunic",
+	"mx"=>"mxnic",
 	"net"=>"gtld",
 	"nl"=>"nlnic",
 	"nu"=>"nunames",
