@@ -342,6 +342,41 @@ class Whois {
 	}
 
 	/*
+	*  Fix and/or add name server information
+	*/
+	function FixNameServers (&$result) {
+
+		if (!isset($result['regrinfo']['registered'])) return;
+		if ($result['regrinfo']['registered']!='yes') return;
+		if (!isset($result['regrinfo']['domain']['nserver'])) return;
+
+		$nserver=$result['regrinfo']['domain']['nserver'];
+		$dns=array();
+
+		while (list($key, $val) = each($nserver)) {
+			$val=str_replace('[','',trim($val));
+			$val=str_replace(']','',$val);
+			$parts=explode(' ',$val);
+			$host='';
+			$ip='';
+
+			while (list($k, $p) = each($parts)) {
+				if (ip2long($p)===-1)
+					$host=$p;
+				else
+					$ip=$p;
+				}
+
+			if ($ip=='')
+				$ip=gethostbyname($host);
+
+			$dns[$ip]=$host;
+			} 
+
+		$result['regrinfo']['domain']['nserver']=$dns;
+	}
+
+	/*
 	 * Perform lookup. Returns an array. The 'rawdata' element contains an
 	 * array of lines gathered from the whois query. If a top level domain
 	 * handler class was found for the domain, other elements will have been
@@ -368,6 +403,8 @@ class Whois {
                                 $result = $this->Process($result);
 
 			$result['regyinfo']['whois'] = strtok($this->Query["server"],'?');
+			// Fix/add nameserver information
+			$this->FixNameServers($result);
                         return($result);
 		      }
 
@@ -428,6 +465,9 @@ class Whois {
 		if (!isset($result["rawdata"]))
 			$result["rawdata"] = $output;
 		
+		// Fix/add nameserver information
+		if (method_exists($this,'FixNameServers'))
+			$this->FixNameServers($result);
 		return($result);
 	}
 }

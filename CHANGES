@@ -2,6 +2,7 @@
 		- fixed SRSPlus detection
 		- applied patch [ 981413 ] Whois Parameter Array
 		  thanx to mwelters
+		- added better reporting on nameservers
 
 2005/03/01  David Saez <david@ols.es>
 		- fixed Network Solutions detection
