@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* dotster.whois 1.1	David Saez Padros <david@ols.es> */
 /* 17/1/2002 Fixed !! */
+/* 2003/02/18 updated to common object model */
 
 if(!defined("__DOTSTER_HANDLER__")) define("__DOTSTER_HANDLER__",1);
 
