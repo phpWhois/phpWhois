@@ -27,38 +27,22 @@
 */
 
 class Whois {
-	// Full code and data version string (e.g. 'Whois2.php v3.01:16')
+
 	var $VERSION;
-
-	// This release of the package
 	var $CODE_VERSION = "3.0.1";
-	
-	// Network Solutions registry server
 	var $NSI_REGISTRY = "whois.nsiregistry.net";
-
-	// Network Solutions registrar server (?)
 	var $NSI_REGISTRAR = "whois.networksolutions.com";
-
-	// Default WHOIS port
 	var $PORT = 43;
-
-	// Maximum number of retries on connection failure
-	var $RETRY = 0;
-
-	// Time to wait between retries
+	var $RETRY = 0; // maximum number of retries on connect
 	var $SLEEP = 2;
+	var $BUFFER = 0; // read buffer size, 0 means char by char	
 
-	// Read buffer size (0 == char by char)
-	var $BUFFER = 0;
-
-	// Status response codes
 	var $STAT = array(
 		-1 => "error",
 		0 => "ready",
 		1 => "ok"
 		);
 
-	// Array to contain all query variables
 	var $Query = array(
 		"tld" => "",
 		"type" => "domain",
@@ -67,246 +51,168 @@ class Whois {
 		"server"
 		);
 	
-	// Various hacks. In a perfect world we don't need these.
+	//
+	// these are hacks. In a perfect world we don't need these
+	// but here we are nonetheless...
+	//
 	var $HACKS = array(
-		// force "dom" keywork
-		"nsi_force_dom" => 1,
-		// set if nsiregistry gives wrong whois server for netsol
-		"nsi_referral_loop" => 0,
-		// ???
+		"nsi_force_dom" => 1, // force "dom" keyword
+		"nsi_referral_loop" => 0, // set if nsiregistry gives wrong whois server for netsol
 		"wrong_netsol_whois" => "rs.internic.net",
-		// ???
 		"real_netsol_whois" => "whois.networksolutions.com",
-		// force english output on .jp for us ethnocentric types, unset or comment out for Japanese output
-		"force_slash_e" => "whois.nic.ad.jp",
-		// whois.nic.cx hangs forever
-		"cx_is_broken" => 1
+		"force_slash_e" => "whois.nic.ad.jp", // force english output on .jp for us ethnocentric types, unset or comment out for Japanese output
+		"cx_is_broken" => 1 // whois.nic.cx hangs forever
 		);
 
-	// List of servers and handlers (loaded from servers.whois)
-	var $DATA = array(); 	
+	//
+	// $DATA is our list of servers and handlers as listed in servers.whois
+	// 
+	var $DATA	= array(); 	
 
-	/*
-	 * Constructor function
-	 */
-	function Whois ($query = "") {
-		// Load DATA array
-
+	function Whois ($query="") {
 		require("servers.whois");
-
-		// Set version
-		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
-
-		// If domain to query was not set
-		if(!isSet($query)) {
-			// Configure to use default whois server
-			$this->Query["server"] = $this->NSI_REGISTRY;
-			return;
-		}
-
-		// Set domain to query in query array
-		$this->Query["string"] = strtolower($query);
-
-		// Determine top level whois server
-		$tld = $this->GetTld($this->Query["string"]);
-		if($tld) {
-			// If found, set tld and whois server in query array
-			$this->Query["server"] = $this->DATA[$tld][0];
-			$this->Query["tld"] = $tld;
-
-			// If a handler exists for the tld
-			if(isSet($this->DATA[$tld][1])) {
-				// Set fle/handler in query array
-				$handler = $this->DATA[$tld][1];
-				$this->Query["file"] = sprintf("%s.whois", $handler);
-				$this->Query["handler"] = $handler;
+		$this->VERSION=sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, 
+				       $this->DATA_VERSION);
+		if(isSet($query)) {
+			$this->Query["string"]=strtolower($query);
+			$tld=$this->GetTld($this->Query["string"]);
+			if($tld) {
+				$this->Query["server"]=$this->DATA[$tld][0];
+				if(isSet($this->DATA[$tld][1])) {
+					$handler=$this->DATA[$tld][1];
+					$this->Query["file"]=sprintf("%s.whois",$handler);
+					$this->Query["handler"]=$handler;
+				}
+				$this->Query["tld"]=$tld;
+			} else { $ip=checkdnsrr($query,"A");
+			if ($ip)
+			{ $ip=gethostbyname($query);
+                        $this->Query["server"]="whois.arin.net";
+                        $this->Query["host_ip"]=$ip;
+                        $this->Query["file"]="ipw.whois";
+			$this->Query["handler"]="ipw";
+                        $this->Query["string"]=$ip;
+                        $this->Query["tld"]="ipw";
+                        if ($query==$ip)
+				$this->Query["host_name"]=gethostbyaddr($ip);
+                        else $this->Query["host_name"]=$query;
 			}
-			return;
+			else { $this->Query["status"]=-1;
+			$this->Query["errstr"][]=$this->Query["string"]. 
+				" domain is not supported";
+			unset($this->Query["server"]);
+			}
+			}
+		} else {
+			$this->Query["server"]=$this->NSI_REGISTRY;
 		}
 
-		// If top level domain not known, check availability in DNS
-		if(checkdnsrr($query, "A")) {
-			// Prepare to do lookup via the 'ipw' handler
-			$ip = gethostbyname($query);
-			$this->Query["server"] = "whois.arin.net";
-			$this->Query["host_ip"] = $ip;
-			$this->Query["file"] = "ipw.whois";
-			$this->Query["handler"] = "ipw";
-			$this->Query["string"] = $ip;
-			$this->Query["tld"] = "ipw";
-
-			// If query was an IP, determine the hostname
-			if ($query==$ip)
-				$this->Query["host_name"] = gethostbyaddr($ip);
-			else
-				$this->Query["host_name"] = $query;
-
-			return;
-		}
-
-		// If tld not known, and domain not in DNS, return error
-		unset($this->Query["server"]);
-		$this->Query["status"] = -1;
-		$this->Query["errstr"][] = $this->Query["string"]." domain is not supported";
-		return;
 	}
 
-	/*
-	 * Open a socket to the whois server.
-	 *
-	 * Returns a socket connection pointer on success, or -1 on failure.
-	 */
-	function Connect () {
-		// Fail if server not set
-		if(!isSet($this->Query["server"]))
-			return(-1);
 
-		// Enter connection attempt loop
+	// open a socket to the whois server
+	// defaults to whois.internic.net if an alternate is not passed
+	// returns: a pointer on success, sets $this->ERROR on fail
+	function Connect () {
+		if(!isSet($this->Query["server"])) { return(-1); }
 		$server = $this->Query["server"];
 		$retry = 0;
-		while($retry <= $this->RETRY) {
-			// Set query status
-			$this->Query["status"] = "ready";
-
-			// Connect to whois port
-			$ptr = fsockopen($server, $this->PORT);
-			if($ptr > 0) {
-				$this->Query["status"]="ok";
-				return($ptr);
-			}
-			
-			// Failed this attempt
-			$this->Query["status"] = "error";
-			$retry++;
-
-			// Sleep before retrying
-			sleep($this->SLEEP);
-		}
-		
-		// If we get this far, it hasn't worked
+		while($retry <= $this->RETRY):
+			$this->Query["status"]="ready";
+		$ptr = fsockopen($server, $this->PORT);
+		if($ptr>0):
+			$this->Query["status"]="ok";
+		return($ptr);
+		else:
+		$this->Query["status"]="error";
+		$retry++;
+                sleep($this->SLEEP);
+		endif;
+		endwhile;
 		return(-1);
 	} 
 
-	/*
-	 * Post-process result with handler class. On success, returns the result
-	 * from the handler. On failure, returns passed in result unaltered.
-	 */
-	function Process (&$result) {
-		// Disable error reporting temporarily (probably not necessary)
+	function Process ($result) {
 		$old_val = error_reporting(FALSE);
-
-		// If the handler has not already been included somehow, include it now
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
-		if(!defined($HANDLER_FLAG))
-			include($this->Query["file"]);
-
-		// Restore error reporting
+		if(!defined($HANDLER_FLAG)) { include($this->Query["file"]); }
 		error_reporting($old_val);
-
-		// If the handler has still not been included, append to query errors list and return
 		if(!defined($HANDLER_FLAG)) {
-			$this->Query["errstr"][] = "Can't find ".$this->Query["tld"]." handler: ".$this->Query["file"];
-			return($result);
+			$this->Query["errstr"][]="Can't find ".$this->Query["tld"]." handler: ".$this->Query["file"];
+		} else {
+			$object = $this->Query["handler"];
+			$handler = new $object($result, $this->Query);
+			if(isSet($handler->Query["errstr"])) {
+				$this->Query["errstr"][]=$handler->Query["errstr"];
+			}
+
+			return($handler->result);
 		}
 
-		// Pass result to handler
-		$object = $this->Query["handler"];
-		$handler = new $object($result, $this->Query);
-
-		// If handler returned an error, append it to the query errors list
-		if(isSet($handler->Query["errstr"]))
-			$this->Query["errstr"][] = $handler->Query["errstr"];
- 		
-		// Return the result
-		return($handler->result);
-	}
-
-	/*
-	 * Perform lookup. Returns an array. The 'rawdata' element contains an
-	 * array of lines gathered from the whois query. If a top level domain
-	 * handler class was found for the domain, other elements will have been
-	 * populated too.
-	 */
-	function Lookup ($query = "") {
-		// If domain to query passed in, use it, otherwise use domain from initialisation
-		$string = !empty($query) ? $query : $this->Query["string"];
-
-		// If the '.cx' whois server is broken, return an error now (saves attempting and timing out)
-		if($this->HACKS["cx_is_broken"] && $this->Query["tld"] == "cx") {
-			$this->Query["errstr"][] = ".cx doesn't work. Turn off HACKS[\"cx_is_broken\"] if ".$this->Query["server"]." finally got fixed.";
-			return("");
-		}
-
-		// Connect to whois server, or return if failed
-		$ptr = $this->Connect();
-		if($ptr < 0) {
-			$this->Query["status"] = -1;
-			$this->Query["errstr"][] = "Connect failed to: ".$this->Query["server"];
-			return(array());
-		}
-
-		// Determining on server/hacks in operation, send appropriate request
-		if(($this->Query["server"] == $this->NSI_REGISTRY || $this->Query["server"] == $this->NSI_REGISTRAR) && $this->HACKS["nsi_force_dom"]) {
-			fputs($ptr, sprintf("dom %s\r\n", trim($string)));
-		}
-		elseif($this->Query["server"] == $this->HACKS["force_slash_e"]) {
-			fputs($ptr, sprintf("%s/e\r\n", trim($string)));
-		} 
-		else {
-			fputs($ptr, sprintf("%s\r\n", trim($string)));
-		}
-
-		// Prepare to receive result
-		$raw = "";
-		$output = array();
-		while(!feof($ptr)) {
-			// If a buffer size is set, fetch line-by-line into an array
-			if($this->BUFFER)
-				$output[] = fgets($ptr, $this->BUFFER);
-			// If not, fetch char-by-char into a string
-			else
-				$raw .= fgetc($ptr);
-		}
-
-		// If captured char-by-char, convert to an array of lines
-		if(!$this->BUFFER)
-			$output = explode("\n", $raw);
-
-		// Drop empty last line
-		unset($output[count($output)-1]);
-		
-		// Create result and set 'rawdata'
-		$result = array();
-		$result['rawdata'] = $output;
-
-		// If we have a handler, post-process it with that
-		if(isSet($this->DATA[$this->Query["tld"]][1]))
-			$result = $this->Process($result);
-		
 		return($result);
 	}
 
-	/*
-	 * Determine top-level whois server for a given domain
-	 */
-	function GetTld ($domain) {
-		// Loop through server/tld list
-		reset($this->DATA);
-		$curr_match = "";
-		while(list($tld, $param) = each($this->DATA)) {
-			// If the tld matches the end of the given domain
-			if(eregi("\.$tld$", $domain)) { 
-				// If we have already found a match
-				if(!empty($curr_match)) {
-					// FIXME: we assume we'll never support a 3rd
-					// level registry. If we do, this breaks.
-					$curr_match = strchr($tld,".") ? $tld : $curr_match;
-				}	
-				else
-					$curr_match = $tld;
+	function Lookup ($query="") {
+		$string = !empty($query) ? $query : $this->Query["string"];
+		if($this->HACKS["cx_is_broken"] && $this->Query["tld"]=="cx") {
+			$this->Query["errstr"][]=".cx doesn't work. Turn off HACKS[\"cx_is_broken\"] if ".$this->Query["server"]." finally got fixed.";
+			return("");
+		}
+		$ptr=$this->Connect();
+		if(empty($this->Query["server"])) { return(false); }
+		if($ptr!=-1){
+			if(($this->Query["server"]==$this->NSI_REGISTRY 
+			    || $this->Query["server"]==$this->NSI_REGISTRAR)
+			   && $this->HACKS["nsi_force_dom"]) {
+				fputs($ptr, sprintf("dom %s\r\n", trim($string)));
+			} elseif($this->Query["server"]==$this->HACKS["force_slash_e"]) {
+				fputs($ptr, sprintf("%s/e\r\n", trim($string)));
+			} else {
+				fputs($ptr, sprintf("%s\r\n", trim($string)));
 			}
+			$r = "";
+			while(!feof($ptr)) {
+				if($this->BUFFER) {
+					$output[]=fgets($ptr, $this->BUFFER);
+				} else 	{
+					$r.=fgetc($ptr);
+				}
+			}
+
+			if(!$this->BUFFER) { $output =  explode("\n", $r); }
+			unset($output[count($output)-1]);
+			if(isSet($this->result["rawdata"])) {
+				$result = $output;
+			} else {
+				$result["rawdata"] = $output;
+			}
+			if(isSet($this->DATA[$this->Query["tld"]][1])) {
+				$result = $this->Process($result);
+			} 
+			return($result);
+		} else {
+			$this->Query["status"]=-1;
+			$this->Query["errstr"][]="Connect failed to: ".$this->Query["server"];
+			return(array());
 		}
 
+	}
+
+	function GetTld ($domain) {
+		// unfortunately the only reliable way to do this is
+		// to blow through the entire server/tld list 
+		reset($this->DATA);
+		while(list($tld, $param)=each($this->DATA)) {
+			if(eregi("\.$tld$", $domain)) { 
+				if(!empty($curr_match)) {
+				// FIXME: we assume we'll never support a 3rd
+				// level registry. If we do, this breaks.
+					$curr_match = strchr($tld,".") ?
+						$tld : $curr_match;
+				}	
+				else	{ $curr_match = $tld; }
+			}		
+		}
 		return($curr_match);
 	}
 
