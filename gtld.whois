@@ -27,23 +27,26 @@
 */
 
 /* gtld.whois	1.0	mark jeftovic	1999/12/06 */
+/* gtld.whois   1.1     david@ols.es    2003/02/09 */
 
 if(!defined("__GTLD_HANDLER__")) define("__GTLD_HANDLER__",1);
 
+require_once("generic2.whois");
+
 class gtld extends Whois {
 
-	var $HANDLER_VERSION = "1.0";
-
-	var $REG_INFO;  // array of "domain","registrar","whois","referrer" and
-	// "nameserver[]";
+	var $HANDLER_VERSION = "1.1";
 
 	var $REG_FIELDS = array(
-		"domain" => "Domain Name",
-		"registrar" => "Registrar",
-		"whois" => "Whois Server",
-		"referrer" => "Referral URL",
-		"nameserver" => "Name Server", // identical descriptors
-		"upadated" => "Updated Date"
+		"regrinfo.domain.name" => "Domain Name:",
+		"regyinfo.registrar" => "Registrar:",
+		"regyinfo.whois" => "Whois Server:",
+		"regyinfo.referrer" => "Referral URL:",
+		"regrinfo.domain.nserver." => "Name Server:", // identical descriptors
+		"regrinfo.domain.changed" => "Updated Date:",
+		"regrinfo.domain.status" => "Status:", 
+		"regrinfo.domain.created" => "Creation Date:",
+		"regrinfo.domain.expires" => "Expiration Date:"
 		);             
 
 	var $REGISTRARS = array(
@@ -62,7 +65,8 @@ class gtld extends Whois {
 	function gTLD ($data, $query) {
 		$this->Query = $query;
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
-		$this->result["regyinfo"] = $this->ParseRegInfo($data["rawdata"]);
+		$this->result = generic_whois($data["rawdata"] , $this->REG_FIELDS);
+
 		if($this->HACKS["nsi_referral_loop"] &&
 		   ($this->result["regyinfo"]["whois"] == $this->HACKS["wrong_netsol_whois"])) {
 			$this->Query["server"] = $this->HACKS["real_netsol_whois"];
@@ -75,35 +79,17 @@ class gtld extends Whois {
 
 		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
 		// david@ols.es 16/10/2002 Fixes rawdata
-		 $this->result["rawdata"] =  $this->result["rawdata"]["rawdata"];
-
+		$this->result["rawdata"] =  $this->result["rawdata"]["rawdata"];
 		$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
+
 		if(!empty($this->Query["handler"])) {
 			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
-			$this->result["regrinfo"] = $this->Process($this->result["rawdata"]);
+			$domaindata = $this->result["regrinfo"]["domain"];
+			$regrinfo = $this->Process($this->result["rawdata"]);
+			$this->result["regrinfo"] = $regrinfo;
+			$this->result["regrinfo"]["domain"] = array_merge($domaindata,$regrinfo["domain"]);
 		}
 	}
-
-	function ParseRegInfo ($arr) {
-		for($i = 0, $max = count($arr); $i < $max ; $i++) {
-			reset($this->REG_FIELDS);
-			while(list($key,$val) = each($this->REG_FIELDS)) {
-				if(!isset($arr[$i]) || !strpos($arr[$i], ":"))
-					continue;
-				list($f_name, $f_val) = split(":", $arr[$i]);
-				if($val == trim($f_name)) {
-					if($key == "nameserver") {
-						$ret_val[$key][] = trim($f_val);
-					} else {
-						$ret_val[$key] = trim($f_val);
-					}
-					break;
-				}
-			}
-		}
-		return($ret_val);
-	}
-
 }
 
 ?>
