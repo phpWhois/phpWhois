@@ -26,7 +26,8 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* denic.whois        0.2        by Elmar K. Bins <elmi@4ever.de> */
+/* denic.whois        0.3 by David Saez <david@ols.es> */    
+/* denic.whois        0.2 by Elmar K. Bins <elmi@4ever.de> */
 /* based upon brnic.whois by Marcelo Sanches <msanches@sitebox.com.br> */
 /* and        atnic.whois by Martin Pircher <martin@pircher.net> */
 
@@ -43,11 +44,17 @@ class denic extends Whois {
 	function parse ($data_str) {
 		$convert = array(
 			"domain" => "name",
-			"descr" => "desc",
-			"type" => "",
+			"descr" => "address",
 			"city" => "address", 
 			"pcode" => "address",
-			"country" =if (is_array($disclaimer)) $ret["disclaimer"]=$disclaimer;> "address"
+			"country" => "address"
+			);
+
+		$sections = array(
+			"main" => "domain",
+			"admin-c" => "admin",
+			"tech-c" => "tech",
+			"zone-c" => "zone"
 			);
 
 		$r = array();
@@ -55,8 +62,9 @@ class denic extends Whois {
 		$hasdata = false;
 		$block = array();
 		$gkey = "main";
+		$rawdata = $data_str["rawdata"];
 
-		while (list($key,$val) = each($rawdata)) {
+		while (list($key,$val) = each($rawdata)) {	
 			$val = trim($val);
 			if (substr($val,0,1) == '%') {
 				$disclaimer[] = trim(substr($val,1));
@@ -69,26 +77,27 @@ class denic extends Whois {
 			if ($newblock && $hasdata) {
 				$blocks[$gkey] = $block;
 				$block = array();
-				$gkey = "";
 			}
-			if ($newblock) {
-				$gkey = str_replace("]["," ",$gkey);
+			if ($newblock && substr($val,0,1)=="[") {
+				$gkey = str_replace("]["," ",$val);
 				$gkey = str_replace("]","",$gkey);
-				$gkey = str_replace("[","",$gkey); 
+				$gkey = str_replace("[","",$gkey);
+				$newblock = false;
+				continue; 
 			}
-			$newblock = false;
 			$hasdata = true;
-			$k = str_tolower(trim(strtok($val,":")));
+			$newblock = false;
+			$k = strtolower(trim(strtok($val,":")));
 			$v = trim(substr(strstr($val,":"),1));
 			
 			if (isset($convert[$k])) {
-				$k = $convert($k);
+				$k = $convert[$k];
 				if ($k == "") continue; 
 			}
                     
-			if (is_array($block[$k]))
+			if (isset($block[$k]) && is_array($block[$k]))
 				$block[$k][] = $v;
-			else if ($block[$k] == "")
+			else if (!isset($block[$k]) || $block[$k]=="")
 				$block[$k] = $v;
 			else {
 				$x = $block[$k];
@@ -102,9 +111,33 @@ class denic extends Whois {
 		if ($hasdata)
 			$blocks[$gkey] = $block;
 
-		$r = $blocks;
+		$r["regrinfo"]["owner"]["organization"]=$blocks["main"]["address"][0];
+		unset($blocks["main"]["address"][0]);
+		$r["regrinfo"]["owner"]["address"]=$blocks["main"]["address"];
+		unset($blocks["main"]["address"]);
 
-		//if (is_array($disclaimer)) $r["disclaimer"]=$disclaimer;
+		while (list($gkey,$gval) = each($blocks))
+                      { 
+                        $parts=explode(" ",$gkey);
+                        while (list($pkey,$pval) = each($parts))
+                              { 
+				if (isset($gval["address"]))
+				   {
+				     $gval["organization"]=$gval["address"][0];
+				     unset($gval["address"][0]);
+				   }
+
+				$r["regrinfo"][$sections[$pval]]=$gval;	
+                              }
+                      }
+
+		$r["rawdata"] = $data_str["rawdata"];
+
+		$r["regyinfo"] = array( "whois" => "whois.denic.de",
+					"registrar" => "DENIC eG",
+					"referer" => "http://www.denic.de/");
+
+		if (isset($disclaimer)) $r["regrinfo"]["disclaimer"]=$disclaimer;
 		return($r);
 	}
 }

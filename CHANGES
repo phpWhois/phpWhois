@@ -1,3 +1,6 @@
+2003/01/19  David Saez <david@ols.es>
+		- fixed denic.whois
+
 2003/01/18  David Saez <david@ols.es>
 		- added nlnic.whois, thanx to Matthijs Koot <koot@cyberwar.nl>
 		- fixed some warning on generic.whois
