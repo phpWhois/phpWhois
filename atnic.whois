@@ -60,31 +60,34 @@ $r["regyinfo"]=array("referrer"=>"http://www.nic.at","registrar"=>"NIC-AT");
 
 $reg=generic_whois($data_str["rawdata"],$translate,$contacts);
 
-unset($reg["domain"]["remarks"]);
+if (isset($reg["domain"]["remarks"]))
+	unset($reg["domain"]["remarks"]);
 
-while (list($key,$val)=each($reg["domain"]["descr"]))
-      { $v=trim(substr(strstr($val,":"),1));
-        if (strstr($val,"[organization]:")) 
-           { $reg["owner"]["organization"]=$v;
-             continue;
-           }
-	if (strstr($val,"[phone]:"))
-           { $reg["owner"]["phone"]=$v;
-             continue;
-           }
-        if (strstr($val,"[fax-no]:"))
-           { $reg["owner"]["fax"]=$v;
-             continue;
-           }
-        if (strstr($val,"[e-mail]:"))
-           { $reg["owner"]["email"]=$v;
-             continue;
-           }
+if (isset($reg["domain"]["descr"])) {
+	while (list($key,$val)=each($reg["domain"]["descr"]))
+	      { $v=trim(substr(strstr($val,":"),1));
+        	if (strstr($val,"[organization]:")) 
+	           { $reg["owner"]["organization"]=$v;
+        	     continue;
+           	   }
+		if (strstr($val,"[phone]:"))
+	           { $reg["owner"]["phone"]=$v;
+	             continue;
+	           }
+	        if (strstr($val,"[fax-no]:"))
+	           { $reg["owner"]["fax"]=$v;
+	             continue;
+	           }
+	        if (strstr($val,"[e-mail]:"))
+	           { $reg["owner"]["email"]=$v;
+	             continue;
+	           }
 
-	$reg["owner"]["address"][$key]=$v;
-      }
+		$reg["owner"]["address"][$key]=$v;
+	      }
 
-unset($reg["domain"]["descr"]);
+	unset($reg["domain"]["descr"]);
+	}
 
 $r["regrinfo"]=$reg;
 return($r);
