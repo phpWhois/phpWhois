@@ -25,7 +25,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* chnic.whois	1.0	David Saez Padros <david@ols.es>  For .ch & .li domains */
+/* chnic.whois	1.1	David Saez Padros <david@ols.es>  For .ch & .li domains */
+/* 8/1/2002 Added status (active/inactive) and corrected error for inactive domains */
+/*          (like creart.ch) thanx to Roger Fichmann */
 
 if(!defined("__CHNIC_HANDLER__")) define("__CHNIC_HANDLER__",1);
 
@@ -75,12 +77,16 @@ while (list($key, $val)=each($data_str["rawdata"]))
            }
       }
 
-if (!empty($r["regrinfo"]["ns"]))
+if (!empty($r["regrinfo"]["domain"]))
    { $r["regyinfo"]=array( "whois"=>"whois.nic.ch","referrer"=>"www.nic.ch" );
      $r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
      $r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
      $r["regyinfo"]["updated"]=$r["regrinfo"]["updated"];
      $r["regyinfo"]["created"]=$r["regrinfo"]["created"];
+
+     if (!empty($r["regrinfo"]["ns"]))
+          $r["regrinfo"]["status"]="active"; 
+     else $r["regrinfo"]["status"]="inactive"; 
    }
 else $r="";
 
