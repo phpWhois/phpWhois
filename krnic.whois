@@ -29,16 +29,49 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__KRNIC_HANDLER__")) define("__KRNIC_HANDLER__",1);
 
+require_once("generic2.whois");
+require_once("generic3.whois");
+
 class krnic extends ipw {
 
 function krnic($data) 
 {
-$this->result=$this->parse(preg_replace("/\n+/","_",implode("\n",$data)));
+	$this->result=$this->parse($data);
 }
 
 function parse ($data_str) 
 {
-return($r);
+
+
+        $blocks = array( "owner" => "[ Organization Information ]",
+                         "admin" => "[ Admin Contact Information]",
+                         "tech" => "[ Technical Contact Information ]",
+			 "abuse" => "[ ISP Network Abuse Contact Information ]",
+			 "network.inetnum" => "IP Address         :",
+			 "network.name" => "Network Name       :",
+			 "network.mnt-by" => "Connect ISP Name   :",
+			 "network.created" => "Registration Date  :"
+                       );
+
+	$items = array( "handle" => "Orgnization ID     :",
+			"organization" => "Org Name           :",
+			"name" => "Name               :",
+			"address.street" => "Address            :",
+			"address.pcode" => "Zip Code           :",
+			"address.state" => "State              :",
+			"phone" => "Phone              :",
+			"fax" => "Fax                :",
+			"email" => "E-Mail             :"
+		      );
+
+        $r = get_blocks($data_str,$blocks);
+
+	$r["owner"]=generic_whois($r["owner"],$items);
+	$r["admin"]=generic_whois($r["admin"],$items);
+	$r["tech"] =generic_whois($r["tech"],$items);
+	$r["abuse"]=generic_whois($r["abuse"],$items);
+
+	return($r);
 }
 
 }
