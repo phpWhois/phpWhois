@@ -27,9 +27,12 @@
 */
 
 /* dotregistrar.whois 1.0	David Saez Padros <david@ols.es> */
+/* dotregistrar.whois 2.0       David Saez Padros <david@ols.es> */
 /* You can check it with zeleste.com */
 
 if(!defined("__DOTREGISTRAR_HANDLER__")) define("__DOTREGISTRAR_HANDLER__",1);
+
+require_once("generic3.whois");
 
 class dotregistrar extends gtld {
 
@@ -39,66 +42,23 @@ class dotregistrar extends gtld {
 
 	function parse ($data_str) {
 
-		$items=array(
-			"domain" => "Domain Name:",
-			"created" => "Record created on",
-			"updated" => "Record last updated on",
-			"expires"	=> "Record expires on"   
-			);
+               $items = array( "owner" => "Registrant:",
+                                "admin" => "Administrative Contact",
+                                "tech" => "Technical Contact",
+                                "zone" => "Zone Contact",
+                                "domain.name" => "Domain name:",
+                                "domain.created" => "Record created on",
+                                "domain.expires" => "Record expires on",
+                                "domain.changed" => "Record last updated on"
+                              );
 
-		$r["ns"]=array();
+                $r = get_blocks($data_str,$items);
+                $r["owner"] = get_contact($r["owner"]);
+                $r["admin"] = get_contact($r["admin"]);
+                $r["tech"] = get_contact($r["tech"]);
+                $r["zone"] = get_contact($r["zone"]);
+                return($r);
 
-		while (list($key, $val)=each($data_str)) {
-			$val=trim($val);
-
-			if ($val!="") {
-				if ($val=="Domain servers in listed order:") {
-					list($key, $val)=each($data_str);
-					while (list($key, $val)=each($data_str)) {
-						if (!($value=trim($val))) break;
-						$ns=split("\t",$value);  
-						$r["ns"][$ns[0]]=$ns[1];
-					} 
-					break;
-				}
-
-				if ($val=="Registrant:") {
-					list($key, $val)=each($data_str);
-					$r["organization"]=trim($val);              
-					continue;
-				}
-  	
-				if ($val=="Administrative Contact:") {
-					list($key, $val)=each($data_str);
-					$refs=explode(" ",$val);
-					$r["admin"]["email"]=$refs[count($refs)-1];
-					array_pop($refs);   
-					$r["admin"]["name"]=trim(implode(" ",$refs));
-					continue;
-				}
-
-				if ($val=="Technical Contact, Zone Contact:") {
-					list($key, $val)=each($data_str);
-					$refs=explode(" ",$val);
-					$r["tech"]["email"]=$refs[count($refs)-1];
-					array_pop($refs);   
-					$r["tech"]["name"]=trim(implode(" ",$refs));
-					continue;
-				}
-
-				reset($items);
-
-				while (list($field, $match)=each($items))
-					if (strstr($val,$match)) {
-						$r[$field]=trim(substr($val,strlen($match)));
-						break;  
-					} 
-			}
-		}
-
-		if (empty($r["ns"])) $r="";
-
-		return($r);
 	}
 
 }
