@@ -1,0 +1,203 @@
+<?
+/*
+Whois2.php        PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* atnic.whois	0.99	Martin Pircher <martin@pircher.net> */
+/* dedicated to klopfer, *24.07.1999, +21.01.2001         */
+/* based upon brnic.whois by Marcelo Sanches  msanches@sitebox.com.br */
+
+if(!defined("__ATNIC_HANDLER__")) define("__ATNIC_HANDLER__",1);
+
+class atnic extends Whois
+  {
+  function atnic($data) { $this->result=$this->parse($data); }
+
+function parse ($data_str) {
+
+$items=array (
+		    "organization"  => "descr:    [organization]:",
+              "name"          => "descr:    [name]:",
+              "address"       => "descr:    [street address]:",
+              "postalcode"    => "descr:    [postal code]:",
+              "city"      	  => "descr:    [city]:",
+              "country"       => "descr:    [country]:",
+              "phone"         => "descr:    [phone]:",
+              "fax"           => "descr:    [fax-no]:",
+              "email"         => "descr:    [e-mail]:"
+);
+
+  $r["rawdata"]=$data_str["rawdata"];
+
+  $r["regyinfo"]=array("whois"=>"whois.nic.at","referer"=>"www.nic.at","registrar"=>"NIC-AT");
+
+  $r["regrinfo"]=array();
+  $r["regrinfo"]["disclaimer"]="";
+  $r["regrinfo"]["owner"]=array();
+  $r["regrinfo"]["nserver"]=array();
+  $r["regrinfo"]["admin_c"]=array();
+  $r["regrinfo"]["tech_c"]=array();
+  $r["regrinfo"]["zone_c"]=array();
+  
+  $changed_ok = FALSE;    // flag for first 'changed'=domain, others are for person object
+  $nic_var=1;
+  $person=array();
+  $changed_line = 0;
+
+  while (list($key, $val)=each($data_str["rawdata"])) {
+      $val=trim($val);
+      if ($val!="") 
+        {
+        // disclaimer
+        if (substr($val,0,2)=="% ") 
+          {$r["regrinfo"]["disclaimer"].=substr($val,2)."\n"; }
+        
+        // domain name
+        if (substr($val,0,7)=="domain:")
+          { $r["regrinfo"]["domain"]=substr($val,10); }
+
+        // fetch nameserver names
+        if (substr($val,0,7)=="nserver") {
+            $n_counter = 1;
+            do {
+               $nserver=split("nserver:  ",$val);
+               $nserver_array = 'nserver'. $n_counter;
+               $r["regrinfo"]["nserver"][$nserver_array]=$nserver[1];
+
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+
+               $n_counter += 1;
+            } while ((substr($val,0,7)=="nserver"));
+         }
+        // fetch nameserver ip's
+        if (substr($val,0,7)=="remarks") {
+            $n_counter = 1;
+            do {
+               $nserver=split("remarks:  ",$val);
+               $nserver_array = 'nserver'. $n_counter;
+               $r["regrinfo"]["nserver"][$nserver_array]=$r["regrinfo"]["nserver"][$nserver_array] . ", " . $nserver[1];
+
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+
+               $n_counter += 1;
+            } while ((substr($val,0,7)=="remarks"));
+         }
+
+        // fetch changed date
+        // not sure if the nicat only prints the last change now
+        // or every change like with ripe-db before
+         if (substr($val,0,7)=="changed") 
+           {
+            $changed_line += 1;
+            $changed=split("changed:  ",$val);
+            $changed_array = 'changed' . $changed_line;
+            $r["regrinfo"]["changed"][$changed_array]=$changed[1];
+
+            // list($key, $val)=each($data_str["rawdata"]);
+            // $val=trim($val);
+           }
+
+        // NICAT handles for admin-c, tech-c, zone-c
+        if (substr($val,0,7)=="admin-c") 
+          { $r["regrinfo"]["admin_c"]["nic-hdl"]=substr($val,10); }
+        if (substr($val,0,6)=="tech-c") 
+          { $r["regrinfo"]["tech_c"]["nic-hdl"]=substr($val,10); }
+        if (substr($val,0,6)=="zone-c") 
+          { $r["regrinfo"]["zone_c"]["nic-hdl"]=substr($val,10); }
+        
+	    // persons
+        $address_line = 0;
+        $changed_line = 0;
+        
+        if (substr($val,0,6)=="person")
+          {
+            do 
+              {
+              list($pers_key,$pers_val)=split(":",$val);
+              
+              if ((substr($val,0,6)=="source")) 
+                { break; }
+              elseif (substr($val,0,7)=="address")
+                 {
+                  $address_line += 1;
+                  $address=split("address:  ",$val);
+                  $address_array = 'address' . $address_line;
+                  $person[$nic_var]["address"][$address_array]=$address[1];
+                 }
+              elseif (substr($val,0,7)=="changed")
+                 {
+                  $changed_line += 1;
+                  $changed=split("changed:  ",$val);
+                  $changed_array = 'changed' . $changed_line;
+                  $person[$nic_var]["changed"][$changed_array]=$changed[1];
+                 }
+              else { $person[$nic_var][$pers_key]=trim($pers_val); }
+
+              list($key, $val)=each($data_str["rawdata"]);
+              $val=trim($val);
+
+              } while (TRUE);
+              
+            $nic_var+=1;
+          }
+		 
+        // parse the items array, just in use for the domain owner
+        reset($items);
+        while (list($field, $match)=each($items)) 
+           {
+           if (strstr($val,$match))
+             { 
+               $r["regrinfo"]["owner"][$field]=trim(substr($val,strlen($match)));
+               break;
+             }
+         }
+
+      }
+  }
+
+// Regristrar Information Array
+$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+$r["regyinfo"]["nameserver"]=$r["regrinfo"]["nserver"];
+$r["regyinfo"]["registered"]=($r["regrinfo"]["domain"]) ? "yes" : "no";
+
+// Domain Information Array
+for ($i=1;$i<$nic_var;$i++)
+  {
+  if ($r["regrinfo"]["admin_c"]["nic-hdl"]==$person[$i]["nic-hdl"])
+    { $r["regrinfo"]["admin_c"]=$person[$i]; }
+  if ($r["regrinfo"]["zone_c"]["nic-hdl"]==$person[$i]["nic-hdl"])
+    { $r["regrinfo"]["zone_c"]=$person[$i]; }
+  if ($r["regrinfo"]["tech_c"]["nic-hdl"]==$person[$i]["nic-hdl"])
+    { $r["regrinfo"]["tech_c"]=$person[$i]; }
+  }
+
+// clean up
+// unset ($person, $changed_array, $address_array);
+
+return($r);
+}
+}
