@@ -27,9 +27,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 /* uknic.whois	1.2	David Saez Padros <david@ols.es> */
-/* Fixed detection of non-existant domains */
-/* 8/1/2002 Added status (active/inactive/detagged) and corrected error for detagged domains */
-/*          (like blue.co.uk) thanx to Adam Greedus */
+/*                      Fixed detection of non-existant domains */
+/* uknic.whois  1.3     8/1/2002 Added status (active/inactive/detagged) */ 
+/*                      and corrected error for detagged domains */
+/*                      (like blue.co.uk) thanx to Adam Greedus */
+/* uknic.whois  1.4     16/10/2002 Updated for new Nominet whois output */
+/*                      also updated for common object model */
 
 if(!defined("__UKNIC_HANDLER__")) define("__UKNIC_HANDLER__",1);
 
@@ -41,34 +44,25 @@ class uknic extends Whois {
 
 	function parse ($data_str) {
 		$items=array( 
-			"organization" => "Registered For:",
-			"domain" => "Domain Name:",
-			"registrar" => "Domain Registered By:",
-			"created" => "Registered on",
-			"updated" => "Record last updated on" 
+			"owner.organization" => "Registrant:",
+			"domain.name" => "Domain Name:",
+			"domain.sponsor" => "Registrant's Agent:",
+			"domain.created" => "Registered on:",
+			"domain.changed" => "Last updated:" 
 			);
 
-
 		$r["rawdata"]=$data_str["rawdata"];
-
-		//if (strstr($data_str["rawdata"],"No match for")) return ($r);
-
-		$r["regrinfo"]=array();
-		$r["regrinfo"]["ns"]=array();
 
 		while (list($key, $val)=each($data_str["rawdata"])) {
 			$val=trim($val);
 
 			if ($val!="") {
-				if ($val=="Domain servers listed in order:") {
-					next($data_str["rawdata"]);
-
+				if ($val=="Name servers listed in order:") {
 					while (list($key, $val)=each($data_str["rawdata"])) {
 						if (!($value=trim($val))) break;
-
 						$ns=split(" ",$value);  
-						for ($i=1;$ns[$i]=="";$i++);
-						$r["regrinfo"]["ns"][$ns[0]]=$ns[$i];
+						for ($i=0;$ns[$i]=="";$i++);
+						$r["regrinfo"]["domain"]["nserver"][]=$ns[$i];
 					} 
 					break;
 				}
@@ -77,29 +71,35 @@ class uknic extends Whois {
 
 				while (list($field, $match)=each($items)) 
 					if (strstr($val,$match)) {
-						$r["regrinfo"][$field]=trim(substr($val,strlen($match)));
-						break;  
-					} 
+						$v=trim(substr($val,strlen($match)));
+                                                if ($v=="") 
+                                                   { $v=each($data_str["rawdata"]);
+                                                     $v=trim($v["value"]);
+                                                   }
+ 					$parts=explode(".",$field);
+					$var="\$r[\"regrinfo\"]";
+					while (list($fn,$mn)=each($parts))
+                                		$var=$var."[\"".$mn."\"]";
+
+                        		eval($var."=\"".$v."\";");
+					break;  
+					}
 			}
 		}
 
-		if (!empty($r["regrinfo"]["domain"])) {
-			$r["regyinfo"]=array(
-				"whois"=>"whois.nic.uk",
-				"referrer"=>"www.nic.uk"
-				);
-			$r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
-			$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
-			$r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
-			$r["regyinfo"]["updated"]=$r["regrinfo"]["updated"];
-			if (!empty($r["regrinfo"]["ns"]))
-				$r["regrinfo"]["status"]="active"; 
+		if (!empty($r["regrinfo"]["domain"]["name"])) {
+			$r["regyinfo"]["whois"]="whois.nic.uk";
+			$r["regyinfo"]["referrer"]="www.nic.uk";
+			$r["regyinfo"]["registrar"]="Nominet UK";
+	
+			if (!empty($r["regrinfo"]["domain"]["nserver"]))
+				$r["regrinfo"]["domain"]["status"]="active"; 
 			else { 
-				if ($r["regrinfo"]["registrar"]=="DETAGGED")
-					$r["regrinfo"]["status"]="detagged"; 
+				if (strstr($r["regrinfo"]["domain"]["sponsor"],"DETAGGED"))
+					$r["regrinfo"]["domain"]["status"]="detagged"; 
 				else 
-					$r["regrinfo"]["status"]="inactive"; 
-			}
+					$r["regrinfo"]["domain"]["status"]="inactive"; 
+			    }
 		}
 		else
 			$r="";
