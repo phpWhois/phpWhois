@@ -40,6 +40,11 @@ class netsol extends gtld {
 	function parse ($data_str) {
 		$data_str=preg_replace("/\s+/"," ",$data_str);
 		preg_match("/^(.+)Registrant:_/",$data_str,$refs); 
+
+		if (!isset($ref[1])) {
+			return '';
+			}
+
 		$r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
 		//preg_match("/^.+Registrant:_(.+)\s+\((.+-DOM)\)_/", $data_str,$refs);
 		preg_match("/^.+Registrant:_(.+)\s+\((.+)\)_\s*(.+)_\s*Domain Name:\s(.+)_/", $data_str,$refs);
