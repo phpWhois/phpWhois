@@ -7,11 +7,12 @@ $newblock=false;
 $hasdata=false;
 $block=array();
 $gkey="main";
+$dend=false;
 
 while (list($key,$val)=each($rawdata))
       { $val=trim($val);
-        if (substr($val,0,1)=='%')
-           { $disclaimer[]=trim(substr($val,1));
+        if ($val[0]=='%')
+           { if (!$dend) $disclaimer[]=trim(substr($val,1));
              continue;
            }
 	if ($val=="")
@@ -22,7 +23,8 @@ while (list($key,$val)=each($rawdata))
            { $blocks[$gkey]=$block;
              $block=array();
 	     $gkey="";
-           } 
+           }
+        $dend=true;
         $newblock=false;
         $hasdata=true;
 	$k=trim(strtok($val,":"));
@@ -65,27 +67,27 @@ $r=$blocks["main"];
 
 $ret["registered"]="yes";
 
-if ($r["admin-c"]!="") 
+if (isset($r["admin-c"])) 
    { $ret["admin"]=$blocks[$r["admin-c"]];
      unset($r["admin-c"]);
    }
 
-if ($r["tech-c"]!="")  
+if (isset($r["tech-c"]))  
    { $ret["tech"]=$blocks[$r["tech-c"]];
      unset($r["tech-c"]);
    }
 
-if ($r["zone-c"]!="")
+if (isset($r["zone-c"]))
    { $ret["zone"]=$blocks[$r["zone-c"]];
      unset($r["zone-c"]);
    }
 
-if ($r["billing-c"]!="")
+if (isset($r["billing-c"]))
    { $ret["billing"]=$blocks[$r["billing-c"]];
      unset($r["billing-c"]);
    }
 
-if ($r["owner-c"]!="")
+if (isset($r["owner-c"]))
    { $ret["owner"]=$blocks[$r["owner-c"]];
      unset($r["owner-c"]);
    }

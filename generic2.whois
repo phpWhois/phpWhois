@@ -4,11 +4,19 @@ function generic_whois ( $rawdata, $items )
 
 {
 $r="";
+$disok=true;
 
 while (list($key,$val)=each($rawdata))
       { if (trim($val)!="") 
            { reset($items);
              $ok=0;
+	     if ($val[0]=='%' && $disok)
+                { $r['disclaimer'][]=trim(substr($val,1));;
+		  $disok=true;
+		  continue;
+                }
+	     
+	     $disok=false;
 
              while (list($field, $match)=each($items)) 
                    { if (strstr($val,$match)) 

@@ -91,6 +91,7 @@ class Whois {
 	 */
 	function Whois ($query = "") {
 		// Load DATA array
+
 		require("servers.whois");
 
 		// Set version

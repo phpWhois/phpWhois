@@ -1,3 +1,8 @@
+2002/12/16  David Saez <david@ols.es>
+		- updated aunic.whois
+		- improved generic.whois & generic2.whois
+		- fixed uninitialized variable in utils.whois
+
 2002/10/16  David Saez <david@ols.es>
 		- Updated uknic handler to new Nominet UK whois output
 		- Added handler for .biz
