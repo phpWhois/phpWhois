@@ -54,6 +54,7 @@ class gtld extends Whois {
 	var $REGISTRARS = array(
 		"ALABANZA, INC." => "bulkregistercom",
 		"CORE INTERNET COUNCIL OF REGISTRARS" => "core",
+		"R23-LROR" => "core",
 		"DOTSTER, INC." => "dotster",
 		"R34-LROR" => "dotster",
 		"ENOM, INC." => "enom",
@@ -67,7 +68,8 @@ class gtld extends Whois {
 		"R11-LROR"  => "opensrsnet",
 		"IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM" => "dotregistrar",
 		"R114-LROR" => "dotregistrar",
-		"INTERDOMAIN, S.A." => "interdomain"
+		"INTERDOMAIN, S.A." => "interdomain",
+		"R49-LROR" => "interdomain"
 		);
 
 	function gTLD ($data, $query) {
@@ -91,7 +93,9 @@ class gtld extends Whois {
 		if (!isset($this->result["rawdata"]["rawdata"]))
 		    $this->Query["errstr"]="Domain not found";
 
-		$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];
+		if (isset($this->result["rawdata"]["rawdata"]))
+			$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];
+
 		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
 		if (!empty($this->Query["handler"])) {
