@@ -1,3 +1,18 @@
+2003/02/26  David Saez <david@ols.es>
+		- common object model changes in some handlers
+		- removed warning in gtld.whois when domain does not exist
+		- core.whois fixed and updated to common object model
+		- added corenic .org handle to gtld.whois
+
+2003/02/25  David Saez <david@ols.es>
+		- added interdomain .org handle
+		- interdomain.whois updated to common object model
+
+2003/02/19  David Saez <david@ols.es>
+		- added dotregistrar .org handle
+		- some improvments to generic3.whois
+		- registercom.whois updated to common object model
+
 2003/02/18  David Saez <david@ols.es>
 		- added dotster .org handle
 		- some improvments to generic3.whois
