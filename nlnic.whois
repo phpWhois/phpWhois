@@ -1,0 +1,87 @@
+<?
+/*
+Whois2.php    PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* nlnic.whois    1.1    David Saez - common object model */
+/* nlnic.whois    1.0    Matthijs Koot - 2003/01/14 - <koot@cyberwar.nl> */
+
+if(!defined("__NLNIC_HANDLER__")) define("__NLNIC_HANDLER__",1);
+
+class nlnic extends Whois {
+
+function nlnic($data) 
+{
+$this->result=$this->parse($data);
+}
+
+function parse ($data) 
+{
+    $data_str=preg_replace("/\n+/","_",implode("\n",$data["rawdata"]));
+    $data_str=preg_replace("/\s+/"," ",$data_str);
+
+    $r["rawdata"]=$data["rawdata"];
+
+    $r["regyinfo"]["whois"]="whois.domain-registry.nl";
+    $r["regyinfo"]["referrer"]="www.domain-registry.nl";
+
+    preg_match("/Registrar:_(.+?)_(.+?)/",$data_str, $refs);
+    $r["regyinfo"]["registrar"]=trim($refs[1]);
+
+    preg_match("/Organisation:_(.+?)_\s/", $data_str,$refs);
+    $r["regrinfo"]["owner"]["organization"]=trim($refs[1]);
+
+    preg_match("/Organisation:_(.+?)_(.+?)_\sAdministrative Contact/", $data_str,$refs);
+    $r["regrinfo"]["owner"]["address"]=preg_replace("/_/","\n",trim($refs[2]));
+
+    preg_match("/Domain name:_(.+?)\((.+?)\)_ Organisation/",$data_str,$refs);
+    $r["regrinfo"]["domain"]["name"]=trim($refs[1]);
+
+    preg_match("/Administrative Contact.?_\s(.+?@.+?)_/",$data_str, $refs);
+    preg_match("/(.+?)_\sPhone:\s(.+?)_\sE-mail:\s(.*@.*)/",$refs[1], $refssub);
+    $r["regrinfo"]["admin"]["name"]=$refssub[1];
+    $r["regrinfo"]["admin"]["phone"]=$refssub[2];
+    $r["regrinfo"]["admin"]["email"]=$refssub[3];
+
+    preg_match("/Technical Contact.?_\s(.+?@.+?)_/",$data_str, $refs);
+    preg_match("/(.+?)_\sPhone:\s(.+?)_\sE-mail:\s(.*@.*)/",$refs[1], $refssub);
+    $r["regrinfo"]["tech"]["name"]=$refssub[1];
+    $r["regrinfo"]["tech"]["phone"]=$refssub[2];
+    $r["regrinfo"]["tech"]["email"]=$refssub[3];
+
+    preg_match("/Record last updated:\s(.+?)_/",$data_str, $refs);
+    $r["regrinfo"]["domain"]["changed"]=trim($refs[1]);
+    
+    preg_match("/Domain first registered:\s(.+?)_/",$data_str, $refs);
+    $r["regrinfo"]["domain"]["created"]=trim($refs[1]);
+        
+    preg_match("/Domain Nameservers:_ (.+?)_\s(.+?)_/",$data_str, $refs);
+    $ns=explode(" ", $refs[1]." ".$refs[2]);
+    $r["regrinfo"]["domain"]["nserver"][$ns[0]]=$ns[1];
+    $r["regrinfo"]["domain"]["nserver"][$ns[2]]=$ns[3];
+   
+    return($r);
+}
+}
