@@ -1,0 +1,43 @@
+// Country domains
+
+atnic		nic.at
+aunic		telstra.com.au
+brnic		registro.br
+chnic		creart.ch blaueskreuz.ch
+cira		cira.ca (v)
+denic		4ever.de
+esnic		ols.es
+lunic		dns.lu
+mxnic           nic.mx
+nicse		nic-se.se
+nunames		nunames.nu
+uknic		olsns.co.uk
+
+// .com/.org/.net
+
+bulkregistercom bulkregister.com
+core            corenic.com corenic.org
+dotregistrar    dotregistrar.com dotregistrar.org
+dotster         dotster.com dotster.org
+enom            enom.com enom.org
+interdomain     interdominio.com interdomain.org
+inwwcom         ?
+netsol          olsns.com olsns.org
+opensrsnet      tucows.com opensrs.org
+registercom     register.com
+
+
+// Other
+
+info            afilias.info
+neulevel        forumed.biz
+
+// IP whois
+
+apnic		218.165.121.114
+arin            207.217.120.54
+bripw		200.165.206.74
+krnic		210.178.148.129
+lacnic		200.44.33.31
+ripe            62.97.102.115
+
