@@ -1,7 +1,20 @@
+2004/04/22  David Saez <david@ols.es>
+		- added handler for .us , thanx to
+		  snguyen@mbaassociation.org
+		- correctly sets regyinfo.whois
+		- added hack for .net.au , thanx to
+		  thill@gumnut.com.au
+		- implemented request id 757465
+		- fixed bug 690623
+		- fixed bug 804595
+		- added feature request 759788
+		- added .bg http whois mserver
+		- added .hu handler
+
 2004/04/21  David Saez <david@ols.es>
 		- fixed small bug in netsol.whois
 		- improvments and fixes to gtld.whois, thanx to
-		  snguyen@mbaassociation.or
+		  snguyen@mbaassociation.org
 
 2004/02/11  David Saez <david@ols.es>
 		- handles R120-LROR, thanx to DavHolle
