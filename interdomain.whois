@@ -26,11 +26,12 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/* interdomain.whois    2.0     David Saez Padros <david@ols.es> */
 /* interdomain.whois	1.1	David Saez Padros <david@ols.es> */
-/* Added expire date & tech & admin phone */
-/* You can check it with cursosred.com */
 
 if(!defined("__INTERDOMAIN_HANDLER__")) define("__INTERDOMAIN_HANDLER__",1);
+
+require_once("generic2.whois");
 
 class interdomain extends gtld {
 
@@ -39,105 +40,48 @@ class interdomain extends gtld {
 	}
 
 	function parse ($data_str) {
-		$admin = array(
-			"name"        => "Administrative Name",
-			"email"       => "Administrative e-mail",
-			"organization"=> "Administrative Org",
-			"address"     => "Administrative street",
-			"cp"          => "Administrative PC",
-			"city"        => "Administrative City",
-			"country"     => "Administrative Country",
-			"phone"       => "Administrative Phone"            
-			);
-
-		$tech = array(
-			"name"        => "Technical Name",
-			"email"       => "Technical e-mail",
-			"organization"=> "Technical Org",
-			"address"     => "Technical Street",
-			"cp"          => "Technical PC",
-			"city"        => "Technical City",
-			"country"     => "Technical Country",
-			"phone"       => "Technical Phone"            
-			);
 
 		$items = array(
-			"organization" => "Organization Name",
-			"domain"       => "Domain Name",
-			"created"      => "Creation Date",
-			"org_address"  => "Organization Street",
-			"city"         => "Organization City",
-			"cp"           => "Organization PC",
-			"country"      => "Organization Country",
-			"expires"      => "Expiry Date",
-			"admin"        => $admin,
-			"tech"         => $tech
+			"domain.name" => "Domain Name................",
+			"domain.created" => "Creation Date............",
+			"domain.expires" => "Expiry Date..............",
+			"domain.changed" => "Last Update Date.........",
+			"domain.nserver." => "Name Server.............",
+			"owner.name" => "Organization Name........",
+			"owner.organization" => "Organization Org.........",
+			"owner.address.street" => "Organization Street......",
+			"owner.address.city" => "Organization City........",
+			"owner.address.state" => "Organization State.......",
+			"owner.address.pcode" => "Organization PC..........",
+			"owner.address.country" => "Organization Country.....",
+			"owner.phone" => "Organization Phone.......",
+			"owner.email" => "Organization e-mail......",
+			"owner.handle" => "Organization Contact Id....",
+			"admin.handle" => "Administrative Contact Id..",
+			"admin.name" => "Administrative Name......",
+                        "admin.organization" => "Administrative Org.......",
+                        "admin.address.street" => "Administrative Street....",
+                        "admin.address.city" => "Administrative City......",
+                        "admin.address.state" => "Administrative State.....",
+                        "admin.address.pcode" => "Administrative PC........",
+                        "admin.address.country" => "Administrative Country...",
+                        "admin.phone" => "Administrative Phone.....",
+                        "admin.email" => "Administrative e-mail....",
+			"admin.fax" => "Administrative Fax.......",
+			"tech.handle" => "Technical Contact Id.......",
+                        "tech.name" => "Technical Name...........",
+                        "tech.organization" => "Technical Org............",
+                        "tech.address.street" => "Technical Street.........",
+                        "tech.address.city" => "Technical City...........",
+                        "tech.address.state" => "Technical State..........",
+                        "tech.address.pcode" => "Technical PC.............",
+                        "tech.address.country" => "Technical Country........",
+                        "tech.phone" => "Technical Phone..........",
+                        "tech.email" => "Technical e-mail.........",
+                        "tech.fax" => "Technical Fax............"
 			);
 
-
-		$r["ns"]=array();
-
-		while (list($key,$val)=each($data_str)) {
-			$val=trim($val);
-
-			if ($val!="") {
-				if ($val=="Domain servers in listed order:") {
-					next($data_str);
-
-					while (list($key,$val)=each($data_str)) {
-						if (!($value=trim($val))) break;
-						$value=idm_getvalue($value);
-						$ns=split(" ",$value);  
-						for ($i=1;$ns[$i]=="";$i++);
-						$r["ns"][$ns[0]]=$ns[$i];
-					} 
-					break;
-				}
-
-				reset($items);
-
-				while (list($field,$match)=each($items)) {
-					if (is_array($match)) {
-						reset($match);
-						while (list($subfield,$value)=each($match)) {
-							if (strstr($val,$value)) {
-								$r[$field][$subfield]=idm_getvalue($val);
-								break;  
-							} 
-						}
-						continue;
-					}   
-					if (strstr($val,$match)) {
-						$r[$field]=idm_getvalue($val);
-						break;  
-					} 
-
-				}
-			}
-		}
-
-		if (empty($r["ns"]))
-			$r="";
-		else {
-			idm_makeaddress($r,"org_address");
-			idm_makeaddress($r["admin"],"address");
-			idm_makeaddress($r["tech"],"address");
-		}
- 
-		return($r);
-	}
-
-	function idm_makeaddress(&$r,$field) {
-		$r[$field]=$r[$field]."\n".$r["cp"].", ".$r["city"]."\n".$r["country"];
-		unset($r["cp"]);
-		unset($r["city"]);
-		unset($r["country"]);
-	}
-
-	function idm_getvalue($str) {
-		for ($i=0;;$i++) if ($str[$i]==".") break;
-		for (;;$i++) if ($str[$i]!=".") break;
-		return trim(substr($str,$i));
+		return generic_whois($data_str,$items);
 	}
 }
 
