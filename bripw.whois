@@ -25,15 +25,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* brnic.whois	1.0 	David Saez 04/04/2003 */
+/* bripw.whois	1.0 	David Saez 04/04/2003 */
 
 require_once("generic.whois");
 
-if(!defined("__BRNIC_HANDLER__")) define("__BRNIC_HANDLER__",1);
+if(!defined("__BRIPW_HANDLER__")) define("__BRIPW_HANDLER__",1);
 
-class brnic extends ipw {
+class bripw extends ipw {
 
-function brnic($data) 
+function bripw($data) 
 {
 $this->result=$this->parse($data);
 }
