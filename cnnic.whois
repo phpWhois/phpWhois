@@ -73,7 +73,7 @@ class cnnic extends Whois {
                         "tech.address.country" => "tec-country:",
                         "tech.email" => "Technical Email:",
 			"tech.phone" => "Technical Phone Number:",
-			"tech.fax" => "Technical Fax",
+			"tech.fax" => "Technical Fax:",
 			"billing.name" => "Billing Name:",
 			"billing.organization" => "Billing Organization:",
                         "billing.address.address" => "Billing Address:",
@@ -90,6 +90,12 @@ class cnnic extends Whois {
 					"referrer"=>"http://www.cnnic.net.cn",
 					"registrar" => "China NIC");
 		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items);
+
+		if (empty($r["regrinfo"]))
+			$r["regrinfo"]["registered"]="no";
+		else
+			$r["regrinfo"]["registered"]="yes";
+
 		return($r);
 	}
 }
