@@ -34,16 +34,17 @@ if(!defined("__NUNAMES_HANDLER__")) define("__NUNAMES_HANDLER__",1);
 class nunames extends Whois {
 
 	function nunames($data) {
-		//$this->result=$this->parse(preg_replace("/\n+/","_",implode($data,"\n")));
 		$this->result=$this->parse($data);
-		//$this->result["rawdata"]=$data["rawdata"];
 	}
 
 	function parse ($data_str) {
 		$items=array(
-			"domain" => "Domain:",
-			"created" => "Created:",
-			"expires" => "Expires:" 
+			"name" => "Domain Name (UTF-8):",
+			"created" => "Record created on",
+			"expires" => "Record expires on",
+			"changed" => "Record last updated on",
+			"status" => "Record status:",
+			"handle" => "Record ID:" 
 			);
 
 
@@ -51,23 +52,19 @@ class nunames extends Whois {
 
 		$r["regyinfo"] = array(
 			"whois"=>"whois.nic.nu",
-			"referrer"=>"www.nunames.nu"
+			"referrer"=>"www.nunames.nu",
+			"registrar"=>".NU Domain, Ltd"
 			);
-
-		$r["regrinfo"] = array();
-		$r["regrinfo"]["ns"] = array();
 
 		while (list($key, $val)=each($data_str["rawdata"])) {
 			$val=trim($val);
 
 			if ($val!="") {
-				if ($val=="Name servers:") {
+				if ($val=="Domain servers in listed order:") {
 					while (list($key, $val)=each($data_str["rawdata"])) {
-						if (!($value=trim($val))) break;
-
-						$ns=split(" ",$value);  
-						for ($i=1;$ns[$i]=="";$i++);
-						$r["regrinfo"]["ns"][$ns[0]]=$ns[$i];
+						$val=trim($val);
+						if ($val=="") break;
+						$r["regrinfo"]["domain"]["nserver"][]=$val;
 					} 
 					break;
 				}
@@ -76,23 +73,13 @@ class nunames extends Whois {
 
 				while (list($field, $match)=each($items)) 
 					if (strstr($val,$match)) {
-						$r["regrinfo"][$field]=trim(substr($val,strlen($match)));
+						$r["regrinfo"]["domain"][$field]=trim(substr($val,strlen($match)));
 						break;  
 					} 
 			}
 		}
-
-		// Inform whether the domain is registered or not, explicitly.
-		// This check can be done in serveral ways, depending on what the NIC reports.
-
-		$r["regyinfo"]["registered"]  = ($r["regrinfo"]["domain"]) ? "yes" : "no";
-	
-		$r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
-		$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
-
 		return($r);
 	}
-
 }
 
 ?>
