@@ -1,4 +1,11 @@
-2003/09/06  David Saez <david@ols.es>
+2003/09/09  David Saez <david@ols.es>
+		- fixed some warning when ip is banned
+		  on domainbank.whois
+		- main.whois also sets regyinfo.whois on http
+		  queries
+		- rewrite of esnic.whois
+
+2003/09/08  David Saez <david@ols.es>
 		- rewrite of cnnic.whois
 		- some fixes to wsnic.whois
 		- some fixes to gtld.whois and generic3.whois
