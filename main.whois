@@ -206,7 +206,7 @@ class Whois {
 			$this->Query["status"] = "ready";
 
 			// Connect to whois port
-			$ptr = fsockopen($server, $this->PORT);
+			$ptr = @fsockopen($server, $this->PORT);
 			if($ptr > 0) {
 				$this->Query["status"]="ok";
 				return($ptr);
@@ -258,6 +258,43 @@ class Whois {
 	}
 
 	/*
+	*   Convert html output to plain text
+	*/
+	function httpQuery ($query) {
+		$lines = file($this->Query["server"]);
+             	$output = "";
+		$pre = "";
+
+		while (list($key, $val)=each($lines)) {
+			$val = trim($val);
+
+			$pos=strpos(strtoupper($val),"<PRE>");
+			if ($pos!==false) {
+				$pre = "\n";
+				$output.=substr($val,0,$pos)."\n";
+				$val = substr($val,$pos+5);
+			}
+			$pos=strpos(strtoupper($val),"</PRE>");
+                        if ($pos!==false) {
+                                $pre = "";
+                                $output.=substr($val,0,$pos)."\n";
+                                $val = substr($val,$pos+6);                    
+                        }
+			$output.=$val.$pre;
+		}
+			
+		$search = array (
+				"<BR>", "<P>", "<TR>", "</TITLE>",
+				"</H1>", "</H2>", "</H3>,",
+				"<br>", "<p>", "<tr>", "</title>",
+				"</h1>", "</h2>", "</h3>"  );
+
+                $output = str_replace($search,"\n",$output);
+		$output = explode("\n",strip_tags($output));
+		return $output;
+	}
+
+	/*
 	 * Perform lookup. Returns an array. The 'rawdata' element contains an
 	 * array of lines gathered from the whois query. If a top level domain
 	 * handler class was found for the domain, other elements will have been
@@ -270,13 +307,7 @@ class Whois {
 		// Check if protocol is http
 		if (substr($this->Query["server"],0,7)=="http://")
                       {
-			$lines = file($this->Query["server"]);
-                        $output = str_replace("\n"," ",implode(" ",$lines));
-                        $output = str_replace("<BR>","\n",$output);
-                        $output = str_replace("<P>", "\n",$output);
-                        $output = str_replace("<TR>","\n",$output);
-                        $output = explode("\n",strip_tags($output));
-                        $result['rawdata'] = $output;
+                        $result['rawdata'] = $this->httpQuery($this->Query["server"]);
 
                         // If we have a handler, post-process it with that
                         if(isSet($this->DATA[$this->Query["tld"]]))
