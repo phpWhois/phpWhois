@@ -62,57 +62,57 @@ $this->result=$this->parse(
 function parse ($data_str) {
 	$data_str=preg_replace("/\s+/"," ",$data_str);
 	
-	echo "BEGIN@".$data_str."@EINDE";
+	//echo "BEGIN@".$data_str."@EINDE";
 
 	preg_match("/terms\._(.+?)_(.+?)/", $data_str,$refs);
-	$r["regrinfo"]["organization"]=trim($refs[1]);
+	$r["owner"]["organization"]=trim($refs[1]);
 
 	preg_match("/terms\._(.+?)_(.*)_\sDomain Name/", $data_str,$refs);
-	$r["regrinfo"]["org_address"]=preg_replace("/_/","\n",trim($refs[2]));
+	$r["owner"]["address"]=explode("_",trim($refs[2]));
+//preg_replace("/_/","\n",trim($refs[2]));
 
 	preg_match("/terms\._.*_\s*Domain Name:\s(.+)_\sAdmin/",$data_str,$refs);
-	$r["regrinfo"]["domain"]=trim($refs[1]);
+	$r["domain"]["name"]=trim($refs[1]);
 
 	preg_match("/Administrative Contact(.+?)\s(.+?@.+?)_/",$data_str, $refs);
         preg_match("/_?(.*)[:->]*?\s(.*@.*)/",$refs[2], $refssub);
         while (preg_match("/[:\->]+?/", substr($refssub[1],-1))>0)
           {$refssub[1]=substr($refssub[1], 0, strlen($refssub[1]) -1);}
-        $r["regrinfo"]["admin"]["name"]=$refssub[1];
-        $r["regrinfo"]["admin"]["email"]=$refssub[2];
-        $r["regrinfo"]["admin"]["handle"]="";
+        $r["admin"]["name"]=$refssub[1];
+        $r["admin"]["email"]=$refssub[2];
         
 	preg_match("/Technical Contact(.+?)\s(.+?@.+?)_/",$data_str, $refs);
         preg_match("/_?(.*)[:->]*?\s(.*@.*)/",$refs[2], $refssub);
         while (preg_match("/[:\->]+?/", substr($refssub[1],-1))>0)
           {$refssub[1]=substr($refssub[1], 0, strlen($refssub[1]) -1);}
-        $r["regrinfo"]["tech"]["name"]=$refssub[1];
-        $r["regrinfo"]["tech"]["email"]=$refssub[2];
-        $r["regrinfo"]["tech"]["handle"]="";
+        $r["tech"]["name"]=$refssub[1];
+        $r["tech"]["email"]=$refssub[2];
         
 	preg_match("/Billing Contact(.+?)\s(.+?@.+?)_/",$data_str, $refs);
-        preg_match("/_?(.*)[:->]*?\s(.*@.*)/",$refs[2], $refssub);
-        while (preg_match("/[:\->]+?/", substr($refssub[1],-1))>0)
-          {$refssub[1]=substr($refssub[1], 0, strlen($refssub[1]) -1);}
-        $r["regrinfo"]["billing"]["name"]=$refssub[1];
-        $r["regrinfo"]["billing"]["email"]=$refssub[2];
-        $r["regrinfo"]["billing"]["handle"]="";
+
+	if (isset($refs[2])) {
+        	preg_match("/_?(.*)[:->]*?\s(.*@.*)/",$refs[2], $refssub);
+        	while (preg_match("/[:\->]+?/", substr($refssub[1],-1))>0)
+          		{$refssub[1]=substr($refssub[1], 0, strlen($refssub[1]) -1);}
+        	$r["billing"]["name"]=$refssub[1];
+        	$r["billing"]["email"]=$refssub[2];
+	}
 
 	preg_match("/Record (update|updated) (date|on)( on)?(  | -|: |->)?(.+?)_/",$data_str, $refs);
-	$r["regrinfo"]["updated"]=trim($refs[5]);
+	$r["domain"]["changed"]=trim($refs[5]);
 
 	preg_match("/Record (create|created) (date|on)( on)?(  | -|: |->)?(.+?)_/",$data_str, $refs);
-	$r["regrinfo"]["created"]=trim($refs[5]);
+	$r["domain"]["created"]=trim($refs[5]);
 
 	preg_match("/Record (will|expire|expires|expiring)( on| date| be| expire)( expiring on date| on| date)?(  |: | -|->)?(.+?)_/",$data_str, $refs);
-	$r["regrinfo"]["expires"]=trim($refs[5]);
+	$r["domain"]["expires"]=trim($refs[5]);
 
-	preg_match("/(Database last updated on|Database last updated on:) (.+?)\./",$data_str, $refs);
-	$r["regrinfo"]["db_updated"]=$refs[1];
+	//preg_match("/(Database last updated on|Database last updated on:) (.+?)\./",$data_str, $refs);
+	//$r["regrinfo"]["db_updated"]=$refs[1];
 	preg_match("/Domain servers in listed order:_ (.+)_Register/",$data_str, $refs);
 	$ns=explode("_", $refs[1]);
 	for($i=0,$max=count($ns);$i<$max;$i++) {
-		list($k,$v)=split(" ", trim($ns[$i]));
-		$r["regrinfo"]["ns"][$k]=$v;
+		$r["domain"]["nserver"][]=$ns[$i];
 	}        	
 	return($r);
 }

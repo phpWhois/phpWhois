@@ -53,6 +53,7 @@ class gtld extends Whois {
 
 	var $REGISTRARS = array(
 		"ALABANZA, INC." => "bulkregistercom",
+		"BULKREGISTER.COM, INC."  => "bulkregistercom",
 		"CORE INTERNET COUNCIL OF REGISTRARS" => "core",
 		"R23-LROR" => "core",
 		"DOTSTER, INC." => "dotster",

@@ -1,3 +1,12 @@
+2003/03/17  David Saez <david@ols.es>
+		- chnic.whois & nlnic.whois rewritten
+		- minor fix and improvment on generic3.whois
+		- added nameserver detection to dotregistrar.whois
+		- minor fix on info.whois
+		- fixed bripw.whois
+		- bulkregstercom.whois fixed and updated to common
+		  object model
+
 2003/03/16  David Saez <david@ols.es>
 		- mxnic.whois updated to common object model
 		- recovered brnic.whois and added bripw.whois
