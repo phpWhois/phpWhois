@@ -159,8 +159,14 @@ class Whois {
                       $tldtests[] = implode(".",$dp);
 		    }
 
+		$pos = strpos(strtolower(getenv ("OS")), "win");
+
+		if ($pos === false) $windows=false;
+		else $windows=true;
+
 		foreach($tldtests as $tld) {
-			$cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
+			if ($windows) $cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
+			else $cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
 			if(!$cname) continue;
 			$server = gethostbyname($tld.".whois-servers.net");
 			break;
@@ -186,6 +192,26 @@ class Whois {
 		$this->Query["status"] = -1;
 		$this->Query["errstr"][] = $this->Query["string"]." domain is not supported";
 		return;
+	}
+
+	/*
+	*  Checks dns reverse records on win platform
+	*/
+
+	function checkdnsrr_win($hostName, $recType= '')
+        {
+                if(!empty($hostName)) {
+			if( $recType == '' ) $recType = "MX";
+			exec("nslookup -type=$recType $hostName", $result);
+			// check each line to find the one that starts with the host
+			// name. If it exists thenthe function succeeded.
+			foreach ($result as $line) {
+				if(eregi("^$hostName",$line)) return true;
+			}
+			// otherwise there was no mail handler for the domain
+			return false;
+		}
+		return false;
 	}
 
 	/*
