@@ -78,6 +78,7 @@ class gtld extends Whois {
 		'SCHLUND+PARTNER AG' => 'schlund',
 		'STARGATE HOLDINGS CORP.' => 'stargate',
 		'TLDS, INC. DBA SRSPLUS' => 'srsplus',
+		'TLDS, LLC DBA SRSPLUS' => 'srsplus',
 		'TUCOWS, INC.' => 'opensrsnet',		
 		'WILD WEST DOMAINS, INC.' => 'godaddy'
 		);
