@@ -102,9 +102,9 @@ while (list($key,$val)=each($contacts))
 	   if (is_array($r[$key]))
 	        $blk=$r[$key][count($r[$key])-1];
 	   else $blk=$r[$key];
-echo $blk;
+
 	   $ret[$val]=$blocks[$blk];
-	   unset($blk); 
+	   unset($r[$key]); 
          }
 
 $ret[$main]=$r;

@@ -29,7 +29,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*              1.01    David Saez 06/07/2002  Added support for */
 /*                      BRNIC, KRNIC, TWNIC and LACNIC */
 
-/* Check with 218.165.121.114, 216.10.13.129 */
+/* Check with 218.165.121.114 (apnic) */
+/*            62.97.102.115   (ripe) */
+/*            216.10.13.129   (arin) */
 
 
 if (!defined("__IPW_HANDLER__")) define("__IPW_HANDLER__",1);
