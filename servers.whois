@@ -59,15 +59,16 @@ $this->DATA = array(
 	);
 
 $this->HTTPW = array(
-		"es" => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio=#&tipo=dominio",
-		"co.za" => "http://co.za/cgi-bin/whois.sh?Domain=#",
-		"fm" => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm",
-		"gs" => "http://www.adamsnames.tc/whois/?domain=#",
-		"in" => "whois.ncst.ernet.in",
-		"ms" => "http://www.adamsnames.tc/whois/?domain=#",
-		"tc" => "http://www.adamsnames.tc/whois/?domain=#",
-		"tf" => "http://www.adamsnames.tc/whois/?domain=#",
-		"tv" => "whois.networksolutions.com",
-		"vg" => "http://www.adamsnames.tc/whois/?domain=#"
+		"es"     => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio=#&tipo=dominio",
+		"co.za"  => "http://co.za/cgi-bin/whois.sh?Domain=#",
+		"fm"     => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm",
+		"gs"     => "http://www.adamsnames.tc/whois/?domain=#",
+		"in"     => "whois.ncst.ernet.in",
+		"ms"     => "http://www.adamsnames.tc/whois/?domain=#",
+		"net.au" => "whois.aunic.net",
+		"tc"     => "http://www.adamsnames.tc/whois/?domain=#",
+		"tf"     => "http://www.adamsnames.tc/whois/?domain=#",
+		"tv"     => "whois.networksolutions.com",
+		"vg"     => "http://www.adamsnames.tc/whois/?domain=#"
 		);
 ?>
