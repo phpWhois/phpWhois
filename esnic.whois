@@ -74,14 +74,16 @@ class esnic extends Whois {
 
 		$rw = generic_whois($data_str["rawdata"],$translate,$contacts);
 
-		$rw["owner"]["organization"]=$rw["domain"]["organization"];
-		unset($rw["domain"]["organization"]);
-		$rw["owner"]["address"]=$rw["domain"]["address"];
-                unset($rw["domain"]["address"]);
-		$rw["owner"]["nif"]=$rw["domain"]["nif"];
-                unset($rw["domain"]["nif"]);
-		$rw["owner"]["type"]=$rw["domain"]["type"];
-                unset($rw["domain"]["type"]);
+		if (isset($rw["domain"]["organization"])) {
+			$rw["owner"]["organization"]=$rw["domain"]["organization"];
+			unset($rw["domain"]["organization"]);
+			$rw["owner"]["address"]=$rw["domain"]["address"];
+                	unset($rw["domain"]["address"]);
+			$rw["owner"]["nif"]=$rw["domain"]["nif"];
+                	unset($rw["domain"]["nif"]);
+			$rw["owner"]["type"]=$rw["domain"]["type"];
+                	unset($rw["domain"]["type"]);
+		}
 
 		$r["regrinfo"] = $rw;
 

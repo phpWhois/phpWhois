@@ -33,12 +33,12 @@ class arin extends ipw {
 
 function arin($data) 
 {
-$this->result=$this->parse(preg_replace("/\n+/","_",implode("\n",$data)));
+$this->result=$this->parse($data);
 }
 
 function parse ($data_str) 
 {
-return($r);
+return("");
 }
 
 }
