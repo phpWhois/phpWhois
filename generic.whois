@@ -25,7 +25,7 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-function generic_whois ($rawdata,$translate,$contacts)
+function generic_whois ($rawdata,$translate,$contacts,$main="domain")
 {
 $r=array();
 $newblock=false;
@@ -51,9 +51,12 @@ while (list($key,$val)=each($rawdata))
            }
         $dend=true;
         $newblock=false;
-        $hasdata=true;
 	$k=trim(strtok($val,":"));
         $v=trim(substr(strstr($val,":"),1));
+
+	if ($v=="") continue;
+
+        $hasdata=true;
 
 	if (isset($translate[$k])) 
            {
@@ -84,7 +87,7 @@ if ($hasdata) $blocks[$gkey]=$block;
 if (isset($disclaimer) && is_array($disclaimer)) 
     $ret["disclaimer"]=$disclaimer;
 
-if (!is_array($blocks["main"]))
+if (!isset($blocks) || !is_array($blocks["main"]))
    { $ret["registered"]="no";
      return $ret;
    }
@@ -96,11 +99,15 @@ $ret["registered"]="yes";
 while (list($key,$val)=each($contacts))
        if (isset($r[$key]))
 	 {
-	   $ret[$val]=$blocks[$r[$key]];
-	   unset($r[$key]); 
+	   if (is_array($r[$key]))
+	        $blk=$r[$key][count($r[$key])-1];
+	   else $blk=$r[$key];
+echo $blk;
+	   $ret[$val]=$blocks[$blk];
+	   unset($blk); 
          }
 
-$ret["domain"]=$r;
+$ret[$main]=$r;
 return $ret;
 }
 
