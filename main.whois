@@ -81,11 +81,24 @@ if(isSet($query)) {
 			$this->Query["handler"]=$handler;
 		}
 		$this->Query["tld"]=$tld;
-	} else {
-		$this->Query["status"]=-1;
+	} else { $ip=checkdnsrr($query,"A");
+                 if ($ip)
+                      { $ip=gethostbyname($query);
+                        $this->Query["server"]="whois.arin.net";
+                        $this->Query["host_ip"]=$ip;
+                        $this->Query["file"]="ipw.whois";
+			$this->Query["handler"]="ipw";
+                        $this->Query["string"]=$ip;
+                        $this->Query["tld"]="ipw";
+                        if ($query==$ip)
+                             $this->Query["host_name"]=gethostbyaddr($ip);
+                        else $this->Query["host_name"]=$query;
+                      }
+                 else { $this->Query["status"]=-1;
 		$this->Query["errstr"][]=$this->Query["string"]. 
 					  " domain is not supported";
 		unset($this->Query["server"]);
+	}
 	}
 } else {
 	$this->Query["server"]=$this->NSI_REGISTRY;
