@@ -52,7 +52,9 @@ var $REGISTRARS = array(
 			"MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE"=>"inwwcom",
 			"NETWORK SOLUTIONS, INC."=>"netsol",
 			"REGISTER.COM, INC."=>"registercom",
-			"TUCOWS, INC."=>"opensrsnet"
+			"TUCOWS, INC."=>"opensrsnet",
+			"IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM"=>"dotregistrar",
+			"INTERDOMAIN, S.A."=>"interdomain"
 			);
 
 function gTLD ($data,$query) {
