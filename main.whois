@@ -344,7 +344,8 @@ class Whois {
 		$string = !empty($query) ? $query : $this->Query["string"];
 
 		// Check if protocol is http
-		if (substr($this->Query["server"],0,7)=="http://")
+		if (substr($this->Query["server"],0,7)=="http://" ||
+                    substr($this->Query["server"],0,8)=="https://")
                       {
                         $result['rawdata'] = $this->httpQuery($this->Query["server"]);
 
