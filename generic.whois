@@ -11,7 +11,7 @@ $dend=false;
 
 while (list($key,$val)=each($rawdata))
       { $val=trim($val);
-        if ($val[0]=='%')
+        if ($val!="" && $val[0]=='%')
            { if (!$dend) $disclaimer[]=trim(substr($val,1));
              continue;
            }
@@ -43,9 +43,9 @@ while (list($key,$val)=each($rawdata))
 				 break;
 	       }
 
-	if (is_array($block[$k]))
+	if (isset($block[$k]) && is_array($block[$k]))
     	     $block[$k][]=$v;
-        else if ($block[$k]=="") 
+        else if (!isset($block[$k]) || $block[$k]=="") 
                     $block[$k]=$v;
              else { $x=$block[$k];
 		    unset($block[$k]);

@@ -1,3 +1,6 @@
+2003/01/18  David Saez <david@ols.es>
+		- added nlnic.whois, thanx to Matthijs Koot <koot@cyberwar.nl>
+
 2002/12/16  David Saez <david@ols.es>
 		- updated aunic.whois
 		- improved generic.whois & generic2.whois
