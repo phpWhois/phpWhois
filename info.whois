@@ -26,9 +26,12 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* info.whois	1.0	David Saez Padros <david@ols.es> */
+/* info.whois   2.0  David Seaz - updated to common object model */  
+/* info.whois	1.0  David Saez Padros <david@ols.es> */
 
 if(!defined("__INFO_HANDLER__")) define("__INFO_HANDLER__",1);
+
+require_once("generic2.whois");
 
 class info extends Whois {
 
@@ -38,54 +41,70 @@ class info extends Whois {
 
 	function parse ($data_str) {
 
-		$items=array(
-			"organization" => "Registrant Name:",
-			"domain" => "Domain Name:",
-			"registrar" => "Sponsoring Registrar:",
-			"created" => "Created On:",
-			"updated" => "Last Updated On:"
-			);
+		$items = array( "domain.handle" => "Domain ID:",
+				"domain.name"  => "Domain Name:",
+				"domain.created" => "Created On:",
+                                "domain.changed" => "Last Updated On:",
+				"domain.expires" => "Expiration Date:",
+				"domain.sponsor" => "Sponsoring Registrar:",
+				"domain.status" => "Status:",
+				"domain.nserver." => "Name Server:",
+				"owner.handle" => "Registrant ID:",
+				"owner.name" => "Registrant Name:",
+				"owner.organization" => "Registrant Organization:",
+				"owner.address.address.0" => "Registrant Street1:",
+				"owner.address.address.1" => "Registrant Street2:",
+				"owner.address.city" => "Registrant City:",
+				"owner.address.state" => "Registrant State/Province:",
+				"owner.address.pcode" => "Registrant Postal Code:",
+				"owner.address.country" => "Registrant Country:",
+				"owner.phone" => "Registrant Phone:",
+				"owner.fax" => "Registrant FAX:",
+				"owner.email" => "Registrant Email:",
+				"admin.handle" => "Admin ID:",
+                                "admin.name" => "Admin Name:",
+                                "admin.organization" => "Admin Organization:",
+                                "admin.address.address.0" => "Admin Street1:",
+                                "admin.address.address.1" => "Admin Street2:",
+                                "admin.address.city" => "Admin City:",
+                                "admin.address.state" => "Admin State/Province:",
+                                "admin.address.pcode" => "Admin Postal Code:",
+                                "admin.address.country" => "Admin Country:",
+                                "admin.phone" => "Admin Phone:",
+                                "admin.fax" => "Admin FAX:",
+                                "admin.email" => "Admin Email:",
+				"tech.handle" => "Tech ID:",
+                                "tech.name" => "Tech Name:",
+                                "tech.organization" => "Tech Organization:",
+                                "tech.address.address.0" => "Tech Street1:",
+                                "tech.address.address.1" => "Tech Street2:",
+                                "tech.address.city" => "Tech City:",
+                                "tech.address.state" => "Tech State/Province:",
+                                "tech.address.pcode" => "Tech Postal Code:",
+                                "tech.address.country" => "Tech Country:",
+                                "tech.phone" => "Tech Phone:",
+                                "tech.fax" => "Tech FAX:",
+                                "tech.email" => "Tech Email:",
+				"billing.handle" => "Billing ID:",
+                                "billing.name" => "Billing Name:",
+                                "billing.organization" => "Billing Organization:",
+                                "billing.address.address.0" => "Billing Street1:",
+                                "billing.address.address.1" => "Billing Street2:",
+                                "billing.address.city" => "Billing City:",
+                                "billing.address.state" => "Billing State/Province:",
+                                "billing.address.pcode" => "Billing Postal Code:",
+                                "billing.address.country" => "Billing Country:",
+                                "billing.phone" => "Billing Phone:",
+                                "billing.fax" => "Billing FAX:",
+                                "billing.email" => "Billing Email:"
+                                );
 
+                $r["rawdata"] = $data_str["rawdata"];
+                $r["regyinfo"] = array("whois"=>"whois.afilias.info",
+                                "referrer"=>"whois.afilias.info" );
 
-		$r["rawdata"]=$data_str["rawdata"];
-		$r["regrinfo"]=array();
-		$r["regrinfo"]["ns"]=array();
-
-
-		while (list($key, $val)=each($data_str["rawdata"])) {
-			$val=trim($val);
-
-			if ($val!="") {
-				if (strstr($val,"Name Server:")) {
-					$r["regrinfo"]["ns"][]=trim(substr($val,strlen("Name Server:")));
-				}
-				else {
-					reset($items);
-
-					while (list($field, $match)=each($items)) 
-						if (strstr($val,$match)) {
-							$r["regrinfo"][$field]=trim(substr($val,strlen($match)));
-							break;  
-						} 
-				}
-			}
-		}
-
-
-		if (!empty($r["regrinfo"]["organization"])) {
-			$r["regyinfo"] = array(
-				"whois"=>"whois.afilias.info",
-				"referrer"=>"whois.afilias.info"
-				);
-			$r["regyinfo"]["nameserver"] = $r["regrinfo"]["ns"];
-			$r["regyinfo"]["domain"] = $r["regrinfo"]["domain"];
-			$r["regyinfo"]["registrar"] = $r["regrinfo"]["registrar"];
-			$r["regrinfo"]["updated"] = strtok($r["regrinfo"]["updated"]," ");
-			$r["regyinfo"]["updated"] = $r["regrinfo"]["updated"];
-		}
-		else $r = "";
-
-		return($r);
+                $r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
+                return $r;
 	}
 
 }

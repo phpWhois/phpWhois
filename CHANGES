@@ -1,3 +1,6 @@
+2003/01/25  David Saez <david@ols.es>
+		- info.whois updated to common object model
+
 2003/01/19  David Saez <david@ols.es>
 		- fixed denic.whois
 
