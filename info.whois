@@ -56,7 +56,7 @@ class info extends Whois {
 				"owner.address.street2" => "Registrant Street2:",
 				"owner.address.city" => "Registrant City:",
 				"owner.address.state" => "Registrant State/Province:",
-				"owner.address.zcode" => "Registrant Postal Code:",
+				"owner.address.pcode" => "Registrant Postal Code:",
 				"owner.address.country" => "Registrant Country:",
 				"owner.phone" => "Registrant Phone:",
 				"owner.fax" => "Registrant FAX:",
