@@ -413,6 +413,9 @@ class Whois {
 		if(isSet($this->DATA[$this->Query["tld"]]))
 			$result = $this->Process($result);
 
+		// Set whois server
+                $result['regyinfo']['whois'] = $this->Query["server"];
+
 		// Add error information if any
 		if (isset($this->Query["errstr"]))
 			$result["errstr"] = $this->Query["errstr"];
