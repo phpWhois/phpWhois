@@ -121,7 +121,7 @@ class denic extends Whois {
                         $parts=explode(" ",$gkey);
                         while (list($pkey,$pval) = each($parts))
                               { 
-				if (isset($gval["address"]))
+				if (isset($gval["address"][0]))
 				   {
 				     $gval["organization"]=$gval["address"][0];
 				     unset($gval["address"][0]);
