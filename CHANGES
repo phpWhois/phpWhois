@@ -1,5 +1,17 @@
+2003/03/16  David Saez <david@ols.es>
+		- mxnic.whois updated to common object model
+		- recovered brnic.whois and added bripw.whois
+		  which was implemented over brnic.whois by
+		  mistake
+
+2003/03/12  Ross Golder <rossigee@users.sourceforge.net>
+		- Minor corrections and a note about coding style
+		  on HANDLERS
+
 2003/03/07  David Saez <david@ols.es>
 		- added lacnic.whois
+		- added file HANDLERS
+		- minor fixes to README
 
 2003/03/05  David Saez <david@ols.es>
 		- implemented krnic.whois
