@@ -27,6 +27,9 @@
 */
 
 class Whois {
+	// Recursion allowed ?
+	var $gtld_recurse = true;
+
 	// Full code and data version string (e.g. 'Whois2.php v3.01:16')
 	var $VERSION;
 
@@ -269,6 +272,9 @@ class Whois {
 			return($result);
 		}
 
+		if (!$this->gtld_recurse && $this->Query["file"]=='gtld.whois')
+			return $result;
+
 		// Pass result to handler
 		$object = $this->Query["handler"];
 		$handler = new $object($result, $this->Query);
@@ -409,12 +415,12 @@ class Whois {
 		$result = array();
 		$result['rawdata'] = $output;
 
-                // Set whois server
-                $result['regyinfo']['whois'] = $this->Query["server"];
-
 		// If we have a handler, post-process it with that
 		if(isSet($this->DATA[$this->Query["tld"]]))
 			$result = $this->Process($result);
+
+		// Set whois server
+                $result['regyinfo']['whois'] = $this->Query["server"];
 
 		// Add error information if any
 		if (isset($this->Query["errstr"]))
