@@ -66,7 +66,9 @@ unset($r["network"]["aut-num"]);
 unset($r["network"]["nsstat"]);
 unset($r["network"]["nslastaa"]);
 unset($r["network"]["inetrev"]);
-$r["network"]["nserver"]=array_unique($r["network"]["nserver"]);
+
+if (isset($r["network"]["nserver"])) 
+    $r["network"]["nserver"]=array_unique($r["network"]["nserver"]);
 
 return $r;
 }
