@@ -1,3 +1,9 @@
+2003/08/04  David Saez <david@ols.es>
+		- Temporary deactivation of .es handler due to
+		  changes in .es registry whois system
+		- Fixed denic.whois, thanks to 
+                  Gulibert@NetGameZone.de
+
 2003/06/30  David Saez <david@ols.es>
 		- added handler for .be, thanx to 
 		  onveilig@hotmail.com

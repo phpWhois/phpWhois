@@ -26,6 +26,9 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/* denic.whois        0.4 by Oliver Notka <notka@ettel-gmbh.de> */
+/* Fixed error when domain doesnt exist */
+
 /* denic.whois        0.3 by David Saez <david@ols.es> */    
 /* denic.whois        0.2 by Elmar K. Bins <elmi@4ever.de> */
 /* based upon brnic.whois by Marcelo Sanches <msanches@sitebox.com.br> */
@@ -116,6 +119,13 @@ class denic extends Whois {
 		$r["regrinfo"]["owner"]["address"]=$blocks["main"]["address"];
 		unset($blocks["main"]["address"]);
 
+		/* Fixed by Oliver Notka if Domain not exist. */
+		if (!isset($blocks)) {
+			$this->Query["errstr"]="Domain not found";
+			unset($this->result["rawdata"]);
+			return;
+		}
+		
 		while (list($gkey,$gval) = each($blocks))
                       { 
                         $parts=explode(" ",$gkey);
