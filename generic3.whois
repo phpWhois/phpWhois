@@ -174,11 +174,13 @@ while (list($key,$val)=each($array))
 	     unset($array[$key]);
 	     continue;
 	   }
+
 	if (strstr($val,"@"))
            {
 	     $parts=explode(" ",$val);
              $top=count($parts)-1;
-             $r["email"]=$parts[$top];
+             $r['email']=str_replace('(','',$parts[$top]);
+	     $r['email']=str_replace(')','',$r['email']);
              array_pop($parts);
              $val=implode(" ",$parts);
 	     if ($val=="") {
