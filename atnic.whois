@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Whois2.php        PHP classes to conduct whois queries
 
@@ -40,9 +40,9 @@ function parse ($data_str) {
 $items=array (
 		    "organization"  => "descr:    [organization]:",
               "name"          => "descr:    [name]:",
-              "address"       => "descr:    [street address]:",
+              "street"        => "descr:    [street address]:",
               "postalcode"    => "descr:    [postal code]:",
-              "city"      	  => "descr:    [city]:",
+              "city"          => "descr:    [city]:",
               "country"       => "descr:    [country]:",
               "phone"         => "descr:    [phone]:",
               "fax"           => "descr:    [fax-no]:",
@@ -56,10 +56,11 @@ $items=array (
   $r["regrinfo"]=array();
   $r["regrinfo"]["disclaimer"]="";
   $r["regrinfo"]["owner"]=array();
-  $r["regrinfo"]["nserver"]=array();
-  $r["regrinfo"]["admin_c"]=array();
-  $r["regrinfo"]["tech_c"]=array();
-  $r["regrinfo"]["zone_c"]=array();
+  $r["regrinfo"]["ns"]=array();
+  $r["regrinfo"]["admin"]=array();
+  $r["regrinfo"]["tech"]=array();
+  $r["regrinfo"]["zone"]=array();
+  $r["regrinfo"]["owner"]["address"]=array();
   
   $changed_ok = FALSE;    // flag for first 'changed'=domain, others are for person object
   $nic_var=1;
@@ -83,28 +84,21 @@ $items=array (
             $n_counter = 1;
             do {
                $nserver=split("nserver:  ",$val);
-               $nserver_array = 'nserver'. $n_counter;
-               $r["regrinfo"]["nserver"][$nserver_array]=$nserver[1];
+	       
+	       $lastnserver = trim($nserver[1]);
+               
+	       list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+        
+               // fetch nameserver ip
+               $nserver=split("remarks:  ",$val);
+               $r["regrinfo"]["ns"][$lastnserver]=trim($nserver[1]);
 
                list($key, $val)=each($data_str["rawdata"]);
                $val=trim($val);
 
                $n_counter += 1;
             } while ((substr($val,0,7)=="nserver"));
-         }
-        // fetch nameserver ip's
-        if (substr($val,0,7)=="remarks") {
-            $n_counter = 1;
-            do {
-               $nserver=split("remarks:  ",$val);
-               $nserver_array = 'nserver'. $n_counter;
-               $r["regrinfo"]["nserver"][$nserver_array]=$r["regrinfo"]["nserver"][$nserver_array] . ", " . $nserver[1];
-
-               list($key, $val)=each($data_str["rawdata"]);
-               $val=trim($val);
-
-               $n_counter += 1;
-            } while ((substr($val,0,7)=="remarks"));
          }
 
         // fetch changed date
@@ -123,11 +117,11 @@ $items=array (
 
         // NICAT handles for admin-c, tech-c, zone-c
         if (substr($val,0,7)=="admin-c") 
-          { $r["regrinfo"]["admin_c"]["nic-hdl"]=substr($val,10); }
+          { $r["regrinfo"]["admin"]["nic-hdl"]=substr($val,10); }
         if (substr($val,0,6)=="tech-c") 
-          { $r["regrinfo"]["tech_c"]["nic-hdl"]=substr($val,10); }
+          { $r["regrinfo"]["tech"]["nic-hdl"]=substr($val,10); }
         if (substr($val,0,6)=="zone-c") 
-          { $r["regrinfo"]["zone_c"]["nic-hdl"]=substr($val,10); }
+          { $r["regrinfo"]["zone"]["nic-hdl"]=substr($val,10); }
         
 	    // persons
         $address_line = 0;
@@ -179,20 +173,52 @@ $items=array (
       }
   }
 
+// copy address information from $item() to [owner][address]
+
+$aline=1;
+
+while ( list($key,$val) = each ($r["regrinfo"]["owner"]) )
+  {
+  if ($key == "postalcode")
+    { $savedpostalcode = $val; }
+
+  if ($key == "city")
+    {
+    $r["regrinfo"]["owner"]["address"]["address$aline"] = "$savedpostalcode $val";
+    $aline++;
+    }
+
+  if (($key == "street") || ($key == "country"))
+    {
+    $r["regrinfo"]["owner"]["address"]["address$aline"] = $val;
+    $aline++;
+    }
+  }
+
+
 // Regristrar Information Array
 $r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
-$r["regyinfo"]["nameserver"]=$r["regrinfo"]["nserver"];
+$r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
 $r["regyinfo"]["registered"]=($r["regrinfo"]["domain"]) ? "yes" : "no";
 
 // Domain Information Array
 for ($i=1;$i<$nic_var;$i++)
   {
-  if ($r["regrinfo"]["admin_c"]["nic-hdl"]==$person[$i]["nic-hdl"])
-    { $r["regrinfo"]["admin_c"]=$person[$i]; }
-  if ($r["regrinfo"]["zone_c"]["nic-hdl"]==$person[$i]["nic-hdl"])
-    { $r["regrinfo"]["zone_c"]=$person[$i]; }
-  if ($r["regrinfo"]["tech_c"]["nic-hdl"]==$person[$i]["nic-hdl"])
-    { $r["regrinfo"]["tech_c"]=$person[$i]; }
+  if ($r["regrinfo"]["admin"]["nic-hdl"]==$person[$i]["nic-hdl"])
+    {
+    $r["regrinfo"]["admin"]=$person[$i];
+    $r["regrinfo"]["admin"]["handle"]=$person[$i]["nic-hdl"];;	// for unification purposes
+    }
+  if ($r["regrinfo"]["zone"]["nic-hdl"]==$person[$i]["nic-hdl"])
+    {
+    $r["regrinfo"]["zone"]=$person[$i];
+    $r["regrinfo"]["zone"]["handle"]=$person[$i]["nic-hdl"];;	// for unification purposes
+    }
+  if ($r["regrinfo"]["tech"]["nic-hdl"]==$person[$i]["nic-hdl"])
+    {
+    $r["regrinfo"]["tech"]=$person[$i];
+    $r["regrinfo"]["tech"]["handle"]=$person[$i]["nic-hdl"];;	// for unification purposes
+    }
   }
 
 // clean up
