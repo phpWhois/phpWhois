@@ -1,3 +1,10 @@
+2003/03/07  David Saez <david@ols.es>
+		- added lacnic.whois
+
+2003/03/05  David Saez <david@ols.es>
+		- implemented krnic.whois
+		- minor improvments to generic3.whois
+
 2003/03/04  David Saez <david@ols.es>
 		- improvments on ripe.whois
 		- implemented arin.whois and brnic.whois

@@ -29,11 +29,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*              1.01    David Saez 06/07/2002  Added support for */
 /*                      BRNIC, KRNIC, TWNIC and LACNIC */
 
-/* Check with 218.165.121.114 (apnic) */
-/*            62.97.102.115   (ripe)  */
-/*            207.217.120.54  (arin)  */
-/*            200.165.206.74  (brnic) */
-/*            210.178.148.129 (krnic) */
+/* Check with 218.165.121.114 (apnic)  */
+/*            62.97.102.115   (ripe)   */
+/*            207.217.120.54  (arin)   */
+/*            200.165.206.74  (brnic)  */
+/*            210.178.148.129 (krnic)  */
+/*	      200.44.33.31    (lacnic) */
 
 if (!defined("__IPW_HANDLER__")) define("__IPW_HANDLER__",1);
 
@@ -54,7 +55,7 @@ class ipw extends Whois {
 			       "whois.ripe.net" =>"ripe",
 			       "whois.arin.net" =>"arin",
 			       "whois.registro.br" =>"brnic",
-			       "whois.lacnic.net"=>"ripe"	 
+			       "whois.lacnic.net"=>"lacnic"
 			     );	
 
 function ipw ($data,$query) {
