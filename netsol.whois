@@ -41,8 +41,8 @@ class netsol extends gtld {
 		$data_str=preg_replace("/\s+/"," ",$data_str);
 		preg_match("/^(.+)Registrant:_/",$data_str,$refs); 
 
-		if (!isset($ref[1])) {
-			return '';
+		if (!isset($refs[1])) {
+			return array();
 			}
 
 		$r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
