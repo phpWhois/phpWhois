@@ -45,6 +45,7 @@ class registercom extends gtld {
                                 "admin" => "Administrative Contact",
                                 "tech" => "Technical Contact",
 				"zone" => "Zone Contact",
+				"" => "Registrar Name....:",
                                 "domain.nserver" => "Domain servers in listed order:",
                                 "domain.name" => "Domain name:",
                                 "domain.created" => "Created on..............:",

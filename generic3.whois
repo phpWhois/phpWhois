@@ -30,54 +30,82 @@ function get_blocks ( $rawdata, $items )
 
 $endtag="";
 
-while (list($field, $match)=each($items))
-      { 
-        // search block header
-	reset($rawdata);
+while (list($key,$val)=each($rawdata))
+      {
+        $val=trim($val);
+	if ($val=="") continue;
+
 	$found=false;
+	reset($items);
 
-	while (list($key,$val)=each($rawdata))
-              {
-                $pos=strpos($val,$match);
-                if ($pos!==false)
-		   {
-		     $last=substr(trim($val),-1,1);
+	while (list($field, $match)=each($items)) {
 
-		     if ($last==":" || $last=="-" || $last=="]")
-		          {
-			    $found=true;
-			    $endtag=$last;
-			    break;
-                          }
-		     else {
-			    $var=getvarname(strtok($field,"#"));
-                            $itm=trim(substr($val,$pos+strlen($match)));
-			    eval($var."=\$itm;");
-                          }
-		   }
-	      }     
+		$pos=strpos($val,$match);
+
+		if ($field!="" && $pos!==false) {
+			$last=substr(trim($val),-1,1);
+
+			if ($last==":" || $last=="-" || $last=="]") {
+				$found=true;
+				$endtag=$last;
+				$line=$val;
+				break;
+			}
+			else {
+				$var=getvarname(strtok($field,"#"));
+				$itm=trim(substr($val,$pos+strlen($match)));
+				eval($var."=\$itm;");
+			}
+		}
+	}
 
 	if (!$found) continue;
 
 	$block=array();
 	$found=false;
+	$spaces=0;
 
 	while (list($key,$val)=each($rawdata))
               { 
 		$val=trim($val);
-		if ($val=="") 
-                   { if ($found) break;
-		     else continue;
-                   }
-                $found=true;  	
+		if ($val=="") { 
+                	if ($found && ++$spaces==2) break;	
+		     	continue;
+                }
+                if (!$found) {
+			$found=true;
+			$block[]=$val;
+			continue;
+		}
 		$last=substr(trim($val),-1,1);
-		//if ($last==":" || $last=="-") break;
-		if ($last==$endtag) break;
+		if ($last==$endtag) {
+			prev($rawdata);
+			break;
+		}
+		if ($spaces>0) {
+			reset($items);
+			$ok=true;
+			while (list($field, $match)=each($items)) {
+				$pos=strpos($val,$match);
+				if ($pos!==false) $ok=false;
+			}
+			if (!$ok) {
+				prev($rawdata);
+				break;
+			}
+		}
 		$block[]=$val;
               }
 
-        $var=getvarname($field);
-        eval($var."=\$block;");
+	reset($items);
+
+	while (list($field, $match)=each($items)) {
+                $pos=strpos($line,$match);
+                if ($pos!==false) {
+        		$var=getvarname($field);
+        		eval($var."=\$block;");
+		}
+	}
       }
 
 return $r;
