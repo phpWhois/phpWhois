@@ -37,110 +37,74 @@ if(!defined("__DENIC_HANDLER__")) define("__DENIC_HANDLER__",1);
 class denic extends Whois {
 
 	function denic($data) {
-		$this->result=$this->parse($data);
+		$this->result = $this->parse($data);
 	}
 
 	function parse ($data_str) {
-		$items=array(
-			"domain" => "domain:",
-			"status" => "status:",
-			"registrar" => "prov:"
+		$convert = array(
+			"domain" => "name",
+			"descr" => "desc",
+			"type" => "",
+			"city" => "address", 
+			"pcode" => "address",
+			"country" =if (is_array($disclaimer)) $ret["disclaimer"]=$disclaimer;> "address"
 			);
 
-		$r["rawdata"] = $data_str["rawdata"];
-		$r["regyinfo"] = array(
-			"whois"=>"whois.denic.de"
-			);
+		$r = array();
+		$newblock = false;
+		$hasdata = false;
+		$block = array();
+		$gkey = "main";
 
-		$r["regrinfo"] = array();
-		$r["regrinfo"]["owner"] = array();
-		$r["regrinfo"]["owner"]["address"] = array();
-		$r["regrinfo"]["ns"] = array();
-		$r["regrinfo"]["admin"] = array();
-		$r["regrinfo"]["tech"] = array();
-		$r["regrinfo"]["zone"] = array();
-
-		$address_ok = FALSE;
-		$nserver_ok = FALSE;
-		$created_ok = FALSE;
-		$changed_ok = FALSE;
-		$org_ok = FALSE;
-
-		while (list($key, $val) = each($data_str["rawdata"])) {
+		while (list($key,$val) = each($rawdata)) {
 			$val = trim($val);
-			if ($val!="") {
-				if ((substr($val,0,5) == "descr") && (!$address_ok)) {
-					$address_line = 1;
-					do {
-						$address = split("descr:",$val);
-						if (!$org_ok)
-						{
-							$r["regrinfo"]["owner"]["organization"] = trim($address[1]);
-							$r["regrinfo"]["organization"] = trim($address[1]);
-							$org_ok = TRUE;
-						}
-						else
-						{
-							$address_array = 'address'. $address_line;
-							$r["regrinfo"]["owner"]["address"][$address_array] = trim($address[1]);
-							$address_line += 1;
-						}
-						list($key, $val) = each($data_str["rawdata"]);
-						$val = trim($val);
-					} while ((substr($val,0,5) == "descr") && (!$address_ok));
-					$address_ok = TRUE;
-				}
-
-				if ((substr($val,0,7) == "nserver") && (!$nserver_ok)) {
-					$n_counter = 1;
-					do {
-						$nserver = split("nserver:",$val);
-						$val = $nserver[1];
-						if ($val == "") break;
-						$val = trim($val);
-						list($v1,$v2) = preg_split("/\s+/",$val);
-
-						$r["regrinfo"]["ns"][$v1] = "$v2";
-
-						list($key, $val) = each($data_str["rawdata"]);
-						$val = trim($val);
-
-						$n_counter += 1;
-					} while ((substr($val,0,7) == "nserver"));
-					$nserver_ok = TRUE;
-				}
-
-				if ((substr($val,0,7) == "changed") && (!$changed_ok)) {
-					$changed = split("changed:",$val);
-					$r["regrinfo"]["changed"] = trim($changed[1]);
-					list($key, $val) = each($data_str["rawdata"]);
-					$val = trim($val);
-					$changed_ok = TRUE;
-				}
-
-				// handles for admin-c, tech-c, zone-c
-				if (substr($val,0,7) == "admin-c") 
-				{ $r["regrinfo"]["admin"]["handle"] = trim(substr($val,10)); }
-				if (substr($val,0,6) == "tech-c") 
-				{ $r["regrinfo"]["tech"]["handle"] = trim(substr($val,10)); }
-				if (substr($val,0,6) == "zone-c") 
-				{ $r["regrinfo"]["zone"]["handle"] = trim(substr($val,10)); }
-
-
-				reset($items);
-				while (list($field, $match) = each($items)) {
-					if (strstr($val,$match))
-					{ $r["regrinfo"][$field] = trim(substr($val,strlen($match)));
-					break;
-					}
-				}
+			if (substr($val,0,1) == '%') {
+				$disclaimer[] = trim(substr($val,1));
+				continue;
 			}
+			if ($val == "") {
+				$newblock = true;
+				continue;
+			}
+			if ($newblock && $hasdata) {
+				$blocks[$gkey] = $block;
+				$block = array();
+				$gkey = "";
+			}
+			if ($newblock) {
+				$gkey = str_replace("]["," ",$gkey);
+				$gkey = str_replace("]","",$gkey);
+				$gkey = str_replace("[","",$gkey); 
+			}
+			$newblock = false;
+			$hasdata = true;
+			$k = str_tolower(trim(strtok($val,":")));
+			$v = trim(substr(strstr($val,":"),1));
+			
+			if (isset($convert[$k])) {
+				$k = $convert($k);
+				if ($k == "") continue; 
+			}
+                    
+			if (is_array($block[$k]))
+				$block[$k][] = $v;
+			else if ($block[$k] == "")
+				$block[$k] = $v;
+			else {
+				$x = $block[$k];
+				unset($block[$k]);
+				$block[$k][] = $x;
+				$block[$k][] = $v;
+			}
+
 		}
 
-		$r["regyinfo"]["address"] = $r["regrinfo"]["owner"]["address"];
-		$r["regyinfo"]["domain"] = $r["regrinfo"]["domain"];
-		$r["regyinfo"]["nserver"] = $r["regrinfo"]["ns"];
+		if ($hasdata)
+			$blocks[$gkey] = $block;
 
+		$r = $blocks;
+
+		//if (is_array($disclaimer)) $r["disclaimer"]=$disclaimer;
 		return($r);
 	}
 }
