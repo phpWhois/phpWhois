@@ -72,7 +72,11 @@ class gtld extends Whois {
 		"INTERDOMAIN, S.A." => "interdomain",
 		"R49-LROR" => "interdomain",
 		"ASCIO TECHNOLOGIES, INC." => "ascio",
-		"R76-LROR" => "ascio"
+		"R76-LROR" => "ascio",
+		"INTERCOSMOS MEDIA GROUP, INC. D/B/A DIRECTNIC.COM" => "directnic",
+		"R48-LROR" => "directnic",
+		"DOMAINDISCOVER" => "buydomains",
+		"R86-LROR" => "buydomains"
 		);
 
 	function gTLD ($data, $query) {

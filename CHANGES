@@ -1,3 +1,8 @@
+2003/03/30  David Saez <david@ols.es>
+		- recovered 'powered by phpWhois' logo
+		- added handlers for directnic and buydomains
+		- minor fixes to generic3.whois
+
 2003/03/26  David Saez <david@ols.es>
 		- some improvments on generic3.whois
 		- added handler for ascio (com/org)

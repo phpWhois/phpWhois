@@ -18,7 +18,9 @@ uknic		olsns.co.uk
 
 ascio.com	ascio.com ascio.org
 bulkregistercom bulkregister.com
+buydomains	buydomains.com buydomains.org
 core            corenic.com corenic.org
+directnic	directnic.com directnic.org
 dotregistrar    dotregistrar.com dotregistrar.org
 dotster         dotster.com dotster.org
 enom            enom.com enom.org
