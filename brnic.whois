@@ -59,7 +59,7 @@ $contacts = array (
 $r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain");
 
 $r["rawdata"]=$data_str["rawdata"];
-$r["regyinfo"]=array( "whois"=>"whois.registro.br", "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");
+$r["regyinfo"]=array( "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");
 
 unset($r["domain"]["nsstat"]);
 unset($r["domain"]["nslastaa"]);

@@ -71,8 +71,7 @@ $r["rawdata"]=$data_str["rawdata"];
 
 $r["regrinfo"]=generic_whois($data_str["rawdata"],$items);
 
-$r["regyinfo"]=array( "whois"=>"whois.cira.ca",
-                      "referrer"=>"http://www.easydns.ca" );
+$r["regyinfo"]=array( "referrer"=>"http://www.easydns.ca" );
 
 $r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
 unset($r["regrinfo"]["registrar"]);

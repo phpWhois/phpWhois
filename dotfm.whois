@@ -60,7 +60,6 @@ function parse ($data)
     
     $r["regrinfo"] = generic_whois($data["rawdata"],$items);
 
-    $r["regyinfo"]["whois"]="none";
     $r["regyinfo"]["referrer"]="http://www.dot.dm";
     $r["regyinfo"]["registrar"]="dotFM";
 

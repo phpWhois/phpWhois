@@ -56,7 +56,6 @@ function parse ($data)
 		  );
 
     $r["rawdata"]=$data["rawdata"];
-    $r["regyinfo"]["whois"]="whois.domain-registry.nl";
     $r["regyinfo"]["referrer"]="http://www.domain-registry.nl";
     $r["regyinfo"]["registrar"]="Stichting Internet Domeinregistratie NL";
 

@@ -56,7 +56,6 @@ class benic extends Whois {
 		  );
 
     $r["rawdata"]=$data["rawdata"];
-    $r["regyinfo"]["whois"]="whois.dns.be";
     $r["regyinfo"]["referrer"]="http://www.domain-registry.nl";
     $r["regyinfo"]["registrar"]="DNS Belgium";
 

@@ -97,7 +97,6 @@ class mxnic extends Whois {
 
 		if (!empty($r["regrinfo"]["owner"]["name"])) {
 			$r["regyinfo"] = array(
-				"whois"=>"whois.nic.mx",
 				"referrer"=>"http://www.nic.mx",
 				"registrar"=>"NIC-Mexico"
 				);

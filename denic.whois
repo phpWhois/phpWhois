@@ -143,8 +143,7 @@ class denic extends Whois {
 
 		$r["rawdata"] = $data_str["rawdata"];
 
-		$r["regyinfo"] = array( "whois" => "whois.denic.de",
-					"registrar" => "DENIC eG",
+		$r["regyinfo"] = array( "registrar" => "DENIC eG",
 					"referrer" => "http://www.denic.de/");
 
 		if (isset($disclaimer)) $r["regrinfo"]["disclaimer"]=$disclaimer;

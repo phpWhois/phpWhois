@@ -55,7 +55,6 @@ class wsnic extends Whois {
 					}
 				}
 			}
-			$r["regyinfo"]["whois"]="whois.samoanic.ws";
 			$r["regyinfo"]["referrer"]="http://www.samoanic.ws";
 			$r["regyinfo"]["registrar"]="Samoa Nic";
 

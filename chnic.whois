@@ -68,8 +68,7 @@ if (!empty($r["regrinfo"]["domain"]["name"])) {
 	$r["regrinfo"]["domain"]["changed"]=$r["regrinfo"]["domain"]["changed"][0];
 	$r["regrinfo"]["domain"]["created"]=$r["regrinfo"]["domain"]["created"][0];
 
- 	$r["regyinfo"]=array("whois"=>"whois.nic.ch",
-			     "referrer"=>"http://www.nic.ch",
+ 	$r["regyinfo"]=array("referrer"=>"http://www.nic.ch",
                              "registrar"=>"SWITCH Domain Name Registration");
 	$r["regrinfo"]["registered"]="yes";
 }

@@ -59,8 +59,7 @@ class aunic extends Whois {
 				);
 
 		$r["rawdata"] = $data_str["rawdata"];
-		$r["regyinfo"] = array("whois"=>"whois.aunic.net",
-				       "referrer"=>"http://www.aunic.net",
+		$r["regyinfo"] = array("referrer"=>"http://www.aunic.net",
 				       "registrar"=>"AU-NIC");
 		
 		$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
