@@ -1,3 +1,8 @@
+2004/04/21  David Saez <david@ols.es>
+		- fixed small bug in netsol.whois
+		- improvments and fixes to gtld.whois, thanx to
+		  snguyen@mbaassociation.or
+
 2004/02/11  David Saez <david@ols.es>
 		- handles R120-LROR, thanx to DavHolle
 
