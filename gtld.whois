@@ -44,8 +44,10 @@ class gtld extends Whois {
 		"regyinfo.referrer" => "Referral URL:",
 		"regrinfo.domain.nserver." => "Name Server:", // identical descriptors
 		"regrinfo.domain.changed" => "Updated Date:",
+		"regrinfo.domain.changed" => "Last Updated On:",
 		"regrinfo.domain.status" => "Status:", 
 		"regrinfo.domain.created" => "Creation Date:",
+		"regrinfo.domain.created" => "Created On:",
 		"regrinfo.domain.expires" => "Expiration Date:"
 		);             
 
@@ -56,6 +58,7 @@ class gtld extends Whois {
 		"ENOM, INC." => "enom",
 		"MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE" => "inwwcom",
 		"NETWORK SOLUTIONS, INC." => "netsol",
+		"R63-LROR" => "netsol",
 		"REGISTER.COM, INC." => "registercom",
 		"TUCOWS, INC." => "opensrsnet",
 		"IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM" => "dotregistrar",
@@ -79,8 +82,8 @@ class gtld extends Whois {
 
 		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
 		// david@ols.es 16/10/2002 Fixes rawdata
-		$this->result["rawdata"] =  $this->result["rawdata"]["rawdata"];
-		$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
+		$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];
+		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
 		if(!empty($this->Query["handler"])) {
 			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);

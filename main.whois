@@ -212,15 +212,14 @@ class Whois {
 	 */
 	function Process (&$result) {
 		// Disable error reporting temporarily (probably not necessary)
-		$old_val = error_reporting(FALSE);
-
+		//$old_val = error_reporting(FALSE);
 		// If the handler has not already been included somehow, include it now
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
 		if(!defined($HANDLER_FLAG))
-			include($this->Query["file"]);
+			@include($this->Query["file"]);
 
 		// Restore error reporting
-		error_reporting($old_val);
+		//error_reporting($old_val);
 
 		// If the handler has still not been included, append to query errors list and return
 		if(!defined($HANDLER_FLAG)) {
