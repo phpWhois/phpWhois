@@ -166,7 +166,7 @@ class Whois {
 		else $windows=true;
 
 		foreach($tldtests as $tld) {
-echo "check cname $tld<br>";
+
 			if ($windows) $cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
 			else $cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
 			if(!$cname) continue;
