@@ -3,10 +3,11 @@ Introduction
 
 Handlers are pieces of code that parse the raw whois output and try
 to add some keys to the result returned by phpWhois. In previous
-versions there was no standard about how this keys should be named
-and organized, which makethem registry specific. Now all handlers
-have been standarized so they return a know set of keys, which is
-called 'Common Object Model'.
+versions there was no standard about how these keys should be named
+and organized, which make them registry specific. Now all handlers
+have been standarized so they return a known set of keys. This is what
+we call 'Common Object Model'.
+
 
 Common Object Model
 -------------------
@@ -112,8 +113,8 @@ on the format returned for some keys (mainly the keys that reflect
 dates). 
 
 
-Writting handlers
------------------
+Writing handlers
+----------------
 
 Writing handlers is easy, just look at how some of them are coded.
 If you write a new handler, please try to map as many as possible
@@ -127,10 +128,13 @@ handlers. They are contained in generic.whois, generic2.whois and
 generic3.whois. Almost all handlers use functions provided by those
 files. You can see how they work by looking into the code.
 
+Please try to mimic the coding style of the other handlers, as this
+will make it easier for other people to understand and maintain.
+
+
 Credits
 -------
 
 Mark Jeftovic <markjr@easydns.com>
 David Saez Padros <david@ols.es>
 Ross Golder <ross@golder.org>
-
