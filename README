@@ -64,6 +64,6 @@ will get around to applying or responding.
 Credits
 -------
 
-Mark Jeftovic <markjr@easydns.org>
+Mark Jeftovic <markjr@easydns.com>
 David Saez Padros <david@ols.se>
 Ross Golder <ross@golder.org>
