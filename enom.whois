@@ -1,5 +1,3 @@
-<?
-
 /*
 
 Whois2.php PHP classes to conduct whois queries
@@ -25,6 +23,7 @@ USA.
 */
 
 /* enom.whois 1.0 stephen leavitt 2000/12/09 */
+/* enom.whois 2.0 tim schulte 2001/03/21 */
 
 if(!defined("__ENOM_HANDLER__")) define("__ENOM_HANDLER__",1);
 
@@ -41,64 +40,50 @@ function parse ($data_str) {
 $data_str=preg_replace("/\s+/"," ",$data_str);
 
 preg_match("/^(.+?)_ _/",$data_str,$refs);
-
 $r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
 
 preg_match("/Domain name:\s(.+) _ _Registrant/", $data_str,$refs);
-
 $r["domain"]=$refs[1];
 
-preg_match("/Registrant: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _ _
-_/",$data_str, $refs);
-
+preg_match( "/Registrant: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
 $r["registrant"]["companyname"]=$refs[1];
-
 $r["registrant"]["name"]=$refs[2];
-
 $r["registrant"]["email"]=$refs[3];
-
 $r["registrant"]["phone"]=$refs[4];
+$r["registrant"]["address1"]=$refs[5];
+$r["registrant"]["address2"]=$refs[6];
+$r["registrant"]["city"]=$refs[7];
+$r["registrant"]["country"]=$refs[8];
 
-$r["registrant"]["address"]=preg_replace("/_/","\n",$refs[5]);
+preg_match( "/Administrative: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
+$r["administrative"]["companyname"]=$refs[1];
+$r["administrative"]["name"]=$refs[2];
+$r["administrative"]["email"]=$refs[3];
+$r["administrative"]["phone"]=$refs[4];
+$r["administrative"]["address1"]=$refs[6];
+$r["administrative"]["city"]=$refs[7];
+$r["administrative"]["country"]=$refs[8];
 
-preg_match("/Administrative: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _
-_ _/",$data_str, $refs);
-
-$r["admin"]["companyname"]=$refs[1];
-
-$r["admin"]["name"]=$refs[2];
-
-$r["admin"]["email"]=$refs[3];
-
-$r["admin"]["phone"]=$refs[4];
-
-$r["admin"]["address"]=preg_replace("/_/","\n",$refs[5]);
-
-preg_match("/Billing: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _ _
-_/",$data_str, $refs);
-
+preg_match( "/Billing: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
 $r["billing"]["companyname"]=$refs[1];
-
 $r["billing"]["name"]=$refs[2];
-
 $r["billing"]["email"]=$refs[3];
-
 $r["billing"]["phone"]=$refs[4];
+$r["billing"]["address1"]=$refs[6];
+$r["billing"]["city"]=$refs[7];
+$r["billing"]["country"]=$refs[8];
 
-$r["billing"]["address"]=preg_replace("/_/","\n",$refs[5]);
+preg_match( "/Technical: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
+$r["technical"]["companyname"]=$refs[1];
+$r["technical"]["name"]=$refs[2];
+$r["technical"]["email"]=$refs[3];
+$r["technical"]["phone"]=$refs[4];
+$r["technical"]["address1"]=$refs[6];
+$r["technical"]["city"]=$refs[7];
+$r["technical"]["country"]=$refs[8];
 
-preg_match("/Technical: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _ _
-_/",$data_str, $refs);
-
-$r["tech"]["companyname"]=$refs[1];
-
-$r["tech"]["name"]=$refs[2];
-
-$r["tech"]["email"]=$refs[3];
-
-$r["tech"]["phone"]=$refs[4];
-
-$r["tech"]["address"]=preg_replace("/_/","\n",$refs[5]);
+preg_match("/DOMAIN EXPIRES : (.+?)\ /",$data_str, $refs);
+$r["expires"]=$refs[1];
 
 return($r);
 
