@@ -48,7 +48,7 @@ class lunic extends Whois {
 			"domain.source" => "source:",
 			"owner.type" => "ownertype:",
 			"owner.organization" => "org-name:",
-			"owner.address.address0" => "org-address:",
+			"owner.address." => "org-address:",
 			"owner.address.zcode" => "org-zipcode:",
 			"owner.address.city" => "org-city:",
 			"owner.address.country" => "org-country:",
