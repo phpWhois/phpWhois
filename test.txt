@@ -30,6 +30,7 @@ inwwcom         ?
 netsol          olsns.com olsns.org
 opensrsnet      tucows.com opensrs.org
 registercom     register.com
+srsplus		srsplus.com, srsplus.org
 
 // Other
 

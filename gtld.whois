@@ -76,7 +76,9 @@ class gtld extends Whois {
 		"INTERCOSMOS MEDIA GROUP, INC. D/B/A DIRECTNIC.COM" => "directnic",
 		"R48-LROR" => "directnic",
 		"DOMAINDISCOVER" => "buydomains",
-		"R86-LROR" => "buydomains"
+		"R86-LROR" => "buydomains",
+		"TLDS, INC. DBA SRSPLUS" => "srsplus",
+		"R78-LROR" => "srsplus"
 		);
 
 	function gTLD ($data, $query) {

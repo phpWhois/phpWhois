@@ -1,3 +1,6 @@
+2003/04/11  David Saez <david@ols.es>
+		- added gtld handler for SRSPlus
+
 2003/04/07  Mark Jeftovic <markjr@easydns.com>
 		- fix for missing checkdnsrr function in windows
 
