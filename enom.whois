@@ -1,25 +1,29 @@
+<?php
+
 /*
-
-Whois2.php PHP classes to conduct whois queries
-Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
-Maintained by Mark Jeftovic <markjr@easydns.com>
-For the most recent version of this package:
-
-http://www.easydns.com/~markjr/whois2/
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
-USA.
-
+  Whois2.php	PHP classes to conduct whois queries
+  
+  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+  
+  Maintained by Mark Jeftovic <markjr@easydns.com>          
+  
+  For the most recent version of this package: 
+  
+  http://www.easydns.com/~markjr/whois2/
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 /* enom.whois 1.0 stephen leavitt 2000/12/09 */
@@ -29,65 +33,65 @@ if(!defined("__ENOM_HANDLER__")) define("__ENOM_HANDLER__",1);
 
 class enom extends gtld {
 
-function enom($data) {
+	function enom($data) {
 
-$this->result=$this->parse(preg_replace("/\n+/","_",implode("\n",$data)));
+		$this->result = $this->parse(preg_replace("/\n+/","_",implode("\n",$data)));
 
-}
+	}
 
-function parse ($data_str) {
+	function parse ($data_str) {
 
-$data_str=preg_replace("/\s+/"," ",$data_str);
+		$data_str = preg_replace("/\s+/"," ",$data_str);
 
-preg_match("/^(.+?)_ _/",$data_str,$refs);
-$r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
+		preg_match("/^(.+?)_ _/",$data_str,$refs);
+		$r["disclaimer"] = preg_replace("/_/","\n",$refs[1]);
 
-preg_match("/Domain name:\s(.+) _ _Registrant/", $data_str,$refs);
-$r["domain"]=$refs[1];
+		preg_match("/Domain name:\s(.+) _ _Registrant/", $data_str,$refs);
+		$r["domain"] = $refs[1];
 
-preg_match( "/Registrant: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
-$r["registrant"]["companyname"]=$refs[1];
-$r["registrant"]["name"]=$refs[2];
-$r["registrant"]["email"]=$refs[3];
-$r["registrant"]["phone"]=$refs[4];
-$r["registrant"]["address1"]=$refs[5];
-$r["registrant"]["address2"]=$refs[6];
-$r["registrant"]["city"]=$refs[7];
-$r["registrant"]["country"]=$refs[8];
+		preg_match( "/Registrant: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
+		$r["registrant"]["companyname"] = $refs[1];
+		$r["registrant"]["name"] = $refs[2];
+		$r["registrant"]["email"] = $refs[3];
+		$r["registrant"]["phone"] = $refs[4];
+		$r["registrant"]["address1"] = $refs[5];
+		$r["registrant"]["address2"] = $refs[6];
+		$r["registrant"]["city"] = $refs[7];
+		$r["registrant"]["country"] = $refs[8];
 
-preg_match( "/Administrative: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
-$r["administrative"]["companyname"]=$refs[1];
-$r["administrative"]["name"]=$refs[2];
-$r["administrative"]["email"]=$refs[3];
-$r["administrative"]["phone"]=$refs[4];
-$r["administrative"]["address1"]=$refs[6];
-$r["administrative"]["city"]=$refs[7];
-$r["administrative"]["country"]=$refs[8];
+		preg_match( "/Administrative: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
+		$r["administrative"]["companyname"] = $refs[1];
+		$r["administrative"]["name"] = $refs[2];
+		$r["administrative"]["email"] = $refs[3];
+		$r["administrative"]["phone"] = $refs[4];
+		$r["administrative"]["address1"] = $refs[6];
+		$r["administrative"]["city"] = $refs[7];
+		$r["administrative"]["country"] = $refs[8];
 
-preg_match( "/Billing: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
-$r["billing"]["companyname"]=$refs[1];
-$r["billing"]["name"]=$refs[2];
-$r["billing"]["email"]=$refs[3];
-$r["billing"]["phone"]=$refs[4];
-$r["billing"]["address1"]=$refs[6];
-$r["billing"]["city"]=$refs[7];
-$r["billing"]["country"]=$refs[8];
+		preg_match( "/Billing: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
+		$r["billing"]["companyname"] = $refs[1];
+		$r["billing"]["name"] = $refs[2];
+		$r["billing"]["email"] = $refs[3];
+		$r["billing"]["phone"] = $refs[4];
+		$r["billing"]["address1"] = $refs[6];
+		$r["billing"]["city"] = $refs[7];
+		$r["billing"]["country"] = $refs[8];
 
-preg_match( "/Technical: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
-$r["technical"]["companyname"]=$refs[1];
-$r["technical"]["name"]=$refs[2];
-$r["technical"]["email"]=$refs[3];
-$r["technical"]["phone"]=$refs[4];
-$r["technical"]["address1"]=$refs[6];
-$r["technical"]["city"]=$refs[7];
-$r["technical"]["country"]=$refs[8];
+		preg_match( "/Technical: _\s(.+?) _\s(.+?) \((.+?@.+?)\) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?) _\s(.+?)/",$data_str, $refs);
+		$r["technical"]["companyname"] = $refs[1];
+		$r["technical"]["name"] = $refs[2];
+		$r["technical"]["email"] = $refs[3];
+		$r["technical"]["phone"] = $refs[4];
+		$r["technical"]["address1"] = $refs[6];
+		$r["technical"]["city"] = $refs[7];
+		$r["technical"]["country"] = $refs[8];
 
-preg_match("/DOMAIN EXPIRES : (.+?)\ /",$data_str, $refs);
-$r["expires"]=$refs[1];
+		preg_match("/DOMAIN EXPIRES : (.+?)\ /",$data_str, $refs);
+		$r["expires"] = $refs[1];
 
-return($r);
+		return($r);
 
-}
+	}
 
 }
 

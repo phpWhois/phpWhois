@@ -1,28 +1,29 @@
-<?
+<?php
+
 /*
-Whois2.php	PHP classes to conduct whois queries
-
-Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
-
-Maintained by Mark Jeftovic <markjr@easydns.com>
-
-For the most recent version of this package: 
-
-http://www.easydns.com/~markjr/whois2/
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+  Whois2.php	PHP classes to conduct whois queries
+  
+  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+  
+  Maintained by Mark Jeftovic <markjr@easydns.com>
+  
+  For the most recent version of this package: 
+  
+  http://www.easydns.com/~markjr/whois2/
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 /* ipw.whois	1.0	David Saez 12/07/2001 */
@@ -31,63 +32,64 @@ if (!defined("__IPW_HANDLER__")) define("__IPW_HANDLER__",1);
 
 class ipw extends Whois {
 
-var $HANDLER_VERSION = "1.0";
+	var $HANDLER_VERSION = "1.0";
 
-var $REGISTRARS = array(
-			"European Regional Internet Registry/RIPE NCC" => "whois.ripe.net",
-                        "Asia Pacific Network Information Center" => "whois.apnic.net"
-			);
+	var $REGISTRARS = array(
+		"European Regional Internet Registry/RIPE NCC" => "whois.ripe.net",
+		"Asia Pacific Network Information Center" => "whois.apnic.net"
+		);
 
-var $HANDLERS = array();
+	var $HANDLERS = array();
 
-function ipw ($data,$query) {
+	function ipw ($data,$query) {
 
-$this->Query=$query;
-//$this->SUBVERSION = sprintf("%s-%s", $query["handler"],this->HANDLER_VERSION);
+		$this->Query=$query;
+		//$this->SUBVERSION = sprintf("%s-%s", $query["handler"],this->HANDLER_VERSION);
 
-if (!isset($this->result["rawdata"])) { $this->result["rawdata"] = array(); }
+		if (!isset($this->result["rawdata"])) { $this->result["rawdata"] = array(); }
 
-$this->result["regyinfo"]=array();
-$this->result["regyinfo"]["registrar"]="American Registry for Internet Numbers (ARIN)";
+		$this->result["regyinfo"]=array();
+		$this->result["regyinfo"]["registrar"]="American Registry for Internet Numbers (ARIN)";
 
-reset($this->REGISTRARS);
+		reset($this->REGISTRARS);
 
-while (list($string, $whois)=each($this->REGISTRARS))
-       if (substr($data["rawdata"][0],0,strlen($string))==$string)
-          { $this->Query["server"]=$whois;
-            $this->result["regyinfo"]["registrar"]=$data["rawdata"][0];
-            break;
-          } 
+		while (list($string, $whois)=each($this->REGISTRARS))
+			if (substr($data["rawdata"][0],0,strlen($string))==$string)
+			{ $this->Query["server"]=$whois;
+			$this->result["regyinfo"]["registrar"]=$data["rawdata"][0];
+			break;
+			} 
 
-$this->result["regyinfo"]["whois"]=$this->Query["server"];
+		$this->result["regyinfo"]["whois"]=$this->Query["server"];
 
-if ($this->Query["server"]!="whois.arin.net")
-       $this->result["rawdata"]=$this->Lookup($this->Query["string"]);
+		if ($this->Query["server"]!="whois.arin.net")
+			$this->result["rawdata"]=$this->Lookup($this->Query["string"]);
 
-else { $newquery="";
+		else { $newquery="";
 
-       while (list($ln,$line)=each($data["rawdata"]))
-             { $s=strstr($line,"(NETBLK-");
-               if ($s!="") $newquery=strtok(substr($s,1),")");  
-             } 
-       if ($newquery!="")
-              $this->result["rawdata"]=$this->Lookup("!".$newquery); 
-       else { reset($data["rawdata"]);
-              $this->result["rawdata"]=$data["rawdata"];
-            }
-     }
+		while (list($ln,$line)=each($data["rawdata"]))
+		{ $s=strstr($line,"(NETBLK-");
+		if ($s!="") $newquery=strtok(substr($s,1),")");  
+		} 
+		if ($newquery!="")
+			$this->result["rawdata"]=$this->Lookup("!".$newquery); 
+		else { reset($data["rawdata"]);
+		$this->result["rawdata"]=$data["rawdata"];
+		}
+		}
 
-$this->Query["handler"] = $this->HANDLERS[$this->Query["server"]];
+		$this->Query["handler"] = $this->HANDLERS[$this->Query["server"]];
 
-if(!empty($this->Query["handler"])) {
-	$this->Query["file"]=sprintf("%s.whois", $this->Query["handler"]);
-	$this->result["regrinfo"]=$this->Process($this->result["rawdata"]);
+		if(!empty($this->Query["handler"])) {
+			$this->Query["file"]=sprintf("%s.whois", $this->Query["handler"]);
+			$this->result["regrinfo"]=$this->Process($this->result["rawdata"]);
+		}
+
+		$this->result["regrinfo"]["host_ip"]=$this->Query["host_ip"];
+		$this->result["regrinfo"]["host_name"]=$this->Query["host_name"];
+
 	}
 
-$this->result["regrinfo"]["host_ip"]=$this->Query["host_ip"];
-$this->result["regrinfo"]["host_name"]=$this->Query["host_name"];
-
 }
 
-}
 ?>

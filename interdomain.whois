@@ -1,4 +1,5 @@
-<?
+<?php
+
 /*
 Whois2.php	PHP classes to conduct whois queries
 
@@ -33,109 +34,111 @@ if(!defined("__INTERDOMAIN_HANDLER__")) define("__INTERDOMAIN_HANDLER__",1);
 
 class interdomain extends gtld {
 
-function interdomain($data) 
-{
-$this->result=$this->parse($data);
-}
+	function interdomain($data) {
+		$this->result=$this->parse($data);
+	}
 
-function parse ($data_str) 
-{
-$admin=array( "name"        => "Administrative Name",
-              "email"       => "Administrative e-mail",
-              "organization"=> "Administrative Org",
-              "address"     => "Administrative street",
-              "cp"          => "Administrative PC",
-              "city"        => "Administrative City",
-              "country"     => "Administrative Country",
-              "phone"       => "Administrative Phone"            
-            );
+	function parse ($data_str) {
+		$admin = array(
+			"name"        => "Administrative Name",
+			"email"       => "Administrative e-mail",
+			"organization"=> "Administrative Org",
+			"address"     => "Administrative street",
+			"cp"          => "Administrative PC",
+			"city"        => "Administrative City",
+			"country"     => "Administrative Country",
+			"phone"       => "Administrative Phone"            
+			);
 
-$tech=array( "name"        => "Technical Name",
-             "email"       => "Technical e-mail",
-             "organization"=> "Technical Org",
-             "address"     => "Technical Street",
-             "cp"          => "Technical PC",
-             "city"        => "Technical City",
-             "country"     => "Technical Country",
-             "phone"       => "Technical Phone"            
-            );
+		$tech = array(
+			"name"        => "Technical Name",
+			"email"       => "Technical e-mail",
+			"organization"=> "Technical Org",
+			"address"     => "Technical Street",
+			"cp"          => "Technical PC",
+			"city"        => "Technical City",
+			"country"     => "Technical Country",
+			"phone"       => "Technical Phone"            
+			);
 
-$items=array( "organization" => "Organization Name",
-              "domain"       => "Domain Name",
-              "created"      => "Creation Date",
-              "org_address"  => "Organization Street",
-              "city"         => "Organization City",
-              "cp"           => "Organization PC",
-              "country"      => "Organization Country",
-              "expires"      => "Expiry Date",
-              "admin"        => $admin,
-              "tech"         => $tech
-            );
+		$items = array(
+			"organization" => "Organization Name",
+			"domain"       => "Domain Name",
+			"created"      => "Creation Date",
+			"org_address"  => "Organization Street",
+			"city"         => "Organization City",
+			"cp"           => "Organization PC",
+			"country"      => "Organization Country",
+			"expires"      => "Expiry Date",
+			"admin"        => $admin,
+			"tech"         => $tech
+			);
 
 
-$r["ns"]=array();
+		$r["ns"]=array();
 
-while (list($key,$val)=each($data_str)) 
-      { $val=trim($val);
+		while (list($key,$val)=each($data_str)) {
+			$val=trim($val);
 
-        if ($val!="") 
-           { if ($val=="Domain servers in listed order:")
-                { next($data_str);
+			if ($val!="") {
+				if ($val=="Domain servers in listed order:") {
+					next($data_str);
 
-                  while (list($key,$val)=each($data_str))                       
-                        { if (!($value=trim($val))) break;
-                          $value=idm_getvalue($value);
-                          $ns=split(" ",$value);  
-                          for ($i=1;$ns[$i]=="";$i++);
-                          $r["ns"][$ns[0]]=$ns[$i];
-                        } 
-                  break;
-                }
+					while (list($key,$val)=each($data_str)) {
+						if (!($value=trim($val))) break;
+						$value=idm_getvalue($value);
+						$ns=split(" ",$value);  
+						for ($i=1;$ns[$i]=="";$i++);
+						$r["ns"][$ns[0]]=$ns[$i];
+					} 
+					break;
+				}
 
-             reset($items);
+				reset($items);
 
-             while (list($field,$match)=each($items)) 
-                   { if (is_array($match))
-                        { reset($match);
-                          while (list($subfield,$value)=each($match)) 
-                                { if (strstr($val,$value))
-                                     { $r[$field][$subfield]=idm_getvalue($val);
-                                        break;  
-                                     } 
-                                }
-                          continue;
-                        }   
-                     if (strstr($val,$match))
-                        { $r[$field]=idm_getvalue($val);
-                          break;  
-                        } 
+				while (list($field,$match)=each($items)) {
+					if (is_array($match)) {
+						reset($match);
+						while (list($subfield,$value)=each($match)) {
+							if (strstr($val,$value)) {
+								$r[$field][$subfield]=idm_getvalue($val);
+								break;  
+							} 
+						}
+						continue;
+					}   
+					if (strstr($val,$match)) {
+						$r[$field]=idm_getvalue($val);
+						break;  
+					} 
 
-                   }
-           }
-      }
+				}
+			}
+		}
 
-if (empty($r["ns"])) $r="";
-else { idm_makeaddress($r,"org_address");
-       idm_makeaddress($r["admin"],"address");
-       idm_makeaddress($r["tech"],"address");
-     }
+		if (empty($r["ns"]))
+			$r="";
+		else {
+			idm_makeaddress($r,"org_address");
+			idm_makeaddress($r["admin"],"address");
+			idm_makeaddress($r["tech"],"address");
+		}
  
-return($r);
+		return($r);
+	}
+
+	function idm_makeaddress(&$r,$field) {
+		$r[$field]=$r[$field]."\n".$r["cp"].", ".$r["city"]."\n".$r["country"];
+		unset($r["cp"]);
+		unset($r["city"]);
+		unset($r["country"]);
+	}
+
+	function idm_getvalue($str) {
+		for ($i=0;;$i++) if ($str[$i]==".") break;
+		for (;;$i++) if ($str[$i]!=".") break;
+		return trim(substr($str,$i));
+	}
 }
 
-}
-
-function idm_makeaddress(&$r,$field)
-{
-$r[$field]=$r[$field]."\n".$r["cp"].", ".$r["city"]."\n".$r["country"];
-unset($r["cp"]);
-unset($r["city"]);
-unset($r["country"]);
-}
-
-function idm_getvalue($str)
-{
-for ($i=0;;$i++) if ($str[$i]==".") break;
-for (;;$i++) if ($str[$i]!=".") break;
-return trim(substr($str,$i));
-}
+?>

@@ -1,28 +1,29 @@
-<?
+<?php
+
 /*
-Whois2.php	PHP classes to conduct whois queries
-
-Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
-
-Maintained by Mark Jeftovic <markjr@easydns.com>
-
-For the most recent version of this package: 
-
-http://www.easydns.com/~markjr/whois2/
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+  Whois2.php	PHP classes to conduct whois queries
+  
+  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+  
+  Maintained by Mark Jeftovic <markjr@easydns.com>
+  
+  For the most recent version of this package: 
+  
+  http://www.easydns.com/~markjr/whois2/
+  
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 /* dotregistrar.whois 1.0	David Saez Padros <david@ols.es> */
@@ -32,73 +33,72 @@ if(!defined("__DOTREGISTRAR_HANDLER__")) define("__DOTREGISTRAR_HANDLER__",1);
 
 class dotregistrar extends gtld {
 
-function dotregistrar($data) 
-{
-$this->result=$this->parse($data);
-}
+	function dotregistrar($data) {
+		$this->result=$this->parse($data);
+	}
 
-function parse ($data_str) 
-{
+	function parse ($data_str) {
 
-$items=array( "domain"       => "Domain Name:",
-              "created"      => "Record created on",
-              "updated"      => "Record last updated on",
-              "expires"	     => "Record expires on"   
-            );
+		$items=array(
+			"domain" => "Domain Name:",
+			"created" => "Record created on",
+			"updated" => "Record last updated on",
+			"expires"	=> "Record expires on"   
+			);
 
-$r["ns"]=array();
+		$r["ns"]=array();
 
-while (list($key, $val)=each($data_str)) 
-      { $val=trim($val);
+		while (list($key, $val)=each($data_str)) {
+			$val=trim($val);
 
-        if ($val!="") 
-           { if ($val=="Domain servers in listed order:")
-                { list($key, $val)=each($data_str);
-                  while (list($key, $val)=each($data_str))                                     
-                        { if (!($value=trim($val))) break;
-                          $ns=split("\t",$value);  
-                          $r["ns"][$ns[0]]=$ns[1];
-                        } 
-                  break;
-                }
+			if ($val!="") {
+				if ($val=="Domain servers in listed order:") {
+					list($key, $val)=each($data_str);
+					while (list($key, $val)=each($data_str)) {
+						if (!($value=trim($val))) break;
+						$ns=split("\t",$value);  
+						$r["ns"][$ns[0]]=$ns[1];
+					} 
+					break;
+				}
 
-	     if ($val=="Registrant:")
-                { list($key, $val)=each($data_str);
-                  $r["organization"]=trim($val);              
-                  continue;
-                }
+				if ($val=="Registrant:") {
+					list($key, $val)=each($data_str);
+					$r["organization"]=trim($val);              
+					continue;
+				}
   	
-             if ($val=="Administrative Contact:")
-                { list($key, $val)=each($data_str);
-                  $refs=explode(" ",$val);
-                  $r["admin"]["email"]=$refs[count($refs)-1];
-                  array_pop($refs);   
-                  $r["admin"]["name"]=trim(implode(" ",$refs));
-                  continue;
-                }
+				if ($val=="Administrative Contact:") {
+					list($key, $val)=each($data_str);
+					$refs=explode(" ",$val);
+					$r["admin"]["email"]=$refs[count($refs)-1];
+					array_pop($refs);   
+					$r["admin"]["name"]=trim(implode(" ",$refs));
+					continue;
+				}
 
-             if ($val=="Technical Contact, Zone Contact:")
-                { list($key, $val)=each($data_str);
-                  $refs=explode(" ",$val);
-                  $r["tech"]["email"]=$refs[count($refs)-1];
-                  array_pop($refs);   
-                  $r["tech"]["name"]=trim(implode(" ",$refs));
-                  continue;
-                }
+				if ($val=="Technical Contact, Zone Contact:") {
+					list($key, $val)=each($data_str);
+					$refs=explode(" ",$val);
+					$r["tech"]["email"]=$refs[count($refs)-1];
+					array_pop($refs);   
+					$r["tech"]["name"]=trim(implode(" ",$refs));
+					continue;
+				}
 
-             reset($items);
+				reset($items);
 
-             while (list($field, $match)=each($items)) 
-                   if (strstr($val,$match))
-                      { $r[$field]=trim(substr($val,strlen($match)));
-                        break;  
-                      } 
-           }
-      }
+				while (list($field, $match)=each($items))
+					if (strstr($val,$match)) {
+						$r[$field]=trim(substr($val,strlen($match)));
+						break;  
+					} 
+			}
+		}
 
-if (empty($r["ns"])) $r="";
+		if (empty($r["ns"])) $r="";
 
-return($r);
-}
+		return($r);
+	}
 
 }

@@ -1,4 +1,5 @@
-<?
+<?php
+
 /*
 Whois2.php	PHP classes to conduct whois queries
 
@@ -34,72 +35,78 @@ if(!defined("__UKNIC_HANDLER__")) define("__UKNIC_HANDLER__",1);
 
 class uknic extends Whois {
 
-function uknic($data) 
-{
-$this->result=$this->parse($data);
+	function uknic($data) {
+		$this->result=$this->parse($data);
+	}
+
+	function parse ($data_str) {
+		$items=array( 
+			"organization" => "Registered For:",
+			"domain" => "Domain Name:",
+			"registrar" => "Domain Registered By:",
+			"created" => "Registered on",
+			"updated" => "Record last updated on" 
+			);
+
+
+		$r["rawdata"]=$data_str["rawdata"];
+
+		//if (strstr($data_str["rawdata"],"No match for")) return ($r);
+
+		$r["regrinfo"]=array();
+		$r["regrinfo"]["ns"]=array();
+
+		while (list($key, $val)=each($data_str["rawdata"])) {
+			$val=trim($val);
+
+			if ($val!="") {
+				if ($val=="Domain servers listed in order:") {
+					next($data_str["rawdata"]);
+
+					while (list($key, $val)=each($data_str["rawdata"])) {
+						if (!($value=trim($val))) break;
+
+						$ns=split(" ",$value);  
+						for ($i=1;$ns[$i]=="";$i++);
+						$r["regrinfo"]["ns"][$ns[0]]=$ns[$i];
+					} 
+					break;
+				}
+
+				reset($items);
+
+				while (list($field, $match)=each($items)) 
+					if (strstr($val,$match)) {
+						$r["regrinfo"][$field]=trim(substr($val,strlen($match)));
+						break;  
+					} 
+			}
+		}
+
+		if (!empty($r["regrinfo"]["domain"])) {
+			$r["regyinfo"]=array(
+				"whois"=>"whois.nic.uk",
+				"referrer"=>"www.nic.uk"
+				);
+			$r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
+			$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+			$r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
+			$r["regyinfo"]["updated"]=$r["regrinfo"]["updated"];
+			if (!empty($r["regrinfo"]["ns"]))
+				$r["regrinfo"]["status"]="active"; 
+			else { 
+				if ($r["regrinfo"]["registrar"]=="DETAGGED")
+					$r["regrinfo"]["status"]="detagged"; 
+				else 
+					$r["regrinfo"]["status"]="inactive"; 
+			}
+		}
+		else
+			$r="";
+
+		return($r);
+	}
+
 }
 
-function parse ($data_str) 
-{
-
-$items=array( "organization" => "Registered For:",
-              "domain"       => "Domain Name:",
-              "registrar"    => "Domain Registered By:",
-              "created"      => "Registered on",
-              "updated"      => "Record last updated on" 
-            );
-
-
-$r["rawdata"]=$data_str["rawdata"];
-
-//if (strstr($data_str["rawdata"],"No match for")) return ($r);
-
-$r["regrinfo"]=array();
-$r["regrinfo"]["ns"]=array();
-
-while (list($key, $val)=each($data_str["rawdata"])) 
-      { $val=trim($val);
-
-        if ($val!="") 
-           { if ($val=="Domain servers listed in order:")
-                { next($data_str["rawdata"]);
-
-                  while (list($key, $val)=each($data_str["rawdata"]))                                     
-                        { if (!($value=trim($val))) break;
-
-                          $ns=split(" ",$value);  
-                          for ($i=1;$ns[$i]=="";$i++);
-                          $r["regrinfo"]["ns"][$ns[0]]=$ns[$i];
-                        } 
-                  break;
-                }
-
-             reset($items);
-
-             while (list($field, $match)=each($items)) 
-                   if (strstr($val,$match))
-                      { $r["regrinfo"][$field]=trim(substr($val,strlen($match)));
-                        break;  
-                      } 
-           }
-      }
-
-if (!empty($r["regrinfo"]["domain"]))
-   { $r["regyinfo"]=array( "whois"=>"whois.nic.uk","referrer"=>"www.nic.uk" );
-     $r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
-     $r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
-     $r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
-     $r["regyinfo"]["updated"]=$r["regrinfo"]["updated"];
-     if (!empty($r["regrinfo"]["ns"]))
-            $r["regrinfo"]["status"]="active"; 
-     else { if ($r["regrinfo"]["registrar"]=="DETAGGED")
-                 $r["regrinfo"]["status"]="detagged"; 
-            else $r["regrinfo"]["status"]="inactive"; 
-          }
-   }
-else $r="";
-
-return($r);
-}
-
-}
+?>
