@@ -1,0 +1,98 @@
+<?php 
+
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>          
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* lunic.whois	1.0	J.M. Roth <jmroth@iip.lu>	2002/11/03 */
+
+if(!defined("__DNSLU_HANDLER__")) define("__DNSLU_HANDLER__",1);
+
+class lunic extends Whois {
+
+	function lunic($data) {
+		$this->result = $this->parse($data);
+	}
+
+	function parse($data_str) {
+		$items = array(
+			"domain" => "domainname",
+			"domainstatus" => "domaintype",
+			"type" => "ownertype",
+			"organization" => "org-name",
+			"person" => "adm-name",
+			"source" => "source",
+			"created" => "registered"
+			);
+		$r["rawdata"] = $data_str["rawdata"];
+		$r["regrinfo"] = array();
+		$r["regrinfo"]["ns"] = array();
+		while ( list($key,$val) = each($data_str["rawdata"]) ) {
+			$val=trim($val);
+			if ( $val!="" && !eregi("%",$val) &&
+			     $wdata=explode(":",$val) ) {
+				$wdata[0]=trim($wdata[0]);
+				$wdata[1]=trim($wdata[1]);
+				if ($wdata[0] == "nserver") {
+					if ( eregi("(.*)\[(.*)\]",$wdata[1],$nsdata)g ) {
+						$r["regrinfo"]["ns"][$nsdata[1]] = $nsdata[2];
+					} else {
+						$r["regrinfo"]["ns"][$wdata[1]] = "null";
+					}
+				} else {
+					reset($items);
+					while ( list($field,$match) =
+						each($items) )
+					{
+						if ( $wdata[0] == $match ) {
+							$r["regrinfo"][$field] =
+								$wdata[1];
+							break;
+						}
+					}
+				}
+			}
+			if ( !empty($r["regrinfo"]["domain"]) ) {
+				$r["regyinfo"] = array("whois"=>"whois.dns.lu", "referrer"=>"www.dns.lu");
+				$r["regyinfo"]["nameserver"] =
+					$r["regrinfo"]["ns"];
+				$r["regyinfo"]["domain"] =
+					$r["regrinfo"]["domain"];
+				$r["regyinfo"]["datasource"] =
+					$r["regrinfo"]["source"];
+				switch ($r["regrinfo"]["type"]) {
+				case "ORGANISATION":
+					$r["regrinfo"]["owner"]
+						= $r["regrinfo"]["organization"]; break;
+				case "PRIVATE": $r["regrinfo"]["owner"] =
+							$r["regrinfo"]["person"];
+				}
+			}
+		}
+		return($r);
+	}
+}
+
+?>
