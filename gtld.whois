@@ -70,7 +70,9 @@ class gtld extends Whois {
 		"IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM" => "dotregistrar",
 		"R114-LROR" => "dotregistrar",
 		"INTERDOMAIN, S.A." => "interdomain",
-		"R49-LROR" => "interdomain"
+		"R49-LROR" => "interdomain",
+		"ASCIO TECHNOLOGIES, INC." => "ascio",
+		"R76-LROR" => "ascio"
 		);
 
 	function gTLD ($data, $query) {

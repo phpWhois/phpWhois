@@ -1,3 +1,7 @@
+2003/03/26  David Saez <david@ols.es>
+		- some improvments on generic3.whois
+		- added handler for ascio (com/org)
+
 2003/03/22  David Saez <david@ols.es>
 		- referrer correction and normalization in some handlers
 		- removed unused handler cdnnet.whois

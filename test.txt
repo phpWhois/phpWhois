@@ -10,11 +10,13 @@ esnic		ols.es
 lunic		dns.lu
 mxnic           nic.mx
 nicse		nic-se.se
+nlnic		domain-registry.nl
 nunames		nunames.nu
 uknic		olsns.co.uk
 
 // .com/.org/.net
 
+ascio.com	ascio.com ascio.org
 bulkregistercom bulkregister.com
 core            corenic.com corenic.org
 dotregistrar    dotregistrar.com dotregistrar.org
@@ -25,7 +27,6 @@ inwwcom         ?
 netsol          olsns.com olsns.org
 opensrsnet      tucows.com opensrs.org
 registercom     register.com
-
 
 // Other
 
