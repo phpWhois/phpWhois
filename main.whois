@@ -306,14 +306,31 @@ class Whois {
 		}
 			
 		$search = array (
-				"<BR>", "<P>", "<TR>", "</TITLE>",
+				"<BR>", "<P>", "</TITLE>",
 				"</H1>", "</H2>", "</H3>,",
-				"<br>", "<p>", "<tr>", "</title>",
+				"<br>", "<p>", "</title>",
 				"</h1>", "</h2>", "</h3>"  );
 
                 $output = str_replace($search,"\n",$output);
+		$output = str_replace("<TD"," <td",$output);
+		$output = str_replace("<td"," <td",$output);
+		$output = str_replace("<tr","\n<tr",$output);
+		$output = str_replace("<TR","\n<tr",$output);
 		$output = explode("\n",strip_tags($output));
-		return $output;
+
+		$rawdata = array();
+		$null = 0;
+
+		while (list($key, $val)=each($output)) {
+			$val=trim($val);
+			if ($val=="") {
+				if (++$null>2) continue;
+			}
+			else $null=0;
+			$rawdata[]=$val;
+		}
+
+		return $rawdata;
 	}
 
 	/*

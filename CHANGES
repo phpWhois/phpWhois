@@ -1,5 +1,9 @@
+2003/04/25  David Saez <david@ols.es>
+		- added support for web based whois for
+		  .tc, .vg, .ms, .gs and .tf domains
+ 
 2003/04/19  David Saez <david@ols.es>
-		- fixed problem whith whois.crsnic.net which
+		- fixed problem with whois.crsnic.net which
 		  causes some domains like hotmail.com and
 		  yahoo.com not to resolve, thanx to
 		  asajith@users.sourceforge.net for reporting

@@ -57,7 +57,12 @@ $this->DATA = array(
 $this->HTTPW = array(
 		"es" => "http://www.nic.es/cgi-bin/consulta.whois?list=Dominios&tipo=procesar&key=#",
 		"co.za" => "http://co.za/cgi-bin/whois.sh?Domain=#",
-		"fm" => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm"
+		"fm" => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm",
+		"gs" => "http://www.adamsnames.tc/whois/?domain=#",
+		"ms" => "http://www.adamsnames.tc/whois/?domain=#",
+		"tc" => "http://www.adamsnames.tc/whois/?domain=#",
+		"tf" => "http://www.adamsnames.tc/whois/?domain=#",
+		"vg" => "http://www.adamsnames.tc/whois/?domain=#"
 		);
 ?>
 
