@@ -1,8 +1,13 @@
+2003/02/16  David Saez <david@ols.es>
+		- improved generic.whois, update all handlers that use it
+		- now it's possible to also query http based whois
+		- added .es handler (http)
+
 2003/02/15  David Saez <david@ols.es>
 		- added generic3.whois with functions to parse whois output
 		- added disclaimer to generic.whois and generic2.whois
 		- opensrsnet.whois updated to common object model
-		- added mxnic.whosi, thanx to torfinn@nome.no
+		- added mxnic.whois, thanx to torfinn@nome.no
 
 2003/02/10  David Saez <david@ols.es>
 		- inwwcom.whois updated to common object model
