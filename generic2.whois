@@ -10,7 +10,7 @@ while (list($key,$val)=each($rawdata))
       { if (trim($val)!="") 
            { reset($items);
              $ok=0;
-	     if ($val[0]=='%' && $disok)
+	     if (($val[0]=='%' || $val[0]=='#') && $disok)
                 { $r['disclaimer'][]=trim(substr($val,1));;
 		  $disok=true;
 		  continue;
@@ -19,7 +19,9 @@ while (list($key,$val)=each($rawdata))
 	     $disok=false;
 
              while (list($field, $match)=each($items)) 
-                   { if (strstr($val,$match)) 
+                   { //if (strstr($val,$match))
+		    $pos=strpos($val,$match);
+                    if ($pos!==false) 
                         { $parts=explode(".",$field);
                           $var="\$r";
                           while (list($fn,$mn)=each($parts))
@@ -27,7 +29,8 @@ while (list($key,$val)=each($rawdata))
                                      $var=$var."[]";
                                 else $var=$var."[\"".$mn."\"]";
 
-                          $itm=trim(substr($val,strlen($match)));
+                          //$itm=trim(substr($val,strlen($match)));
+			  $itm=trim(substr($val,$pos+strlen($match)));
                           if ($itm!="")
                               eval($var."=\"".$itm."\";");
 

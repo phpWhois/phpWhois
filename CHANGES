@@ -1,3 +1,9 @@
+2003/01/29  David Saez <david@ols.es>
+                - fixed nicse.whois and updated to common object model
+
+2003/01/27  David Saez <david@ols.es>
+		- fixed nunames.whois and updated to common object model
+
 2003/01/26  David Saez <david@ols.es>
 		- fixed lunic.whois and updated to common object model
 		- neulevel.whois changed to use generic2.whois
