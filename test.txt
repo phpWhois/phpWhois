@@ -5,6 +5,7 @@ aunic		telstra.com.au
 brnic		registro.br
 chnic		creart.ch blaueskreuz.ch
 cira		cira.ca (v)
+cnnic           cnnic.net.cn
 denic		4ever.de
 dotfm		dot.fm
 esnic		ols.es

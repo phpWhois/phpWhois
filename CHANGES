@@ -1,4 +1,7 @@
 2003/09/06  David Saez <david@ols.es>
+		- rewrite of cnnic.whois
+
+2003/09/06  David Saez <david@ols.es>
 		- Added handlers for .cn and .ws
 		  thanx to zingfharn@fastmail.fm
 		- Fixed main.whois to allow https queries
