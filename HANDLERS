@@ -131,6 +131,180 @@ files. You can see how they work by looking into the code.
 Please try to mimic the coding style of the other handlers, as this
 will make it easier for other people to understand and maintain.
 
+Some support functions have been developed to help you write new
+handlers, those functions are stored on the following files:
+
+- generic.whois:
+
+  contains code to parse whois outputs like this one, you could
+  take a look at atnic.whois to see how you could use it:
+
+  domain:         nic.at
+  registrant:     NAIV1117337-NICAT
+  admin-c:        NAR567002-NICAT
+  tech-c:         GW502425-NICAT
+  zone-c:         GW502425-NICAT
+  nserver:        ns3ext.univie.ac.at
+  nserver:        ns4ext.univie.ac.at
+  nserver:        ns5.univie.ac.at
+  nserver:        ns9.univie.ac.at
+  changed:        20030616 12:54:18
+  source:         AT-DOM
+ 
+  personname:     
+  organization:   NIC.AT Internet Verwaltungs- und Betriebsges.m.b.H.
+  street address: Jakob-Haringerstrasse 8
+  postal code:    A-5020
+  city:           Salzburg
+  country:        Austria
+  phone:          +43662466920
+  fax-no:         +43662466929
+  e-mail:         office@nic.at
+  nic-hdl:        NAIV1117337-NICAT
+  changed:        20020614 17:29:04
+  source:         AT-DOM
+ 
+  personname:     NIC.AT Role
+  organization:   
+  street address: NIC.AT Internet Verwaltungs- und Betriebsgesellschaft m.b.H.
+  street address: Jakob-Haringerstrasse 8
+  street address: A-5020 Salzburg
+  street address: Austria
+  postal code:    
+  city:           
+  country:        
+  phone:          +43 662 4669 0
+  fax-no:         +43 662 4669 19
+  e-mail:         nic-at@nic.at
+  nic-hdl:        NAR567002-NICAT
+  changed:        20010223 12:52:13
+  source:         AT-DOM
+ 
+  personname:     Gerhard Winkler
+  organization:   
+  street address: Vienna University
+  street address: Computer Center - ACOnet
+  street address: Universitaetsstrasse 7
+  street address: A-1010 Vienna
+  street address: Austria
+  postal code:    
+  city:           
+  country:        
+  phone:          +43 1 4277 140 35
+  fax-no:         +43 1 4277 9140
+  e-mail:         gerhard.winkler@univie.ac.at
+  nic-hdl:        GW502425-NICAT
+  changed:        20001205 14:06:15
+  source:         AT-DOM
+
+- generic2.whois:
+
+  contains code to parse whois outputs like this one, you could
+  take a look at neulevel.whois to see how you could use it:
+
+  Domain Name:                                 NIC.BIZ
+  Domain ID:                                   D714-BIZ
+  Sponsoring Registrar:                        REGISTRY REGISTRAR
+  Domain Status:                               clientDeleteProhibited
+  Domain Status:                               clientTransferProhibited
+  Domain Status:                               clientUpdateProhibited
+  Domain Status:                               serverDeleteProhibited
+  Domain Status:                               serverTransferProhibited
+  Domain Status:                               serverUpdateProhibited
+  Registrant ID:                               NEULEVEL1
+  Registrant Name:                             Customer Support
+  Registrant Address1:                         Loudoun Tech Center
+  Registrant Address2:                         45980 Center Oak Plaza
+  Registrant City:                             Sterling
+  Registrant State/Province:                   Virginia
+  Registrant Postal Code:                      20166
+  Registrant Country:                          United States
+  Registrant Country Code:                     US
+  Registrant Phone Number:                     +1.5714345757
+  Registrant Facsimile Number:                 +1.5714345758
+  Registrant Email:                            support@neulevel.biz
+  Administrative Contact ID:                   NEULEVEL1
+  Administrative Contact Name:                 Customer Support
+  Administrative Contact Address1:             Loudoun Tech Center
+  Administrative Contact Address2:             45980 Center Oak Plaza
+  Administrative Contact City:                 Sterling
+  Administrative Contact State/Province:       Virginia
+  Administrative Contact Postal Code:          20166
+  Administrative Contact Country:              United States
+  Administrative Contact Country Code:         US
+  Administrative Contact Phone Number:         +1.5714345757
+  Administrative Contact Facsimile Number:     +1.5714345758
+  Administrative Contact Email:                support@neulevel.biz
+  Billing Contact ID:                          NEULEVEL1
+  Billing Contact Name:                        Customer Support
+  Billing Contact Address1:                    Loudoun Tech Center
+  Billing Contact Address2:                    45980 Center Oak Plaza
+  Billing Contact City:                        Sterling
+  Billing Contact State/Province:              Virginia
+  Billing Contact Postal Code:                 20166
+  Billing Contact Country:                     United States
+  Billing Contact Country Code:                US
+  Billing Contact Phone Number:                +1.5714345757
+  Billing Contact Facsimile Number:            +1.5714345758
+  Billing Contact Email:                       support@neulevel.biz
+  Technical Contact ID:                        NEULEVEL1
+  Technical Contact Name:                      Customer Support
+  Technical Contact Address1:                  Loudoun Tech Center
+  Technical Contact Address2:                  45980 Center Oak Plaza
+  Technical Contact City:                      Sterling
+  Technical Contact State/Province:            Virginia
+  Technical Contact Postal Code:               20166
+  Technical Contact Country:                   United States
+  Technical Contact Country Code:              US
+  Technical Contact Phone Number:              +1.5714345757
+  Technical Contact Facsimile Number:          +1.5714345758
+  Technical Contact Email:                     support@neulevel.biz
+  Name Server:                                 NS1.NEULEVEL.BIZ
+  Name Server:                                 NS2.NEULEVEL.BIZ
+  Name Server:                                 NS4.NEULEVEL.BIZ
+  Name Server:                                 NS3.NEULEVEL.BIZ
+  Created by Registrar:                        REGISTRY REGISTRAR
+  Last Updated by Registrar:                   NEULEVELCSR
+  Domain Registration Date:                    Wed Nov 07 00:01:00 GMT 2001
+  Domain Expiration Date:                      Sat Nov 06 23:59:00 GMT 2004
+  Domain Last Updated Date:                    Fri Nov 07 18:59:11 GMT 2003 
+
+- generic3.whois:
+
+  contains code to parse whois outputs like this one, you could
+  take a look at chnic.whois to see how you could use it:
+
+  Domain name:
+  nic.ch
+
+  Holder of domain name:
+  SWITCH Internet Domains
+  Dana Djurdjevic
+  Neumühlequai 6
+  CH-8001 Zürich
+  Switzerland
+  hostmaster@switch.ch
+  Contractual Language: English
+
+  Technical contact:
+  SWITCH Geschäftsstelle
+  Andrea Tognola
+  Network
+  Limmatquai 138
+  CH-8001 Zürich
+  Switzerland
+  hostmaster@switch.ch
+
+  Name servers:
+  merapi.switch.ch	[130.59.211.10]
+  scsnms.switch.ch	[130.59.1.30]
+  scsnms.switch.ch	[130.59.10.30]
+
+  Date of last registration:
+  31.12.1995
+
+  Date of last modification:
+  22.12.2003
 
 Credits
 -------
