@@ -28,6 +28,13 @@
 
 /* esnic.whois	1.0  David Saez Padros <david@ols.es> */
 /* esnic.whois  1.1  David Saez Padros <david@ols.es> */
+/* 
+ * requires https support, please see:
+ *
+ * http://www.php.net/manual/en/ref.openssl.php
+ * http://www.php.net/manual/en/wrappers.php
+ *
+ */
 
 if(!defined("__ESNIC_HANDLER__")) define("__ESNIC_HANDLER__",1);
 
