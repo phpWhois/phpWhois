@@ -31,7 +31,7 @@ class Whois {
 	var $VERSION;
 
 	// This release of the package
-	var $CODE_VERSION = "3.0.1";
+	var $CODE_VERSION = "3.0.4";
 	
 	// Network Solutions registry server
 	var $NSI_REGISTRY = "whois.nsiregistry.net";
@@ -104,19 +104,35 @@ class Whois {
 		}
 
 		// Set domain to query in query array
-		$this->Query["string"] = strtolower($query);
+		$this->Query["string"] = $domain = strtolower($query);
 
-		// Determine top level whois server
-		$tld = $this->GetTld($this->Query["string"]);
-		if($tld) {
+		// Determine the top level domain, and it's whois server using
+                // DNS lookups on 'whois-servers.net'.
+		// Assumes a valid DNS response indicates a recognised tld (!?)
+		$tld = "";
+		$server = "";
+		$dp = explode(".", $domain);
+		$np = count($dp);
+		$tldtests = array(
+			//$dp[$np-3].".".$dp[$np-2].".".$dp[$np-1],
+			$dp[$np-2].".".$dp[$np-1],
+			$dp[$np-1]);
+		foreach($tldtests as $tld) {
+			$cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
+			if(!$cname) continue;
+			$server = gethostbyname($tld.".whois-servers.net");
+			break;
+		}
+
+		if($tld && $server) {
 			// If found, set tld and whois server in query array
-			$this->Query["server"] = $this->DATA[$tld][0];
+			$this->Query["server"] = $server;
 			$this->Query["tld"] = $tld;
 
 			// If a handler exists for the tld
-			if(isSet($this->DATA[$tld][1])) {
+			if(isSet($this->DATA[$tld])) {
 				// Set fle/handler in query array
-				$handler = $this->DATA[$tld][1];
+				$handler = $this->DATA[$tld];
 				$this->Query["file"] = sprintf("%s.whois", $handler);
 				$this->Query["handler"] = $handler;
 			}
@@ -279,36 +295,11 @@ class Whois {
 		$result['rawdata'] = $output;
 
 		// If we have a handler, post-process it with that
-		if(isSet($this->DATA[$this->Query["tld"]][1]))
+		if(isSet($this->DATA[$this->Query["tld"]]))
 			$result = $this->Process($result);
 		
 		return($result);
 	}
-
-	/*
-	 * Determine top-level whois server for a given domain
-	 */
-	function GetTld ($domain) {
-		// Loop through server/tld list
-		reset($this->DATA);
-		$curr_match = "";
-		while(list($tld, $param) = each($this->DATA)) {
-			// If the tld matches the end of the given domain
-			if(eregi("\.$tld$", $domain)) { 
-				// If we have already found a match
-				if(!empty($curr_match)) {
-					// FIXME: we assume we'll never support a 3rd
-					// level registry. If we do, this breaks.
-					$curr_match = strchr($tld,".") ? $tld : $curr_match;
-				}	
-				else
-					$curr_match = $tld;
-			}
-		}
-
-		return($curr_match);
-	}
-
 }
 
 ?>

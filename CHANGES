@@ -1,3 +1,7 @@
+2003/02/09  Ross Golder <ross@golder.org>
+		- updated to do a 'whois-servers.net' DNS lookup to determine
+		  the tld whois server to query
+
 2003/01/29  David Saez <david@ols.es>
                 - fixed nicse.whois and updated to common object model
 
