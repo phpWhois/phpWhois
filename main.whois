@@ -27,6 +27,10 @@
 */
 
 class Whois {
+	// Windows based ?
+
+	var $windows = false;
+
 	// Recursion allowed ?
 	var $gtld_recurse = true;
 
@@ -96,6 +100,11 @@ class Whois {
 		// Load DATA array
 		@require("servers.whois");
 
+		$pos = strpos(strtolower(getenv ("OS")), "win");
+
+                if ($pos === false) $this->windows=false;
+                else $this->windows=true;
+
 		// Set version
 		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
 
@@ -163,15 +172,13 @@ class Whois {
                       	$tldtests[] = implode(".",$dp);
 		    	}
 
-		$pos = strpos(strtolower(getenv ("OS")), "win");
-
-		if ($pos === false) $windows=false;
-		else $windows=true;
-
 		foreach($tldtests as $tld) {
 
-			if ($windows) $cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
-			else $cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
+			if ($this->windows)
+				$cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
+			else
+				$cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
+
 			if(!$cname) continue;
 			//This also works
 			//$server = gethostbyname($tld.".whois-servers.net");
@@ -344,12 +351,28 @@ class Whois {
 	/*
 	*  Fix and/or add name server information
 	*/
-	function FixNameServers (&$result) {
+	function FixResult (&$result,$domain) {
 
-		if (!isset($result['regrinfo']['registered'])) return;
+		// Add usual fields
+		$result['regrinfo']['domain']['domain']=$domain;
+
+		// Check if nameservers exist
+		if (!isset($result['regrinfo']['registered'])) {
+                        if ($this->windows)
+                                $has_ns = $this->checkdnsrr_win($domain, "NS");
+                        else
+                                $has_ns = checkdnsrr($domain, "NS");
+
+			if ($has_ns)
+				$result['regrinfo']['registered']='yes';
+			else
+				$result['regrinfo']['registered']='unknown';
+			}
+
 		if ($result['regrinfo']['registered']!='yes') return;
 		if (!isset($result['regrinfo']['domain']['nserver'])) return;
 
+		// Normalize nameserver fields
 		$nserver=$result['regrinfo']['domain']['nserver'];
 
 		if (!is_array($result['regrinfo']['domain']['nserver'])) {
@@ -410,7 +433,7 @@ class Whois {
 
 			$result['regyinfo']['whois'] = strtok($this->Query["server"],'?');
 			// Fix/add nameserver information
-			$this->FixNameServers($result);
+			$this->FixResult($result,$string);
                         return($result);
 		      }
 
@@ -472,8 +495,8 @@ class Whois {
 			$result["rawdata"] = $output;
 		
 		// Fix/add nameserver information
-		if (method_exists($this,'FixNameServers'))
-			$this->FixNameServers($result);
+		if (method_exists($this,'FixResult') && $this->Query['tld']!='ipw')
+			$this->FixResult($result,$string);
 		return($result);
 	}
 }
