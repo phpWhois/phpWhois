@@ -75,12 +75,11 @@ class gtld extends Whois {
 
 		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
 		// david@ols.es 16/10/2002 Fixes rawdata
-		$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];
+		 $this->result["rawdata"] =  $this->result["rawdata"]["rawdata"];
 
 		$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 		if(!empty($this->Query["handler"])) {
 			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
-			// $this->result["regrinfo"] = $this->Process($this->result["rawinfo"]);
 			$this->result["regrinfo"] = $this->Process($this->result["rawdata"]);
 		}
 	}
