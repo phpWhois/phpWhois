@@ -1,3 +1,8 @@
+2002/10/11  Ross Golder <ross@golder.org>
+		- Merged in as many useful patches as possible (supplied by Mark)
+		- Re-indented the classes for clarity
+		- Attempted to add comments to as much code as possible
+
 2001/02/28
 		-batch add of many updates
 		-uknic.whois updated by David Saez Padros 
