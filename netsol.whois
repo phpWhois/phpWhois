@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Whois2.php	PHP classes to conduct whois queries
 
@@ -71,7 +71,16 @@ $ns=explode("_", $refs[1]);
 for($i=0,$max=count($ns);$i<$max;$i++) {
 	list($k,$v)=split(" ", trim($ns[$i]));
 	$r["ns"][$k]=$v;
+
+$r["owner"] = array();
+$r["owner"]["address"]= array();
+$r["owner"]["organization"]=$r["organization"];
+$r["owner"]["handle"]=$r["org_handle"];
+
+$r["owner"]["address"]["address1"]=$r["org_address"];	// alright, this is cheap, but... ;)
+
 }
+
 return($r);
 }
 
