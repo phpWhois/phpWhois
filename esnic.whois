@@ -55,7 +55,8 @@ class esnic extends Whois {
 					"Estado" => "status",
 					"Acronimo de proveedor" => "sponsor",
 					"Serv. primario" => "nserver.",
-					"Serv. secundario" => "nserver."
+					"Serv. secundario" => "nserver.",
+					"Forma Jurídica" => "type"
 				   );
 
 		$contacts = array (
@@ -79,8 +80,8 @@ class esnic extends Whois {
                 unset($rw["domain"]["address"]);
 		$rw["owner"]["nif"]=$rw["domain"]["nif"];
                 unset($rw["domain"]["nif"]);
-		$rw["owner"]["forma jurídica"]=$rw["domain"]["forma jurídica"];
-                unset($rw["domain"]["forma jurídica"]);
+		$rw["owner"]["type"]=$rw["domain"]["type"];
+                unset($rw["domain"]["type"]);
 
 		$r["regrinfo"] = $rw;
 
