@@ -40,6 +40,21 @@ echo "<pre>";
 print_r($result);
 echo "</pre>";
 
+What you can query
+------------------
+
+You can use phpWhois to query domain names, ip addresses and
+other information like AS, i.e, both of the following examples
+work:
+
+$whois = new Whois("example.com");
+$result = $whois->Lookup();
+
+$whois = new Whois("62.97.102.115");
+$result = $whois->Lookup();
+
+$whois = new Whois("AS220");
+$result = $whois->Lookup();
 
 Notes
 -----
