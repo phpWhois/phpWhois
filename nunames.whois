@@ -77,6 +77,11 @@ class nunames extends Whois {
 						break;  
 					} 
 			}
+
+		if (isset($r['regrinfo']['domain']))
+			$r['regrinfo']['registered']='yes';
+		else
+			$r['regrinfo']['registered']='no';
 		}
 		return($r);
 	}
