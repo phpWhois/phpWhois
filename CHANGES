@@ -1,3 +1,19 @@
+2005/03/01  David Saez <david@ols.es>
+		- fixed Network Solutions detection
+		- ordered list of handlers in gtld.whois
+		- added handler for Moniker
+		- added handler for Innerwise
+		- added handler for Stargate
+		- added handler for Cronon
+		- added handler for Joker
+		- fixed scripts using php short tags
+		  thanx to rpm@keynetics.com
+		- added handler for Schlund
+
+2004/08/06  David Saez <david@ols.es>
+		- fixed denic.whois when domain does not
+		  exist, thanx to bjoern@xrow.de
+
 2004/04/24  David Saez <david@ols.es>
 		- added .is handler
 		- added some notes about generic support functions

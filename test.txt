@@ -9,6 +9,7 @@ cnnic           cnnic.net.cn
 denic		4ever.de
 dotfm		dot.fm
 esnic		ols.es
+hunic		nic.hu
 lunic		dns.lu
 mxnic           nic.mx
 nicse		nic-se.se
@@ -23,20 +24,24 @@ ascio.com	ascio.com
 bulkregistercom bulkregister.com
 buydomains	buydomains.com
 core            corenic.com
+cronon		antiquea.com
 directnic	directnic.com
 domainbank	domainbank.com
 dotregistrar    dotregistrar.com
 dotster         dotster.com
 enom            enom.com
 godaddy		godaddy.com
-wwd		iprocommunicator.com
+joker		managerialanalyzer.com
+innerwise	sexido.com
 interdomain     interdominio.com
 inwwcom         ?
+moniker		kaka.com
 netsol          olsns.com
 nicline		nicline.com
 opensrsnet      tucows.com
 registercom     register.com
 srsplus		srsplus.com
+wwd             iprocommunicator.com
 
 // Other
 

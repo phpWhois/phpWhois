@@ -34,7 +34,7 @@ $endtag="";
 while (list($key,$val)=each($rawdata))
       {
         $val=trim($val);
-	if ($val=="") continue;
+	if ($val=='') continue;
 
 	$found=false;
 	reset($items);
@@ -43,10 +43,17 @@ while (list($key,$val)=each($rawdata))
 
 		$pos=strpos($val,$match);
 
-		if ($field!="" && $pos!==false) {
-			$last=substr(trim($val),-1,1);
+		if ($field!='' && $pos!==false) {
+			if ($val==$match) {
+				$found=true;
+				$endtag='';
+				$line=$val;
+				break;
+				}
 
-			if ($last==":" || $last=="-" || $last=="]") {
+			$last=substr($val,-1,1);
+
+			if ($last==':' || $last=='-' || $last==']') {
 				$found=true;
 				$endtag=$last;
 				$line=$val;
