@@ -1,3 +1,7 @@
+2003/06/04  Ross Golder <ross@golder.org>
+		- Removed a blank line preventing headers from
+		  being sent.
+
 2003/04/25  David Saez <david@ols.es>
 		- added support for web based whois for
 		  .tc, .vg, .ms, .gs and .tf domains
