@@ -53,6 +53,7 @@ $this->DATA = array(
 	"org"	=> "org",
 	"se"	=> "nicse",
 	"uk"	=> "uknic",
+	"us"	=> "neustar",
 	"ws"	=> "wsnic",
         "ipw"	=> "ipw" // Dummy, just for ip whois
 	);
