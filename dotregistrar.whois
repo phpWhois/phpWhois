@@ -47,6 +47,7 @@ class dotregistrar extends gtld {
                                 "tech" => "Technical Contact",
                                 "zone" => "Zone Contact",
                                 "domain.name" => "Domain name:",
+				"domain.nserver." => "Name Server:",
                                 "domain.created" => "Record created on",
                                 "domain.expires" => "Record expires on",
                                 "domain.changed" => "Record last updated on"
