@@ -3,6 +3,8 @@
 		- some fixes to wsnic.whois
 		- some fixes to gtld.whois and generic3.whois
 		- added handler for Godady and Domain Bank
+		- minor improvment to main.whois and generic2.whois
+		- added handler for .org
 
 2003/09/06  David Saez <david@ols.es>
 		- Added handlers for .cn and .ws

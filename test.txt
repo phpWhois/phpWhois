@@ -19,26 +19,27 @@ wsnic		samoanic.ws
 
 // .com/.org/.net
 
-ascio.com	ascio.com ascio.org
+ascio.com	ascio.com
 bulkregistercom bulkregister.com
-buydomains	buydomains.com buydomains.org
-core            corenic.com corenic.org
-directnic	directnic.com directnic.org
+buydomains	buydomains.com
+core            corenic.com
+directnic	directnic.com
 domainbank	domainbank.com
-dotregistrar    dotregistrar.com dotregistrar.org
-dotster         dotster.com dotster.org
-enom            enom.com enom.org
+dotregistrar    dotregistrar.com
+dotster         dotster.com
+enom            enom.com
 godaddy		godaddy.com
-interdomain     interdominio.com interdomain.org
+interdomain     interdominio.com
 inwwcom         ?
-netsol          olsns.com olsns.org
-opensrsnet      tucows.com opensrs.org
+netsol          olsns.com
+opensrsnet      tucows.com
 registercom     register.com
-srsplus		srsplus.com, srsplus.org
+srsplus		srsplus.com
 
 // Other
 
 info            afilias.info
+org		ascio.org buydomains.org ...
 neulevel        forumed.biz
 
 // IP whois
