@@ -69,6 +69,11 @@ while (list($key,$val)=each($rawdata))
            }
       }
 
+if (empty($r))
+	$r["registered"] = 'no';
+else
+	$r['registered'] = 'yes';
+
 return $r;
 }
 
