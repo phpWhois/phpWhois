@@ -27,11 +27,12 @@ class wsnic extends Whois {
 
 			if ($val!="") {
 				if ($val=="Name servers:") {
+					$breaker=0;
 					while (list($key, $val)=each($data_str["rawdata"])) {
 						// There's a blank line before the list- hack it out.
 						if (!($value=trim($val))) $breaker++;
 						if($breaker == 2) break;
-						if($value) $r["regrinfo"]["domain"]["nserver"][]=$value;
+						if($value) $r["regrinfo"]["domain"]["nserver"][]=strtok($value,' ');
 					} 
 					break;
 				}

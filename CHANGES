@@ -1,5 +1,6 @@
 2003/09/06  David Saez <david@ols.es>
 		- rewrite of cnnic.whois
+		- some fixes to wsnic.whois
 
 2003/09/06  David Saez <david@ols.es>
 		- Added handlers for .cn and .ws

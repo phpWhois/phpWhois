@@ -15,6 +15,7 @@ nicse		nic-se.se
 nlnic		domain-registry.nl
 nunames		nunames.nu
 uknic		olsns.co.uk
+wsnic		samoanic.ws
 
 // .com/.org/.net
 
