@@ -141,7 +141,10 @@ while (list($key,$val)=each($array))
              $r["email"]=$parts[$top];
              array_pop($parts);
              $val=implode(" ",$parts);
-	     if ($val=="") continue;
+	     if ($val=="") {
+		unset($array[$key]);
+		continue;
+	     }
              $r["name"]=$val;
              unset($array[$key]);
 	     if ($key==1)
