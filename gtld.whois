@@ -88,17 +88,17 @@ class gtld extends Whois {
 	function ParseRegInfo ($array) {
 		for($i=0,$max=count($array);$i<$max;$i++) {
 			reset($this->REG_FIELDS);
-			while(list($key,$val)=each($this->REG_FIELDS)):
+			while(list($key,$val)=each($this->REG_FIELDS)) {
 				list($f_name,$f_val)=split(":", $array[$i]);
-			if($val==trim($f_name)) {
-				if($key=="nameserver") {
-					$ret_val[$key][]=trim($f_val);
-				} else {
-					$ret_val[$key]=trim($f_val);
+				if($val==trim($f_name)) {
+					if($key=="nameserver") {
+						$ret_val[$key][]=trim($f_val);
+					} else {
+						$ret_val[$key]=trim($f_val);
+					}
+					break;
 				}
-				break;
 			}
-			endwhile;
 		}
 		return($ret_val);
 	}           
