@@ -43,6 +43,7 @@ $this->DATA = array(
 	"de"	=> "denic",
 	"es"	=> "esnic",
 	"fm"	=> "dotfm",
+	"hu"	=> "hunic",
 	"info"	=> "info",
 	"li"	=> "chnic",
 	"lu"	=> "lunic",
@@ -59,6 +60,7 @@ $this->DATA = array(
 	);
 
 $this->HTTPW = array(
+		"bg"	 => "http://www.register.bg/bg-nic/displaydomain.pl?domain=#&search=exist",
 		"es"     => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio=#&tipo=dominio",
 		"co.za"  => "http://co.za/cgi-bin/whois.sh?Domain=#",
 		"fm"     => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm",
