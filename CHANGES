@@ -1,3 +1,6 @@
+2003/04/04  David Saez <david@ols.es>
+		- added handler for .fm
+
 2003/03/30  David Saez <david@ols.es>
 		- recovered 'powered by phpWhois' logo
 		- added handlers for directnic and buydomains

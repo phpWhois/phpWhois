@@ -40,6 +40,7 @@ $this->DATA = array(
 	"com"=>"gtld",
 	"de"=>"denic",
 	"es"=>"esnic",
+	"fm"=>"dotfm",
 	"info"=>"info",
 	"li"=>"chnic",
 	"lu"=>"lunic",
@@ -56,6 +57,7 @@ $this->DATA = array(
 $this->HTTPW = array(
 		"es" => "http://www.nic.es/cgi-bin/consulta.whois?list=Dominios&tipo=procesar&key=#",
 		"co.za" => "http://co.za/cgi-bin/whois.sh?Domain=#",
+		"fm" => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm"
 		);
 ?>
 

@@ -1,0 +1,69 @@
+<?
+/*
+Whois2.php    PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* dotfm.whois    1.0    David Saez 4/4/2003 */
+
+if(!defined("__DOTFM_HANDLER__")) define("__DOTFM_HANDLER__",1);
+
+require_once("generic2.whois");
+
+class dotfm extends Whois {
+
+function dotfm($data) 
+{
+$this->result=$this->parse($data);
+}
+
+function parse ($data) 
+{
+
+    $items = array(
+			"domain.name" => "FM Domain:",
+			"domain.nserver.0" => "Primary Hostname:",
+			"domain.nserver.1" => "Secondary Hostname:",
+			"domain.expires" => "Renewal Date::",
+			"owner.organization" => "Organization:",
+			"owner.name" => "Name:",
+			"owner.address." => "Address:",
+			"owner.address.city" => "City, State Zip:",
+			"owner.address.country" => "Country",
+			"owner.phone" => "Phone:",
+			"owner.fax" => "Fax:",
+			"owner.email" => "Email:"
+		  );
+
+    $r["rawdata"]=$data["rawdata"];
+    
+    $r["regrinfo"] = generic_whois($data["rawdata"],$items);
+
+    $r["regyinfo"]["whois"]="none";
+    $r["regyinfo"]["referrer"]="http://www.dot.dm";
+    $r["regyinfo"]["registrar"]="dotFM";
+
+    return($r);
+}
+}

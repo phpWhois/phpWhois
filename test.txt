@@ -6,6 +6,7 @@ brnic		registro.br
 chnic		creart.ch blaueskreuz.ch
 cira		cira.ca (v)
 denic		4ever.de
+dotfm		dot.fm
 esnic		ols.es
 lunic		dns.lu
 mxnic           nic.mx
