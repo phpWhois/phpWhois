@@ -3,6 +3,7 @@
 		- recovered brnic.whois and added bripw.whois
 		  which was implemented over brnic.whois by
 		  mistake
+		- fixed netsol.whois
 
 2003/03/12  Ross Golder <rossigee@users.sourceforge.net>
 		- Minor corrections and a note about coding style
