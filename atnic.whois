@@ -56,7 +56,7 @@ $contacts = array (
                   );
 
 $r["rawdata"]=$data_str["rawdata"];
-$r["regyinfo"]=array("whois"=>"whois.nic.at","referer"=>"www.nic.at","registrar"=>"NIC-AT");
+$r["regyinfo"]=array("whois"=>"whois.nic.at","referrer"=>"http://www.nic.at","registrar"=>"NIC-AT");
 
 $reg=generic_whois($data_str["rawdata"],$translate,$contacts);
 

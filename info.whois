@@ -101,7 +101,7 @@ class info extends Whois {
 
                 $r["rawdata"] = $data_str["rawdata"];
                 $r["regyinfo"] = array("whois"=>"whois.afilias.info",
-                                "referrer"=>"whois.afilias.info",
+                                "referrer"=>"http://whois.afilias.info",
 				"registrar"=>"Afilias Global Registry Services" );
 
                 $r["regrinfo"] = generic_whois($data_str["rawdata"],$items);

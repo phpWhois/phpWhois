@@ -51,7 +51,7 @@ class nicse extends Whois {
 
 		$r["regyinfo"]=array(
 			"whois"=>"whois.nic-se.se",
-			"referrer"=>"www.nic-se.se",
+			"referrer"=>"http://www.nic-se.se",
 			"registrar" => "NIC-SE"
 			);
 

@@ -52,7 +52,7 @@ class nunames extends Whois {
 
 		$r["regyinfo"] = array(
 			"whois"=>"whois.nic.nu",
-			"referrer"=>"www.nunames.nu",
+			"referrer"=>"http://www.nunames.nu",
 			"registrar"=>".NU Domain, Ltd"
 			);
 

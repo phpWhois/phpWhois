@@ -20,7 +20,7 @@ contains the raw text output returned by the whois server.
 
 regyinfo contains information about the registry who returned that
 information. It has three subkeys: 'whois' (the whois server who
-returned the data), 'referer' (the web address of the registry)
+returned the data), 'referrer' (the web address of the registry)
 and 'registar' (the company name of the registry).
 
 regrinfo holds the information about the domain itself. It could have

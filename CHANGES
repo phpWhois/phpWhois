@@ -1,3 +1,10 @@
+2003/03/22  David Saez <david@ols.es>
+		- referrer correction and normalization in some handlers
+		- removed unused handler cdnnet.whois
+
+2003/03/22  Ross Golder <rossigee@users.sourceforge.net>
+		- Release 3.0.4 available now
+
 2003/03/17  David Saez <david@ols.es>
 		- chnic.whois & nlnic.whois rewritten
 		- minor fix and improvment on generic3.whois

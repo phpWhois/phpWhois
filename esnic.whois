@@ -69,7 +69,7 @@ class esnic extends Whois {
 
                 $r["rawdata"] = $data_str["rawdata"];
                 $r["regyinfo"] = array("whois"=>"www.nic.es",
-                                "referrer"=>"www.nic.es",
+                                "referrer"=>"http://www.nic.es",
 				"registrar"=>"ES-NIC" );
 
 		$rw = generic_whois($data_str["rawdata"],$translate,$contacts);

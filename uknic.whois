@@ -88,7 +88,7 @@ class uknic extends Whois {
 		}
 
 		$r["regyinfo"]["whois"]="whois.nic.uk";
-                $r["regyinfo"]["referrer"]="www.nic.uk";
+                $r["regyinfo"]["referrer"]="http://www.nic.uk";
                 $r["regyinfo"]["registrar"]="Nominet UK";
 
 		if (!empty($r["regrinfo"]["domain"]["name"])) {

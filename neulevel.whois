@@ -95,7 +95,7 @@ function parse ($data_str) {
 	$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
 
 	$r["regyinfo"] = array( "whois"=>"whois.neulevel.biz", 
-				"referrer"=>"www.neulevel.biz", 
+				"referrer"=>"http://www.neulevel.biz", 
 				"registrar" => "NEULEVEL" );
 
 	return($r);
