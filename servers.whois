@@ -45,6 +45,7 @@ $this->DATA = array(
 	"fm"	=> "dotfm",
 	"hu"	=> "hunic",
 	"info"	=> "info",
+	"is"	=> "isnic",
 	"li"	=> "chnic",
 	"lu"	=> "lunic",
 	"mx"	=> "mxnic",
