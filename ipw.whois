@@ -30,9 +30,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*                      BRNIC, KRNIC, TWNIC and LACNIC */
 
 /* Check with 218.165.121.114 (apnic) */
-/*            62.97.102.115   (ripe) */
-/*            216.10.13.129   (arin) */
-
+/*            62.97.102.115   (ripe)  */
+/*            207.217.120.54  (arin)  */
+/*            200.165.206.74  (brnic) */
 
 if (!defined("__IPW_HANDLER__")) define("__IPW_HANDLER__",1);
 
@@ -49,10 +49,10 @@ class ipw extends Whois {
 			);
 
 	var $HANDLERS = array( "whois.krnic.net"=>"krnic",
-			       "whois.apnic.net"=>"ripe",
+			       "whois.apnic.net"=>"apnic",
 			       "whois.ripe.net" =>"ripe",
 			       "whois.arin.net" =>"arin",
-			       "whois.registro.br" =>"arin",
+			       "whois.registro.br" =>"brnic",
 			       "whois.lacnic.net"=>"ripe"	 
 			     );	
 
