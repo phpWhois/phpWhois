@@ -25,10 +25,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/* neulevel.whois        2.1        7/2/2002 David Saez now uses generic2 */
 /* neulevel.whois	 2.0	    7/2/2002 David Saez stadarized object model */
 /* neulevel.whois        1.0        by Brian Blood <brian@macserve.net>  */
 
 if(!defined("__NEULEVEL_HANDLER__")) define("__NEULEVEL_HANDLER__",1);
+
+require_once("generic2.whois");
 
 class neulevel extends Whois {
 
@@ -36,113 +39,66 @@ function neulevel($data) {
    $this->result = $this->parse($data);
 }
 
-function set_address ($data)
-{
-
-$data["address"][]=$data["address1"];
-unset($data["address1"]);
-
-if ($data["address2"]!="") 
-   { $data["address"][]=$data["address2"];
-     unset($data["address2"]);
-   }
-
-$data["address"][]=$data["postalcode"]." ".$data["city"];
-unset($data["postalcode"]);
-unset($data["city"]);
-
-$data["address"][]=$data["country"];
-unset($data["country"]);
-
-return $data;
-}
-
 function parse ($data_str) {
-  $recordMap = array(
-	      "domain" => array( "key" => "",
-			         "fields" => array ("handle"  => "Domain ID",
-                                                    "name"  => "Domain Name",
-                                                    "sponsor" => "Sponsoring Registrar",
-                                                    "nserver"  => array("key" => "Name Server"),
-                                                    "created" => "Domain Registration Date",
-                                                    "changed" => "Domain Last Updated Date",
-                                                    "expires" => "Domain Expiration Date" )
-				),
-              "owner"   => array("key"   => "Registrant",
-				"fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
-					          "address1"=>"Address1", "address2"=>"Address2", 
-					          "city"=>"City", "postalcode"=>"Postal Code",
-						  "country"=>"Country","phone"=>"Phone Number",
-						  "fax"=>"Facsimile Number","email"=>"Email")
-						),
-              "admin"   => array("key"   => "Administrative Contact",
-                                "fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
-                                                  "address1"=>"Address1", "address2"=>"Address2", "city"=>"City", "postalcode"=>"Postal Code",
-                                                  "country"=>"Country","phone"=>"Phone Number",
-                                                  "fax"=>"Facsimile Number","email"=>"Email")
-                                                ),
 
-              "billing"  => array("key"   => "Billing Contact",
-                                "fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
-                                                  "address1"=>"Address1", "address2"=>"Address2", "city"=>"City", "postalcode"=>"Postal Code",
-                                                  "country"=>"Country","phone"=>"Phone Number",
-                                                  "fax"=>"Facsimile Number","email"=>"Email")
-                                                ),
-              "tech"     => array("key"   => "Technical Contact",
-                                "fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
-                                                  "address1"=>"Address1", "address2"=>"Address2", "city"=>"City", "postalcode"=>"Postal Code",
-                                                  "country"=>"Country","phone"=>"Phone Number",
-                                                  "fax"=>"Facsimile Number","email"=>"Email")
-                                                )
-           );
+	$items = array( "domain.name" => "Domain Name:",
+			"domain.handle" => "Domain ID:",
+			"domain.sponsor" => "Sponsoring Registrar:",
+			"domain.status" => "Domain Status:",
+			"domain.nserver." => "Name Server:",
+			"domain.created" => "Domain Registration Date:",
+			"domain.expires" => "Domain Expiration Date:",
+			"domain.changed" => "Domain Last Updated Date:",
+			"owner.handle" => "Registrant ID:",
+			"owner.name" => "Registrant Name:",
+			"owner.organization" => "Registrant Organization:",
+			"owner.address.address0" => "Registrant Address1:",
+			"owner.address.zcode" => "Registrant Postal Code:",
+			"owner.address.city" => "Registrant City:",
+			"owner.address.state" => "Registrant State/Province:",
+			"owner.address.country" => "Registrant Country:",
+			"owner.phone" => "Registrant Phone Number:",
+			"owner.email" => "Registrant Email:",
+			"admin.handle" => "Administrative Contact ID:",
+                        "admin.name" => "Administrative Contact Name:",
+                        "admin.organization" => "Administrative Contact Organization:",
+                        "admin.address.address0" => "Administrative Contact Address1:",
+                        "admin.address.zcode" => "Administrative Contact Postal Code:",
+                        "admin.address.city" => "Administrative Contact City:",
+                        "admin.address.state" => "Administrative Contact State/Province:",
+                        "admin.address.country" => "Administrative Contact Country:",
+                        "admin.phone" => "Administrative Contact Phone Number:",
+                        "admin.email" => "Administrative Contact Email:",
+			"tech.handle" => "Technical Contact ID:",
+                        "tech.name" => "Technical Contact Name:",
+                        "tech.organization" => "Technical Contact Organization:",
+                        "tech.address.address0" => "Technical Contact Address1:",
+                        "tech.address.zcode" => "Technical Contact Postal Code:",
+                        "tech.address.city" => "Technical Contact City:",
+                        "tech.address.state" => "Technical Contact State/Province:",
+                        "tech.address.country" => "Technical Contact Country:",
+                        "tech.phone" => "Technical Contact Phone Number:",
+                        "tech.email" => "Technical Contact Email:",
+			"billing.handle" => "Billing Contact ID:",
+                        "billing.name" => "Billing Contact Name:",
+                        "billing.organization" => "Billing Contact Organization:",
+                        "billing.address.address0" => "Billing Contact Address1:",
+                        "billing.address.zcode" => "Billing Contact Postal Code:",
+                        "billing.address.city" => "Billing Contact City:",
+                        "billing.address.state" => "Billing Contact State/Province:",
+                        "billing.address.country" => "Billing Contact Country:",
+                        "billing.phone" => "Billing Contact Phone Number:",
+                        "billing.email" => "Billing Contact Email:"
+		);
 
 	$r["rawdata"] = $data_str["rawdata"];
+	$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
 
-	foreach($data_str["rawdata"] as $lineData)	
-               {
-		$lineData = trim($lineData);
-		if ($lineData != "") 
-                   {
-			list($lineKey, $lineVal) = explode(":", $lineData);
-			$lineVal = trim(substr($lineData,strlen($lineKey)+1));
-			$lineKey = strtolower(trim($lineKey));
-			reset($recordMap);
-			foreach ($recordMap as $recordKey => $recordField) 
-				     {	// there are subfields or multiple values for this data
-					$keyMatch = $recordField['key'];
-					// this field has sub fields
-					
-				       $recordSubFields = $recordField['fields'];
+	$r["regyinfo"] = array( "whois"=>"whois.neulevel.biz", 
+				"referrer"=>"www.neulevel.biz", 
+				"registrar" => "NEULEVEL" );
 
-				       foreach($recordSubFields as $subKey => $subField)
- 					      { if (is_array($subField))
-                                                     { $fullSubKey = trim($keyMatch ." ". $subField["key"]);
-						        if ($lineKey == strtolower($fullSubKey))
-                                                           $r["regrinfo"][$recordKey][$subKey][] = $lineVal;	
-					             }
-                                                else { $fullSubKey = trim($keyMatch ." ". $subField);
-						       if ($lineKey == strtolower($fullSubKey))	
-							   $r["regrinfo"][$recordKey][$subKey] = $lineVal;
-					             }
-					      }
-				    }      
-		}
-	}
-	
-	if (empty($r["regrinfo"]['domain']['handle'])) $r["registered"]="no";
-        else  { $r["registered"]="yes";
-                $r["regrinfo"]["owner"]=$this->set_address($r["regrinfo"]["owner"]);
-                $r["regrinfo"]["admin"]=$this->set_address($r["regrinfo"]["admin"]);
-                $r["regrinfo"]["billing"]=$this->set_address($r["regrinfo"]["billing"]);
-                $r["regrinfo"]["tech"]=$this->set_address($r["regrinfo"]["tech"]);
-              }
-
-	if(!empty($r["regrinfo"])) {
-		$r["regyinfo"] = array( "whois"=>"whois.neulevel.biz", "referrer"=>"www.neulevel.biz" );
-		$r["regyinfo"]["registrar"] = "NEULEVEL";
-			}
-
-return($r);
+	return($r);
 }
 
 }

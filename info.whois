@@ -52,11 +52,11 @@ class info extends Whois {
 				"owner.handle" => "Registrant ID:",
 				"owner.name" => "Registrant Name:",
 				"owner.organization" => "Registrant Organization:",
-				"owner.address.address.0" => "Registrant Street1:",
-				"owner.address.address.1" => "Registrant Street2:",
+				"owner.address.address0" => "Registrant Street1:",
+				"owner.address.address1" => "Registrant Street2:",
 				"owner.address.city" => "Registrant City:",
 				"owner.address.state" => "Registrant State/Province:",
-				"owner.address.pcode" => "Registrant Postal Code:",
+				"owner.address.zcode" => "Registrant Postal Code:",
 				"owner.address.country" => "Registrant Country:",
 				"owner.phone" => "Registrant Phone:",
 				"owner.fax" => "Registrant FAX:",
@@ -101,7 +101,8 @@ class info extends Whois {
 
                 $r["rawdata"] = $data_str["rawdata"];
                 $r["regyinfo"] = array("whois"=>"whois.afilias.info",
-                                "referrer"=>"whois.afilias.info" );
+                                "referrer"=>"whois.afilias.info",
+				"registrar"=>"Afilias Global Registry Services" );
 
                 $r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
                 return $r;

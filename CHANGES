@@ -1,3 +1,8 @@
+2003/01/26  David Saez <david@ols.es>
+		- fixed lunic.whois and updated to common object model
+		- neulevel.whois changed to use generic2.whois
+		- some minor fixes on info.whois
+
 2003/01/25  David Saez <david@ols.es>
 		- info.whois updated to common object model
 
@@ -6,7 +11,7 @@
 
 2003/01/18  David Saez <david@ols.es>
 		- added nlnic.whois, thanx to Matthijs Koot <koot@cyberwar.nl>
-		- fixed some warning on generic.whois
+		- fixed some warnings on generic.whois
 		- fixed double processing on atnic.whois
 
 2002/12/16  David Saez <david@ols.es>
