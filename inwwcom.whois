@@ -27,55 +27,38 @@
 */
 
 /* inwwcom.whois	1.0	jeremiah bellomy	2000/04/06 */
+/* inwwcom.whois        2.0     david@ols.es            2003/02/09 */
 
+require_once("generic2.whois");
+    
 if(!defined("__INWWCOM_HANDLER__")) define("__INWWCOM_HANDLER__",1);
 
 class inwwcom extends gtld {
 
 	function inwwcom($data) {
-		$this->result=$this->parse(
-			preg_replace("/\n+/","_",implode("\n",$data))
-			);
+		$this->result=$this->parse($data);
 	}
 
 	function parse($data_str) {
-		$data_str=preg_replace("/\s+/"," ",$data_str);
-
-		preg_match("/Organisation Name\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["organization"]=$refs[1];
-		preg_match_all("/_\s*Organisation Address\.+(\s+?(.+?))?_/", $data_str,$refs);
-		$r["org_address"]=implode("\n",$refs[2]);
-
-		preg_match("/Domain Name\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["domain"]=$refs[1];
-
-		preg_match("/Admin Name\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["admin"]["name"]=$refs[1];
-		preg_match("/Admin Email\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["admin"]["email"]=$refs[1];
-		preg_match("/Admin Phone\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["admin"]["phone"]=$refs[1];
-
-		preg_match("/Tech Name\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["tech"]["name"]=$refs[1];
-		preg_match("/Tech Email\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["tech"]["email"]=$refs[1];
-		preg_match("/Tech Phone\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["tech"]["phone"]=$refs[1];
-
-		preg_match("/Registration Date\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["created"]=$refs[1];
-		preg_match("/Expiry Date\.+\s+?(.+?)_/", $data_str,$refs);
-		$r["expiry"]=$refs[1];
-
-		preg_match_all("/Name Server\.+\s+?(.+?)_/", $data_str,$refs);
-		//$r["ns"]=$refs[1];
-		for($i=0,$max=count($refs[1]);$i<$max;$i++) {
-			$k=$refs[1][$i];
-			$r["ns"][$k]=gethostbyname($k);
-		}
-
-		return($r);
+		$items = array ( "domain.name" => "Domain Name..........",
+                                 "domain.created" => "Registration Date....",
+				 "domain.expires" => "Expiry Date..........",
+				 "owner.name" => "Organisation Name....",
+				 "owner.address." => "Organisation Address.",
+				 "admin.name" => "Admin Name...........",
+				 "admin.address." => "Admin Address........",
+				 "admin.email" => "Admin Email..........",
+				 "admin.phone" => "Admin Phone..........",
+				 "admin.fax" => "Admin Fax............",
+				 "tech.name" => "Tech Name............",
+				 "tech.address." => "Tech Address.........",
+				 "tech.email" => "Tech Email...........",
+				 "tech.phone" => "Tech Phone...........",
+				 "tech.fax" => "Tech Fax.............",
+				 "domain.nserver." => "Name Server.........."
+                               );
+ 
+		return generic_whois($data_str,$items);
 	}
 
 }

@@ -1,6 +1,13 @@
+2003/02/10  David Saez <david@ols.es>
+		- inwwcom.whois updated to common object model
+		- added inwwcom org handle to gtld.whois
+		- gtld.whois now can get the name of the org registrar
+		- minor fixes to generic2.whois
+
 2003/02/09  Ross Golder <ross@golder.org>
 		- updated to do a 'whois-servers.net' DNS lookup to determine
 		  the tld whois server to query
+
 	    David Saez <david@ols.es>
 		- netsol.whois & gtld.whois updated to common object model
 		- fixed some warnings in main.whois

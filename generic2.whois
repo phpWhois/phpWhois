@@ -8,20 +8,21 @@ $disok=true;
 
 while (list($key,$val)=each($rawdata))
       { if (trim($val)!="") 
-           { reset($items);
-             $ok=0;
+           { 
 	     if (($val[0]=='%' || $val[0]=='#') && $disok)
-                { $r['disclaimer'][]=trim(substr($val,1));;
+                { $r['disclaimer'][]=trim(substr($val,1));
 		  $disok=true;
 		  continue;
                 }
 	     
 	     $disok=false;
+	     reset($items);
+	     $ok=0;
 
              while (list($field, $match)=each($items)) 
-                   { //if (strstr($val,$match))
-		    $pos=strpos($val,$match);
-                    if ($pos!==false) 
+                   {
+		     $pos=strpos($val,$match);
+                     if ($pos!==false) 
                         { $parts=explode(".",$field);
                           $var="\$r";
                           while (list($fn,$mn)=each($parts))
@@ -29,17 +30,17 @@ while (list($key,$val)=each($rawdata))
                                      $var=$var."[]";
                                 else $var=$var."[\"".$mn."\"]";
 
-                          //$itm=trim(substr($val,strlen($match)));
 			  $itm=trim(substr($val,$pos+strlen($match)));
+			  $itm=addslashes($itm);
                           if ($itm!="")
                               eval($var."=\"".$itm."\";");
-
                           $ok=1;
                           break;
                         }
                    }
-             if ($ok==0 && $val[0]==" ")
-                 eval($var."=\"".trim($val)."\";");
+	     // buggy	
+             //if ($ok==0 && $val[0]==" ")
+             //    eval($var."=\"".trim($val)."\";");
            }
       }
 

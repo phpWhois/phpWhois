@@ -57,6 +57,7 @@ class gtld extends Whois {
 		"DOTSTER, INC." => "dotster",
 		"ENOM, INC." => "enom",
 		"MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE" => "inwwcom",
+		"R52-LROR" => "inwwcom",
 		"NETWORK SOLUTIONS, INC." => "netsol",
 		"R63-LROR" => "netsol",
 		"REGISTER.COM, INC." => "registercom",
@@ -68,7 +69,7 @@ class gtld extends Whois {
 	function gTLD ($data, $query) {
 		$this->Query = $query;
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
-		$this->result = generic_whois($data["rawdata"] , $this->REG_FIELDS);
+		$this->result = generic_whois($data["rawdata"],$this->REG_FIELDS);
 
 		if($this->HACKS["nsi_referral_loop"] &&
 		   ($this->result["regyinfo"]["whois"] == $this->HACKS["wrong_netsol_whois"])) {
@@ -79,13 +80,19 @@ class gtld extends Whois {
 
 		if (!isset($this->result["rawdata"]))
 			$this->result["rawdata"] = array();
-
+ 
 		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
 		// david@ols.es 16/10/2002 Fixes rawdata
 		$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];
 		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
-		if(!empty($this->Query["handler"])) {
+		if (!empty($this->Query["handler"])) {
+			if (strstr($this->result["regyinfo"]["registrar"],"-LROR"))
+                           {
+			     // Get the name of the registrar
+			     $key = array_search($this->Query["handler"],$this->REGISTRARS);
+                             $this->result["regyinfo"]["registrar"] = $key;
+                           } 
 			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
 			$domaindata = $this->result["regrinfo"]["domain"];
 			$regrinfo = $this->Process($this->result["rawdata"]);
