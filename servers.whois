@@ -39,6 +39,7 @@ $this->DATA = array(
 	"ch"=>"chnic",
 	"com"=>"gtld",
 	"de"=>"denic",
+	"es"=>"esnic",
 	"info"=>"info",
 	"li"=>"chnic",
 	"lu"=>"lunic",
@@ -52,5 +53,8 @@ $this->DATA = array(
         "ipw"=>"ipw" // Dummy, just for ip whois
 	);
 
+$this->HTTPW = array(
+		"es" => "http://www.nic.es/cgi-bin/consulta.whois?list=Dominios&tipo=procesar&key=#"
+		);
 ?>
 
