@@ -91,7 +91,7 @@ class Whois {
 	 */
 	function Whois ($query = "") {
 		// Load DATA array
-		require("servers.whois");
+		@require("servers.whois");
 
 		// Set version
 		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
@@ -112,11 +112,15 @@ class Whois {
 		$tld = "";
 		$server = "";
 		$dp = explode(".", $domain);
-		$np = count($dp);
-		$tldtests = array(
-			//$dp[$np-3].".".$dp[$np-2].".".$dp[$np-1],
-			$dp[$np-2].".".$dp[$np-1],
-			$dp[$np-1]);
+		$np = count($dp) -1;
+		$tldtests = array();
+
+		for ($i=0; $i<$np; $i++) 
+		    {
+		      array_shift($dp);
+                      $tldtests[] = implode(".",$dp);
+		    }
+
 		foreach($tldtests as $tld) {
 			$cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
 			if(!$cname) continue;
