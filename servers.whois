@@ -66,6 +66,7 @@ $this->HTTPW = array(
 		"ms" => "http://www.adamsnames.tc/whois/?domain=#",
 		"tc" => "http://www.adamsnames.tc/whois/?domain=#",
 		"tf" => "http://www.adamsnames.tc/whois/?domain=#",
+		"tv" => "whois.networksolutions.com",
 		"vg" => "http://www.adamsnames.tc/whois/?domain=#"
 		);
 ?>
