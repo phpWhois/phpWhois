@@ -1,0 +1,82 @@
+<?
+/*
+Whois2.php        PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* benic.whois        1.0        Matthijs Koot <koot@cyberwar.nl> */
+
+include_once("generic3.whois");
+
+if(!defined("__BENIC_HANDLER__")) define("__BENIC_HANDLER__",1);
+
+class benic extends Whois {
+
+  function benic($data) {
+    $this->result=$this->parse($data);
+  }
+
+  function parse ($data) {
+
+    $items = array(
+			"domain.name" => "Domain:",
+			"domain.status" => "Status:",
+			"domain.nserver" => "NameServers:",
+			"domain.created" => "Registered:",
+                        "owner" => "Licensee:",
+                        "owner.organization" => "Company:",
+                        "owner.email" => "Email:",
+			"admin" => "Onsite Contacts:",
+                        "admin.organization" => "Company:",
+                        "admin.email" => "Email:",
+			"tech" => "Agent Technical Contacts:",
+                        "tech.organization" => "Company:",
+                        "tech.email" => "Email:"
+		  );
+
+    $r["rawdata"]=$data["rawdata"];
+    $r["regyinfo"]["whois"]="whois.dns.be";
+    $r["regyinfo"]["referrer"]="http://www.domain-registry.nl";
+    $r["regyinfo"]["registrar"]="DNS Belgium";
+
+    $r["regrinfo"] = get_blocks($data["rawdata"],$items);
+
+    $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
+    $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
+    $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
+    
+    $r["regrinfo"]["owner"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["owner"]["name"]);
+    $r["regrinfo"]["tech"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["tech"]["name"]);
+    $r["regrinfo"]["admin"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["admin"]["name"]);
+    
+    $r["regrinfo"]["owner"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["owner"]["address"][1]); 
+    $r["regrinfo"]["tech"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["tech"]["address"][1]); 
+    $r["regrinfo"]["admin"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["admin"]["address"][1]); 
+    
+    $r["regrinfo"]["domain"]["nserver"][0] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][0]);
+    $r["regrinfo"]["domain"]["nserver"][1] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][1]);
+        
+    return($r);
+  }
+}

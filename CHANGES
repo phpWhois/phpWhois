@@ -1,3 +1,7 @@
+2003/06/30  David Saez <david@ols.es>
+		- added handler for .be, thanx to 
+		  onveilig@hotmail.com
+
 2003/06/04  Ross Golder <ross@golder.org>
 		- Removed a blank line preventing headers from
 		  being sent.
