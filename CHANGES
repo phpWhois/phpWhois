@@ -1,3 +1,8 @@
+2003/02/18  David Saez <david@ols.es>
+		- added dotster .org handle
+		- some improvments to generic3.whois
+		- dotster.whois & registercom.whois updated to common object model
+
 2003/02/16  David Saez <david@ols.es>
 		- improved generic.whois, update all handlers that use it
 		- now it's possible to also query http based whois
