@@ -85,3 +85,4 @@ class benic extends Whois {
     return($r);
   }
 }
+?>

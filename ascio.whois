@@ -57,3 +57,4 @@ class ascio extends gtld {
                 return($r);
 	}
 }
+?>

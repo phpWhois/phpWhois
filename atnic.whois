@@ -93,3 +93,4 @@ $r["regrinfo"]=$reg;
 return($r);
 }
 }
+?>

@@ -58,3 +58,4 @@ class godaddy extends gtld {
                 return($r);
 	}
 }
+?>

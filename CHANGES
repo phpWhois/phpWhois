@@ -1,3 +1,6 @@
+2004/04/23  David Saez <david@ols.es>
+		- Fixed ending tag in all files
+
 2004/04/22  David Saez <david@ols.es>
 		- added handler for .us , thanx to
 		  snguyen@mbaassociation.org
