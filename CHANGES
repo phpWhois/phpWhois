@@ -1,3 +1,11 @@
+2002/10/16  David Saez <david@ols.es>
+		- Updated uknic handler to new Nominet UK whois output
+		- Added handler for .biz
+		- Added support to ipw.whois for BRNIC, KRNIC, TWNIC and LACNIC
+		- Some handlers updated to new common object model
+		- Added generic.whois and generic2.whois with parse functions
+		  for two kinds of whois output commonly used
+
 2002/10/11  Ross Golder <ross@golder.org>
 		- Merged in as many useful patches as possible (supplied by Mark)
 		- Re-indented the classes for clarity
