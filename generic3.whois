@@ -1,0 +1,116 @@
+<?php
+/*
+  Generic3.php    PHP functions for parsing whois output
+
+  Copyright (C)2003
+
+  Maintained by Mark Jeftovic <markjr@easydns.com>
+
+  For the most recent version of this package:
+
+  http://www.easydns.com/~markjr/whois2/
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+function get_blocks ( $rawdata, $items )
+{
+
+while (list($field, $match)=each($items))
+      { 
+        // search block header
+	reset($rawdata);
+	$found=false;
+
+	while (list($key,$val)=each($rawdata))
+              {
+                $pos=strpos($val,$match);
+                if ($pos!==false)
+		   {
+		     if (substr(trim($val),-1,1)==":")
+		            $found=true;
+		     else {
+			    $var=getvarname($field);
+                            $itm=trim(substr($val,$pos+strlen($match)));
+			    eval($var."=\$itm;");
+                          }
+		     break;
+		   }
+	      }     
+
+	if (!$found) continue;
+
+	$block=array();
+
+	while (list($key,$val)=each($rawdata))
+              { 
+		$val=trim($val);
+		if ($val=="") break;
+		if (substr(trim($val),-1,1)==":") break;
+		$block[]=$val;
+              }
+
+        $var=getvarname($field);
+        eval($var."=\$block;");
+      }
+
+return $r;
+}
+
+function getvarname ( $vdef )
+{
+$parts=explode(".",$vdef);
+$var="\$r";
+
+while (list($fn,$mn)=each($parts))
+       if ($mn=="")
+            $var=$var."[]";
+       else $var=$var."[\"".$mn."\"]";
+
+return $var;
+}
+
+function get_contact ( $array )
+{
+$top=count($array)-1;
+$pos=strpos($array[$top],"Fax:");
+
+if ($pos!==false)
+   { 
+     $len=strlen("Fax:"); 
+     $itm=trim(substr($array[$top],$pos+$len));
+     $r["fax"]=trim($itm);
+     $array[$top]=trim(substr($array[$top],0,-strlen($itm)-$len-1));	
+   }
+
+if (!preg_match("/[^0-9\(\)\-\. ]/", $array[$top]))
+     $r["phone"]=array_pop($array);
+
+$r["name"]=$array[0];
+unset($array[0]);
+$r["address"]=$array;
+
+$parts=explode(" ",$r["name"]);
+$top=count($parts)-1;
+
+if (strstr($parts[$top],"@"))
+   { $r["email"]=$parts[$top];
+     array_pop($parts);
+     $r["name"]=implode(" ",$parts);	
+   }
+
+return $r;
+}
+?>
