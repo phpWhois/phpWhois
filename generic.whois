@@ -81,7 +81,8 @@ while (list($key,$val)=each($rawdata))
 
 if ($hasdata) $blocks[$gkey]=$block;
 
-if (is_array($disclaimer)) $ret["disclaimer"]=$disclaimer;
+if (isset($disclaimer) && is_array($disclaimer)) 
+    $ret["disclaimer"]=$disclaimer;
 
 if (!is_array($blocks["main"]))
    { $ret["registered"]="no";
@@ -98,23 +99,6 @@ while (list($key,$val)=each($contacts))
 	   $ret[$val]=$blocks[$r[$key]];
 	   unset($r[$key]); 
          }
-
-/*
-if (is_array($r["descr"]))
-   { $ret["owner"]["address"]=$r["descr"];
-     unset($r["descr"]);
-   }
-
-
-while (list($key,$val)=each($r))
-      { switch ($key)
-               { case "domain":  $ret["domain"]["name"]=$val; break;
-		 case "changed":
-                 case "nserver": $ret["domain"][$key]=$val; break;
-		 default:        $ret["owner"][$key]=$val;
-               } 
-      }
-*/
 
 $ret["domain"]=$r;
 return $ret;
