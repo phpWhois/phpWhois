@@ -12,7 +12,7 @@ $whois = new Whois($domain);
 $result = $whois->Lookup();
 
 echo "<form method=\"post\" action=\"example.php\">";
-echo "<input name=\"domain\"/>";
+echo "<input name=\"domain\" value=\"".$domain."\"/>";
 echo "<input type=\"submit\"/>";
 echo "</form>";
 
