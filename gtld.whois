@@ -56,6 +56,7 @@ class gtld extends Whois {
 		"CORE INTERNET COUNCIL OF REGISTRARS" => "core",
 		"DOTSTER, INC." => "dotster",
 		"ENOM, INC." => "enom",
+		"R39-LROR" => "enom",
 		"MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE" => "inwwcom",
 		"R52-LROR" => "inwwcom",
 		"NETWORK SOLUTIONS, INC." => "netsol",
