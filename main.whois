@@ -114,16 +114,16 @@ class Whois {
 
                 // If query is an ip address do ip lookup
 
-                if($query == long2ip(ip2long($query))) {
+                if($query == long2ip(ip2long($query)) || !strpos($query,'.')) {
                         // Prepare to do lookup via the 'ipw' handler
-                        $ip = gethostbyname($query);
+                        $ip = @gethostbyname($query);
                         $this->Query["server"] = "whois.arin.net";
                         $this->Query["host_ip"] = $ip;
                         $this->Query["file"] = "ipw.whois";
                         $this->Query["handler"] = "ipw";
                         $this->Query["string"] = $ip;
                         $this->Query["tld"] = "ipw";
-			$this->Query["host_name"] = gethostbyaddr($ip);
+			$this->Query["host_name"] = @gethostbyaddr($ip);
                         return;
                 }
 
