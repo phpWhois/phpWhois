@@ -1,3 +1,8 @@
+2004/04/24  David Saez <david@ols.es>
+		- added .is handler
+		- added some notes about generic support functions
+		  in HANDLERS
+
 2004/04/23  David Saez <david@ols.es>
 		- Fixed ending tag in all files
 
