@@ -109,7 +109,7 @@ switch ($this->Query["server"])
                     }
                } 
        
-         $this->result["regyinfo"]["netname"]=$newquery;
+         if ($newquery!="") $this->result["regyinfo"]["netname"]=$newquery;
 
          if (strstr($newquery,"BRAZIL-BLK"))
             { $this->Query["server"]="whois.registro.br";
@@ -157,8 +157,8 @@ if (!empty($this->Query["handler"]))
      $this->result["regrinfo"]=$this->Process($this->result["rawdata"]);
    }
 
-$this->result["regrinfo"]["host_ip"]=$this->Query["host_ip"];
-$this->result["regrinfo"]["host_name"]=$this->Query["host_name"];
+$this->result["regrinfo"]["network"]["host_ip"]=$this->Query["host_ip"];
+$this->result["regrinfo"]["network"]["host_name"]=$this->Query["host_name"];
 
 }
 

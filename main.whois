@@ -97,7 +97,7 @@ class Whois {
 		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
 
 		// If domain to query was not set
-		if(!isSet($query)) {
+		if(!isSet($query) || $query=="") {
 			// Configure to use default whois server
 			$this->Query["server"] = $this->NSI_REGISTRY;
 			return;
@@ -106,6 +106,21 @@ class Whois {
 		// Set domain to query in query array
 
 		$this->Query["string"] = $domain = strtolower($query);
+
+                // If query is an ip address do ip lookup
+
+                if($query == long2ip(ip2long($query))) {
+                        // Prepare to do lookup via the 'ipw' handler
+                        $ip = gethostbyname($query);
+                        $this->Query["server"] = "whois.arin.net";
+                        $this->Query["host_ip"] = $ip;
+                        $this->Query["file"] = "ipw.whois";
+                        $this->Query["handler"] = "ipw";
+                        $this->Query["string"] = $ip;
+                        $this->Query["tld"] = "ipw";
+			$this->Query["host_name"] = gethostbyaddr($ip);
+                        return;
+                }
 
                 // Test if we know in advance that no whois server is
                 // available for this domain and that we can get the
@@ -163,26 +178,6 @@ class Whois {
 				$this->Query["file"] = sprintf("%s.whois", $handler);
 				$this->Query["handler"] = $handler;
 			}
-			return;
-		}
-
-		// If top level domain not known, check availability in DNS
-		if(checkdnsrr($query, "A")) {
-			// Prepare to do lookup via the 'ipw' handler
-			$ip = gethostbyname($query);
-			$this->Query["server"] = "whois.arin.net";
-			$this->Query["host_ip"] = $ip;
-			$this->Query["file"] = "ipw.whois";
-			$this->Query["handler"] = "ipw";
-			$this->Query["string"] = $ip;
-			$this->Query["tld"] = "ipw";
-
-			// If query was an IP, determine the hostname
-			if ($query==$ip)
-				$this->Query["host_name"] = gethostbyaddr($ip);
-			else
-				$this->Query["host_name"] = $query;
-
 			return;
 		}
 
