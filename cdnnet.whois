@@ -1,0 +1,108 @@
+<?
+/*
+Whois2.php        PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* cdnnet.whois        1.0        by Mark Jeftovic <markjr@easydns.com>  */
+
+if(!defined("__CDNNET_HANDLER__")) define("__CDNNET_HANDLER__",1);
+
+class cdnnet extends Whois {
+
+function cdnnet($data) {
+   $this->result=$this->parse($data);
+}
+
+function parse ($data_str) {
+  $items=array( "organization"  => "Organization:",
+              "domain"  => "Subdomain:",
+              "received" => "Date-Received:",
+              "approved" => "Date-Approved:",
+              "modified" => "Date-Modified:",
+              "desc" => "Description:",
+              "admin-name" => "Admin-Name:",
+              "admin-title" => "Admin-Title:",
+              "admin-address" => "Admin-Postal:",
+              "admin-phone" => "Admin-Phone:",
+              "admin-email" => "Admin-Mailbox:",
+              "tech-name" => "Tech-Name:",
+              "tech-title" => "Tech-Title:",
+              "tech-address" => "Tech-Postal:",
+              "tech-phone" => "Tech-Phone:",
+              "tech-email" => "Tech-Mailbox:",
+	      "ns1" => "NS1-Hostname:",
+	      "ns2" => "NS2-Hostname:",
+	      "ns3" => "NS3-Hostname:",
+	      "ns4" => "NS4-Hostname:",
+	      "ns5" => "NS5-Hostname:",
+	      "ns6" => "NS6-Hostname:",
+              "status" => "status:"
+              );
+
+$r["rawdata"]=$data_str["rawdata"];
+
+$regyinfo=array();
+
+
+$r["regrinfo"]=array();
+$r["regrinfo"]["ns"]=array();
+
+while (list($key, $val)=each($data_str["rawdata"])) 
+      { $val=trim($val);
+
+        if ($val!="") { 
+
+             reset($items);
+
+             while (list($field, $match)=each($items)) {
+                   if (strstr($val,$match)) { 
+			$r["regrinfo"][$field]=
+			trim(substr($val,strlen($match)));
+                        break;  
+                      } 
+           }
+      }
+}
+
+for($i = 0;$i<6;$i++) {
+	$var = sprintf("ns%d", $i+1);
+	if($r["regrinfo"][$var]) {
+	  	$r["regrinfo"]["ns"][$i]=$r["regrinfo"][$var];
+	}
+}
+
+if(!empty($r["regrinfo"])) {
+	$r["regyinfo"]=array( "whois"=>"whois.cdnnet.ca",
+                      "referrer"=>"www.easydns.ca" );
+	$r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
+	$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+	$r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
+	$r["regyinfo"]["updated"]=$r["regrinfo"]["updated"];
+}
+
+return($r);
+}
+
+}

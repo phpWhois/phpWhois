@@ -1,0 +1,97 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* uknic.whois	1.1	David Saez Padros <david@ols.es> */
+/* Fixed detection of non-existant domains */
+
+if(!defined("__UKNIC_HANDLER__")) define("__UKNIC_HANDLER__",1);
+
+class uknic extends Whois {
+
+function uknic($data) 
+{
+$this->result=$this->parse($data);
+}
+
+function parse ($data_str) 
+{
+
+$items=array( "organization" => "Registered For:",
+              "domain"       => "Domain Name:",
+              "registrar"    => "Domain Registered By:",
+              "created"      => "Registered on",
+              "updated"      => "Record last updated on" 
+            );
+
+
+$r["rawdata"]=$data_str["rawdata"];
+
+//if (strstr($data_str["rawdata"],"No match for")) return ($r);
+
+$r["regrinfo"]=array();
+$r["regrinfo"]["ns"]=array();
+
+while (list($key, $val)=each($data_str["rawdata"])) 
+      { $val=trim($val);
+
+        if ($val!="") 
+           { if ($val=="Domain servers listed in order:")
+                { next($data_str["rawdata"]);
+
+                  while (list($key, $val)=each($data_str["rawdata"]))                                     
+                        { if (!($value=trim($val))) break;
+
+                          $ns=split(" ",$value);  
+                          for ($i=1;$ns[$i]=="";$i++);
+                          $r["regrinfo"]["ns"][$ns[0]]=$ns[$i];
+                        } 
+                  break;
+                }
+
+             reset($items);
+
+             while (list($field, $match)=each($items)) 
+                   if (strstr($val,$match))
+                      { $r["regrinfo"][$field]=trim(substr($val,strlen($match)));
+                        break;  
+                      } 
+           }
+      }
+
+if (!empty($r["regrinfo"]["ns"]))
+   { $r["regyinfo"]=array( "whois"=>"whois.nic.uk","referrer"=>"www.nic.uk" );
+     $r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
+     $r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+     $r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
+     $r["regyinfo"]["updated"]=$r["regrinfo"]["updated"];
+   }
+else $r="";
+
+return($r);
+}
+
+}

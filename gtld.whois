@@ -1,0 +1,103 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* gtld.whois	1.0	mark jeftovic	1999/12/06 */
+
+if(!defined("__GTLD_HANDLER__")) define("__GTLD_HANDLER__",1);
+
+class gtld extends Whois {
+
+var $HANDLER_VERSION = "1.0";
+
+var $REG_INFO;  // array of "domain","registrar","whois","referrer" and
+                // "nameserver[]";
+
+var $REG_FIELDS = array("domain"=>"Domain Name",
+                        "registrar"=>"Registrar",
+                        "whois"=>"Whois Server",
+                        "referrer"=>"Referral URL",
+                        "nameserver"=>"Name Server", // identical descriptors
+                        "upadated"=>"Updated Date"
+                        );             
+
+var $REGISTRARS = array(
+			"ALABANZA, INC."=>"bulkregistercom",
+			"CORE INTERNET COUNCIL OF REGISTRARS"=>"core",
+			"DOTSTER, INC."=>"dotster",
+			"ENOM, INC."=>"enom",
+			"MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE"=>"inwwcom",
+			"NETWORK SOLUTIONS, INC."=>"netsol",
+			"REGISTER.COM, INC."=>"registercom",
+			"TUCOWS, INC."=>"opensrsnet"
+			);
+
+function gTLD ($data,$query) {
+$this->Query=$query;
+$this->SUBVERSION = sprintf("%s-%s", $query["handler"], 
+				$this->HANDLER_VERSION);
+$this->result["regyinfo"]=$this->ParseRegInfo($data["rawdata"]);
+if($this->HACKS["nsi_referral_loop"] &&
+	$this->result["regyinfo"]["whois"]==
+	$this->HACKS["wrong_netsol_whois"] ) {
+	$this->Query["server"]=$this->HACKS["real_netsol_whois"];
+} else {
+	$this->Query["server"]=$this->result["regyinfo"]["whois"];
+}
+
+if (!isset($this->result["rawdata"])) { $this->result["rawdata"] = array(); }
+$this->result["rawdata"]=$this->Lookup($this->Query["string"]);
+
+$this->Query["handler"] = 
+		$this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
+if(!empty($this->Query["handler"])) {
+	$this->Query["file"]=sprintf("%s.whois", $this->Query["handler"]);
+	#$this->result["regrinfo"]=$this->Process($this->result["rawinfo"]);
+	$this->result["regrinfo"]=$this->Process($this->result["rawdata"]);
+	}
+
+}
+
+function ParseRegInfo ($array) {
+for($i=0,$max=count($array);$i<$max;$i++) {
+        reset($this->REG_FIELDS);
+        while(list($key,$val)=each($this->REG_FIELDS)):
+                list($f_name,$f_val)=split(":", $array[$i]);
+                if($val==trim($f_name)) {
+                        if($key=="nameserver") {
+                                $ret_val[$key][]=trim($f_val);
+                        } else {
+                                $ret_val[$key]=trim($f_val);
+                        }
+                        break;
+                }
+        endwhile;
+        }
+return($ret_val);
+}           
+
+}
+?>

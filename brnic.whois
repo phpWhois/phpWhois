@@ -1,0 +1,201 @@
+<?
+/*
+Whois2.php        PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* brnic.whois        1.0        by Marcelo Sanches  msanches@sitebox.com.br */
+
+/*     HOW TO USE IT !!!
+
+       $mydomain = "yourdomain.com.br";
+       include("main.whois");
+       $whois = new Whois($mydomain);
+       $result = $whois->Lookup();
+
+       if ($result["regrinfo"]["domain"]) {
+
+           // taken
+           echo "<b>Owner :</b><BR>\n";
+           echo $result["regrinfo"]["owner"]."<BR><BR>\n";
+           echo "<b>Address :</b><BR>\n";
+           echo $result["regrinfo"]["address"]["address1"]."<BR>\n";
+           echo $result["regrinfo"]["address"]["address2"]."<BR><BR>\n";
+           // etc ...
+        } else {
+
+           //available
+
+        }
+*/
+
+if(!defined("__BRNIC_HANDLER__")) define("__BRNIC_HANDLER__",1);
+
+class brnic extends Whois {
+
+function brnic($data) {
+   $this->result=$this->parse($data);
+}
+
+function parse ($data_str) {
+  $items=array( "owner"  => "owner:",
+              "domain"  => "domain:",
+              "ownerid" => "ownerid:",
+              "owner_c" => "owner-c:",
+              "admin_c" => "admin-c:",
+              "tech_c" => "tech-c:",
+              "status" => "status:"
+              );
+
+  $r["rawdata"]=$data_str["rawdata"];
+  $r["regyinfo"]=array( "whois"=>"whois.registro.br");
+
+  $r["regrinfo"]=array();
+  $r["regrinfo"]["address"]=array();
+  $r["regrinfo"]["nserver"]=array();
+  $r["regrinfo"]["nic_1"]=array();
+  $r["regrinfo"]["nic_2"]=array();
+  $r["regrinfo"]["nic_3"]=array();
+
+  $address_ok = FALSE;
+  $nserver_ok = FALSE;
+  $created_ok = FALSE;
+  $changed_ok = FALSE;
+  $nic_hdl_br_ok = FALSE;
+
+  while (list($key, $val)=each($data_str["rawdata"])) {
+      $val=trim($val);
+      if ($val!="") {
+         if ((substr($val,0,7)=="address") && (!$address_ok)) {
+            $address_line = 1;
+            do {
+               $address=split("address:",$val);
+               $address_array = 'address'. $address_line;
+               $r["regrinfo"]["address"][$address_array]=$address[1];
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+               $address_line += 1;
+            } while ((substr($val,0,7)=="address") && (!$address_ok));
+            $address_ok = TRUE;
+         }
+         if ((substr($val,0,7)=="nserver") && (!$nserver_ok)) {
+            $n_counter = 1;
+            do {
+               $nserver=split("nserver:",$val);
+               $nserver_array = 'nserver'. $n_counter;
+               $r["regrinfo"]["nserver"][$nserver_array]=$nserver[1];
+
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+
+               $nsstat=split("nsstat:",$val);
+               $nsstat_array = 'nsstat'. $n_counter;
+               $r["regrinfo"]["nserver"][$nsstat_array]=$nsstat[1];
+
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+
+               $nslastaa=split("nslastaa:",$val);
+               $nslastaa_array = 'nslastaa'. $n_counter;
+               $r["regrinfo"]["nserver"][$nslastaa_array]=$nslastaa[1];
+
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+
+               $n_counter += 1;
+            } while ((substr($val,0,7)=="nserver"));
+            $nserver_ok = TRUE;
+         }
+
+         if ((substr($val,0,7)=="created") && (!$created_ok)) {
+            $created=split("created:",$val);
+            $r["regrinfo"]["created"]=$created[1];
+            list($key, $val)=each($data_str["rawdata"]);
+            $val=trim($val);
+            $created_ok = TRUE;
+         }
+         if ((substr($val,0,7)=="changed") && (!$changed_ok)) {
+            $changed=split("changed:",$val);
+            $r["regrinfo"]["changed"]=$changed[1];
+            list($key, $val)=each($data_str["rawdata"]);
+            $val=trim($val);
+            $changed_ok = TRUE;
+         }
+
+         if ((substr($val,0,10)=="nic-hdl-br") && (!$nic_hdl_br_ok)) {
+            $address_line = 0;
+            $nic_var = 1;
+            $nic_hdl_var = "nic_".$nic_var;
+            do {
+               if ((substr($val,0,10)=="nic-hdl-br")) {
+                  $nic_hdl_br=split("nic-hdl-br:",$val);
+                  $r["regrinfo"][$nic_hdl_var]["id"]=$nic_hdl_br[1];
+               } elseif ((substr($val,0,6)=="person")) {
+                  $person=split("person:",$val);
+                  $r["regrinfo"][$nic_hdl_var]["person"]=$person[1];
+               } elseif ((substr($val,0,6)=="e-mail")) {
+                  $e_mail=split("e-mail:",$val);
+                  $r["regrinfo"][$nic_hdl_var]["e_mail"]=$e_mail[1];
+               } elseif ((substr($val,0,7)=="address")) {
+                  $address_line += 1;
+                  $address=split("address:",$val);
+                  $address_array = 'address'. $address_line;
+                  $r["regrinfo"][$nic_hdl_var]["address"][$address_array]=$address[1];
+               } elseif ((substr($val,0,5)=="phone")) {
+                  $phone=split("phone:",$val);
+                  $r["regrinfo"][$nic_hdl_var]["phone"]=$phone[1];
+               } elseif ((substr($val,0,7)=="created")) {
+                  $created=split("created:",$val);
+                  $r["regrinfo"][$nic_hdl_var]["created"]=$created[1];
+               } elseif ((substr($val,0,7)=="changed")) {
+                  $changed=split("changed:",$val);
+                  $r["regrinfo"][$nic_hdl_var]["changed"]=$changed[1];
+               } elseif ((substr($val,0,7)=="remarks")) {
+                  break;
+               }
+               list($key, $val)=each($data_str["rawdata"]);
+               $val=trim($val);
+               if (empty($val)) {
+                  list($key, $val)=each($data_str["rawdata"]);
+                  $nic_var += 1;
+                  $nic_hdl_var = "nic_".$nic_var;
+                  $val=trim($val);
+               }
+            } while (TRUE);
+            $nic_hdl_br_ok = TRUE;
+         }
+         reset($items);
+         while (list($field, $match)=each($items)) {
+                   if (strstr($val,$match))
+                      { $r["regrinfo"][$field]=trim(substr($val,strlen($match)));
+                        break;
+                      }
+         }
+      }
+  }
+  $r["regyinfo"]["address"]=$r["regrinfo"]["address"];
+  $r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+  return($r);
+}
+}

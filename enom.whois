@@ -1,0 +1,109 @@
+<?
+
+/*
+
+Whois2.php PHP classes to conduct whois queries
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+Maintained by Mark Jeftovic <markjr@easydns.com>
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.
+
+*/
+
+/* enom.whois 1.0 stephen leavitt 2000/12/09 */
+
+if(!defined("__ENOM_HANDLER__")) define("__ENOM_HANDLER__",1);
+
+class enom extends gtld {
+
+function enom($data) {
+
+$this->result=$this->parse(preg_replace("/\n+/","_",implode("\n",$data)));
+
+}
+
+function parse ($data_str) {
+
+$data_str=preg_replace("/\s+/"," ",$data_str);
+
+preg_match("/^(.+?)_ _/",$data_str,$refs);
+
+$r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
+
+preg_match("/Domain name:\s(.+) _ _Registrant/", $data_str,$refs);
+
+$r["domain"]=$refs[1];
+
+preg_match("/Registrant: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _ _
+_/",$data_str, $refs);
+
+$r["registrant"]["companyname"]=$refs[1];
+
+$r["registrant"]["name"]=$refs[2];
+
+$r["registrant"]["email"]=$refs[3];
+
+$r["registrant"]["phone"]=$refs[4];
+
+$r["registrant"]["address"]=preg_replace("/_/","\n",$refs[5]);
+
+preg_match("/Administrative: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _
+_ _/",$data_str, $refs);
+
+$r["admin"]["companyname"]=$refs[1];
+
+$r["admin"]["name"]=$refs[2];
+
+$r["admin"]["email"]=$refs[3];
+
+$r["admin"]["phone"]=$refs[4];
+
+$r["admin"]["address"]=preg_replace("/_/","\n",$refs[5]);
+
+preg_match("/Billing: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _ _
+_/",$data_str, $refs);
+
+$r["billing"]["companyname"]=$refs[1];
+
+$r["billing"]["name"]=$refs[2];
+
+$r["billing"]["email"]=$refs[3];
+
+$r["billing"]["phone"]=$refs[4];
+
+$r["billing"]["address"]=preg_replace("/_/","\n",$refs[5]);
+
+preg_match("/Technical: _(.+?) _(.+?)\s\((.+?@.+?)\) _(.+?) _(.+?) _ _
+_/",$data_str, $refs);
+
+$r["tech"]["companyname"]=$refs[1];
+
+$r["tech"]["name"]=$refs[2];
+
+$r["tech"]["email"]=$refs[3];
+
+$r["tech"]["phone"]=$refs[4];
+
+$r["tech"]["address"]=preg_replace("/_/","\n",$refs[5]);
+
+return($r);
+
+}
+
+}
+
+?>

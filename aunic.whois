@@ -1,0 +1,72 @@
+<?
+/*
+Whois2.php        PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* aunic.whois 1.0 by Edi Wibowo <edi@ausnik-it.com,http://www.ausnik-it.com> */ 
+if(!defined("__AUNIC_HANDLER__")) define("__AUNIC_HANDLER__",1);
+
+class aunic extends Whois {
+
+function aunic($data) {
+   $this->result=$this->parse($data);
+}
+
+function parse ($data_str) {
+  $items=array("domain"  => "domain:",
+              "admin-name" => "person:",
+              "admin-phone" => "phone:",
+              "admin-email" => "e-mail:"
+              );
+
+$r["rawdata"]=$data_str["rawdata"];
+
+$r["regyinfo"]=array( "whois"=>"whois.aunic.net" );
+
+$r["regrinfo"]=array();
+
+while (list($key, $val)=each($data_str["rawdata"])) 
+      { $val=trim($val);
+
+        if ($val!="") { 
+
+             reset($items);
+
+             while (list($field, $match)=each($items)) {
+                   if (strstr($val,$match)) { 
+			$r["regrinfo"][$field]=
+			trim(substr($val,strlen($match)));
+                        break;  
+                      } 
+           }
+      }
+}
+
+$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+
+return($r);
+}
+
+}

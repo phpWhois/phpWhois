@@ -1,0 +1,91 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>          
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* core.whois	1.0	mark jeftovic	1999/12/06	*/
+/* Adapted from netsol.whois by Denny Reiter 2000/12/12	*/
+
+if(!defined("__CORE_HANDLER__")) define("__CORE_HANDLER__",1);
+
+class core extends gtld {
+
+function core($data) {
+$this->result=$this->parse(
+	preg_replace("/\n+/","_",implode("\n",$data))
+	);
+}
+
+function parse ($data_str) {
+$data_str=preg_replace("/\s+/"," ",$data_str);
+preg_match("/^(.+)\s\(template/", $data_str,$refs);
+$r["organization"]=$refs[1];
+preg_match("/template\s(.+?)\)_(.+?)_(.+?)_(.+?)_(.+?)(_|Domain)/",$data_str,$refs);
+$r["org_handle"]=$refs[1];
+$r["org_email"]=$refs[2];
+$r["org_address"]=trim($refs[3]."\n".$refs[4]."\n".$refs[5]);
+preg_match("/Domain Name:\s(.+?)_/",$data_str,$refs);
+$r["domain"]=$refs[1];
+preg_match("/Status:\s*(.+?)_/",$data_str,$refs);
+$r["status"]=$refs[1];
+preg_match("/CORE Registrar:\s*(.+?)_/",$data_str,$refs);
+$r["core_registrar"]=$refs[1];
+preg_match("/Admin .*?Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_(.+?)_/",$data_str, $refs);
+$r["admin"]["name"]=$refs[1];
+$r["admin"]["handle"]=$refs[2];
+$r["admin"]["email"]=$refs[3];
+$phones = preg_split("/\(FAX\)/",$refs[4]);
+$r["admin"]["phone"]=$phones[0];
+$r["admin"]["fax"]=$phones[1];
+preg_match("/Technical .*?Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_(.+?)_/",$data_str, $refs);
+$r["tech"]["name"]=$refs[1];
+$r["tech"]["handle"]=$refs[2];
+$r["tech"]["email"]=$refs[3];
+$phones = preg_split("/\(FAX\)/",$refs[4]);
+$r["tech"]["phone"]=$phones[0];
+$r["tech"]["fax"]=$phones[1];
+preg_match("/Zone Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_(.+?)_/",$data_str, $refs);
+$r["zone"]["name"]=$refs[1];
+$r["zone"]["handle"]=$refs[2];
+$r["zone"]["email"]=$refs[3];
+$phones = preg_split("/\(FAX\)/",$refs[4]);
+$r["zone"]["phone"]=$phones[0];
+$r["zone"]["fax"]=$phones[1];
+preg_match("/Record expires: (.+?)\_/",$data_str, $refs);
+$r["expires"]=$refs[1];
+preg_match("/Record created: (.+?)\_/",$data_str, $refs);
+$r["created"]=$refs[1];
+preg_match("/Database last updated on (.+?)$/",$data_str, $refs);
+$r["db_updated"]=$refs[1];
+preg_match("/Domain servers in listed order:_ (.+)$/",$data_str, $refs);
+$ns=explode("_", $refs[1]);
+for($i=0,$max=(count($ns)-1);$i<$max;$i++) {
+	list($k,$v)=split(" ", trim($ns[$i]));
+	$r["ns"][$k]=$v;
+}
+return($r);
+}
+
+}

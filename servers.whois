@@ -1,0 +1,141 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>     
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* servers.whois	v16	mark jeftovic	2001/02/28 */
+
+$this->DATA_VERSION = "16";
+$this->DATA = array(
+	"ac"=>array("whois.nic.ac"),
+	"al"=>array("whois.ripe.net"),
+	"am"=>array("whois.amnic.net"),
+	"as"=>array("whois.nic.as"),
+	"at"=>array("whois.nic.at","atnic"),
+	"au"=>array("whois.aunic.net","aunic"),
+	"az"=>array("whois.ripe.net"),
+	"ba"=>array("whois.ripe.net"),
+	"be"=>array("whois.dns.be"),
+	"bg"=>array("whois.ripe.net"),
+	"br"=>array("whois.registro.br", "brnic"),  
+	"by"=>array("whois.ripe.net"),
+	"ca"=>array("whois.cira.ca","cdnnet"),
+	"cc"=>array("whois.nic.cc"),
+	"ch"=>array("whois.nic.ch","chnic"),
+	"ck"=>array("whois.ck-nic.org.ck"),
+	"cn"=>array("whois.cnnic.net.cn"),
+	"com"=>array($this->NSI_REGISTRY,"gtld"),
+	"cx"=>array("whois.nic.cx"),
+	"cy"=>array("whois.ripe.net"),
+	"cz"=>array("whois.nic.cz"),
+	"de"=>array("whois.denic.de"),
+	"dk"=>array("whois.dk-hostmaster.dk"),
+	"dz"=>array("whois.ripe.net"),
+	"edu"=>array("rs.internic.net"),
+	"ee"=>array("whois.ripe.net"),
+	"eg"=>array("whois.ripe.net"),
+#	 "es"=>array("whois.ripe.net"),
+	"fi"=>array("whois.ripe.net"),
+	"fj"=>array("whois.usp.ac.fj"),
+	"fo"=>array("whois.ripe.net"),
+	"fr"=>array("whois.nic.fr"),
+	"gb"=>array("whois.ripe.net"),
+	"gb.com"=>array("whois.nomination.net"),
+	"gb.net"=>array("whois.nomination.net"),
+	"ge"=>array("whois.ripe.net"),
+	"gov"=>array("whois.nic.gov"),
+	"gr"=>array("whois.ripe.net"),
+	"gs"=>array("whois.adamsnames.tc"),
+	"hk"=>array("whois.hknic.net.hk"),
+	"hm"=>array("whois.registry.hm"),
+	"hr"=>array("whois.ripe.net"),
+	"hu"=>array("whois.ripe.net"),
+	"id"=>array("whois.idnic.net.id"),
+	"ie"=>array("whois.domainregistry.ie"),
+	"int"=>array("whois.isi.edu"),
+	"il"=>array("whois.ripe.net"),
+	"is"=>array("whois.isnet.is"),
+	"it"=>array("whois.nic.it"),
+	"jp"=>array("whois.nic.ad.jp"),
+	"ke"=>array("whois.rg.net"),
+	"kg"=>array("whois.domain.kg"),
+	"kr"=>array("whois.nic.or.kr"),
+	"kz"=>array("whois.domain.kz"),
+	"li"=>array("whois.nic.li","chnic"),
+	"lk"=>array("whois.nic.lk"),
+	"lt"=>array("whois.ripe.net"),
+	"lu"=>array("whois.ripe.net"),
+	"lv"=>array("whois.ripe.net"),
+	"ma"=>array("whois.ripe.net"),
+	"md"=>array("whois.ripe.net"),
+	"mil"=>array("whois.nic.mil"),
+	"mk"=>array("whois.ripe.net"),
+//	"mm"=>array("whois.nic.mm"),		// down?
+	"ms"=>array("whois.adamsnames.tc"),
+	"mt"=>array("whois.ripe.net"),
+	"mx"=>array("whois.nic.mx"),
+	"net"=>array($this->NSI_REGISTRY,"gtld"),
+	"net.au"=>array("whois.net.au","aunic"),
+	"nl"=>array("whois.domain-registry.nl"),
+	"no"=>array("whois.norid.no"),
+	"no.com"=>array("whois.nomination.net"),
+	"nu"=>array("whois.nic.nu","nunames"),
+	"nz"=>array("whois.domainz.net.nz"),
+	"org"=>array($this->NSI_REGISTRY,"gtld"),
+	"pl"=>array("whois.ripe.net"),
+//	"pk"=>array("whois.pknic.net.pk"),	// down ?
+	"pt"=>array("whois.ripe.net"),
+	"ro"=>array("whois.ripe.net"),
+	"ru"=>array("whois.ripn.ru"),
+	"se"=>array("whois.nic-se.se","nicse"),
+	"se.com"=>array("whois.nomination.net"),
+	"se.net"=>array("whois.nomination.net"),
+	"sg"=>array("whois.nic.net.sg"),
+	"si"=>array("whois.ripe.net"),
+	"sh"=>array("whois.nic.sh"),
+	"sk"=>array("whois.ripe.net"),
+	"sm"=>array("whois.ripe.net"),
+	"st"=>array("whois.nic.st"),
+	"su"=>array("whois.ripe.net"),
+	"tc"=>array("whois.adamsnames.tc"),
+	"tf"=>array("whois.adamsnames.tc"),
+	"tj"=>array("whois.nic.tj"),
+	"th"=>array("whois.thnic.net"),
+//	"tm"=>array("whois.nic.tm"),		// down?
+	"tn"=>array("whois.ripe.net"),
+	"to"=>array("whois.tonic.to"),
+	"tr"=>array("whois.ripe.net"),
+	"tw"=>array("whois.twnic.net"),
+	"ua"=>array("whois.ripe.net"),
+	"uk"=>array("whois.nic.uk","uknic"),
+	"uk.com"=>array("whois.nomination.net"),
+	"us"=>array("whois.isi.edu"),
+	"va"=>array("whois.ripe.net"),
+	"vg"=>array("whois.adamsnames.tc"),
+	"ws"=>array("whois.nic.ws"),
+	"yu"=>array("whois.ripe.net"),
+	"za"=>array("whois.frd.ac.za")
+	);
+?>

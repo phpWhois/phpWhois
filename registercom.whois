@@ -1,0 +1,74 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>          
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* registercom.whois	1.0	mark jeftovic	1999/12/26 */
+
+if(!defined("__REGISTERCOM_HANDLER__")) define("__REGISTERCOM_HANDLER__",1);
+
+class registercom extends gtld {
+
+function registercom($data) {
+$this->result=$this->parse(
+	preg_replace("/\n+/","_",implode("\n",$data))
+	);
+}
+
+function parse ($data_str) {
+$data_str=preg_replace("/\s+/"," ",$data_str);
+preg_match("/^(.+)(Registrant|Organization):_/",$data_str,$refs); 
+$r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
+preg_match("/^.+(Registrant|Organization):_(.+?)_/", $data_str,$refs);
+$r["organization"]=$refs[2];
+preg_match("/$refs[2]_(.+)?Registrar\.\.:(.+)_ Domain Name: (.+)_ Created/", $data_str,$refs);
+$r["org_address"]=preg_replace("/_/","\n",$refs[1]);
+$r["registrar"]=$refs[2];
+$r["domain"]=$refs[3];
+preg_match("/Created on\.{14,14}: (.+)_\s+Expires on\.{14,14}: (.+)_ Record/",$data_str,$refs);
+$r["created"]=$refs[1];
+$r["expires"]=$refs[2];
+preg_match("/Record last updated on\.{2,2}: (.+)_ Admin/",$data_str,$refs);
+$r["modified"]=$refs[1];
+
+preg_match("/Administrative Contact.*?:_(.+?)\s([^\s]+?@.+?)_/",$data_str, $refs);
+$r["admin"]["name"]=$refs[1];
+$r["admin"]["email"]=$refs[2];
+
+preg_match("/Technical Contact.+:_(.+?)\s([^\s]+?@.+?)_/",$data_str, $refs);
+$r["tech"]["name"]=$refs[1];
+$r["tech"]["email"]=$refs[2];
+
+preg_match("/Domain servers in listed order:_ (.+)(Register your.+)_/",$data_str, $refs);
+$ns=explode("_", $refs[1]);
+for($i=0,$max=count($ns);$i<$max;$i++) {
+	list($k,$v)=split(" ", trim($ns[$i]));
+	$r["ns"][$k]=$v;
+}
+$r["plug"]=$refs[2];
+return($r);
+}
+
+}

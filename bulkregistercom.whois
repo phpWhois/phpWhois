@@ -1,0 +1,81 @@
+<?php 
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>          
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* bulkregistercom.whois	1.0	mark jeftovic	1999/12/06 */
+
+if(!defined("__BULKREGISTERCOM_HANDLER__")) define("__BULKREGISTERCOM_HANDLER__",1);
+
+class bulkregistercom extends gtld {
+
+function bulkregistercom($data) {
+$this->result=$this->parse(
+	preg_replace("/\n+/","_",implode("\n",$data))
+	);
+}
+
+function parse ($data_str) {
+	$data_str=preg_replace("/\s+/"," ",$data_str);
+
+	preg_match("/^(.+)\s+\((.+-DOM)\)_/", $data_str,$refs);
+	$r["organization"]=$refs[1];
+	$r["org_handle"]=$refs[2];
+
+	preg_match("/\(.+-DOM\)_\s*(.+)_\s*Domain Name:\s(.+)_\sAdmin/",$data_str,$refs);
+	$r["org_address"]=preg_replace("/_/","\n",$refs[1]);
+	$r["domain"]=$refs[2];
+
+	preg_match("/Administrative .*?Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_/",$data_str, $refs);
+	$r["admin"]["name"]=$refs[1];
+	$r["admin"]["handle"]=$refs[2];
+	$r["admin"]["email"]=$refs[3];
+
+	preg_match("/Technical .*?Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_/",$data_str, $refs);
+	$r["tech"]["name"]=$refs[1];
+	$r["tech"]["handle"]=$refs[2];
+	$r["tech"]["email"]=$refs[3];
+
+	preg_match("/Billing Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_/",$data_str, $refs);
+	$r["billing"]["name"]=$refs[1];
+	$r["billing"]["handle"]=$refs[2];
+	$r["billing"]["email"]=$refs[3];
+
+	preg_match("/Record updated on (.+?)\./",$data_str, $refs);
+	$r["updated"]=$refs[1];
+	preg_match("/Record created on (.+?)\./",$data_str, $refs);
+	$r["created"]=$refs[1];
+	preg_match("/Database last updated on (.+?)\./",$data_str, $refs);
+	$r["db_updated"]=$refs[1];
+	preg_match("/Domain servers in listed order:_ (.+)$/",$data_str, $refs);
+	$ns=explode("_", $refs[1]);
+	for($i=0,$max=count($ns);$i<$max;$i++) {
+		list($k,$v)=split(" ", trim($ns[$i]));
+		$r["ns"][$k]=$v;
+	}
+	return($r);
+}
+
+}

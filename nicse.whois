@@ -1,0 +1,102 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* senic.whois	0.99	Stefan Alfredsson <stefan@alfredsson.org> */
+/* Based upon uknic.whois by David Saez Padros */
+
+if(!defined("__NICSE_HANDLER__")) define("__NICSE_HANDLER__",1);
+
+class nicse extends Whois {
+
+function nicse($data) 
+{
+//$this->result=$this->parse(preg_replace("/\n+/","_",implode($data,"\n")));
+$this->result=$this->parse($data);
+//$this->result["rawdata"]=$data["rawdata"];
+}
+
+function parse ($data_str) 
+{
+
+$items=array( 
+		"holder" => "*holder:",
+		"domain"       => "*domainname.name:",
+              "created"      => "*domainname.regdate:"
+            );
+
+
+$r["rawdata"]=$data_str["rawdata"];
+
+$r["regyinfo"]=array( "whois"=>"whois.nic-se.se",
+                      "referrer"=>"www.nic-se.se" );
+
+$r["regrinfo"]=array();
+$r["regrinfo"]["ns"]=array();
+
+while (list($key, $val)=each($data_str["rawdata"])) 
+      { $val=trim($val);
+
+        if ($val!="") 
+           { if ($val=="*domainname.dns.data:")
+                {
+
+                  while (list($key, $val)=each($data_str["rawdata"]))
+                  { 
+			if (!($value=trim($val))) break;
+
+                          $ns=split(" ",$value);  
+                          for ($i=1;$ns[$i]=="";$i++);
+                          $r["regrinfo"]["ns"][$ns[0]]=$ns[$i];
+                        } 
+                  break;
+                }
+
+             reset($items);
+
+             while (list($field, $match)=each($items)) 
+                   if (strstr($val,$match))
+                      { $r["regrinfo"][$field]=trim(substr($val,strlen($match)));
+                        break;  
+                      } 
+           }
+      }
+
+// Inform whether the domain is registered or not, explicitly.
+// This check can be done in serveral ways, depending on what the NIC reports.
+
+$r["regyinfo"]["registered"]  = ($r["regrinfo"]["domain"]) ? "yes" : "no";
+	
+$r["regyinfo"]["nameserver"]=$r["regrinfo"]["ns"];
+$r["regyinfo"]["domain"]=$r["regrinfo"]["domain"];
+$r["regyinfo"]["holder"]=$r["regrinfo"]["holder"];
+$r["regyinfo"]["created"]=$r["regrinfo"]["created"];
+
+return($r);
+}
+
+}
+

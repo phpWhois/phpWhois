@@ -1,0 +1,80 @@
+<?php 
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>          
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* inwwcom.whois	1.0	jeremiah bellomy	2000/04/06 */
+
+if(!defined("__INWWCOM_HANDLER__")) define("__INWWCOM_HANDLER__",1);
+
+class inwwcom extends gtld {
+
+function inwwcom($data) {
+$this->result=$this->parse(
+	preg_replace("/\n+/","_",implode("\n",$data))
+	);
+}
+
+function parse($data_str) {
+	$data_str=preg_replace("/\s+/"," ",$data_str);
+
+	preg_match("/Organisation Name\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["organization"]=$refs[1];
+	preg_match_all("/_\s*Organisation Address\.+(\s+?(.+?))?_/", $data_str,$refs);
+	$r["org_address"]=implode("\n",$refs[2]);
+
+	preg_match("/Domain Name\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["domain"]=$refs[1];
+
+	preg_match("/Admin Name\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["admin"]["name"]=$refs[1];
+	preg_match("/Admin Email\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["admin"]["email"]=$refs[1];
+	preg_match("/Admin Phone\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["admin"]["phone"]=$refs[1];
+
+	preg_match("/Tech Name\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["tech"]["name"]=$refs[1];
+	preg_match("/Tech Email\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["tech"]["email"]=$refs[1];
+	preg_match("/Tech Phone\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["tech"]["phone"]=$refs[1];
+
+	preg_match("/Registration Date\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["created"]=$refs[1];
+	preg_match("/Expiry Date\.+\s+?(.+?)_/", $data_str,$refs);
+	$r["expiry"]=$refs[1];
+
+	preg_match_all("/Name Server\.+\s+?(.+?)_/", $data_str,$refs);
+	//$r["ns"]=$refs[1];
+	for($i=0,$max=count($refs[1]);$i<$max;$i++) {
+		$k=$refs[1][$i];
+		$r["ns"][$k]=gethostbyname($k);
+	}
+
+	return($r);
+}
+
+}

@@ -1,0 +1,205 @@
+<?
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* main.whois	2.2-3	mark jeftovic	2000/08/07 */
+
+class Whois {
+
+var $VERSION;
+var $CODE_VERSION	= "2.2-4b";
+var $NSI_REGISTRY 	= "whois.nsiregistry.net";
+var $NSI_REGISTRAR 	= "whois.networksolutions.com";
+var $PORT 		= 43;
+var $RETRY		= 0;	// maximum number of retries on connect
+var $SLEEP		= 2;
+var $BUFFER		= 0;	// read buffer size, 0 means char by char	
+
+var $STAT	= array(-1=>"error",0=>"ready",1=>"ok");
+
+var $Query	= array(
+			"tld"=>"",
+			"type"=>"domain",
+			"string"=>"", 
+			"status",
+			"server"
+			);
+
+#
+# these are hacks. In a perfect world we don't need these
+# but here we are nonetheless...
+#
+var $HACKS	= array(
+			"nsi_force_dom"=>1,	# force "dom" keyword
+			"nsi_referral_loop"=>0,	# set if nsiregistry gives wrong whois server for netsol
+			"wrong_netsol_whois"=>	"rs.internic.net",
+			"real_netsol_whois"=>	"whois.networksolutions.com",
+			"force_slash_e"=>	"whois.nic.ad.jp", # force english output on .jp for us ethnocentric types, unset or comment out for Japanese output
+			"cx_is_broken"=>1	# whois.nic.cx hangs forever
+			);
+
+#
+# $DATA is our list of servers and handlers as listed in servers.whois
+# 
+var $DATA	= array(); 	
+
+function Whois ($query="") {
+require("servers.whois");
+$this->VERSION=sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, 
+			$this->DATA_VERSION);
+if(isSet($query)) {
+	$this->Query["string"]=strtolower($query);
+	$tld=$this->GetTld($this->Query["string"]);
+	if($tld) {
+		$this->Query["server"]=$this->DATA[$tld][0];
+		if(isSet($this->DATA[$tld][1])) {
+			$handler=$this->DATA[$tld][1];
+			$this->Query["file"]=sprintf("%s.whois",$handler);
+			$this->Query["handler"]=$handler;
+		}
+		$this->Query["tld"]=$tld;
+	} else {
+		$this->Query["status"]=-1;
+		$this->Query["errstr"][]=$this->Query["string"]. 
+					  " domain is not supported";
+		unset($this->Query["server"]);
+	}
+} else {
+	$this->Query["server"]=$this->NSI_REGISTRY;
+}
+
+}
+
+
+// open a socket to the whois server
+// defaults to whois.internic.net if an alternate is not passed
+// returns: a pointer on success, sets $this->ERROR on fail
+function Connect () {
+if(!isSet($this->Query["server"])) { return(-1); }
+$server = $this->Query["server"];
+$retry = 0;
+while($retry <= $this->RETRY):
+	$this->$Query["status"]="ready";
+	$ptr = fsockopen($server, $this->PORT);
+	if($ptr>0):
+		$this->$Query["status"]="ok";
+		return($ptr);
+	else:
+		$this->$Query["status"]="error";
+		$retry++;
+                sleep($this->SLEEP);
+        endif;
+endwhile;
+return(-1);
+} 
+
+function Process ($result) {
+$old_val = error_reporting(OFF);
+$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
+if(!defined($HANDLER_FLAG)) { include($this->Query["file"]); }
+error_reporting($old_val);
+if(!defined($HANDLER_FLAG)) {
+	$this->Query["errstr"][]="Can't find ".$this->Query["tld"]." handler: ".$this->Query["file"];
+} else {
+$object = $this->Query["handler"];
+$handler = new $object($result, $this->Query);
+if(isSet($handler->Query["errstr"])) {
+	$this->Query["errstr"][]=$handler->Query["errstr"];
+}
+
+return($handler->result);
+}
+
+return($result);
+}
+
+function Lookup ($query="") {
+$string = !empty($query) ? $query : $this->Query["string"];
+if($this->HACKS["cx_is_broken"] && $this->Query["tld"]=="cx") {
+	$this->Query["errstr"][]=".cx doesn't work. Turn off HACKS[\"cx_is_broken\"] if ".$this->Query["server"]." finally got fixed.";
+	return("");
+}
+$ptr=$this->Connect();
+if(empty($this->Query["server"])) { return(false); }
+if($ptr!=-1){
+	if(($this->Query["server"]==$this->NSI_REGISTRY 
+		|| $this->Query["server"]==$this->NSI_REGISTRAR)
+		&& $this->HACKS["nsi_force_dom"]) {
+		fputs($ptr, sprintf("dom %s\r\n", trim($string)));
+	} elseif($this->Query["server"]==$this->HACKS["force_slash_e"]) {
+		fputs($ptr, sprintf("%s/e\r\n", trim($string)));
+	} else {
+		fputs($ptr, sprintf("%s\r\n", trim($string)));
+	}
+	while(!feof($ptr)) {
+		if($this->BUFFER) {
+			$output[]=fgets($ptr, $this->BUFFER);
+		} else 	{
+			$r.=fgetc($ptr);
+		}
+	}
+
+	if(!$this->BUFFER) { $output =  explode("\n", $r); }
+	unset($output[count($output)-1]);
+	if(isSet($this->result["rawdata"])) {
+		$result = $output;
+	} else {
+		$result["rawdata"] = $output;
+	}
+	if(isSet($this->DATA[$this->Query["tld"]][1])) {
+		$result = $this->Process($result);
+	} 
+	return($result);
+} else {
+	$this->Query["status"]=-1;
+	$this->Query["errstr"][]="Connect failed to: ".$this->Query["server"];
+	return(array());
+}
+
+}
+
+function GetTld ($domain) {
+	// unfortunately the only reliable way to do this is
+	// to blow through the entire server/tld list 
+	reset($this->DATA);
+	while(list($tld, $param)=each($this->DATA)) {
+		if(eregi("\.$tld$", $domain)) { 
+			if(!empty($curr_match)) {
+				// FIXME: we assume we'll never support a 3rd
+				// level registry. If we do, this breaks.
+				$curr_match = strchr($tld,".") ?
+					     $tld : $curr_match;
+				}	
+			else	{ $curr_match = $tld; }
+			}		
+		}
+	return($curr_match);
+	}
+
+}
+
+
+?>
