@@ -76,6 +76,8 @@ class org extends Whois {
 
 		$r["rawdata"] = $data_str["rawdata"];
 		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items);
+		$r['regyinfo']['referrer'] ='http://www.pir.org/';
+        	$r['regyinfo']['registrar']='Public Interest Registry';
 		return($r);
 	}
 }

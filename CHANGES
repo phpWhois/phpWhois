@@ -1,3 +1,6 @@
+2003/09/13  David Saez <david@ols.es>
+		- minor improvment to org.whois
+
 2003/09/12  David Saez <david@ols.es>
 		- added gtld handler for Arsys nicline
 		  thanx to cgalvez@espaciowww.com
