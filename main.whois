@@ -351,6 +351,12 @@ class Whois {
 		if (!isset($result['regrinfo']['domain']['nserver'])) return;
 
 		$nserver=$result['regrinfo']['domain']['nserver'];
+
+		if (!is_array($result['regrinfo']['domain']['nserver'])) {
+			unset($result['regrinfo']['domain']['nserver']);
+			return;
+			}
+
 		$dns=array();
 
 		while (list($key, $val) = each($nserver)) {

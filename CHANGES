@@ -1,3 +1,6 @@
+2005/03/03  David Saez <david@ols.es>
+		- minor fix to main.whois
+
 2005/03/02  David Saez <david@ols.es>
 		- fixed SRSPlus detection
 		- applied patch [ 981413 ] Whois Parameter Array
