@@ -1,3 +1,10 @@
+2003/09/06  David Saez <david@ols.es>
+		- Added handlers for .cn and .ws
+		  thanx to zingfharn@fastmail.fm
+		- Fixed main.whois to allow https queries
+		- Enabled .es queries but handler remains
+                  disabled because needs total rewrite
+
 2003/08/04  David Saez <david@ols.es>
 		- Temporary deactivation of .es handler due to
 		  changes in .es registry whois system

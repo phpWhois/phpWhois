@@ -1,0 +1,79 @@
+<?php
+
+/*
+ * Samoan (ws) registration tool
+ * Chewy - 2003/Sep/03
+ *
+ */
+
+if(!defined("__WSNIC_HANDLER__")) define("__WSNIC_HANDLER__",1);
+
+class wsnic extends Whois {
+	function wsnic($data) {
+		$this->result=$this->parse($data);
+	}
+
+	function parse ($data_str) {
+		$items=array( 
+			"domain.name" => "Domain Name:",
+			"owner.organization" => "Registrant:",
+			"domain.created" => "Domain created on",
+			"domain.changed" => "Domain last updated on" 
+			);
+
+		$r["rawdata"]=$data_str["rawdata"];
+		while (list($key, $val)=each($data_str["rawdata"])) {
+			$val=trim($val);
+
+			if ($val!="") {
+				if ($val=="Name servers:") {
+					while (list($key, $val)=each($data_str["rawdata"])) {
+						// There's a blank line before the list- hack it out.
+						if (!($value=trim($val))) $breaker++;
+						if($breaker == 2) break;
+						if($value) $r["regrinfo"]["domain"]["nserver"][]=$value;
+					} 
+					break;
+				}
+
+				reset($items);
+
+				while (list($field, $match)=each($items)) 
+					if (strstr($val,$match)) {
+						$v=trim(substr($val,strlen($match)));
+						if ($v=="") {
+							$v=each($data_str["rawdata"]);
+							$v=trim($v["value"]);
+						}
+ 						$parts=explode(".",$field);
+						$var="\$r[\"regrinfo\"]";
+						while (list($fn,$mn)=each($parts))
+							$var=$var."[\"".$mn."\"]";
+						eval($var."=\"".$v."\";");
+						break;  
+					}
+				}
+			}
+			$r["regyinfo"]["whois"]="whois.samoanic.ws";
+			$r["regyinfo"]["referrer"]="http://www.samoanic.ws";
+			$r["regyinfo"]["registrar"]="Samoa Nic";
+
+			if (!empty($r["regrinfo"]["domain"]["name"])) {
+				$r["regrinfo"]["registered"] = "yes";
+				if (!empty($r["regrinfo"]["domain"]["nserver"]))
+					$r["regrinfo"]["domain"]["status"]="active"; 
+				else { 
+					if (strstr($r["regrinfo"]["domain"]["sponsor"],"DETAGGED"))
+						$r["regrinfo"]["domain"]["status"]="detagged"; 
+					else 
+						$r["regrinfo"]["domain"]["status"]="inactive"; 
+				}
+			}
+			else
+				$r["regrinfo"]["registered"] = "no";
+
+			return($r);
+		}
+	}
+
+?>

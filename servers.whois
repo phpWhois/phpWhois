@@ -38,9 +38,10 @@ $this->DATA = array(
 	"br"	=> "brnic",
 	"ca"	=> "cira",
 	"ch"	=> "chnic",
+	"cn"	=> "cnnic",
 	"com"	=> "gtld",
 	"de"	=> "denic",
-	"es"	=> "esnic",
+#	"es"	=> "esnic",
 	"fm"	=> "dotfm",
 	"info"	=> "info",
 	"li"	=> "chnic",
@@ -52,11 +53,12 @@ $this->DATA = array(
 	"org"	=> "gtld",
 	"se"	=> "nicse",
 	"uk"	=> "uknic",
+	"ws"	=> "wsnic",
         "ipw"	=> "ipw" // Dummy, just for ip whois
 	);
 
 $this->HTTPW = array(
-#		"es" => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio=#&tipo=dominio",
+		"es" => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio=#&tipo=dominio",
 		"co.za" => "http://co.za/cgi-bin/whois.sh?Domain=#",
 		"fm" => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm",
 		"gs" => "http://www.adamsnames.tc/whois/?domain=#",
