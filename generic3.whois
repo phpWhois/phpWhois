@@ -28,6 +28,8 @@
 function get_blocks ( $rawdata, $items )
 {
 
+$endtag="";
+
 while (list($field, $match)=each($items))
       { 
         // search block header
@@ -40,8 +42,12 @@ while (list($field, $match)=each($items))
                 if ($pos!==false)
 		   {
 		     $last=substr(trim($val),-1,1);
-		     if ($last==":" || $last=="-")
-		            $found=true;
+
+		     if ($last==":" || $last=="-" || $last=="]")
+		          {
+			    $found=true;
+			    $endtag=$last;
+                          }
 		     else {
 			    $var=getvarname(strtok($field,"#"));
                             $itm=trim(substr($val,$pos+strlen($match)));
@@ -65,7 +71,8 @@ while (list($field, $match)=each($items))
                    }
                 $found=true;  	
 		$last=substr(trim($val),-1,1);
-		if ($last==":" || $last=="-") break;
+		//if ($last==":" || $last=="-") break;
+		if ($last==$endtag) break;
 		$block[]=$val;
               }
 
