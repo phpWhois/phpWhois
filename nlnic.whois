@@ -61,12 +61,18 @@ function parse ($data)
 
     $r["regrinfo"] = get_blocks($data["rawdata"],$items);
 
+    if (!isset($r["regrinfo"]["domain"]["name"][0])) {
+	$r["regrinfo"]["registered"]="no";
+	return $r;
+	}
+		
     $r["regrinfo"]["domain"]["name"]=$r["regrinfo"]["domain"]["name"][0];
 
     $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
     $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
     $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
 
+    $r["regrinfo"]["registered"]="yes";
     return($r);
 }
 }
