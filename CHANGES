@@ -2,6 +2,9 @@
 		- improved generic.whois, update all handlers that use it
 		- now it's possible to also query http based whois
 		- added .es handler (http)
+		- some improvments on generic3.whois
+		- enom.whois fixed and updated to common object model
+		- added enom .org handle to gtld.whois
 
 2003/02/15  David Saez <david@ols.es>
 		- added generic3.whois with functions to parse whois output
