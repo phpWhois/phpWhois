@@ -79,12 +79,14 @@ while (list($string, $whois)=each($this->REGISTRARS))
 switch ($this->Query["server"])
        { case "whois.apnic.net": 
          $rawdata=$this->Lookup($this->Query["string"]);
+	 $rawdata=$rawdata["rawdata"];
 
          while (list($ln,$line)=each($rawdata))
                { if (strstr($line,"KRNIC whois server at whois.krnic.net"))
                     { $this->Query["server"]="whois.krnic.net";
                       $this->result["regyinfo"]["registrar"]="Korea Network Information Center (KRNIC)";
                       $rawdata=$this->Lookup($this->Query["string"]);
+		      $rawdata=$rawdata["rawdata"];	
 	              break;
                     }
                } 
@@ -113,14 +115,19 @@ switch ($this->Query["server"])
             { $this->Query["server"]="whois.registro.br";
               $this->result["regyinfo"]["registrar"]="Comite Gestor da Internet no Brasil";
               $rawdata=$this->Lookup($this->Query["string"]);
+	      $rawdata=$rawdata["rawdata"];
 	      $newquery="";
             }	
 
-        if ($newquery!="") $rawdata=$this->Lookup("!".$newquery);
+        if ($newquery!="") 
+           { $rawdata=$this->Lookup("!".$newquery);
+             $rawdata=$rawdata["rawdata"];
+           }
         break;
 
 	case "whois.lacnic.net":
 	$rawdata=$this->Lookup($this->Query["string"]);
+	$rawdata=$rawdata["rawdata"];
 
 	while (list($ln,$line)=each($rawdata))
                { $s=strstr($line,"at whois.registro.br and at");
@@ -128,6 +135,7 @@ switch ($this->Query["server"])
  		    { $this->Query["server"]="whois.registro.br";
                       $this->result["regyinfo"]["registrar"]="Comite Gestor da Internet do Brazil";
                       $rawdata=$this->Lookup($this->Query["string"]);
+		      $rawdata=$rawdata["rawdata"];
 		      break;
                     }
 	       }
@@ -135,6 +143,7 @@ switch ($this->Query["server"])
 
         default:
         $rawdata=$this->Lookup($this->Query["string"]);
+	$rawdata=$rawdata["rawdata"];
      }
 
 $this->result["rawdata"]=$rawdata;
