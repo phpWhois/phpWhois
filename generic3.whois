@@ -101,7 +101,9 @@ while (list($key,$val)=each($array))
  	  }	
 	if ($val!="" && !preg_match("/[^0-9\(\)\-\. ]/", $val))
            {
-	     $r["phone"]=$val;
+	     if (isset($r["phone"]))
+	          $r["fax"]=$val;	
+	     else $r["phone"]=$val;
 	     unset($array[$key]);
 	     continue;
 	   }
