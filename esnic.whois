@@ -117,10 +117,15 @@ class esnic extends Whois {
 
 		$r['regrinfo'] = get_blocks($data,$items);
 
-		$r['regrinfo']['owner'] = buscar($r['regrinfo']['owner'],$cont);
-		$r['regrinfo']['admin'] = buscar($r['regrinfo']['admin'],$cont);
-		$r['regrinfo']['billing'] = buscar($r['regrinfo']['billing'],$cont);
-		$r['regrinfo']['tech'] = buscar($r['regrinfo']['tech'],$cont);
+		if (isset($r['regrinfo']['domain']['name'])) {
+			$r['regrinfo']['owner'] = buscar($r['regrinfo']['owner'],$cont);
+			$r['regrinfo']['admin'] = buscar($r['regrinfo']['admin'],$cont);
+			$r['regrinfo']['billing'] = buscar($r['regrinfo']['billing'],$cont);
+			$r['regrinfo']['tech'] = buscar($r['regrinfo']['tech'],$cont);
+			$r['regrinfo']['registered']='yes';
+			}
+		else
+			$r['regrinfo']['registered']='no';
 
 		$r['regyinfo'] = array('referrer'=>'http://www.nic.es',
 				       'registrar'=>'ES-NIC' );
