@@ -96,6 +96,8 @@ class Whois {
 		// Set version
 		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
 
+		$query = trim($query);
+
 		// If domain to query was not set
 		if(!isSet($query) || $query=="") {
 			// Configure to use default whois server
@@ -124,7 +126,7 @@ class Whois {
 
                 // Test if we know in advance that no whois server is
                 // available for this domain and that we can get the
-                // data via http request
+                // data via http or whois request
 
                 reset($this->HTTPW);
 
@@ -153,11 +155,10 @@ class Whois {
 		$np = count($dp) -1;
 		$tldtests = array();
 
-		for ($i=0; $i<$np; $i++) 
-		    {
-		      array_shift($dp);
-                      $tldtests[] = implode(".",$dp);
-		    }
+		for ($i=0; $i<$np; $i++) {
+			array_shift($dp);
+                      	$tldtests[] = implode(".",$dp);
+		    	}
 
 		$pos = strpos(strtolower(getenv ("OS")), "win");
 
@@ -165,6 +166,7 @@ class Whois {
 		else $windows=true;
 
 		foreach($tldtests as $tld) {
+echo "check cname $tld<br>";
 			if ($windows) $cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
 			else $cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
 			if(!$cname) continue;
@@ -342,6 +344,12 @@ class Whois {
 	function Lookup ($query = "") {
 		// If domain to query passed in, use it, otherwise use domain from initialisation
 		$string = !empty($query) ? $query : $this->Query["string"];
+
+		if (!isset($this->Query["server"])) {
+			$this->Query["status"] = -1;
+                        $this->Query["errstr"][] = "No server specified";
+                        return(array());
+			}
 
 		// Check if protocol is http
 		if (substr($this->Query["server"],0,7)=="http://" ||
