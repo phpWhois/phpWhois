@@ -47,13 +47,13 @@ while (list($field, $match)=each($items))
 		          {
 			    $found=true;
 			    $endtag=$last;
+			    break;
                           }
 		     else {
 			    $var=getvarname(strtok($field,"#"));
                             $itm=trim(substr($val,$pos+strlen($match)));
 			    eval($var."=\$itm;");
                           }
-		     break;
 		   }
 	      }     
 
