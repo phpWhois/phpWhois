@@ -25,15 +25,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* brnic.whois	1.0 	David Saez 04/04/2003 */
+/* apnic.whois	1.0 	David Saez 3/4/2003 */
 
 require_once("generic.whois");
 
-if(!defined("__BRNIC_HANDLER__")) define("__BRNIC_HANDLER__",1);
+if(!defined("__APNIC_HANDLER__")) define("__APNIC_HANDLER__",1);
 
-class brnic extends ipw {
+class apnic extends ipw {
 
-function brnic($data) 
+function apnic($data) 
 {
 $this->result=$this->parse($data);
 }
@@ -43,30 +43,25 @@ function parse ($data_str)
 $translate = array (
                         "fax-no" => "fax",
                         "e-mail" => "email",
-                        "nic-hdl-br" => "handle",
+                        "nic-hdl" => "handle",
                         "person" => "name",
-			"netname" => "name"
+			"country" => "address",
+			"netname" => "name",
+			"descr" => "desc"
                    );
 
 $contacts = array (
-                        "owner-c" => "owner",
-                        "tech-c" => "tech",
-			"abuse-c" => "abuse"
+                        "admin-c" => "admin",
+                        "tech-c" => "tech"
                   );
 
 $r = generic_whois($data_str,$translate,$contacts,"network");
 
-unset($r["network"]["owner"]);
-unset($r["network"]["ownerid"]);
-unset($r["network"]["responsible"]);
+$r["owner"]["organization"] = $r["network"]["desc"][0];
+unset($r["network"]["desc"][0]);
+$r["owner"]["address"]=$r["network"]["desc"];
+unset($r["network"]["desc"]);
 unset($r["network"]["address"]);
-unset($r["network"]["phone"]);
-$r["network"]["handle"]=$r["network"]["aut-num"];
-unset($r["network"]["aut-num"]);
-unset($r["network"]["nsstat"]);
-unset($r["network"]["nslastaa"]);
-unset($r["network"]["inetrev"]);
-$r["network"]["nserver"]=array_unique($r["network"]["nserver"]);
 return $r;
 }
 

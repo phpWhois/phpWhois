@@ -29,6 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__ARIN_HANDLER__")) define("__ARIN_HANDLER__",1);
 
+require_once("generic2.whois");
+
 class arin extends ipw {
 
 function arin($data) 
@@ -38,7 +40,32 @@ $this->result=$this->parse($data);
 
 function parse ($data_str) 
 {
-return("");
+               $items = array(  "owner.organization"  => "OrgName:",
+				"owner.handle"  => "OrgId:",
+				"owner.address.street"  => "Address:",
+				"owner.address.city"  => "City:",
+				"owner.address.state"  => "StateProv:",
+				"owner.address.pcode"  => "PostalCode:",
+				"owner.address.country"  => "Country:",
+				"network.inetnum"  => "NetRange:",
+				"network.name"  => "NetName:",
+				"network.handle"  => "NetHandle:",
+                                "network.status"  => "NetType:",
+                                "network.nserver."  => "NameServer:",
+                                "network.desc."  => "Comment:",
+                                "network.created"  => "RegDate:",
+                                "network.changed"  => "Updated:",
+                                "tech.handle"  => "TechHandle:",
+                                "tech.name"  => "TechName:",
+                                "tech.phone"  => "TechPhone:",
+                                "tech.email"  => "TechEmail:",
+				"abuse.name" => "OrgAbuseName:",
+				"abuse.handle" => "OrgAbuseHandle:",
+				"abuse.phone" => "OrgAbusePhone:",
+				"abuse.email" => "OrgAbuseEmail:"
+                             );
+
+                return generic_whois($data_str,$items);
 }
 
 }
