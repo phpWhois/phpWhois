@@ -70,7 +70,8 @@ class gtld extends Whois {
 		"TLDS, INC. DBA SRSPLUS" => "srsplus",
 		"DOMAIN BANK, INC." => "domainbank",
 		"GO DADDY SOFTWARE, INC." => "godaddy",
-		"ARSYS INTERNET, S.L. D/B/A NICLINE.COM" => "nicline"
+		"ARSYS INTERNET, S.L. D/B/A NICLINE.COM" => "nicline",
+		"WILD WEST DOMAINS, INC." => "godaddy"
 		);
 
 	function gTLD ($data, $query) {

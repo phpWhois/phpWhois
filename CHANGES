@@ -1,3 +1,6 @@
+2004/02/11  David Saez <david@ols.es>
+		- handles R120-LROR, thanx to DavHolle
+
 2003/11/22  David Saez <david@ols.es>
 		- fix for .tv domains
 

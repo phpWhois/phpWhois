@@ -29,6 +29,7 @@ dotregistrar    dotregistrar.com
 dotster         dotster.com
 enom            enom.com
 godaddy		godaddy.com
+wwd		iprocommunicator.com
 interdomain     interdominio.com
 inwwcom         ?
 netsol          olsns.com
