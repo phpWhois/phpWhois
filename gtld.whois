@@ -55,6 +55,7 @@ class gtld extends Whois {
 	var $REGISTRARS = array(
 		"ALABANZA, INC." => "bulkregistercom",
 		"BULKREGISTER.COM, INC."  => "bulkregistercom",
+		"BULKREGISTER, LLC." => "bulkregistercom",
 		"CORE INTERNET COUNCIL OF REGISTRARS" => "core",
 		"DOTSTER, INC." => "dotster",
 		"ENOM, INC." => "enom",
@@ -101,15 +102,37 @@ class gtld extends Whois {
 
 		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
+		$this->result["regrinfo"]["registered"] = $this->result["registered"];
+		unset($this->result["registered"]);
+
 		if (!empty($this->Query["handler"])) {
 			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
-			$domaindata = $this->result["regrinfo"]["domain"];
 			$regrinfo = $this->Process($this->result["rawdata"]);
-			$this->result["regrinfo"] = $regrinfo;
-			if (isset($regrinfo["domain"]))
-				$this->result["regrinfo"]["domain"] = array_merge($domaindata,$regrinfo["domain"]);
+			$this->result["regrinfo"] = merge_results($this->result["regrinfo"],$regrinfo);
 		}
 	}
+}
+
+function merge_results ( $a1, $a2 )
+{
+
+reset($a2);
+
+while (list($key, $val) = each($a2)) {
+	if (isset($a1[$key])) {
+		if (is_array($val))
+			$a1[$key]=merge_results($a1[$key],$val);
+		else {
+			$val=trim($val);
+			if ($val!='')
+				$a1[$key]=$val;
+			}
+		}
+	else
+		$a1[$key]=$val;
+	}
+
+return $a1;
 }
 
 ?>
