@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 /* benic.whois        1.0        Matthijs Koot <koot@cyberwar.nl> */
+/* benic.whois        1.1	 David Saez */
 
 include_once("generic3.whois");
 
@@ -61,21 +62,26 @@ class benic extends Whois {
 
     $r["regrinfo"] = get_blocks($data["rawdata"],$items);
 
-    $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
-    $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
-    $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
+    if (isset($r['regrinfo']['domain']['name'])) {
+	$r['regrinfo']['registered']='yes';
+	$r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
+        $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
+        $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
     
-    $r["regrinfo"]["owner"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["owner"]["name"]);
-    $r["regrinfo"]["tech"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["tech"]["name"]);
-    $r["regrinfo"]["admin"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["admin"]["name"]);
+        $r["regrinfo"]["owner"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["owner"]["name"]);
+        $r["regrinfo"]["tech"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["tech"]["name"]);
+        $r["regrinfo"]["admin"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["admin"]["name"]);
     
-    $r["regrinfo"]["owner"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["owner"]["address"][1]); 
-    $r["regrinfo"]["tech"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["tech"]["address"][1]); 
-    $r["regrinfo"]["admin"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["admin"]["address"][1]); 
+        $r["regrinfo"]["owner"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["owner"]["address"][1]); 
+        $r["regrinfo"]["tech"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["tech"]["address"][1]); 
+        $r["regrinfo"]["admin"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["admin"]["address"][1]); 
     
-    $r["regrinfo"]["domain"]["nserver"][0] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][0]);
-    $r["regrinfo"]["domain"]["nserver"][1] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][1]);
-        
+        $r["regrinfo"]["domain"]["nserver"][0] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][0]);
+        $r["regrinfo"]["domain"]["nserver"][1] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][1]);
+        }
+    else
+	$r['regrinfo']['registered']='no';
+
     return($r);
   }
 }
