@@ -371,15 +371,6 @@ class Whois {
 			return(array());
 		}
 
-		// This no longer works
-		// Determining on server/hacks in operation, send appropriate request
-		// Hacks no longer need
-		//if(($this->Query["server"] == $this->NSI_REGISTRY || $this->Query["server"] == $this->NSI_REGISTRAR) && $this->HACKS["nsi_force_dom"]) {
-		//	fputs($ptr, sprintf("dom %s\r\n", trim($string)));
-		//}
-		//elseif($this->Query["server"] == $this->HACKS["force_slash_e"]) {
-		//	fputs($ptr, sprintf("%s/e\r\n", trim($string)));
-		//}
 		if ($this->Query["server"] == "com.whois-servers.net") {
 			fputs($ptr, "=".trim($string)."\r\n");
 		} 
@@ -410,12 +401,12 @@ class Whois {
 		$result = array();
 		$result['rawdata'] = $output;
 
+                // Set whois server
+                $result['regyinfo']['whois'] = $this->Query["server"];
+
 		// If we have a handler, post-process it with that
 		if(isSet($this->DATA[$this->Query["tld"]]))
 			$result = $this->Process($result);
-
-		// Set whois server
-                $result['regyinfo']['whois'] = $this->Query["server"];
 
 		// Add error information if any
 		if (isset($this->Query["errstr"]))

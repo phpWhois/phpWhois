@@ -32,6 +32,7 @@ godaddy		godaddy.com
 interdomain     interdominio.com
 inwwcom         ?
 netsol          olsns.com
+nicline		nicline.com
 opensrsnet      tucows.com
 registercom     register.com
 srsplus		srsplus.com

@@ -28,6 +28,7 @@
 
 /* gtld.whois	1.0	mark jeftovic	1999/12/06 */
 /* gtld.whois   1.1     david@ols.es    2003/02/09 */
+/* gtld.whois   1.2     david@ols.es    2003/09/12 */
 
 if(!defined("__GTLD_HANDLER__")) define("__GTLD_HANDLER__",1);
 
@@ -68,7 +69,8 @@ class gtld extends Whois {
 		"DOMAINDISCOVER" => "buydomains",
 		"TLDS, INC. DBA SRSPLUS" => "srsplus",
 		"DOMAIN BANK, INC." => "domainbank",
-		"GO DADDY SOFTWARE, INC." => "godaddy"
+		"GO DADDY SOFTWARE, INC." => "godaddy",
+		"ARSYS INTERNET, S.L. D/B/A NICLINE.COM" => "nicline"
 		);
 
 	function gTLD ($data, $query) {
@@ -99,12 +101,6 @@ class gtld extends Whois {
 		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
 		if (!empty($this->Query["handler"])) {
-			if (strstr($this->result["regyinfo"]["registrar"],"-LROR"))
-                           {
-			     // Get the name of the registrar
-			     $key = array_search($this->Query["handler"],$this->REGISTRARS);
-                             $this->result["regyinfo"]["registrar"] = $key;
-                           } 
 			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
 			$domaindata = $this->result["regrinfo"]["domain"];
 			$regrinfo = $this->Process($this->result["rawdata"]);

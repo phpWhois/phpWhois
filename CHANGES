@@ -1,3 +1,8 @@
+2003/09/12  David Saez <david@ols.es>
+		- added gtld handler for Arsys nicline
+		  thanx to cgalvez@espaciowww.com
+		- minor fixes to main.whois and gtld.whois
+
 2003/09/09  David Saez <david@ols.es>
 		- fixed some warning when ip is banned
 		  on domainbank.whois
