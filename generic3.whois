@@ -28,6 +28,7 @@
 function get_blocks ( $rawdata, $items )
 {
 
+$r=array();
 $endtag="";
 
 while (list($key,$val)=each($rawdata))
@@ -126,6 +127,9 @@ return $var;
 
 function get_contact ( $array )
 {
+
+if (!is_array($array))
+	return array();
 
 $items = array (
 		"phone:" => "phone",
