@@ -54,7 +54,7 @@ class ipw extends Whois {
 			       "whois.apnic.net"=>"apnic",
 			       "whois.ripe.net" =>"ripe",
 			       "whois.arin.net" =>"arin",
-			       "whois.registro.br" =>"brnic",
+			       "whois.registro.br" =>"bripw",
 			       "whois.lacnic.net"=>"lacnic"
 			     );	
 
