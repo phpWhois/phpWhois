@@ -39,10 +39,11 @@ while (list($field, $match)=each($items))
                 $pos=strpos($val,$match);
                 if ($pos!==false)
 		   {
-		     if (substr(trim($val),-1,1)==":")
+		     $last=substr(trim($val),-1,1);
+		     if ($last==":" || $last=="-")
 		            $found=true;
 		     else {
-			    $var=getvarname($field);
+			    $var=getvarname(strtok($field,"#"));
                             $itm=trim(substr($val,$pos+strlen($match)));
 			    eval($var."=\$itm;");
                           }
@@ -58,7 +59,8 @@ while (list($field, $match)=each($items))
               { 
 		$val=trim($val);
 		if ($val=="") break;
-		if (substr(trim($val),-1,1)==":") break;
+		$last=substr(trim($val),-1,1);
+		if ($last==":" || $last=="-") break;
 		$block[]=$val;
               }
 
@@ -84,32 +86,48 @@ return $var;
 
 function get_contact ( $array )
 {
-$top=count($array)-1;
-$pos=strpos($array[$top],"Fax:");
 
-if ($pos!==false)
-   { 
-     $len=strlen("Fax:"); 
-     $itm=trim(substr($array[$top],$pos+$len));
-     $r["fax"]=trim($itm);
-     $array[$top]=trim(substr($array[$top],0,-strlen($itm)-$len-1));	
+while (list($key,$val)=each($array))
+      {
+	$pos=strpos(strtolower($val),"fax:");
+	if ($pos!==false)
+	   {
+	     $itm=trim(substr($val,$pos+4));
+	     $r["fax"]=trim($itm);
+	     $val=trim(substr($val,0,-strlen($itm)-5));
+	     if ($val=="")
+		  unset($array[$key]);
+	     else $array[$key]=$val;
+ 	  }	
+	if ($val!="" && !preg_match("/[^0-9\(\)\-\. ]/", $val))
+           {
+	     $r["phone"]=$val;
+	     unset($array[$key]);
+	     continue;
+	   }
+	if (strstr($val,"@"))
+           {
+	     $parts=explode(" ",$val);
+             $top=count($parts)-1;
+             $r["email"]=$parts[$top];
+             array_pop($parts);
+             $r["name"]=implode(" ",$parts);
+             unset($array[$key]);
+	     if ($key==1)
+                {
+		  $r["organization"]=$array[0];
+		  unset($array[0]);
+                }
+           }
+      }     
+
+if (!isset($r["name"]))
+   {
+     $r["name"]=$array[0];
+     unset($array[0]);
    }
 
-if (!preg_match("/[^0-9\(\)\-\. ]/", $array[$top]))
-     $r["phone"]=array_pop($array);
-
-$r["name"]=$array[0];
-unset($array[0]);
 $r["address"]=$array;
-
-$parts=explode(" ",$r["name"]);
-$top=count($parts)-1;
-
-if (strstr($parts[$top],"@"))
-   { $r["email"]=$parts[$top];
-     array_pop($parts);
-     $r["name"]=implode(" ",$parts);	
-   }
 
 return $r;
 }
