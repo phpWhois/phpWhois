@@ -56,6 +56,7 @@ $this->DATA = array(
 	"nu"	=> "nunames",
 	"org"	=> "org",
 	"se"	=> "nicse",
+	"tv"	=> "gtld",
 	"uk"	=> "uknic",
 	"us"	=> "neustar",
 	"ws"	=> "wsnic",
@@ -80,7 +81,6 @@ $this->HTTPW = array(
 		"net.au" => "whois.aunic.net",
 		"tc"     => "http://www.adamsnames.tc/whois/?domain=#",
 		"tf"     => "http://www.adamsnames.tc/whois/?domain=#",
-		"tv"     => "whois.networksolutions.com",
 		"vg"     => "http://www.adamsnames.tc/whois/?domain=#"
 		);
 ?>

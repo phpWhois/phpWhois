@@ -1,6 +1,7 @@
 2005/03/03  David Saez <david@ols.es>
 		- minor fix to main.whois
 		- added some object fields when not set
+		- fixed handling of .tv
 
 2005/03/02  David Saez <david@ols.es>
 		- fixed SRSPlus detection
