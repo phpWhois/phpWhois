@@ -1,4 +1,29 @@
 <?php
+/*
+  Generic3.php    PHP functions for parsing whois output
+
+  Copyright (C)2003
+
+  Maintained by Mark Jeftovic <markjr@easydns.com>
+
+  For the most recent version of this package:
+
+  http://www.easydns.com/~markjr/whois2/
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
 function generic_whois ( $rawdata, $items )
 
@@ -17,7 +42,7 @@ while (list($key,$val)=each($rawdata))
 	     
 	     $disok=false;
 	     reset($items);
-	     $ok=0;
+	     //$ok=0;
 
              while (list($field, $match)=each($items)) 
                    {
@@ -31,10 +56,10 @@ while (list($key,$val)=each($rawdata))
                                 else $var=$var."[\"".$mn."\"]";
 
 			  $itm=trim(substr($val,$pos+strlen($match)));
-			  $itm=addslashes($itm);
+			  //$itm=addslashes($itm);
                           if ($itm!="")
                               eval($var."=\"".$itm."\";");
-                          $ok=1;
+                          //$ok=1;
                           break;
                         }
                    }
@@ -46,3 +71,4 @@ while (list($key,$val)=each($rawdata))
 
 return $r;
 }
+
