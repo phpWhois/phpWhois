@@ -1,3 +1,12 @@
+2003/04/19  David Saez <david@ols.es>
+		- fixed problem whith whois.crsnic.net which
+		  causes some domains like hotmail.com and
+		  yahoo.com not to resolve, thanx to
+		  asajith@users.sourceforge.net for reporting
+		  this issue, also some improvments have been
+		  made to help diagnose problems like that in
+		  the future
+
 2003/04/11  David Saez <david@ols.es>
 		- added gtld handler for SRSPlus
 

@@ -93,14 +93,14 @@ class gtld extends Whois {
 			$this->Query["server"] = $this->result["regyinfo"]["whois"];
 		}
 
-		//if (!isset($this->result["rawdata"]))
-		//	$this->result["rawdata"] = array();
- 
 		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
 		// david@ols.es 16/10/2002 Fixes rawdata
 		
-		if (!isset($this->result["rawdata"]["rawdata"]))
-		    $this->Query["errstr"]="Domain not found";
+		if (!isset($this->result["rawdata"]["rawdata"])) {
+			$this->Query["errstr"]="Domain not found";
+			unset($this->result["rawdata"]);
+			return;
+		}
 
 		if (isset($this->result["rawdata"]["rawdata"]))
 			$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];

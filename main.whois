@@ -168,7 +168,9 @@ class Whois {
 			if ($windows) $cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
 			else $cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
 			if(!$cname) continue;
-			$server = gethostbyname($tld.".whois-servers.net");
+			//This also works
+			//$server = gethostbyname($tld.".whois-servers.net");
+			$server = $tld.".whois-servers.net";
 			break;
 		}
 
@@ -176,7 +178,6 @@ class Whois {
 			// If found, set tld and whois server in query array
 			$this->Query["server"] = $server;
 			$this->Query["tld"] = $tld;
-
 			// If a handler exists for the tld
 			if(isSet($this->DATA[$tld])) {
 				// Set file/handler in query array
@@ -255,15 +256,10 @@ class Whois {
 	 * from the handler. On failure, returns passed in result unaltered.
 	 */
 	function Process (&$result) {
-		// Disable error reporting temporarily (probably not necessary)
-		//$old_val = error_reporting(FALSE);
 		// If the handler has not already been included somehow, include it now
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
 		if(!defined($HANDLER_FLAG))
 			@include($this->Query["file"]);
-
-		// Restore error reporting
-		//error_reporting($old_val);
 
 		// If the handler has still not been included, append to query errors list and return
 		if(!defined($HANDLER_FLAG)) {
@@ -356,12 +352,17 @@ class Whois {
 			return(array());
 		}
 
+		// This no longer works
 		// Determining on server/hacks in operation, send appropriate request
-		if(($this->Query["server"] == $this->NSI_REGISTRY || $this->Query["server"] == $this->NSI_REGISTRAR) && $this->HACKS["nsi_force_dom"]) {
-			fputs($ptr, sprintf("dom %s\r\n", trim($string)));
-		}
-		elseif($this->Query["server"] == $this->HACKS["force_slash_e"]) {
-			fputs($ptr, sprintf("%s/e\r\n", trim($string)));
+		// Hacks no longer need
+		//if(($this->Query["server"] == $this->NSI_REGISTRY || $this->Query["server"] == $this->NSI_REGISTRAR) && $this->HACKS["nsi_force_dom"]) {
+		//	fputs($ptr, sprintf("dom %s\r\n", trim($string)));
+		//}
+		//elseif($this->Query["server"] == $this->HACKS["force_slash_e"]) {
+		//	fputs($ptr, sprintf("%s/e\r\n", trim($string)));
+		//}
+		if ($this->Query["server"] == "com.whois-servers.net") {
+			fputs($ptr, "=".trim($string)."\r\n");
 		} 
 		else {
 			fputs($ptr, sprintf("%s\r\n", trim($string)));
@@ -393,6 +394,14 @@ class Whois {
 		// If we have a handler, post-process it with that
 		if(isSet($this->DATA[$this->Query["tld"]]))
 			$result = $this->Process($result);
+
+		// Add error information if any
+		if (isset($this->Query["errstr"]))
+			$result["errstr"] = $this->Query["errstr"];
+
+		// If no rawdata use rawdata from first whois server
+		if (!isset($result["rawdata"]))
+			$result["rawdata"] = $output;
 		
 		return($result);
 	}
