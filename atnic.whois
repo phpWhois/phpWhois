@@ -40,7 +40,6 @@ class atnic extends Whois
 
 function parse ($data_str) {
 
-$r["regrinfo"]=generic_whois($data_str["rawdata"]);
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array("whois"=>"whois.nic.at","referer"=>"www.nic.at","registrar"=>"NIC-AT");
 
