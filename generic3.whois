@@ -54,11 +54,16 @@ while (list($field, $match)=each($items))
 	if (!$found) continue;
 
 	$block=array();
+	$found=false;
 
 	while (list($key,$val)=each($rawdata))
               { 
 		$val=trim($val);
-		if ($val=="") break;
+		if ($val=="") 
+                   { if ($found) break;
+		     else continue;
+                   }
+                $found=true;  	
 		$last=substr(trim($val),-1,1);
 		if ($last==":" || $last=="-") break;
 		$block[]=$val;
@@ -87,19 +92,33 @@ return $var;
 function get_contact ( $array )
 {
 
+$items = array (
+		"phone:" => "phone",
+		"fax..:" => "fax",
+		"fax:"   => "fax",
+		"email:" => "email"
+               );
+
 while (list($key,$val)=each($array))
       {
-	$pos=strpos(strtolower($val),"fax:");
-	if ($pos!==false)
-	   {
-	     $itm=trim(substr($val,$pos+4));
-	     $r["fax"]=trim($itm);
-	     $val=trim(substr($val,0,-strlen($itm)-5));
-	     if ($val=="")
-		  unset($array[$key]);
-	     else $array[$key]=$val;
- 	  }	
-	if ($val!="" && !preg_match("/[^0-9\(\)\-\. ]/", $val))
+	reset($items);
+
+	while (list($match,$field)=each($items))
+	      {
+		$pos=strpos(strtolower($val),$match);
+		if ($pos===false) continue;
+		$itm=trim(substr($val,$pos+strlen($match)));
+		$r[$field]=$itm;
+		$val=trim(substr($val,0,-strlen($itm)-1-strlen($match)));
+		if ($val=="")
+                     unset($array[$key]);
+	        else $array[$key]=$val;
+                break;
+              } 	
+
+	if ($val=="") continue;
+
+	if (!preg_match("/[^0-9\(\)\-\. ]/", $val))
            {
 	     if (isset($r["phone"]))
 	          $r["fax"]=$val;	
