@@ -18,7 +18,7 @@ nunames		nunames.nu
 uknic		olsns.co.uk
 wsnic		samoanic.ws
 
-// .com/.org/.net
+// .com/.org/.net/.tv
 
 ascio.com	ascio.com
 bulkregistercom bulkregister.com
@@ -41,6 +41,7 @@ nicline		nicline.com
 opensrsnet      tucows.com
 registercom     register.com
 srsplus		srsplus.com
+tvcorp		sex.tv
 wwd             iprocommunicator.com
 
 // Other

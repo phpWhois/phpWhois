@@ -71,15 +71,16 @@ class gtld extends Whois {
 		"INTERCOSMOS MEDIA GROUP, INC. D/B/A DIRECTNIC.COM" => "directnic",
 		"INTERDOMAIN, S.A." => "interdomain",
 		"MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE" => "inwwcom",
-		"MONIKER ONLINE SERVICES, INC." => 'moniker',
-		"NETWORK SOLUTIONS, INC." => "netsol",
-		"NETWORK SOLUTIONS, LLC." => "netsol",
-		"REGISTER.COM, INC." => "registercom",
+		'MONIKER ONLINE SERVICES, INC.' => 'moniker',
+		'NETWORK SOLUTIONS, INC.' => 'netsol',
+		'NETWORK SOLUTIONS, LLC.' => 'netsol',
+		'REGISTER.COM, INC.' => 'registercom',
 		'SCHLUND+PARTNER AG' => 'schlund',
 		'STARGATE HOLDINGS CORP.' => 'stargate',
 		'TLDS, INC. DBA SRSPLUS' => 'srsplus',
 		'TLDS, LLC DBA SRSPLUS' => 'srsplus',
 		'TUCOWS, INC.' => 'opensrsnet',		
+		'TV CORPORATION' => 'tvcorp',
 		'WILD WEST DOMAINS, INC.' => 'godaddy'
 		);
 

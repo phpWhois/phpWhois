@@ -1,3 +1,6 @@
+2005/03/14  David Saez <david@ols.es>
+		- added handler for TV CORPORATION
+
 2005/03/03  David Saez <david@ols.es>
 		- minor fix to main.whois
 		- added some object fields when not set

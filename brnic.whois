@@ -25,7 +25,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* brnic.whois	      2.0        David Saez <david@ols.es> 
+/* brnic.whois	      2.1        David Saez <david@ols.es> 
 /* brnic.whois        1.0        by Marcelo Sanches  msanches@sitebox.com.br */
 
 include_once("generic.whois");
@@ -60,6 +60,12 @@ $r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain");
 
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array( "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");
+
+if (in_array('Permission denied.',$r['disclaimer']))
+	{
+	$r['registered']='unknown';
+	return $r;
+	}
 
 unset($r["domain"]["nsstat"]);
 unset($r["domain"]["nslastaa"]);
