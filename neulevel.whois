@@ -1,0 +1,148 @@
+<?
+/*
+Whois2.php        PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+For the most recent version of this package:
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* neulevel.whois	 2.0	    7/2/2002 David Saez stadarized object model */
+/* neulevel.whois        1.0        by Brian Blood <brian@macserve.net>  */
+
+if(!defined("__NEULEVEL_HANDLER__")) define("__NEULEVEL_HANDLER__",1);
+
+class neulevel extends Whois {
+
+function neulevel($data) {
+   $this->result = $this->parse($data);
+}
+
+function set_address ($data)
+{
+
+$data["address"][]=$data["address1"];
+unset($data["address1"]);
+
+if ($data["address2"]!="") 
+   { $data["address"][]=$data["address2"];
+     unset($data["address2"]);
+   }
+
+$data["address"][]=$data["postalcode"]." ".$data["city"];
+unset($data["postalcode"]);
+unset($data["city"]);
+
+$data["address"][]=$data["country"];
+unset($data["country"]);
+
+return $data;
+}
+
+function parse ($data_str) {
+  $recordMap = array(
+	      "domain" => array( "key" => "",
+			         "fields" => array ("handle"  => "Domain ID",
+                                                    "name"  => "Domain Name",
+                                                    "sponsor" => "Sponsoring Registrar",
+                                                    "nserver"  => array("key" => "Name Server"),
+                                                    "created" => "Domain Registration Date",
+                                                    "changed" => "Domain Last Updated Date",
+                                                    "expires" => "Domain Expiration Date" )
+				),
+              "owner"   => array("key"   => "Registrant",
+				"fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
+					          "address1"=>"Address1", "address2"=>"Address2", 
+					          "city"=>"City", "postalcode"=>"Postal Code",
+						  "country"=>"Country","phone"=>"Phone Number",
+						  "fax"=>"Facsimile Number","email"=>"Email")
+						),
+              "admin"   => array("key"   => "Administrative Contact",
+                                "fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
+                                                  "address1"=>"Address1", "address2"=>"Address2", "city"=>"City", "postalcode"=>"Postal Code",
+                                                  "country"=>"Country","phone"=>"Phone Number",
+                                                  "fax"=>"Facsimile Number","email"=>"Email")
+                                                ),
+
+              "billing"  => array("key"   => "Billing Contact",
+                                "fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
+                                                  "address1"=>"Address1", "address2"=>"Address2", "city"=>"City", "postalcode"=>"Postal Code",
+                                                  "country"=>"Country","phone"=>"Phone Number",
+                                                  "fax"=>"Facsimile Number","email"=>"Email")
+                                                ),
+              "tech"     => array("key"   => "Technical Contact",
+                                "fields" => array("handle"=>"ID", "name"=>"Name", "organization"=>"Organization",
+                                                  "address1"=>"Address1", "address2"=>"Address2", "city"=>"City", "postalcode"=>"Postal Code",
+                                                  "country"=>"Country","phone"=>"Phone Number",
+                                                  "fax"=>"Facsimile Number","email"=>"Email")
+                                                )
+           );
+
+	$r["rawdata"] = $data_str["rawdata"];
+
+	foreach($data_str["rawdata"] as $lineData)	
+               {
+		$lineData = trim($lineData);
+		if ($lineData != "") 
+                   {
+			list($lineKey, $lineVal) = explode(":", $lineData);
+			$lineVal = trim(substr($lineData,strlen($lineKey)+1));
+			$lineKey = strtolower(trim($lineKey));
+			reset($recordMap);
+			foreach ($recordMap as $recordKey => $recordField) 
+				     {	// there are subfields or multiple values for this data
+					$keyMatch = $recordField['key'];
+					// this field has sub fields
+					
+				       $recordSubFields = $recordField['fields'];
+
+				       foreach($recordSubFields as $subKey => $subField)
+ 					      { if (is_array($subField))
+                                                     { $fullSubKey = trim($keyMatch ." ". $subField["key"]);
+						        if ($lineKey == strtolower($fullSubKey))
+                                                           $r["regrinfo"][$recordKey][$subKey][] = $lineVal;	
+					             }
+                                                else { $fullSubKey = trim($keyMatch ." ". $subField);
+						       if ($lineKey == strtolower($fullSubKey))	
+							   $r["regrinfo"][$recordKey][$subKey] = $lineVal;
+					             }
+					      }
+				    }      
+		}
+	}
+	
+	if (empty($r["regrinfo"]['domain']['handle'])) $r["registered"]="no";
+        else  { $r["registered"]="yes";
+                $r["regrinfo"]["owner"]=$this->set_address($r["regrinfo"]["owner"]);
+                $r["regrinfo"]["admin"]=$this->set_address($r["regrinfo"]["admin"]);
+                $r["regrinfo"]["billing"]=$this->set_address($r["regrinfo"]["billing"]);
+                $r["regrinfo"]["tech"]=$this->set_address($r["regrinfo"]["tech"]);
+              }
+
+	if(!empty($r["regrinfo"])) {
+		$r["regyinfo"] = array( "whois"=>"whois.neulevel.biz", "referrer"=>"www.neulevel.biz" );
+		$r["regyinfo"]["registrar"] = "NEULEVEL";
+			}
+
+return($r);
+}
+
+}

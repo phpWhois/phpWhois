@@ -1,0 +1,110 @@
+<?php
+
+function generic_whois ($rawdata)
+{
+$r=array();
+$newblock=false;
+$hasdata=false;
+$block=array();
+$gkey="main";
+
+while (list($key,$val)=each($rawdata))
+      { $val=trim($val);
+        if (substr($val,0,1)=='%')
+           { $disclaimer[]=trim(substr($val,1));
+             continue;
+           }
+	if ($val=="")
+           { $newblock=true;
+             continue;
+           }
+	if ($newblock && $hasdata)
+           { $blocks[$gkey]=$block;
+             $block=array();
+	     $gkey="";
+           } 
+        $newblock=false;
+        $hasdata=true;
+	$k=trim(strtok($val,":"));
+        $v=trim(substr(strstr($val,":"),1));
+
+	switch ($k)
+               { case "fax-no":  $k="fax";
+				 break;
+                 case "e-mail":  $k="email";
+				 break;
+                 case "nic-hdl-br":
+                 case "nic-hdl": $gkey=$v;
+				 $k="handle"; 
+				 break;
+                 case "person":  $k="name";
+				 break;
+	       }
+
+	if (is_array($block[$k]))
+    	     $block[$k][]=$v;
+        else if ($block[$k]=="") 
+                    $block[$k]=$v;
+             else { $x=$block[$k];
+		    unset($block[$k]);
+		    $block[$k][]=$x;
+                    $block[$k][]=$v;
+                  }
+      }
+
+if ($hasdata) $blocks[$gkey]=$block;
+
+if (is_array($disclaimer)) $ret["disclaimer"]=$disclaimer;
+
+if (!is_array($blocks["main"]))
+   { $ret["registered"]="no";
+     return $ret;
+   }
+
+$r=$blocks["main"];
+
+$ret["registered"]="yes";
+
+if ($r["admin-c"]!="") 
+   { $ret["admin"]=$blocks[$r["admin-c"]];
+     unset($r["admin-c"]);
+   }
+
+if ($r["tech-c"]!="")  
+   { $ret["tech"]=$blocks[$r["tech-c"]];
+     unset($r["tech-c"]);
+   }
+
+if ($r["zone-c"]!="")
+   { $ret["zone"]=$blocks[$r["zone-c"]];
+     unset($r["zone-c"]);
+   }
+
+if ($r["billing-c"]!="")
+   { $ret["billing"]=$blocks[$r["billing-c"]];
+     unset($r["billing-c"]);
+   }
+
+if ($r["owner-c"]!="")
+   { $ret["owner"]=$blocks[$r["owner-c"]];
+     unset($r["owner-c"]);
+   }
+
+if (is_array($r["descr"]))
+   { $ret["owner"]["address"]=$r["descr"];
+     unset($r["descr"]);
+   }
+
+while (list($key,$val)=each($r))
+      { switch ($key)
+               { case "domain":  $ret["domain"]["name"]=$val; break;
+		 case "changed":
+                 case "nserver": $ret["domain"][$key]=$val; break;
+		 default:        $ret["owner"][$key]=$val;
+               } 
+      }
+
+return $ret;
+}
+
+?>
