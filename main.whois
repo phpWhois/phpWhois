@@ -102,13 +102,13 @@ if(!isSet($this->Query["server"])) { return(-1); }
 $server = $this->Query["server"];
 $retry = 0;
 while($retry <= $this->RETRY):
-	$this->$Query["status"]="ready";
+	$this->Query["status"]="ready";
 	$ptr = fsockopen($server, $this->PORT);
 	if($ptr>0):
-		$this->$Query["status"]="ok";
+		$this->Query["status"]="ok";
 		return($ptr);
 	else:
-		$this->$Query["status"]="error";
+		$this->Query["status"]="error";
 		$retry++;
                 sleep($this->SLEEP);
         endif;
@@ -117,7 +117,7 @@ return(-1);
 } 
 
 function Process ($result) {
-$old_val = error_reporting(OFF);
+$old_val = error_reporting(FALSE);
 $HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
 if(!defined($HANDLER_FLAG)) { include($this->Query["file"]); }
 error_reporting($old_val);
@@ -154,6 +154,7 @@ if($ptr!=-1){
 	} else {
 		fputs($ptr, sprintf("%s\r\n", trim($string)));
 	}
+	$r = "";
 	while(!feof($ptr)) {
 		if($this->BUFFER) {
 			$output[]=fgets($ptr, $this->BUFFER);
