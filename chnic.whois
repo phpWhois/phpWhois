@@ -30,6 +30,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*                      for inactive domains */
 /*                      (like creart.ch) thanx to Roger Fichmann */
 /* 24/7/2002    2.0     David Saez - updated to new object model */
+/* 17/3/2003    2.1     David Saez - rewritten to use generic3.whois */
+
+require_once("generic3.whois");
 
 if(!defined("__CHNIC_HANDLER__")) define("__CHNIC_HANDLER__",1);
 
@@ -43,58 +46,32 @@ $this->result=$this->parse($data);
 function parse ($data_str) 
 {
 
-$items=array( "owner.organization" => "Holder of domain name:",
+$items=array( "owner" 		   => "Holder of domain name:",
               "domain.name"        => "Domain name:",
               "domain.created"     => "Date of last registration:",
               "domain.changed"     => "Date of last modification:",
-	      "tech.organization"  => "Technical contact:" 
+	      "tech"		   => "Technical contact:",
+	      "domain.nserver"     => "Name servers:" 
             );
 
 
 $r["rawdata"]=$data_str["rawdata"];
 
-$r["regrinfo"]=array();
-$r["regrinfo"]["domain"]=array();
+$r["regrinfo"] = get_blocks($data_str["rawdata"],$items);
 
-while (list($key, $val)=each($data_str["rawdata"])) 
-      { $val=trim($val);
+if (!empty($r["regrinfo"]["domain"]["name"])) { 
 
-        if ($val!="") 
-           { if ($val=="Name servers:")
-                { while (list($key, $val)=each($data_str["rawdata"]))
-                        { $val=trim($val);
-                          if ($val=="") break;
-			  $parts=explode(" ",$val);
-                          $r["regrinfo"]["domain"]["nserver"][]=$parts[0];
-                        } 
-                  continue;
-                }
+	$r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
+        $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
+	
+	$r["regrinfo"]["domain"]["name"]=$r["regrinfo"]["domain"]["name"][0];
+	$r["regrinfo"]["domain"]["changed"]=$r["regrinfo"]["domain"]["changed"][0];
+	$r["regrinfo"]["domain"]["created"]=$r["regrinfo"]["domain"]["created"][0];
 
-             reset($items);
-
-             while (list($field, $match)=each($items)) 
-                   if (strstr($val,$match))
-                      { list($key, $val)=each($data_str["rawdata"]);
-			$parts=explode(".",$field);
-                        $var="\$r[\"regrinfo\"]";
-                        while (list($fn,$mn)=each($parts))
-                                if ($mn=="")
-                                     $var=$var."[]";
-                                else $var=$var."[\"".$mn."\"]";
-
-                        if ($val!="")
-                             eval($var."=\"".$val."\";");
-                        
-                        break;  
-                      } 
-           }
-      }
-
-if (!empty($r["regrinfo"]["domain"]))
-   { $r["regyinfo"]=array("whois"=>"whois.nic.ch","referrer"=>"www.nic.ch",
+ 	$r["regyinfo"]=array("whois"=>"whois.nic.ch","referrer"=>"www.nic.ch",
                           "registrar"=>"SWITCH Domain Name Registration");
-     $r["regrinfo"]["registered"]="yes";
-   }
+	$r["regrinfo"]["registered"]="yes";
+}
 else { $r="";
        $r["regrinfo"]["registered"]="no";
      }
