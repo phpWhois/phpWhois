@@ -353,6 +353,7 @@ class Whois {
                         if(isSet($this->DATA[$this->Query["tld"]]))
                                 $result = $this->Process($result);
 
+			$result['regyinfo']['whois'] = $this->Query["server"];
                         return($result);
 		      }
 
