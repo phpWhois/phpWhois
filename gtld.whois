@@ -59,49 +59,49 @@ class gtld extends Whois {
 		"INTERDOMAIN, S.A." => "interdomain"
 		);
 
-	function gTLD ($data,$query) {
-		$this->Query=$query;
-		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], 
-					    $this->HANDLER_VERSION);
-		$this->result["regyinfo"]=$this->ParseRegInfo($data["rawdata"]);
+	function gTLD ($data, $query) {
+		$this->Query = $query;
+		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
+		$this->result["regyinfo"] = $this->ParseRegInfo($data["rawdata"]);
 		if($this->HACKS["nsi_referral_loop"] &&
-		   $this->result["regyinfo"]["whois"]==
-		   $this->HACKS["wrong_netsol_whois"] ) {
-			$this->Query["server"]=$this->HACKS["real_netsol_whois"];
+		   ($this->result["regyinfo"]["whois"] == $this->HACKS["wrong_netsol_whois"])) {
+			$this->Query["server"] = $this->HACKS["real_netsol_whois"];
 		} else {
-			$this->Query["server"]=$this->result["regyinfo"]["whois"];
+			$this->Query["server"] = $this->result["regyinfo"]["whois"];
 		}
 
-		if (!isset($this->result["rawdata"])) { $this->result["rawdata"] = array(); }
-		$this->result["rawdata"]=$this->Lookup($this->Query["string"]);
+		if (!isset($this->result["rawdata"]))
+			$this->result["rawdata"] = array();
 
-		$this->Query["handler"] = 
-			$this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
+		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
+
+		$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 		if(!empty($this->Query["handler"])) {
-			$this->Query["file"]=sprintf("%s.whois", $this->Query["handler"]);
-			// $this->result["regrinfo"]=$this->Process($this->result["rawinfo"]);
-			$this->result["regrinfo"]=$this->Process($this->result["rawdata"]);
+			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
+			// $this->result["regrinfo"] = $this->Process($this->result["rawinfo"]);
+			$this->result["regrinfo"] = $this->Process($this->result["rawdata"]);
 		}
-
 	}
 
-	function ParseRegInfo ($array) {
-		for($i=0,$max=count($array);$i<$max;$i++) {
+	function ParseRegInfo ($arr) {
+		for($i = 0, $max = count($arr); $i < $max ; $i++) {
 			reset($this->REG_FIELDS);
-			while(list($key,$val)=each($this->REG_FIELDS)) {
-				list($f_name,$f_val)=split(":", $array[$i]);
-				if($val==trim($f_name)) {
-					if($key=="nameserver") {
-						$ret_val[$key][]=trim($f_val);
+			while(list($key,$val) = each($this->REG_FIELDS)) {
+				if(!isset($arr[$i]) || !strpos($arr[$i], ":"))
+					continue;
+				list($f_name, $f_val) = split(":", $arr[$i]);
+				if($val == trim($f_name)) {
+					if($key == "nameserver") {
+						$ret_val[$key][] = trim($f_val);
 					} else {
-						$ret_val[$key]=trim($f_val);
+						$ret_val[$key] = trim($f_val);
 					}
 					break;
 				}
 			}
 		}
 		return($ret_val);
-	}           
+	}
 
 }
 
