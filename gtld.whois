@@ -79,7 +79,8 @@ class gtld extends Whois {
 		"R86-LROR" => "buydomains",
 		"TLDS, INC. DBA SRSPLUS" => "srsplus",
 		"R78-LROR" => "srsplus",
-		"DOMAIN BANK, INC." => "domainbank"
+		"DOMAIN BANK, INC." => "domainbank",
+		"GO DADDY SOFTWARE, INC." => "godaddy"
 		);
 
 	function gTLD ($data, $query) {

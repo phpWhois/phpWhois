@@ -24,9 +24,11 @@ bulkregistercom bulkregister.com
 buydomains	buydomains.com buydomains.org
 core            corenic.com corenic.org
 directnic	directnic.com directnic.org
+domainbank	domainbank.com
 dotregistrar    dotregistrar.com dotregistrar.org
 dotster         dotster.com dotster.org
 enom            enom.com enom.org
+godaddy		godaddy.com
 interdomain     interdominio.com interdomain.org
 inwwcom         ?
 netsol          olsns.com olsns.org
