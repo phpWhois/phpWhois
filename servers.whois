@@ -54,7 +54,8 @@ $this->DATA = array(
 	);
 
 $this->HTTPW = array(
-		"es" => "http://www.nic.es/cgi-bin/consulta.whois?list=Dominios&tipo=procesar&key=#"
+		"es" => "http://www.nic.es/cgi-bin/consulta.whois?list=Dominios&tipo=procesar&key=#",
+		"co.za" => "http://co.za/cgi-bin/whois.sh?Domain=#",
 		);
 ?>
 
