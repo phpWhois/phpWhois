@@ -78,7 +78,8 @@ class gtld extends Whois {
 		"DOMAINDISCOVER" => "buydomains",
 		"R86-LROR" => "buydomains",
 		"TLDS, INC. DBA SRSPLUS" => "srsplus",
-		"R78-LROR" => "srsplus"
+		"R78-LROR" => "srsplus",
+		"DOMAIN BANK, INC." => "domainbank"
 		);
 
 	function gTLD ($data, $query) {
@@ -90,7 +91,8 @@ class gtld extends Whois {
 		   ($this->result["regyinfo"]["whois"] == $this->HACKS["wrong_netsol_whois"])) {
 			$this->Query["server"] = $this->HACKS["real_netsol_whois"];
 		} else {
-			$this->Query["server"] = $this->result["regyinfo"]["whois"];
+			if (isset($this->result["regyinfo"]["whois"]))
+				$this->Query["server"] = $this->result["regyinfo"]["whois"];
 		}
 
 		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
@@ -118,7 +120,8 @@ class gtld extends Whois {
 			$domaindata = $this->result["regrinfo"]["domain"];
 			$regrinfo = $this->Process($this->result["rawdata"]);
 			$this->result["regrinfo"] = $regrinfo;
-			$this->result["regrinfo"]["domain"] = array_merge($domaindata,$regrinfo["domain"]);
+			if (isset($regrinfo["domain"]))
+				$this->result["regrinfo"]["domain"] = array_merge($domaindata,$regrinfo["domain"]);
 		}
 	}
 }
