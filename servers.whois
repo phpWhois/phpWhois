@@ -26,10 +26,12 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/* servers.whois	v18   Markus Welters	2004/06/25 */
 /* servers.whois	v17	ross golder	2003/02/09 */
 /* servers.whois	v16	mark jeftovic	2001/02/28 */
 
-$this->DATA_VERSION = "17";
+$this->DATA_VERSION = "18";
+
 $this->DATA = array(
 	"at"	=> "atnic",
 	"au"	=> "aunic",
@@ -58,6 +60,13 @@ $this->DATA = array(
 	"us"	=> "neustar",
 	"ws"	=> "wsnic",
         "ipw"	=> "ipw" // Dummy, just for ip whois
+	);
+
+/* If whois Server needs any parameters, enter it here */
+
+$this->WHOIS_PARAM = array(
+	"com" => "=",
+	"de" => "-T dn,ace "
 	);
 
 $this->HTTPW = array(

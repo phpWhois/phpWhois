@@ -385,12 +385,10 @@ class Whois {
 			return(array());
 		}
 
-		if ($this->Query["server"] == "com.whois-servers.net") {
-			fputs($ptr, "=".trim($string)."\r\n");
-		} 
-		else {
-			fputs($ptr, sprintf("%s\r\n", trim($string)));
-		}
+		if (isset($this->WHOIS_PARAM[$this->Query["tld"]]))
+			fputs($ptr, $this->WHOIS_PARAM[$this->Query["tld"]].trim($string)."\r\n");
+		else
+			fputs($ptr, trim($string)."\r\n");
 
 		// Prepare to receive result
 		$raw = "";
