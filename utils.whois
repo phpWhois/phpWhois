@@ -93,7 +93,7 @@ class utils extends Whois {
 		"us" => "http://www.isi.edu:80/in-notes/usdnr/rwhois.html",
 		"ve" => "http://www.nic.ve/nicwho01.html",
 		"yu" => "http://ubbg.etf.bg.ac.yu/yu-tld/domains.html",
-		"za" => "http://co.za/whois.html"
+		"za" => "http://co.za/whois.shtml"
 		);
 
 	function getRegistrar($cc) {
