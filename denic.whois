@@ -26,6 +26,7 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/* denic.whois        1.0 by david saez */
 /* denic.whois        0.4 by Oliver Notka <notka@ettel-gmbh.de> */
 /* Fixed error when domain doesnt exist */
 
@@ -38,6 +39,9 @@
 
 if(!defined("__DENIC_HANDLER__")) define("__DENIC_HANDLER__",1);
 
+require_once('generic3.whois');
+require_once('getdate.whois');
+
 class denic extends Whois {
 
 	function denic($data) {
@@ -45,110 +49,41 @@ class denic extends Whois {
 	}
 
 	function parse ($data_str) {
-		$convert = array(
-			"domain" => "name",
-			"descr" => "address",
-			"city" => "address", 
-			"pcode" => "address",
-			"country" => "address"
+
+		$items=array(
+			'domain.name' => 'domain:',
+			'domain.nserver' => 'nserver',
+			'domain.status' => 'status:',
+			'domain.changed' => 'changed:',
+			'owner' => '[holder]',
+			'admin' => '[admin-c]',
+			'tech' => '[tech-c]',
+			'zone' => '[zone-c]'
 			);
 
-		$sections = array(
-			"main" => "domain",
-			"admin-c" => "admin",
-			"tech-c" => "tech",
-			"zone-c" => "zone"
+		$extra=array(
+			'address:' => 'address.street',
+			'city:' => 'address.city',
+			'pcode:' => 'address.zcode',
+			'country:' => 'address.country',
+			'name:' => 'name',
+			'remarks:' => ''
 			);
 
-		$r = array();
-		$newblock = false;
-		$hasdata = false;
-		$block = array();
-		$gkey = "main";
-		$rawdata = $data_str["rawdata"];
+		$r['regrinfo'] = get_blocks($data_str['rawdata'],$items);
 
-		while (list($key,$val) = each($rawdata)) {	
-			$val = trim($val);
-			if (substr($val,0,1) == '%') {
-				$disclaimer[] = trim(substr($val,1));
-				continue;
-			}
-			if ($val == "") {
-				$newblock = true;
-				continue;
-			}
-			if ($newblock && $hasdata) {
-				$blocks[$gkey] = $block;
-				$block = array();
-			}
-			if ($newblock && substr($val,0,1)=="[") {
-				$gkey = str_replace("]["," ",$val);
-				$gkey = str_replace("]","",$gkey);
-				$gkey = str_replace("[","",$gkey);
-				$newblock = false;
-				continue; 
-			}
-			$hasdata = true;
-			$newblock = false;
-			$k = strtolower(trim(strtok($val,":")));
-			$v = trim(substr(strstr($val,":"),1));
-			
-			if (isset($convert[$k])) {
-				$k = $convert[$k];
-				if ($k == "") continue; 
-			}
-                    
-			if (isset($block[$k]) && is_array($block[$k]))
-				$block[$k][] = $v;
-			else if (!isset($block[$k]) || $block[$k]=="")
-				$block[$k] = $v;
-			else {
-				$x = $block[$k];
-				unset($block[$k]);
-				$block[$k][] = $x;
-				$block[$k][] = $v;
-			}
-
-		}
-
-		if ($hasdata)
-			$blocks[$gkey] = $block;
-
-		$r["regrinfo"]["owner"]["organization"]=$blocks["main"]["address"][0];
-		unset($blocks["main"]["address"][0]);
-		$r["regrinfo"]["owner"]["address"]=$blocks["main"]["address"];
-		unset($blocks["main"]["address"]);
-
-		/* Fixed by Oliver Notka if Domain not exist. */
-		if (!isset($blocks)) {
-			$this->Query["errstr"]="Domain not found";
-			unset($this->result["rawdata"]);
-			return;
-		}
-		
-		while (list($gkey,$gval) = each($blocks))
-                      { 
-                        $parts=explode(" ",$gkey);
-                        while (list($pkey,$pval) = each($parts))
-                              { 
-				if (isset($gval["address"][0]))
-				   {
-				     $gval["organization"]=$gval["address"][0];
-				     unset($gval["address"][0]);
-				   }
-
-				$r["regrinfo"][$sections[$pval]]=$gval;	
-                              }
-                      }
+		$r['regrinfo']['owner']=get_contact($r['regrinfo']['owner'],$extra);
+		$r['regrinfo']['admin']=get_contact($r['regrinfo']['admin'],$extra);
+		$r['regrinfo']['tech']=get_contact($r['regrinfo']['tech'],$extra);
+		$r['regrinfo']['zone']=get_contact($r['regrinfo']['zone'],$extra);
 
 		$r["rawdata"] = $data_str["rawdata"];
 
 		$r["regyinfo"] = array( "registrar" => "DENIC eG",
 					"referrer" => "http://www.denic.de/");
 
-		if (isset($disclaimer)) $r["regrinfo"]["disclaimer"]=$disclaimer;
-
 		$r['regrinfo']['domain']['changed']=substr($r['regrinfo']['domain']['changed'],0,10);
+		$r=format_dates($r,'ymd');
 		return($r);
 	}
 }

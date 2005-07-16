@@ -148,7 +148,7 @@ $items = array (
                );
 
 if ($extra_items!='')
-	$items=array_merge($items,$extra_items);
+	$items=array_merge($extra_items,$items);
 
 while (list($key,$val)=each($array))
       {

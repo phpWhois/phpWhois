@@ -4,7 +4,8 @@
 		- improved getdate.whois
 		- fixed benic.whois
 		- improvements to genric whois handling
-		- improvments & fixes to esnic.whois and brnic.whois
+		- improvments & fixes to esnic, denic and brnic
+                  handlers
 		
 2005/04/28  David Saez <david@ols.es>
 		- Fixed .fm handling
