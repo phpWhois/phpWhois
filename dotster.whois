@@ -32,6 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 if(!defined("__DOTSTER_HANDLER__")) define("__DOTSTER_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class dotster extends gtld {
 
@@ -44,19 +45,21 @@ function parse ($data_str)
 {
 
                 $items = array( "owner" => "Registrant:",
-                                "admin" => "Administrative Contact",
-                                "tech" => "Technical Contact",
+                                "admin" => "Administrative",
+                                "tech" => "Technical",
                                 "domain.nserver" => "Domain servers in listed order:",
                                 "domain.name" => "Domain name:",
                                 "domain.created" => "Created on:",
                                 "domain.expires" => "Expires on:",
-                                "domain.changed" => "Last Updated on:"
+                                "domain.changed" => "Last Updated on:",
+				"domain.sponsor" => "Registrar:"
                               );
 
                 $r = get_blocks($data_str,$items);
                 $r["owner"] = get_contact($r["owner"]);
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
+		format_dates($r,'dmy');
                 return($r);
 
 }

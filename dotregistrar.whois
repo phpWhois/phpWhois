@@ -33,6 +33,7 @@
 if(!defined("__DOTREGISTRAR_HANDLER__")) define("__DOTREGISTRAR_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class dotregistrar extends gtld {
 
@@ -50,7 +51,9 @@ class dotregistrar extends gtld {
 				"domain.nserver." => "Name Server:",
                                 "domain.created" => "Record created on",
                                 "domain.expires" => "Record expires on",
-                                "domain.changed" => "Record last updated on"
+                                "domain.changed" => "Record last updated on",
+				"domain.status" => "Status:",
+				"domain.name" => "Domain Name:"
                               );
 
                 $r = get_blocks($data_str,$items);
@@ -58,6 +61,7 @@ class dotregistrar extends gtld {
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
                 $r["zone"] = get_contact($r["zone"]);
+		format_dates($r,'dmy');
                 return($r);
 
 	}

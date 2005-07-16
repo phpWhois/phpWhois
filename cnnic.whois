@@ -88,7 +88,7 @@ class cnnic extends Whois {
 		$r["rawdata"] = $data_str["rawdata"];
 		$r["regyinfo"] = array( "referrer"=>"http://www.cnnic.net.cn",
 					"registrar" => "China NIC");
-		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items);
+		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items,'ymd');
 		return($r);
 	}
 }

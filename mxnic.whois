@@ -31,6 +31,8 @@
 
 if(!defined("__MXNIC_HANDLER__")) define("__MXNIC_HANDLER__",1);
 
+require_once('getdate.whois');
+
 class mxnic extends Whois {
 
 	function mxnic($data) {
@@ -104,6 +106,7 @@ class mxnic extends Whois {
 		}
 		else $r = "";
 
+		format_dates($r,'dmy');
 		return($r);
 	}
 

@@ -31,6 +31,7 @@
 if(!defined("__DIRECTNIC_HANDLER__")) define("__DIRECTNIC_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class directnic extends gtld {
 
@@ -56,6 +57,7 @@ class directnic extends gtld {
 		$r["owner"] = get_contact($r["owner"]);
 		$r["admin"] = get_contact($r["admin"]);
 		$r["tech"] = get_contact($r["tech"]);
+		format_dates($r,'mdy');
 		return($r);
 	}
 

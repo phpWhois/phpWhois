@@ -25,11 +25,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* joker.whois  1.00    David Saez <david@ols.es> */
+/* joker.whois  1.10    David Saez <david@ols.es> */
 
 if(!defined("__JOKER_HANDLER__")) define("__JOKER_HANDLER__",1);
 
-include_once("generic2.whois");
+include_once('generic2.whois');
 
 class joker extends gtld {
 
@@ -40,18 +40,18 @@ class joker extends gtld {
         function parse ($data_str) {
 
 	$items = array(
-                        "owner.name" => "owner:",
-                        "owner.address.street" => "address:",
-                        "owner.address.zcode" => "postal-code:",
-                        "owner.address.city" => "city:",
-                        "owner.address.state" => "state:",
-                        "owner.address.country" => "country:",
-			"admin.email" => "admin-c:",
-			"tech.email" => "tech-c:",
-			"billing.email" => "billing-c:",
-			"domain.created" => "created:",
-			"domain.changed" => "modified:",
-			"domain.sponsor" => "reseller-1:"
+                        'owner.name' => 'owner:',
+                        'owner.address.street' => 'address:',
+                        'owner.address.zcode' => 'postal-code:',
+                        'owner.address.city' => 'city:',
+                        'owner.address.state' => 'state:',
+                        'owner.address.country' => 'country:',
+			'admin.email' => 'admin-c:',
+			'tech.email' => 'tech-c:',
+			'billing.email' => 'billing-c:',
+			'domain.created' => 'created:',
+			'domain.changed' => 'modified:',
+			'domain.sponsor' => 'reseller-1:'
 			);
 
 	$r=generic_whois($data_str,$items);

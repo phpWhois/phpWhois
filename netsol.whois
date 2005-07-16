@@ -26,64 +26,39 @@
 */
 
 /* netsol.whois	1.0	mark jeftovic	1999/12/06 */
+/* netsol.whois 2.0	david saez */
 
 if(!defined("__NETSOL_HANDLER__")) define("__NETSOL_HANDLER__",1);
+
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class netsol extends gtld {
 
 	function netsol($data) {
-		$this->result=$this->parse(
-			preg_replace("/\n+/","_",implode("\n",$data))
-			);
+		$this->result=$this->parse($data);
 	}
 
 	function parse ($data_str) {
-		$data_str=preg_replace("/\s+/"," ",$data_str);
-		preg_match("/^(.+)Registrant:_/",$data_str,$refs); 
 
-		if (!isset($refs[1])) {
-			return array();
-			}
+		$items = array(
+				"owner" => "Registrant:",
+                                "admin" => "Administrative Contact",
+                                "tech" => "Technical Contact",
+                                "domain.name" => "Domain Name:",
+                                "domain.nserver." => "Domain servers in listed order:",
+                                "domain.created" => "Record created on",
+                                "domain.expires" => "Record expires on"
+                              );
 
-		$r["disclaimer"]=preg_replace("/_/","\n",$refs[1]);
-		//preg_match("/^.+Registrant:_(.+)\s+\((.+-DOM)\)_/", $data_str,$refs);
-		preg_match("/^.+Registrant:_(.+)\s+\((.+)\)_\s*(.+)_\s*Domain Name:\s(.+)_/", $data_str,$refs);
-		$r["owner"]["organization"]=$refs[1];
-		$r["owner"]["handle"]=$refs[2];
-		$r["owner"]["address"]=explode("_",$refs[3]);
-		//preg_match("/\(.+-DOM\)_\s*(.+)_\s*Domain Name:\s(.+)_\sAdmin/",$data_str,$refs);
-		//$r["owner"]["address"]=explode("_",$refs[1]);
-		//preg_replace("/_/","\n",$refs[1]);
-		//$r["domain"]["name"]=$refs[2];
-		preg_match("/Administrative .*?Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_/",$data_str, $refs);
-		$r["admin"]["name"]=$refs[1];
-		$r["admin"]["handle"]=$refs[2];
-		$r["admin"]["email"]=$refs[3];
-		preg_match("/Technical .*?Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_/",$data_str, $refs);
-		$r["tech"]["name"]=$refs[1];
-		$r["tech"]["handle"]=$refs[2];
-		$r["tech"]["email"]=$refs[3];
-		preg_match("/Billing Contact:_(.+?)\((.+?)\)\s(.+?@.+?)_/",$data_str, $refs);
-		if (isset($refs[1])) $r["billing"]["name"]=$refs[1];
-		if (isset($refs[2])) $r["billing"]["handle"]=$refs[2];
-		if (isset($refs[3])) $r["billing"]["email"]=$refs[3];
+                $r = get_blocks($data_str,$items);
 
-		//preg_match("/Record last updated on (.+?)\./",$data_str, $refs);
-		//$r["domain"]["changed"]=$refs[1];
-		preg_match("/Record created on (.+?)\./",$data_str, $refs);
-		$r["domain"]["created"]=$refs[1];
-		preg_match("/Record expires on (.+?)\./",$data_str, $refs);
-		$r["domain"]["expires"]=$refs[1];
-		preg_match("/Domain servers in listed order:_ (.+)$/",$data_str, $refs);
-		$ns=explode("_", $refs[1]);
-		for($i=0,$max=count($ns);$i<$max;$i++) {
-			     @list($k,$v)=split(" ", trim($ns[$i]));
-			     if ($k!="") $r["domain"]["nserver"][]=$k." [".$v."]";
-		}
+                $r["owner"] = get_contact($r["owner"]);
+                $r["admin"] = get_contact($r["admin"]);
+                $r["tech"] = get_contact($r["tech"]);
+                $r=format_dates($r,'dmy');
 
-		return($r);
+                return($r);
 	}
-
 }
-
 ?>

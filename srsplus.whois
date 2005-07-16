@@ -31,6 +31,7 @@
 if(!defined("__SRSPLUS_HANDLER__")) define("__SRSPLUS_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class srsplus extends gtld {
 
@@ -40,7 +41,8 @@ class srsplus extends gtld {
 
 	function parse ($data_str) {
 		
-		$items = array( "owner" => "Registrant:",
+		$items = array(
+				"owner" => "Registrant:",
 				"admin" => "Administrative",
 				"tech" => "Technical",
 				"billing" => "Billing",
@@ -52,10 +54,11 @@ class srsplus extends gtld {
 
 		$r =  get_blocks($data_str,$items);
 
-		$r["owner"] = get_contact($r["owner"]);
-		$r["admin"] = get_contact($r["admin"]);
-		$r["tech"] = get_contact($r["tech"]);
-                $r["billing"] = get_contact($r["billing"]);
+		if (isset($r["owner"])) $r["owner"] = get_contact($r["owner"]);
+		if (isset($r["admin"])) $r["admin"] = get_contact($r["admin"]);
+		if (isset($r["tech"])) $r["tech"] = get_contact($r["tech"]);
+		if (isset($r["billing"])) $r["billing"] = get_contact($r["billing"]);
+		format_dates($r['domain'],'mdy');
 		return($r);
 	}
 

@@ -79,7 +79,8 @@ class gtld extends Whois {
 		'STARGATE HOLDINGS CORP.' => 'stargate',
 		'TLDS, INC. DBA SRSPLUS' => 'srsplus',
 		'TLDS, LLC DBA SRSPLUS' => 'srsplus',
-		'TUCOWS, INC.' => 'opensrsnet',		
+		'TUCOWS, INC.' => 'opensrsnet',
+		'TUCOWS INC.' => 'opensrsnet',
 		'TV CORPORATION' => 'tvcorp',
 		'WILD WEST DOMAINS, INC.' => 'godaddy'
 		);
@@ -87,8 +88,10 @@ class gtld extends Whois {
 	function gTLD ($data, $query) {
 		$this->Query = $query;
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
-		$this->result = generic_whois($data["rawdata"],$this->REG_FIELDS);
+		$this->result = generic_whois($data["rawdata"],$this->REG_FIELDS,'dmy');
 
+		unset($this->Query["handler"]);
+		
 		if($this->HACKS["nsi_referral_loop"] &&
 		   ($this->result["regyinfo"]["whois"] == $this->HACKS["wrong_netsol_whois"])) {
 			$this->Query["server"] = $this->HACKS["real_netsol_whois"];

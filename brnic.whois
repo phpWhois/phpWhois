@@ -56,7 +56,7 @@ $contacts = array (
 			"billing-c" => "billing"
                   );
 
-$r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain");
+$r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain",'Ymd');
 
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array( "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");

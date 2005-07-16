@@ -69,7 +69,7 @@ $items=array( "owner.organization"  => "Organization:",
 
 $r["rawdata"]=$data_str["rawdata"];        
 
-$r["regrinfo"]=generic_whois($data_str["rawdata"],$items);
+$r["regrinfo"]=generic_whois($data_str["rawdata"],$items,'ymd');
 
 $r["regyinfo"]=array( "referrer"=>"http://www.easydns.ca" );
 

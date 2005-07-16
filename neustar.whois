@@ -56,6 +56,7 @@ function parse ($data_str) {
 			"owner.address.state" => "Registrant State/Province:",
 			"owner.address.country" => "Registrant Country:",
 			"owner.phone" => "Registrant Phone Number:",
+			"owner.fax" => "Registrant Facsimile Number:",
 			"owner.email" => "Registrant Email:",
 			"admin.handle" => "Administrative Contact ID:",
                         "admin.name" => "Administrative Contact Name:",
@@ -67,6 +68,7 @@ function parse ($data_str) {
                         "admin.address.country" => "Administrative Contact Country:",
                         "admin.phone" => "Administrative Contact Phone Number:",
                         "admin.email" => "Administrative Contact Email:",
+			"admin.fax" => "Administrative Contact Facsimile Number:",
 			"tech.handle" => "Technical Contact ID:",
                         "tech.name" => "Technical Contact Name:",
                         "tech.organization" => "Technical Contact Organization:",
@@ -77,6 +79,7 @@ function parse ($data_str) {
                         "tech.address.country" => "Technical Contact Country:",
                         "tech.phone" => "Technical Contact Phone Number:",
                         "tech.email" => "Technical Contact Email:",
+			"tech.fax" => "Technical Contact Facsimile Number:",
 			"billing.handle" => "Billing Contact ID:",
                         "billing.name" => "Billing Contact Name:",
                         "billing.organization" => "Billing Contact Organization:",
@@ -86,11 +89,12 @@ function parse ($data_str) {
                         "billing.address.state" => "Billing Contact State/Province:",
                         "billing.address.country" => "Billing Contact Country:",
                         "billing.phone" => "Billing Contact Phone Number:",
-                        "billing.email" => "Billing Contact Email:"
+                        "billing.email" => "Billing Contact Email:",
+			"billing.fax" => "Billing Contact Facsimile Number:"
 		);
 
 	$r["rawdata"] = $data_str["rawdata"];
-	$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
+	$r["regrinfo"] = generic_whois($data_str["rawdata"],$items,'-md--y');
 
 	$r["regyinfo"] = array( "referrer"=>"http://www.neustar.us", 
 				"registrar" => "NEUSTAR INC." );

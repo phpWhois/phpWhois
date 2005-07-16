@@ -30,7 +30,8 @@
 
 if(!defined("__INNERWISE_HANDLER__")) define("__INNERWISE_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class innerwise extends gtld {
 
@@ -52,10 +53,11 @@ class innerwise extends gtld {
                               );
 
                 $r = get_blocks($data_str,$items);
-                $r["owner"] = get_contact($r["owner"]);
-                $r["admin"] = get_contact($r["admin"]);
-                $r["tech"] = get_contact($r["tech"]);
-		$r["billing"] = get_contact($r["billing"]);
+                $r['owner'] = get_contact($r['owner']);
+                $r['admin'] = get_contact($r['admin']);
+                $r['tech'] = get_contact($r['tech']);
+		$r['billing'] = get_contact($r['billing']);
+		$r=format_dates($r,'mdy');
                 return($r);
 	}
 }

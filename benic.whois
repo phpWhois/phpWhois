@@ -26,9 +26,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 /* benic.whois        1.0        Matthijs Koot <koot@cyberwar.nl> */
-/* benic.whois        1.1	 David Saez */
+/* benic.whois        1.2	 David Saez */
 
-include_once("generic3.whois");
+include_once('generic3.whois');
+include_once('getdate.whois');
 
 if(!defined("__BENIC_HANDLER__")) define("__BENIC_HANDLER__",1);
 
@@ -43,17 +44,12 @@ class benic extends Whois {
     $items = array(
 			"domain.name" => "Domain:",
 			"domain.status" => "Status:",
-			"domain.nserver" => "NameServers:",
+			"domain.nserver" => "Nameservers:",
 			"domain.created" => "Registered:",
                         "owner" => "Licensee:",
-                        "owner.organization" => "Company:",
-                        "owner.email" => "Email:",
 			"admin" => "Onsite Contacts:",
-                        "admin.organization" => "Company:",
-                        "admin.email" => "Email:",
 			"tech" => "Agent Technical Contacts:",
-                        "tech.organization" => "Company:",
-                        "tech.email" => "Email:"
+			'agent' => 'Agent:'
 		  );
 
     $r["rawdata"]=$data["rawdata"];
@@ -62,22 +58,23 @@ class benic extends Whois {
 
     $r["regrinfo"] = get_blocks($data["rawdata"],$items);
 
-    if (isset($r['regrinfo']['domain']['name'])) {
+    if (isset($r['regrinfo']['domain']['name']))
+	{
 	$r['regrinfo']['registered']='yes';
-	$r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
-        $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
-        $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
-    
-        $r["regrinfo"]["owner"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["owner"]["name"]);
-        $r["regrinfo"]["tech"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["tech"]["name"]);
-        $r["regrinfo"]["admin"]["name"] = str_replace("Name:     ", "", $r["regrinfo"]["admin"]["name"]);
-    
-        $r["regrinfo"]["owner"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["owner"]["address"][1]); 
-        $r["regrinfo"]["tech"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["tech"]["address"][1]); 
-        $r["regrinfo"]["admin"]["organization"] = str_replace("Company:  ", "", $r["regrinfo"]["admin"]["address"][1]); 
-    
-        $r["regrinfo"]["domain"]["nserver"][0] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][0]);
-        $r["regrinfo"]["domain"]["nserver"][1] = str_replace("Name:     ", "", $r["regrinfo"]["domain"]["nserver"][1]);
+	$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
+        $r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
+
+	if (isset($r['regrinfo']['admin']))
+	        $r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
+
+        if (isset($r['regrinfo']['agent']))
+		{
+                $sponsor = get_contact($r['regrinfo']['agent']);
+		unset($r['regrinfo']['agent']);
+		$r['regrinfo']['domain']['sponsor']=$sponsor['name'];
+		}
+
+	$r=format_dates($r,'-mdy');
         }
     else
 	$r['regrinfo']['registered']='no';

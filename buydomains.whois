@@ -31,6 +31,7 @@
 if(!defined("__BUYDOMAINS_HANDLER__")) define("__BUYDOMAINS_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class buydomains extends gtld {
 
@@ -56,6 +57,7 @@ class buydomains extends gtld {
 		$r["admin"] = get_contact($r["admin"]);
 		$r["tech"] = get_contact($r["tech"]);
 		$r["zone"] = get_contact($r["zone"]);
+		format_dates($r,'dmy');
 		return($r);
 	}
 

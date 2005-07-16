@@ -27,11 +27,12 @@
 */
 
 /* registercom.whois	1.0	mark jeftovic	1999/12/26 */
-/* registercom.whois    2.0     david@ols.es    2003/02/18 */
+/* registercom.whois    2.1     david@ols.es    2003/02/18 */
 
 if(!defined("__REGISTERCOM_HANDLER__")) define("__REGISTERCOM_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class registercom extends gtld {
 
@@ -58,6 +59,7 @@ class registercom extends gtld {
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
 		$r["zone"] = get_contact($r["zone"]);
+		$r=format_dates($r,'-mdy');
                 return($r);
 	}
 }

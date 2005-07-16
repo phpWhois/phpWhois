@@ -81,7 +81,8 @@ class interdomain extends gtld {
                         "tech.fax" => "Technical Fax............"
 			);
 
-		return generic_whois($data_str,$items);
+		$ret = generic_whois($data_str,$items,'dmy');
+		return $ret;
 	}
 }
 

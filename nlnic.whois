@@ -32,6 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 if(!defined("__NLNIC_HANDLER__")) define("__NLNIC_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class nlnic extends Whois {
 
@@ -47,12 +48,13 @@ function parse ($data)
 			"domain.name" => "Domain name:",
 			"domain.status" => "Status:",
 			"domain.nserver" => "Domain nameservers:",
-			"domain.created" => "Date first registered:",
+			"domain.created" => "Date registered:",
 			"domain.changed" => "Record last updated:",
 			"domain.sponsor" => "Record maintained by:",
 			"owner" => "Registrant:",
 			"admin" => "Administrative contact:",
-			"tech" => "Technical contact:"
+			"tech" => "Technical contact:",
+			"zone" => "Registrar:"
 		  );
 
     $r["rawdata"]=$data["rawdata"];
@@ -71,8 +73,10 @@ function parse ($data)
     $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
     $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
     $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
+    $r["regrinfo"]["zone"] = get_contact($r["regrinfo"]["zone"]);
 
     $r["regrinfo"]["registered"]="yes";
+    format_dates($r,'dmy');
     return($r);
 }
 }

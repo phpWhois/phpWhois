@@ -30,7 +30,8 @@
 
 if(!defined("__GODADDY_HANDLER__")) define("__GODADDY_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class godaddy extends gtld {
 
@@ -41,8 +42,8 @@ class godaddy extends gtld {
 	function parse ($data_str) {
 
                $items = array( "owner" => "Registrant:",
-                                "admin" => "Administrative Contact:",
-                                "tech" => "Technical Contact:",
+                                "admin" => "Administrative Contact",
+                                "tech" => "Technical Contact",
                                 "domain.name" => "Domain Name:",
 				"domain.nserver." => "Domain servers in listed order:",
                                 "domain.created" => "Created on:",
@@ -55,6 +56,7 @@ class godaddy extends gtld {
                 $r["owner"] = get_contact($r["owner"]);
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"]  = get_contact($r["tech"]);
+		$r=format_dates($r,'dmy');
                 return($r);
 	}
 }

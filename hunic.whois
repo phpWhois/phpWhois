@@ -31,6 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 if(!defined("__HUNIC_HANDLER__")) define("__HUNIC_HANDLER__",1);
 
 include_once("generic.whois");
+include_once('getdate.whois');
 
 class hunic extends Whois
   {
@@ -126,6 +127,7 @@ while (list($key,$val)=each($reg['domain']))
 } 
 
 $r["regrinfo"]=$reg;
+format_dates($r,'ymd');
 return($r);
 }
 }

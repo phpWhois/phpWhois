@@ -31,6 +31,7 @@
 if(!defined("__CRONON_HANDLER__")) define("__CRONON_HANDLER__",1);
 
 require_once("generic3.whois");
+require_once('getdate.whois');
 
 class cronon extends gtld {
 
@@ -53,6 +54,7 @@ class cronon extends gtld {
                 $r["owner"] = get_contact($r["owner"]);
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
+		format_dates($r,'ymd');
                 return($r);
 	}
 }

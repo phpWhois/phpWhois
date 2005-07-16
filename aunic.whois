@@ -33,7 +33,7 @@
 
 if(!defined("__AUNIC_HANDLER__")) define("__AUNIC_HANDLER__",1);
 
-include_once("generic2.whois");
+include_once('generic2.whois');
 
 class aunic extends Whois {
 	
@@ -62,7 +62,7 @@ class aunic extends Whois {
 		$r["regyinfo"] = array("referrer"=>"http://www.aunic.net",
 				       "registrar"=>"AU-NIC");
 		
-		$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
+		$r['regrinfo'] = generic_whois($data_str['rawdata'],$items);
 		return $r;
 	}
 }

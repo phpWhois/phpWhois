@@ -2,6 +2,7 @@
 
 atnic		nic.at
 aunic		telstra.com.au
+benic		nic.be
 brnic		registro.br
 chnic		creart.ch blaueskreuz.ch
 cira		cira.ca (v)
@@ -10,8 +11,10 @@ denic		4ever.de
 dotfm		dot.fm
 esnic		ols.es
 hunic		nic.hu
+isnic		isnic.is
 lunic		dns.lu
 mxnic           nic.mx
+neustar		neustar.us
 nicse		nic-se.se
 nlnic		domain-registry.nl
 nunames		nunames.nu
@@ -31,16 +34,18 @@ dotregistrar    dotregistrar.com
 dotster         dotster.com
 enom            enom.com
 godaddy		godaddy.com
-joker		managerialanalyzer.com
+joker		joker.com
 innerwise	sexido.com
 interdomain     interdominio.com
-inwwcom         ?
-moniker		kaka.com
-netsol          olsns.com
+inwwcom         inww.com
+moniker		moniker.com
+netsol          networksolutions.com
 nicline		nicline.com
 opensrsnet      tucows.com
 registercom     register.com
+schlund		schlund.com
 srsplus		srsplus.com
+stargate	stargate.com
 tvcorp		sex.tv
 wwd             iprocommunicator.com
 

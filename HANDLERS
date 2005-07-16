@@ -42,11 +42,9 @@ the following subkeys:
 
 		name	-> domain name
 		desc	-> description of the domain
-		nserver	-> array containing canonical names
-			   of all nameservers for that domain
-			   listed i n order. Optionally it can
-			   also include the name server ip address
-			   following the canonical name.
+		nserver	-> array where the key is the canonical name
+			   of each nameserver and the value is the
+			   ip adresss (if none) of the server.
 		status  -> status of the domain (registry dependant)
 		changed -> date of last change
 		created	-> creation date
@@ -109,8 +107,10 @@ the following subkeys:
 Not all handlers fill values in each of the keys defined by the
 Common Object Model as not all registries return the same amount
 of data about a domain or ip address. Also there are some differences
-on the format returned for some keys (mainly the keys that reflect
-dates). 
+on the format returned for some keys.
+
+Dates (created/changed/expires) are always returned in the format
+yyyy-mm-dd.
 
 
 Writing handlers

@@ -1,3 +1,17 @@
+2005/07/16  David Saez <david@ols.es>
+		- normalized expired/created/chaged dates
+		- report non existant dns servers
+		- improved getdate.whois
+		- fixed benic.whois
+		- improvements to genric whois handling
+		
+2005/04/28  David Saez <david@ols.es>
+		- Fixed .fm handling
+		- normalized expired/created/chaged dates
+		- changed the way nservers are normalized
+		- some fixes
+		- adde CLI mode example
+
 2005/03/14  David Saez <david@ols.es>
 		- added handler for TV CORPORATION
 

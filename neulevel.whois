@@ -25,8 +25,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* neulevel.whois        2.1        7/2/2002 David Saez now uses generic2 */
-/* neulevel.whois	 2.0	    7/2/2002 David Saez stadarized object model */
+/* neulevel.whois        2.2        David Saez */
 /* neulevel.whois        1.0        by Brian Blood <brian@macserve.net>  */
 
 if(!defined("__NEULEVEL_HANDLER__")) define("__NEULEVEL_HANDLER__",1);
@@ -91,11 +90,11 @@ function parse ($data_str) {
                         "billing.email" => "Billing Contact Email:"
 		);
 
-	$r["rawdata"] = $data_str["rawdata"];
-	$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
+	$r['rawdata'] = $data_str['rawdata'];
+	$r['regrinfo'] = generic_whois($data_str['rawdata'],$items,'-md--y');
 
-	$r["regyinfo"] = array( "referrer"=>"http://www.neulevel.biz", 
-				"registrar" => "NEULEVEL" );
+	$r['regyinfo'] = array( 'referrer'  => 'http://www.neulevel.biz', 
+				'registrar' => 'NEULEVEL' );
 
 	return($r);
 }

@@ -28,11 +28,12 @@
 
 /* enom.whois 1.0 stephen leavitt 2000/12/09 */
 /* enom.whois 2.0 tim schulte 2001/03/21 */
-/* enom.whois 3.0 david@ols.es 2003/02/16 */
+/* enom.whois 3.1 david@ols.es 2003/02/16 */
 
 if(!defined("__ENOM_HANDLER__")) define("__ENOM_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class enom extends gtld {
 
@@ -65,6 +66,7 @@ class enom extends gtld {
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
 		$r["billing"] = get_contact($r["billing"]);
+		$r=format_dates($r,'dmy');
                 return($r);
 	}
 }

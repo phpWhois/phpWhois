@@ -39,6 +39,7 @@
 if(!defined("__ESNIC_HANDLER__")) define("__ESNIC_HANDLER__",1);
 
 require_once('generic3.whois');
+require_once('getdate.whois');
 
 function buscar ($what, $where)
 {
@@ -65,13 +66,13 @@ class esnic extends Whois {
 				'domain.expires' => 'Fecha Caducidad ',
 				'domain.nserver' => 'Nombre Servidor:',
 				'domain.sponsor' => 'Agente Registrador',
-				'owner' => 'Tipo de Contacto  Titular:',
-				'admin' => 'Tipo de Contacto  Administrativo:',
-				'billing' => 'Tipo de Contacto  Facturación:',
-				'tech' => 'Tipo de Contacto  Técnico:'
+				'owner' => 'Tipo de Contacto  Titular',
+				'admin' => 'Tipo de Contacto  Administrativo',
+				'billing' => 'Tipo de Contacto  Facturación',
+				'tech' => 'Tipo de Contacto  Técnico'
 				);
 
-		$citms = array ( 'handle' => 'NIC_HANDLE',
+		$citms = array ('handle' => 'NIC_HANDLE ',
 				'name' => 'Nombre',
 				'type' => 'Tipo de Titular',
 				'organization' => 'Organización',
@@ -81,7 +82,8 @@ class esnic extends Whois {
 				'address' => 'Domicilio',
 				'city' => 'Población',
 				'zcode' => 'Código Postal',
-				'country' => 'País'
+				'country' => 'País',
+				'role' => 'Cargo'
 				);
 
 		$data = array();
@@ -125,7 +127,9 @@ class esnic extends Whois {
 		$r['regrinfo'] = get_blocks($data,$items);
 
 		if (isset($r['regrinfo']['domain']['name'])) {
-			$r['regrinfo']['owner'] = buscar($r['regrinfo']['owner'],$cont);
+			$owner=buscar($r['regrinfo']['owner'],$cont);
+			if ($owner!='')
+				$r['regrinfo']['owner'] = $owner;
 			$r['regrinfo']['admin'] = buscar($r['regrinfo']['admin'],$cont);
 			$r['regrinfo']['billing'] = buscar($r['regrinfo']['billing'],$cont);
 			$r['regrinfo']['tech'] = buscar($r['regrinfo']['tech'],$cont);
@@ -138,7 +142,7 @@ class esnic extends Whois {
 				       'registrar'=>'ES-NIC' );
 
 		$r['rawdata'] = $data_str['rawdata'];
-
+		format_dates($r,'ymd');
                 return $r;
 	}
 }

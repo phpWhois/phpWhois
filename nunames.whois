@@ -31,6 +31,8 @@
 
 if(!defined("__NUNAMES_HANDLER__")) define("__NUNAMES_HANDLER__",1);
 
+require_once('getdate.whois');
+
 class nunames extends Whois {
 
 	function nunames($data) {
@@ -83,6 +85,7 @@ class nunames extends Whois {
 		else
 			$r['regrinfo']['registered']='no';
 		}
+		format_dates($r,'dmy');
 		return($r);
 	}
 }

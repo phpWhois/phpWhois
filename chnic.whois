@@ -32,7 +32,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* 24/7/2002    2.0     David Saez - updated to new object model */
 /* 17/3/2003    2.1     David Saez - rewritten to use generic3.whois */
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 if(!defined("__CHNIC_HANDLER__")) define("__CHNIC_HANDLER__",1);
 
@@ -65,16 +66,18 @@ if (!empty($r["regrinfo"]["domain"]["name"])) {
         $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
 	
 	$r["regrinfo"]["domain"]["name"]=$r["regrinfo"]["domain"]["name"][0];
-	$r["regrinfo"]["domain"]["changed"]=$r["regrinfo"]["domain"]["changed"][0];
-	$r["regrinfo"]["domain"]["created"]=$r["regrinfo"]["domain"]["created"][0];
+	$r["regrinfo"]["domain"]["changed"]=get_date($r["regrinfo"]["domain"]["changed"][0],'dmy');
+	$r["regrinfo"]["domain"]["created"]=get_date($r["regrinfo"]["domain"]["created"][0],'dmy');
 
  	$r["regyinfo"]=array("referrer"=>"http://www.nic.ch",
                              "registrar"=>"SWITCH Domain Name Registration");
+
 	$r["regrinfo"]["registered"]="yes";
-}
-else { $r="";
-       $r["regrinfo"]["registered"]="no";
-     }
+	}
+else {
+	$r='';
+       	$r["regrinfo"]["registered"]="no";
+	}
 
 return($r);
 }

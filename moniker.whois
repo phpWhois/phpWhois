@@ -26,11 +26,12 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* moniker.whois 1.0	David Saez Padros <david@ols.es> */
+/* moniker.whois 1.1	David Saez Padros <david@ols.es> */
 
 if(!defined("__MONIKER_HANDLER__")) define("__MONIKER_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class moniker extends gtld {
 
@@ -40,15 +41,15 @@ class moniker extends gtld {
 
 	function parse ($data_str) {
 
-               $items = array( "owner" => "Registrant:",
+               $items = array( "owner" => "Registrant",
                                 "admin" => "Administrative ",
                                 "tech" => "Technical ",
 				"billing" => "Billing ",
                                 "domain.name" => "Domain Name:",
 				"domain.nserver." => "Domain servers in listed order:",
-                                "domain.created" => "Record created on ",
-                                "domain.expires" => "Domain expires on ",
-                                "domain.changed" => "Database last updated on "
+                                "domain.created" => "Record created on: ",
+                                "domain.expires" => "Domain Expires on: ",
+                                "domain.changed" => "Database last updated on: "
                               );
 
                 $r = get_blocks($data_str,$items);
@@ -56,6 +57,7 @@ class moniker extends gtld {
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
 		$r["billing"] = get_contact($r["billing"]);
+		$r=format_dates($r,'ymd');
                 return($r);
 	}
 }

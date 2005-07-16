@@ -147,6 +147,8 @@ class denic extends Whois {
 					"referrer" => "http://www.denic.de/");
 
 		if (isset($disclaimer)) $r["regrinfo"]["disclaimer"]=$disclaimer;
+
+		$r['regrinfo']['domain']['changed']=substr($r['regrinfo']['domain']['changed'],0,10);
 		return($r);
 	}
 }

@@ -71,16 +71,16 @@ $this->WHOIS_PARAM = array(
 	);
 
 $this->HTTPW = array(
-		"bg"	 => "http://www.register.bg/bg-nic/displaydomain.pl?domain=#&search=exist",
-		"es"     => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio=#&tipo=dominio",
-		"co.za"  => "http://co.za/cgi-bin/whois.sh?Domain=#",
-		"fm"     => "http://www.dot.fm/query_whois.cfm?domain=#&tld=fm",
-		"gs"     => "http://www.adamsnames.tc/whois/?domain=#",
+		"bg"	 => "http://www.register.bg/bg-nic/displaydomain.pl?domain={domain}.{tld}&search=exist",
+		"es"     => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio={domain}.{tld}&tipo=dominio",
+		"co.za"  => "http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}",
+		"fm"     => "http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm",
+		"gs"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
 		"in"     => "whois.ncst.ernet.in",
-		"ms"     => "http://www.adamsnames.tc/whois/?domain=#",
+		"ms"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
 		"net.au" => "whois.aunic.net",
-		"tc"     => "http://www.adamsnames.tc/whois/?domain=#",
-		"tf"     => "http://www.adamsnames.tc/whois/?domain=#",
-		"vg"     => "http://www.adamsnames.tc/whois/?domain=#"
+		"tc"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
+		"tf"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
+		"vg"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}"
 		);
 ?>

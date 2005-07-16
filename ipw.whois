@@ -62,6 +62,8 @@ function ipw ($data,$query) {
 
 $this->Query=$query;
 
+unset($this->Query["handler"]);
+
 if (!isset($this->result["rawdata"])) { $this->result["rawdata"] = array(); }
 
 $this->result["regyinfo"]=array();

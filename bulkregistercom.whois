@@ -51,6 +51,8 @@ if(!defined("__BULKREGISTERCOM_HANDLER__")) define("__BULKREGISTERCOM_HANDLER__"
 
 #################################################*/
 
+require_once('getdate.whois');
+
 class bulkregistercom extends gtld {
 
 function bulkregistercom($data) {
@@ -114,6 +116,7 @@ function parse ($data_str) {
 	for($i=0,$max=count($ns);$i<$max;$i++) {
 		$r["domain"]["nserver"][]=$ns[$i];
 	}        	
+	format_dates($r,'ymd');
 	return($r);
 }
 

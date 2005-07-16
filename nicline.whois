@@ -27,11 +27,13 @@
 */
 
 /* NICLINE.whois 1.0	Carlos Galvez <cgalvez@espaciowww.com> */
+/* NICLINE.whois 1.1	David Saez */
 /* Example "niclide.com" */
 
 if(!defined("__NICLINE_HANDLER__")) define("__NICLINE_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
 class nicline  extends gtld {
 
@@ -57,9 +59,8 @@ class nicline  extends gtld {
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
                 //$r["zone"] = get_contact($r["zone"]);
+		$r=format_dates($r,'dmy');
                 return($r);
-
 	}
-
 }
 ?>

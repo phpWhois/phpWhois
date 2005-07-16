@@ -37,6 +37,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__UKNIC_HANDLER__")) define("__UKNIC_HANDLER__",1);
 
+require_once('getdate.whois');
+
 class uknic extends Whois {
 
 	function uknic($data) {
@@ -53,12 +55,12 @@ class uknic extends Whois {
 			"domain.changed" => "Last updated:" 
 			);
 
-		$r["rawdata"]=$data_str["rawdata"];
+		$r['rawdata']=$data_str['rawdata'];
 
 		while (list($key, $val)=each($data_str["rawdata"])) {
 			$val=trim($val);
 
-			if ($val!="") {
+			if ($val!='') {
 				if ($val=="Name servers listed in order:") {
 					while (list($key, $val)=each($data_str["rawdata"])) {
 						if (!($value=trim($val))) break;
@@ -87,8 +89,8 @@ class uknic extends Whois {
 			}
 		}
 
-                $r["regyinfo"]["referrer"]="http://www.nic.uk";
-                $r["regyinfo"]["registrar"]="Nominet UK";
+                $r['regyinfo']['referrer']='http://www.nic.uk';
+                $r['regyinfo']['registrar']='Nominet UK';
 
 		if (!empty($r["regrinfo"]["domain"]["name"])) {
 			$r["regrinfo"]["registered"] = "yes";
@@ -105,6 +107,7 @@ class uknic extends Whois {
 		else
 			$r["regrinfo"]["registered"] = "no";
 
+		format_dates($r,'dmy');
 		return($r);
 	}
 

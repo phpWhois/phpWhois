@@ -8,6 +8,8 @@
 
 if(!defined("__WSNIC_HANDLER__")) define("__WSNIC_HANDLER__",1);
 
+require_once('getdate.whois');
+
 class wsnic extends Whois {
 	function wsnic($data) {
 		$this->result=$this->parse($data);
@@ -72,6 +74,7 @@ class wsnic extends Whois {
 			else
 				$r["regrinfo"]["registered"] = "no";
 
+			format_dates($r,'ymd');
 			return($r);
 		}
 	}
