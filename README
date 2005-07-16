@@ -32,7 +32,7 @@ Example usage
 
 (see example.php)
 
-include("main.whois");
+include("whois.main.php");
 
 $whois = new Whois("example.com");
 $result = $whois->Lookup();

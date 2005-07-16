@@ -2,9 +2,9 @@
 
 // $Id$
 
-include("main.whois");
+include('whois.main.php');
 
-$domain = "example.com";
+$domain = 'example.com';
 if(isset($_REQUEST['domain'])) {
 	$domain = $_REQUEST['domain'];
 }
