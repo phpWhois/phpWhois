@@ -26,6 +26,7 @@
 */
 
 require_once('getdate.whois');
+require_once('genutil.whois');
 
 function generic_whois ( $rawdata, $items, $dateformat='mdy' )
 
@@ -48,14 +49,9 @@ while (list($key,$val)=each($rawdata))
              while (list($field, $match)=each($items)) 
                    {
 		     $pos=strpos($val,$match);
-                     if ($pos!==false) 
-                        { $parts=explode('.',$field);
-                          $var="\$r";
-                          while (list($fn,$mn)=each($parts))
-                                if ($mn=='')
-                                     $var.='[]';
-                                else $var.="[\"".$mn."\"]";
-
+                     if ($pos!==false)
+			{
+			  $var="\$r".getvarname($field);
 			  $itm=trim(substr($val,$pos+strlen($match)));
                           if ($itm!='')
                               eval($var."=\"".$itm."\";");

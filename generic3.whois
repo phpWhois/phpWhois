@@ -128,44 +128,57 @@ if (!is_array($array))
 	return array();
 
 $items = array (
-		'phone:' => 'phone',
 		'fax..:' => 'fax',
 		'fax-' => 'fax',
 		'fax:'   => 'fax',
 		'[fax]' => 'fax',
+		'(fax)' => 'fax',
+		'phone:' => 'phone',
 		'email:' => 'email',
 		'company name:' => 'organization',
 		'first name:' => 'name.first',
 		'last name:' => 'name.last',
 		'street:' => 'address.street',
 		'language:' => '',
-		'location:' => 'address.city'
+		'location:' => 'address.city',
+		'name:' => 'name',
+		'fax.' => 'fax',
+		'tel.' => 'phone'
                );
 
 while (list($key,$val)=each($array))
       {
-	reset($items);
+	$ok=true;
 
-	while (list($match,$field)=each($items))
-	      {
-		$pos=strpos(strtolower($val),$match);
-		if ($pos===false) continue;
-		$itm=trim(substr($val,$pos+strlen($match)));
-		if ($field!='')
-			{
-			eval("\$r".getvarname($field)."=\$itm;");
-			}
-		$val=trim(substr($val,0,$pos));
-		if ($val=='')
-                     unset($array[$key]);
-	        else
-			$array[$key]=$val;
-                break;
-              } 	
+	while ($ok)
+		{
+		reset($items);
+		$ok=false;
 
-	if ($val=="") continue;
+		while (list($match,$field)=each($items))
+	      		{
+			$pos=strpos(strtolower($val),$match);
+			if ($pos===false) continue;
+			$itm=trim(substr($val,$pos+strlen($match)));
+			if ($field!='')
+				{
+				eval("\$r".getvarname($field)."=\$itm;");
+				}
+			$val=trim(substr($val,0,$pos));
 
-	if (!preg_match("/[^0-9\(\)\-\.\+ ]/", $val))
+			if ($val=='')
+                	     	unset($array[$key]);
+		        else
+				{
+			     	$array[$key]=$val;
+				$ok=true;
+				}
+                	break;
+        	      } 	
+		}
+	if ($val=='') continue;
+
+	if (!preg_match("/[^0-9\(\)\-\.\+ ]/", $val) && strlen($val)>5)
            {
 	     if (isset($r['phone']))
 	        $r['fax']=$val;	
@@ -177,6 +190,7 @@ while (list($key,$val)=each($array))
 
 	if (strstr($val,'@'))
            {
+	     $val=str_replace("\t",' ',$val);	
 	     $parts=explode(' ',$val);
              $top=count($parts)-1;
              $r['email']=str_replace('(','',$parts[$top]);
