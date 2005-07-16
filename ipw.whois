@@ -159,7 +159,7 @@ if ($this->HANDLERS[$this->Query["server"]]!="")
     $this->Query["handler"] = $this->HANDLERS[$this->Query["server"]];
 
 if (!empty($this->Query["handler"])) 
-   { $this->Query["file"]=sprintf("%s.whois", $this->Query["handler"]);
+   { $this->Query["file"]=sprintf("whois.ip.%s.php", $this->Query["handler"]);
      $this->result["regrinfo"]=$this->Process($this->result["rawdata"]);
    }
 
