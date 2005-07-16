@@ -25,6 +25,8 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+require_once('genutil.whois');
+
 function get_blocks ( $rawdata, $items )
 {
 
@@ -62,7 +64,7 @@ while (list($key,$val)=each($rawdata))
 			else {
 				$var=getvarname(strtok($field,"#"));
 				$itm=trim(substr($val,$pos+strlen($match)));
-				eval($var."=\$itm;");
+				eval("\$r".$var."=\$itm;");
 			}
 		}
 	}
@@ -111,25 +113,12 @@ while (list($key,$val)=each($rawdata))
                 $pos=strpos($line,$match);
                 if ($pos!==false) {
         		$var=getvarname($field);
-        		eval($var."=\$block;");
+        		eval("\$r".$var."=\$block;");
 		}
 	}
       }
 
 return $r;
-}
-
-function getvarname ( $vdef )
-{
-$parts=explode(".",$vdef);
-$var="\$r";
-
-while (list($fn,$mn)=each($parts))
-       if ($mn=="")
-            $var=$var."[]";
-       else $var=$var."[\"".$mn."\"]";
-
-return $var;
 }
 
 function get_contact ( $array )
@@ -139,12 +128,18 @@ if (!is_array($array))
 	return array();
 
 $items = array (
-		"phone:" => "phone",
-		"fax..:" => "fax",
-		"fax-" => "fax",
-		"fax:"   => "fax",
-		"[fax]" => "fax",
-		"email:" => "email"
+		'phone:' => 'phone',
+		'fax..:' => 'fax',
+		'fax-' => 'fax',
+		'fax:'   => 'fax',
+		'[fax]' => 'fax',
+		'email:' => 'email',
+		'company name:' => 'organization',
+		'first name:' => 'name.first',
+		'last name:' => 'name.last',
+		'street:' => 'address.street',
+		'language:' => '',
+		'location:' => 'address.city'
                );
 
 while (list($key,$val)=each($array))
@@ -156,11 +151,15 @@ while (list($key,$val)=each($array))
 		$pos=strpos(strtolower($val),$match);
 		if ($pos===false) continue;
 		$itm=trim(substr($val,$pos+strlen($match)));
-		$r[$field]=$itm;
-		$val=trim(substr($val,0,-strlen($itm)-1-strlen($match)));
-		if ($val=="")
+		if ($field!='')
+			{
+			eval("\$r".getvarname($field)."=\$itm;");
+			}
+		$val=trim(substr($val,0,$pos));
+		if ($val=='')
                      unset($array[$key]);
-	        else $array[$key]=$val;
+	        else
+			$array[$key]=$val;
                 break;
               } 	
 
@@ -168,42 +167,48 @@ while (list($key,$val)=each($array))
 
 	if (!preg_match("/[^0-9\(\)\-\.\+ ]/", $val))
            {
-	     if (isset($r["phone"]))
-	          $r["fax"]=$val;	
-	     else $r["phone"]=$val;
+	     if (isset($r['phone']))
+	        $r['fax']=$val;	
+	     else
+		$r['phone']=$val;
 	     unset($array[$key]);
 	     continue;
 	   }
 
-	if (strstr($val,"@"))
+	if (strstr($val,'@'))
            {
-	     $parts=explode(" ",$val);
+	     $parts=explode(' ',$val);
              $top=count($parts)-1;
              $r['email']=str_replace('(','',$parts[$top]);
 	     $r['email']=str_replace(')','',$r['email']);
              array_pop($parts);
-             $val=implode(" ",$parts);
-	     if ($val=="") {
+             $val=implode(' ',$parts);
+	     if ($val=='') {
 		unset($array[$key]);
 		continue;
 	     }
-             $r["name"]=$val;
+             $r['name']=$val;
              unset($array[$key]);
 	     if ($key==1)
                 {
-		  $r["organization"]=$array[0];
+		  $r['organization']=$array[0];
 		  unset($array[0]);
                 }
            }
       }     
 
-if (!isset($r["name"]))
-   {
-     $r["name"]=$array[0];
-     unset($array[0]);
-   }
+if (!isset($r['name']))
+	{
+	$r['name']=$array[0];
+	unset($array[0]);
+	}
 
-if (!empty($array)) $r["address"]=$array;
+if (is_array($r['name']))
+	{
+	$r['name']=implode($r['name'],' ');
+	}
+
+if (!empty($array)) $r['address']=$array;
 
 return $r;
 }

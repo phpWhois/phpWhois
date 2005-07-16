@@ -25,7 +25,10 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-function generic_whois ($rawdata,$translate,$contacts,$main="domain")
+require_once('getdate.whois');
+require_once('genutil.whois');
+
+function generic_whois ($rawdata,$translate,$contacts,$main='domain',$dateformat='dmy')
 {
 $r=array();
 $newblock=false;
@@ -36,11 +39,11 @@ $dend=false;
 
 while (list($key,$val)=each($rawdata))
       { $val=trim($val);
-        if ($val!="" && $val[0]=='%')
+        if ($val!='' && $val[0]=='%')
            { if (!$dend) $disclaimer[]=trim(substr($val,1));
              continue;
            }
-	if ($val=="")
+	if ($val=='')
            { $newblock=true;
              continue;
            }
@@ -51,8 +54,8 @@ while (list($key,$val)=each($rawdata))
            }
         $dend=true;
         $newblock=false;
-	$k=trim(strtok($val,":"));
-        $v=trim(substr(strstr($val,":"),1));
+	$k=trim(strtok($val,':'));
+        $v=trim(substr(strstr($val,':'),1));
 
 	if ($v=="") continue;
 
@@ -61,7 +64,7 @@ while (list($key,$val)=each($rawdata))
 	if (isset($translate[$k])) 
            {
              $k=$translate[$k];
-	     if (strstr($k,"."))
+	     if (strstr($k,'.'))
                 {
                   eval("\$block".getvarname($k)."=\$v;");
                   continue;
@@ -73,7 +76,7 @@ while (list($key,$val)=each($rawdata))
 
 	if (isset($block[$k]) && is_array($block[$k]))
     	     $block[$k][]=$v;
-        else if (!isset($block[$k]) || $block[$k]=="") 
+        else if (!isset($block[$k]) || $block[$k]=='') 
                     $block[$k]=$v;
              else { $x=$block[$k];
 		    unset($block[$k]);
@@ -85,16 +88,16 @@ while (list($key,$val)=each($rawdata))
 if ($hasdata) $blocks[$gkey]=$block;
 
 if (isset($disclaimer) && is_array($disclaimer)) 
-    $ret["disclaimer"]=$disclaimer;
+    $ret['disclaimer']=$disclaimer;
 
-if (!isset($blocks) || !is_array($blocks["main"]))
-   { $ret["registered"]="no";
+if (!isset($blocks) || !is_array($blocks['main']))
+   { $ret['registered']='no';
      return $ret;
    }
 
-$r=$blocks["main"];
+$r=$blocks['main'];
 
-$ret["registered"]="yes";
+$ret['registered']='yes';
 
 while (list($key,$val)=each($contacts))
        if (isset($r[$key]))
@@ -108,20 +111,8 @@ while (list($key,$val)=each($contacts))
          }
 
 $ret[$main]=$r;
+format_dates($ret,$dateformat);
+
 return $ret;
 }
-
-function getvarname ( $vdef )
-{
-$parts=explode(".",$vdef);
-$var="";
-
-while (list($fn,$mn)=each($parts))
-       if ($mn=="")
-            $var=$var."[]";
-       else $var=$var."[\"".$mn."\"]";
-
-return $var;
-}
-
 ?>

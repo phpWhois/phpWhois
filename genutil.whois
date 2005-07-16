@@ -1,0 +1,16 @@
+<?php
+
+function getvarname ( $vdef )
+{
+$parts=explode(".",$vdef);
+$var="";
+
+while (list($fn,$mn)=each($parts))
+       if ($mn=="")
+            $var=$var."[]";
+       else $var=$var."[\"".$mn."\"]";
+
+return $var;
+}
+
+?>
