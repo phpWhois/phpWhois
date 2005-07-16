@@ -6,7 +6,8 @@
 		- improvements to genric whois handling
 		- improvments & fixes to esnic, denic and brnic
                   handlers
-		
+		- added configurable timeout for sockec communications
+
 2005/04/28  David Saez <david@ols.es>
 		- Fixed .fm handling
 		- normalized expired/created/chaged dates

@@ -93,6 +93,9 @@ class Whois {
 	// List of servers and handlers (loaded from servers.whois)
 	var $DATA = array(); 	
 
+	// Communications timeout
+
+	var $timeout = 10;
 	/*
 	 * Constructor function
 	 */
@@ -463,11 +466,14 @@ class Whois {
 
 		// Connect to whois server, or return if failed
 		$ptr = $this->Connect();
+		
 		if($ptr < 0) {
 			$this->Query["status"] = -1;
 			$this->Query["errstr"][] = "Connect failed to: ".$this->Query["server"];
 			return(array());
 		}
+
+		stream_set_timeout($ptr,$this->timeout);
 
 		if (isset($this->WHOIS_PARAM[$this->Query["tld"]]))
 			fputs($ptr, $this->WHOIS_PARAM[$this->Query["tld"]].trim($string)."\r\n");
