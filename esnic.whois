@@ -60,79 +60,54 @@ class esnic extends Whois {
 
 	function parse ($data_str) {
 
-		$items = array( 'domain.name' => 'Nombre del dominio ',
+		$items = array(
+				'domain.name' => 'Datos del Dominio',
 				'domain.status' => 'Estado ',
 				'domain.created' => 'Fecha de Alta ',
 				'domain.expires' => 'Fecha Caducidad ',
-				'domain.nserver' => 'Nombre Servidor:',
+				'domain.nserver' => 'Nombre Servidor  IP',
 				'domain.sponsor' => 'Agente Registrador',
-				'owner' => 'Tipo de Contacto  Titular',
-				'admin' => 'Tipo de Contacto  Administrativo',
-				'billing' => 'Tipo de Contacto  Facturación',
-				'tech' => 'Tipo de Contacto  Técnico'
+				'owner' => 'PROPIETARIO DEL DOMINIO',
+				'admin' => 'PERSONA DE CONTACTO ADMINISTRATIVO',
+				'billing' => 'PERSONA DE CONTACTO DE FACTURACION',
+				'tech' => 'PERSONA DE CONTACTO TECNICO'
 				);
 
-		$citms = array ('handle' => 'NIC_HANDLE ',
-				'name' => 'Nombre',
-				'type' => 'Tipo de Titular',
-				'organization' => 'Organización',
-				'email' => 'EMAIL',
-				'phone' => 'Teléfono',
-				'fax' => 'Fax',
-				'address' => 'Domicilio',
-				'city' => 'Población',
-				'zcode' => 'Código Postal',
-				'country' => 'País',
-				'role' => 'Cargo'
-				);
+		$extra = array (
+                		'domicilio' => 'address.street',
+		                'población' => 'address.city',
+		                'provincia' => '',
+                		'código postal' => 'address.zcode',
+		                'país' => 'address.country',
+                		'nic_handle' => 'handle',
+		                'nombre' => 'name',
+                		'organización ' => 'organization',
+				'tipo de titular' => '',
+				'titular' => 'organization',
+		                'teléfono' => 'phone'
+		               );
 
-		$data = array();
-		$cont = array();
-		$curr = array();
-		$cdat = true;
-
-		while (list ($key, $val) = each ($data_str['rawdata'])) {
-			if (trim($val)=='DETALLES CONTACTOS') {
-				$cdat = false;
-				continue;
-				}
-			if (trim($val)=='SERVIDORES DNS') {
-				$cdat = true;
-				continue;
-				}
-			if (trim($val)=='Nombre Servidor  IP') {
-				$data[]='Nombre Servidor:';
-				continue;
-				}
-			if (substr($val,0,17)=='Tipo de Contacto ') {
-				$data[]=$val.':';
-				continue;
-				}
-			if ($cdat) {
-				$data[]=$val;
-				}
-			else {
-				if (substr($val,0,10)=='NIC_HANDLE') {
-					if (!empty($curr))
-						$cont[] = get_blocks($curr,$citms);
-					$curr = array();
-					}
-				$curr[]=$val;
+		while (list ($key, $val) = each ($data_str['rawdata']))
+			{
+			if (strpos($val,'Nombre del dominio')!==false)
+				{
+				$data_str['rawdata'][$key]='PROPIETARIO DEL DOMINIO:';
+				break;
 				}
 			}
 
-		if (!empty($curr))
-                	$cont[] = get_blocks($curr,$citms);
+		$rawdata=implode("\n",$data_str['rawdata']);
+		$rawdata=str_replace('CONTACTO ADMINISTRATIVO','CONTACTO ADMINISTRATIVO:',$rawdata);
+		$rawdata=explode("\n",$rawdata);
 
-		$r['regrinfo'] = get_blocks($data,$items);
+		$r['regrinfo'] = get_blocks($rawdata,$items);
 
-		if (isset($r['regrinfo']['domain']['name'])) {
-			$owner=buscar($r['regrinfo']['owner'],$cont);
-			if ($owner!='')
-				$r['regrinfo']['owner'] = $owner;
-			$r['regrinfo']['admin'] = buscar($r['regrinfo']['admin'],$cont);
-			$r['regrinfo']['billing'] = buscar($r['regrinfo']['billing'],$cont);
-			$r['regrinfo']['tech'] = buscar($r['regrinfo']['tech'],$cont);
+		if (isset($r['regrinfo']['domain']['name']))
+			{
+			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'],$extra);
+			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'],$extra);
+			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing'],$extra);
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'],$extra);
 			$r['regrinfo']['registered']='yes';
 			}
 		else
@@ -141,7 +116,13 @@ class esnic extends Whois {
 		$r['regyinfo'] = array('referrer'=>'http://www.nic.es',
 				       'registrar'=>'ES-NIC' );
 
-		$r['rawdata'] = $data_str['rawdata'];
+		$rawdata=implode("\n",$rawdata);
+		$first=strpos($rawdata,'Datos del Dominio '.$r['regrinfo']['domain']['name']);
+
+		if ($first!==false)
+			$rawdata = substr($rawdata,$first);
+
+		$r['rawdata'] = explode("\n",$rawdata);
 		format_dates($r,'ymd');
                 return $r;
 	}

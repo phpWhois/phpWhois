@@ -121,7 +121,7 @@ while (list($key,$val)=each($rawdata))
 return $r;
 }
 
-function get_contact ( $array )
+function get_contact ( $array, $extra_items='' )
 {
 
 if (!is_array($array))
@@ -133,6 +133,7 @@ $items = array (
 		'fax:'   => 'fax',
 		'[fax]' => 'fax',
 		'(fax)' => 'fax',
+		'fax' => 'fax',
 		'phone:' => 'phone',
 		'email:' => 'email',
 		'company name:' => 'organization',
@@ -145,6 +146,9 @@ $items = array (
 		'fax.' => 'fax',
 		'tel.' => 'phone'
                );
+
+if ($extra_items!='')
+	$items=array_merge($items,$extra_items);
 
 while (list($key,$val)=each($array))
       {
@@ -211,18 +215,19 @@ while (list($key,$val)=each($array))
            }
       }     
 
-if (!isset($r['name']))
+if (!isset($r['name']) && isset($array[0]))
 	{
 	$r['name']=$array[0];
 	unset($array[0]);
 	}
 
-if (is_array($r['name']))
+if (isset($r['name']) && is_array($r['name']))
 	{
 	$r['name']=implode($r['name'],' ');
 	}
 
-if (!empty($array)) $r['address']=$array;
+if (!empty($array) && !isset($r['address']))
+	$r['address']=$array;
 
 return $r;
 }
