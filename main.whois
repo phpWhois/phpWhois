@@ -101,7 +101,7 @@ class Whois {
 	 */
 	function Whois ($query = "") {
 		// Load DATA array
-		@require("servers.whois");
+		@require('whois.servers.php');
 
 		$pos = strpos(strtolower(getenv ("OS")), "win");
 
