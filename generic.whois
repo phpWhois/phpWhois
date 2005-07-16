@@ -64,6 +64,7 @@ while (list($key,$val)=each($rawdata))
 	if (isset($translate[$k])) 
            {
              $k=$translate[$k];
+	     if ($k=='') continue;
 	     if (strstr($k,'.'))
                 {
                   eval("\$block".getvarname($k)."=\$v;");

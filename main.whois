@@ -381,8 +381,8 @@ class Whois {
 				$result['regrinfo']['registered']='unknown';
 			}
 
-//		if ($result['regrinfo']['registered']!='yes') return;
-		if (!isset($result['regrinfo']['domain']['nserver'])) return;
+		if (!isset($result['regrinfo']['domain']['nserver']))
+			return;
 
 		// Normalize nameserver fields
 		$nserver=$result['regrinfo']['domain']['nserver'];
