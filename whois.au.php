@@ -31,15 +31,11 @@
 /* aunic.whois 1.0 by Edi Wibowo <edi@ausnik-it.com,http://www.ausnik-it.com> */  
 /* check with telstra.com.au */
 
-if(!defined("__AUNIC_HANDLER__")) define("__AUNIC_HANDLER__",1);
+if(!defined("__AU_HANDLER__")) define("__AU_HANDLER__",1);
 
 include_once('generic2.whois');
 
-class aunic extends Whois {
-	
-	function aunic($data) {
-		$this->result = $this->parse($data);
-	}
+class au_handler extends Whois {
 	
 	function parse ($data_str) {
 		

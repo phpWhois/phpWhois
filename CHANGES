@@ -1,3 +1,6 @@
+2005/07/17  David Saez <david@ols.es>
+		- changed naming schema for country handlers
+
 2005/07/16  David Saez <david@ols.es>
 		- normalized expired/created/chaged dates
 		- report non existant dns servers
@@ -7,6 +10,7 @@
 		- improvments & fixes to esnic, denic and brnic
                   handlers
 		- added configurable timeout for sockec communications
+		- changed naming schema for ip handlers
 
 2005/04/28  David Saez <david@ols.es>
 		- Fixed .fm handling

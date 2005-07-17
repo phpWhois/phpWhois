@@ -35,15 +35,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*                      also updated for common object model */
 /* uknic.whois  1.5     03/03/2003 minor fixes */
 
-if(!defined("__UKNIC_HANDLER__")) define("__UKNIC_HANDLER__",1);
+if(!defined("__UK_HANDLER__")) define("__UK_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class uknic extends Whois {
-
-	function uknic($data) {
-		$this->result=$this->parse($data);
-	}
+class uk_handler extends Whois {
 
 	function parse ($data_str) {
 		$items=array( 
@@ -52,7 +48,9 @@ class uknic extends Whois {
 			"domain.name" => "Domain Name:",
 			"domain.sponsor" => "Registrant's Agent:",
 			"domain.created" => "Registered on:",
-			"domain.changed" => "Last updated:" 
+			"domain.changed" => "Last updated:",
+			"domain.expires" => "Renewal Date:",
+			"domain.status" => "Registration Status:" 
 			);
 
 		$r['rawdata']=$data_str['rawdata'];
@@ -95,9 +93,8 @@ class uknic extends Whois {
 		if (!empty($r["regrinfo"]["domain"]["name"])) {
 			$r["regrinfo"]["registered"] = "yes";
 
-			if (!empty($r["regrinfo"]["domain"]["nserver"]))
-				$r["regrinfo"]["domain"]["status"]="active"; 
-			else { 
+			if (empty($r["regrinfo"]["domain"]["nserver"]))
+			    { 
 				if (strstr($r["regrinfo"]["domain"]["sponsor"],"DETAGGED"))
 					$r["regrinfo"]["domain"]["status"]="detagged"; 
 				else 

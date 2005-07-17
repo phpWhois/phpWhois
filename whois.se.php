@@ -30,15 +30,11 @@
 /* senic.whois	0.99	Stefan Alfredsson <stefan@alfredsson.org> */
 /* Based upon uknic.whois by David Saez Padros */
 
-if(!defined("__NICSE_HANDLER__")) define("__NICSE_HANDLER__",1);
+if(!defined("__SE_HANDLER__")) define("__SE_HANDLER__",1);
 
 require_once('generic2.whois');
 
-class nicse extends Whois {
-
-	function nicse($data) {
-		$this->result=$this->parse($data);
-	}
+class se_handler extends Whois {
 
 	function parse ($data_str) {
 		$items=array( 

@@ -29,15 +29,11 @@
 /* nunames.whois	0.99	Stefan Alfredsson <stefan@alfredsson.org> */
 /* Based upon uknic.whois by David Saez Padros */
 
-if(!defined("__NUNAMES_HANDLER__")) define("__NUNAMES_HANDLER__",1);
+if(!defined("__NU_HANDLER__")) define("__NU_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class nunames extends Whois {
-
-	function nunames($data) {
-		$this->result=$this->parse($data);
-	}
+class nu_handler extends Whois {
 
 	function parse ($data_str) {
 		$items=array(

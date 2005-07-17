@@ -29,15 +29,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* lunic.whois  2.0	David Saez <david@ols.es> 2003/09/08 */
 /* cnnic.whois	1.0	Chewy - 2003/Sep/03 */
 
-if(!defined("__CNNIC_HANDLER__")) define("__CNNIC_HANDLER__",1);
+if(!defined("__CN_HANDLER__")) define("__CN_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class cnnic extends Whois {
-
-	function cnnic($data) {
-		$this->result = $this->parse($data);
-	}
+class cn_handler extends Whois {
 
 	function parse($data_str) {
 		$items = array(

@@ -29,15 +29,11 @@
 /* mxnic.whois	1.0	Torfinn Nome <torfinn@nome.no> 2003-02-15 */
 /* Based upon info.whois by David Saez Padros <david@ols.es> */
 
-if(!defined("__MXNIC_HANDLER__")) define("__MXNIC_HANDLER__",1);
+if(!defined("__MX_HANDLER__")) define("__MX_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class mxnic extends Whois {
-
-	function mxnic($data) {
-		$this->result = $this->parse($data);
-	}
+class mx_handler extends Whois {
 
 	function parse ($data_str) {
 

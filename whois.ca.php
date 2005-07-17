@@ -29,15 +29,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*		     2.0	David Saez <david@ols.es> */
 /*				standarized object model */
 
-if(!defined("__CIRA_HANDLER__")) define("__CIRA_HANDLER__",1);
+if(!defined("__CA_HANDLER__")) define("__CA_HANDLER__",1);
 
 include_once("generic2.whois");
 
-class cira extends Whois {
-
-function cira($data) {
-   $this->result=$this->parse($data);
-}
+class ca_handler extends Whois {
 
 function parse ($data_str) {
 

@@ -1,25 +1,26 @@
 // Country domains
 
-atnic		nic.at
-aunic		telstra.com.au
-benic		nic.be
-brnic		registro.br
-chnic		creart.ch blaueskreuz.ch
-cira		cira.ca (v)
-cnnic           cnnic.net.cn
-denic		4ever.de
-dotfm		dot.fm
-esnic		ols.es
-hunic		nic.hu
-isnic		isnic.is
-lunic		dns.lu
-mxnic           nic.mx
-neustar		neustar.us
-nicse		nic-se.se
-nlnic		domain-registry.nl
-nunames		nunames.nu
-uknic		olsns.co.uk
-wsnic		samoanic.ws
+at		nic.at
+au		telstra.com.au
+be		nic.be
+br		registro.br
+ca              cira.ca
+ch		creart.ch blaueskreuz.ch
+cn           	cnnic.net.cn
+de		4ever.de
+es		ols.es
+fm		dot.fm
+hu		nic.hu
+is		isnic.is
+li		nic.li
+lu		dns.lu
+mx           	nic.mx
+nl		domain-registry.nl
+nu		nunames.nu
+se		nic-se.se
+uk		olsns.co.uk
+us		neustar.us
+ws		samoanic.ws
 
 // .com/.org/.net/.tv
 
@@ -53,7 +54,7 @@ wwd             iprocommunicator.com
 
 info            afilias.info
 org		ascio.org buydomains.org ...
-neulevel        forumed.biz
+biz        	neulevel.biz
 
 // IP whois
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /*
 Whois2.php        PHP classes to conduct whois queries
 
@@ -25,18 +25,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* neulevel.whois        2.2        David Saez */
-/* neulevel.whois        1.0        by Brian Blood <brian@macserve.net>  */
+/* neulevel.whois        1.0        by David Saez <david @ ols . es>  */
 
-if(!defined("__NEULEVEL_HANDLER__")) define("__NEULEVEL_HANDLER__",1);
+if(!defined("__US_HANDLER__")) define("__US_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class neulevel extends Whois {
-
-function neulevel($data) {
-   $this->result = $this->parse($data);
-}
+class us_handler extends Whois {
 
 function parse ($data_str) {
 
@@ -57,6 +52,7 @@ function parse ($data_str) {
 			"owner.address.state" => "Registrant State/Province:",
 			"owner.address.country" => "Registrant Country:",
 			"owner.phone" => "Registrant Phone Number:",
+			"owner.fax" => "Registrant Facsimile Number:",
 			"owner.email" => "Registrant Email:",
 			"admin.handle" => "Administrative Contact ID:",
                         "admin.name" => "Administrative Contact Name:",
@@ -68,6 +64,7 @@ function parse ($data_str) {
                         "admin.address.country" => "Administrative Contact Country:",
                         "admin.phone" => "Administrative Contact Phone Number:",
                         "admin.email" => "Administrative Contact Email:",
+			"admin.fax" => "Administrative Contact Facsimile Number:",
 			"tech.handle" => "Technical Contact ID:",
                         "tech.name" => "Technical Contact Name:",
                         "tech.organization" => "Technical Contact Organization:",
@@ -78,6 +75,7 @@ function parse ($data_str) {
                         "tech.address.country" => "Technical Contact Country:",
                         "tech.phone" => "Technical Contact Phone Number:",
                         "tech.email" => "Technical Contact Email:",
+			"tech.fax" => "Technical Contact Facsimile Number:",
 			"billing.handle" => "Billing Contact ID:",
                         "billing.name" => "Billing Contact Name:",
                         "billing.organization" => "Billing Contact Organization:",
@@ -87,17 +85,17 @@ function parse ($data_str) {
                         "billing.address.state" => "Billing Contact State/Province:",
                         "billing.address.country" => "Billing Contact Country:",
                         "billing.phone" => "Billing Contact Phone Number:",
-                        "billing.email" => "Billing Contact Email:"
+                        "billing.email" => "Billing Contact Email:",
+			"billing.fax" => "Billing Contact Facsimile Number:"
 		);
 
-	$r['rawdata'] = $data_str['rawdata'];
-	$r['regrinfo'] = generic_whois($data_str['rawdata'],$items,'-md--y');
+	$r["rawdata"] = $data_str["rawdata"];
+	$r["regrinfo"] = generic_whois($data_str["rawdata"],$items,'-md--y');
 
-	$r['regyinfo'] = array( 'referrer'  => 'http://www.neulevel.biz', 
-				'registrar' => 'NEULEVEL' );
+	$r["regyinfo"] = array( "referrer"=>"http://www.neustar.us", 
+				"registrar" => "NEUSTAR INC." );
 
 	return($r);
 }
 
 }
-?>

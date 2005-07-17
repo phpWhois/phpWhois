@@ -6,14 +6,11 @@
  *
  */
 
-if(!defined("__WSNIC_HANDLER__")) define("__WSNIC_HANDLER__",1);
+if(!defined("__WS_HANDLER__")) define("__WS_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class wsnic extends Whois {
-	function wsnic($data) {
-		$this->result=$this->parse($data);
-	}
+class ws_handler extends Whois {
 
 	function parse ($data_str) {
 		$items=array( 

@@ -1,12 +1,12 @@
 <?php
 /*
-Whois2.php	PHP classes to conduct whois queries
+Whois2.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by Mark Jeftovic <markjr@easydns.com>          
+Maintained by Mark Jeftovic <markjr@easydns.com>
 
-For the most recent version of this package: 
+For the most recent version of this package:
 
 http://www.easydns.com/~markjr/whois2/
 
@@ -25,18 +25,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* bripw.whois	1.0 	David Saez 04/04/2003 */
+/* brnic.whois	      2.1        David Saez <david@ols.es> 
+/* brnic.whois        1.0        by Marcelo Sanches  msanches@sitebox.com.br */
 
-require_once("generic.whois");
+include_once("generic.whois");
 
-if(!defined("__BRIPW_HANDLER__")) define("__BRIPW_HANDLER__",1);
+if(!defined("__BR_HANDLER__")) define("__BR_HANDLER__",1);
 
-class bripw extends ipw {
-
-function bripw($data) 
-{
-$this->result=$this->parse($data);
-}
+class br_handler extends Whois {
 
 function parse ($data_str) 
 {
@@ -45,33 +41,41 @@ $translate = array (
                         "e-mail" => "email",
                         "nic-hdl-br" => "handle",
                         "person" => "name",
-			"netname" => "name"
+                        "netname" => "name",
+			"domain" => "name",
+			"updated" => ""
                    );
 
 $contacts = array (
                         "owner-c" => "owner",
                         "tech-c" => "tech",
-			"abuse-c" => "abuse"
+                        "admin-c" => "admin",
+			"billing-c" => "billing"
                   );
 
-$r = generic_whois($data_str,$translate,$contacts,"network");
+$r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain",'Ymd');
 
-unset($r["network"]["owner"]);
-unset($r["network"]["ownerid"]);
-unset($r["network"]["responsible"]);
-unset($r["network"]["address"]);
-unset($r["network"]["phone"]);
-$r["network"]["handle"]=$r["network"]["aut-num"];
-unset($r["network"]["aut-num"]);
-unset($r["network"]["nsstat"]);
-unset($r["network"]["nslastaa"]);
-unset($r["network"]["inetrev"]);
+$a['regyinfo']=array( "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");
 
-if (isset($r["network"]["nserver"])) 
-    $r["network"]["nserver"]=array_unique($r["network"]["nserver"]);
+if (in_array('Permission denied.',$r['disclaimer']))
+	{
+	$r['registered']='unknown';
+	return $r;
+	}
 
-return $r;
+unset($r["domain"]["nsstat"]);
+unset($r["domain"]["nslastaa"]);
+
+$r["owner"]["organization"]=$r["domain"]["owner"];
+
+unset($r["domain"]["owner"]);
+unset($r["domain"]["responsible"]);
+unset($r["domain"]["address"]);
+unset($r["domain"]["phone"]);
+
+$a['regrinfo']=$r;
+
+return($a);
 }
-
 }
 ?>

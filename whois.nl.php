@@ -29,17 +29,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* nlnic.whois    1.1    David Saez - common object model */
 /* nlnic.whois    1.0    Matthijs Koot - 2003/01/14 - <koot@cyberwar.nl> */
 
-if(!defined("__NLNIC_HANDLER__")) define("__NLNIC_HANDLER__",1);
+if(!defined("__NL_HANDLER__")) define("__NL_HANDLER__",1);
 
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class nlnic extends Whois {
-
-function nlnic($data) 
-{
-$this->result=$this->parse($data);
-}
+class nl_handler extends Whois {
 
 function parse ($data) 
 {

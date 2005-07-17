@@ -33,11 +33,7 @@ if(!defined("__INFO_HANDLER__")) define("__INFO_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class info extends Whois {
-
-	function info($data) {
-		$this->result = $this->parse($data);
-	}
+class info_handler extends Whois {
 
 	function parse ($data_str) {
 
@@ -52,8 +48,8 @@ class info extends Whois {
 				"owner.handle" => "Registrant ID:",
 				"owner.name" => "Registrant Name:",
 				"owner.organization" => "Registrant Organization:",
-				"owner.address.street" => "Registrant Street1:",
-				"owner.address.street2" => "Registrant Street2:",
+				"owner.address.street.0" => "Registrant Street1:",
+				"owner.address.street.1" => "Registrant Street2:",
 				"owner.address.city" => "Registrant City:",
 				"owner.address.state" => "Registrant State/Province:",
 				"owner.address.pcode" => "Registrant Postal Code:",
@@ -64,8 +60,8 @@ class info extends Whois {
 				"admin.handle" => "Admin ID:",
                                 "admin.name" => "Admin Name:",
                                 "admin.organization" => "Admin Organization:",
-                                "admin.address.street" => "Admin Street1:",
-                                "admin.address.street2" => "Admin Street2:",
+                                "admin.address.street.0" => "Admin Street1:",
+                                "admin.address.street.1" => "Admin Street2:",
                                 "admin.address.city" => "Admin City:",
                                 "admin.address.state" => "Admin State/Province:",
                                 "admin.address.pcode" => "Admin Postal Code:",
@@ -76,8 +72,8 @@ class info extends Whois {
 				"tech.handle" => "Tech ID:",
                                 "tech.name" => "Tech Name:",
                                 "tech.organization" => "Tech Organization:",
-                                "tech.address.street" => "Tech Street1:",
-                                "tech.address.street2" => "Tech Street2:",
+                                "tech.address.street.0" => "Tech Street1:",
+                                "tech.address.street.1" => "Tech Street2:",
                                 "tech.address.city" => "Tech City:",
                                 "tech.address.state" => "Tech State/Province:",
                                 "tech.address.pcode" => "Tech Postal Code:",
@@ -88,8 +84,8 @@ class info extends Whois {
 				"billing.handle" => "Billing ID:",
                                 "billing.name" => "Billing Name:",
                                 "billing.organization" => "Billing Organization:",
-                                "billing.address.street" => "Billing Street1:",
-                                "billing.address.street2" => "Billing Street2:",
+                                "billing.address.street.0" => "Billing Street1:",
+                                "billing.address.street.1" => "Billing Street2:",
                                 "billing.address.city" => "Billing City:",
                                 "billing.address.state" => "Billing State/Province:",
                                 "billing.address.pcode" => "Billing Postal Code:",

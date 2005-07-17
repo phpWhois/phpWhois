@@ -1,4 +1,4 @@
-<?php
+<?
 /*
 Whois2.php        PHP classes to conduct whois queries
 
@@ -25,18 +25,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* atnic.whois  2.00    David Saez <david@ols.es> */
-/* atnic.whois	0.99	Martin Pircher <martin@pircher.net> */
-/* dedicated to klopfer, *24.07.1999, +21.01.2001         */
-/* based upon brnic.whois by Marcelo Sanches  msanches@sitebox.com.br */
+/* isnic.whois  1.00    David Saez <david@ols.es> */
 
-if(!defined("__ATNIC_HANDLER__")) define("__ATNIC_HANDLER__",1);
+if(!defined("__IS_HANDLER__")) define("__IS_HANDLER__",1);
 
 include_once('generic.whois');
 
-class atnic extends Whois
+class is_handler extends Whois
   {
-  function atnic($data) { $this->result=$this->parse($data); }
 
 function parse ($data_str) {
 
@@ -56,37 +52,14 @@ $contacts = array (
                   );
 
 $r["rawdata"]=$data_str["rawdata"];
-$r["regyinfo"]=array("referrer"=>"http://www.nic.at","registrar"=>"NIC-AT");
+$r["regyinfo"]=array("referrer"=>"http://www.isnic.is","registrar"=>"ISNIC");
 
-$reg=generic_whois($data_str["rawdata"],$translate,$contacts,'domain','Ymd');
+$reg=generic_whois($data_str["rawdata"],$translate,$contacts,'domain','mdy');
 
-if (isset($reg["domain"]["remarks"]))
-	unset($reg["domain"]["remarks"]);
-
-if (isset($reg["domain"]["descr"])) {
-	while (list($key,$val)=each($reg["domain"]["descr"]))
-	      { $v=trim(substr(strstr($val,":"),1));
-        	if (strstr($val,"[organization]:")) 
-	           { $reg["owner"]["organization"]=$v;
-        	     continue;
-           	   }
-		if (strstr($val,"[phone]:"))
-	           { $reg["owner"]["phone"]=$v;
-	             continue;
-	           }
-	        if (strstr($val,"[fax-no]:"))
-	           { $reg["owner"]["fax"]=$v;
-	             continue;
-	           }
-	        if (strstr($val,"[e-mail]:"))
-	           { $reg["owner"]["email"]=$v;
-	             continue;
-	           }
-
-		$reg["owner"]["address"][$key]=$v;
-	      }
-
-	unset($reg["domain"]["descr"]);
+if (isset($reg['domain']['descr'])) {
+	$reg['owner']['name'] = array_shift($reg['domain']['descr']);
+	$reg['owner']['address'] = $reg['domain']['descr'];
+	unset($reg['domain']['descr']);
 	}
 
 $r["regrinfo"]=$reg;

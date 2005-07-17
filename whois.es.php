@@ -36,27 +36,12 @@
  *
  */
 
-if(!defined("__ESNIC_HANDLER__")) define("__ESNIC_HANDLER__",1);
+if(!defined("__ES_HANDLER__")) define("__ES_HANDLER__",1);
 
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-function buscar ($what, $where)
-{
-	$search = trim(strstr($what[0],' '));
-
-	while (list ($key, $val) = each ($where)) {
-		if (array_search($search,$val))
-			return $val; 
-		}
-	return '';
-}
-
-class esnic extends Whois {
-
-	function esnic($data) {
-		$this->result = $this->parse($data);
-	}
+class es_handler extends Whois {
 
 	function parse ($data_str) {
 

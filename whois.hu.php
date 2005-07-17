@@ -28,14 +28,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* hunic.whois	0.01	Manuel Machajdik <machajdik@gmxpro.net> */
 /* based upon org.whois and atnic.whois */
 
-if(!defined("__HUNIC_HANDLER__")) define("__HUNIC_HANDLER__",1);
+if(!defined("__HU_HANDLER__")) define("__HU_HANDLER__",1);
 
 include_once("generic.whois");
 include_once('getdate.whois');
 
-class hunic extends Whois
+class hu_handler extends Whois
   {
-  function hunic($data) { $this->result=$this->parse($data); }
 
 function parse ($data_str) {
 

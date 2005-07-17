@@ -32,7 +32,7 @@ if(!defined("__ORG_HANDLER__")) define("__ORG_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class org extends Whois {
+class org_handler extends Whois {
 
 	function org($data) {
 		$this->result = $this->parse($data);

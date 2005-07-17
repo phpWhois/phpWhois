@@ -142,6 +142,7 @@ $items = array (
 		'street:' => 'address.street',
 		'language:' => '',
 		'location:' => 'address.city',
+		'country:' => 'address.country',
 		'name:' => 'name',
 		'fax.' => 'fax',
 		'tel.' => 'phone'

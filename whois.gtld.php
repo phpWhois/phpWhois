@@ -34,7 +34,7 @@ if(!defined("__GTLD_HANDLER__")) define("__GTLD_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class gtld extends Whois {
+class gtld_handler extends Whois {
 
 	var $HANDLER_VERSION = "1.1";
 

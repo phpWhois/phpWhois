@@ -38,7 +38,7 @@ class Whois {
 	var $VERSION;
 
 	// This release of the package
-	var $CODE_VERSION = "3.0.4";
+	var $CODE_VERSION = "4.0.0";
 	
 	// Network Solutions registry server
 	var $NSI_REGISTRY = "whois.nsiregistry.net";
@@ -154,10 +154,11 @@ class Whois {
 							$this->Query["tld"] = $key;
 
                              // If a handler exists for the tld
+			     
                              if(isSet($this->DATA[$key])) {
                                 // Set file/handler in query array
                                 $handler = $this->DATA[$key];
-                                $this->Query["file"] = sprintf("%s.whois",$handler);
+                                $this->Query["file"] = "whois.$handler.php";
                                 $this->Query["handler"] = $handler;
                                }
                              return;
@@ -203,7 +204,7 @@ class Whois {
 					{
 					// Set file/handler in query array
 					$handler = $this->DATA[$htld];
-					$this->Query["file"] = sprintf("%s.whois", $handler);
+					$this->Query['file'] = "whois.$handler.php";
 					$this->Query["handler"] = $handler;
 					break;
 					}				
@@ -282,6 +283,7 @@ class Whois {
 
 		// If the handler has not already been included somehow, include it now
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
+
 		if(!defined($HANDLER_FLAG))
 			@include($this->Query["file"]);
 
@@ -291,19 +293,19 @@ class Whois {
 			return($result);
 		}
 
-		if (!$this->gtld_recurse && $this->Query["file"]=='gtld.whois')
+		if (!$this->gtld_recurse && $this->Query["file"]=='whois.com.php')
 			return $result;
 
 		// Pass result to handler
-		$object = $this->Query["handler"];
-		$handler = new $object($result, $this->Query);
+		$object = $this->Query['handler'].'_handler';
+		$handler = new $object('');
 
 		// If handler returned an error, append it to the query errors list
 		if(isSet($handler->Query["errstr"]))
 			$this->Query["errstr"][] = $handler->Query["errstr"];
 
 		// Return the result
-		return($handler->result);
+		return $handler->parse($result);
 	}
 
 	/*
@@ -408,7 +410,9 @@ class Whois {
 			while (list($k, $p) = each($parts)) {
 				if ($p=='') continue;
 				if (ip2long($p)===-1)
-					$host=$p;
+					{
+					if ($host=='') $host=$p;
+					}
 				else
 					$ip=$p;
 				}

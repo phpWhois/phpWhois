@@ -35,14 +35,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-if(!defined("__CHNIC_HANDLER__")) define("__CHNIC_HANDLER__",1);
+if(!defined("__CH_HANDLER__")) define("__CH_HANDLER__",1);
 
-class chnic extends Whois {
-
-function chnic($data) 
-{
-$this->result=$this->parse($data);
-}
+class ch_handler extends Whois {
 
 function parse ($data_str) 
 {

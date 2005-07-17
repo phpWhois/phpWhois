@@ -27,17 +27,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* dotfm.whois    1.0    David Saez 4/4/2003 */
 
-if(!defined("__DOTFM_HANDLER__")) define("__DOTFM_HANDLER__",1);
+if(!defined("__FM_HANDLER__")) define("__FM_HANDLER__",1);
 
 require_once('generic2.whois');
 require_once('generic3.whois');
 
-class dotfm extends Whois {
-
-function dotfm($data) 
-{
-$this->result=$this->parse($data);
-}
+class fm_handler extends Whois {
 
 function parse ($data) 
 {

@@ -29,15 +29,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* lunic.whois  2.0	David Saez <david@ols.es> 2003/01/26 */
 /* lunic.whois	1.0	J.M. Roth <jmroth@iip.lu> 2002/11/03 */
 
-if(!defined("__LUNIC_HANDLER__")) define("__LUNIC_HANDLER__",1);
+if(!defined("__LU_HANDLER__")) define("__LU_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class lunic extends Whois {
-
-	function lunic($data) {
-		$this->result = $this->parse($data);
-	}
+class lu_handler extends Whois {
 
 	function parse($data_str) {
 		$items = array(
