@@ -31,14 +31,9 @@ require_once("generic.whois");
 
 if(!defined("__APNIC_HANDLER__")) define("__APNIC_HANDLER__",1);
 
-class apnic extends ipw {
+class apnic_handler extends ip_handler {
 
-function apnic($data) 
-{
-$this->result=$this->parse($data);
-}
-
-function parse ($data_str) 
+function parse ($data_str,$query) 
 {
 $translate = array (
                         "fax-no" => "fax",
@@ -55,7 +50,7 @@ $contacts = array (
                         "tech-c" => "tech"
                   );
 
-$r = generic_whois($data_str,$translate,$contacts,"network");
+$r = generic_whois($data_str,$translate,$contacts,"network",'Ymd');
 
 $r["owner"]["organization"] = $r["network"]["desc"][0];
 unset($r["network"]["desc"][0]);

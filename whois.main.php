@@ -127,14 +127,14 @@ class Whois {
                 // If query is an ip address do ip lookup
 
                 if($query == long2ip(ip2long($query)) || !strpos($query,'.')) {
-                        // Prepare to do lookup via the 'ipw' handler
+                        // Prepare to do lookup via the 'ip' handler
                         $ip = @gethostbyname($query);
                         $this->Query["server"] = "whois.arin.net";
                         $this->Query["host_ip"] = $ip;
-                        $this->Query["file"] = "ipw.whois";
-                        $this->Query["handler"] = "ipw";
+                        $this->Query["file"] = "whois.ip.php";
+                        $this->Query["handler"] = "ip";
                         $this->Query["string"] = $ip;
-                        $this->Query["tld"] = "ipw";
+                        $this->Query["tld"] = "ip";
 			$this->Query["host_name"] = @gethostbyaddr($ip);
                         return;
                 }
@@ -285,7 +285,7 @@ class Whois {
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query["handler"]));
 
 		if(!defined($HANDLER_FLAG))
-			@include($this->Query["file"]);
+			include($this->Query["file"]);
 
 		// If the handler has still not been included, append to query errors list and return
 		if(!defined($HANDLER_FLAG)) {
@@ -298,6 +298,7 @@ class Whois {
 
 		// Pass result to handler
 		$object = $this->Query['handler'].'_handler';
+
 		$handler = new $object('');
 
 		// If handler returned an error, append it to the query errors list
@@ -305,7 +306,7 @@ class Whois {
 			$this->Query["errstr"][] = $handler->Query["errstr"];
 
 		// Return the result
-		return $handler->parse($result);
+		return $handler->parse($result,$this->Query);
 	}
 
 	/*

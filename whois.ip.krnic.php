@@ -32,16 +32,10 @@ if(!defined("__KRNIC_HANDLER__")) define("__KRNIC_HANDLER__",1);
 require_once("generic2.whois");
 require_once("generic3.whois");
 
-class krnic extends ipw {
+class krnic_handler extends ip_handler {
 
-function krnic($data) 
+function parse ($data_str,$query) 
 {
-	$this->result=$this->parse($data);
-}
-
-function parse ($data_str) 
-{
-
 
         $blocks = array( "owner" => "[ Organization Information ]",
                          "admin" => "[ Admin Contact Information]",
@@ -66,11 +60,12 @@ function parse ($data_str)
 
         $r = get_blocks($data_str,$blocks);
 
-	$r["owner"]=generic_whois($r["owner"],$items);
-	$r["admin"]=generic_whois($r["admin"],$items);
-	$r["tech"] =generic_whois($r["tech"],$items);
-	$r["abuse"]=generic_whois($r["abuse"],$items);
+	$r["owner"]=generic_whois($r["owner"],$items,'Ymd',false);
+	$r["admin"]=generic_whois($r["admin"],$items,'Ymd',false);
+	$r["tech"] =generic_whois($r["tech"],$items,'Ymd',false);
+	$r["abuse"]=generic_whois($r["abuse"],$items,'Ymd',false);
 
+	$r=format_dates($r,'Ymd');
 	return($r);
 }
 
