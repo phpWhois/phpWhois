@@ -9,7 +9,7 @@ reset($res);
 while (list($key, $val) = each($res))
 	{
 	if (is_array($val))
-		$res[$key]=format_dates(&$val,$format);
+		$res[$key]=format_dates($val,$format);
 	else
 		{
 		if (is_numeric($key)) continue;
@@ -28,6 +28,14 @@ function get_date($date,$format)
 {
 $months=array( 'jan'=>1, 'feb'=>2, 'mar'=>3, 'apr'=>4,  'may'=>5,  'jun'=>6, 
                'jul'=>7, 'aug'=>8, 'sep'=>9, 'oct'=>10, 'nov'=>11, 'dec'=>12 );
+
+$parts=explode(' ',$date);
+
+if (strpos($parts[0],'@')!==false)
+	{
+	unset($parts[0]);
+	$date=implode(' ',$parts);
+	}
 
 $date=str_replace(',',' ',trim($date));
 $date=str_replace('.',' ',$date);

@@ -60,7 +60,7 @@ biz        	neulevel.biz
 
 apnic		218.165.121.114
 arin            207.217.120.54
-bripw		200.165.206.74
+bripw		
 krnic		210.178.148.129
 lacnic		200.44.33.31
 ripe            62.97.102.115

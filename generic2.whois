@@ -28,7 +28,7 @@
 require_once('getdate.whois');
 require_once('genutil.whois');
 
-function generic_whois ( $rawdata, $items, $dateformat='mdy' )
+function generic_whois ( $rawdata, $items, $dateformat='mdy', $hasreg=true )
 
 {
 $r='';
@@ -62,12 +62,13 @@ while (list($key,$val)=each($rawdata))
       }
 
 if (empty($r))
-	$r['registered'] = 'no';
+	{
+	if ($hasreg) $r['registered'] = 'no';
+	}
 else
 	{
-	$r['registered'] = 'yes';
-	format_dates($r,$dateformat);
-
+	if ($hasreg) $r['registered'] = 'yes';
+	$r=format_dates($r,$dateformat);
 	}
 
 return $r;
