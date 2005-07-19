@@ -56,7 +56,7 @@ class Whois {
 	var $SLEEP = 2;
 
 	// Read buffer size (0 == char by char)
-	var $BUFFER = 0;
+	var $BUFFER = 255;
 
 	// Status response codes
 	var $STAT = array(
@@ -95,11 +95,11 @@ class Whois {
 
 	// Communications timeout
 
-	var $timeout = 10;
+	var $timeout = 20;
 	/*
 	 * Constructor function
 	 */
-	function Whois ($query = "") {
+        function Whois () {
 		// Load DATA array
 		@require('whois.servers.php');
 
@@ -110,6 +110,10 @@ class Whois {
 
 		// Set version
 		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
+	}
+
+
+	function Lookup($query='') {
 
 		$query = trim($query);
 
@@ -136,7 +140,7 @@ class Whois {
                         $this->Query["string"] = $ip;
                         $this->Query["tld"] = "ip";
 			$this->Query["host_name"] = @gethostbyaddr($ip);
-                        return;
+                        return $this->GetData();
                 }
 
                 // Test if we know in advance that no whois server is
@@ -161,7 +165,7 @@ class Whois {
                                 $this->Query["file"] = "whois.$handler.php";
                                 $this->Query["handler"] = $handler;
                                }
-                             return;
+                             return $this->GetData();
                            }
 
 		// Determine the top level domain, and it's whois server using
@@ -209,7 +213,7 @@ class Whois {
 					break;
 					}				
 				}
-			return;
+			return $this->GetData();
 		}
 
 		// If tld not known, and domain not in DNS, return error
@@ -436,10 +440,12 @@ class Whois {
 	 * handler class was found for the domain, other elements will have been
 	 * populated too.
 	 */
-	function Lookup ($query = "") {
+
+	function GetData ($query = "") {
 		// If domain to query passed in, use it, otherwise use domain from initialisation
 		$string = !empty($query) ? $query : $this->Query["string"];
 
+//echo "GetData ".$this->Query["server"]." $string\n<br>";		
 		if (!isset($this->Query["server"])) {
 			$this->Query["status"] = -1;
                         $this->Query["errstr"][] = "No server specified";
@@ -480,8 +486,8 @@ class Whois {
 
 		stream_set_timeout($ptr,$this->timeout);
 
-		if (isset($this->WHOIS_PARAM[$this->Query["tld"]]))
-			fputs($ptr, $this->WHOIS_PARAM[$this->Query["tld"]].trim($string)."\r\n");
+		if (isset($this->WHOIS_PARAM[$this->Query["server"]]))
+			fputs($ptr, $this->WHOIS_PARAM[$this->Query["server"]].trim($string)."\r\n");
 		else
 			fputs($ptr, trim($string)."\r\n");
 

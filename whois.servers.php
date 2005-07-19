@@ -66,8 +66,8 @@ $this->DATA = array(
 /* If whois Server needs any parameters, enter it here */
 
 $this->WHOIS_PARAM = array(
-	"com" => "=",
-	"de" => "-T dn,ace "
+	"com.whois-servers.net" => "=",
+	"de.whois-servers.net" => "-T dn,ace "
 	);
 
 $this->HTTPW = array(
