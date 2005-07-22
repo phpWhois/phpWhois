@@ -1,3 +1,11 @@
+2005/07/22  David Saez <david@ols.es>
+		- added CDIR to inetnum conversion for ip whois and
+		  fixed brnic detection
+		- changed naming schema for gtld handlers
+
+2005/07/19  David Saez <david@ols.es>
+		- changes on methods and variables of Whois class
+
 2005/07/17  David Saez <david@ols.es>
 		- changed naming schema for country handlers
 

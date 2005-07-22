@@ -26,40 +26,31 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* tvcorp.whois 1.1	David Saez Padros <david@ols.es> */
+/* cronon.whois 1.0	David Saez Padros <david@ols.es> */
 
-if(!defined('__TVCORP_HANDLER__')) define('__TVCORP_HANDLER__',1);
+if(!defined("__CRONON_HANDLER__")) define("__CRONON_HANDLER__",1);
 
-require_once('generic3.whois');
+require_once("generic3.whois");
 require_once('getdate.whois');
 
-class tvcorp extends gtld {
-
-	function tvcorp($data) {
-		$this->result=$this->parse($data);
-	}
+class cronon_handler extends gtld_handler {
 
 	function parse ($data_str) {
 
-               $items = array(
-				'owner' => 'Registrant',
-                                'admin' => 'Admin',
-                                'tech' => 'Technical',
-				'billing' => 'Billing',
-				'domain.nserver.' => 'Domain servers:',
-                                'domain.created' => 'Record created on',
-                                'domain.expires' => 'Record expires on'
+               $items = array( "owner" => "Owner Contact:",
+                                "admin" => "Admin Contact",
+                                "tech" => "Technical Contact, Zone Contact",
+                                "domain.name" => "Domain Name:",
+				"domain.nserver." => "Domain servers in listed order:",
+                                "domain.expires" => "Record expires on: ",
+                                "domain.changed" => "Record last updated on: "
                               );
 
                 $r = get_blocks($data_str,$items);
-                $r['owner'] = get_contact($r['owner']);
-                $r['admin'] = get_contact($r['admin']);
-                $r['tech'] = get_contact($r['tech']);
-
-		if (isset($r['billing']))
-			$r['billing'] = get_contact($r['billing']);
-
-		$r=format_dates($r,'myd');
+                $r["owner"] = get_contact($r["owner"]);
+                $r["admin"] = get_contact($r["admin"]);
+                $r["tech"] = get_contact($r["tech"]);
+		format_dates($r,'ymd');
                 return($r);
 	}
 }

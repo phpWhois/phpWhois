@@ -26,30 +26,25 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* directnic.whois     1.0     david@ols.es            2003/03/30 */
+/* buydomains.whois     1.0     david@ols.es            2003/03/30 */
 
-if(!defined("__DIRECTNIC_HANDLER__")) define("__DIRECTNIC_HANDLER__",1);
+if(!defined("__BUYDOMAINS_HANDLER__")) define("__BUYDOMAINS_HANDLER__",1);
 
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class directnic extends gtld {
+class buydomains_handler extends gtld_handler {
 
-	function directnic($data) {
-		$this->result=$this->parse($data);
-	}
-
-	function parse ($data_str) {
+	function parse ($data_str,$query) {
 		
 		$items = array( "owner" => "Registrant:",
 				"admin" => "Administrative Contact",
 				"tech" => "Technical Contact",
-				"domain.name" => "Domain name:",
-				"domain.sponsor" => "Registration Service Provider:",
-				"domain.nserver" => "Domain servers in listed order:",
-				"domain.changed" => "Record last updated ",
-				"domain.created" => "Record created on",
-				"domain.expires" => "Record expires on"
+				"zone" => "Zone Contact",
+				"domain.name" => "Domain Name:",
+				"domain.changed" => "Last updated on",
+				"domain.created" => "Domain created on",
+				"domain.expires" => "Domain expires on"
 			      );
 
 		$r =  get_blocks($data_str,$items);
@@ -57,7 +52,8 @@ class directnic extends gtld {
 		$r["owner"] = get_contact($r["owner"]);
 		$r["admin"] = get_contact($r["admin"]);
 		$r["tech"] = get_contact($r["tech"]);
-		format_dates($r,'mdy');
+		$r["zone"] = get_contact($r["zone"]);
+		format_dates($r,'dmy');
 		return($r);
 	}
 

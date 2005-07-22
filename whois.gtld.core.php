@@ -34,13 +34,9 @@ require_once("generic2.whois");
 
 if(!defined("__CORE_HANDLER__")) define("__CORE_HANDLER__",1);
 
-class core extends gtld {
+class core_handler extends gtld_handler {
 
-	function core($data) {
-		$this->result = $this->parse($data);
-	}
-
-	function parse ($data_str) {
+	function parse ($data_str,$query) {
 
 		$items = array( "domain.handle" => "Domain ID:",
 				"domain.name" => "Domain Name:",

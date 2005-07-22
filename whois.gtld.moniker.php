@@ -1,10 +1,11 @@
 <?php
+
 /*
   Whois2.php	PHP classes to conduct whois queries
   
-  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
   
-  Maintained by Mark Jeftovic <markjr@easydns.com>          
+  Maintained by Mark Jeftovic <markjr@easydns.com>
   
   For the most recent version of this package: 
   
@@ -25,39 +26,34 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* netsol.whois	1.0	mark jeftovic	1999/12/06 */
-/* netsol.whois 2.0	david saez */
+/* moniker.whois 1.1	David Saez Padros <david@ols.es> */
 
-if(!defined("__NETSOL_HANDLER__")) define("__NETSOL_HANDLER__",1);
+if(!defined("__MONIKER_HANDLER__")) define("__MONIKER_HANDLER__",1);
 
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class netsol extends gtld {
+class moniker_handler extends gtld_handler {
 
-	function netsol($data) {
-		$this->result=$this->parse($data);
-	}
+	function parse ($data_str,$query) {
 
-	function parse ($data_str) {
-
-		$items = array(
-				"owner" => "Registrant:",
-                                "admin" => "Administrative Contact",
-                                "tech" => "Technical Contact",
+               $items = array( "owner" => "Registrant",
+                                "admin" => "Administrative ",
+                                "tech" => "Technical ",
+				"billing" => "Billing ",
                                 "domain.name" => "Domain Name:",
-                                "domain.nserver." => "Domain servers in listed order:",
-                                "domain.created" => "Record created on",
-                                "domain.expires" => "Record expires on"
+				"domain.nserver." => "Domain servers in listed order:",
+                                "domain.created" => "Record created on: ",
+                                "domain.expires" => "Domain Expires on: ",
+                                "domain.changed" => "Database last updated on: "
                               );
 
                 $r = get_blocks($data_str,$items);
-
                 $r["owner"] = get_contact($r["owner"]);
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
-                $r=format_dates($r,'dmy');
-
+		$r["billing"] = get_contact($r["billing"]);
+		$r=format_dates($r,'ymd');
                 return($r);
 	}
 }

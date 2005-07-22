@@ -3,9 +3,9 @@
 /*
   Whois2.php	PHP classes to conduct whois queries
   
-  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic 
+  Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
   
-  Maintained by Mark Jeftovic <markjr@easydns.com>
+  Maintained by Mark Jeftovic <markjr@easydns.com>          
   
   For the most recent version of this package: 
   
@@ -26,45 +26,38 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* dotregistrar.whois 1.0	David Saez Padros <david@ols.es> */
-/* dotregistrar.whois 2.0       David Saez Padros <david@ols.es> */
-/* You can check it with zeleste.com */
+/* registercom.whois	1.0	mark jeftovic	1999/12/26 */
+/* registercom.whois    2.1     david@ols.es    2003/02/18 */
 
-if(!defined("__DOTREGISTRAR_HANDLER__")) define("__DOTREGISTRAR_HANDLER__",1);
+if(!defined("__REGISTERCOM_HANDLER__")) define("__REGISTERCOM_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
 require_once('getdate.whois');
 
-class dotregistrar extends gtld {
+class registercom_handler extends gtld_handler {
 
-	function dotregistrar($data) {
-		$this->result=$this->parse($data);
-	}
+	function parse ($data_str,$query) {
 
-	function parse ($data_str) {
-
-               $items = array( "owner" => "Registrant:",
+                $items = array( "owner" => "Organization:",
                                 "admin" => "Administrative Contact",
                                 "tech" => "Technical Contact",
-                                "zone" => "Zone Contact",
+				"zone" => "Zone Contact",
+				"" => "Registrar Name....:",
+                                "domain.nserver" => "Domain servers in listed order:",
                                 "domain.name" => "Domain name:",
-				"domain.nserver." => "Name Server:",
-                                "domain.created" => "Record created on",
-                                "domain.expires" => "Record expires on",
-                                "domain.changed" => "Record last updated on",
-				"domain.status" => "Status:",
-				"domain.name" => "Domain Name:"
+                                "domain.created" => "Created on..............:",
+                                "domain.expires" => "Expires on..............:",
+                                "domain.changed" => "Record last updated on..:"
                               );
 
                 $r = get_blocks($data_str,$items);
                 $r["owner"] = get_contact($r["owner"]);
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
-                $r["zone"] = get_contact($r["zone"]);
-		format_dates($r,'dmy');
+		$r["zone"] = get_contact($r["zone"]);
+		$r=format_dates($r,'-mdy');
                 return($r);
-
 	}
-
 }
+
 ?>

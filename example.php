@@ -8,8 +8,8 @@ $domain = 'example.com';
 if(isset($_REQUEST['domain'])) {
 	$domain = $_REQUEST['domain'];
 }
-$whois = new Whois($domain);
-$result = $whois->Lookup();
+$whois = new Whois();
+$result = $whois->Lookup($domain);
 
 echo "<form method=\"post\" action=\"example.php\">";
 echo "<input name=\"domain\" value=\"".$domain."\"/>";

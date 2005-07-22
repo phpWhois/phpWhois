@@ -31,13 +31,9 @@ if(!defined("__SCHLUND_HANDLER__")) define("__SCHLUND_HANDLER__",1);
 
 include_once("generic2.whois");
 
-class schlund extends gtld {
+class schlund_handler extends gtld_handler {
 
-        function schlund($data) {
-                $this->result=$this->parse($data);
-        }
-
-        function parse ($data_str) {
+        function parse ($data_str,$query) {
 
 	$items = array(
                         "domain.created" => "created:",

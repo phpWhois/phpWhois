@@ -26,41 +26,36 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* domainbank.whois 1.0	David Saez Padros <david@ols.es> */
+/* NICLINE.whois 1.0	Carlos Galvez <cgalvez@espaciowww.com> */
+/* NICLINE.whois 1.1	David Saez */
+/* Example "niclide.com" */
 
-if(!defined("__DOMAINBANK_HANDLER__")) define("__DOMAINBANK_HANDLER__",1);
+if(!defined("__NICLINE_HANDLER__")) define("__NICLINE_HANDLER__",1);
 
-require_once("generic3.whois");
+require_once('generic3.whois');
+require_once('getdate.whois');
 
-class domainbank extends gtld {
+class nicline_handler  extends gtld_handler {
 
-	function domainbank($data) {
-		$this->result=$this->parse($data);
-	}
-
-	function parse ($data_str) {
+	function parse ($data_str,$query) {
 
                $items = array( "owner" => "Registrant:",
-                                "admin" => "Administrative Contact:",
-                                "tech" => "Technical Contact:",
-				"zone" => "Zone Contact:",
-                                "domain.name" => "Domain:",
+                                "admin" => "Administrative contact:",
+                                "tech" => "Technical contact:",
+                                //"zone" => "Zone Contact",
+                                "domain.name" => "Domain name:",
 				"domain.nserver." => "Domain servers in listed order:",
-                                "domain.created" => "Record created on ",
-                                "domain.expires" => "Record expires on ",
-                                "domain.changed" => "Record last updated "
+                                "domain.created" => "Created:",
+                                "domain.expires" => "Expires:",
+                                "domain.changed" => "Last updated:"
                               );
 
                 $r = get_blocks($data_str,$items);
-
-		if (isset($r["owner"]))
-                	$r["owner"] = get_contact($r["owner"]);
-		if (isset($r["admin"]))
-                	$r["admin"] = get_contact($r["admin"]);
-		if (isset($r["tech"]))
-                	$r["tech"]  = get_contact($r["tech"]);
-		if (isset($r["zone"]))
-			$r["zone"]  = get_contact($r["zone"]);
+                $r["owner"] = get_contact($r["owner"]);
+                $r["admin"] = get_contact($r["admin"]);
+                $r["tech"] = get_contact($r["tech"]);
+                //$r["zone"] = get_contact($r["zone"]);
+		$r=format_dates($r,'dmy');
                 return($r);
 	}
 }

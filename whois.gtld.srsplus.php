@@ -26,38 +26,35 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* buydomains.whois     1.0     david@ols.es            2003/03/30 */
+/* srsplus.whois	1.0	david@ols.es 11/4/2003 */
 
-if(!defined("__BUYDOMAINS_HANDLER__")) define("__BUYDOMAINS_HANDLER__",1);
+if(!defined("__SRSPLUS_HANDLER__")) define("__SRSPLUS_HANDLER__",1);
 
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class buydomains extends gtld {
+class srsplus_handler extends gtld_handler {
 
-	function buydomains($data) {
-		$this->result=$this->parse($data);
-	}
-
-	function parse ($data_str) {
+	function parse ($data_str,$query) {
 		
-		$items = array( "owner" => "Registrant:",
-				"admin" => "Administrative Contact",
-				"tech" => "Technical Contact",
-				"zone" => "Zone Contact",
-				"domain.name" => "Domain Name:",
-				"domain.changed" => "Last updated on",
-				"domain.created" => "Domain created on",
-				"domain.expires" => "Domain expires on"
+		$items = array(
+				"owner" => "Registrant:",
+				"admin" => "Administrative",
+				"tech" => "Technical",
+				"billing" => "Billing",
+				"domain.name" => "Domain name:",
+				"domain.nserver" => "Domain servers:",
+				"domain.created" => "Record created on",
+				"domain.expires" => "Record expires on"
 			      );
 
 		$r =  get_blocks($data_str,$items);
 
-		$r["owner"] = get_contact($r["owner"]);
-		$r["admin"] = get_contact($r["admin"]);
-		$r["tech"] = get_contact($r["tech"]);
-		$r["zone"] = get_contact($r["zone"]);
-		format_dates($r,'dmy');
+		if (isset($r["owner"])) $r["owner"] = get_contact($r["owner"]);
+		if (isset($r["admin"])) $r["admin"] = get_contact($r["admin"]);
+		if (isset($r["tech"])) $r["tech"] = get_contact($r["tech"]);
+		if (isset($r["billing"])) $r["billing"] = get_contact($r["billing"]);
+		format_dates($r['domain'],'mdy');
 		return($r);
 	}
 

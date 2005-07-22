@@ -1,5 +1,4 @@
 <?php
-
 /*
   Whois2.php	PHP classes to conduct whois queries
   
@@ -26,49 +25,36 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* enom.whois 1.0 stephen leavitt 2000/12/09 */
-/* enom.whois 2.0 tim schulte 2001/03/21 */
-/* enom.whois 3.1 david@ols.es 2003/02/16 */
+/* netsol.whois	1.0	mark jeftovic	1999/12/06 */
+/* netsol.whois 2.0	david saez */
 
-if(!defined("__ENOM_HANDLER__")) define("__ENOM_HANDLER__",1);
+if(!defined("__NETSOL_HANDLER__")) define("__NETSOL_HANDLER__",1);
 
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class enom extends gtld {
+class netsol_handler extends gtld_handler {
 
-	function enom($data) {
+	function parse ($data_str,$query) {
 
-		$this->result = $this->parse($data);
-
-	}
-
-	function parse ($data_str) {
-
-                $items = array( "owner" => "Registrant Contact",
+		$items = array(
+				"owner" => "Registrant:",
                                 "admin" => "Administrative Contact",
                                 "tech" => "Technical Contact",
-				"billing" => "Billing Contact",	
-				"domain.nserver" => "Nameservers",
-				"domain.name#0" => "Domain name:",
-				"domain.name#1" => "Domain name-",
-				"domain.status" => "Status:",
-                                "domain.created#0" => "Creation date:",
-                                "domain.expires#0" => "Expiration date:",
-                                "domain.created#1" => "Created:",
-                                "domain.expires#1" => "Expires:",
-				"domain.created#2" => "Start of registration-",
-                                "domain.expires#2" => "Registered through-",
+                                "domain.name" => "Domain Name:",
+                                "domain.nserver." => "Domain servers in listed order:",
+                                "domain.created" => "Record created on",
+                                "domain.expires" => "Record expires on"
                               );
 
                 $r = get_blocks($data_str,$items);
+
                 $r["owner"] = get_contact($r["owner"]);
                 $r["admin"] = get_contact($r["admin"]);
                 $r["tech"] = get_contact($r["tech"]);
-		$r["billing"] = get_contact($r["billing"]);
-		$r=format_dates($r,'dmy');
+                $r=format_dates($r,'dmy');
+
                 return($r);
 	}
 }
-
 ?>

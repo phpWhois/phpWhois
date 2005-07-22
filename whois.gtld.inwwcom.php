@@ -33,13 +33,9 @@ require_once("generic2.whois");
     
 if(!defined("__INWWCOM_HANDLER__")) define("__INWWCOM_HANDLER__",1);
 
-class inwwcom extends gtld {
+class inwwcom_handler extends gtld_handler {
 
-	function inwwcom($data) {
-		$this->result=$this->parse($data);
-	}
-
-	function parse($data_str) {
+	function parse($data_str,$query) {
 		$items = array ( "domain.name" => "Domain Name..........",
                                  "domain.created" => "Registration Date....",
 				 "domain.expires" => "Expiry Date..........",

@@ -25,7 +25,7 @@ ws		samoanic.ws
 // .com/.org/.net/.tv
 
 ascio.com	ascio.com
-bulkregistercom bulkregister.com
+bulkr		bulkregister.com
 buydomains	buydomains.com
 core            corenic.com
 cronon		antiquea.com
@@ -60,7 +60,7 @@ biz        	neulevel.biz
 
 apnic		218.165.121.114
 arin            207.217.120.54
-bripw		
+bripw		200.165.206.74
 krnic		210.178.148.129
 lacnic		200.44.33.31
 ripe            62.97.102.115

@@ -33,13 +33,9 @@ if(!defined("__INTERDOMAIN_HANDLER__")) define("__INTERDOMAIN_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class interdomain extends gtld {
+class interdomain_handler extends gtld_handler {
 
-	function interdomain($data) {
-		$this->result=$this->parse($data);
-	}
-
-	function parse ($data_str) {
+	function parse ($data_str,$query) {
 
 		$items = array(
 			"domain.name" => "Domain Name................",

@@ -49,15 +49,16 @@ class gtld_handler extends Whois {
 		"regrinfo.domain.status" => "Status:", 
 		"regrinfo.domain.created" => "Creation Date:",
 		"regrinfo.domain.created" => "Created On:",
-		"regrinfo.domain.expires" => "Expiration Date:"
+		"regrinfo.domain.expires" => "Expiration Date:",
+		"regrinfo.domain.changed" => "Updated Date:"
 		);             
 
 	var $REGISTRARS = array(
-		"ALABANZA, INC." => "bulkregistercom",
+		"ALABANZA, INC." => "bulkr",
 		'ARSYS INTERNET, S.L. D/B/A NICLINE.COM' => "nicline",
 		"ASCIO TECHNOLOGIES, INC." => "ascio",
-		"BULKREGISTER.COM, INC."  => "bulkregistercom",
-		"BULKREGISTER, LLC." => "bulkregistercom",
+		"BULKREGISTER.COM, INC."  => "bulkr",
+		"BULKREGISTER, LLC." => "bulkr",
 		'COMPUTER SERVICES LANGENBACH GMBH DBA JOKER.COM' => 'joker',
 		"CORE INTERNET COUNCIL OF REGISTRARS" => "core",
 		'CRONON AG BERLIN, NIEDERLASSUNG REGENSBURG' => 'cronon',
@@ -85,22 +86,25 @@ class gtld_handler extends Whois {
 		'WILD WEST DOMAINS, INC.' => 'godaddy'
 		);
 
-	function gTLD ($data, $query) {
+	function parse ($data,$query)
+		{
 		$this->Query = $query;
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
 		$this->result = generic_whois($data["rawdata"],$this->REG_FIELDS,'dmy');
 
 		unset($this->Query["handler"]);
 		
+		/*
 		if($this->HACKS["nsi_referral_loop"] &&
 		   ($this->result["regyinfo"]["whois"] == $this->HACKS["wrong_netsol_whois"])) {
 			$this->Query["server"] = $this->HACKS["real_netsol_whois"];
 		} else {
+		*/
 			if (isset($this->result["regyinfo"]["whois"]))
 				$this->Query["server"] = $this->result["regyinfo"]["whois"];
-		}
+		//}
 
-		$this->result["rawdata"] = $this->Lookup($this->Query["string"]);
+		$this->result["rawdata"] = $this->GetData($this->Query["string"]);
 		// david@ols.es 16/10/2002 Fixes rawdata
 		
 		if (!isset($this->result["rawdata"]["rawdata"])) {
@@ -118,10 +122,11 @@ class gtld_handler extends Whois {
 		unset($this->result["registered"]);
 
 		if (!empty($this->Query["handler"])) {
-			$this->Query["file"] = sprintf("%s.whois", $this->Query["handler"]);
+			$this->Query["file"] = sprintf("whois.gtld.%s.php", $this->Query["handler"]);
 			$regrinfo = $this->Process($this->result["rawdata"]);
 			$this->result["regrinfo"] = merge_results($this->result["regrinfo"],$regrinfo);
 		}
+		return $this->result;
 	}
 }
 

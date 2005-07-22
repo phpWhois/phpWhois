@@ -7,8 +7,8 @@ if (isset($argv[1]))
 else
 	$domain = 'example.com';
 
-$whois = new Whois($domain);
-$result = $whois->Lookup();
+$whois = new Whois();
+$result = $whois->Lookup($domain);
 
 print_r($result);
 ?>

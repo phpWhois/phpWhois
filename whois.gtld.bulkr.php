@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* bulkregistercom.whois	1.0	mark jeftovic	1999/12/06 */
 /* bulkregistercom.whois	1.1	Matthijs Koot	2003/01/14 */
 
-if(!defined("__BULKREGISTERCOM_HANDLER__")) define("__BULKREGISTERCOM_HANDLER__",1);
+if(!defined("__BULKR_HANDLER__")) define("__BULKR_HANDLER__",1);
 
 
 /*#################################################
@@ -53,15 +53,10 @@ if(!defined("__BULKREGISTERCOM_HANDLER__")) define("__BULKREGISTERCOM_HANDLER__"
 
 require_once('getdate.whois');
 
-class bulkregistercom extends gtld {
+class bulkr_handler extends gtld_handler {
 
-function bulkregistercom($data) {
-$this->result=$this->parse(
-	preg_replace("/\n+/","_",implode("\n",$data))
-	);
-}
-
-function parse ($data_str) {
+function parse ($data_str,$query) {
+	$data_str=preg_replace("/\n+/","_",implode("\n",$data_str));
 	$data_str=preg_replace("/\s+/"," ",$data_str);
 	
 	//echo "BEGIN@".$data_str."@EINDE";
@@ -71,7 +66,7 @@ function parse ($data_str) {
 
 	preg_match("/terms\._(.+?)_(.*)_\sDomain Name/", $data_str,$refs);
 	$r["owner"]["address"]=explode("_",trim($refs[2]));
-//preg_replace("/_/","\n",trim($refs[2]));
+	//preg_replace("/_/","\n",trim($refs[2]));
 
 	preg_match("/terms\._.*_\s*Domain Name:\s(.+)_\sAdmin/",$data_str,$refs);
 	$r["domain"]["name"]=trim($refs[1]);

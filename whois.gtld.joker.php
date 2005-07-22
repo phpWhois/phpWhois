@@ -31,13 +31,9 @@ if(!defined("__JOKER_HANDLER__")) define("__JOKER_HANDLER__",1);
 
 include_once('generic2.whois');
 
-class joker extends gtld {
+class joker_handler extends gtld_handler {
 
-        function joker($data) {
-                $this->result=$this->parse($data);
-        }
-
-        function parse ($data_str) {
+        function parse ($data_str,$query) {
 
 	$items = array(
                         'owner.name' => 'owner:',

@@ -1,4 +1,4 @@
-+<?php 
+<?php 
 
 /*
   Whois2.php	PHP classes to conduct whois queries
@@ -34,11 +34,7 @@ if(!defined("__OPENSRSNET_HANDLER__")) define("__OPENSRSNET_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class opensrsnet extends gtld {
-
-	function opensrsnet($data) {
-		$this->result=$this->parse($data);
-	}
+class opensrsnet_handler extends gtld_handler {
 
 	function parse ($data_str) {
 		

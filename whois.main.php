@@ -497,7 +497,7 @@ class Whois {
 		while(!feof($ptr)) {
 			// If a buffer size is set, fetch line-by-line into an array
 			if($this->BUFFER)
-				$output[] = fgets($ptr, $this->BUFFER);
+				$output[] = trim(fgets($ptr, $this->BUFFER));
 			// If not, fetch char-by-char into a string
 			else
 				$raw .= fgetc($ptr);

@@ -26,38 +26,35 @@
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* moniker.whois 1.1	David Saez Padros <david@ols.es> */
+/* stargate.whois 1.1	David Saez Padros <david@ols.es> */
 
-if(!defined("__MONIKER_HANDLER__")) define("__MONIKER_HANDLER__",1);
+if(!defined("__STARGATE_HANDLER__")) define("__STARGATE_HANDLER__",1);
 
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class moniker extends gtld {
+class stargate_handler extends gtld_handler {
 
-	function moniker($data) {
-		$this->result=$this->parse($data);
-	}
+	function parse ($data_str,$query) {
 
-	function parse ($data_str) {
-
-               $items = array( "owner" => "Registrant",
-                                "admin" => "Administrative ",
-                                "tech" => "Technical ",
-				"billing" => "Billing ",
-                                "domain.name" => "Domain Name:",
-				"domain.nserver." => "Domain servers in listed order:",
-                                "domain.created" => "Record created on: ",
-                                "domain.expires" => "Domain Expires on: ",
-                                "domain.changed" => "Database last updated on: "
+               $items = array(
+				'owner' => 'Registrant',
+                                'admin' => 'Administrative',
+                                'tech' => 'Technical',
+				'billing' => 'Billing',
+                                'domain.name' => 'Domain Name:',
+				'domain.nserver.' => 'Name Servers',
+                                'domain.created' => 'Creation Date:',
+                                'domain.expires' => 'Expiration Date:',
+				'domain.status' => 'Status:'
                               );
 
                 $r = get_blocks($data_str,$items);
-                $r["owner"] = get_contact($r["owner"]);
-                $r["admin"] = get_contact($r["admin"]);
-                $r["tech"] = get_contact($r["tech"]);
-		$r["billing"] = get_contact($r["billing"]);
-		$r=format_dates($r,'ymd');
+                $r['owner'] = get_contact($r['owner']);
+                $r['admin'] = get_contact($r['admin']);
+                $r['tech'] = get_contact($r['tech']);
+		$r['billing'] = get_contact($r['billing']);
+		$r=format_dates($r,'dmy');
                 return($r);
 	}
 }
