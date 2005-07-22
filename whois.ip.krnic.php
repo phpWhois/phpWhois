@@ -41,7 +41,7 @@ function parse ($data_str,$query)
                          "admin" => "[ Admin Contact Information]",
                          "tech" => "[ Technical Contact Information ]",
 			 "abuse" => "[ ISP Network Abuse Contact Information ]",
-			 "network.inetnum" => "IP Address         :",
+			 "network.inetnum" => "IPv4 Address       :",
 			 "network.name" => "Network Name       :",
 			 "network.mnt-by" => "Connect ISP Name   :",
 			 "network.created" => "Registration Date  :"
