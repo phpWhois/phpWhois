@@ -2,6 +2,7 @@
 		- removed unused file denic.whois
 		- added support for za.net and za.org, thanx
                   to luca@clamav.net
+		- rewritte of .uk handler
 
 2005/07/22  David Saez <david@ols.es>
 		- added CDIR to inetnum conversion for ip whois and

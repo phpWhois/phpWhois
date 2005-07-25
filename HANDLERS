@@ -51,6 +51,7 @@ the following subkeys:
 		expires -> expire date
 		sponsor	-> registry partner where the domain was
 			   registered
+		referer -> sponsor's URL
 		handle  -> domain handle
 		source  -> who gives this information
 

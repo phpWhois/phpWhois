@@ -38,74 +38,32 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 if(!defined("__UK_HANDLER__")) define("__UK_HANDLER__",1);
 
 require_once('getdate.whois');
+require_once('generic3.whois');
 
 class uk_handler extends Whois {
 
-	function parse ($data_str) {
-		$items=array( 
-			"owner.organization" => "Registrant:",
-			"owner.address" => "Registrant's Address:",
-			"domain.name" => "Domain Name:",
-			"domain.sponsor" => "Registrant's Agent:",
-			"domain.created" => "Registered on:",
-			"domain.changed" => "Last updated:",
-			"domain.expires" => "Renewal Date:",
-			"domain.status" => "Registration Status:" 
-			);
+function parse ($data_str) {
 
-		$r['rawdata']=$data_str['rawdata'];
+	$items=array( 'owner.organization' => 'Registrant:',
+	      'owner.address'	   => "Registrant's Address:",
+              'domain.created'     => 'Registered on:',
+              'domain.changed'     => 'Last updated:',
+	      'domain.expires'	   => 'Renewal Date:',
+              'domain.nserver'     => 'Name servers listed in order:',
+	      'domain.sponsor'	   => "Registrant's Agent:"
+            );
 
-		while (list($key, $val)=each($data_str["rawdata"])) {
-			$val=trim($val);
+	$r['rawdata']=$data_str['rawdata'];
 
-			if ($val!='') {
-				if ($val=="Name servers listed in order:") {
-					while (list($key, $val)=each($data_str["rawdata"])) {
-						if (!($value=trim($val))) break;
-						$r["regrinfo"]["domain"]["nserver"][]=$value;
-					} 
-					break;
-				}
+	$r['regrinfo'] = get_blocks($data_str['rawdata'],$items);
 
-				reset($items);
+	$r['regrinfo']['owner']['organization']=$r['regrinfo']['owner']['organization'][0];
+	$r['regrinfo']['domain']['sponsor']=$r['regrinfo']['domain']['sponsor'][0];
 
-				while (list($field, $match)=each($items)) 
-					if (strstr($val,$match)) {
-						$v=trim(substr($val,strlen($match)));
-                                                if ($v=="") 
-                                                   { $v=each($data_str["rawdata"]);
-                                                     $v=trim($v["value"]);
-                                                   }
- 					$parts=explode(".",$field);
-					$var="\$r[\"regrinfo\"]";
-					while (list($fn,$mn)=each($parts))
-                                		$var=$var."[\"".$mn."\"]";
+	unset($r['regrinfo']['domain']['nserver'][count($r['regrinfo']['domain']['nserver'])-1]);
 
-                        		eval($var."=\"".$v."\";");
-					break;  
-					}
-			}
-		}
-
-                $r['regyinfo']['referrer']='http://www.nic.uk';
-                $r['regyinfo']['registrar']='Nominet UK';
-
-		if (!empty($r["regrinfo"]["domain"]["name"])) {
-			$r["regrinfo"]["registered"] = "yes";
-
-			if (empty($r["regrinfo"]["domain"]["nserver"]))
-			    { 
-				if (strstr($r["regrinfo"]["domain"]["sponsor"],"DETAGGED"))
-					$r["regrinfo"]["domain"]["status"]="detagged"; 
-				else 
-					$r["regrinfo"]["domain"]["status"]="inactive"; 
-			    }
-		}
-		else
-			$r["regrinfo"]["registered"] = "no";
-
-		format_dates($r,'dmy');
-		return($r);
+	$r=format_dates($r,'dmy');	
+	return $r;
 	}
 
 }

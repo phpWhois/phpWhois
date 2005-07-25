@@ -31,7 +31,7 @@ function get_blocks ( $rawdata, $items )
 {
 
 $r=array();
-$endtag="";
+$endtag='';
 
 while (list($key,$val)=each($rawdata))
       {
