@@ -34,7 +34,7 @@ require_once("generic2.whois");
 
 if(!defined("__CORE_HANDLER__")) define("__CORE_HANDLER__",1);
 
-class core_handler extends gtld_handler {
+class core_handler {
 
 	function parse ($data_str,$query) {
 

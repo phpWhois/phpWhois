@@ -40,7 +40,7 @@ if(!defined("__UK_HANDLER__")) define("__UK_HANDLER__",1);
 require_once('getdate.whois');
 require_once('generic3.whois');
 
-class uk_handler extends Whois {
+class uk_handler {
 
 function parse ($data_str) {
 

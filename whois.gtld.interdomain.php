@@ -33,7 +33,7 @@ if(!defined("__INTERDOMAIN_HANDLER__")) define("__INTERDOMAIN_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class interdomain_handler extends gtld_handler {
+class interdomain_handler {
 
 	function parse ($data_str,$query) {
 

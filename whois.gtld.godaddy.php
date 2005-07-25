@@ -33,7 +33,7 @@ if(!defined("__GODADDY_HANDLER__")) define("__GODADDY_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class godaddy_handler extends gtld_handler {
+class godaddy_handler {
 
 	function godaddy($data) {
 		$this->result=$this->parse($data);

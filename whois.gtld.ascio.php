@@ -33,7 +33,7 @@ if(!defined("__ASCIO_HANDLER__")) define("__ASCIO_HANDLER__",1);
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class ascio_handler extends gtld_handler {
+class ascio_handler {
 
 	function parse ($data_str,$query) {
 

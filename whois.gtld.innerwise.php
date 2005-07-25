@@ -33,7 +33,7 @@ if(!defined("__INNERWISE_HANDLER__")) define("__INNERWISE_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class innerwise_handler extends gtld_handler {
+class innerwise_handler {
 
 	function parse ($data_str,$query) {
 

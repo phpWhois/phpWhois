@@ -32,7 +32,7 @@ if(!defined("__KRNIC_HANDLER__")) define("__KRNIC_HANDLER__",1);
 require_once("generic2.whois");
 require_once("generic3.whois");
 
-class krnic_handler extends ip_handler {
+class krnic_handler {
 
 function parse ($data_str,$query) 
 {

@@ -10,7 +10,7 @@ if(!defined("__WS_HANDLER__")) define("__WS_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class ws_handler extends Whois {
+class ws_handler {
 
 	function parse ($data_str) {
 		$items=array( 

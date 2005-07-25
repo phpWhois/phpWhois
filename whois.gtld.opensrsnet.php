@@ -34,7 +34,7 @@ if(!defined("__OPENSRSNET_HANDLER__")) define("__OPENSRSNET_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class opensrsnet_handler extends gtld_handler {
+class opensrsnet_handler {
 
 	function parse ($data_str) {
 		

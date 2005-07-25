@@ -32,7 +32,7 @@ if(!defined("__BIZ_HANDLER__")) define("__BIZ_HANDLER__",1);
 
 require_once('generic2.whois');
 
-class biz_handler extends Whois {
+class biz_handler {
 
 function parse ($data_str) {
 

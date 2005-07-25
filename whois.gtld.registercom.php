@@ -34,7 +34,7 @@ if(!defined("__REGISTERCOM_HANDLER__")) define("__REGISTERCOM_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class registercom_handler extends gtld_handler {
+class registercom_handler {
 
 	function parse ($data_str,$query) {
 

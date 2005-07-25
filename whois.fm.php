@@ -32,7 +32,7 @@ if(!defined("__FM_HANDLER__")) define("__FM_HANDLER__",1);
 require_once('generic2.whois');
 require_once('generic3.whois');
 
-class fm_handler extends Whois {
+class fm_handler {
 
 function parse ($data) 
 {

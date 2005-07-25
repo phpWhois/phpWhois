@@ -33,8 +33,7 @@ if(!defined("__HU_HANDLER__")) define("__HU_HANDLER__",1);
 include_once("generic.whois");
 include_once('getdate.whois');
 
-class hu_handler extends Whois
-  {
+class hu_handler {
 
 function parse ($data_str) {
 

@@ -1,8 +1,10 @@
-2005/07/252  David Saez <david@ols.es>
+2005/07/25  David Saez <david@ols.es>
 		- removed unused file denic.whois
 		- added support for za.net and za.org, thanx
                   to luca@clamav.net
 		- rewritte of .uk handler
+		- whois client code moved to whois.client.php
+		- class inheritence revised
 
 2005/07/22  David Saez <david@ols.es>
 		- added CDIR to inetnum conversion for ip whois and

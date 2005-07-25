@@ -33,7 +33,7 @@ if(!defined("__CRONON_HANDLER__")) define("__CRONON_HANDLER__",1);
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class cronon_handler extends gtld_handler {
+class cronon_handler {
 
 	function parse ($data_str) {
 

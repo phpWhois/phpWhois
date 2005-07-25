@@ -53,7 +53,7 @@ if(!defined("__BULKR_HANDLER__")) define("__BULKR_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class bulkr_handler extends gtld_handler {
+class bulkr_handler {
 
 function parse ($data_str,$query) {
 	$data_str=preg_replace("/\n+/","_",implode("\n",$data_str));

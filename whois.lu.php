@@ -33,7 +33,7 @@ if(!defined("__LU_HANDLER__")) define("__LU_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class lu_handler extends Whois {
+class lu_handler {
 
 	function parse($data_str) {
 		$items = array(

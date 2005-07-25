@@ -31,7 +31,7 @@ require_once("generic.whois");
 
 if(!defined("__APNIC_HANDLER__")) define("__APNIC_HANDLER__",1);
 
-class apnic_handler extends ip_handler {
+class apnic_handler {
 
 function parse ($data_str,$query) 
 {

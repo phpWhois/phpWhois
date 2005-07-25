@@ -35,7 +35,7 @@ if(!defined("__AU_HANDLER__")) define("__AU_HANDLER__",1);
 
 include_once('generic2.whois');
 
-class au_handler extends Whois {
+class au_handler {
 	
 	function parse ($data_str) {
 		

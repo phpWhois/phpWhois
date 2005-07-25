@@ -35,7 +35,7 @@ if(!defined("__DOTREGISTRAR_HANDLER__")) define("__DOTREGISTRAR_HANDLER__",1);
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class dotregistrar_handler extends gtld_handler {
+class dotregistrar_handler {
 
 	function parse ($data_str,$query) {
 

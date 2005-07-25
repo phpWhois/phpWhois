@@ -31,7 +31,7 @@ require_once("generic.whois");
 
 if(!defined("__LACNIC_HANDLER__")) define("__LACNIC_HANDLER__",1);
 
-class lacnic_handler extends ip_handler {
+class lacnic_handler {
 
 function parse ($data_str,$query) 
 {

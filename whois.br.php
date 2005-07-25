@@ -32,25 +32,25 @@ include_once("generic.whois");
 
 if(!defined("__BR_HANDLER__")) define("__BR_HANDLER__",1);
 
-class br_handler extends Whois {
+class br_handler {
 
 function parse ($data_str) 
 {
 $translate = array (
-                        "fax-no" => "fax",
-                        "e-mail" => "email",
-                        "nic-hdl-br" => "handle",
-                        "person" => "name",
-                        "netname" => "name",
-			"domain" => "name",
-			"updated" => ""
+				"fax-no" => "fax",
+				"e-mail" => "email",
+				"nic-hdl-br" => "handle",
+				"person" => "name",
+				"netname" => "name",
+				"domain" => "name",
+				"updated" => ""
                    );
 
 $contacts = array (
-                        "owner-c" => "owner",
-                        "tech-c" => "tech",
-                        "admin-c" => "admin",
-			"billing-c" => "billing"
+				"owner-c" => "owner",
+				"tech-c" => "tech",
+				"admin-c" => "admin",
+				"billing-c" => "billing"
                   );
 
 $r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain",'Ymd');

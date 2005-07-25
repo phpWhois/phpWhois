@@ -31,7 +31,7 @@ if(!defined("__ARIN_HANDLER__")) define("__ARIN_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class arin_handler extends ip_handler {
+class arin_handler {
 
 function parse ($data_str) 
 {

@@ -33,7 +33,7 @@ if(!defined("__NU_HANDLER__")) define("__NU_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class nu_handler extends Whois {
+class nu_handler {
 
 	function parse ($data_str) {
 		$items=array(

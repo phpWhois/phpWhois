@@ -31,7 +31,7 @@ if(!defined("__SCHLUND_HANDLER__")) define("__SCHLUND_HANDLER__",1);
 
 include_once("generic2.whois");
 
-class schlund_handler extends gtld_handler {
+class schlund_handler {
 
         function parse ($data_str,$query) {
 

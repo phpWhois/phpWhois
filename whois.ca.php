@@ -33,7 +33,7 @@ if(!defined("__CA_HANDLER__")) define("__CA_HANDLER__",1);
 
 include_once("generic2.whois");
 
-class ca_handler extends Whois {
+class ca_handler {
 
 function parse ($data_str) {
 
@@ -42,7 +42,7 @@ $items=array( "owner.organization"  => "Organization:",
               "registrar" => "Registrar:",
               "domain.created" => "Date-Approved:",
               "domain.changed" => "Date-Modified:",
-	      "domain.expires" => "Renewal-Date:",
+				"domain.expires" => "Renewal-Date:",
               "domain.desc" => "Description:",
               "admin.name" => "Admin-Name:",
               "admin.address." => "Admin-Postal:",

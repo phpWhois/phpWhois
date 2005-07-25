@@ -41,7 +41,7 @@ if(!defined("__ES_HANDLER__")) define("__ES_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class es_handler extends Whois {
+class es_handler {
 
 	function parse ($data_str) {
 

@@ -33,7 +33,7 @@ if(!defined("__MONIKER_HANDLER__")) define("__MONIKER_HANDLER__",1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class moniker_handler extends gtld_handler {
+class moniker_handler {
 
 	function parse ($data_str,$query) {
 

@@ -31,8 +31,7 @@ if(!defined("__IS_HANDLER__")) define("__IS_HANDLER__",1);
 
 include_once('generic.whois');
 
-class is_handler extends Whois
-  {
+class is_handler {
 
 function parse ($data_str) {
 

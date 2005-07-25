@@ -33,7 +33,7 @@ if(!defined("__SRSPLUS_HANDLER__")) define("__SRSPLUS_HANDLER__",1);
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class srsplus_handler extends gtld_handler {
+class srsplus_handler {
 
 	function parse ($data_str,$query) {
 		

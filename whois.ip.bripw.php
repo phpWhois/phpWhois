@@ -31,7 +31,7 @@ require_once("generic.whois");
 
 if(!defined("__BRIPW_HANDLER__")) define("__BRIPW_HANDLER__",1);
 
-class bripw_handler extends ip_handler {
+class bripw_handler {
 
 function parse ($data_str) 
 {

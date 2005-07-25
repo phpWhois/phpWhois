@@ -34,7 +34,7 @@ if(!defined("__DOTSTER_HANDLER__")) define("__DOTSTER_HANDLER__",1);
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class dotster_handler extends gtld_handler {
+class dotster_handler {
 
 function parse ($data_str) 
 {

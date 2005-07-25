@@ -33,7 +33,7 @@ if(!defined("__BUYDOMAINS_HANDLER__")) define("__BUYDOMAINS_HANDLER__",1);
 require_once("generic3.whois");
 require_once('getdate.whois');
 
-class buydomains_handler extends gtld_handler {
+class buydomains_handler {
 
 	function parse ($data_str,$query) {
 		

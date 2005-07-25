@@ -32,7 +32,7 @@ if(!defined("__DOMAINBANK_HANDLER__")) define("__DOMAINBANK_HANDLER__",1);
 
 require_once("generic3.whois");
 
-class domainbank_handler extends gtld_handler {
+class domainbank_handler {
 
 	function parse ($data_str) {
 

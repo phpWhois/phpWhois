@@ -33,7 +33,7 @@ if(!defined('__TVCORP_HANDLER__')) define('__TVCORP_HANDLER__',1);
 require_once('generic3.whois');
 require_once('getdate.whois');
 
-class tvcorp_handler extends gtld_handler {
+class tvcorp_handler {
 
 	function parse ($data_str,$query) {
 

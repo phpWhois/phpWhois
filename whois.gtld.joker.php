@@ -31,7 +31,7 @@ if(!defined("__JOKER_HANDLER__")) define("__JOKER_HANDLER__",1);
 
 include_once('generic2.whois');
 
-class joker_handler extends gtld_handler {
+class joker_handler {
 
         function parse ($data_str,$query) {
 

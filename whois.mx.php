@@ -33,7 +33,7 @@ if(!defined("__MX_HANDLER__")) define("__MX_HANDLER__",1);
 
 require_once('getdate.whois');
 
-class mx_handler extends Whois {
+class mx_handler {
 
 	function parse ($data_str) {
 

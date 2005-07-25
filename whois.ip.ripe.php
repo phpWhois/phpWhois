@@ -31,7 +31,7 @@ require_once("generic.whois");
 
 if(!defined("__RIPE_HANDLER__")) define("__RIPE_HANDLER__",1);
 
-class ripe_handler extends ip_handler {
+class ripe_handler {
 
 function parse ($data_str) 
 {

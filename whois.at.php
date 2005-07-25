@@ -34,8 +34,8 @@ if(!defined("__AT_HANDLER__")) define("__AT_HANDLER__",1);
 
 include_once('generic.whois');
 
-class at_handler extends Whois
-  {
+class at_handler {
+
 function parse ($data_str) {
 
 $translate = array (

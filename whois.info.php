@@ -33,7 +33,7 @@ if(!defined("__INFO_HANDLER__")) define("__INFO_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class info_handler extends Whois {
+class info_handler {
 
 	function parse ($data_str) {
 

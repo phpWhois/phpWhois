@@ -34,11 +34,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*            207.217.120.54  (arin)   */
 /*            200.165.206.74  (brnic)  */
 /*            210.178.148.129 (krnic)  */
-/*	      200.44.33.31    (lacnic) */
+/*	          200.44.33.31    (lacnic) */
 
-if (!defined("__IP_HANDLER__")) define("__IP_HANDLER__",1);
+if (!defined('__IP_HANDLER__')) define('__IP_HANDLER__',1);
 
-class ip_handler extends Whois {
+class ip_handler extends WhoisClient {
 
 	var $HANDLER_VERSION = '1.0';
 
@@ -215,6 +215,7 @@ if ($n>0)
 $bits1=str_pad(decbin(ip2long($start)),32,'0','STR_PAD_LEFT');
 $net=pow(2,(32-substr(strstr($net,'/'),1)))-1;
 $bits2=str_pad(decbin($net),32,'0','STR_PAD_LEFT');
+$final='';
 
 for ($i=0;$i<32;$i++)
 	{

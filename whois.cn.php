@@ -33,7 +33,7 @@ if(!defined("__CN_HANDLER__")) define("__CN_HANDLER__",1);
 
 require_once("generic2.whois");
 
-class cn_handler extends Whois {
+class cn_handler {
 
 	function parse($data_str) {
 		$items = array(

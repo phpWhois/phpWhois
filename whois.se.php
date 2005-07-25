@@ -34,7 +34,7 @@ if(!defined("__SE_HANDLER__")) define("__SE_HANDLER__",1);
 
 require_once('generic2.whois');
 
-class se_handler extends Whois {
+class se_handler {
 
 	function parse ($data_str) {
 		$items=array( 

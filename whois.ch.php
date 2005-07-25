@@ -37,7 +37,7 @@ require_once('getdate.whois');
 
 if(!defined("__CH_HANDLER__")) define("__CH_HANDLER__",1);
 
-class ch_handler extends Whois {
+class ch_handler {
 
 function parse ($data_str) 
 {
