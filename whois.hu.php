@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__HU_HANDLER__")) define("__HU_HANDLER__",1);
 
-include_once("generic.whois");
+require_once('whois.parser.php');
 include_once('getdate.whois');
 
 class hu_handler {
@@ -87,7 +87,7 @@ for ($i=1; $i<count($data_str['rawdata']); $i++) {
 
 $r["rawdata"]=$data_str["rawdata"];
 
-$reg=generic_whois($data_str["rawdata"],$translate,$contacts);
+$reg=generic_parser_a($data_str["rawdata"],$translate,$contacts);
 
 
 if ($reg['domain']) {

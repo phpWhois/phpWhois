@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* brnic.whois	      2.1        David Saez <david@ols.es> 
 /* brnic.whois        1.0        by Marcelo Sanches  msanches@sitebox.com.br */
 
-include_once("generic.whois");
+require_once('whois.parser.php');
 
 if(!defined("__BR_HANDLER__")) define("__BR_HANDLER__",1);
 
@@ -53,7 +53,7 @@ $contacts = array (
 				"billing-c" => "billing"
                   );
 
-$r = generic_whois($data_str["rawdata"],$translate,$contacts,"domain",'Ymd');
+$r = generic_parser_a($data_str["rawdata"],$translate,$contacts,"domain",'Ymd');
 
 $a['regyinfo']=array( "registrar"=>"BR-NIC", "referrer"=>"http://www.nic.br");
 

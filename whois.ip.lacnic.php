@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* lacnic.whois	1.0 	David Saez 3/7/2003 */
 
-require_once("generic.whois");
+require_once('whois.parser.php');
 
 if(!defined("__LACNIC_HANDLER__")) define("__LACNIC_HANDLER__",1);
 
@@ -51,7 +51,7 @@ $contacts = array (
 			"owner-c" => "owner"
                   );
 
-$r = generic_whois($data_str,$translate,$contacts,"network");
+$r = generic_parser_a($data_str,$translate,$contacts,"network");
 
 if (isset($r['network']['nsstat'])) {
 	unset($r['network']['nsstat']);

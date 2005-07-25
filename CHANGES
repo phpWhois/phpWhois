@@ -5,6 +5,7 @@
 		- rewritte of .uk handler
 		- whois client code moved to whois.client.php
 		- class inheritence revised
+		- generic.whois moved to whois.parser.php
 
 2005/07/22  David Saez <david@ols.es>
 		- added CDIR to inetnum conversion for ip whois and

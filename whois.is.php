@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__IS_HANDLER__")) define("__IS_HANDLER__",1);
 
-include_once('generic.whois');
+require_once('whois.parser.php');
 
 class is_handler {
 
@@ -53,7 +53,7 @@ $contacts = array (
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array("referrer"=>"http://www.isnic.is","registrar"=>"ISNIC");
 
-$reg=generic_whois($data_str["rawdata"],$translate,$contacts,'domain','mdy');
+$reg=generic_parser_a($data_str["rawdata"],$translate,$contacts,'domain','mdy');
 
 if (isset($reg['domain']['descr'])) {
 	$reg['owner']['name'] = array_shift($reg['domain']['descr']);

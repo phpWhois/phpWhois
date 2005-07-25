@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* bripw.whois	1.0 	David Saez 04/04/2003 */
 
-require_once("generic.whois");
+require_once('whois.parser.php');
 
 if(!defined("__BRIPW_HANDLER__")) define("__BRIPW_HANDLER__",1);
 
@@ -49,7 +49,7 @@ $contacts = array (
 			"abuse-c" => "abuse"
                   );
 
-$r = generic_whois($data_str,$translate,$contacts,"network");
+$r = generic_parser_a($data_str,$translate,$contacts,"network");
 
 unset($r["network"]["owner"]);
 unset($r["network"]["ownerid"]);

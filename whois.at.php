@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__AT_HANDLER__")) define("__AT_HANDLER__",1);
 
-include_once('generic.whois');
+require_once('whois.parser.php');
 
 class at_handler {
 
@@ -61,7 +61,7 @@ $contacts = array (
 $r["rawdata"]=$data_str["rawdata"];
 $r["regyinfo"]=array("referrer"=>"http://www.nic.at","registrar"=>"NIC-AT");
 
-$reg=generic_whois($data_str["rawdata"],$translate,$contacts,'domain','Ymd');
+$reg=generic_parser_a($data_str["rawdata"],$translate,$contacts,'domain','Ymd');
 
 if (isset($reg["domain"]["remarks"]))
 	unset($reg["domain"]["remarks"]);

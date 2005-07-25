@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* apnic.whois	1.0 	David Saez 3/4/2003 */
 
-require_once("generic.whois");
+require_once('whois.parser.php');
 
 if(!defined("__APNIC_HANDLER__")) define("__APNIC_HANDLER__",1);
 
@@ -50,7 +50,7 @@ $contacts = array (
                         "tech-c" => "tech"
                   );
 
-$r = generic_whois($data_str,$translate,$contacts,"network",'Ymd');
+$r = generic_parser_a($data_str,$translate,$contacts,"network",'Ymd');
 
 $r["owner"]["organization"] = $r["network"]["desc"][0];
 unset($r["network"]["desc"][0]);

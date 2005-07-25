@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* ripe.whois	1.0 	David Saez 7/6/2002 */
 
-require_once("generic.whois");
+require_once('whois.parser.php');
 
 if(!defined("__RIPE_HANDLER__")) define("__RIPE_HANDLER__",1);
 
@@ -49,7 +49,7 @@ $contacts = array (
                         "tech-c" => "tech"
                   );
 
-$r = generic_whois($data_str,$translate,$contacts,"network");
+$r = generic_parser_a($data_str,$translate,$contacts,"network");
 
 $r["owner"]["organization"] = $r["network"]["desc"];
 unset($r["network"]["desc"]);
