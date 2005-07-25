@@ -60,27 +60,31 @@ $this->DATA = array(
 	"uk"	=> "uk",
 	"us"	=> "us",
 	"ws"	=> "ws",
-        "ipw"	=> "ipw" // Dummy, just for ip whois
+    "ipw"	=> "ipw" // Dummy, just for ip whois
 	);
 
 /* If whois Server needs any parameters, enter it here */
 
 $this->WHOIS_PARAM = array(
-	"com.whois-servers.net" => "=",
-	"de.whois-servers.net" => "-T dn,ace "
+	'com.whois-servers.net' => '=',
+	'de.whois-servers.net' => '-T dn,ace '
 	);
 
-$this->HTTPW = array(
-		"bg"	 => "http://www.register.bg/bg-nic/displaydomain.pl?domain={domain}.{tld}&search=exist",
-		"es"     => "https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio={domain}.{tld}&tipo=dominio",
-		"co.za"  => "http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}",
-		"fm"     => "http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm",
-		"gs"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
-		"in"     => "whois.ncst.ernet.in",
-		"ms"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
-		"net.au" => "whois.aunic.net",
-		"tc"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
-		"tf"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}",
-		"vg"     => "http://www.adamsnames.tc/whois/?domain={domain}.{tld}"
+/* TLD's that have special whois servers or that can only be reached via HTTP */
+
+$this->WHOIS_SPECIAL = array(
+		'bg'	 => 'http://www.register.bg/bg-nic/displaydomain.pl?domain={domain}.{tld}&search=exist',
+		'es'     => 'https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio={domain}.{tld}&tipo=dominio',
+		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}',
+		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
+		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'in'     => 'whois.ncst.ernet.in',
+		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'net.au' => 'whois.aunic.net',
+		'tc'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'tf'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'vg'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'za.net' => 'whois.za.net',
+		'za.org' => 'whois.za.net'
 		);
 ?>

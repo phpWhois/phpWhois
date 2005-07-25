@@ -99,17 +99,17 @@ class Whois {
 	/*
 	 * Constructor function
 	 */
-        function Whois () {
+	function Whois () {
 		// Load DATA array
 		@require('whois.servers.php');
 
 		$pos = strpos(strtolower(getenv ("OS")), "win");
 
-                if ($pos === false) $this->windows=false;
-                else $this->windows=true;
+		if ($pos === false) $this->windows=false;
+		else $this->windows=true;
 
 		// Set version
-		$this->VERSION = sprintf("Whois2.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
+		$this->VERSION = sprintf("Whois.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
 	}
 
 
@@ -118,108 +118,115 @@ class Whois {
 		$query = trim($query);
 
 		// If domain to query was not set
-		if(!isSet($query) || $query=="") {
+		if(!isSet($query) || $query=='') {
 			// Configure to use default whois server
-			$this->Query["server"] = $this->NSI_REGISTRY;
+			$this->Query['server'] = $this->NSI_REGISTRY;
 			return;
 		}
 
 		// Set domain to query in query array
 
-		$this->Query["string"] = $domain = strtolower($query);
+		$this->Query['string'] = $domain = strtolower($query);
 
-                // If query is an ip address do ip lookup
+		// If query is an ip address do ip lookup
 
-                if($query == long2ip(ip2long($query)) || !strpos($query,'.')) {
-                        // Prepare to do lookup via the 'ip' handler
-                        $ip = @gethostbyname($query);
-                        $this->Query["server"] = "whois.arin.net";
-                        $this->Query["host_ip"] = $ip;
-                        $this->Query["file"] = "whois.ip.php";
-                        $this->Query["handler"] = "ip";
-                        $this->Query["string"] = $ip;
-                        $this->Query["tld"] = "ip";
-			$this->Query["host_name"] = @gethostbyaddr($ip);
-                        return $this->GetData();
-                }
+		if($query == long2ip(ip2long($query)) || !strpos($query,'.'))
+			{
+			// Prepare to do lookup via the 'ip' handler
+			$ip = @gethostbyname($query);
+			$this->Query['server'] = 'whois.arin.net';
+			$this->Query['host_ip'] = $ip;
+			$this->Query['file'] = 'whois.ip.php';
+			$this->Query['handler'] = 'ip';
+			$this->Query['string'] = $ip;
+			$this->Query['tld'] = 'ip';
+			$this->Query['host_name'] = @gethostbyaddr($ip);
+			return $this->GetData();
+			}
 
-                // Test if we know in advance that no whois server is
-                // available for this domain and that we can get the
-                // data via http or whois request
-
-                reset($this->HTTPW);
-
-                while (list($key, $val)=each($this->HTTPW))
-                        if (substr($query,-strlen($key)-1)==".$key")
-                           {
-							$domain=substr($query,0,-strlen($key)-1);	
-							$val = str_replace("{domain}",$domain,$val);
-							$this->Query["server"] = str_replace("{tld}",$key,$val);
-							$this->Query["tld"] = $key;
-
-                             // If a handler exists for the tld
-			     
-                             if(isSet($this->DATA[$key])) {
-                                // Set file/handler in query array
-                                $handler = $this->DATA[$key];
-                                $this->Query["file"] = "whois.$handler.php";
-                                $this->Query["handler"] = $handler;
-                               }
-                             return $this->GetData();
-                           }
-
-		// Determine the top level domain, and it's whois server using
-                // DNS lookups on 'whois-servers.net'.
-		// Assumes a valid DNS response indicates a recognised tld (!?)
-		$tld = "";
-		$server = "";
-		$dp = explode(".", $domain);
+		// Build array of all possible tld's for that domain
+		
+		$tld = '';
+		$server = '';
+		$dp = explode('.', $domain);
 		$np = count($dp) -1;
 		$tldtests = array();
 
-		for ($i=0; $i<$np; $i++) {
+		for ($i=0; $i<$np; $i++)
+			{
 			array_shift($dp);
-                      	$tldtests[] = implode(".",$dp);
-		    	}
+			$tldtests[] = implode('.',$dp);
+			}
 
-		foreach($tldtests as $tld) {
+		// Search the correct whois server
 
+		foreach($tldtests as $tld)
+			{
+			// Test if we know in advance that no whois server is
+			// available for this domain and that we can get the
+			// data via http or whois request
+            
+			reset($this->WHOIS_SPECIAL);
+
+            while (list($key, $val)=each($this->WHOIS_SPECIAL))
+				if ($tld==$key)
+					{
+					$domain=substr($query,0,-strlen($key)-1);	
+					$val = str_replace('{domain}',$domain,$val);
+					$server = str_replace('{tld}',$key,$val);
+					break;
+					}
+
+			if ($server!='') break;
+			
+			// Determine the top level domain, and it's whois server using
+			// DNS lookups on 'whois-servers.net'.
+			// Assumes a valid DNS response indicates a recognised tld (!?)
+		
 			if ($this->windows)
-				$cname = $this->checkdnsrr_win($tld.".whois-servers.net", "CNAME");
+				$cname = $this->checkdnsrr_win($tld.'.whois-servers.net', 'CNAME');
 			else
-				$cname = checkdnsrr($tld.".whois-servers.net", "CNAME");
+				$cname = checkdnsrr($tld.'.whois-servers.net', 'CNAME');
 
-			if(!$cname) continue;
+			if (!$cname) continue;
 			//This also works
 			//$server = gethostbyname($tld.".whois-servers.net");
-			$server = $tld.".whois-servers.net";
+			$server = $tld.'.whois-servers.net';
 			break;
-		}
+			}
 
-		if($tld && $server) {
+		if ($tld && $server)
+			{
 			// If found, set tld and whois server in query array
-			$this->Query["server"] = $server;
-			$this->Query["tld"] = $tld;
-			// If a handler exists for the tld
+			$this->Query['server'] = $server;
+			$this->Query['tld'] = $tld;		
+			$handler = '';
 
 			foreach($tldtests as $htld)
 				{
-				if(isSet($this->DATA[$htld]))
+				// special handler exists for the tld ?				
+				if (isSet($this->DATA[$htld]))
 					{
-					// Set file/handler in query array
 					$handler = $this->DATA[$htld];
-					$this->Query['file'] = "whois.$handler.php";
-					$this->Query["handler"] = $handler;
 					break;
-					}				
+					}
 				}
+
+			// If there is a handler process the data
+			
+			if ($handler!='')
+				{
+				$this->Query['file'] = "whois.$handler.php";
+				$this->Query['handler'] = $handler;
+				}
+
 			return $this->GetData();
-		}
+			}
 
 		// If tld not known, and domain not in DNS, return error
-		unset($this->Query["server"]);
-		$this->Query["status"] = -1;
-		$this->Query["errstr"][] = $this->Query["string"]." domain is not supported";
+		unset($this->Query['server']);
+		$this->Query['status'] = -1;
+		$this->Query['errstr'][] = $this->Query['string'].' domain is not supported';
 		return;
 	}
 
