@@ -1,6 +1,7 @@
 2005/07/26  David Saez <david@ols.es>
 		- added handler for za.org & za.net, thanx to
  		  luca@clamav.net
+		- generic3.whois code moved to whois.parser.php
 
 2005/07/25  David Saez <david@ols.es>
 		- removed unused file denic.whois

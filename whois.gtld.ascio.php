@@ -30,8 +30,7 @@
 
 if(!defined("__ASCIO_HANDLER__")) define("__ASCIO_HANDLER__",1);
 
-require_once("generic3.whois");
-require_once('getdate.whois');
+require_once('whois.parser.php');
 
 class ascio_handler {
 

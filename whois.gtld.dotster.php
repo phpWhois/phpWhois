@@ -31,8 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__DOTSTER_HANDLER__")) define("__DOTSTER_HANDLER__",1);
 
-require_once("generic3.whois");
-require_once('getdate.whois');
+require_once('whois.parser.php');
 
 class dotster_handler {
 

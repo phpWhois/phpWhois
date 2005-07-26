@@ -28,8 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* benic.whois        1.0        Matthijs Koot <koot@cyberwar.nl> */
 /* benic.whois        1.2	 David Saez */
 
-include_once('generic3.whois');
-include_once('getdate.whois');
+require_once('whois.parser.php');
 
 if(!defined("__BE_HANDLER__")) define("__BE_HANDLER__",1);
 

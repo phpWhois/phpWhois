@@ -32,8 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* 24/7/2002    2.0     David Saez - updated to new object model */
 /* 17/3/2003    2.1     David Saez - rewritten to use generic3.whois */
 
-require_once('generic3.whois');
-require_once('getdate.whois');
+require_once('whois.parser.php');
 
 if(!defined("__CH_HANDLER__")) define("__CH_HANDLER__",1);
 
