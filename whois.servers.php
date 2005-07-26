@@ -60,7 +60,8 @@ $this->DATA = array(
 	"uk"	=> "uk",
 	"us"	=> "us",
 	"ws"	=> "ws",
-    "ipw"	=> "ipw" // Dummy, just for ip whois
+	'za.org'=> 'za',
+	'za.net'=> 'za'
 	);
 
 /* If whois Server needs any parameters, enter it here */

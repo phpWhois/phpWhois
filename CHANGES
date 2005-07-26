@@ -1,3 +1,7 @@
+2005/07/26  David Saez <david@ols.es>
+		- added handler for za.org & za.net, thanx to
+ 		  luca@clamav.net
+
 2005/07/25  David Saez <david@ols.es>
 		- removed unused file denic.whois
 		- added support for za.net and za.org, thanx

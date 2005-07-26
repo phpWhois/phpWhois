@@ -1,0 +1,96 @@
+<?php 
+
+/*
+Whois2.php	PHP classes to conduct whois queries
+
+Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+
+Maintained by Mark Jeftovic <markjr@easydns.com>
+
+Parameters redefined for ZA NiC (.za.net and .za.org domains)
+by Brett Cave, 16 July 2005     
+
+For the most recent version of this package: 
+
+http://www.easydns.com/~markjr/whois2/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+/* zanic.whois	1.0	Brett Cave, based on code by David Saez */
+
+if(!defined("__ZA_HANDLER__")) define("__ZA_HANDLER__",1);
+
+require_once("generic3.whois");
+require_once("getdate.whois");
+
+class za_handler {
+
+	function parse($data_str) {
+	
+		$items = array(
+			'domain.name' 		=> 'Domain Name            : ',
+			'domain.created' 	=> 'Record Created         :',
+			'domain.changed' 	=> 'Record Last Updated    :',
+			'owner.name' 		=> 'Registered for         :',
+			'admin' 			=> 'Administrative Contact :',
+			'tech' 				=> 'Technical Contact      :',
+			'domain.nserver'	=> 'Domain Name Servers listed in order:',
+			'registered' 		=> 'No such domain: '
+			);
+		
+		// Arrange contacts ...
+		
+		$rawdata=array();
+		
+		while (list($key,$line)=each($data_str['rawdata']))
+			{
+			if (strpos($line,' Contact ')!==false)
+				{
+				$pos=strpos($line,':');
+				
+				if ($pos!==false)
+					{
+					$rawdata[]=substr($line,0,$pos+1);
+					$rawdata[]=trim(substr($line,$pos+1));
+					continue;
+					}
+				}
+			$rawdata[]=$line;
+			}
+			
+		$r['rawdata'] = $rawdata; //$data_str['rawdata'];
+		
+		$r['regrinfo'] = get_blocks($rawdata,$items);
+		
+		if (isset($r['regrinfo']['registered']))
+			{
+			$r['regrinfo']['registered']='no';
+			}
+		else
+			{
+			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
+			}
+			
+		$r['regyinfo']['referrer'] ='http://www.za.net/';	// or http://www.za.org
+        $r['regyinfo']['registrar']='ZA NiC';
+        
+        $r = format_dates($r,'xmdxxy');
+        
+		return($r);
+	}
+}
+?>
