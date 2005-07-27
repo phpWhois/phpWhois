@@ -57,15 +57,12 @@ the following subkeys:
 
 	network
 	-------
-	Only when dealing with ip addresses. Could contain the
+	Only when dealing with ip addresses or AS. Could contain the
 	following subkeys:
 
-		name	-> network name
+		name	-> network/AS name		
 		inetnum	-> network ip address range
 		desc	-> network description
-		host_ip	-> ip address that was tested
-		host_name> host name obtained doing reverse dns
-			   lookup on host_ip
 		mnt-by	-> who provided that network
 		mnt-lower> who provided that network 
 		nserver -> name servers in listed order that
@@ -74,7 +71,7 @@ the following subkeys:
 		remarks -> remarks provided by the registry
                 changed -> date of last change
                 created -> creation date
-                handle  -> domain handle
+                handle  -> network/AS handle
                 source  -> who gives this information
 
 	owner,admin,tech,zone,billing,abuse

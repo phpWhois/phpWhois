@@ -193,9 +193,6 @@ if (!isset($result['regrinfo']['network']['inetnum']) &&
     $result['regrinfo']['network']['inetnum']=$this->cidr_conv($result['regrinfo']['network']['cdir']);
     }
     
-$result["regrinfo"]["network"]["host_ip"]=$this->Query["host_ip"];
-$result["regrinfo"]["network"]["host_name"]=$this->Query["host_name"];
-
 return $result;
 }
 

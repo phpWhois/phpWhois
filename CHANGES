@@ -5,6 +5,7 @@
 		- added handler.template.php
 		- disclaimer updated
 		- updated README file
+		- some improvments for AS queries
 
 2005/07/26  David Saez <david@ols.es>
 		- added handler for za.org & za.net, thanx to

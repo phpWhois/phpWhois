@@ -50,6 +50,10 @@ function parse ($data_str)
                                 "network.desc."  => "Comment:",
                                 "network.created"  => "RegDate:",
                                 "network.changed"  => "Updated:",
+				'network.handle' => 'ASHandle:',
+				'network.name' => 'ASName:',
+				'network.handle' => 'NetHandle:',
+				'network.name' => 'NetName:',
                                 "tech.handle"  => "TechHandle:",
                                 "tech.name"  => "TechName:",
                                 "tech.phone"  => "TechPhone:",
@@ -60,7 +64,7 @@ function parse ($data_str)
 				"abuse.email" => "OrgAbuseEmail:"
                              );
 
-                return generic_parser_b($data_str,$items);
+                return generic_parser_b($data_str,$items,'ymd',false);
 }
 
 }
