@@ -8,7 +8,7 @@
 
 if(!defined("__WS_HANDLER__")) define("__WS_HANDLER__",1);
 
-require_once('getdate.whois');
+require_once('whois.parser.php');
 
 class ws_handler {
 

@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__CA_HANDLER__")) define("__CA_HANDLER__",1);
 
-include_once("generic2.whois");
+require_once('whois.parser.php');
 
 class ca_handler {
 
@@ -65,7 +65,7 @@ $items=array( "owner.organization"  => "Organization:",
 
 $r["rawdata"]=$data_str["rawdata"];        
 
-$r["regrinfo"]=generic_whois($data_str["rawdata"],$items,'ymd');
+$r["regrinfo"]=generic_parser_b($data_str["rawdata"],$items,'ymd');
 
 $r["regyinfo"]=array( "referrer"=>"http://www.easydns.ca" );
 

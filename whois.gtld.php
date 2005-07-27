@@ -32,7 +32,7 @@
 
 if(!defined("__GTLD_HANDLER__")) define("__GTLD_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 class gtld_handler extends WhoisClient {
 
@@ -90,7 +90,7 @@ class gtld_handler extends WhoisClient {
 		{
 		$this->Query = $query;
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
-		$this->result = generic_whois($data["rawdata"],$this->REG_FIELDS,'dmy');
+		$this->result = generic_parser_b($data["rawdata"],$this->REG_FIELDS,'dmy');
 
 		unset($this->Query["handler"]);
 		

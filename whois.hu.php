@@ -31,7 +31,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 if(!defined("__HU_HANDLER__")) define("__HU_HANDLER__",1);
 
 require_once('whois.parser.php');
-include_once('getdate.whois');
 
 class hu_handler {
 

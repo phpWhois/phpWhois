@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__CN_HANDLER__")) define("__CN_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 class cn_handler {
 
@@ -84,7 +84,7 @@ class cn_handler {
 		$r["rawdata"] = $data_str["rawdata"];
 		$r["regyinfo"] = array( "referrer"=>"http://www.cnnic.net.cn",
 					"registrar" => "China NIC");
-		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items,'ymd');
+		$r["regrinfo"] = generic_parser_b ($data_str["rawdata"],$items,'ymd');
 		return($r);
 	}
 }

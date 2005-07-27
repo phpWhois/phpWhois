@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__ORG_HANDLER__")) define("__ORG_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 class org_handler {
 
@@ -75,7 +75,7 @@ class org_handler {
 			);
 
 		$r["rawdata"] = $data_str["rawdata"];
-		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items);
+		$r["regrinfo"] = generic_parser_b ($data_str["rawdata"],$items);
 		$r['regyinfo']['referrer'] ='http://www.pir.org/';
         	$r['regyinfo']['registrar']='Public Interest Registry';
 		return($r);

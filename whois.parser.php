@@ -95,6 +95,69 @@ return $ret;
 
 //-------------------------------------------------------------------------
 
+function generic_parser_b ( $rawdata, $items, $dateformat='mdy', $hasreg=true )
+
+{
+$r='';
+$disok=true;
+
+while (list($key,$val)=each($rawdata))
+      { if (trim($val)!='') 
+           { 
+	     if (($val[0]=='%' || $val[0]=='#') && $disok)
+                { $r['disclaimer'][]=trim(substr($val,1));
+		  $disok=true;
+		  continue;
+                }
+	     
+	     $disok=false;
+	     reset($items);
+
+             while (list($field, $match)=each($items)) 
+                   {
+		     $pos=strpos($val,$match);
+                     if ($pos!==false)
+			{
+			  $var="\$r".getvarname($field);
+			  $itm=trim(substr($val,$pos+strlen($match)));
+                          if ($itm!='')
+                              eval($var."=\"".$itm."\";");
+                          break;
+                        }
+                   }
+           }
+      }
+
+if (empty($r))
+	{
+	if ($hasreg) $r['registered'] = 'no';
+	}
+else
+	{
+	if ($hasreg) $r['registered'] = 'yes';
+	$r=format_dates($r,$dateformat);
+	}
+
+return $r;
+}
+
+//-------------------------------------------------------------------------
+
+function getvarname ( $vdef )
+{
+$parts=explode(".",$vdef);
+$var="";
+
+while (list($fn,$mn)=each($parts))
+       if ($mn=="")
+            $var=$var."[]";
+       else $var=$var."[\"".$mn."\"]";
+
+return $var;
+}
+
+//-------------------------------------------------------------------------
+
 function get_blocks ( $rawdata, $items )
 {
 
@@ -302,4 +365,130 @@ if (!empty($array) && !isset($r['address']))
 
 return $r;
 }
+
+//-------------------------------------------------------------------------
+
+function format_dates (&$res,$format='mdy')
+{
+if (!is_array($res)) return $res;
+
+reset($res);
+
+while (list($key, $val) = each($res))
+	{
+	if (is_array($val))
+		$res[$key]=format_dates($val,$format);
+	else
+		{
+		if (is_numeric($key)) continue;
+
+		if ($key=='expires' || $key=='created' || $key=='changed')
+			{
+			$res[$key]=get_date($val,$format);
+			}
+		}
+	}
+
+return $res;
+}
+
+//-------------------------------------------------------------------------
+
+function get_date($date,$format)
+{
+$months=array( 'jan'=>1, 'feb'=>2, 'mar'=>3, 'apr'=>4,  'may'=>5,  'jun'=>6, 
+               'jul'=>7, 'aug'=>8, 'sep'=>9, 'oct'=>10, 'nov'=>11, 'dec'=>12 );
+
+$parts=explode(' ',$date);
+
+if (strpos($parts[0],'@')!==false)
+	{
+	unset($parts[0]);
+	$date=implode(' ',$parts);
+	}
+
+$date=str_replace(',',' ',trim($date));
+$date=str_replace('.',' ',$date);
+$date=str_replace('-',' ',$date);
+$date=str_replace('/',' ',$date);
+$date=str_replace("\t",' ',$date);
+
+$parts=explode(' ',$date);
+
+if (strlen($parts[0])==8 && is_numeric($parts[0]))
+	{
+	$val=$parts[0];
+	for ($p=$i=0;$i<3;$i++)
+		{
+		if ($format[$i]!='Y')
+			{
+			$res[$format[$i]]=substr($val,$p,2);
+			$p+=2;
+			}
+		else
+			{
+			$res['y']=substr($val,$p,4);
+			$p+=4;
+			}
+		}
+	}
+else
+	{
+	for ($p=$i=0;$p<count($parts) && $i<strlen($format);$p++)
+		{
+		if (trim($parts[$p])=='')
+			continue;
+
+		if ($format[$i]!='-')
+			{
+			$res[$format[$i]]=$parts[$p];
+			}
+		$i++;
+		}
+	}
+
+$ok=false;
+
+while (!$ok)
+	{
+	reset($res);
+	$ok=true;
+	while (list($key, $val) = each($res)) 
+		{
+		if ($val=='' || $key=='') continue;
+
+		if (!is_numeric($val))
+			{
+			$res[$key]=$res['m'];
+			$res['m']=$months[substr(strtolower($val),0,3)];
+			$ok=false;
+			break;
+			}
+
+		if ($key!='y' && $val>1900)
+			{
+			$res[$key]=$res['y'];
+			$res['y']=$val;
+			$ok=false;
+			break;
+			}
+		}
+	}
+
+if ($res['m']>12)
+	{
+	$v=$res['m'];
+	$res['m']=$res['d'];
+	$res['d']=$v;
+	}
+
+if ($res['y']<70)
+	$res['y']+=2000;
+else
+	if ($res['y']<=99)
+		$res['y']+=1900;
+
+return sprintf("%.4d-%02d-%02d",$res['y'],$res['m'],$res['d']);
+}
+
 ?>

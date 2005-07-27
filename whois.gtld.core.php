@@ -30,7 +30,7 @@
 /* Adapted from netsol.whois by Denny Reiter 2000/12/12	*/
 /* core.whois   2.0     david@ols.es 2003/02/26 */
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 if(!defined("__CORE_HANDLER__")) define("__CORE_HANDLER__",1);
 
@@ -94,7 +94,7 @@ class core_handler {
                                 "zone.email" => "Zone Email:"
 			      );
 
-		return generic_whois($data_str,$items);
+		return generic_parser_b($data_str,$items);
 	}
 
 }

@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__BIZ_HANDLER__")) define("__BIZ_HANDLER__",1);
 
-require_once('generic2.whois');
+require_once('whois.parser.php');
 
 class biz_handler {
 
@@ -95,7 +95,7 @@ function parse ($data_str) {
 		);
 
 	$r['rawdata'] = $data_str['rawdata'];
-	$r['regrinfo'] = generic_whois($data_str['rawdata'],$items,'-md--y');
+	$r['regrinfo'] = generic_parser_b($data_str['rawdata'],$items,'-md--y');
 
 	$r['regyinfo'] = array( 'referrer'  => 'http://www.neulevel.biz', 
 				'registrar' => 'NEULEVEL' );

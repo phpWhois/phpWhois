@@ -29,7 +29,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__KRNIC_HANDLER__")) define("__KRNIC_HANDLER__",1);
 
-require_once("generic2.whois");
 require_once('whois.parser.php');
 
 class krnic_handler {
@@ -60,10 +59,10 @@ function parse ($data_str,$query)
 
         $r = get_blocks($data_str,$blocks);
 
-	$r["owner"]=generic_whois($r["owner"],$items,'Ymd',false);
-	$r["admin"]=generic_whois($r["admin"],$items,'Ymd',false);
-	$r["tech"] =generic_whois($r["tech"],$items,'Ymd',false);
-	$r["abuse"]=generic_whois($r["abuse"],$items,'Ymd',false);
+	$r["owner"]=generic_parser_b($r["owner"],$items,'Ymd',false);
+	$r["admin"]=generic_parser_b($r["admin"],$items,'Ymd',false);
+	$r["tech"] =generic_parser_b($r["tech"],$items,'Ymd',false);
+	$r["abuse"]=generic_parser_b($r["abuse"],$items,'Ymd',false);
 
 	$r=format_dates($r,'Ymd');
 	return($r);

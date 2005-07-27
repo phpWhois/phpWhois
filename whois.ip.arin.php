@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__ARIN_HANDLER__")) define("__ARIN_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 class arin_handler {
 
@@ -60,7 +60,7 @@ function parse ($data_str)
 				"abuse.email" => "OrgAbuseEmail:"
                              );
 
-                return generic_whois($data_str,$items);
+                return generic_parser_b($data_str,$items);
 }
 
 }

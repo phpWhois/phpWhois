@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__JOKER_HANDLER__")) define("__JOKER_HANDLER__",1);
 
-include_once('generic2.whois');
+require_once('whois.parser.php');
 
 class joker_handler {
 
@@ -50,7 +50,7 @@ class joker_handler {
 			'domain.sponsor' => 'reseller-1:'
 			);
 
-	$r=generic_whois($data_str,$items);
+	$r=generic_parser_b($data_str,$items);
 	return($r);
 	}
 }

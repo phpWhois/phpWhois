@@ -1,3 +1,7 @@
+2005/07/27  David Saez <david@ols.es>
+		- genutil, generic2 and getdate moved to
+		  whois.parser.php
+
 2005/07/26  David Saez <david@ols.es>
 		- added handler for za.org & za.net, thanx to
  		  luca@clamav.net

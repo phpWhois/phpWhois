@@ -31,7 +31,7 @@
 
 if(!defined("__INTERDOMAIN_HANDLER__")) define("__INTERDOMAIN_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.generic.php');
 
 class interdomain_handler {
 
@@ -77,7 +77,7 @@ class interdomain_handler {
                         "tech.fax" => "Technical Fax............"
 			);
 
-		$ret = generic_whois($data_str,$items,'dmy');
+		$ret = generic_parser_b($data_str,$items,'dmy');
 		return $ret;
 	}
 }

@@ -29,7 +29,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__FM_HANDLER__")) define("__FM_HANDLER__",1);
 
-require_once('generic2.whois');
 require_once('whois.parser.php');
 
 class fm_handler {
@@ -51,7 +50,7 @@ function parse ($data)
 			"expires" => "Renewal Date:"
 		  );
 
-    $r['regrinfo']['domain'] = generic_whois($data['rawdata'],$items);
+    $r['regrinfo']['domain'] = generic_parser_b($data['rawdata'],$items);
 
     $items = array (
 			'organization' => 'Organiztion:',
@@ -68,7 +67,7 @@ function parse ($data)
   
     while (list($key, $val) = each($blocks))
 	{
-	$r['regrinfo'][$key] = generic_whois($val,$items);
+	$r['regrinfo'][$key] = generic_parser_b($val,$items);
 	}
 
     $r['regyinfo']['referrer']='http://www.dot.dm';

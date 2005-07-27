@@ -32,7 +32,7 @@
 
 if(!defined("__SE_HANDLER__")) define("__SE_HANDLER__",1);
 
-require_once('generic2.whois');
+require_once('whois.parser.php');
 
 class se_handler {
 
@@ -50,7 +50,7 @@ class se_handler {
 			"registrar" => "NIC-SE"
 			);
 
-		$r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
+		$r["regrinfo"] = generic_parser_b($data_str["rawdata"],$items);
 
 		return($r);
 	}

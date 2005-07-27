@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__LU_HANDLER__")) define("__LU_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 class lu_handler {
 
@@ -71,7 +71,7 @@ class lu_handler {
 		$r["rawdata"] = $data_str["rawdata"];
 		$r["regyinfo"] = array( "referrer"=>"http://www.dns.lu",
 					"registrar" => "DNS-LU");
-		$r["regrinfo"] = generic_whois ($data_str["rawdata"],$items,'dmy');
+		$r["regrinfo"] = generic_parser_b ($data_str["rawdata"],$items,'dmy');
 		return($r);
 	}
 }

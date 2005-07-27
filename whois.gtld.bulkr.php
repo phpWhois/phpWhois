@@ -51,7 +51,7 @@ if(!defined("__BULKR_HANDLER__")) define("__BULKR_HANDLER__",1);
 
 #################################################*/
 
-require_once('getdate.whois');
+require_once('whois.parser.php');
 
 class bulkr_handler {
 

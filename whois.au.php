@@ -33,7 +33,7 @@
 
 if(!defined("__AU_HANDLER__")) define("__AU_HANDLER__",1);
 
-include_once('generic2.whois');
+require_once('whois.parser.php');
 
 class au_handler {
 	
@@ -58,7 +58,7 @@ class au_handler {
 		$r["regyinfo"] = array("referrer"=>"http://www.aunic.net",
 				       "registrar"=>"AU-NIC");
 		
-		$r['regrinfo'] = generic_whois($data_str['rawdata'],$items);
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'],$items);
 		return $r;
 	}
 }

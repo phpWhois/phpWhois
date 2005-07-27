@@ -29,7 +29,7 @@
 /* inwwcom.whois	1.0	jeremiah bellomy	2000/04/06 */
 /* inwwcom.whois        2.0     david@ols.es            2003/02/09 */
 
-require_once("generic2.whois");
+require_once('whois.generic.php');
     
 if(!defined("__INWWCOM_HANDLER__")) define("__INWWCOM_HANDLER__",1);
 
@@ -54,7 +54,7 @@ class inwwcom_handler {
 				 "domain.nserver." => "Name Server.........."
                                );
  
-		return generic_whois($data_str,$items);
+		return generic_parser_b($data_str,$items);
 	}
 
 }
