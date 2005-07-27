@@ -43,24 +43,27 @@ class ip_handler extends WhoisClient {
 	var $HANDLER_VERSION = '1.0';
 
 	var $REGISTRARS = array(
-		'European Regional Internet Registry/RIPE NCC' => 'whois.ripe.net',
-		'RIPE Network Coordination Centre' => 'whois.ripe.net',
-        'Asia Pacific Network Information Center' => 'whois.apnic.net',
-	    'Asia Pacific Network Information Centre' => 'whois.apnic.net',
-	 	'Latin American and Caribbean IP address Regional Registry' => 'whois.lacnic.net'
+		'European Regional Internet Registry/RIPE NCC' 				=> 'whois.ripe.net',
+		'RIPE Network Coordination Centre' 							=> 'whois.ripe.net',
+        'Asia Pacific Network Information Center' 					=> 'whois.apnic.net',
+	    'Asia Pacific Network Information Centre' 					=> 'whois.apnic.net',
+	 	'Latin American and Caribbean IP address Regional Registry' => 'whois.lacnic.net',
+	 	'African Network Information Center'						=> 'whois.afrinic.net'
 		);
 
 	var $HANDLERS = array(
-					'whois.krnic.net' =>'krnic',
-					'whois.apnic.net' =>'apnic',
-					'whois.ripe.net' =>'ripe',
-					'whois.arin.net' =>'arin',
+					'whois.krnic.net' 	=>'krnic',
+					'whois.apnic.net' 	=>'apnic',
+					'whois.ripe.net' 	=>'ripe',
+					'whois.arin.net' 	=>'arin',
 					'whois.registro.br' =>'bripw',
-					'whois.lacnic.net' =>'lacnic'
+					'whois.lacnic.net' 	=>'lacnic',
+					'whois.afrinic.net' => 'afrinic'
 					);	
 
-function parse ($data,$query) {
-
+function parse ($data,$query)
+{
+	
 $this->Query=$query;
 unset($this->Query['handler']);
 
@@ -70,128 +73,130 @@ if (!isset($result['rawdata']))
 	}
 
 $result['regyinfo']=array();
-$result["regyinfo"]["registrar"]="American Registry for Internet Numbers (ARIN)";
+$result['regyinfo']['registrar']='American Registry for Internet Numbers (ARIN)';
 
 reset($this->REGISTRARS);
 
-$rawdata=$data["rawdata"];
+$rawdata=$data['rawdata'];
 $orgname=trim($rawdata[0]);
 
-if ($orgname=="") $orgname=trim($rawdata[1]);
+if ($orgname=='') $orgname=trim($rawdata[1]);
 
 while (list($string, $whois)=each($this->REGISTRARS))
-       if (strstr($orgname,$string)!="")
-          { $this->Query["server"]=$whois;
-            $result["regyinfo"]["registrar"]=$string;
-            break;
-          } 
+	if (strstr($orgname,$string)!='')
+		{
+		$this->Query['server']=$whois;
+		$result['regyinfo']['registrar']=$string;
+		break;
+		} 
 
-switch ($this->Query["server"])
-       { case "whois.apnic.net": 
-			$rawdata=$this->GetData($this->Query["string"]);
-			$rawdata=$rawdata["rawdata"];
-
-			while (list($ln,$line)=each($rawdata))
-				{
-				if (strstr($line,"KRNIC whois server at whois.krnic.net"))
-                    {
-                    $this->Query["server"]="whois.krnic.net";
-                    $result["regyinfo"]["registrar"]="Korea Network Information Center (KRNIC)";
-                    $rawdata=$this->GetData($this->Query["string"]);
-					$rawdata=$rawdata["rawdata"];	
-					break;
-                    }
-				} 
-			break;
-
-         case "whois.arin.net":
-			$newquery="";
-
-			while (list($ln,$line)=each($rawdata))
-				{
-				$s=strstr($line,"(NETBLK-");
-                if ($s!="") 
-                    {
-					$newquery=substr(strtok($s,") "),1);
-                     break;
-                    }
-
-				$s=strstr($line,"(NET-");
-                
-                if ($s!="")
-                    {
-					$newquery=substr(strtok($s,") "),1);
-                    break;
-                    }
-				} 
-       
-			if ($newquery!="") $result["regyinfo"]["netname"]=$newquery;
-
-			if (strstr($newquery,"BRAZIL-BLK"))
-				{
-				$this->Query["server"]="whois.registro.br";
-				$result["regyinfo"]["registrar"]="Comite Gestor da Internet no Brasil";
-				$rawdata=$this->GetData($this->Query["string"]);
-				$rawdata=$rawdata["rawdata"];
-				$newquery="";
-				}	
-
-			if ($newquery!="") 
-				{
-				$rawdata=$this->GetData("!".$newquery);
-				$rawdata=$rawdata["rawdata"];
-				}
-			break;
-
-		case "whois.lacnic.net":
-			$rawdata=$this->GetData($this->Query["string"]);
-			$rawdata=$rawdata["rawdata"];
-
-			while (list($ln,$line)=each($rawdata))
-				{
-				$s=strstr($line,"at whois.registro.br or ");
-				if ($s!="")
-					{
-					$this->Query["server"]="whois.registro.br";
-                    $result["regyinfo"]["registrar"]="Comite Gestor da Internet do Brazil";
-                    $rawdata=$this->GetData($this->Query["string"]);
-					$rawdata=$rawdata["rawdata"];
-					break;
-                    }
-				}
-			break;
-
-        default:
-	        $rawdata=$this->GetData($this->Query["string"]);
-			if (isset($rawdata["rawdata"])) $rawdata=$rawdata["rawdata"];
-     }
-
-$result["rawdata"]=$rawdata;
-$result["regyinfo"]["whois"]=$this->Query["server"];
-
-if ($this->HANDLERS[$this->Query["server"]]!='')
-    $this->Query["handler"] = $this->HANDLERS[$this->Query["server"]];
-
-if (!empty($this->Query["handler"])) 
+switch ($this->Query['server'])
 	{
-	$this->Query["file"]=sprintf("whois.ip.%s.php", $this->Query["handler"]);
-	$result["regrinfo"]=$this->Process($result["rawdata"]);
+	case 'whois.apnic.net': 
+		$rawdata=$this->GetData($this->Query['string']);
+		$rawdata=$rawdata['rawdata'];
+
+		while (list($ln,$line)=each($rawdata))
+			{
+			if (strstr($line,'KRNIC whois server at whois.krnic.net'))
+                   {
+					$this->Query['server']='whois.krnic.net';
+					$result['regyinfo']['registrar']='Korea Network Information Center (KRNIC)';
+					$rawdata=$this->GetData($this->Query['string']);
+					$rawdata=$rawdata['rawdata'];	
+					break;
+                   }
+				} 
+		break;
+
+	case 'whois.arin.net':
+		$newquery='';
+
+		while (list($ln,$line)=each($rawdata))
+			{
+			$s=strstr($line,'(NETBLK-');
+			if ($s!='') 
+				{
+				$newquery=substr(strtok($s,') '),1);
+				break;
+				}
+
+			$s=strstr($line,'(NET-');
+                
+            if ($s!='')
+				{
+				$newquery=substr(strtok($s,') '),1);
+				break;
+                }
+			} 
+       
+		if ($newquery!="") $result['regyinfo']['netname']=$newquery;
+
+		if (strstr($newquery,'BRAZIL-BLK'))
+			{
+			$this->Query["server"]='whois.registro.br';
+			$result["regyinfo"]["registrar"]='Comite Gestor da Internet no Brasil';
+			$rawdata=$this->GetData($this->Query['string']);
+			$rawdata=$rawdata['rawdata'];
+			$newquery='';
+			}	
+
+		if ($newquery!='') 
+			{
+			$rawdata=$this->GetData('!'.$newquery);
+			$rawdata=$rawdata['rawdata'];
+			}
+		break;
+
+	case 'whois.lacnic.net':
+		$rawdata=$this->GetData($this->Query['string']);
+		$rawdata=$rawdata['rawdata'];
+
+		while (list($ln,$line)=each($rawdata))
+			{
+			$s=strstr($line,'at whois.registro.br or ');
+			if ($s!='')
+				{
+				$this->Query['server']='whois.registro.br';
+				$result['regyinfo']['registrar']='Comite Gestor da Internet do Brazil';
+				$rawdata=$this->GetData($this->Query['string']);
+				$rawdata=$rawdata['rawdata'];
+				break;
+				}
+			}
+		break;
+
+	default:
+		$rawdata=$this->GetData($this->Query['string']);
+		if (isset($rawdata['rawdata'])) $rawdata=$rawdata['rawdata'];
+	}
+
+$result['rawdata']=$rawdata;
+$result['regyinfo']['whois']=$this->Query['server'];
+
+if (isset($this->HANDLERS[$this->Query['server']]))
+	$this->Query['handler'] = $this->HANDLERS[$this->Query['server']];
+
+if (!empty($this->Query['handler'])) 
+	{
+	$this->Query['file']=sprintf('whois.ip.%s.php', $this->Query['handler']);
+	$result['regrinfo']=$this->Process($result['rawdata']);
 	}
 
 if (isset($result['regrinfo']['network']['inetnum']) &&
-    strpos($result['regrinfo']['network']['inetnum'],'/')!==false)
-    {
-    //Convert CDIR to inetnum
-    $result['regrinfo']['network']['cdir']=$result['regrinfo']['network']['inetnum'];
-    $result['regrinfo']['network']['inetnum']=$this->cidr_conv($result['regrinfo']['network']['cdir']);
-    }
+	strpos($result['regrinfo']['network']['inetnum'],'/')!==false)
+	{
+	//Convert CDIR to inetnum
+	$result['regrinfo']['network']['cdir']=$result['regrinfo']['network']['inetnum'];
+	$result['regrinfo']['network']['inetnum']=$this->cidr_conv($result['regrinfo']['network']['cdir']);
+	}
 
 if (!isset($result['regrinfo']['network']['inetnum']) &&
-    isset($result['regrinfo']['network']['cdir']))
-    {
-    //Convert CDIR to inetnum
-    $result['regrinfo']['network']['inetnum']=$this->cidr_conv($result['regrinfo']['network']['cdir']);
-    }
+	isset($result['regrinfo']['network']['cdir']))
+	{
+	//Convert CDIR to inetnum
+	$result['regrinfo']['network']['inetnum']=$this->cidr_conv($result['regrinfo']['network']['cdir']);
+	}
     
 return $result;
 }

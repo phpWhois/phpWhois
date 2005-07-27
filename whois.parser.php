@@ -400,14 +400,21 @@ reset($res);
 while (list($key, $val) = each($res))
 	{
 	if (is_array($val))
-		$res[$key]=format_dates($val,$format);
+		{
+		if ($key=='expires' || $key=='created' || $key=='changed')
+			{
+			$res[$key]=get_date($val[0],$format);
+			}
+		else
+			$res[$key]=format_dates($val,$format);
+		}
 	else
 		{
 		if (is_numeric($key)) continue;
 
 		if ($key=='expires' || $key=='created' || $key=='changed')
 			{
-			$res[$key]=get_date($val,$format);
+			$res[$key]=get_date($val,$format);			
 			}
 		}
 	}

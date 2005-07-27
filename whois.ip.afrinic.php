@@ -29,30 +29,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if(!defined("__RIPE_HANDLER__")) define("__RIPE_HANDLER__",1);
+if(!defined('__AFRINIC_HANDLER__')) define('__AFRINIC_HANDLER__',1);
 
-class ripe_handler {
+class afrinic_handler {
 
-function parse ($data_str) 
+function parse ($data_str,$query) 
 {
 $translate = array (
-                        "fax-no" => "fax",
-                        "e-mail" => "email",
-                        "nic-hdl" => "handle",
-                        "person" => "name",
-						"netname" => "name",
-						"descr" => "desc"
+                        'fax-no'		=> 'fax',
+                        'e-mail' 		=> 'email',
+                        'nic-hdl' 		=> 'handle',
+                        'person' 		=> 'name',
+						'netname' 		=> 'name',
+						'descr' 		=> 'desc',
+						'organisation'  => 'handle',
+						'org-name'		=> 'organization',
+						'org-type'		=> 'type'
                    );
 
 $contacts = array (
-                        "admin-c" => "admin",
-                        "tech-c" => "tech"
+                        'admin-c'	=> 'admin',
+                        'tech-c'	=> 'tech',
+                        'org'		=> 'owner'
                   );
 
-$r = generic_parser_a($data_str,$translate,$contacts,"network");
-
-$r["owner"]["organization"] = $r["network"]["desc"];
-unset($r["network"]["desc"]);
+$r = generic_parser_a($data_str,$translate,$contacts,'network','Ymd');
 
 return $r;
 }
