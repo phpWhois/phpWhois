@@ -159,7 +159,7 @@ handlers, those functions are stored on the following files:
 - generic_parser_a:
 
   contains code to parse whois outputs like this one, you could
-  take a look at atnic.whois to see how you could use it:
+  take a look at whois.at.php to see how you could use it:
 
   domain:         nic.at
   registrant:     NAIV1117337-NICAT
@@ -222,7 +222,7 @@ handlers, those functions are stored on the following files:
 - generic_parser_b:
 
   contains code to parse whois outputs like this one, you could
-  take a look at neulevel.whois to see how you could use it:
+  take a look at whois.neulevel.php to see how you could use it:
 
   Domain Name:                                 NIC.BIZ
   Domain ID:                                   D714-BIZ
@@ -294,7 +294,7 @@ handlers, those functions are stored on the following files:
 - get_blocks/get_contacts:
 
   contains code to parse whois outputs like this one, you could
-  take a look at chnic.whois to see how you could use it:
+  take a look at whois.ch.php to see how you could use it:
 
   Domain name:
   nic.ch
