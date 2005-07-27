@@ -58,6 +58,7 @@ biz        	neulevel.biz
 
 // IP whois
 
+afrinic		66.18.70.6
 apnic		218.165.121.114
 arin            207.217.120.54
 bripw		200.165.206.74
