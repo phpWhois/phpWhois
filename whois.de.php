@@ -58,7 +58,7 @@ class de_handler {
 		$extra=array(
 			'address:' => 'address.street',
 			'city:' => 'address.city',
-			'pcode:' => 'address.zcode',
+			'pcode:' => 'address.pcode',
 			'country:' => 'address.country',
 			'name:' => 'name',
 			'remarks:' => ''

@@ -46,7 +46,7 @@ $translate = array (
 			'personname' => 'name',
 			'street address' => 'address.street',
 			'city' => 'address.city',
-			'postal code' => 'address.zcode',
+			'postal code' => 'address.pcode',
 			'country' => 'address.country'
 		   );
 

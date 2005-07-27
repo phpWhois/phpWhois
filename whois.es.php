@@ -60,7 +60,7 @@ class es_handler {
                 		'domicilio' => 'address.street',
 		                'población' => 'address.city',
 		                'provincia' => '',
-                		'código postal' => 'address.zcode',
+                		'código postal' => 'address.pcode',
 		                'país' => 'address.country',
                 		'nic_handle' => 'handle',
 		                'nombre' => 'name',

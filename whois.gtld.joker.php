@@ -38,7 +38,7 @@ class joker_handler {
 	$items = array(
                         'owner.name' => 'owner:',
                         'owner.address.street' => 'address:',
-                        'owner.address.zcode' => 'postal-code:',
+                        'owner.address.pcode' => 'postal-code:',
                         'owner.address.city' => 'city:',
                         'owner.address.state' => 'state:',
                         'owner.address.country' => 'country:',
