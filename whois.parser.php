@@ -1,6 +1,4 @@
 <?php
-require_once('getdate.whois');
-require_once('genutil.whois');
 
 //-------------------------------------------------------------------------
 
