@@ -3,6 +3,7 @@
 		  whois.parser.php
 		- cli_example.php renamed to example.cli.php
 		- added handler.template.php
+		- disclaimer updated
 
 2005/07/26  David Saez <david@ols.es>
 		- added handler for za.org & za.net, thanx to

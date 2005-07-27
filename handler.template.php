@@ -4,9 +4,9 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez david@ols.es
+Maintained by David Saez (david@ols.es)
 
-For the most recent version of this package:
+For the most recent version of this package visit:
 
 http://phpwhois.sourceforge.net
 

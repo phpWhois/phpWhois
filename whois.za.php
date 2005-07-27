@@ -1,18 +1,14 @@
 <?php 
-
 /*
-Whois2.php	PHP classes to conduct whois queries
+Whois.php        PHP classes to conduct whois queries
 
-Copyright (C)1999,2000 easyDNS Technologies Inc. & Mark Jeftovic
+Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by Mark Jeftovic <markjr@easydns.com>
+Maintained by David Saez (david@ols.es)
 
-Parameters redefined for ZA NiC (.za.net and .za.org domains)
-by Brett Cave, 16 July 2005     
+For the most recent version of this package visit:
 
-For the most recent version of this package: 
-
-http://www.easydns.com/~markjr/whois2/
+http://phpwhois.sourceforge.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
