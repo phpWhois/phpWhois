@@ -121,10 +121,34 @@ create new keys if need, but please do not do create new keys where
 existing predefined keys exists. Nevertheless all handlers submited
 will be checked before they are added to phpWhois distribution. 
 
+If some tld needs special parameters or can be queried in
+another whois servers or web base whois servers you can setup
+rules in whois.servers.php so phpWhois can do the right thing.
+
+There is also a naming schema that must be followed, country
+handlers are named whois.XX.php, where XX is the iso country
+code. The handler must also define __XX_HANDLER__ and implement
+a class named xx_handler with a function named parse that takes
+two array arguments: $data_str and $query. $data_str['rawdata']
+contains the raw output of the query and is what need to be parsed
+in order to generate the Common Object Model. $query contains
+some, rarely useful, data about the query. That function must
+return an array with any available result in the format defined
+by this document. Country handlers must be defined in the file
+whois.servers.php on the array DATA where the key is the iso
+country code and the value the handler name (xx).
+
+Handlers for .com/.net/.tv domains are defined in whois.gtld.php
+and are named whois.gtld.xxx.php where xxx is the name of the
+handler defined as the value in the array REGISTRARS in the
+file whois.gtld.php. It must be implemented the same way as
+country handlers.
+
 Some useful utility functions have been written to aid in developing
-handlers. They are contained in generic.whois, generic2.whois and
-generic3.whois. Almost all handlers use functions provided by those
-files. You can see how they work by looking into the code.
+handlers. They are contained in whois.parser.php. Almost all handlers
+use functions provided by that file. You can see how they work by
+looking into the code. You also have a handler.template.php file
+with the squeleton of a handler.
 
 Please try to mimic the coding style of the other handlers, as this
 will make it easier for other people to understand and maintain.
@@ -132,7 +156,7 @@ will make it easier for other people to understand and maintain.
 Some support functions have been developed to help you write new
 handlers, those functions are stored on the following files:
 
-- generic.whois:
+- generic_parser_a:
 
   contains code to parse whois outputs like this one, you could
   take a look at atnic.whois to see how you could use it:
@@ -195,7 +219,7 @@ handlers, those functions are stored on the following files:
   changed:        20001205 14:06:15
   source:         AT-DOM
 
-- generic2.whois:
+- generic_parser_b:
 
   contains code to parse whois outputs like this one, you could
   take a look at neulevel.whois to see how you could use it:
@@ -267,7 +291,7 @@ handlers, those functions are stored on the following files:
   Domain Expiration Date:                      Sat Nov 06 23:59:00 GMT 2004
   Domain Last Updated Date:                    Fri Nov 07 18:59:11 GMT 2003 
 
-- generic3.whois:
+- get_blocks/get_contacts:
 
   contains code to parse whois outputs like this one, you could
   take a look at chnic.whois to see how you could use it:

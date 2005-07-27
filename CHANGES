@@ -8,6 +8,7 @@
 		- some improvments for AS queries
 		- some handlers reported zcode instead of pcode
 		- added support for AfriNIC (ip whois)
+		- updated HANDLERS documentation
 
 2005/07/26  David Saez <david@ols.es>
 		- added handler for za.org & za.net, thanx to
