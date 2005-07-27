@@ -24,7 +24,8 @@ ws		samoanic.ws
 
 // .com/.org/.net/.tv
 
-ascio.com	ascio.com
+ascio		ascio.com
+chdom		naturebox.com
 bulkr		bulkregister.com
 buydomains	buydomains.com
 core            corenic.com
