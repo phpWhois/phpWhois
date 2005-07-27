@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__INFO_HANDLER__")) define("__INFO_HANDLER__",1);
 
-require_once("generic2.whois");
+require_once('whois.parser.php');
 
 class info_handler {
 
@@ -98,7 +98,7 @@ class info_handler {
                 $r["regyinfo"] = array("referrer"=>"http://whois.afilias.info",
 				"registrar"=>"Afilias Global Registry Services" );
 
-                $r["regrinfo"] = generic_whois($data_str["rawdata"],$items);
+                $r["regrinfo"] = generic_parser_b($data_str["rawdata"],$items);
                 return $r;
 	}
 

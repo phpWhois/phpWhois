@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 if(!defined("__SCHLUND_HANDLER__")) define("__SCHLUND_HANDLER__",1);
 
-include_once("generic2.whois");
+require_once('whois.parser.php');
 
 class schlund_handler {
 
@@ -81,7 +81,7 @@ class schlund_handler {
                         "billing.email" => "bill-c-email:"
 			);
 
-	$r=generic_whois($data_str,$items);
+	$r=generic_parser_b($data_str,$items);
 	return($r);
 	}
 }
