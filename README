@@ -32,10 +32,10 @@ Example usage
 
 (see example.php)
 
-include("whois.main.php");
+include('whois.main.php');
 
-$whois = new Whois("example.com");
-$result = $whois->Lookup();
+$whois = new Whois();
+$result = $whois->Lookup('example.com');
 echo "<pre>";
 print_r($result);
 echo "</pre>";
@@ -47,14 +47,14 @@ You can use phpWhois to query domain names, ip addresses and
 other information like AS, i.e, both of the following examples
 work:
 
-$whois = new Whois("example.com");
-$result = $whois->Lookup();
+$whois = new Whois();
+$result = $whois->Lookup('example.com');
 
-$whois = new Whois("62.97.102.115");
-$result = $whois->Lookup();
+$whois = new Whois();
+$result = $whois->Lookup('62.97.102.115');
 
-$whois = new Whois("AS220");
-$result = $whois->Lookup();
+$whois = new Whois();
+$result = $whois->Lookup('AS220');
 
 Notes
 -----
@@ -65,7 +65,7 @@ it will output the total layout of the returned object to the
 web browser.
 
 The latest version of the package and a demo script resides at 
-<http://www.easydns.com/~markjr/whois2/>
+<http://phpwhois.sourceforge.net/>
 
 There is also be an article describing the package on devshed.com
 at <http://www.devshed.com/Server_Side/PHP/whois/>
