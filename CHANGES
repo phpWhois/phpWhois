@@ -1,3 +1,6 @@
+2005/07/28  David Saez <david@ols.es>
+		- modified $query parameter for parse function
+
 2005/07/27  David Saez <david@ols.es>
 		- genutil, generic2 and getdate moved to
 		  whois.parser.php

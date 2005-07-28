@@ -88,7 +88,7 @@ class gtld_handler extends WhoisClient {
 
 	function parse ($data,$query)
 		{
-		$this->Query = $query;
+		$this->Query = array();
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
 		$this->result = generic_parser_b($data["rawdata"],$this->REG_FIELDS,'dmy');
 
@@ -104,7 +104,7 @@ class gtld_handler extends WhoisClient {
 				$this->Query["server"] = $this->result["regyinfo"]["whois"];
 		//}
 
-		$this->result["rawdata"] = $this->GetData($this->Query["string"]);
+		$this->result["rawdata"] = $this->GetData($query);
 		// david@ols.es 16/10/2002 Fixes rawdata
 		
 		if (!isset($this->result["rawdata"]["rawdata"])) {

@@ -129,11 +129,11 @@ There is also a naming schema that must be followed, country
 handlers are named whois.XX.php, where XX is the iso country
 code. The handler must also define __XX_HANDLER__ and implement
 a class named xx_handler with a function named parse that takes
-two array arguments: $data_str and $query. $data_str['rawdata']
+two arguments: $data_str and $query. $data_str['rawdata']
 contains the raw output of the query and is what need to be parsed
 in order to generate the Common Object Model. $query contains
-some, rarely useful, data about the query. That function must
-return an array with any available result in the format defined
+the domain, ip adrress or AS that it's being queried. That function
+must return an array with any available result in the format defined
 by this document. Country handlers must be defined in the file
 whois.servers.php on the array DATA where the key is the iso
 country code and the value the handler name (xx).
@@ -158,8 +158,8 @@ handlers, those functions are stored on the following files:
 
 - generic_parser_a:
 
-  contains code to parse whois outputs like this one, you could
-  take a look at whois.at.php to see how you could use it:
+  contains code to parse whois outputs in RPSL format, like this one.
+  You could take a look at whois.at.php to see how you could use it:
 
   domain:         nic.at
   registrant:     NAIV1117337-NICAT

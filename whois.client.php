@@ -76,6 +76,8 @@ class WhoisClient {
 		// If domain to query passed in, use it, otherwise use domain from initialisation
 		$string = !empty($query) ? $query : $this->Query['string'];
 		
+		$this->Query['string'] = $string;
+		
 		if (!isset($this->Query['server'])) {
 			$this->Query['status'] = -1;
 			$this->Query['errstr'][] = 'No server specified';
@@ -283,6 +285,6 @@ class WhoisClient {
 			$this->Query['errstr'][] = $handler->Query['errstr'];
 
 		// Return the result
-		return $handler->parse($result,$this->Query);
+		return $handler->parse($result,$this->Query['string']);
 	}	
 }
