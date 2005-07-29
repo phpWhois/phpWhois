@@ -65,15 +65,11 @@ function parse ($data,$query)
 {
 	
 $this->Query=array();
+$this->Query['server'] = 'whois.arin.net';
+$this->Query['string'] = $query;
 
-unset($this->Query['handler']);
-
-if (!isset($result['rawdata']))
-	{
-	$result['rawdata'] = array();
-	}
-
-$result['regyinfo']=array();
+$result['rawdata']  = array();
+$result['regyinfo'] = array();
 $result['regyinfo']['registrar']='American Registry for Internet Numbers (ARIN)';
 
 reset($this->REGISTRARS);
