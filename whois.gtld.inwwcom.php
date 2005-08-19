@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* inwwcom.whois	1.0	jeremiah bellomy	2000/04/06 */
 /* inwwcom.whois        2.0     david@ols.es            2003/02/09 */
 
-require_once('whois.generic.php');
+require_once('whois.parser.php');
     
 if(!defined("__INWWCOM_HANDLER__")) define("__INWWCOM_HANDLER__",1);
 

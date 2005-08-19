@@ -1,3 +1,9 @@
+2005/08/19  David Saez <david@ols.es>
+		- fixed some bad includes
+
+2005/07/29  David Saez <david@ols.es>
+		- fixed problem with lastest changes in whois.ip
+
 2005/07/28  David Saez <david@ols.es>
 		- modified $query parameter for parse function
 
