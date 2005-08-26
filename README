@@ -16,9 +16,11 @@ handler exists, the special handler will parse the output and make
 additional elements available in the response. The keys of these
 additional elements are described in the file HANDLERS.
 
-It also supports ip whois queries which are very useful to trace
-SPAM. You just only need to pass the doted quad ip address instead
-of the domain name.
+It also supports ip/AS whois queries which are very useful to trace
+SPAM. You just only need to pass the doted quad ip address or the
+AS (Autonomus System) handle instead of the domain name. Limited,
+non-recursive support for Referral Whois (RFC 1714/2167) is also
+provided.
 
 Installation
 ------------

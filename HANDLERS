@@ -74,8 +74,8 @@ the following subkeys:
                 handle  -> network/AS handle
                 source  -> who gives this information
 
-	owner,admin,tech,zone,billing,abuse
-	-----------------------------------
+	owner,admin,tech,zone,billing,abuse,customer
+	--------------------------------------------
 
 	All of these possible keys hold information about the different
 	contacts of the domain or ip address. They all could have the
@@ -101,6 +101,9 @@ the following subkeys:
 		changed		-> last change date
 		source		-> who provided that information
 		remarks		-> remarks
+		inetnum		-> only for ip whois for customer
+                                   object, ip space assigned to
+                                   customer
 
 Not all handlers fill values in each of the keys defined by the
 Common Object Model as not all registries return the same amount

@@ -83,12 +83,12 @@ class ip_handler extends WhoisClient
 			$orgname = trim($rawdata[1]);
 
 		while (list($string, $whois) = each($this->REGISTRARS))
-		if (strstr($orgname, $string) != '')
-			{
-			$this->Query['server'] = $whois;
-			$result['regyinfo']['registrar'] = $string;
-			break;
-			}
+			if (strstr($orgname, $string) != '')
+				{
+				$this->Query['server'] = $whois;
+				$result['regyinfo']['registrar'] = $string;
+				break;
+				}
 
 		switch ($this->Query['server'])
 			{
@@ -196,6 +196,23 @@ class ip_handler extends WhoisClient
 			{
 			//Convert CDIR to inetnum
 			$result['regrinfo']['network']['inetnum'] = $this->cidr_conv($result['regrinfo']['network']['cdir']);
+			}
+
+		//Check if Referral rwhois server has been reported
+	
+		if (isset($result['regrinfo']['rwhois']))
+			{			
+			$this->Query['server'] = $result['regrinfo']['rwhois'];
+			unset($result['regrinfo']['rwhois']);				
+			
+			//If so, get customer data from rwhois			
+			$this->Query['handler'] = 'rwhois';		
+			$this->Query['file'] = 'whois.rwhois.php';
+			$rwdata = $this->GetData($query);			
+			$rwres = $this->Process($rwdata);
+			
+			$result['regrinfo']['customer'] = $rwres;
+			$result['regyinfo']['rwhois'] = $this->Query['server'];
 			}
 
 		return $result;

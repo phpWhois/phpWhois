@@ -64,7 +64,8 @@ class arin_handler
                   "abuse.name" => "OrgAbuseName:",
                   "abuse.handle" => "OrgAbuseHandle:",
                   "abuse.phone" => "OrgAbusePhone:",
-                  "abuse.email" => "OrgAbuseEmail:"
+                  "abuse.email" => "OrgAbuseEmail:",
+                  'rwhois' => 'ReferralServer:'
 		              );
 
 		return generic_parser_b($data_str, $items, 'ymd', false);

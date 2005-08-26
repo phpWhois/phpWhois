@@ -92,13 +92,6 @@ class WhoisClient {
 			}
 		else
 			{
-			// If the '.cx' whois server is broken, return an error now (saves attempting and timing out)
-			/*
-			if($this->HACKS["cx_is_broken"] && $this->Query["tld"] == "cx") {
-				$this->Query["errstr"][] = ".cx doesn't work. Turn off HACKS[\"cx_is_broken\"] if ".$this->Query["server"]." finally got fixed.";
-				return("");
-				}
-			*/
 			// Connect to whois server, or return if failed
 			$ptr = $this->Connect();
 		
@@ -222,21 +215,40 @@ class WhoisClient {
 	 *
 	 * Returns a socket connection pointer on success, or -1 on failure.
 	 */
-	function Connect () {
+	function Connect ($server = '') {
 	
+		if ($server == '')
+			$server = $this->Query['server'];
+			
 		// Fail if server not set
-		if(!isSet($this->Query['server']))
+		if($server == '')
 			return(-1);
 
+		// Get rid of protocol and/or get port
+		$port = $this->PORT;
+		
+		$pos = strpos($server,'://');
+		
+		if ($pos !== false)
+			$server = substr($server, $pos+3);
+			
+		$pos = strpos($server,':');
+		
+		if ($pos !== false)
+			{
+			$port = substr($server,$pos+1);
+			$server = substr($server,0,$pos);			
+			}
+			
 		// Enter connection attempt loop
-		$server = $this->Query['server'];
 		$retry = 0;
+		
 		while($retry <= $this->RETRY) {
 			// Set query status
 			$this->Query['status'] = 'ready';
 
 			// Connect to whois port
-			$ptr = @fsockopen($server, $this->PORT);
+			$ptr = @fsockopen($server, $port);
 			if($ptr > 0) {
 				$this->Query['status']='ok';
 				return($ptr);

@@ -1,5 +1,8 @@
 2005/08/26  David Saez <david@ols.es>
-		- code cleanup and  formatting
+		- code cleanup and formatting
+		- added support form Referral Whois (rwhois)
+                  as per RFC 1714/2167, support is limited, non
+                  recursive and only for ARIN ip space
 
 2005/08/19  David Saez <david@ols.es>
 		- fixed some bad includes

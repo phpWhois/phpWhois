@@ -125,31 +125,33 @@ $r='';
 $disok=true;
 
 while (list($key,$val)=each($rawdata))
-      { if (trim($val)!='') 
-           { 
+	{
+	if (trim($val)!='')
+		{ 
 	     if (($val[0]=='%' || $val[0]=='#') && $disok)
-                { $r['disclaimer'][]=trim(substr($val,1));
-		  $disok=true;
-		  continue;
-                }
-	     
-	     $disok=false;
-	     reset($items);
-
-             while (list($field, $match)=each($items)) 
-                   {
-		     $pos=strpos($val,$match);
-                     if ($pos!==false)
 			{
-			  $var="\$r".getvarname($field);
-			  $itm=trim(substr($val,$pos+strlen($match)));
-                          if ($itm!='')
-                              eval($var."=\"".$itm."\";");
-                          break;
-                        }
-                   }
-           }
-      }
+			$r['disclaimer'][]=trim(substr($val,1));
+			$disok=true;
+			continue;
+			}
+	     
+		$disok=false;
+		reset($items);
+
+		while (list($field, $match)=each($items)) 
+			{
+			$pos=strpos($val,$match);
+			if ($pos!==false)
+				{
+				$var = "\$r".getvarname($field);
+				$itm = trim(substr($val,$pos+strlen($match)));
+                if ($itm!='')
+					eval($var."=\"".$itm."\";");
+				break;
+				}
+			}
+		}
+	}
 
 if (empty($r))
 	{
@@ -158,7 +160,8 @@ if (empty($r))
 else
 	{
 	if ($hasreg) $r['registered'] = 'yes';
-	$r=format_dates($r,$dateformat);
+	
+	$r = format_dates($r, $dateformat);
 	}
 
 return $r;
