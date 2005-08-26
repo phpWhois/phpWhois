@@ -23,57 +23,59 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* cira.whois        1.0        by Mark Jeftovic <markjr@easydns.com>  */
 /*		     2.0	David Saez <david@ols.es> */
 /*				standarized object model */
 
-if(!defined("__CA_HANDLER__")) define("__CA_HANDLER__",1);
+if (!defined("__CA_HANDLER__"))
+	define("__CA_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class ca_handler {
+class ca_handler
+	{
 
-function parse ($data_str) {
+	function parse($data_str, $query)
+		{
 
-$items=array( "owner.organization"  => "Organization:",
-              "domain.name"  => "Subdomain:",
-              "registrar" => "Registrar:",
-              "domain.created" => "Date-Approved:",
-              "domain.changed" => "Date-Modified:",
-				"domain.expires" => "Renewal-Date:",
-              "domain.desc" => "Description:",
-              "admin.name" => "Admin-Name:",
-              "admin.address." => "Admin-Postal:",
-              "admin.phone" => "Admin-Phone:",
-              "admin.email" => "Admin-Mailbox:",
-	      "admin.fax" => "Admin-Fax:",	
-              "tech.name" => "Tech-Name:",
-              "tech.address." => "Tech-Postal:",
-              "tech.phone" => "Tech-Phone:",
-              "tech.email" => "Tech-Mailbox:",
-	      "tech.fax" => "Tech-Fax:",
-	      "domain.nserver.0" => "NS1-Hostname:",
-	      "domain.nserver.1" => "NS2-Hostname:",
-	      "domain.nserver.2" => "NS3-Hostname:",
-	      "domain.nserver.3" => "NS4-Hostname:",
-	      "domain.nserver.4" => "NS5-Hostname:",
-	      "domain.nserver.5" => "NS6-Hostname:",
-              "domain.status" => "Status:"
-              );
+		$items = array(
+                  "owner.organization" => "Organization:",
+                  "domain.name" => "Subdomain:",
+                  "registrar" => "Registrar:",
+                  "domain.created" => "Date-Approved:",
+                  "domain.changed" => "Date-Modified:",
+                  "domain.expires" => "Renewal-Date:",
+                  "domain.desc" => "Description:",
+                  "admin.name" => "Admin-Name:",
+                  "admin.address." => "Admin-Postal:",
+                  "admin.phone" => "Admin-Phone:",
+                  "admin.email" => "Admin-Mailbox:",
+                  "admin.fax" => "Admin-Fax:",
+                  "tech.name" => "Tech-Name:",
+                  "tech.address." => "Tech-Postal:",
+                  "tech.phone" => "Tech-Phone:",
+                  "tech.email" => "Tech-Mailbox:",
+                  "tech.fax" => "Tech-Fax:",
+                  "domain.nserver.0" => "NS1-Hostname:",
+                  "domain.nserver.1" => "NS2-Hostname:",
+                  "domain.nserver.2" => "NS3-Hostname:",
+                  "domain.nserver.3" => "NS4-Hostname:",
+                  "domain.nserver.4" => "NS5-Hostname:",
+                  "domain.nserver.5" => "NS6-Hostname:",
+                  "domain.status" => "Status:"
+		              );
 
-$r["rawdata"]=$data_str["rawdata"];        
+		$r["regrinfo"] = generic_parser_b($data_str["rawdata"], $items, 'ymd');
 
-$r["regrinfo"]=generic_parser_b($data_str["rawdata"],$items,'ymd');
+		$r["regyinfo"]["referrer"] = "http://www.easydns.ca";
 
-$r["regyinfo"]=array( "referrer"=>"http://www.easydns.ca" );
+		$r["regyinfo"]["registrar"] = $r["regrinfo"]["registrar"];
+		unset($r["regrinfo"]["registrar"]);
 
-$r["regyinfo"]["registrar"]=$r["regrinfo"]["registrar"];
-unset($r["regrinfo"]["registrar"]);
+		return ($r);
+		}
 
-return($r);
-}
-
-}
+	}
 ?>

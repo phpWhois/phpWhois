@@ -23,34 +23,37 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
-if(!defined('__CHDOM_HANDLER__')) define('__CHDOM_HANDLER__',1);
+if (!defined('__CHDOM_HANDLER__'))
+	define('__CHDOM_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class chdom_handler {
+class chdom_handler
+	{
 
-function parse ($data_str,$query) {
+	function parse($data_str, $query)
+		{
 
-	$items=array(
-				'admin'					=> 'Administrative',
-				'tech'					=> 'Technical',
-				'domain.created'     	=> 'Created on:',
-				'domain.changed'     	=> 'Last Updated on:',
-				'domain.expires'	   	=> 'Expires on:',
-				'domain.nserver'     	=> 'Domain servers in listed order:',
-				'domain.sponsor'	   	=> "Registrar:"
-            );
+		$items = array(
+                'admin' => 'Administrative',
+                'tech' => 'Technical',
+                'domain.created' => 'Created on:',
+                'domain.changed' => 'Last Updated on:',
+                'domain.expires' => 'Expires on:',
+                'domain.nserver' => 'Domain servers in listed order:',
+                'domain.sponsor' => "Registrar:"
+		            );
 
-	$r['rawdata']=$data_str;
+		$r['rawdata'] = $data_str;
 
-	$r['regrinfo'] = get_blocks($data_str,$items);
+		$r['regrinfo'] = get_blocks($data_str, $items);
 
-	$r=format_dates($r,'dmy');	
-	return $r;
+		$r = format_dates($r, 'dmy');
+		return $r;
+		}
+
 	}
-
-}
 
 ?>

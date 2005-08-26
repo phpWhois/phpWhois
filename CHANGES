@@ -1,3 +1,6 @@
+2005/08/26  David Saez <david@ols.es>
+		- code cleanup and  formatting
+
 2005/08/19  David Saez <david@ols.es>
 		- fixed some bad includes
 

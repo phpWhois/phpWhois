@@ -23,11 +23,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* esnic.whois	1.0  David Saez Padros <david@ols.es> */
 /* esnic.whois  1.1  David Saez Padros <david@ols.es> */
-/* 
+/*
  * requires https support, please see:
  *
  * http://www.php.net/manual/en/ref.openssl.php
@@ -35,80 +35,85 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-if(!defined("__ES_HANDLER__")) define("__ES_HANDLER__",1);
+if (!defined("__ES_HANDLER__"))
+	define("__ES_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class es_handler {
+class es_handler
+	{
 
-	function parse ($data_str) {
+	function parse($data_str, $query)
+		{
 
 		$items = array(
-				'domain.name' => 'Datos del Dominio',
-				'domain.status' => 'Estado ',
-				'domain.created' => 'Fecha de Alta ',
+                'domain.name' => 'Datos del Dominio',
+                'domain.status' => 'Estado ',
+                'domain.created' => 'Fecha de Alta ',
 				'domain.expires' => 'Fecha Caducidad ',
-				'domain.nserver' => 'Nombre Servidor  IP',
-				'domain.sponsor' => 'Agente Registrador',
-				'owner' => 'PROPIETARIO DEL DOMINIO',
-				'admin' => 'PERSONA DE CONTACTO ADMINISTRATIVO',
-				'billing' => 'PERSONA DE CONTACTO DE FACTURACION',
-				'tech' => 'PERSONA DE CONTACTO TECNICO'
-				);
+                'domain.nserver' => 'Nombre Servidor  IP',
+                'domain.sponsor' => 'Agente	Registrador',
+                'owner' => 'PROPIETARIO DEL DOMINIO',
+                'admin' => 'PERSONA DE CONTACTO ADMINISTRATIVO',
+                'billing' => 'PERSONA DE CONTACTO DE FACTURACION',
+                'tech' => 'PERSONA DE CONTACTO TECNICO'
+		            );
 
-		$extra = array (
-                		'domicilio' => 'address.street',
-		                'población' => 'address.city',
-		                'provincia' => '',
-                		'código postal' => 'address.pcode',
-		                'país' => 'address.country',
-                		'nic_handle' => 'handle',
-		                'nombre' => 'name',
-                		'organización ' => 'organization',
-				'tipo de titular' => '',
-				'titular' => 'organization',
-		                'teléfono' => 'phone'
-		               );
+		$extra = array(
+                'domicilio' => 'address.street',
+                'población' => 'address.city',
+				'provincia' => '',
+                'código postal' => 'address.pcode',
+                'país' => 'address.country',
+                'nic_handle' => 'handle',
+                'nombre' =>	'name',
+                'organización ' => 'organization',
+                'tipo de titular'	=> '',
+                'titular' => 'organization',
+                'teléfono' => 'phone'
+		            );
 
-		while (list ($key, $val) = each ($data_str['rawdata']))
+		while (list($key, $val) = each($data_str['rawdata']))
 			{
-			if (strpos($val,'Nombre del dominio')!==false)
+			if (strpos($val, 'Nombre del dominio') !=  = false)
 				{
-				$data_str['rawdata'][$key]='PROPIETARIO DEL DOMINIO:';
+				$data_str['rawdata'][$key] = 'PROPIETARIO DEL DOMINIO:';
 				break;
 				}
 			}
 
-		$rawdata=implode("\n",$data_str['rawdata']);
-		$rawdata=str_replace('CONTACTO ADMINISTRATIVO','CONTACTO ADMINISTRATIVO:',$rawdata);
-		$rawdata=explode("\n",$rawdata);
+		$rawdata = implode("\n", $data_str['rawdata']);
+		$rawdata = str_replace('CONTACTO ADMINISTRATIVO', 'CONTACTO ADMINISTRATIVO:', $rawdata);
+		$rawdata = explode("\n", $rawdata);
 
-		$r['regrinfo'] = get_blocks($rawdata,$items);
+		$r['regrinfo'] = get_blocks($rawdata, $items);
 
 		if (isset($r['regrinfo']['domain']['name']))
 			{
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'],$extra);
-			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'],$extra);
-			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing'],$extra);
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'],$extra);
-			$r['regrinfo']['registered']='yes';
+			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
+			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
+			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing'], $extra);
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
+			$r['regrinfo']['registered'] = 'yes';
 			}
 		else
-			$r['regrinfo']['registered']='no';
+			$r['regrinfo']['registered'] = 'no';
 
-		$r['regyinfo'] = array('referrer'=>'http://www.nic.es',
-				       'registrar'=>'ES-NIC' );
+		$r['regyinfo'] = array(
+                'referrer' => 'http://www.nic.es',
+                'registrar' => 'ES-NIC'
+                );
 
-		$rawdata=implode("\n",$rawdata);
-		$first=strpos($rawdata,'Datos del Dominio '.$r['regrinfo']['domain']['name']);
+		$rawdata = implode("\n", $rawdata);
+		$first = strpos($rawdata, 'Datos del Dominio '.$r['regrinfo']['domain']['name']);
 
-		if ($first!==false)
-			$rawdata = substr($rawdata,$first);
+		if ($first !=  = false)
+			$rawdata = substr($rawdata, $first);
 
-		$r['rawdata'] = explode("\n",$rawdata);
-		format_dates($r,'ymd');
-                return $r;
+		$r['rawdata'] = explode("\n", $rawdata);
+		format_dates($r, 'ymd');
+		return $r;
+		}
 	}
-}
 
 ?>

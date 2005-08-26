@@ -23,17 +23,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
-if(!defined('__XX_HANDLER__')) define('__XX_HANDLER__',1);
+if (!defined('__XX_HANDLER__'))
+	define('__XX_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class xx_handler {
+class xx_handler
+	{
 
-function parse ($data_str,$query) {
-	
-	return($r);
+	function parse($data_str, $query)
+		{
+
+		return ($r);
+		}
 	}
-}
 ?>

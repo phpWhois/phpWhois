@@ -23,24 +23,24 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 include('whois.main.php');
 
 $domain = 'example.com';
 
-if(isset($_REQUEST['domain']))
+if (isset($_REQUEST['domain']))
 	$domain = $_REQUEST['domain'];
-	
+
 $whois = new Whois();
 $result = $whois->Lookup($domain);
 
-echo "<form method=\"post\" action=\"example.php\">";
-echo "<input name=\"domain\" value=\"".$domain."\"/>";
-echo "<input type=\"submit\"/>";
-echo "</form>";
+echo"<form method=\"post\" action=\"example.php\">";
+echo"<input name=\"domain\" value=\"".$domain."\"/>";
+echo"<input type=\"submit\"/>";
+echo"</form>";
 
-echo "<pre>";
+echo"<pre>";
 print_r($result);
-echo "</pre>";
+echo"</pre>";
 ?>

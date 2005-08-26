@@ -23,39 +23,39 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* godaddy.whois 1.0	David Saez Padros <david@ols.es> */
 
-if(!defined("__GODADDY_HANDLER__")) define("__GODADDY_HANDLER__",1);
+if (!defined("__GODADDY_HANDLER__"))
+	define("__GODADDY_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class godaddy_handler {
+class godaddy_handler
+	{
 
-	function godaddy($data) {
-		$this->result=$this->parse($data);
+	function parse($data_str, $query)
+		{
+
+		$items = array(
+                  "owner" => "Registrant:",
+                  "admin" => "Administrative Contact",
+                  "tech" => "Technical Contact",
+                  "domain.name" => "Domain Name:",
+                  "domain.nserver." => "Domain servers in listed order:",
+                  "domain.created" => "Created on:",
+                  "domain.expires" => "Expires on:",
+                  "domain.changed" => "Last Updated on:",
+                  "domain.sponsor" => "Registered through:"
+		              );
+
+		$r = get_blocks($data_str, $items);
+		$r["owner"] = get_contact($r["owner"]);
+		$r["admin"] = get_contact($r["admin"]);
+		$r["tech"] = get_contact($r["tech"]);
+		$r = format_dates($r, 'dmy');
+		return ($r);
+		}
 	}
-
-	function parse ($data_str) {
-
-               $items = array( "owner" => "Registrant:",
-                                "admin" => "Administrative Contact",
-                                "tech" => "Technical Contact",
-                                "domain.name" => "Domain Name:",
-				"domain.nserver." => "Domain servers in listed order:",
-                                "domain.created" => "Created on:",
-                                "domain.expires" => "Expires on:",
-                                "domain.changed" => "Last Updated on:",
-				"domain.sponsor" => "Registered through:"
-                              );
-
-                $r = get_blocks($data_str,$items);
-                $r["owner"] = get_contact($r["owner"]);
-                $r["admin"] = get_contact($r["admin"]);
-                $r["tech"]  = get_contact($r["tech"]);
-		$r=format_dates($r,'dmy');
-                return($r);
-	}
-}
 ?>

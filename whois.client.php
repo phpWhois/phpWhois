@@ -52,7 +52,7 @@ class WhoisClient {
 	var $Query = array(
 		'tld' => '',
 		'type' => 'domain',
-		'string' => '', 
+		'string' => '',
 		'status',
 		'server'
 		);
@@ -183,7 +183,7 @@ class WhoisClient {
 			if ($pos!==false) {
 				$pre = '';
 				$output.=substr($val,0,$pos)."\n";
-				$val = substr($val,$pos+6);                    
+				$val = substr($val,$pos+6);
 				}
 			$output.=$val.$pre;
 			}

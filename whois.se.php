@@ -23,37 +23,39 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* nicse.whois  1.00 update to common object model by David Saez */
 /* senic.whois	0.99	Stefan Alfredsson <stefan@alfredsson.org> */
 /* Based upon uknic.whois by David Saez Padros */
 
-if(!defined("__SE_HANDLER__")) define("__SE_HANDLER__",1);
+if (!defined("__SE_HANDLER__"))
+	define("__SE_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class se_handler {
+class se_handler
+	{
 
-	function parse ($data_str) {
-		$items=array( 
-			"domain.name" => "*domainname.name:",
-			"domain.status" => "*domainname.status:",
-			"domain.expires" => "*domainname.date_to_delete:",
-			"domain.nserver." => "\tNS\t" );
-			
-		$r["rawdata"]=$data_str["rawdata"];
+	function parse($data_str, $query)
+		{
+		$items = array(
+                    "domain.name" => "*domainname.name:",
+                    "domain.status" => "*domainname.status:",
+                    "domain.expires" => "*domainname.date_to_delete:",
+                    "domain.nserver." => "\tNS\t"
+                    );
 
-		$r["regyinfo"]=array(
-			"referrer"=>"http://www.nic-se.se",
-			"registrar" => "NIC-SE"
-			);
+		$r["regyinfo"] = array(
+                    "referrer" => "http://www.nic-se.se",
+                    "registrar" => "NIC-SE"
+		                );
 
-		$r["regrinfo"] = generic_parser_b($data_str["rawdata"],$items);
+		$r["regrinfo"] = generic_parser_b($data_str["rawdata"], $items);
 
-		return($r);
+		return ($r);
+		}
+
 	}
-
-}
 
 ?>

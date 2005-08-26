@@ -23,57 +23,61 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* dotfm.whois    1.0    David Saez 4/4/2003 */
 
-if(!defined("__FM_HANDLER__")) define("__FM_HANDLER__",1);
+if (!defined("__FM_HANDLER__"))
+	define("__FM_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class fm_handler {
-
-function parse ($data) 
-{
-
-    $items = array( "owner" => "Registrant",
-                    "admin" => "Administrative",
-                    "tech" => "Technical",
-                    "billing" => "Billing" );
-
-    $blocks = get_blocks($data['rawdata'],$items);
-
-    $items = array(
-			"name" => "FM Domain:",
-			"nserver.0" => "Primary Hostname:",
-			"nserver.1" => "Secondary Hostname:",
-			"expires" => "Renewal Date:"
-		  );
-
-    $r['regrinfo']['domain'] = generic_parser_b($data['rawdata'],$items);
-
-    $items = array (
-			'organization' => 'Organiztion:',
-			'name' => 'Name:',
-			'address.0' => 'Address:',
-			'address.1' => 'City, State Zip:',
-			'address.country' => 'Country:',
-			'phone' => 'Phone:',
-			'fax' => 'Fax:',
-			'email' => 'Email:'
-			);
-
-    $r['rawdata']=$data['rawdata'];
-  
-    while (list($key, $val) = each($blocks))
+class fm_handler
 	{
-	$r['regrinfo'][$key] = generic_parser_b($val,$items);
+
+	function parse($data, $query)
+		{
+
+		$items = array(
+                  "owner" => "Registrant",
+                  "admin" => "Administrative",
+                  "tech" => "Technical",
+                  "billing" => "Billing"
+                  );
+
+		$blocks = get_blocks($data['rawdata'], $items);
+
+		$items = array(
+                  "name" => "FM Domain:",
+                  "nserver.0" => "Primary Hostname:",
+                  "nserver.1" => "Secondary Hostname:",
+                  "expires" => "Renewal Date:"
+		              );
+
+		$r['regrinfo']['domain'] = generic_parser_b($data['rawdata'], $items);
+
+		$items = array(
+                'organization' => 'Organiztion:',
+                'name' => 'Name:',
+ 								'address.0' => 'Address:',
+                'address.1' => 'City, State Zip:',
+ 								'address.country' => 'Country:',
+                'phone' => 'Phone:',
+                'fax' => 'Fax:',
+                'email' => 'Email:'
+		            );
+
+		$r['rawdata'] = $data['rawdata'];
+
+		while (list($key, $val) = each($blocks))
+			{
+			$r['regrinfo'][$key] = generic_parser_b($val, $items);
+			}
+
+		$r['regyinfo']['referrer'] = 'http://www.dot.dm';
+		$r['regyinfo']['registrar'] = 'dotFM';
+
+		return ($r);
+		}
 	}
-
-    $r['regyinfo']['referrer']='http://www.dot.dm';
-    $r['regyinfo']['registrar']='dotFM';
-
-    return($r);
-}
-}
 ?>

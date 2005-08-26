@@ -23,36 +23,40 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* moniker.whois 1.1	David Saez Padros <david@ols.es> */
 
-if(!defined("__MONIKER_HANDLER__")) define("__MONIKER_HANDLER__",1);
+if (!defined("__MONIKER_HANDLER__"))
+	define("__MONIKER_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class moniker_handler {
+class moniker_handler
+	{
 
-	function parse ($data_str,$query) {
+	function parse($data_str, $query)
+		{
 
-               $items = array( "owner" => "Registrant",
-                                "admin" => "Administrative ",
-                                "tech" => "Technical ",
-				"billing" => "Billing ",
-                                "domain.name" => "Domain Name:",
-				"domain.nserver." => "Domain servers in listed order:",
-                                "domain.created" => "Record created on: ",
-                                "domain.expires" => "Domain Expires on: ",
-                                "domain.changed" => "Database last updated on: "
-                              );
+		$items = array(
+                  "owner" => "Registrant",
+                  "admin" => "Administrative ",
+                  "tech" => "Technical ",
+                  "billing" => "Billing ",
+                  "domain.name" => "Domain Name:",
+                  "domain.nserver." => "Domain servers in listed order:",
+                  "domain.created" => "Record created on: ",
+                  "domain.expires" => "Domain Expires on: ",
+                  "domain.changed" => "Database last updated on: "
+		              );
 
-                $r = get_blocks($data_str,$items);
-                $r["owner"] = get_contact($r["owner"]);
-                $r["admin"] = get_contact($r["admin"]);
-                $r["tech"] = get_contact($r["tech"]);
+		$r = get_blocks($data_str, $items);
+		$r["owner"] = get_contact($r["owner"]);
+		$r["admin"] = get_contact($r["admin"]);
+		$r["tech"] = get_contact($r["tech"]);
 		$r["billing"] = get_contact($r["billing"]);
-		$r=format_dates($r,'ymd');
-                return($r);
+		$r = format_dates($r, 'ymd');
+		return ($r);
+		}
 	}
-}
 ?>

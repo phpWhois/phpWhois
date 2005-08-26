@@ -23,7 +23,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* chnic.whois	1.1	David Saez Padros <david@ols.es>  For .ch & .li domains */
 /*  8/1/2002    1.2     Added status (active/inactive) and corrected error */
@@ -34,47 +34,51 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if(!defined("__CH_HANDLER__")) define("__CH_HANDLER__",1);
+if (!defined("__CH_HANDLER__"))
+	define("__CH_HANDLER__", 1);
 
-class ch_handler {
+class ch_handler
+	{
 
-function parse ($data_str) 
-{
+	function parse($data_str, $query)
+		{
 
-$items=array( "owner" 		   => "Holder of domain name:",
-              "domain.name"        => "Domain name:",
-              "domain.created"     => "Date of last registration:",
-              "domain.changed"     => "Date of last modification:",
-	      "tech"		   => "Technical contact:",
-	      "domain.nserver"     => "Name servers:" 
-            );
+		$items = array(
+                "owner" => "Holder of domain name:",
+                "domain.name" => "Domain name:",
+                "domain.created" => "Date of last registration:",
+                "domain.changed" => "Date of last modification:",
+                "tech" => "Technical contact:",
+                "domain.nserver" => "Name servers:"
+		            );
 
+		$r["regrinfo"] = get_blocks($data_str["rawdata"], $items);
 
-$r["rawdata"]=$data_str["rawdata"];
+		if (!empty($r["regrinfo"]["domain"]["name"]))
+			{
 
-$r["regrinfo"] = get_blocks($data_str["rawdata"],$items);
+			$r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
+			$r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
 
-if (!empty($r["regrinfo"]["domain"]["name"])) { 
+			$r["regrinfo"]["domain"]["name"] = $r["regrinfo"]["domain"]["name"][0];
+			$r["regrinfo"]["domain"]["changed"] = get_date($r["regrinfo"]["domain"]["changed"][0], 'dmy');
+			$r["regrinfo"]["domain"]["created"] = get_date($r["regrinfo"]["domain"]["created"][0], 'dmy');
 
-	$r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
-        $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
-	
-	$r["regrinfo"]["domain"]["name"]=$r["regrinfo"]["domain"]["name"][0];
-	$r["regrinfo"]["domain"]["changed"]=get_date($r["regrinfo"]["domain"]["changed"][0],'dmy');
-	$r["regrinfo"]["domain"]["created"]=get_date($r["regrinfo"]["domain"]["created"][0],'dmy');
+			$r["regyinfo"] = array(
+                          "referrer" => "http://www.nic.ch",
+                          "registrar" => "SWITCH Domain Name Registration"
+                          );
 
- 	$r["regyinfo"]=array("referrer"=>"http://www.nic.ch",
-                             "registrar"=>"SWITCH Domain Name Registration");
+			$r["regrinfo"]["registered"] = "yes";
+			}
+		else
+			{
+			$r = '';
+			$r["regrinfo"]["registered"] = "no";
+			}
 
-	$r["regrinfo"]["registered"]="yes";
+		return ($r);
+		}
+
 	}
-else {
-	$r='';
-       	$r["regrinfo"]["registered"]="no";
-	}
-
-return($r);
-}
-
-}
 ?>

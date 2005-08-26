@@ -23,39 +23,41 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* ripe.whois	1.0 	David Saez 7/6/2002 */
 
 require_once('whois.parser.php');
 
-if(!defined("__RIPE_HANDLER__")) define("__RIPE_HANDLER__",1);
+if (!defined("__RIPE_HANDLER__"))
+	define("__RIPE_HANDLER__", 1);
 
-class ripe_handler {
+class ripe_handler
+	{
 
-function parse ($data_str) 
-{
-$translate = array (
-                        "fax-no" => "fax",
-                        "e-mail" => "email",
-                        "nic-hdl" => "handle",
-                        "person" => "name",
-						"netname" => "name",
-						"descr" => "desc"
-                   );
+	function parse($data_str, $query)
+		{
+		$translate = array(
+                      "fax-no" => "fax",
+                      "e-mail" => "email",
+                      "nic-hdl" => "handle",
+                      "person" => "name",
+                      "netname" => "name",
+                      "descr" => "desc"
+		                  );
 
-$contacts = array (
-                        "admin-c" => "admin",
-                        "tech-c" => "tech"
-                  );
+		$contacts = array(
+                      "admin-c" => "admin",
+                      "tech-c" => "tech"
+		                  );
 
-$r = generic_parser_a($data_str,$translate,$contacts,"network");
+		$r = generic_parser_a($data_str, $translate, $contacts, "network");
 
-$r["owner"]["organization"] = $r["network"]["desc"];
-unset($r["network"]["desc"]);
+		$r["owner"]["organization"] = $r["network"]["desc"];
+		unset($r["network"]["desc"]);
 
-return $r;
-}
+		return $r;
+		}
 
-}
+	}
 ?>

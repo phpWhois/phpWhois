@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -23,69 +23,73 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* lunic.whois  2.0	David Saez <david@ols.es> 2003/09/08 */
 /* cnnic.whois	1.0	Chewy - 2003/Sep/03 */
 
-if(!defined("__CN_HANDLER__")) define("__CN_HANDLER__",1);
+if (!defined("__CN_HANDLER__"))
+	define("__CN_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class cn_handler {
+class cn_handler
+	{
 
-	function parse($data_str) {
+	function parse($data_str, $query)
+		{
 		$items = array(
-			"domain.name" => "Domain Name:",
-			"domain.status" => "Domain Status:",
-			"domain.nserver." => "Name Server:",
-			"domain.created" => "Registration Date:",
-			"domain.expires" => "Expiration Date:",
-			"domain.sponsor" => "Sponsoring Registrar:",
-			"owner.name" => "Registrant Name:",
-			"owner.organization" => "Registrant Organization:",
-			"owner.address.address" => "Registrant Address:",
-			"owner.address.pcode" => "Registrant Postal Code:",
-			"owner.address.city" => "Registrant City:",
-			"owner.address.country" => "Registrant Country Code:",
-			"owner.email" => "Registrant Email:",
-			"owner.phone" => "Registrant Phone Number:",
-			"owner.fax" => "Registrant Fax:",
-			"admin.name" => "Administrative Name:",
-			"admin.organization" => "Administrative Organization:",
-			"admin.address.address" => "Administrative Address:",
-			"admin.address.pcode" => "Administrative Postal Code:",
-			"admin.address.city" => "Administrative City:",
-			"admin.address.country" => "Administrative Country Code:",
-			"admin.email" => "Administrative Email:",
-			"admin.phone" => "Administrative Phone Number:",
-			"admin.fax" => "Administrative Fax:",
-			"tech.name" => "Technical Name:",
-			"tech.organization" => "Technical Organization:",
-			"tech.address.address" => "Technical Address:",
-                        "tech.address.pcode" => "Technical Postal Code:",
-                        "tech.address.city" => "Technical City:",
-                        "tech.address.country" => "tec-country:",
-                        "tech.email" => "Technical Email:",
-			"tech.phone" => "Technical Phone Number:",
-			"tech.fax" => "Technical Fax:",
-			"billing.name" => "Billing Name:",
-			"billing.organization" => "Billing Organization:",
-                        "billing.address.address" => "Billing Address:",
-                        "billing.address.pcode" => "Billing Postal Code:",
-                        "billing.address.city" => "Billing City:",
-                        "billing.address.country" => "Billing Country Code:",
-                        "billing.email" => "Billing Email:",
-			"billing.phone" => "Billing Phone Number:",
-			"billing.fax" => "Billing Fax:"
-			);
+                "domain.name" => "Domain Name:",
+                "domain.status" => "Domain Status:",
+                "domain.nserver." => "Name Server:",
+                "domain.created" => "Registration Date:",
+                "domain.expires" => "Expiration Date:",
+                "domain.sponsor" => "Sponsoring Registrar:",
+                "owner.name" => "Registrant Name:",
+                "owner.organization" => "Registrant Organization:",
+                "owner.address.address" => "Registrant Address:",
+                "owner.address.pcode" => "Registrant Postal Code:",
+                "owner.address.city" => "Registrant City:",
+                "owner.address.country" => "Registrant Country Code:",
+                "owner.email" => "Registrant Email:",
+                "owner.phone" => "Registrant Phone Number:",
+                "owner.fax" => "Registrant Fax:",
+                "admin.name" => "Administrative Name:",
+                "admin.organization" => "Administrative Organization:",
+                "admin.address.address" => "Administrative Address:",
+                "admin.address.pcode" => "Administrative Postal Code:",
+                "admin.address.city" => "Administrative City:",
+                "admin.address.country" => "Administrative Country Code:",
+                "admin.email" => "Administrative Email:",
+                "admin.phone" => "Administrative Phone Number:",
+                "admin.fax" => "Administrative Fax:",
+                "tech.name" => "Technical Name:",
+                "tech.organization" => "Technical Organization:",
+                "tech.address.address" => "Technical Address:",
+                "tech.address.pcode" => "Technical Postal Code:",
+                "tech.address.city" => "Technical City:",
+                "tech.address.country" => "tec-country:",
+                "tech.email" => "Technical Email:",
+                "tech.phone" => "Technical Phone Number:",
+                "tech.fax" => "Technical Fax:",
+                "billing.name" => "Billing Name:",
+                "billing.organization" => "Billing Organization:",
+                "billing.address.address" => "Billing Address:",
+                "billing.address.pcode" => "Billing Postal Code:",
+                "billing.address.city" => "Billing City:",
+                "billing.address.country" => "Billing Country Code:",
+                "billing.email" => "Billing Email:",
+                "billing.phone" => "Billing Phone Number:",
+                "billing.fax" => "Billing Fax:"
+		            );
 
-		$r["rawdata"] = $data_str["rawdata"];
-		$r["regyinfo"] = array( "referrer"=>"http://www.cnnic.net.cn",
-					"registrar" => "China NIC");
-		$r["regrinfo"] = generic_parser_b ($data_str["rawdata"],$items,'ymd');
-		return($r);
+		$r["regyinfo"] = array(
+                "referrer" => "http://www.cnnic.net.cn",
+                "registrar" => "China NIC"
+                );
+		$r["regrinfo"] = generic_parser_b($data_str["rawdata"], $items, 'ymd');
+		return ($r);
+		}
 	}
-}
 
 ?>

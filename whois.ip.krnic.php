@@ -23,50 +23,54 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* krnic.whois	1.0 	David Saez 7/6/2002 */
 
-if(!defined("__KRNIC_HANDLER__")) define("__KRNIC_HANDLER__",1);
+if (!defined("__KRNIC_HANDLER__"))
+	define("__KRNIC_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class krnic_handler {
+class krnic_handler
+	{
 
-function parse ($data_str,$query) 
-{
+	function parse($data_str, $query)
+		{
 
-        $blocks = array( "owner" => "[ Organization Information ]",
-                         "admin" => "[ Admin Contact Information]",
-                         "tech" => "[ Technical Contact Information ]",
-			 "abuse" => "[ ISP Network Abuse Contact Information ]",
-			 "network.inetnum" => "IPv4 Address       :",
-			 "network.name" => "Network Name       :",
-			 "network.mnt-by" => "Connect ISP Name   :",
-			 "network.created" => "Registration Date  :"
-                       );
+		$blocks = array(
+                    "owner" => "[ Organization Information ]",
+                    "admin" => "[ Admin Contact Information]",
+                    "tech" => "[ Technical Contact Information ]",
+                    "abuse" => "[ ISP Network Abuse Contact Information ]",
+                    "network.inetnum" => "IPv4 Address       :",
+                    "network.name" => "Network Name       :",
+                    "network.mnt-by" => "Connect ISP Name   :",
+                    "network.created" => "Registration Date  :"
+		              );
 
-	$items = array( "handle" => "Orgnization ID     :",
-			"organization" => "Org Name           :",
-			"name" => "Name               :",
-			"address.street" => "Address            :",
-			"address.pcode" => "Zip Code           :",
-			"address.state" => "State              :",
-			"phone" => "Phone              :",
-			"fax" => "Fax                :",
-			"email" => "E-Mail             :"
-		      );
+		$items = array(
+                    "handle" => "Orgnization ID     :",
+                    "organization" => "Org Name           :",
+                    "name" => "Name               :",
+                    "address.street" => "Address            :",
+                    "address.pcode" => "Zip Code           :",
+                    "address.state" => "State              :",
+                    "phone" => "Phone              :",
+                    "fax" => "Fax                :",
+                    "email" => "E-Mail             :"
+		              );
 
-        $r = get_blocks($data_str,$blocks);
+		$r = get_blocks($data_str, $blocks);
 
-	$r["owner"]=generic_parser_b($r["owner"],$items,'Ymd',false);
-	$r["admin"]=generic_parser_b($r["admin"],$items,'Ymd',false);
-	$r["tech"] =generic_parser_b($r["tech"],$items,'Ymd',false);
-	$r["abuse"]=generic_parser_b($r["abuse"],$items,'Ymd',false);
+		$r["owner"] = generic_parser_b($r["owner"], $items, 'Ymd', false);
+		$r["admin"] = generic_parser_b($r["admin"], $items, 'Ymd', false);
+		$r["tech"] = generic_parser_b($r["tech"], $items, 'Ymd', false);
+		$r["abuse"] = generic_parser_b($r["abuse"], $items, 'Ymd', false);
 
-	$r=format_dates($r,'Ymd');
-	return($r);
-}
+		$r = format_dates($r, 'Ymd');
+		return ($r);
+		}
 
-}
+	}
 ?>

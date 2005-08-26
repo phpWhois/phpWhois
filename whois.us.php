@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -33,7 +33,7 @@ require_once('whois.parser.php');
 
 class us_handler {
 
-function parse ($data_str) {
+function parse ($data_str, $query) {
 
 	$items = array( "domain.name" => "Domain Name:",
 			"domain.handle" => "Domain ID:",
@@ -55,45 +55,46 @@ function parse ($data_str) {
 			"owner.fax" => "Registrant Facsimile Number:",
 			"owner.email" => "Registrant Email:",
 			"admin.handle" => "Administrative Contact ID:",
-                        "admin.name" => "Administrative Contact Name:",
-                        "admin.organization" => "Administrative Contact Organization:",
-                        "admin.address.street" => "Administrative Contact Address1:",
-                        "admin.address.pcode" => "Administrative Contact Postal Code:",
-                        "admin.address.city" => "Administrative Contact City:",
-                        "admin.address.state" => "Administrative Contact State/Province:",
-                        "admin.address.country" => "Administrative Contact Country:",
-                        "admin.phone" => "Administrative Contact Phone Number:",
-                        "admin.email" => "Administrative Contact Email:",
+			"admin.name" => "Administrative Contact Name:",
+			"admin.organization" => "Administrative Contact Organization:",
+			"admin.address.street" => "Administrative Contact Address1:",
+			"admin.address.pcode" => "Administrative Contact Postal Code:",
+			"admin.address.city" => "Administrative Contact City:",
+			"admin.address.state" => "Administrative Contact State/Province:",
+			"admin.address.country" => "Administrative Contact Country:",
+			"admin.phone" => "Administrative Contact Phone Number:",
+			"admin.email" => "Administrative Contact Email:",
 			"admin.fax" => "Administrative Contact Facsimile Number:",
 			"tech.handle" => "Technical Contact ID:",
-                        "tech.name" => "Technical Contact Name:",
-                        "tech.organization" => "Technical Contact Organization:",
-                        "tech.address.street" => "Technical Contact Address1:",
-                        "tech.address.pcode" => "Technical Contact Postal Code:",
-                        "tech.address.city" => "Technical Contact City:",
-                        "tech.address.state" => "Technical Contact State/Province:",
-                        "tech.address.country" => "Technical Contact Country:",
-                        "tech.phone" => "Technical Contact Phone Number:",
-                        "tech.email" => "Technical Contact Email:",
+			"tech.name" => "Technical Contact Name:",
+			"tech.organization" => "Technical Contact Organization:",
+			"tech.address.street" => "Technical Contact Address1:",
+			"tech.address.pcode" => "Technical Contact Postal Code:",
+			"tech.address.city" => "Technical Contact City:",
+			"tech.address.state" => "Technical Contact State/Province:",
+			"tech.address.country" => "Technical Contact Country:",
+			"tech.phone" => "Technical Contact Phone Number:",
+			"tech.email" => "Technical Contact Email:",
 			"tech.fax" => "Technical Contact Facsimile Number:",
 			"billing.handle" => "Billing Contact ID:",
-                        "billing.name" => "Billing Contact Name:",
-                        "billing.organization" => "Billing Contact Organization:",
-                        "billing.address.street" => "Billing Contact Address1:",
-                        "billing.address.pcode" => "Billing Contact Postal Code:",
-                        "billing.address.city" => "Billing Contact City:",
-                        "billing.address.state" => "Billing Contact State/Province:",
-                        "billing.address.country" => "Billing Contact Country:",
-                        "billing.phone" => "Billing Contact Phone Number:",
-                        "billing.email" => "Billing Contact Email:",
+			"billing.name" => "Billing Contact Name:",
+			"billing.organization" => "Billing Contact Organization:",
+			"billing.address.street" => "Billing Contact Address1:",
+			"billing.address.pcode" => "Billing Contact Postal Code:",
+			"billing.address.city" => "Billing Contact City:",
+			"billing.address.state" => "Billing Contact State/Province:",
+			"billing.address.country" => "Billing Contact Country:",
+			"billing.phone" => "Billing Contact Phone Number:",
+			"billing.email" => "Billing Contact Email:",
 			"billing.fax" => "Billing Contact Facsimile Number:"
-		);
+			);
 
-	$r["rawdata"] = $data_str["rawdata"];
 	$r["regrinfo"] = generic_parser_b($data_str["rawdata"],$items,'-md--y');
 
-	$r["regyinfo"] = array( "referrer"=>"http://www.neustar.us", 
-				"registrar" => "NEUSTAR INC." );
+	$r["regyinfo"] = array(
+                        "referrer"=>"http://www.neustar.us",
+				                "registrar" => "NEUSTAR INC."
+                        );
 
 	return($r);
 }

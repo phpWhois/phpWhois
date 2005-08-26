@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -23,69 +23,72 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* zanic.whois	1.0	Brett Cave, based on code by David Saez */
 
-if(!defined("__ZA_HANDLER__")) define("__ZA_HANDLER__",1);
+if (!defined("__ZA_HANDLER__"))
+	define("__ZA_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class za_handler {
+class za_handler
+	{
 
-	function parse($data_str) {
-	
+	function parse($data_str, $query)
+		{
+
 		$items = array(
-			'domain.name' 		=> 'Domain Name            : ',
-			'domain.created' 	=> 'Record Created         :',
-			'domain.changed' 	=> 'Record Last Updated    :',
-			'owner.name' 		=> 'Registered for         :',
-			'admin' 			=> 'Administrative Contact :',
-			'tech' 				=> 'Technical Contact      :',
-			'domain.nserver'	=> 'Domain Name Servers listed in order:',
-			'registered' 		=> 'No such domain: '
-			);
-		
+                  'domain.name' => 'Domain Name            : ',
+                  'domain.created' => 'Record Created         :',
+                  'domain.changed' => 'Record	Last Updated    :',
+                  'owner.name' => 'Registered for         :',
+                  'admin' => 'Administrative Contact :',
+                  'tech' => 'Technical Contact      :',
+                  'domain.nserver' => 'Domain Name Servers listed in order:',
+                  'registered' => 'No such domain: '
+		              );
+
 		// Arrange contacts ...
-		
-		$rawdata=array();
-		
-		while (list($key,$line)=each($data_str['rawdata']))
+
+		$rawdata = array();
+
+		while (list($key, $line) = each($data_str['rawdata']))
 			{
-			if (strpos($line,' Contact ')!==false)
+			if (strpos($line, ' Contact ') !=  = false)
 				{
-				$pos=strpos($line,':');
-				
-				if ($pos!==false)
+				$pos = strpos($line, ':');
+
+				if ($pos !=  = false)
 					{
-					$rawdata[]=substr($line,0,$pos+1);
-					$rawdata[]=trim(substr($line,$pos+1));
+					$rawdata[] = substr($line, 0, $pos + 1);
+					$rawdata[] = trim(substr($line, $pos + 1));
 					continue;
 					}
 				}
-			$rawdata[]=$line;
+			$rawdata[] = $line;
 			}
-			
-		$r['rawdata'] = $rawdata; //$data_str['rawdata'];
-		
-		$r['regrinfo'] = get_blocks($rawdata,$items);
-		
+
+		$r['rawdata'] = $rawdata;
+
+		$r['regrinfo'] = get_blocks($rawdata, $items);
+
 		if (isset($r['regrinfo']['registered']))
 			{
-			$r['regrinfo']['registered']='no';
+			$r['regrinfo']['registered'] = 'no';
 			}
 		else
 			{
 			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
 			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
 			}
-			
-		$r['regyinfo']['referrer'] ='http://www.za.net/';	// or http://www.za.org
-        $r['regyinfo']['registrar']='ZA NiC';
-        
-        $r = format_dates($r,'xmdxxy');
-        
-		return($r);
+
+		$r['regyinfo']['referrer'] = 'http://www.za.net/'; // or http://www.za.org
+		$r['regyinfo']['registrar'] = 'ZA NiC';
+
+		$r = format_dates($r, 'xmdxxy');
+
+		return ($r);
+		}
 	}
-}
 ?>

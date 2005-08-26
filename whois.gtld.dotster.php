@@ -23,40 +23,44 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* dotster.whois 1.1	David Saez Padros <david@ols.es> */
 /* 17/1/2002 Fixed !! */
 /* 2003/02/18 updated to common object model */
 
-if(!defined("__DOTSTER_HANDLER__")) define("__DOTSTER_HANDLER__",1);
+if (!defined("__DOTSTER_HANDLER__"))
+	define("__DOTSTER_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class dotster_handler {
+class dotster_handler
+	{
 
-function parse ($data_str) 
-{
+	function parse($data_str, $query)
+		{
 
-                $items = array( "owner" => "Registrant:",
-                                "admin" => "Administrative",
-                                "tech" => "Technical",
-                                "domain.nserver" => "Domain servers in listed order:",
-                                "domain.name" => "Domain name:",
-                                "domain.created" => "Created on:",
-                                "domain.expires" => "Expires on:",
-                                "domain.changed" => "Last Updated on:",
-				"domain.sponsor" => "Registrar:"
-                              );
+		$items = array(
+                  "owner" => "Registrant:",
+                  "admin" => "Administrative",
+                  "tech" => "Technical",
+                  "domain.nserver" =>
+                  "Domain servers in listed order:",
+                  "domain.name" => "Domain name:",
+                  "domain.created" => "Created on:",
+                  "domain.expires" => "Expires on:",
+                  "domain.changed" => "Last Updated on:",
+                  "domain.sponsor" => "Registrar:"
+		              );
 
-                $r = get_blocks($data_str,$items);
-                $r["owner"] = get_contact($r["owner"]);
-                $r["admin"] = get_contact($r["admin"]);
-                $r["tech"] = get_contact($r["tech"]);
-		format_dates($r,'dmy');
-                return($r);
+		$r = get_blocks($data_str, $items);
+		$r["owner"] = get_contact($r["owner"]);
+		$r["admin"] = get_contact($r["admin"]);
+		$r["tech"] = get_contact($r["tech"]);
+		format_dates($r, 'dmy');
+		return ($r);
 
-}
+		}
 
-}
+	}
 ?>

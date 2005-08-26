@@ -23,62 +23,65 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* denic.whois        1.0 by david saez */
 /* denic.whois        0.4 by Oliver Notka <notka@ettel-gmbh.de> */
 /* Fixed error when domain doesnt exist */
 
-/* denic.whois        0.3 by David Saez <david@ols.es> */    
+/* denic.whois        0.3 by David Saez <david@ols.es> */
 /* denic.whois        0.2 by Elmar K. Bins <elmi@4ever.de> */
 /* based upon brnic.whois by Marcelo Sanches <msanches@sitebox.com.br> */
 /* and        atnic.whois by Martin Pircher <martin@pircher.net> */
 
 /* this version does not yet deliver contact data, but handles only */
 
-if(!defined("__DE_HANDLER__")) define("__DE_HANDLER__",1);
+if (!defined("__DE_HANDLER__"))
+	define("__DE_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class de_handler {
+class de_handler
+	{
 
-	function parse ($data_str) {
+	function parse($data_str, $query)
+		{
 
-		$items=array(
-			'domain.name' => 'domain:',
-			'domain.nserver' => 'nserver',
-			'domain.status' => 'status:',
-			'domain.changed' => 'changed:',
-			'owner' => '[holder]',
-			'admin' => '[admin-c]',
-			'tech' => '[tech-c]',
-			'zone' => '[zone-c]'
-			);
+		$items = array(
+                'domain.name' => 'domain:',
+                'domain.nserver' => 'nserver',
+				'domain.status' => 'status:',
+                'domain.changed' => 'changed:',
+				'owner' => '[holder]',
+                'admin' => '[admin-c]',
+                'tech' =>	'[tech-c]',
+                'zone' => '[zone-c]'
+		            );
 
-		$extra=array(
-			'address:' => 'address.street',
-			'city:' => 'address.city',
-			'pcode:' => 'address.pcode',
-			'country:' => 'address.country',
-			'name:' => 'name',
-			'remarks:' => ''
-			);
+		$extra = array(
+                'address:' => 'address.street',
+                'city:' => 'address.city',
+				'pcode:' => 'address.pcode',
+                'country:' => 'address.country',
+				'name:' => 'name',
+                'remarks:' => ''
+		            );
 
-		$r['regrinfo'] = get_blocks($data_str['rawdata'],$items);
+		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
-		$r['regrinfo']['owner']=get_contact($r['regrinfo']['owner'],$extra);
-		$r['regrinfo']['admin']=get_contact($r['regrinfo']['admin'],$extra);
-		$r['regrinfo']['tech']=get_contact($r['regrinfo']['tech'],$extra);
-		$r['regrinfo']['zone']=get_contact($r['regrinfo']['zone'],$extra);
+		$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
+		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
+		$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
+		$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'], $extra);
 
-		$r["rawdata"] = $data_str["rawdata"];
+		$r["regyinfo"] = array(
+                  "registrar" => "DENIC eG",
+                  "referrer" => "http://www.denic.de/"
+                  );
 
-		$r["regyinfo"] = array( "registrar" => "DENIC eG",
-					"referrer" => "http://www.denic.de/");
-
-		$r['regrinfo']['domain']['changed']=substr($r['regrinfo']['domain']['changed'],0,10);
-		$r=format_dates($r,'ymd');
-		return($r);
+		$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
+		$r = format_dates($r, 'ymd');
+		return ($r);
+		}
 	}
-}
 ?>

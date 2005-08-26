@@ -23,55 +23,57 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* nlnic.whois	  1.2    David Saez - updated to use generic3.whois */
 /* nlnic.whois    1.1    David Saez - common object model */
 /* nlnic.whois    1.0    Matthijs Koot - 2003/01/14 - <koot@cyberwar.nl> */
 
-if(!defined("__NL_HANDLER__")) define("__NL_HANDLER__",1);
+if (!defined("__NL_HANDLER__"))
+	define("__NL_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class nl_handler {
+class nl_handler
+	{
 
-function parse ($data) 
-{
+	function parse($data)
+		{
 
-    $items = array(
-			"domain.name" => "Domain name:",
-			"domain.status" => "Status:",
-			"domain.nserver" => "Domain nameservers:",
-			"domain.created" => "Date registered:",
-			"domain.changed" => "Record last updated:",
-			"domain.sponsor" => "Record maintained by:",
-			"owner" => "Registrant:",
-			"admin" => "Administrative contact:",
-			"tech" => "Technical contact:",
-			"zone" => "Registrar:"
-		  );
+		$items = array(
+                  "domain.name" => "Domain name:",
+                  "domain.status" => "Status:",
+                  "domain.nserver" => "Domain nameservers:",
+                  "domain.created" => "Date registered:",
+                  "domain.changed" => "Record last updated:",
+                  "domain.sponsor" => "Record maintained by:",
+                  "owner" => "Registrant:",
+                  "admin" => "Administrative contact:",
+                  "tech" => "Technical contact:",
+                  "zone" => "Registrar:"
+		            );
 
-    $r["rawdata"]=$data["rawdata"];
-    $r["regyinfo"]["referrer"]="http://www.domain-registry.nl";
-    $r["regyinfo"]["registrar"]="Stichting Internet Domeinregistratie NL";
+		$r["regyinfo"]["referrer"] = "http://www.domain-registry.nl";
+		$r["regyinfo"]["registrar"] = "Stichting Internet Domeinregistratie NL";
 
-    $r["regrinfo"] = get_blocks($data["rawdata"],$items);
+		$r["regrinfo"] = get_blocks($data["rawdata"], $items);
 
-    if (!isset($r["regrinfo"]["domain"]["name"][0])) {
-	$r["regrinfo"]["registered"]="no";
-	return $r;
+		if (!isset($r["regrinfo"]["domain"]["name"][0]))
+			{
+			$r["regrinfo"]["registered"] = "no";
+			return $r;
+			}
+
+		$r["regrinfo"]["domain"]["name"] = $r["regrinfo"]["domain"]["name"][0];
+
+		$r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
+		$r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
+		$r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
+		$r["regrinfo"]["zone"] = get_contact($r["regrinfo"]["zone"]);
+
+		$r["regrinfo"]["registered"] = "yes";
+		format_dates($r, 'dmy');
+		return ($r);
+		}
 	}
-		
-    $r["regrinfo"]["domain"]["name"]=$r["regrinfo"]["domain"]["name"][0];
-
-    $r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
-    $r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
-    $r["regrinfo"]["admin"] = get_contact($r["regrinfo"]["admin"]);
-    $r["regrinfo"]["zone"] = get_contact($r["regrinfo"]["zone"]);
-
-    $r["regrinfo"]["registered"]="yes";
-    format_dates($r,'dmy');
-    return($r);
-}
-}
 ?>

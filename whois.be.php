@@ -23,58 +23,61 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* benic.whois        1.0        Matthijs Koot <koot@cyberwar.nl> */
 /* benic.whois        1.2	 David Saez */
 
 require_once('whois.parser.php');
 
-if(!defined("__BE_HANDLER__")) define("__BE_HANDLER__",1);
+if (!defined("__BE_HANDLER__"))
+	define("__BE_HANDLER__", 1);
 
-class be_handler {
-
-  function parse ($data) {
-
-    $items = array(
-			"domain.name" => "Domain:",
-			"domain.status" => "Status:",
-			"domain.nserver" => "Nameservers:",
-			"domain.created" => "Registered:",
-                        "owner" => "Licensee:",
-			"admin" => "Onsite Contacts:",
-			"tech" => "Agent Technical Contacts:",
-			'agent' => 'Agent:'
-		  );
-
-    $r["rawdata"]=$data["rawdata"];
-    $r["regyinfo"]["referrer"]="http://www.domain-registry.nl";
-    $r["regyinfo"]["registrar"]="DNS Belgium";
-
-    $r["regrinfo"] = get_blocks($data["rawdata"],$items);
-
-    if (isset($r['regrinfo']['domain']['name']))
+class be_handler
 	{
-	$r['regrinfo']['registered']='yes';
-	$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-        $r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
 
-	if (isset($r['regrinfo']['admin']))
-	        $r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
-
-        if (isset($r['regrinfo']['agent']))
+	function parse($data, $query)
 		{
-                $sponsor = get_contact($r['regrinfo']['agent']);
-		unset($r['regrinfo']['agent']);
-		$r['regrinfo']['domain']['sponsor']=$sponsor['name'];
+
+		$items = array(
+                "domain.name" => "Domain:",
+                "domain.status" => "Status:",
+				"domain.nserver" => "Nameservers:",
+                "domain.created" => "Registered:",
+                "owner" => "Licensee:",
+                "admin" => "Onsite Contacts:",
+                "tech" => "Agent Technical Contacts:",
+				'agent' => 'Agent:'
+				);
+
+		$r["rawdata"] = $data["rawdata"];
+		$r["regyinfo"]["referrer"] = "http://www.domain-registry.nl";
+		$r["regyinfo"]["registrar"] = "DNS Belgium";
+
+		$r["regrinfo"] = get_blocks($data["rawdata"], $items);
+
+		if (isset($r['regrinfo']['domain']['name']))
+			{
+			$r['regrinfo']['registered'] = 'yes';
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
+			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
+
+			if (isset($r['regrinfo']['admin']))
+				$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
+
+			if (isset($r['regrinfo']['agent']))
+				{
+				$sponsor = get_contact($r['regrinfo']['agent']);
+				unset($r['regrinfo']['agent']);
+				$r['regrinfo']['domain']['sponsor'] = $sponsor['name'];
+				}
+
+			$r = format_dates($r, '-mdy');
+			}
+		else
+			$r['regrinfo']['registered'] = 'no';
+
+		return ($r);
 		}
-
-	$r=format_dates($r,'-mdy');
-        }
-    else
-	$r['regrinfo']['registered']='no';
-
-    return($r);
-  }
-}
+	}
 ?>

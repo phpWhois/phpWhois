@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -23,66 +23,69 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* schlund.whois  1.00    David Saez <david@ols.es> */
 
-if(!defined("__SCHLUND_HANDLER__")) define("__SCHLUND_HANDLER__",1);
+if (!defined("__SCHLUND_HANDLER__"))
+	define("__SCHLUND_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class schlund_handler {
+class schlund_handler
+	{
 
-        function parse ($data_str,$query) {
+	function parse($data_str, $query)
+		{
 
-	$items = array(
-                        "domain.created" => "created:",
-                        "domain.changed" => "last-changed:",
-                        "domain.status" => "status:",
-                        "owner.name.first" => "registrant-firstname:",
-			"owner.name.last" => "registrant-lastname:",
-			"owner.organization" => "registrant-organization:",
-                        "owner.address.street." => "registrant-street1:",
-			"owner.address.street." => "registrant-street2:",
-                        "owner.address.pcode" => "registrant-pcode:",
-                        "owner.address.city" => "registrant-city:",
-                        "owner.address.country" => "registrant-ccode:",
-			"owner.phone" => "registrant-phone:",
-			"onwer.email" => "registrant-email:",
-                        "admin.name.first" => "admin-c-firstname:",
-                        "admin.name.last" => "admin-c-lastname:",
-                        "admin.organization" => "admin-c-organization:",
-                        "admin.address.street." => "admin-c-street1:",
-                        "admin.address.street." => "admin-c-street2:",
-                        "admin.address.pcode" => "admin-c-pcode:",
-                        "admin.address.city" => "admin-c-city:",
-                        "admin.address.country" => "admin-c-ccode:",
-                        "admin.phone" => "admin-c-phone:",
-                        "admin.email" => "admin-c-email:",
-			"tech.name.first" => "tech-c-firstname:",
-                        "tech.name.last" => "tech-c-lastname:",
-                        "tech.organization" => "tech-c-organization:",
-                        "tech.address.street." => "tech-c-street1:",
-                        "tech.address.street." => "tech-c-street2:",
-                        "tech.address.pcode" => "tech-c-pcode:",
-                        "tech.address.city" => "tech-c-city:",
-                        "tech.address.country" => "tech-c-ccode:",
-                        "tech.phone" => "tech-c-phone:",
-                        "tech.email" => "tech-c-email:",
-			"billing.name.first" => "bill-c-firstname:",
-                        "billing.name.last" => "bill-c-lastname:",
-                        "billing.organization" => "bill-c-organization:",
-                        "billing.address.street." => "bill-c-street1:",
-                        "billing.address.street." => "bill-c-street2:",
-                        "billing.address.pcode" => "bill-c-pcode:",
-                        "billing.address.city" => "bill-c-city:",
-                        "billing.address.country" => "bill-c-ccode:",
-                        "billing.phone" => "bill-c-phone:",
-                        "billing.email" => "bill-c-email:"
-			);
+		$items = array(
+                  "domain.created" => "created:",
+                  "domain.changed" => "last-changed:",
+                  "domain.status" => "status:",
+                  "owner.name.first" => "registrant-firstname:",
+                  "owner.name.last" => "registrant-lastname:",
+                  "owner.organization" => "registrant-organization:",
+                  "owner.address.street." => "registrant-street1:",
+                  "owner.address.street." => "registrant-street2:",
+                  "owner.address.pcode" => "registrant-pcode:",
+                  "owner.address.city" => "registrant-city:",
+                  "owner.address.country" => "registrant-ccode:",
+                  "owner.phone" => "registrant-phone:",
+                  "onwer.email" => "registrant-email:",
+                  "admin.name.first" => "admin-c-firstname:",
+                  "admin.name.last" => "admin-c-lastname:",
+                  "admin.organization" => "admin-c-organization:",
+                  "admin.address.street." => "admin-c-street1:",
+                  "admin.address.street." => "admin-c-street2:",
+                  "admin.address.pcode" => "admin-c-pcode:",
+                  "admin.address.city" => "admin-c-city:",
+                  "admin.address.country" => "admin-c-ccode:",
+                  "admin.phone" => "admin-c-phone:",
+                  "admin.email" => "admin-c-email:",
+                  "tech.name.first" => "tech-c-firstname:",
+                  "tech.name.last" => "tech-c-lastname:",
+                  "tech.organization" => "tech-c-organization:",
+                  "tech.address.street." => "tech-c-street1:",
+                  "tech.address.street." => "tech-c-street2:",
+                  "tech.address.pcode" => "tech-c-pcode:",
+                  "tech.address.city" => "tech-c-city:",
+                  "tech.address.country" => "tech-c-ccode:",
+                  "tech.phone" => "tech-c-phone:",
+                  "tech.email" => "tech-c-email:",
+                  "billing.name.first" => "bill-c-firstname:",
+                  "billing.name.last" => "bill-c-lastname:",
+                  "billing.organization" => "bill-c-organization:",
+                  "billing.address.street." => "bill-c-street1:",
+                  "billing.address.street." => "bill-c-street2:",
+                  "billing.address.pcode" => "bill-c-pcode:",
+                  "billing.address.city" => "bill-c-city:",
+                  "billing.address.country" => "bill-c-ccode:",
+                  "billing.phone" => "bill-c-phone:",
+                  "billing.email" => "bill-c-email:"
+		              );
 
-	$r=generic_parser_b($data_str,$items);
-	return($r);
+		$r = generic_parser_b($data_str, $items);
+		return ($r);
+		}
 	}
-}
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -23,38 +23,42 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* buydomains.whois     1.0     david@ols.es            2003/03/30 */
 
-if(!defined("__BUYDOMAINS_HANDLER__")) define("__BUYDOMAINS_HANDLER__",1);
+if (!defined("__BUYDOMAINS_HANDLER__"))
+	define("__BUYDOMAINS_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class buydomains_handler {
+class buydomains_handler
+	{
 
-	function parse ($data_str,$query) {
-		
-		$items = array( "owner" => "Registrant:",
-				"admin" => "Administrative Contact",
-				"tech" => "Technical Contact",
-				"zone" => "Zone Contact",
-				"domain.name" => "Domain Name:",
-				"domain.changed" => "Last updated on",
-				"domain.created" => "Domain created on",
-				"domain.expires" => "Domain expires on"
-			      );
+	function parse($data_str, $query)
+		{
 
-		$r =  get_blocks($data_str,$items);
+		$items = array(
+                "owner" => "Registrant:",
+                "admin" => "Administrative Contact",
+                "tech" => "Technical Contact",
+                "zone" => "Zone Contact",
+                "domain.name" => "Domain Name:",
+                "domain.changed" => "Last updated on",
+                "domain.created" => "Domain created on",
+                "domain.expires" => "Domain expires on"
+		            );
+
+		$r = get_blocks($data_str, $items);
 
 		$r["owner"] = get_contact($r["owner"]);
 		$r["admin"] = get_contact($r["admin"]);
 		$r["tech"] = get_contact($r["tech"]);
 		$r["zone"] = get_contact($r["zone"]);
-		format_dates($r,'dmy');
-		return($r);
-	}
+		format_dates($r, 'dmy');
+		return ($r);
+		}
 
-}
+	}
 
 ?>

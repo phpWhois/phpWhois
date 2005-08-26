@@ -23,62 +23,65 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* interdomain.whois    2.0     David Saez Padros <david@ols.es> */
 /* interdomain.whois	1.1	David Saez Padros <david@ols.es> */
 
-if(!defined("__INTERDOMAIN_HANDLER__")) define("__INTERDOMAIN_HANDLER__",1);
+if (!defined("__INTERDOMAIN_HANDLER__"))
+	define("__INTERDOMAIN_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class interdomain_handler {
+class interdomain_handler
+	{
 
-	function parse ($data_str,$query) {
+	function parse($data_str, $query)
+		{
 
 		$items = array(
-			"domain.name" => "Domain Name................",
-			"domain.created" => "Creation Date............",
-			"domain.expires" => "Expiry Date..............",
-			"domain.changed" => "Last Update Date.........",
-			"domain.nserver." => "Name Server.............",
-			"owner.name" => "Organization Name........",
-			"owner.organization" => "Organization Org.........",
-			"owner.address.street" => "Organization Street......",
-			"owner.address.city" => "Organization City........",
-			"owner.address.state" => "Organization State.......",
-			"owner.address.pcode" => "Organization PC..........",
-			"owner.address.country" => "Organization Country.....",
-			"owner.phone" => "Organization Phone.......",
-			"owner.email" => "Organization e-mail......",
-			"owner.handle" => "Organization Contact Id....",
-			"admin.handle" => "Administrative Contact Id..",
-			"admin.name" => "Administrative Name......",
-                        "admin.organization" => "Administrative Org.......",
-                        "admin.address.street" => "Administrative Street....",
-                        "admin.address.city" => "Administrative City......",
-                        "admin.address.state" => "Administrative State.....",
-                        "admin.address.pcode" => "Administrative PC........",
-                        "admin.address.country" => "Administrative Country...",
-                        "admin.phone" => "Administrative Phone.....",
-                        "admin.email" => "Administrative e-mail....",
-			"admin.fax" => "Administrative Fax.......",
-			"tech.handle" => "Technical Contact Id.......",
-                        "tech.name" => "Technical Name...........",
-                        "tech.organization" => "Technical Org............",
-                        "tech.address.street" => "Technical Street.........",
-                        "tech.address.city" => "Technical City...........",
-                        "tech.address.state" => "Technical State..........",
-                        "tech.address.pcode" => "Technical PC.............",
-                        "tech.address.country" => "Technical Country........",
-                        "tech.phone" => "Technical Phone..........",
-                        "tech.email" => "Technical e-mail.........",
-                        "tech.fax" => "Technical Fax............"
-			);
+                    "domain.name" => "Domain Name................",
+                    "domain.created" => "Creation Date............",
+                    "domain.expires" => "Expiry Date..............",
+                    "domain.changed" => "Last Update Date.........",
+                    "domain.nserver." => "Name Server.............",
+                    "owner.name" => "Organization Name........",
+                    "owner.organization" => "Organization Org.........",
+                    "owner.address.street" => "Organization Street......",
+                    "owner.address.city" => "Organization City........",
+                    "owner.address.state" => "Organization State.......",
+                    "owner.address.pcode" => "Organization PC..........",
+                    "owner.address.country" => "Organization Country.....",
+                    "owner.phone" => "Organization Phone.......",
+                    "owner.email" => "Organization e-mail......",
+                    "owner.handle" => "Organization Contact Id....",
+                    "admin.handle" => "Administrative Contact Id..",
+                    "admin.name" => "Administrative Name......",
+                    "admin.organization" => "Administrative Org.......",
+                    "admin.address.street" => "Administrative Street....",
+                    "admin.address.city" => "Administrative City......",
+                    "admin.address.state" => "Administrative State.....",
+                    "admin.address.pcode" => "Administrative PC........",
+                    "admin.address.country" => "Administrative Country...",
+                    "admin.phone" => "Administrative Phone.....",
+                    "admin.email" => "Administrative e-mail....",
+                    "admin.fax" => "Administrative Fax.......",
+                    "tech.handle" => "Technical Contact Id.......",
+                    "tech.name" => "Technical Name...........",
+                    "tech.organization" => "Technical Org............",
+                    "tech.address.street" => "Technical Street.........",
+                    "tech.address.city" => "Technical City...........",
+                    "tech.address.state" => "Technical State..........",
+                    "tech.address.pcode" => "Technical PC.............",
+                    "tech.address.country" => "Technical Country........",
+                    "tech.phone" => "Technical Phone..........",
+                    "tech.email" => "Technical e-mail.........",
+                    "tech.fax" => "Technical Fax............"
+		              );
 
-		$ret = generic_parser_b($data_str,$items,'dmy');
+		$ret = generic_parser_b($data_str, $items, 'dmy');
 		return $ret;
+		}
 	}
-}
 
 ?>

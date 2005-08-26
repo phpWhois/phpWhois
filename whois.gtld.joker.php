@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -23,35 +23,38 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* joker.whois  1.10    David Saez <david@ols.es> */
 
-if(!defined("__JOKER_HANDLER__")) define("__JOKER_HANDLER__",1);
+if (!defined("__JOKER_HANDLER__"))
+	define("__JOKER_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class joker_handler {
+class joker_handler
+	{
 
-        function parse ($data_str,$query) {
+	function parse($data_str, $query)
+		{
 
-	$items = array(
-                        'owner.name' => 'owner:',
-                        'owner.address.street' => 'address:',
-                        'owner.address.pcode' => 'postal-code:',
-                        'owner.address.city' => 'city:',
-                        'owner.address.state' => 'state:',
-                        'owner.address.country' => 'country:',
-			'admin.email' => 'admin-c:',
-			'tech.email' => 'tech-c:',
-			'billing.email' => 'billing-c:',
-			'domain.created' => 'created:',
-			'domain.changed' => 'modified:',
-			'domain.sponsor' => 'reseller-1:'
-			);
+		$items = array(
+                'owner.name' => 'owner:',
+                'owner.address.street' => 'address:',
+				'owner.address.pcode' => 'postal-code:',
+                'owner.address.city' => 'city:',
+                'owner.address.state' => 'state:',
+				'owner.address.country' => 'country:',
+                'admin.email' => 'admin-c:',
+                'tech.email' => 'tech-c:',
+                'billing.email' => 'billing-c:',
+                'domain.created' => 'created:',
+                'domain.changed' =>	'modified:',
+                'domain.sponsor' => 'reseller-1:'
+		            );
 
-	$r=generic_parser_b($data_str,$items);
-	return($r);
+		$r = generic_parser_b($data_str, $items);
+		return ($r);
+		}
 	}
-}
 ?>

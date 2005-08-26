@@ -23,49 +23,52 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* arin.whois	1.0 	David Saez 7/6/2002 */
 
-if(!defined("__ARIN_HANDLER__")) define("__ARIN_HANDLER__",1);
+if (!defined("__ARIN_HANDLER__"))
+	define("__ARIN_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class arin_handler {
+class arin_handler
+	{
 
-function parse ($data_str) 
-{
-               $items = array(  "owner.organization"  => "OrgName:",
-				"owner.handle"  => "OrgId:",
-				"owner.address.street"  => "Address:",
-				"owner.address.city"  => "City:",
-				"owner.address.state"  => "StateProv:",
-				"owner.address.pcode"  => "PostalCode:",
-				"owner.address.country"  => "Country:",
-				"network.inetnum"  => "NetRange:",
-				"network.name"  => "NetName:",
-				"network.handle"  => "NetHandle:",
-                                "network.status"  => "NetType:",
-                                "network.nserver."  => "NameServer:",
-                                "network.desc."  => "Comment:",
-                                "network.created"  => "RegDate:",
-                                "network.changed"  => "Updated:",
-				'network.handle' => 'ASHandle:',
-				'network.name' => 'ASName:',
-				'network.handle' => 'NetHandle:',
-				'network.name' => 'NetName:',
-                                "tech.handle"  => "TechHandle:",
-                                "tech.name"  => "TechName:",
-                                "tech.phone"  => "TechPhone:",
-                                "tech.email"  => "TechEmail:",
-				"abuse.name" => "OrgAbuseName:",
-				"abuse.handle" => "OrgAbuseHandle:",
-				"abuse.phone" => "OrgAbusePhone:",
-				"abuse.email" => "OrgAbuseEmail:"
-                             );
+	function parse($data_str, $query)
+		{
+		$items = array(
+                  "owner.organization" => "OrgName:",
+                  "owner.handle" => "OrgID:",
+                  "owner.address.street" => "Address:",
+                  "owner.address.city" => "City:",
+                  "owner.address.state" => "StateProv:",
+                  "owner.address.pcode" => "PostalCode:",
+                  "owner.address.country" => "Country:",
+                  "network.inetnum" => "NetRange:",
+                  "network.name" => "NetName:",
+                  "network.handle" => "NetHandle:",
+                  "network.status" => "NetType:",
+                  "network.nserver." => "NameServer:",
+                  "network.desc." => "Comment:",
+                  "network.created" => "RegDate:",
+                  "network.changed" => "Updated:",
+                  'network.handle' => 'ASHandle:',
+                  'network.name' => 'ASName:',
+                  'network.handle' => 'NetHandle:',
+                  'network.name' => 'NetName:',
+                  "tech.handle" => "TechHandle:",
+                  "tech.name" => "TechName:",
+                  "tech.phone" => "TechPhone:",
+                  "tech.email" => "TechEmail:",
+                  "abuse.name" => "OrgAbuseName:",
+                  "abuse.handle" => "OrgAbuseHandle:",
+                  "abuse.phone" => "OrgAbusePhone:",
+                  "abuse.email" => "OrgAbuseEmail:"
+		              );
 
-                return generic_parser_b($data_str,$items,'ymd',false);
-}
+		return generic_parser_b($data_str, $items, 'ymd', false);
+		}
 
-}
+	}
 ?>

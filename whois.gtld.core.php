@@ -23,7 +23,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* core.whois	1.0	mark jeftovic	1999/12/06	*/
 /* Adapted from netsol.whois by Denny Reiter 2000/12/12	*/
@@ -31,71 +31,75 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if(!defined("__CORE_HANDLER__")) define("__CORE_HANDLER__",1);
+if (!defined("__CORE_HANDLER__"))
+	define("__CORE_HANDLER__", 1);
 
-class core_handler {
+class core_handler
+	{
 
-	function parse ($data_str,$query) {
+	function parse($data_str, $query)
+		{
 
-		$items = array( "domain.handle" => "Domain ID:",
-				"domain.name" => "Domain Name:",
-				"domain.created" => "Creation Date:",
-				"domain.expires" => "Expiration Date:",
-				"domain.changed" => "Last Modification Date:",
-				"domain.sponsor" => "Sponsoring Registrar:",
-				"domain.nserver." => "Name Server:",
-				"owner.organization" => "Registrant Organization:",
-				"owner.name" => "Registrant Name:",
-				"owner.address.street" => "Registrant Address:",
-				"owner.address.street2" => "Registrant Address 2:",
-				"owner.address.city" => "Registrant City:",
-				"owner.address.state" => "Registrant State/Province:",
-				"owner.address.pcode" => "Registrant Postal Code:",
-				"owner.address.country" => "Registrant Country:",
-				"owner.phone" => "Registrant Phone Number:",
-				"owner.fax" => "Registrant Fax Number:",
-				"owner.email" => "Registrant Email:",
-				"admin.handle" => "Admin ID:",
-				"admin.organization" => "Admin Organization:",
-                                "admin.name" => "Admin Name:",
-                                "admin.address.street" => "Admin Address:",
-                                "admin.address.street2" => "Admin Address 2:",
-                                "admin.address.city" => "Admin City:",
-                                "admin.address.state" => "Admin State/Province:",
-                                "admin.address.pcode" => "Admin Postal Code:",
-                                "admin.address.country" => "Admin Country:",
-                                "admin.phone" => "Admin Phone Number:",
-                                "admin.fax" => "Admin Fax Number:",
-                                "admin.email" => "Admin Email:",
-				"tech.handle" => "Tech ID:",
-                                "tech.organization" => "Tech Organization:",
-                                "tech.name" => "Tech Name:",
-                                "tech.address.street" => "Tech Address:",
-                                "tech.address.street2" => "Tech Address 2:",
-                                "tech.address.city" => "Tech City:",
-                                "tech.address.state" => "Tech State/Province:",
-                                "tech.address.pcode" => "Tech Postal Code:",
-                                "tech.address.country" => "Tech Country:",
-                                "tech.phone" => "Tech Phone Number:",
-                                "tech.fax" => "Tech Fax Number:",
-                                "tech.email" => "Tech Email:",
-				"zone.handle" => "Zone ID:",
-                                "zone.organization" => "Zone Organization:",
-                                "zone.name" => "Zone Name:",
-                                "zone.address.street" => "Zone Address:",
-                                "zone.address.street2" => "Zone Address 2:",
-                                "zone.address.city" => "Zone City:",
-                                "zone.address.state" => "Zone State/Province:",
-                                "zone.address.pcode" => "Zone Postal Code:",
-                                "zone.address.country" => "Zone Country:",
-                                "zone.phone" => "Zone Phone Number:",
-                                "zone.fax" => "Zone Fax Number:",
-                                "zone.email" => "Zone Email:"
-			      );
+		$items = array(
+                "domain.handle" => "Domain ID:",
+                "domain.name" => "Domain Name:",
+                "domain.created" => "Creation Date:",
+                "domain.expires" => "Expiration Date:",
+                "domain.changed" => "Last Modification Date:",
+                "domain.sponsor" => "Sponsoring Registrar:",
+                "domain.nserver." => "Name Server:",
+                "owner.organization" => "Registrant Organization:",
+                "owner.name" => "Registrant Name:",
+                "owner.address.street" => "Registrant Address:",
+                "owner.address.street2" => "Registrant Address 2:",
+                "owner.address.city" => "Registrant City:",
+                "owner.address.state" => "Registrant State/Province:",
+                "owner.address.pcode" => "Registrant Postal Code:",
+                "owner.address.country" => "Registrant Country:",
+                "owner.phone" => "Registrant Phone Number:",
+                "owner.fax" => "Registrant Fax Number:",
+                "owner.email" => "Registrant Email:",
+                "admin.handle" => "Admin ID:",
+                "admin.organization" => "Admin Organization:",
+                "admin.name" => "Admin Name:",
+                "admin.address.street" => "Admin Address:",
+                "admin.address.street2" => "Admin Address 2:",
+                "admin.address.city" => "Admin City:",
+                "admin.address.state" => "Admin State/Province:",
+                "admin.address.pcode" => "Admin Postal Code:",
+                "admin.address.country" => "Admin Country:",
+                "admin.phone" => "Admin Phone Number:",
+                "admin.fax" => "Admin Fax Number:",
+                "admin.email" => "Admin Email:",
+                "tech.handle" => "Tech ID:",
+                "tech.organization" => "Tech Organization:",
+                "tech.name" => "Tech Name:",
+                "tech.address.street" => "Tech Address:",
+                "tech.address.street2" => "Tech Address 2:",
+                "tech.address.city" => "Tech City:",
+                "tech.address.state" => "Tech State/Province:",
+                "tech.address.pcode" => "Tech Postal Code:",
+                "tech.address.country" => "Tech Country:",
+                "tech.phone" => "Tech Phone Number:",
+                "tech.fax" => "Tech Fax Number:",
+                "tech.email" => "Tech Email:",
+                "zone.handle" => "Zone ID:",
+                "zone.organization" => "Zone Organization:",
+                "zone.name" => "Zone Name:",
+                "zone.address.street" => "Zone Address:",
+                "zone.address.street2" => "Zone Address 2:",
+                "zone.address.city" => "Zone City:",
+                "zone.address.state" => "Zone State/Province:",
+                "zone.address.pcode" => "Zone Postal Code:",
+                "zone.address.country" => "Zone Country:",
+                "zone.phone" => "Zone Phone Number:",
+                "zone.fax" => "Zone Fax Number:",
+                "zone.email" => "Zone Email:"
+		          );
 
-		return generic_parser_b($data_str,$items);
+		return generic_parser_b($data_str, $items);
+		}
+
 	}
-
-}
 
 ?>

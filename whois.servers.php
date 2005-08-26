@@ -67,7 +67,7 @@ $this->DATA = array(
 
 $this->WHOIS_PARAM = array(
 	'com.whois-servers.net' => '=',
-	'de.whois-servers.net' => '-T dn,ace '
+	'de.whois-servers.net'	=> '-T dn,ace '
 	);
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */

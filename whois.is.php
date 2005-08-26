@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Whois.php        PHP classes to conduct whois queries
 
@@ -23,46 +23,52 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+ */
 
 /* isnic.whois  1.00    David Saez <david@ols.es> */
 
-if(!defined("__IS_HANDLER__")) define("__IS_HANDLER__",1);
+if (!defined("__IS_HANDLER__"))
+	define("__IS_HANDLER__", 1);
 
 require_once('whois.parser.php');
 
-class is_handler {
+class is_handler
+	{
 
-function parse ($data_str) {
+	function parse($data_str, $query)
+		{
 
-$translate = array (
-			"fax-no" => "fax",
-			"e-mail" => "email",
-			"nic-hdl" => "handle",
-			"person" => "name"
-		   );
+		$translate = array(
+                      "fax-no" => "fax",
+                      "e-mail" => "email",
+                      "nic-hdl" => "handle",
+                      "person" => "name"
+		                  );
 
-$contacts = array (
-                        "owner-c" => "owner",
-                        "admin-c" => "admin",
-                        "tech-c" => "tech",
-                        "billing-c" => "billing",
-			"zone-c" => "zone"
-                  );
+		$contacts = array(
+                      "owner-c" => "owner",
+                      "admin-c" => "admin",
+                      "tech-c" => "tech",
+                      "billing-c" => "billing",
+                      "zone-c" => "zone"
+		                  );
 
-$r["rawdata"]=$data_str["rawdata"];
-$r["regyinfo"]=array("referrer"=>"http://www.isnic.is","registrar"=>"ISNIC");
+		$r["regyinfo"] = array(
+                          "referrer" => "http://www.isnic.is",
+                          "registrar" => "ISNIC"
+                          );
 
-$reg=generic_parser_a($data_str["rawdata"],$translate,$contacts,'domain','mdy');
+		$reg = generic_parser_a($data_str["rawdata"], $translate, $contacts, 'domain', 'mdy');
 
-if (isset($reg['domain']['descr'])) {
-	$reg['owner']['name'] = array_shift($reg['domain']['descr']);
-	$reg['owner']['address'] = $reg['domain']['descr'];
-	unset($reg['domain']['descr']);
+		if (isset($reg['domain']['descr']))
+			{
+			$reg['owner']['name'] = array_shift($reg['domain']['descr']);
+			$reg['owner']['address'] = $reg['domain']['descr'];
+			unset($reg['domain']['descr']);
+			}
+
+		$r["regrinfo"] = $reg;
+		return ($r);
+		}
 	}
-
-$r["regrinfo"]=$reg;
-return($r);
-}
-}
 ?>
