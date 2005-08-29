@@ -24,23 +24,67 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-include('whois.main.php');
-
-$domain = 'example.com';
-
-if (isset($_REQUEST['domain']))
-	$domain = $_REQUEST['domain'];
-
-$whois = new Whois();
-$result = $whois->Lookup($domain);
-
-echo"<form method=\"post\" action=\"example.php\">";
-echo"<input name=\"domain\" value=\"".$domain."\"/>";
-echo"<input type=\"submit\"/>";
-echo"</form>";
-
-echo"<pre>";
-print_r($result);
-echo"</pre>";
 ?>
+
+<head>
+<title>whois.php -base classes to do whois queries with php</title>
+</head>
+<body bgcolor="ffffff">
+<blockquote>
+<pre>
+<blockquote>
+
+<?
+if(isSet($query))
+	{
+	include_once('whois.main.php');
+	
+	$whois = new Whois();
+	$result = $whois->Lookup($query);
+	echo "<b>Results for  $query :</b><p>";
+
+	if($output=="object") {
+		include("utils.whois");
+		$utils = new utils;
+		$utils->showObject($result);
+	}
+	else {
+		if(!empty($result['rawdata'])) {
+			echo implode($result["rawdata"],"\n");
+			}
+        else {
+			echo "<br>No Match";
+			}       
+	}
+}
+?>
+
+</blockquote>
+</pre>
+</blockquote>
+<center>
+<table>
+<tr><td bgcolor="55aaff">
+<form method="post" action="<?echo $SCRIPT_NAME; ?>">
+<table>
+<tr><td colspan=2><b>Enter any domain name, ip address or AS handle you would like to query whois for<b></td></tr>
+<tr><td align=center colspan=2><input name="query">
+<input type="submit" value="Whois"></td></tr>
+<tr><td colspan=2>
+<input type="radio" name="output" value="normal" checked> Show me regular output
+</td></tr>
+<tr><td>
+<input type="radio" name="output" value="object"> Show me the returned PHP object
+</td>
+<td align=right valign=bottom>
+<a href="http://phpwhois.sourceforge.net">
+<img border=0 src="whois.icon.png" alt=""><br>
+</a>
+</td>
+</tr>
+
+</table>
+</form>
+</td></tr>
+</table>
+</center>
