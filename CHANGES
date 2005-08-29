@@ -1,3 +1,6 @@
+2005/08/29  David Saez <david@ols.es>
+		- changed gif icon for a new png one
+
 2005/08/26  David Saez <david@ols.es>
 		- code cleanup and formatting
 		- added support form Referral Whois (rwhois)
