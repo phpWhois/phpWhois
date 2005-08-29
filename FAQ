@@ -51,17 +51,3 @@ the meantime just move netsol.whois out of the php_include_path,
 you won't get nicely parsed output for netsol domains but you 
 will still at least get the raw output then.
 
-1.2 whois2 breaks under PHP4, I get $result["rawdata"] = Array now instead
-    of the actual data!
-
-Have look at the returned object using the showObject() function in the 
-utils.whois class. Odds are the data will be in $result["rawdata"]["rawdata"]
-instead.
-
-This is of course, a bug. I have tried to fix and unsuccessfully, but I
-haven't had too much time either. I think it's some kind of scoping issue
-with classes under PHP4.
-
-[This is also fixed as of v2.3 thanks to all who contributed fixes, used
-one by Stephen Leavitt <stephen_j_leavitt@hotmail.com> who's fix was the
-simplest and was backwards compatible with php3]
