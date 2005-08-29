@@ -9,6 +9,7 @@
 		- fixed whois.ip.php
 		- added extra abuse email address detection
                   for whois.ip.php
+		- addeed rwhois recognition for afrinic
 
 2005/08/26  David Saez <david@ols.es>
 		- code cleanup and formatting

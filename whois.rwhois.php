@@ -38,6 +38,7 @@ class rwhois_handler
 
 		$items = array(
 						'name' => 'network:Organization-Name:',
+						'organization' => 'network:Organization;I:',
 						'address.city' => 'network:Organization-City:',
 						'address.pcode' => 'network:Organization-Zip:',
 						'address.country' => 'network:Organization-Country:',
