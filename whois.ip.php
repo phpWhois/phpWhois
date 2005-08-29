@@ -48,7 +48,7 @@ class ip_handler extends WhoisClient
                         'European Regional Internet Registry/RIPE NCC' =>	'whois.ripe.net',
                         'RIPE Network Coordination Centre' => 'whois.ripe.net',
                         'Asia Pacific Network Information	Center' => 'whois.apnic.net',
-                        'Asia Pacific Network	Information Centre' => 'whois.apnic.net',
+                        'Asia Pacific Network Information Centre' => 'whois.apnic.net',
                         'Latin American and Caribbean IP address Regional Registry'	=> 'whois.lacnic.net',
                         'African Network Information Center' => 'whois.afrinic.net'
 	                     );
