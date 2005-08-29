@@ -135,9 +135,11 @@ class utils extends Whois {
 	
 	function showHTML($result) {
 		
+		$email_regex = "/([-_\w\.]+)(@)([-_\w\.]+)\b/i";
+		
 		$out = implode($result['rawdata'],"\n");
 		
-		$out = preg_replace ("/([\w\.]+)(@)([\w\.-]+)\b/i", '<a href="mailto:$0">$0</a>', $out); 
+		$out = preg_replace ($email_regex, '<a href="mailto:$0">$0</a>', $out); 
 		
 		if (isset($result['regrinfo']['domain']['nserver']))
 			{

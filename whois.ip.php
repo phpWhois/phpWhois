@@ -185,6 +185,8 @@ class ip_handler extends WhoisClient
 			$result['regrinfo'] = $this->Process($result['rawdata']);
 			}
 
+		// Arrange inetnum/cdir
+		
 		if (isset($result['regrinfo']['network']['inetnum']) && strpos($result['regrinfo']['network']['inetnum'], '/') != false)
 			{
 			//Convert CDIR to inetnum
@@ -198,6 +200,24 @@ class ip_handler extends WhoisClient
 			$result['regrinfo']['network']['inetnum'] = $this->cidr_conv($result['regrinfo']['network']['cdir']);
 			}
 
+		// Try to find abuse email address
+		
+		if (!isset($result['regrinfo']['abuse']['email']))
+			{
+			reset($result['rawdata']);
+
+			while (list($key, $line) = each($result['rawdata']))
+				{
+				$email_regex = "/([-_\w\.]+)(@)([-_\w\.]+)\b/i";
+								
+				if (strpos($line,'abuse') !== false && preg_match($email_regex,$line,$matches)>0)
+					{
+					$result['regrinfo']['abuse']['email'] = $matches[0];
+					break;
+					}
+				}
+			}
+			
 		//Check if Referral rwhois server has been reported
 	
 		if (isset($result['regrinfo']['rwhois']))
