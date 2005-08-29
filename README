@@ -61,7 +61,7 @@ $result = $whois->Lookup('AS220');
 Notes
 -----
 
-There is an extended class called "utils.whois" which contains a
+There is an extended class called "whois.utils.php" which contains a
 debugging function called showObject(), if you showObject($result)
 it will output the total layout of the returned object to the 
 web browser.

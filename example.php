@@ -44,7 +44,7 @@ if(isSet($query))
 	echo "<b>Results for  $query :</b><p>";
 
 	if($output=="object") {
-		include("utils.whois");
+		include_once('whois.utils.php');
 		$utils = new utils;
 		$utils->showObject($result);
 	}

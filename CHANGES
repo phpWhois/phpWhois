@@ -2,6 +2,7 @@
 		- changed gif icon for a new png one
 		- recovered better example.php from old
                   distribution
+		- utils.whois renamed to whois.utils.php
 
 2005/08/26  David Saez <david@ols.es>
 		- code cleanup and formatting
