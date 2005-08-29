@@ -4,6 +4,8 @@
                   distribution
 		- utils.whois renamed to whois.utils.php
 		- removed obsolete FAQ item
+		- added nice HTML output capabilities to
+		  whois.utils.php
 
 2005/08/26  David Saez <david@ols.es>
 		- code cleanup and formatting

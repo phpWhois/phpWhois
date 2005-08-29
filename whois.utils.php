@@ -131,6 +131,30 @@ class utils extends Whois {
 		return checkdnsrr($query,"NS");
 	}       
 
+	// adds links fort HTML output
+	
+	function showHTML($result) {
+		
+		$out = implode($result['rawdata'],"\n");
+		
+		$out = preg_replace ("/([\w\.]+)(@)([\w\.-]+)\b/i", '<a href="mailto:$0">$0</a>', $out); 
+		
+		if (isset($result['regrinfo']['domain']['nserver']))
+			{
+			$nserver = $result['regrinfo']['domain']['nserver'];
+			
+			if (is_array($nserver))
+				{
+				reset($nserver); 
+				while (list($host, $ip) = each($nserver))
+					{
+					$out = str_replace($host,"<a href=". $_SERVER['PHP_SELF']."?query=$ip&output=nice>$host</a>",$out);
+					}
+				}
+			}
+			
+		echo $out;
+	}
 }
 
 ?>

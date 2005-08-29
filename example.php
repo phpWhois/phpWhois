@@ -35,26 +35,42 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 <blockquote>
 
 <?
-if(isSet($query))
+if(isSet($_GET['query']))
 	{
+	$query = $_GET['query'];
+	$output = $_GET['output'];
+	
 	include_once('whois.main.php');
+	include_once('whois.utils.php');
 	
 	$whois = new Whois();
 	$result = $whois->Lookup($query);
 	echo "<b>Results for  $query :</b><p>";
 
-	if($output=="object") {
-		include_once('whois.utils.php');
-		$utils = new utils;
-		$utils->showObject($result);
-	}
-	else {
-		if(!empty($result['rawdata'])) {
-			echo implode($result["rawdata"],"\n");
-			}
-        else {
-			echo "<br>No Match";
-			}       
+	switch ($output)
+		{
+		case 'object':
+			$utils = new utils;
+			$utils->showObject($result);
+			break;
+			
+		case 'nice':			
+			if(!empty($result['rawdata'])) {				
+				$utils = new utils;
+				$utils->showHTML($result);
+				}
+			else {
+				echo "<br>No Match";
+				}       
+			break;
+						
+		default:
+			if(!empty($result['rawdata'])) {
+				echo implode($result['rawdata'],"\n");
+				}
+			else {
+				echo '<br>No Match';
+				}       
 	}
 }
 ?>
@@ -65,17 +81,25 @@ if(isSet($query))
 <center>
 <table>
 <tr><td bgcolor="55aaff">
-<form method="post" action="<?echo $SCRIPT_NAME; ?>">
+<form method="get" action="<?echo  $_SERVER['PHP_SELF']; ?>">
+
 <table>
-<tr><td colspan=2><b>Enter any domain name, ip address or AS handle you would like to query whois for<b></td></tr>
-<tr><td align=center colspan=2><input name="query">
-<input type="submit" value="Whois"></td></tr>
 <tr><td colspan=2>
-<input type="radio" name="output" value="normal" checked> Show me regular output
+<center>
+<b>Enter any domain name, ip address or AS handle you would like to query whois for<b>
+<br><br>
+<input name="query"> <input type="submit" value="Whois">
+</center>
 </td></tr>
+
 <tr><td>
+<input type="radio" name="output" value="normal"> Show me regular output
+<br>
+<input type="radio" name="output" value="nice" checked> Show me HTMLized output
+<br>
 <input type="radio" name="output" value="object"> Show me the returned PHP object
 </td>
+
 <td align=right valign=bottom>
 <a href="http://phpwhois.sourceforge.net">
 <img border=0 src="whois.icon.png" alt=""><br>
