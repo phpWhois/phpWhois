@@ -275,6 +275,9 @@ class Whois extends WhoisClient
 					$ip = '(DOES NOT EXIST)';
 				}
 
+			if (substr($host,-1,1) == '.')
+				$host = substr($host,0,-1);
+				
 			$dns[strtolower($host)] = $ip;
 			}
 

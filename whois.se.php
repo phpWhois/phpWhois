@@ -43,7 +43,7 @@ class se_handler
                     "*domainname.name:" => "domain.name",
                     "*domainname.status:" => "domain.status",
                     "*domainname.date_to_delete:" => "domain.expires",
-                    "\tNS\t" => "domain.nserver."
+                    " NS " => "domain.nserver."
                     );
 
 		$r["regyinfo"] = array(
