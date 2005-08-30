@@ -50,15 +50,15 @@ class krnic_handler
 		              );
 
 		$items = array(
-                    "handle" => "Orgnization ID     :",
-                    "organization" => "Org Name           :",
-                    "name" => "Name               :",
-                    "address.street" => "Address            :",
-                    "address.pcode" => "Zip Code           :",
-                    "address.state" => "State              :",
-                    "phone" => "Phone              :",
-                    "fax" => "Fax                :",
-                    "email" => "E-Mail             :"
+                    "Orgnization ID     :" => "handle",
+                    "Org Name           :" => "organization",
+                    "Name               :" => "name",
+                    "Address            :" => "address.street",
+                    "Zip Code           :" => "address.pcode",
+                    "State              :" => "address.state",
+                    "Phone              :" => "phone",
+                    "Fax                :" => "fax",
+                    "E-Mail             :" => "email"
 		              );
 
 		$r = get_blocks($data_str, $blocks);

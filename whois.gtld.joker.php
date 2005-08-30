@@ -39,18 +39,18 @@ class joker_handler
 		{
 
 		$items = array(
-                'owner.name' => 'owner:',
-                'owner.address.street' => 'address:',
-				'owner.address.pcode' => 'postal-code:',
-                'owner.address.city' => 'city:',
-                'owner.address.state' => 'state:',
-				'owner.address.country' => 'country:',
-                'admin.email' => 'admin-c:',
-                'tech.email' => 'tech-c:',
-                'billing.email' => 'billing-c:',
-                'domain.created' => 'created:',
-                'domain.changed' =>	'modified:',
-                'domain.sponsor' => 'reseller-1:'
+                'owner:' => 'owner.name',
+                'address:' => 'owner.address.street',
+				'postal-code:' => 'owner.address.pcode',
+                'city:' => 'owner.address.city',
+                'state:' => 'owner.address.state',
+				'country:' => 'owner.address.country',
+                'admin-c:' => 'admin.email',
+                'tech-c:' => 'tech.email',
+                'billing-c:' => 'billing.email',
+                'created:' => 'domain.created',
+                'modified:' => 'domain.changed',
+                'reseller-1:' => 'domain.sponsor'
 		            );
 
 		$r = generic_parser_b($data_str, $items);

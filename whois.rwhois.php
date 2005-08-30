@@ -37,15 +37,15 @@ class rwhois_handler
 		{
 
 		$items = array(
-						'name' => 'network:Organization-Name:',
-						'organization' => 'network:Organization;I:',
-						'address.city' => 'network:Organization-City:',
-						'address.pcode' => 'network:Organization-Zip:',
-						'address.country' => 'network:Organization-Country:',
-						'inetnum' => 'network:IP-Network-Block:',
-						'handle' => 'network:Network-Name:',
-						'created' => 'network:Created:',
-						'changed' => 'network:Updated:'
+						'network:Organization-Name:' => 'name',
+						'network:Organization;I:' => 'organization',
+						'network:Organization-City:' => 'address.city',
+						'network:Organization-Zip:' => 'address.pcode',
+						'network:Organization-Country:' => 'address.country',
+						'network:IP-Network-Block:' => 'inetnum',
+						'network:Network-Name:' => 'handle',
+						'network:Created:' => 'created',
+						'network:Updated:' => 'changed'
 						);
 												
 		$res = generic_parser_b($data_str['rawdata'], $items, 'Ymd', false);

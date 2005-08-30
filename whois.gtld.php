@@ -40,18 +40,18 @@ class gtld_handler extends WhoisClient
 	var $HANDLER_VERSION = "1.1";
 
 	var $REG_FIELDS = array(
-                        "regrinfo.domain.name" => "Domain Name:",
-                        "regyinfo.registrar" => "Registrar:",
-                        "regyinfo.whois" => "Whois Server:",
-                        "regyinfo.referrer" => "Referral URL:",
-                        "regrinfo.domain.nserver." => "Name Server:",  // identical descriptors
-						"regrinfo.domain.changed" => "Updated Date:",
-                        "regrinfo.domain.changed" => "Last Updated On:",
-                        "regrinfo.domain.status" => "Status:",
-                        "regrinfo.domain.created" => "Creation Date:",
-                        "regrinfo.domain.created" => "Created On:",
-                        "regrinfo.domain.expires" => "Expiration Date:",
-                        "regrinfo.domain.changed" => "Updated Date:"
+                        "Domain Name:" => "regrinfo.domain.name",
+                        "Registrar:" => "regyinfo.registrar",
+                        "Whois Server:" => "regyinfo.whois",
+                        "Referral URL:" => "regyinfo.referrer",
+                        "Name Server:" => "regrinfo.domain.nserver.",  // identical descriptors
+						"Updated Date:" => "regrinfo.domain.changed",
+                        "Last Updated On:" => "regrinfo.domain.changed",
+                        "Status:" => "regrinfo.domain.status",
+                        "Creation Date:" => "regrinfo.domain.created",
+                        "Created On:" => "regrinfo.domain.created",
+                        "Expiration Date:" => "regrinfo.domain.expires",
+                        "Updated Date:" => "regrinfo.domain.changed"
 	                     );
 
 	var $REGISTRARS = array(

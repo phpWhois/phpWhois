@@ -42,19 +42,19 @@ class au_handler
 		{
 
 		$items = array(
-                    "domain.name" => "Domain Name:",
-                    "domain.changed" => "Last Modified:",
-                    "domain.sponsor" => "Registrar Name:",
-                    "domain.status" => "Status:",
-                    "domain.handle" => "Domain ROID:",
-                    "owner.organization" => "Registrant:",
-                    "owner.handle" => "Registrant ID:",
-                    "owner.email" => "Registrant Email:",
-                    "owner.name" => "Registrant Contact Name:",
-                    "tech.name" => "Tech Name:",
-                    "tech.email" => "Tech Email:",
-                    "tech.handle" => "Tech ID:",
-                    "domain.nserver." => "Name Server:"
+                    "Domain Name:" => "domain.name",
+                    "Last Modified:" => "domain.changed",
+                    "Registrar Name:" => "domain.sponsor",
+                    "Status:" => "domain.status",
+                    "Domain ROID:" => "domain.handle",
+                    "Registrant:" => "owner.organization",
+                    "Registrant ID:" => "owner.handle",
+                    "Registrant Email:" => "owner.email",
+                    "Registrant Contact Name:" => "owner.name",
+                    "Tech Name:" => "tech.name",
+                    "Tech Email:" => "tech.email",
+                    "Tech ID:" => "tech.handle",
+                    "Name Server:" => "domain.nserver."
 		              );
 
 		$r["regyinfo"] = array(

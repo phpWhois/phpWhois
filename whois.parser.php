@@ -138,7 +138,7 @@ while (list($key,$val)=each($rawdata))
 		$disok=false;
 		reset($items);
 
-		while (list($field, $match)=each($items)) 
+		while (list($match, $field)=each($items)) 
 			{
 			$pos=strpos($val,$match);
 			if ($pos!==false)

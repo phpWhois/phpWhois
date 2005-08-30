@@ -39,22 +39,22 @@ class inwwcom_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                  "domain.name" => "Domain Name..........",
-                  "domain.created" => "Registration Date....",
-                  "domain.expires" => "Expiry Date..........",
-                  "owner.name" => "Organisation Name....",
-                  "owner.address." => "Organisation Address.",
-                  "admin.name" => "Admin Name...........",
-                  "admin.address." => "Admin Address........",
-                  "admin.email" => "Admin Email..........",
-                  "admin.phone" => "Admin Phone..........",
-                  "admin.fax" => "Admin Fax............",
-                  "tech.name" => "Tech Name............",
-                  "tech.address." => "Tech Address.........",
-                  "tech.email" => "Tech Email...........",
-                  "tech.phone" => "Tech Phone...........",
-                  "tech.fax" => "Tech Fax.............",
-                  "domain.nserver." => "Name Server.........."
+                  "Domain Name.........." => "domain.name",
+                  "Registration Date...." => "domain.created",
+                  "Expiry Date.........." => "domain.expires",
+                  "Organisation Name...." => "owner.name",
+                  "Organisation Address." => "owner.address.",
+                  "Admin Name..........." => "admin.name",
+                  "Admin Address........" => "admin.address.",
+                  "Admin Email.........." => "admin.email",
+                  "Admin Phone.........." => "admin.phone",
+                  "Admin Fax............" => "admin.fax",
+                  "Tech Name............" => "tech.name",
+                  "Tech Address........." => "tech.address.",
+                  "Tech Email..........." => "tech.email",
+                  "Tech Phone..........." => "tech.phone",
+                  "Tech Fax............." => "tech.fax",
+                  "Name Server.........." => "domain.nserver."
 		              );
 
 		return generic_parser_b($data_str, $items);

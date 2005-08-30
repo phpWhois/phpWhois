@@ -48,23 +48,23 @@ class fm_handler
 		$blocks = get_blocks($data['rawdata'], $items);
 
 		$items = array(
-                  "name" => "FM Domain:",
-                  "nserver.0" => "Primary Hostname:",
-                  "nserver.1" => "Secondary Hostname:",
-                  "expires" => "Renewal Date:"
+                  "FM Domain:" => "name",
+                  "Primary Hostname:" => "nserver.0",
+                  "Secondary Hostname:" => "nserver.1",
+                  "Renewal Date:" => "expires"
 		              );
 
 		$r['regrinfo']['domain'] = generic_parser_b($data['rawdata'], $items);
 
 		$items = array(
-                'organization' => 'Organiztion:',
-                'name' => 'Name:',
- 								'address.0' => 'Address:',
-                'address.1' => 'City, State Zip:',
- 								'address.country' => 'Country:',
-                'phone' => 'Phone:',
-                'fax' => 'Fax:',
-                'email' => 'Email:'
+                'Organiztion:' => 'organization',
+                'Name:' => 'name',
+ 				'Address:' => 'address.0',
+                'City, State Zip:' => 'address.1',
+ 				'Country:' => 'address.country',
+                'Phone:' => 'phone',
+                'Fax:' => 'fax',
+                'Email:' => 'email'
 		            );
 
 		$r['rawdata'] = $data['rawdata'];

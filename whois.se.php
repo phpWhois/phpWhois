@@ -40,10 +40,10 @@ class se_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                    "domain.name" => "*domainname.name:",
-                    "domain.status" => "*domainname.status:",
-                    "domain.expires" => "*domainname.date_to_delete:",
-                    "domain.nserver." => "\tNS\t"
+                    "*domainname.name:" => "domain.name",
+                    "*domainname.status:" => "domain.status",
+                    "*domainname.date_to_delete:" => "domain.expires",
+                    "\tNS\t" => "domain.nserver."
                     );
 
 		$r["regyinfo"] = array(
