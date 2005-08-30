@@ -131,7 +131,7 @@ class WhoisClient {
 		// Create result and set 'rawdata'
 		$result = array();			
 		$result['rawdata'] = $output;
-		
+
 		// If we have a handler, post-process it with that
 
 		if(isSet($this->Query['handler']))
@@ -140,6 +140,10 @@ class WhoisClient {
 		// Set whois server
 		$result['regyinfo']['whois'] = $this->Query['server'];
 
+		// Type defaults to domain
+		if (!isset($result['regyinfo']['type']))
+			$result['regyinfo']['type'] = 'domain';	
+		
 		// Add error information if any
 		if (isset($this->Query['errstr']))
 			$result['errstr'] = $this->Query['errstr'];

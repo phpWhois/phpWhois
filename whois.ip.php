@@ -240,6 +240,13 @@ class ip_handler extends WhoisClient
 				}
 			}
 
+		// IP or AS ?
+		
+		if (isset($result['regrinfo']['AS']))
+			$result['regyinfo']['type'] = 'AS';
+		else
+			$result['regyinfo']['type'] = 'ip';
+			
 		return $result;
 		}
 

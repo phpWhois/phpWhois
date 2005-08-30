@@ -53,7 +53,7 @@ class arin_handler
                   "Comment:" => "network.desc.",
                   "RegDate:" => "network.created",
                   "Updated:" => "network.changed",
-                  'ASHandle:' => 'network.handle',
+                  'ASHandle:' => 'AS.handle',
                   'ASName:' => 'network.name',
                   'NetHandle:' => 'network.handle',
                   'NetName:' => 'network.name',
@@ -68,7 +68,17 @@ class arin_handler
                   'ReferralServer:' => 'rwhois'
 		              );
 
-		return generic_parser_b($data_str, $items, 'ymd', false);
+		$r = generic_parser_b($data_str, $items, 'ymd', false);
+		
+		if (isset($r['AS']))
+			{
+			$ash = $r['AS']['handle'];
+			$r['AS'] = $r['network'];
+			$r['AS']['handle'] = $ash;
+			unset($r['network']);			
+			}
+			
+		return $r;
 		}
 
 	}

@@ -20,8 +20,10 @@ contains the raw text output returned by the whois server.
 
 regyinfo contains information about the registry who returned that
 information. It has three subkeys: 'whois' (the whois server who
-returned the data), 'referrer' (the web address of the registry)
-and 'registar' (the company name of the registry).
+returned the data), 'referrer' (the web address of the registry),
+'registar' (the company name of the registry), 'rwhois' is extra
+rwhois informatio has been found and 'type' which can be 'domain',
+'ip' or 'AS'.
 
 regrinfo holds the information about the domain itself. It could have
 the following subkeys:
@@ -57,7 +59,7 @@ the following subkeys:
 
 	network
 	-------
-	Only when dealing with ip addresses or AS. Could contain the
+	Only when dealing with ip addresses. Could contain the
 	following subkeys:
 
 		name	-> network/AS name		
@@ -74,8 +76,14 @@ the following subkeys:
                 handle  -> network/AS handle
                 source  -> who gives this information
 
-	owner,admin,tech,zone,billing,abuse,customer
-	--------------------------------------------
+	AS
+	--
+
+	Only when dealing with Autonomus systems, could contain
+	the same subkeys as network.
+
+	owner,admin,tech,zone,billing,abuse
+	-----------------------------------
 
 	All of these possible keys hold information about the different
 	contacts of the domain or ip address. They all could have the
@@ -101,9 +109,15 @@ the following subkeys:
 		changed		-> last change date
 		source		-> who provided that information
 		remarks		-> remarks
-		inetnum		-> only for ip whois for customer
-                                   object, ip space assigned to
-                                   customer
+
+	customer
+	--------
+
+	when extra rwhois information about ip address space
+	delegation is available this subkey could contain the
+	following subkeys: owner, network, admin, tech, ...
+	which in turn could have the same subkeys as the same
+	keys in the previous level.
 
 Not all handlers fill values in each of the keys defined by the
 Common Object Model as not all registries return the same amount
