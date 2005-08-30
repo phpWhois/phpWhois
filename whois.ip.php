@@ -228,11 +228,16 @@ class ip_handler extends WhoisClient
 			//If so, get customer data from rwhois			
 			$this->Query['handler'] = 'rwhois';		
 			$this->Query['file'] = 'whois.rwhois.php';
+
 			$rwdata = $this->GetData($query);			
-			$rwres = $this->Process($rwdata);
 			
-			$result['regrinfo']['customer'] = $rwres;
-			$result['regyinfo']['rwhois'] = $this->Query['server'];
+			if (!empty($rwdata))
+				{			
+				$rwres = $this->Process($rwdata);
+			
+				$result['regrinfo']['customer'] = $rwres;
+				$result['regyinfo']['rwhois'] = $this->Query['server'];
+				}
 			}
 
 		return $result;

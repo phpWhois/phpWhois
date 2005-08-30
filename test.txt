@@ -62,7 +62,7 @@ biz        	neulevel.biz
 afrinic		66.18.70.6
 apnic		218.165.121.114
 arin            207.217.120.54
-arain+rwhois    70.84.47.210
+arin+rwhois     70.84.47.210
 bripw		200.165.206.74
 krnic		210.178.148.129
 lacnic		200.44.33.31

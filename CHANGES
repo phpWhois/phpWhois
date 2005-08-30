@@ -1,5 +1,6 @@
 2005/08/30  David Saez <david@ols.es>
 		- changed generic_whois_b item parameter array
+		- fixes & improvments for rwhois
  
 2005/08/29  David Saez <david@ols.es>
 		- changed gif icon for a new png one
