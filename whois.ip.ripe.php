@@ -29,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if (!defined("__RIPE_HANDLER__"))
-	define("__RIPE_HANDLER__", 1);
+if (!defined('__RIPE_HANDLER__'))
+	define('__RIPE_HANDLER__', 1);
 
 class ripe_handler
 	{
@@ -38,24 +38,36 @@ class ripe_handler
 	function parse($data_str, $query)
 		{
 		$translate = array(
-                      "fax-no" => "fax",
-                      "e-mail" => "email",
-                      "nic-hdl" => "handle",
-                      "person" => "name",
-                      "netname" => "name",
-                      "descr" => "desc"
+						'fax-no' => 'fax',
+						'e-mail' => 'email',
+						'nic-hdl' => 'handle',
+						'person' => 'name',
+						'netname' => 'name',
+						'descr' => 'desc'						
 		                  );
 
 		$contacts = array(
-                      "admin-c" => "admin",
-                      "tech-c" => "tech"
+						'admin-c' => 'admin',
+						'tech-c' => 'tech'
 		                  );
 
-		$r = generic_parser_a($data_str, $translate, $contacts, "network");
+		$r = generic_parser_a($data_str, $translate, $contacts, 'network');
 
-		$r["owner"]["organization"] = $r["network"]["desc"];
-		unset($r["network"]["desc"]);
+		$r['owner']['organization'] = $r['network']['desc'];
+		unset($r['network']['desc']);
 
+		if (isset($r['admin']['abuse-mailbox']))
+			{
+			$r['abuse']['email'] = $r['admin']['abuse-mailbox'];
+			unset($r['admin']['abuse-mailbox']);
+			}
+
+		if (isset($r['tech']['abuse-mailbox']))
+			{
+			$r['abuse']['email'] = $r['tech']['abuse-mailbox'];
+			unset($r['tech']['abuse-mailbox']);
+			}
+			
 		return $r;
 		}
 
