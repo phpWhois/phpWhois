@@ -187,40 +187,40 @@ return $var;
 function get_blocks ( $rawdata, $items )
 {
 
-$r=array();
+$r = array();
 $endtag='';
 
-while (list($key,$val)=each($rawdata))
-      {
-        $val=trim($val);
-	if ($val=='') continue;
+while (list($key,$val) = each($rawdata))
+	{
+	$val = trim($val);
+	if ($val == '') continue;
 
-	$found=false;
+	$found = false;
 	reset($items);
 
-	while (list($field, $match)=each($items)) {
+	while (list($field, $match) = each($items)) {
 
-		$pos=strpos($val,$match);
+		$pos = strpos($val,$match);
 
-		if ($field!='' && $pos!==false) {
-			if ($val==$match) {
-				$found=true;
-				$endtag='';
-				$line=$val;
+		if ($field != '' && $pos !== false) {
+			if ($val == $match) {
+				$found = true;
+				$endtag = '';
+				$line = $val;
 				break;
 				}
 
-			$last=substr($val,-1,1);
+			$last = substr($val,-1,1);
 
-			if ($last==':' || $last=='-' || $last==']') {
-				$found=true;
-				$endtag=$last;
-				$line=$val;
+			if ($last == ':' || $last == '-' || $last == ']') {
+				$found = true;
+				$endtag = $last;
+				$line = $val;
 				break;
 			}
 			else {
-				$var=getvarname(strtok($field,"#"));
-				$itm=trim(substr($val,$pos+strlen($match)));
+				$var = getvarname(strtok($field,"#"));
+				$itm = trim(substr($val,$pos+strlen($match)));
 				eval("\$r".$var."=\$itm;");
 			}
 		}
@@ -228,52 +228,80 @@ while (list($key,$val)=each($rawdata))
 
 	if (!$found) continue;
 
-	$block=array();
-	$found=false;
-	$spaces=0;
+	$block = array();
+	$found = false;
+	$spaces = 0;
 
-	while (list($key,$val)=each($rawdata))
-              { 
-		$val=trim($val);
-		if ($val=="") { 
-                	if ($found && ++$spaces==2) break;	
-		     	continue;
-                }
-                if (!$found) {
-			$found=true;
-			$block[]=$val;
+	while (list($key,$val) = each($rawdata))
+		{ 
+		$val = trim($val);
+		
+		if ($val == '') { 
+			if ($found && ++$spaces == 2) break;	
+		    continue;
+            }
+		
+		if (!$found) {
+			$found = true;
+			$block[] = $val;
 			continue;
-		}
-		$last=substr(trim($val),-1,1);
-		if ($last==$endtag) {
+			}
+			
+		$last = substr(trim($val),-1,1);
+		
+		if ($last == $endtag) {
+			// Another block found
 			prev($rawdata);
 			break;
-		}
+			}
+			
+		if ($endtag == '')
+			{
+			//Check if this line starts another block
+			reset($items);
+			$et = false;
+			
+			while (list($field, $match) = each($items)) {
+				if ($val == $match)
+					{
+					$et = true;
+					break;
+					}
+				}
+				
+			if ($et)
+				{
+				// Another block found
+				prev($rawdata);
+				break;
+				}
+			}
+			
 		if ($spaces>0) {
 			reset($items);
-			$ok=true;
+			$ok = true;
 			while (list($field, $match)=each($items)) {
 				$pos=strpos($val,$match);
 				if ($pos!==false) $ok=false;
-			}
+				}
 			if (!$ok) {
 				prev($rawdata);
 				break;
+				}
 			}
-		}
 		$block[]=$val;
-              }
+		}
 
 	reset($items);
 
 	while (list($field, $match)=each($items)) {
-                $pos=strpos($line,$match);
-                if ($pos!==false) {
-        		$var=getvarname($field);
-        		eval("\$r".$var."=\$block;");
+		$pos=strpos($line,$match);
+		if ($pos!==false) {
+			$var=getvarname($field);
+			eval("\$r".$var."=\$block;");
+			}
 		}
 	}
-      }
 
 return $r;
 }
@@ -288,12 +316,19 @@ if (!is_array($array))
 
 $items = array (
 		'fax..:' => 'fax',
+		'fax.' => 'fax',
+		'fax -' => 'fax',
 		'fax-' => 'fax',
+		'fax::'   => 'fax',
 		'fax:'   => 'fax',
 		'[fax]' => 'fax',
 		'(fax)' => 'fax',
 		'fax' => 'fax',
+		'tel.' => 'phone',
+		'phone::' => 'phone',
 		'phone:' => 'phone',
+		'phone-' => 'phone',
+		'phone -' => 'phone',
 		'email:' => 'email',
 		'company name:' => 'organization',
 		'first name:' => 'name.first',
@@ -302,16 +337,14 @@ $items = array (
 		'language:' => '',
 		'location:' => 'address.city',
 		'country:' => 'address.country',
-		'name:' => 'name',
-		'fax.' => 'fax',
-		'tel.' => 'phone'
-               );
+		'name:' => 'name'				
+		);
 
 if ($extra_items!='')
 	$items=array_merge($extra_items,$items);
 
 while (list($key,$val)=each($array))
-      {
+	{
 	$ok=true;
 
 	while ($ok)
@@ -320,7 +353,7 @@ while (list($key,$val)=each($array))
 		$ok=false;
 
 		while (list($match,$field)=each($items))
-	      		{
+			{
 			$pos=strpos(strtolower($val),$match);
 			if ($pos===false) continue;
 			$itm=trim(substr($val,$pos+strlen($match)));
@@ -404,7 +437,7 @@ while (list($key, $val) = each($res))
 	{
 	if (is_array($val))
 		{
-		if ($key=='expires' || $key=='created' || $key=='changed')
+		if (!is_numeric($key) && ($key=='expires' || $key=='created' || $key=='changed'))
 			{
 			$res[$key]=get_date($val[0],$format);
 			}
@@ -413,9 +446,7 @@ while (list($key, $val) = each($res))
 		}
 	else
 		{
-		if (is_numeric($key)) continue;
-
-		if ($key=='expires' || $key=='created' || $key=='changed')
+		if (!is_numeric($key) && ($key=='expires' || $key=='created' || $key=='changed'))
 			{
 			$res[$key]=get_date($val,$format);			
 			}

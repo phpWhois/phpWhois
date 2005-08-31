@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* bulkregistercom.whois	1.0	mark jeftovic	1999/12/06 */
 /* bulkregistercom.whois	1.1	Matthijs Koot	2003/01/14 */
+/* bulkregistercom.whois	1.2	David Saez	    2005/08/31 */
 
 if (!defined("__BULKR_HANDLER__"))
 	define("__BULKR_HANDLER__", 1);
@@ -58,69 +59,38 @@ class bulkr_handler
 
 	function parse($data_str, $query)
 		{
-		$data_str = preg_replace("/\n+/", "_", implode("\n", $data_str));
-		$data_str = preg_replace("/\s+/", " ", $data_str);
+		$items = array(
+                'admin' => 'Administrative Contact',
+                'tech' => 'Technical Contact',
+                'billing' => 'Billing Contact',
+                'domain.name' => 'Domain name:',
+                'domain.nserver.' => 'Domain servers in listed order:',
+                'dummy' => 'Record update'
+		            );
 
-		//echo "BEGIN@".$data_str."@EINDE";
+		$r = get_blocks($data_str, $items);
+		
+		$r['admin'] = get_contact($r['admin']);
+		$r['tech'] = get_contact($r['tech']);
+		$r['billing'] = get_contact($r['billing']);
 
-		preg_match("/terms\._(.+?)_(.+?)/", $data_str, $refs);
-		$r["owner"]["organization"] = trim($refs[1]);
+		unset($r['dummy']);
+		reset($data_str); 
+		
+		while (list($key, $val) = each($data_str))
+			if (trim($val)=='') break;
 
-		preg_match("/terms\._(.+?)_(.*)_\sDomain Name/", $data_str, $refs);
-		$r["owner"]["address"] = explode("_", trim($refs[2]));
-		//preg_replace("/_/","\n",trim($refs[2]));
+		while (list($key, $val) = each($data_str))
+			if (trim($val)!='') break;
+			
+		$r['owner']['name'] = $val;
 
-		preg_match("/terms\._.*_\s*Domain Name:\s(.+)_\sAdmin/", $data_str, $refs);
-		$r["domain"]["name"] = trim($refs[1]);
-
-		preg_match("/Administrative Contact(.+?)\s(.+?@.+?)_/", $data_str, $refs);
-		preg_match("/_?(.*)[:->]*?\s(.*@.*)/", $refs[2], $refssub);
-		while (preg_match("/[:\->]+?/", substr($refssub[1],  - 1)) > 0)
-			{
-			$refssub[1] = substr($refssub[1], 0, strlen($refssub[1]) - 1);
+		while (list($key, $val) = each($data_str))
+			{			
+			if (trim($val)=='') break;
+			$r['owner']['address'][] = $val;
 			}
-		$r["admin"]["name"] = $refssub[1];
-		$r["admin"]["email"] = $refssub[2];
-
-		preg_match("/Technical Contact(.+?)\s(.+?@.+?)_/", $data_str, $refs);
-		preg_match("/_?(.*)[:->]*?\s(.*@.*)/", $refs[2], $refssub);
-		while (preg_match("/[:\->]+?/", substr($refssub[1],  - 1)) > 0)
-			{
-			$refssub[1] = substr($refssub[1], 0, strlen($refssub[1]) - 1);
-			}
-		$r["tech"]["name"] = $refssub[1];
-		$r["tech"]["email"] = $refssub[2];
-
-		preg_match("/Billing Contact(.+?)\s(.+?@.+?)_/", $data_str, $refs);
-
-		if (isset($refs[2]))
-			{
-			preg_match("/_?(.*)[:->]*?\s(.*@.*)/", $refs[2], $refssub);
-			while (preg_match("/[:\->]+?/", substr($refssub[1],  - 1)) > 0)
-				{
-				$refssub[1] = substr($refssub[1], 0, strlen($refssub[1]) - 1);
-				}
-			$r["billing"]["name"] = $refssub[1];
-			$r["billing"]["email"] = $refssub[2];
-			}
-
-		preg_match("/Record (update|updated) (date|on)( on)?(  | -|: |->)?(.+?)_/", $data_str, $refs);
-		$r["domain"]["changed"] = trim($refs[5]);
-
-		preg_match("/Record (create|created) (date|on)( on)?(  | -|: |->)?(.+?)_/", $data_str, $refs);
-		$r["domain"]["created"] = trim($refs[5]);
-
-		preg_match("/Record (will|expire|expires|expiring)( on| date| be| expire)( expiring on date| on| date)?(  |: | -|->)?(.+?)_/", $data_str, $refs);
-		$r["domain"]["expires"] = trim($refs[5]);
-
-		//preg_match("/(Database last updated on|Database last updated on:) (.+?)\./",$data_str, $refs);
-		//$r["regrinfo"]["db_updated"]=$refs[1];
-		preg_match("/Domain servers in listed order:_ (.+)_Register/", $data_str, $refs);
-		$ns = explode("_", $refs[1]);
-		for ($i = 0, $max = count($ns); $i < $max; $i++)
-			{
-			$r["domain"]["nserver"][] = $ns[$i];
-			}
+			
 		format_dates($r, 'ymd');
 		return ($r);
 		}
