@@ -51,12 +51,13 @@ class gtld_handler extends WhoisClient
                         "Creation Date:" => "regrinfo.domain.created",
                         "Created On:" => "regrinfo.domain.created",
                         "Expiration Date:" => "regrinfo.domain.expires",
-                        "Updated Date:" => "regrinfo.domain.changed"
+                        "Updated Date:" => "regrinfo.domain.changed",
+                        'No match for ' => 'nodomain'
 	                     );
 
 	var $REGISTRARS = array(
                         "ALABANZA, INC." => "bulkr",
-                        'ARSYS INTERNET, S.L.	D/B/A NICLINE.COM' => "nicline",
+                        'ARSYS INTERNET, S.L. D/B/A NICLINE.COM' => "nicline",
 						"ASCIO TECHNOLOGIES, INC." => "ascio",
 						"BULKREGISTER.COM, INC." => "bulkr",
 						"BULKREGISTER, LLC." => "bulkr",
@@ -93,13 +94,23 @@ class gtld_handler extends WhoisClient
 		$this->Query = array();
 		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
 		$this->result = generic_parser_b($data["rawdata"], $this->REG_FIELDS, 'dmy');
-
-		unset($this->Query["handler"]);
+		
+		unset($this->result['registered']);
+		
+		if (isset($this->result['nodomain']))
+			{
+			unset($this->result['nodomain']);
+			$this->result['regrinfo']['registered'] = 'no';
+			return $this->result;
+			}
+			
+		$this->result['regrinfo']['registered'] = 'yes';			
+		unset($this->Query["handler"]);		
 
 		if (isset($this->result["regyinfo"]["whois"]))
 			$this->Query["server"] = $this->result["regyinfo"]["whois"];
 
-		$this->result["rawdata"] = $this->GetData($query);
+		$this->result['rawdata'] = $this->GetData($query);
 		// david@ols.es 16/10/2002 Fixes rawdata
 
 		if (!isset($this->result["rawdata"]["rawdata"]))
@@ -114,11 +125,11 @@ class gtld_handler extends WhoisClient
 
 		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
-		$this->result["regrinfo"]["registered"] = $this->result["registered"];
-		unset($this->result["registered"]);
+		//$this->result["regrinfo"]["registered"] = $this->result["registered"];
+		//unset($this->result["registered"]);
 
 		if (!empty($this->Query["handler"]))
-			{
+			{			
 			$this->Query["file"] = sprintf("whois.gtld.%s.php", $this->Query["handler"]);
 			$regrinfo = $this->Process($this->result["rawdata"]);
 			$this->result["regrinfo"] = merge_results($this->result["regrinfo"], $regrinfo);
@@ -137,7 +148,10 @@ function merge_results($a1, $a2)
 		if (isset($a1[$key]))
 			{
 			if (is_array($val))
-				$a1[$key] = merge_results($a1[$key], $val);
+				{
+				if ($key != 'nserver')
+					$a1[$key] = merge_results($a1[$key], $val);
+				}
 			else
 				{
 				$val = trim($val);

@@ -37,7 +37,7 @@ require_once('whois.parser.php');
 class nl_handler
 	{
 
-	function parse($data)
+	function parse($data, $query)
 		{
 
 		$items = array(
@@ -56,15 +56,13 @@ class nl_handler
 		$r["regyinfo"]["referrer"] = "http://www.domain-registry.nl";
 		$r["regyinfo"]["registrar"] = "Stichting Internet Domeinregistratie NL";
 
-		$r["regrinfo"] = get_blocks($data["rawdata"], $items);
+		$r["regrinfo"] = get_blocks($data['rawdata'], $items);
 
-		if (!isset($r["regrinfo"]["domain"]["name"][0]))
+		if (!isset($r['regrinfo']['domain']['status']))
 			{
 			$r["regrinfo"]["registered"] = "no";
 			return $r;
 			}
-
-		$r["regrinfo"]["domain"]["name"] = $r["regrinfo"]["domain"]["name"][0];
 
 		$r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
 		$r["regrinfo"]["owner"] = get_contact($r["regrinfo"]["owner"]);
@@ -73,6 +71,7 @@ class nl_handler
 
 		$r["regrinfo"]["registered"] = "yes";
 		format_dates($r, 'dmy');
+		
 		return ($r);
 		}
 	}

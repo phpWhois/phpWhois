@@ -45,7 +45,8 @@ class cronon_handler
               "domain.name" => "Domain Name:",
               "domain.nserver." => "Domain servers in listed order:",
               "domain.expires" => "Record expires on: ",
-              "domain.changed" => "Record last updated on: "
+              "domain.changed" => "Record last updated on: ",
+              '' => 'RACE Name:'
 		          );
 
 		$r = get_blocks($data_str, $items);

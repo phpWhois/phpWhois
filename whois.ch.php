@@ -61,8 +61,12 @@ class ch_handler
 			$r["regrinfo"]["tech"] = get_contact($r["regrinfo"]["tech"]);
 
 			$r["regrinfo"]["domain"]["name"] = $r["regrinfo"]["domain"]["name"][0];
-			$r["regrinfo"]["domain"]["changed"] = get_date($r["regrinfo"]["domain"]["changed"][0], 'dmy');
-			$r["regrinfo"]["domain"]["created"] = get_date($r["regrinfo"]["domain"]["created"][0], 'dmy');
+			
+			if (isset($r["regrinfo"]["domain"]["changed"][0]))
+				$r["regrinfo"]["domain"]["changed"] = get_date($r["regrinfo"]["domain"]["changed"][0], 'dmy');
+				
+			if (isset($r["regrinfo"]["domain"]["created"][0]))
+				$r["regrinfo"]["domain"]["created"] = get_date($r["regrinfo"]["domain"]["created"][0], 'dmy');
 
 			$r["regyinfo"] = array(
                           "referrer" => "http://www.nic.ch",

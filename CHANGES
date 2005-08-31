@@ -3,6 +3,7 @@
 		- changed url disclaimer
 		- added GPL license file
 		- whois.gtld.bulkr.php rewritten
+		- last minute fixes
 
 2005/08/30  David Saez <david@ols.es>
 		- changed generic_whois_b item parameter array

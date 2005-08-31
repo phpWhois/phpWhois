@@ -52,6 +52,7 @@ class de_handler
                 'domain.nserver' => 'nserver',
 				'domain.status' => 'status:',
                 'domain.changed' => 'changed:',
+                'domain.desc.' => 'descr:',
 				'owner' => '[holder]',
                 'admin' => '[admin-c]',
                 'tech' =>	'[tech-c]',
@@ -69,7 +70,21 @@ class de_handler
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
-		$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
+		if (isset($r['regrinfo']['owner']))
+			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
+		
+		if (isset($r['regrinfo']['domain']['desc']))
+			{
+			if (!isset($r['regrinfo']['owner']['name']))
+				$r['regrinfo']['owner']['name'] = $r['regrinfo']['domain']['desc'][0];
+				
+			if (!isset($r['regrinfo']['owner']['address']))
+				for ($i=1; $i<count($r['regrinfo']['domain']['desc']); $i++)
+					$r['regrinfo']['owner']['address'][] = $r['regrinfo']['domain']['desc'][$i];
+					
+			unset($r['regrinfo']['domain']['desc']);
+			}
+			
 		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
 		$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
 		$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'], $extra);

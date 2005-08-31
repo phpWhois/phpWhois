@@ -146,7 +146,7 @@ while (list($key,$val)=each($rawdata))
 				$var = "\$r".getvarname($field);
 				$itm = trim(substr($val,$pos+strlen($match)));
                 if ($itm!='')
-					eval($var."=\"".$itm."\";");
+					eval($var."=\"".str_replace('"','\"',$itm)."\";");
 				break;
 				}
 			}

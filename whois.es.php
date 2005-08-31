@@ -75,7 +75,7 @@ class es_handler
 
 		while (list($key, $val) = each($data_str['rawdata']))
 			{
-			if (strpos($val, 'Nombre del dominio') !=  = false)
+			if (strpos($val, 'Nombre del dominio') !== false)
 				{
 				$data_str['rawdata'][$key] = 'PROPIETARIO DEL DOMINIO:';
 				break;
@@ -107,7 +107,7 @@ class es_handler
 		$rawdata = implode("\n", $rawdata);
 		$first = strpos($rawdata, 'Datos del Dominio '.$r['regrinfo']['domain']['name']);
 
-		if ($first !=  = false)
+		if ($first !== false)
 			$rawdata = substr($rawdata, $first);
 
 		$r['rawdata'] = explode("\n", $rawdata);

@@ -46,10 +46,9 @@ nicline		nicline.com
 opensrsnet      tucows.com
 registercom     register.com
 schlund		schlund.com
-srsplus		srsplus.com
+srsplus		olsns.com
 stargate	stargate.com
 tvcorp		sex.tv
-wwd             iprocommunicator.com
 
 // Other
 
