@@ -1,6 +1,7 @@
 2005/08/31  David Saez <david@ols.es>
 		- changed behaviour of whois.utils.php
 		- changed url disclaimer
+		- added GPL license file
 
 2005/08/30  David Saez <david@ols.es>
 		- changed generic_whois_b item parameter array
