@@ -8,7 +8,7 @@ Maintained by David Saez (david@ols.es)
 
 For the most recent version of this package visit:
 
-http://phpwhois.sourceforge.net
+http://www.phpwhois.org
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -110,7 +110,7 @@ class utils extends Whois {
 
 	function showObject(&$obj) {
 		$r = $this->debugObject($obj);
-		echo "<PRE>".$r."</PRE>\n";
+		return "<PRE>".$r."</PRE>\n";
 	}
 
 	function debugObject($obj,$indent=0) {
@@ -157,7 +157,7 @@ class utils extends Whois {
 				}
 			}
 			
-		echo $out;
+		return $out;
 	}
 }
 

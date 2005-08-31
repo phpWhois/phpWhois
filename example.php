@@ -8,7 +8,7 @@ Maintained by David Saez (david@ols.es)
 
 For the most recent version of this package visit:
 
-http://phpwhois.sourceforge.net
+http://www.phpwhois.org
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -51,13 +51,13 @@ if(isSet($_GET['query']))
 		{
 		case 'object':
 			$utils = new utils;
-			$utils->showObject($result);
+			echo $utils->showObject($result);
 			break;
 			
 		case 'nice':			
 			if(!empty($result['rawdata'])) {				
 				$utils = new utils;
-				$utils->showHTML($result);
+				echo $utils->showHTML($result);
 				}
 			else {
 				echo "<br>No Match";

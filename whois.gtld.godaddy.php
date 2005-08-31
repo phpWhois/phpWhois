@@ -8,7 +8,7 @@ Maintained by David Saez (david@ols.es)
 
 For the most recent version of this package visit:
 
-http://phpwhois.sourceforge.net
+http://www.phpwhois.org
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
