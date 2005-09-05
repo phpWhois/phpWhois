@@ -137,12 +137,14 @@ class utils extends Whois {
 		
 		$email_regex = "/([-_\w\.]+)(@)([-_\w\.]+)\b/i";
 		$html_regex = "/(?:^|\b)((((http|https|ftp):\/\/)|(www\.))([\w\.]+)([,:%#&\/?~=\w+\.-]+))(?:\b|$)/is";
-
+		$ip_regex = "/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/i";
+		
 		$out = implode($result['rawdata'],"\n");
 		
 		$out = preg_replace ($email_regex, '<a href="mailto:$0">$0</a>', $out); 
 		$out = preg_replace ($html_regex, '<a href="$1" target="_blank">$1</a>', $out); 
-		
+		$out = preg_replace ($ip_regex, '<a href="'.$_SERVER['PHP_SELF'].'?query=$0&output=nice">$0</a>', $out); 
+				
 		if (isset($result['regrinfo']['domain']['nserver']))
 			{
 			$nserver = $result['regrinfo']['domain']['nserver'];
