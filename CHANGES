@@ -2,6 +2,8 @@
 		- minor code cleaup on whois.gtld.php
 		- added better support for errors
 		- added hanlder for .ag
+		- added ip detection for HTML output
+		- country tld revision [ax-bx]
 
 2005/09/01  Released phpWhois 4.0.0
 

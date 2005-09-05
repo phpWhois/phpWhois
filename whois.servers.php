@@ -75,7 +75,15 @@ $this->WHOIS_PARAM = array(
 
 $this->WHOIS_SPECIAL = array(
 		'ad'	 => '',
+		'ai'	 => 'http://whois.offshore.ai/cgi-bin/whois.pl?domain-name={domain}.{tld}',
+		'al'	 => '',
+		'az'	 => '',
+		'ba'	 => '',
+		'bb'	 => 'http://domains.org.bb/regsearch/getdetails.cfm?DND={domain}.{tld}',
 		'bg'	 => 'http://www.register.bg/bg-nic/displaydomain.pl?domain={domain}.{tld}&search=exist',
+		'bi'	 => 'whois.nic.bi',
+		'bj'	 => 'whois.nic.bj',
+		'by'	 => '',
 		'es'     => 'https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio={domain}.{tld}&tipo=dominio',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
