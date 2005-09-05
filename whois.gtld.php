@@ -110,19 +110,10 @@ class gtld_handler extends WhoisClient
 		if (isset($this->result["regyinfo"]["whois"]))
 			$this->Query["server"] = $this->result["regyinfo"]["whois"];
 
-		$this->result['rawdata'] = $this->GetData($query);
-		// david@ols.es 16/10/2002 Fixes rawdata
-
-		if (!isset($this->result["rawdata"]["rawdata"]))
-			{
-			$this->Query["errstr"] = "Domain not found";
-			unset($this->result["rawdata"]);
-			return ;
-			}
-
-		if (isset($this->result["rawdata"]["rawdata"]))
-			$this->result["rawdata"] = $this->result["rawdata"]["rawdata"];
-
+		$subresult = $this->GetData($query);
+				
+		$this->result['rawdata'] = $subresult['rawdata'];
+		
 		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
 
 		//$this->result["regrinfo"]["registered"] = $this->result["registered"];

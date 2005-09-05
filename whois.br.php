@@ -71,9 +71,12 @@ class br_handler
 		unset($r["domain"]["nsstat"]);
 		unset($r["domain"]["nslastaa"]);
 
-		$r["owner"]["organization"] = $r["domain"]["owner"];
-
-		unset($r["domain"]["owner"]);
+		if (isset($r["domain"]["owner"]))
+			{
+			$r["owner"]["organization"] = $r["domain"]["owner"];
+			unset($r["domain"]["owner"]);
+			}
+			
 		unset($r["domain"]["responsible"]);
 		unset($r["domain"]["address"]);
 		unset($r["domain"]["phone"]);

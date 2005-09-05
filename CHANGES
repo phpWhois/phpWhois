@@ -1,3 +1,8 @@
+2005/09/05  David Saez <david@ols.es>
+		- minor code cleaup on whois.gtld.php
+
+2005/09/01  Released phpWhois 4.0.0
+
 2005/08/31  David Saez <david@ols.es>
 		- changed behaviour of whois.utils.php
 		- changed url disclaimer
