@@ -47,16 +47,18 @@ if(isSet($_GET['query']))
 	$result = $whois->Lookup($query);
 	echo "<b>Results for $query :</b><p>";
 
-	if ($whois->Query['status'] < 0)
-		{
-		echo implode($whois->Query['errstr'],"\n<br>");
-		}
-		
 	switch ($output)
 		{
 		case 'object':
-			$utils = new utils;
-			echo $utils->showObject($result);
+			if ($whois->Query['status'] < 0)
+				{
+				echo implode($whois->Query['errstr'],"\n<br>");
+				}
+			else
+				{
+				$utils = new utils;
+				echo $utils->showObject($result);
+				}
 			break;
 			
 		case 'nice':			
@@ -65,7 +67,7 @@ if(isSet($_GET['query']))
 				echo $utils->showHTML($result);
 				}
 			else {
-				echo "<br>No Match";
+				echo implode($whois->Query['errstr'],"\n<br>");
 				}       
 			break;
 						
@@ -74,7 +76,7 @@ if(isSet($_GET['query']))
 				echo implode($result['rawdata'],"\n");
 				}
 			else {
-				echo '<br>No Match';
+				echo implode($whois->Query['errstr'],"\n<br>");
 				}       
 	}
 }

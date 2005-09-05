@@ -176,7 +176,7 @@ class Whois extends WhoisClient
 					break;
 					}
 				}
-
+				
 			// If there is a handler process the data
 
 			if ($handler != '')
