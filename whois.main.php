@@ -66,7 +66,9 @@ class Whois extends WhoisClient
 
 	function Lookup($query = '')
 		{
-
+		// start clean
+		$this->Query['status'] = 0;
+		
 		$query = trim($query);
 
 		// If domain to query was not set
@@ -118,21 +120,29 @@ class Whois extends WhoisClient
 			// Test if we know in advance that no whois server is
 			// available for this domain and that we can get the
 			// data via http or whois request
-
+/*
 			reset($this->WHOIS_SPECIAL);
 
 			while (list($key, $val) = each($this->WHOIS_SPECIAL))
-			if ($tld == $key)
+				if ($tld == $key)
+					{
+					$domain = substr($query, 0,  - strlen($key) - 1);
+					$val = str_replace('{domain}', $domain, $val);
+					$server = str_replace('{tld}', $key, $val);
+					break;
+					}
+			if ($server != '')
+				break;				
+*/
+			if (isset($this->WHOIS_SPECIAL[$tld]))
 				{
-				$domain = substr($query, 0,  - strlen($key) - 1);
+				$val = $this->WHOIS_SPECIAL[$tld];
+				$domain = substr($query, 0,  - strlen($tld) - 1);
 				$val = str_replace('{domain}', $domain, $val);
-				$server = str_replace('{tld}', $key, $val);
+				$server = str_replace('{tld}', $tld, $val);
 				break;
 				}
-
-			if ($server != '')
-				break;
-
+				
 			// Determine the top level domain, and it's whois server using
 			// DNS lookups on 'whois-servers.net'.
 			// Assumes a valid DNS response indicates a recognised tld (!?)

@@ -45,8 +45,13 @@ if(isSet($_GET['query']))
 	
 	$whois = new Whois();
 	$result = $whois->Lookup($query);
-	echo "<b>Results for  $query :</b><p>";
+	echo "<b>Results for $query :</b><p>";
 
+	if ($whois->Query['status'] < 0)
+		{
+		echo implode($whois->Query['errstr'],"\n<br>");
+		}
+		
 	switch ($output)
 		{
 		case 'object':

@@ -73,6 +73,7 @@ $this->WHOIS_PARAM = array(
 /* TLD's that have special whois servers or that can only be reached via HTTP */
 
 $this->WHOIS_SPECIAL = array(
+		'ad'	 => '',
 		'bg'	 => 'http://www.register.bg/bg-nic/displaydomain.pl?domain={domain}.{tld}&search=exist',
 		'es'     => 'https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio={domain}.{tld}&tipo=dominio',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}',
