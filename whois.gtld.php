@@ -29,15 +29,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* gtld.whois   1.1     david@ols.es    2003/02/09 */
 /* gtld.whois   1.2     david@ols.es    2003/09/12 */
 
-if (!defined("__GTLD_HANDLER__"))
-	define("__GTLD_HANDLER__", 1);
+if (!defined('__GTLD_HANDLER__'))
+	define('__GTLD_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
 class gtld_handler extends WhoisClient
 	{
 
-	var $HANDLER_VERSION = "1.1";
+	var $HANDLER_VERSION = '1.1';
 
 	var $REG_FIELDS = array(
                         "Domain Name:" => "regrinfo.domain.name",
@@ -105,26 +105,27 @@ class gtld_handler extends WhoisClient
 			}
 			
 		$this->result['regrinfo']['registered'] = 'yes';			
-		unset($this->Query["handler"]);		
+		unset($this->Query['handler']);
 
-		if (isset($this->result["regyinfo"]["whois"]))
-			$this->Query["server"] = $this->result["regyinfo"]["whois"];
+		if (isset($this->result['regyinfo']['whois']))
+			$this->Query['server'] = $this->result['regyinfo']['whois'];
 
 		$subresult = $this->GetData($query);
-				
-		$this->result['rawdata'] = $subresult['rawdata'];
 		
-		@$this->Query["handler"] = $this->REGISTRARS[$this->result["regyinfo"]["registrar"]];
+		if (isset($subresult['rawdata']))
+			{
+			$this->result['rawdata'] = $subresult['rawdata'];
+		
+			@$this->Query['handler'] = $this->REGISTRARS[$this->result['regyinfo']['registrar']];
 
-		//$this->result["regrinfo"]["registered"] = $this->result["registered"];
-		//unset($this->result["registered"]);
-
-		if (!empty($this->Query["handler"]))
-			{			
-			$this->Query["file"] = sprintf("whois.gtld.%s.php", $this->Query["handler"]);
-			$regrinfo = $this->Process($this->result["rawdata"]);
-			$this->result["regrinfo"] = merge_results($this->result["regrinfo"], $regrinfo);
+			if (!empty($this->Query['handler']))
+				{			
+				$this->Query['file'] = sprintf("whois.gtld.%s.php", $this->Query['handler']);
+				$regrinfo = $this->Process($this->result['rawdata']);
+				$this->result['regrinfo'] = merge_results($this->result['regrinfo'], $regrinfo);
+				}
 			}
+			
 		return $this->result;
 		}
 	}

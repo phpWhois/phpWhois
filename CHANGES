@@ -1,3 +1,6 @@
+2005/09/13  David Saez <david@ols.es>
+		- better error handling in whois.gtld
+
 2005/09/05  David Saez <david@ols.es>
 		- minor code cleaup on whois.gtld.php
 		- added better support for errors
