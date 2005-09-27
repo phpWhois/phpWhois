@@ -1,3 +1,7 @@
+2005/09/27  David Saez <david@ols.es>
+		- minor formating fix
+		- added handler for .lt
+
 2005/09/13  David Saez <david@ols.es>
 		- better error handling in whois.gtld
 
