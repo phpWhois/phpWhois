@@ -42,16 +42,16 @@ class at_handler
 		{
 
 		$translate = array(
-                    'fax-no' => 'fax',
-                    'e-mail' => 'email',
-                    'nic-hdl' => 'handle',
-                    'person' => 'name',
-                    'personname' => 'name',
-					'street address' => 'address.street',
-                    'city' =>	'address.city',
-                    'postal code' => 'address.pcode',
-					'country' => 'address.country'
-		                );
+			'fax-no' => 'fax',
+			'e-mail' => 'email',
+			'nic-hdl' => 'handle',
+			'person' => 'name',
+			'personname' => 'name',
+			'street address' => 'address.street',
+			'city' =>	'address.city',
+			'postal code' => 'address.pcode',
+			'country' => 'address.country'
+			);
 
 		$contacts = array(
                     "owner-c" => "owner",
