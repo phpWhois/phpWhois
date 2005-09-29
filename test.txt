@@ -54,6 +54,7 @@ tvcorp		sex.tv
 // Other
 
 info            afilias.info
+museum		nic.museum
 org		ascio.org buydomains.org ...
 biz        	neulevel.biz
 

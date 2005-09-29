@@ -1,3 +1,6 @@
+2005/09/29  David Saez <david@ols.es>
+		- added handler for .museum
+
 2005/09/27  David Saez <david@ols.es>
 		- minor formating fix
 		- added handler for .lt
