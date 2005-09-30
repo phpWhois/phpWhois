@@ -86,12 +86,12 @@ class museum_handler
                   "Billing Email:" => "billing.email"
 		            );
 
-		$r["regyinfo"] = array(
-                          "referrer" => "http://whois.afilias.info",
-                          "registrar" => "Afilias Global Registry Services"
+		$r['regyinfo'] = array(
+                          'referrer' => 'http://musedoma.museum',
+                          'registrar' => 'Museum Domain Management Association'
                           );
 
-		$r["regrinfo"] = generic_parser_b($data_str["rawdata"], $items);
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
 		return $r;
 		}
 
