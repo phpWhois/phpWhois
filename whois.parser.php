@@ -521,7 +521,7 @@ while (!$ok)
 		{
 		if ($val=='' || $key=='') continue;
 
-		if (!is_numeric($val))
+		if (!is_numeric($val) && isset($months[substr(strtolower($val),0,3)]))
 			{
 			$res[$key]=$res['m'];
 			$res['m']=$months[substr(strtolower($val),0,3)];
