@@ -1,3 +1,8 @@
+2005/09/30  David Saez <david@ols.es>
+		- fix for .museum handler
+		- added handler for .aero
+		- minor fix for date extraction in whois.parser.php
+
 2005/09/29  David Saez <david@ols.es>
 		- added handler for .museum
 

@@ -32,6 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 $this->DATA_VERSION = '18';
 
 $this->DATA = array(
+	'aero'		=> 'aero',
 	'ag'		=> 'ag',
 	'at'		=> 'at',
 	'au'		=> 'au',
