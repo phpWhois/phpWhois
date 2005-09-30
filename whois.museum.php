@@ -58,7 +58,6 @@ class museum_handler
                   "Admin Organization:" => "admin.organization",
                   "Admin Address:" => "admin.address.street",
                   "Admin City:" => "admin.address.city",
-                  "Admin State/Province:" => "admin.address.state",
                   "Admin Postal Code:" => "admin.address.pcode",
                   "Admin Country:" => "admin.address.country",
                   "Admin Phone Number:" => "admin.phone",
