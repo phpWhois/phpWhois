@@ -97,7 +97,7 @@ the following subkeys:
 				   numbers, could have predefined
 				   subkeys or could be amix of numbers
 				   and predefined subkeys. Predefined
-				   subkeys are street, street2, city,
+				   subkeys are street, city,
 				   state, pcode and country
 		phone		-> phone, could also be an array of
 				   phone numers
