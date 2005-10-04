@@ -54,10 +54,11 @@ tvcorp		sex.tv
 // Other
 
 aero		nic.aero
+biz             neulevel.biz
+coop		sex.coop , nic.coop
 info            afilias.info
 museum		nic.museum
 org		ascio.org buydomains.org ...
-biz        	neulevel.biz
 
 // IP whois
 

@@ -1,3 +1,7 @@
+2005/10/04  David Saez <david@ols.es>
+		- fix for address reporting
+		- added handler for .coop
+
 2005/09/30  David Saez <david@ols.es>
 		- fix for .museum handler
 		- added handler for .aero
