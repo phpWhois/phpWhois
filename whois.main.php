@@ -39,7 +39,7 @@ class Whois extends WhoisClient
 	var $VERSION;
 
 	// This release of the package
-	var $CODE_VERSION = "4.0.0";
+	var $CODE_VERSION = "4.0.1";
 
 	// Network Solutions registry server
 	var $NSI_REGISTRY = "whois.nsiregistry.net";

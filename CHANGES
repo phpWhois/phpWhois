@@ -1,3 +1,6 @@
+2005/10/09  Released phpWhois 4.0.1
+		- some files where missing !!
+
 2005/10/04  David Saez <david@ols.es>
 		- fix for address reporting
 		- added handler for .coop
