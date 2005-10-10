@@ -29,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* senic.whois	0.99	Stefan Alfredsson <stefan@alfredsson.org> */
 /* Based upon uknic.whois by David Saez Padros */
 
-if (!defined("__SE_HANDLER__"))
-	define("__SE_HANDLER__", 1);
+if (!defined('__SE_HANDLER__'))
+	define('__SE_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -40,19 +40,21 @@ class se_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                    "*domainname.name:" => "domain.name",
-                    "*domainname.status:" => "domain.status",
-                    "*domainname.date_to_delete:" => "domain.expires",
-                    " NS " => "domain.nserver."
+                    '*domainname.name:' => 'domain.name',
+                    '*domainname.status:' => 'domain.status',
+                    '*domainname.date_to_delete:' => 'domain.expires',
+                    ' NS ' => 'domain.nserver.'
                     );
 
-		$r["regyinfo"] = array(
-                    "referrer" => "http://www.nic-se.se",
-                    "registrar" => "NIC-SE"
+		$r['regyinfo'] = array(
+                    'referrer' => 'http://www.nic-se.se',
+                    'registrar' => 'NIC-SE'
 		                );
 
-		$r["regrinfo"] = generic_parser_b($data_str["rawdata"], $items);
-
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'mdy', false);
+		
+		$r['regrinfo']['registered'] = isset($r['regrinfo']['domain']['name']) ? 'yes' : 'no';
+		
 		return ($r);
 		}
 
