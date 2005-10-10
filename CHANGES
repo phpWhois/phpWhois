@@ -2,7 +2,8 @@
 		- fixed some short tags in example.php,
 		  fixed queries to .net whois server,
 		  added support for .pe domains,
-		  fixed .se registration detection
+		  fixed .se registration detection,
+		  added requirements section in README
 		  thanx to Speedywise
 
 2005/10/09  Released phpWhois 4.0.1

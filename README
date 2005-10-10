@@ -22,6 +22,15 @@ AS (Autonomus System) handle instead of the domain name. Limited,
 non-recursive support for Referral Whois (RFC 1714/2167) is also
 provided.
 
+Requirements
+------------
+
+phpWhois requires PHP 4.3.0 or better with OpenSSL support to
+work properly. Without SSL support you will not be able to
+query domains which do not have a whois server but that have
+a https based whois. Also, you can run it in lower PHP versions
+but without timeout control (see example.whois)
+
 Installation
 ------------
 
