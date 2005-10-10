@@ -4,7 +4,8 @@
 		  added support for .pe domains,
 		  fixed .se registration detection,
 		  added requirements section in README,
-		  fix to let it work with PHP 4.1.0 - 4.3.1
+		  fix to let it work with PHP 4.1.0 - 4.3.1,
+		  installation clarified
 		  thanx to Speedywise
 
 2005/10/09  Released phpWhois 4.0.1

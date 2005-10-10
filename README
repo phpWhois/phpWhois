@@ -35,9 +35,17 @@ versions below 4.1.0
 Installation
 ------------
 
-Basically, untar the distribution somewhere and make sure the directory
-is listed in 'include_path' in your php.ini file.
+Basically, untar the distribution somewhere outside your server's
+document root and make sure the directory is listed in 'include_path'
+in your php.ini file, server configuration or in an .htaccess file.
+If you want to test it using a web browser just copy example.php and
+whois.icon.png anywhere on your server's document root and try it.
 
+phpWhois is not a PHP aplication is a class that can be used in
+applications. There is no need to make the installation folder
+accesible to anyone but PHP, nevertheless you can install it inside
+your server's document root if you like, it will work without
+problems or security risks.
 
 Example usage
 -------------
