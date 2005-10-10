@@ -1,3 +1,7 @@
+2005/10/10  David Saez <david@ols.es>
+		- fixed some short tags in example.php
+		  thanx to Speedywise
+
 2005/10/09  Released phpWhois 4.0.1
 		- some files where missing !!
 

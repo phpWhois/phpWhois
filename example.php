@@ -34,7 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 <pre>
 <blockquote>
 
-<?
+<?php
 if(isSet($_GET['query']))
 	{
 	$query = $_GET['query'];
@@ -88,7 +88,7 @@ if(isSet($_GET['query']))
 <center>
 <table>
 <tr><td bgcolor="55aaff">
-<form method="get" action="<?echo  $_SERVER['PHP_SELF']; ?>">
+<form method="get" action="<?php echo  $_SERVER['PHP_SELF']; ?>">
 
 <table>
 <tr><td colspan=2>
