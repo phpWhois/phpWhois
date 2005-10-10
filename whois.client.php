@@ -101,7 +101,8 @@ class WhoisClient {
 				return(array());
 				}
 
-			stream_set_timeout($ptr,$this->STIMEOUT);
+			if (version_compare(phpversion(),'4.3.0')>=0)
+				stream_set_timeout($ptr,$this->STIMEOUT);
 
 			if (isset($this->WHOIS_PARAM[$this->Query['server']]))
 				fputs($ptr, $this->WHOIS_PARAM[$this->Query['server']].trim($string)."\r\n");

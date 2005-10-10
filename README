@@ -29,7 +29,8 @@ phpWhois requires PHP 4.3.0 or better with OpenSSL support to
 work properly. Without SSL support you will not be able to
 query domains which do not have a whois server but that have
 a https based whois. Also, you can run it in lower PHP versions
-but without timeout control (see example.whois)
+but without timeout control. phpWhois will not work with PHP
+versions below 4.1.0
 
 Installation
 ------------
