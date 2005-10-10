@@ -1,6 +1,7 @@
 2005/10/10  David Saez <david@ols.es>
 		- fixed some short tags in example.php,
-		  fixed queries to .net whois server
+		  fixed queries to .net whois server,
+		  added support for .pe domains
 		  thanx to Speedywise
 
 2005/10/09  Released phpWhois 4.0.1
