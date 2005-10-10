@@ -72,6 +72,7 @@ $this->DATA = array(
 
 $this->WHOIS_PARAM = array(
 	'com.whois-servers.net' => '=',
+	'net.whois-servers.net' => '=',
 	'de.whois-servers.net'	=> '-T dn,ace '
 	);
 
