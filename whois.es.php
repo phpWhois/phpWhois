@@ -35,8 +35,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-if (!defined("__ES_HANDLER__"))
-	define("__ES_HANDLER__", 1);
+if (!defined('__ES_HANDLER__'))
+	define('__ES_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -105,7 +105,7 @@ class es_handler
                 );
 
 		$rawdata = implode("\n", $rawdata);
-		$first = strpos($rawdata, 'Datos del Dominio '.$r['regrinfo']['domain']['name']);
+		$first = strpos($rawdata, 'Datos del Dominio '.$query);
 
 		if ($first !== false)
 			$rawdata = substr($rawdata, $first);

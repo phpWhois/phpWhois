@@ -1,3 +1,6 @@
+2005/10/11  David Saez <david@ols.es>
+		- fixed warning for non-existant .es domains
+
 2005/10/10  David Saez <david@ols.es>
 		- fixed some short tags in example.php,
 		  fixed queries to .net whois server,
