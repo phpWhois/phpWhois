@@ -198,7 +198,12 @@ class WhoisClient {
 		$output = str_replace('<tr',"\n<tr",$output);
 		$output = str_replace('<TR',"\n<tr",$output);
 		$output = str_replace('&nbsp;',' ',$output);
-		$output = html_entity_decode($output);
+		
+		//$output = html_entity_decode($output); needs 4.3.0
+		$trans_tbl = get_html_translation_table (HTML_ENTITIES); 
+		$trans_tbl = array_flip ($trans_tbl); 
+		$output = strtr($output, $trans_tbl);		
+			
 		$output = explode("\n",strip_tags($output));
 
 		$rawdata = array();

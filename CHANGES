@@ -1,3 +1,6 @@
+2005/10/12  David Saez <david@ols.es>
+		- added compatibility with PHP versions prior 4.3.0
+
 2005/10/11  David Saez <david@ols.es>
 		- fixed warning for non-existant .es domains
 
