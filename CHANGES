@@ -1,3 +1,6 @@
+2005/10/142  David Saez <david@ols.es>
+		- clean some messy ripe records
+
 2005/10/12  David Saez <david@ols.es>
 		- added compatibility with PHP versions prior 4.3.0
 

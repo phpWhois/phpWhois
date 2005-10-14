@@ -43,7 +43,7 @@ class ripe_handler
 						'nic-hdl' => 'handle',
 						'person' => 'name',
 						'netname' => 'name',
-						'descr' => 'desc'						
+						'descr' => 'desc'
 		                  );
 
 		$contacts = array(
@@ -67,7 +67,13 @@ class ripe_handler
 			$r['abuse']['email'] = $r['tech']['abuse-mailbox'];
 			unset($r['tech']['abuse-mailbox']);
 			}
-			
+		
+		// Clean mess
+		if (isset($r['tech']['tech-c']))  unset($r['tech']['tech-c']);
+		if (isset($r['tech']['admin-c'])) unset($r['tech']['admin-c']);
+		if (isset($r['admin']['tech-c']))  unset($r['admin']['tech-c']);
+		if (isset($r['admin']['admin-c'])) unset($r['admin']['admin-c']);
+		
 		return $r;
 		}
 
