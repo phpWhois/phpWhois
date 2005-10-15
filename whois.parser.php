@@ -358,23 +358,27 @@ while (list($key,$val)=each($array))
 		while (list($match,$field)=each($items))
 			{
 			$pos=strpos(strtolower($val),$match);
+			
 			if ($pos===false) continue;
+			
 			$itm=trim(substr($val,$pos+strlen($match)));
-			if ($field!='')
+			
+			if ($field!='' && $itm!='')
 				{
 				eval("\$r".getvarname($field)."=\$itm;");
 				}
+				
 			$val=trim(substr($val,0,$pos));
 
 			if ($val=='')
-                	     	unset($array[$key]);
-		        else
+				unset($array[$key]);
+			else
 				{
-			     	$array[$key]=$val;
+				$array[$key]=$val;
 				$ok=true;
 				}
-                	break;
-        	      } 	
+			break;
+			} 	
 		}
 	if ($val=='') continue;
 
