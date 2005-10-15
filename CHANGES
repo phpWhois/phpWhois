@@ -1,4 +1,9 @@
-2005/10/142  David Saez <david@ols.es>
+2005/10/15  David Saez <david@ols.es>
+		- added missing example for .ag
+		- added multiple abuse email address detection
+		  in arin ip queries
+
+2005/10/14  David Saez <david@ols.es>
 		- clean some messy ripe records
 		- added handler for .name
 

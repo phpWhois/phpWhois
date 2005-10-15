@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* arin.whois	1.0 	David Saez 7/6/2002 */
 
-if (!defined("__ARIN_HANDLER__"))
-	define("__ARIN_HANDLER__", 1);
+if (!defined('__ARIN_HANDLER__'))
+	define('__ARIN_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -38,13 +38,13 @@ class arin_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                  "OrgName:" => "owner.organization",
-                  "OrgID:" => "owner.handle",
-                  "Address:" => "owner.address.street",
-                  "City:" => "owner.address.city",
-                  "StateProv:" => "owner.address.state",
-                  "PostalCode:" => "owner.address.pcode",
-                  "Country:" => "owner.address.country",
+                  'OrgName:' 	=> 'owner.organization',
+                  'OrgID:' 		=> 'owner.handle',
+                  'Address:' 	=> 'owner.address.street',
+                  'City:' 		=> 'owner.address.city',
+                  'StateProv:' 	=> 'owner.address.state',
+                  'PostalCode:' => 'owner.address.pcode',
+                  'Country:' 	=> 'owner.address.country',
                   "NetRange:" => "network.inetnum",
                   "NetName:" => "network.name",
                   "NetHandle:" => "network.handle",
@@ -64,11 +64,11 @@ class arin_handler
                   "OrgAbuseName:" => "abuse.name",
                   "OrgAbuseHandle:" => "abuse.handle",
                   "OrgAbusePhone:" => "abuse.phone",
-                  "OrgAbuseEmail:" => "abuse.email",
+                  "OrgAbuseEmail:" => "abuse.email.",
                   'ReferralServer:' => 'rwhois'
 		              );
 
-		$r = generic_parser_b($data_str, $items, 'ymd', false);
+		$r = generic_parser_b($data_str, $items, 'ymd', false, true);
 		
 		if (isset($r['AS']))
 			{

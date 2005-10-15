@@ -118,7 +118,7 @@ return $ret;
 
 //-------------------------------------------------------------------------
 
-function generic_parser_b ( $rawdata, $items, $dateformat='mdy', $hasreg=true )
+function generic_parser_b ( $rawdata, $items, $dateformat='mdy', $hasreg=true, $scanall=false )
 
 {
 $r='';
@@ -145,9 +145,12 @@ while (list($key,$val)=each($rawdata))
 				{
 				$var = "\$r".getvarname($field);
 				$itm = trim(substr($val,$pos+strlen($match)));
+				
                 if ($itm!='')
 					eval($var."=\"".str_replace('"','\"',$itm)."\";");
-				break;
+					
+				if (!$scanall) 
+					break;
 				}
 			}
 		}
