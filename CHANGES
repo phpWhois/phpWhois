@@ -1,7 +1,9 @@
 2005/10/15  David Saez <david@ols.es>
-		- added missing example for .ag
+		- added missing example for .ag and .name
 		- added multiple abuse email address detection
 		  in arin ip queries
+		- avoid adding empty fields in whois.parser.php
+		- added support and handler for .pro domains
 
 2005/10/14  David Saez <david@ols.es>
 		- clean some messy ripe records

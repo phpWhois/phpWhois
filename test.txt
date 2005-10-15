@@ -59,7 +59,9 @@ biz             neulevel.biz
 coop		sex.coop , nic.coop
 info            afilias.info
 museum		nic.museum
+name		peter.morgan.name
 org		ascio.org buydomains.org ...
+pro		registrypro.pr
 
 // IP whois
 
