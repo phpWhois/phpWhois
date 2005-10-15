@@ -1,5 +1,6 @@
 // Country domains
 
+ag		nic.ag
 at		nic.at
 au		telstra.com.au
 be		nic.be
