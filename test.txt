@@ -24,7 +24,7 @@ uk		olsns.co.uk
 us		neustar.us
 ws		samoanic.ws
 
-// .com/.org/.net/.tv
+// .com/.net/.tv
 
 ascio		ascio.com
 chdom		naturebox.com
@@ -38,6 +38,7 @@ dotregistrar    dotregistrar.com
 dotster         dotster.com
 enom            enom.com
 godaddy		godaddy.com
+iana		example.com
 joker		joker.com
 innerwise	sexido.com
 interdomain     interdominio.com
@@ -60,7 +61,7 @@ coop		sex.coop , nic.coop
 info            afilias.info
 museum		nic.museum
 name		peter.morgan.name
-org		ascio.org buydomains.org ...
+org		example.org
 pro		registrypro.pr
 
 // IP whois

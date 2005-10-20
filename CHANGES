@@ -1,5 +1,6 @@
 2005/10/20  David Saez <david@ols.es>
 		- added handler for gtld IANA
+		- updated .org handler
 
 2005/10/15  David Saez <david@ols.es>
 		- added missing example for .ag and .name
