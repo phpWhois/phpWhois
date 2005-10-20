@@ -141,13 +141,17 @@ while (list($key,$val)=each($rawdata))
 		while (list($match, $field)=each($items)) 
 			{
 			$pos=strpos($val,$match);
+			
 			if ($pos!==false)
 				{
-				$var = "\$r".getvarname($field);
-				$itm = trim(substr($val,$pos+strlen($match)));
+				if ($field!='')
+					{
+					$var = "\$r".getvarname($field);
+					$itm = trim(substr($val,$pos+strlen($match)));
 				
-                if ($itm!='')
-					eval($var."=\"".str_replace('"','\"',$itm)."\";");
+					if ($itm!='')
+						eval($var."=\"".str_replace('"','\"',$itm)."\";");
+					}
 					
 				if (!$scanall) 
 					break;
