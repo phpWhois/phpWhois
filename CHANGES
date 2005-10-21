@@ -1,3 +1,6 @@
+2005/10/21  David Saez <david@ols.es>
+		- added handler for Directi
+
 2005/10/20  David Saez <david@ols.es>
 		- added handler for gtld IANA
 		- updated .org handler

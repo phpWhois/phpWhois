@@ -32,6 +32,7 @@ bulkr		bulkregister.com
 buydomains	buydomains.com
 core            corenic.com
 cronon		antiquea.com
+directi		directi.com
 directnic	directnic.com
 domainbank	domainbank.com
 dotregistrar    dotregistrar.com
