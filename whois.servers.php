@@ -44,6 +44,7 @@ $this->DATA = array(
 	'cn'		=> 'cn',
 	'com'		=> 'gtld',
 	'coop'		=> 'coop',
+	'cz'		=> 'cz',
 	'de'		=> 'de',
 	'es'		=> 'es',
 	'fm'		=> 'fm',

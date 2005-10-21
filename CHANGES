@@ -1,5 +1,6 @@
 2005/10/21  David Saez <david@ols.es>
 		- added handler for Directi
+		- added handler for .cz domains
 
 2005/10/20  David Saez <david@ols.es>
 		- added handler for gtld IANA
