@@ -52,12 +52,10 @@ class Whois extends WhoisClient
 		// Load DATA array
 		@require('whois.servers.php');
 
-		$pos = strpos(strtolower(getenv("OS")), "win");
-
-		if ($pos == false)
-			$this->windows = false;
-		else
+		if ( ( substr( php_uname(), 0, 7 ) == "Windows" ) )
 			$this->windows = true;
+		else
+			$this->windows = false;
 
 		// Set version
 		$this->VERSION = sprintf("Whois.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
