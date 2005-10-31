@@ -156,6 +156,10 @@ class ip_handler extends WhoisClient
 				while (list($ln, $line) = each($rawdata))
 					{
 					$s = strstr($line, 'at whois.registro.br or ');
+					
+					if ($s == '')
+						$s = strstr($line, 'Copyright registro.br');
+						
 					if ($s != '')
 						{
 						$this->Query['server'] = 'whois.registro.br';

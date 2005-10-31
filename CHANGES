@@ -1,5 +1,6 @@
 2005/10/31  David Saez <david@ols.es>
 		- better windows based php detection
+		- fixed registro.br detection
 
 2005/10/21  David Saez <david@ols.es>
 		- added handler for Directi
