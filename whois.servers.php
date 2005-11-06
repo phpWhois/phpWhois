@@ -63,6 +63,7 @@ $this->DATA = array(
 	'org'		=> 'org',
 	'pro'		=> 'pro',
 	'se'		=> 'se',
+	'travel'	=> 'travel',
 	'tv'		=> 'gtld',
 	'uk'		=> 'uk',
 	'us'		=> 'us',
@@ -103,6 +104,7 @@ $this->WHOIS_SPECIAL = array(
 		'pro'	 => 'whois.registry.pro',
 		'tc'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
 		'tf'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'travel' => 'http://www.whois.travel/whois.cgi?TLD={tld}&dn={domain}&TYPE=DOMAIN',
 		'vg'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
 		'za.net' => 'whois.za.net',
 		'za.org' => 'whois.za.net'

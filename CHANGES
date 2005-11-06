@@ -1,3 +1,6 @@
+2005/11/06  David Saez <david@ols.es>
+		- added support & handler for .travel
+
 2005/10/31  David Saez <david@ols.es>
 		- better windows based php detection
 		- fixed registro.br detection
