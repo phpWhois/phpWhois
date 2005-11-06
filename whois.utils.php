@@ -133,7 +133,7 @@ class utils extends Whois {
 
 	// adds links fort HTML output
 	
-	function showHTML($result) {
+	function showHTML($result, $link_myself=true, $params='query=$0&output=nice') {
 		
 		$email_regex = "/([-_\w\.]+)(@)([-_\w\.]+)\b/i";
 		$html_regex = "/(?:^|\b)((((http|https|ftp):\/\/)|(www\.))([\w\.]+)([,:%#&\/?~=\w+\.-]+))(?:\b|$)/is";
@@ -143,18 +143,24 @@ class utils extends Whois {
 		
 		$out = preg_replace ($email_regex, '<a href="mailto:$0">$0</a>', $out); 
 		$out = preg_replace ($html_regex, '<a href="$1" target="_blank">$1</a>', $out); 
-		$out = preg_replace ($ip_regex, '<a href="'.$_SERVER['PHP_SELF'].'?query=$0&output=nice">$0</a>', $out); 
-				
-		if (isset($result['regrinfo']['domain']['nserver']))
+		
+		if ($link_myself)
 			{
-			$nserver = $result['regrinfo']['domain']['nserver'];
-			
-			if (is_array($nserver))
+			$out = preg_replace ($ip_regex, '<a href="'.$_SERVER['PHP_SELF'].'?'.$params.'">$0</a>', $out); 			
+				
+			if (isset($result['regrinfo']['domain']['nserver']))
 				{
-				reset($nserver); 
-				while (list($host, $ip) = each($nserver))
+				$nserver = $result['regrinfo']['domain']['nserver'];
+			
+				if (is_array($nserver))
 					{
-					$out = str_replace($host,"<a href=". $_SERVER['PHP_SELF']."?query=$ip&output=nice>$host</a>",$out);
+					reset($nserver); 
+					while (list($host, $ip) = each($nserver))
+						{
+						$url = '<a href="'. $_SERVER['PHP_SELF'].'?'.str_replace('$0',$ip,$params)."\">$host</a>";
+						$out = str_replace($host, $url, $out);
+						$out = str_replace(strtoupper($host), $url, $out);
+						}
 					}
 				}
 			}
