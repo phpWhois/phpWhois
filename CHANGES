@@ -1,5 +1,6 @@
 2005/11/07  David Saez <david@ols.es>
 		- added handler for .int domains
+		- added support for some other domains
 
 2005/11/06  David Saez <david@ols.es>
 		- added support & handler for .travel
