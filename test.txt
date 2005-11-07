@@ -61,10 +61,12 @@ aero		nic.aero
 biz             neulevel.biz
 coop		sex.coop , nic.coop
 info            afilias.info
+int		who.int
 museum		nic.museum
 name		peter.morgan.name
 org		example.org
 pro		registrypro.pr
+travel		nic.travel
 
 // IP whois
 

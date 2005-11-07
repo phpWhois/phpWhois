@@ -1,3 +1,6 @@
+2005/11/07  David Saez <david@ols.es>
+		- added handler for .int domains
+
 2005/11/06  David Saez <david@ols.es>
 		- added support & handler for .travel
 		- showHTML made a bit more flexible
