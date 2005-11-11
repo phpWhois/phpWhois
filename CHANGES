@@ -1,3 +1,6 @@
+2005/11/11  David Saez <david@ols.es>
+		- removed support for .es domains
+
 2005/11/07  David Saez <david@ols.es>
 		- added handler for .int domains
 		- added support for some other domains

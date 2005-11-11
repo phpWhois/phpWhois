@@ -96,7 +96,7 @@ $this->WHOIS_SPECIAL = array(
 		'bi'	 => 'whois.nic.bi',
 		'bj'	 => 'whois.nic.bj',
 		'by'	 => '',
-		'es'     => 'https://www.nic.es/esnic/servlet/WhoisControllerHTML?dominio={domain}.{tld}&tipo=dominio',
+		'es'     => '',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
