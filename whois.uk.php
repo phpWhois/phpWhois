@@ -34,8 +34,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*                      also updated for common object model */
 /* uknic.whois  1.5     03/03/2003 minor fixes */
 
-if (!defined("__UK_HANDLER__"))
-	define("__UK_HANDLER__", 1);
+if (!defined('__UK_HANDLER__'))
+	define('__UK_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -49,7 +49,7 @@ class uk_handler
                 'owner.organization' => 'Registrant:',
                 'owner.address' => "Registrant's Address:",
                 'domain.created' => 'Registered on:',
- 								'domain.changed' => 'Last updated:',
+ 				'domain.changed' => 'Last updated:',
                 'domain.expires' => 'Renewal Date:',
                 'domain.nserver' => 'Name servers listed in order:',
                 'domain.sponsor' => "Registrant's Agent:"
@@ -57,13 +57,19 @@ class uk_handler
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
-		$r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
-		$r['regrinfo']['domain']['sponsor'] = $r['regrinfo']['domain']['sponsor'][0];
+		if (isset($r['regrinfo']['owner']))
+			{
+			$r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
+			$r['regrinfo']['domain']['sponsor'] = $r['regrinfo']['domain']['sponsor'][0];
 
-		unset($r['regrinfo']['domain']['nserver'][count
-				($r['regrinfo']['domain']['nserver']) - 1]);
-
-		$r = format_dates($r, 'dmy');
+			unset($r['regrinfo']['domain']['nserver'][count($r['regrinfo']['domain']['nserver']) - 1]);
+			$r['regrinfo']['registered'] = 'yes';
+			
+			$r = format_dates($r, 'dmy');
+			}
+		else
+			$r['regrinfo']['registered'] = 'no';
+			
 		return $r;
 		}
 
