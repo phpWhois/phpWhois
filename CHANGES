@@ -1,3 +1,6 @@
+2005/11/14  David Saez <david@ols.es>
+		- avoid some warnings on whois.gtld.bulkr.php
+
 2005/11/11  David Saez <david@ols.es>
 		- removed support for .es domains
 		- some fixes in .uk handler

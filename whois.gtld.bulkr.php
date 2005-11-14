@@ -29,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* bulkregistercom.whois	1.1	Matthijs Koot	2003/01/14 */
 /* bulkregistercom.whois	1.2	David Saez	    2005/08/31 */
 
-if (!defined("__BULKR_HANDLER__"))
-	define("__BULKR_HANDLER__", 1);
+if (!defined('__BULKR_HANDLER__'))
+	define('__BULKR_HANDLER__', 1);
 
 
 /*#################################################
@@ -60,19 +60,24 @@ class bulkr_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                'admin' => 'Administrative Contact',
-                'tech' => 'Technical Contact',
-                'billing' => 'Billing Contact',
-                'domain.name' => 'Domain name:',
-                'domain.nserver.' => 'Domain servers in listed order:',
-                'dummy' => 'Record update'
+                'admin' 			=> 'Administrative Contact',
+                'tech' 				=> 'Technical Contact',
+                'billing' 			=> 'Billing Contact',
+                'domain.name' 		=> 'Domain name:',
+                'domain.nserver.' 	=> 'Domain servers in listed order:',
+                'dummy' 			=> 'Record update'
 		            );
 
 		$r = get_blocks($data_str, $items);
 		
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		$r['billing'] = get_contact($r['billing']);
+		if (isset($r['admin']))
+			$r['admin'] = get_contact($r['admin']);
+		
+		if (isset($r['admin']))	
+			$r['tech'] = get_contact($r['tech']);
+		
+		if (isset($r['billing']))	
+			$r['billing'] = get_contact($r['billing']);
 
 		unset($r['dummy']);
 		reset($data_str); 
@@ -94,6 +99,5 @@ class bulkr_handler
 		format_dates($r, 'ymd');
 		return ($r);
 		}
-
 	}
 ?>
