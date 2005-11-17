@@ -102,6 +102,7 @@ $this->WHOIS_SPECIAL = array(
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
 		'in'     => 'whois.ncst.ernet.in',
 		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
+		'mt'	 => 'http://www.um.edu.mt/cgi-bin/nic/whois?domain={domain}.{tld}',
 		'net.au' => 'whois.aunic.net',
 		'pe'	 => 'http://nic.pe/detpublic.php?decid=B&ndom={domain}.{tld}',
 		'pro'	 => 'whois.registry.pro',

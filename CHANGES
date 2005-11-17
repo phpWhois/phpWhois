@@ -1,3 +1,6 @@
+2005/11/17  David Saez <david@ols.es>
+		- added support for .mt domains
+
 2005/11/14  David Saez <david@ols.es>
 		- avoid some warnings on whois.gtld.bulkr.php
 
