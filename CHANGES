@@ -1,5 +1,8 @@
 2005/11/21  David Saez <david@ols.es>
 		- added support for .pr domains
+		- fixed warning in whois.ip.afrinic.php
+		- added detection for netblocks transferred
+		  from RIPE to AFRINIC
 
 2005/11/17  David Saez <david@ols.es>
 		- added support for .mt domains

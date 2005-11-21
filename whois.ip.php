@@ -171,6 +171,23 @@ class ip_handler extends WhoisClient
 					}
 				break;
 
+			case 'whois.ripe.net':
+				$rawdata = $this->GetData($query);
+				$rawdata = $rawdata['rawdata'];
+
+				while (list($ln, $line) = each($rawdata))
+					{
+					if (strstr($line, 'AFRINIC-NET-TRANSFERRED-'))
+						{
+						$this->Query['server'] = 'whois.afrinic.net';
+						$result['regyinfo']['registrar'] = 'African Network Information Center';
+						$rawdata = $this->GetData($query);
+						$rawdata = $rawdata['rawdata'];
+						break;
+						}
+					}
+				break;
+				
 			default:
 				$rawdata = $this->GetData($query);
 				if (isset($rawdata['rawdata']))

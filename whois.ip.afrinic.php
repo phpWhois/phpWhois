@@ -57,13 +57,14 @@ class afrinic_handler
 
 		$r = generic_parser_a($data_str, $translate, $contacts, 'network', 'Ymd');
 
-		while (list($key, $val) = each($r['owner']['remarks']))
-			{ 
-			$pos = strpos($val,'rwhois://');
+		if (isset($r['owner']['remarks']))
+			while (list($key, $val) = each($r['owner']['remarks']))
+				{ 
+				$pos = strpos($val,'rwhois://');
 			
-			if ($pos!==false)
-				$r['rwhois'] = strtok(substr($val,$pos),' ');
-			}
+				if ($pos!==false)
+					$r['rwhois'] = strtok(substr($val,$pos),' ');
+				}
 		
 		return $r;
 		}

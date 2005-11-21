@@ -139,7 +139,8 @@ class WhoisClient {
 			$result = $this->Process($result);
 
 		// Set whois server
-		$result['regyinfo']['whois'] = $this->Query['server'];
+		if (!isset($result['regyinfo']['whois']))
+			$result['regyinfo']['whois'] = $this->Query['server'];
 
 		// Type defaults to domain
 		if (!isset($result['regyinfo']['type']))
