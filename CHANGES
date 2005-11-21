@@ -1,3 +1,6 @@
+2005/11/21  David Saez <david@ols.es>
+		- added support for .pr domains
+
 2005/11/17  David Saez <david@ols.es>
 		- added support for .mt domains
 
