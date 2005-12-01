@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* netsol.whois	1.0	mark jeftovic	1999/12/06 */
 /* netsol.whois 2.0	david saez */
 
-if (!defined("__NETSOL_HANDLER__"))
-	define("__NETSOL_HANDLER__", 1);
+if (!defined('__NETSOL_HANDLER__'))
+	define('__NETSOL_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -40,20 +40,21 @@ class netsol_handler
 		{
 
 		$items = array(
-                  "owner" => "Registrant:",
-                  "admin" => "Administrative Contact",
-                  "tech" => "Technical Contact",
-                  "domain.name" => "Domain Name:",
-                  "domain.nserver." => "Domain servers in listed order:",
-                  "domain.created" => "Record created on",
-                  "domain.expires" => "Record expires on"
+                  'owner'			=> 'Registrant:',
+                  'admin'			=> 'Administrative Contact',
+                  'tech'			=> 'Technical Contact',
+                  'domain.name'		=> 'Domain Name:',
+                  'domain.nserver.'	=> 'Domain servers in listed order:',
+                  'domain.created'	=> 'Record created on',
+                  'domain.expires'	=> 'Record expires on'
 		              );
 
 		$r = get_blocks($data_str, $items);
 
-		$r["owner"] = get_contact($r["owner"]);
-		$r["admin"] = get_contact($r["admin"]);
-		$r["tech"] = get_contact($r["tech"]);
+		if (isset($r['owner']))	$r['owner'] = get_contact($r['owner']);
+		if (isset($r['admin']))	$r['admin'] = get_contact($r['admin']);
+		if (isset($r['tech']))	$r['tech'] = get_contact($r['tech']);
+		
 		$r = format_dates($r, 'dmy');
 
 		return ($r);
