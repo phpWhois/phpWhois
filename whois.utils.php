@@ -142,7 +142,7 @@ class utils extends Whois {
 		$out = implode($result['rawdata'],"\n");
 		
 		$out = preg_replace ($email_regex, '<a href="mailto:$0">$0</a>', $out); 
-		$out = preg_replace ($html_regex, '<a href="$1" target="_blank">$1</a>', $out); 
+		$out = preg_replace_callback ($html_regex, 'href_replace', $out); 
 		
 		if ($link_myself)
 			{
@@ -169,4 +169,19 @@ class utils extends Whois {
 	}
 }
 
+function href_replace($matches)
+{
+if (substr($matches[0],0,4)=='www.')
+	{
+	$web=$matches[0];
+	$url='http://'.$web;
+	}
+else
+	{
+	$web=$matches[0];
+	$url=$web;
+	}
+	
+return '<a href="'.$url.'" target="_blank">'.$web.'</a>';
+}
 ?>
