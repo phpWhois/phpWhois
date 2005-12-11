@@ -36,8 +36,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* this version does not yet deliver contact data, but handles only */
 
-if (!defined("__DE_HANDLER__"))
-	define("__DE_HANDLER__", 1);
+if (!defined('__DE_HANDLER__'))
+	define('__DE_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -85,16 +85,25 @@ class de_handler
 			unset($r['regrinfo']['domain']['desc']);
 			}
 			
-		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
-		$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
-		$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'], $extra);
+		if (isset($r['regrinfo']['admin']))
+			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
+		
+		if (isset($r['regrinfo']['tech']))
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
+			
+		if (isset($r['regrinfo']['zone']))
+			$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'], $extra);
 
-		$r["regyinfo"] = array(
-                  "registrar" => "DENIC eG",
-                  "referrer" => "http://www.denic.de/"
+		$r['regyinfo'] = array(
+                  'registrar' => 'DENIC eG',
+                  'referrer' => 'http://www.denic.de/'
                   );
 
-		$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
+		if (isset($r['regrinfo']['domain']))
+			$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
+		else
+			$r['regrinfo']['registered'] = 'unknown';
+			
 		$r = format_dates($r, 'ymd');
 		return ($r);
 		}
