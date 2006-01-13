@@ -47,12 +47,13 @@ class uk_handler
 
 		$items = array(
                 'owner.organization' => 'Registrant:',
-                'owner.address' => "Registrant's Address:",
+                'owner.address' => "Registrant's address:",
                 'domain.created' => 'Registered on:',
  				'domain.changed' => 'Last updated:',
-                'domain.expires' => 'Renewal Date:',
-                'domain.nserver' => 'Name servers listed in order:',
-                'domain.sponsor' => "Registrant's Agent:"
+                'domain.expires' => 'Renewal date:',
+                'domain.nserver' => 'Name servers:',
+                'domain.sponsor' => "Registrant's agent:",
+                'domain.status'	 => 'Registration status:'
 		        );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);

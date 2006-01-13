@@ -1,3 +1,16 @@
+2006/01/13  David Saez <david@ols.es>
+		- updated .uk handler
+
+2005/12/11  David Saez <david@ols.es>
+		- fixed some warnings in .de handler and
+		  added timeout detection
+
+2005/12/10  David Saez <david@ols.es>
+		- fixed html output broken links
+
+2005/12/01  David Saez <david@ols.es>
+		- fixed php warning with limbo domains in netsol
+
 2005/11/21  David Saez <david@ols.es>
 		- added support for .pr domains
 		- fixed warning in whois.ip.afrinic.php
