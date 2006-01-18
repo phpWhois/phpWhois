@@ -1,3 +1,6 @@
+2006/01/18  David Saez <david@ols.es>
+		- minor fixes in enom handler
+
 2006/01/13  David Saez <david@ols.es>
 		- updated .uk handler
 
