@@ -59,6 +59,7 @@ tvcorp		sex.tv
 
 aero		nic.aero
 biz             neulevel.biz
+cat		domini.cat
 coop		sex.coop , nic.coop
 info            afilias.info
 int		who.int

@@ -3,6 +3,7 @@
 		- added function to set specific whois servers
 		- updated .es handler
 		- formating fixes in whois.parser.php
+		- added handler for .cat
 
 2006/01/18  David Saez <david@ols.es>
 		- minor fixes in enom handler

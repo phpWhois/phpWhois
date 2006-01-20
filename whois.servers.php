@@ -40,6 +40,7 @@ $this->DATA = array(
 	'be'		=> 'be',
 	'br'		=> 'br',
 	'ca'		=> 'ca',
+	'cat'		=> 'cat',
 	'ch'		=> 'ch',
 	'cn'		=> 'cn',
 	'com'		=> 'gtld',
