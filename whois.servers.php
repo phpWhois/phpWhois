@@ -46,7 +46,6 @@ $this->DATA = array(
 	'coop'		=> 'coop',
 	'cz'		=> 'cz',
 	'de'		=> 'de',
-	'es'		=> 'es',
 	'fm'		=> 'fm',
 	'hu'		=> 'hu',
 	'info'		=> 'info',
@@ -96,8 +95,8 @@ $this->WHOIS_SPECIAL = array(
 		'bi'	 => 'whois.nic.bi',
 		'bj'	 => 'whois.nic.bj',
 		'by'	 => '',
-		'es'     => '',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}',
+		'es'	 => 'http://www.interdominios.com/dominios_es.aspx?whoisdomain={domain}.{tld}',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
 		'in'     => 'whois.ncst.ernet.in',
@@ -114,4 +113,5 @@ $this->WHOIS_SPECIAL = array(
 		'za.net' => 'whois.za.net',
 		'za.org' => 'whois.za.net'
 		);
+		
 ?>
