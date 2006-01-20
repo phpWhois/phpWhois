@@ -25,6 +25,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+require_once('whois.ip.lib.php');
+
 class WhoisClient {
 
 	// Recursion allowed ?
@@ -56,6 +58,12 @@ class WhoisClient {
 		'status',
 		'server'
 		);
+
+	// This release of the package
+	var $CODE_VERSION = '4.0.1';
+	
+	// Full code and data version string (e.g. 'Whois2.php v3.01:16')
+	var $VERSION;
 	
 	/*
 	 * Constructor function
@@ -63,6 +71,9 @@ class WhoisClient {
 	function WhoisClient () {
 		// Load DATA array
 		@require('whois.servers.php');		
+
+		// Set version
+		$this->VERSION = sprintf("phpWhois v%s-%s", $this->CODE_VERSION, $this->DATA_VERSION);
 	}
 		
 	/*
@@ -85,14 +96,53 @@ class WhoisClient {
 			}
 
 		// Check if protocol is http
+		
 		if (substr($this->Query['server'],0,7)=='http://' ||
 			substr($this->Query['server'],0,8)=='https://')
 			{
 			$output = $this->httpQuery($this->Query['server']);
+			$query_args = '';
 			}
 		else
 			{
+			// Get args
+			
+			if (strpos($this->Query['server'],'?'))
+				{
+				$parts = explode('?',$this->Query['server']);
+				$this->Query['server'] = trim($parts[0]);
+				$query_args = trim($parts[1]);
+				
+				// replace substitution parameters			
+				$query_args = str_replace('{query}', $string, $query_args);
+				$query_args = str_replace('{version}', 'phpWhois'.$this->CODE_VERSION, $query_args);
+				
+				if (strpos($query_args,'{ip}')!==false)
+					{
+					$query_args = str_replace('{ip}', getclientip(), $query_args);
+					}
+					
+				if (strpos($query_args,'{hname}')!==false)
+					{
+					$query_args = str_replace('{hname}', gethostbyaddr(getclientip()), $query_args);
+					}
+				}
+			else
+				$query_args = $string;
+			
+			// Get port
+			
+			if (strpos($this->Query['server'],':'))
+				{
+				$parts = explode(':',$this->Query['server']);
+				$this->Query['server'] = trim($parts[0]);
+				$this->Query['server_port'] = trim($parts[1]);
+				}
+			else			
+				$this->Query['server_port'] = $this->PORT;
+	
 			// Connect to whois server, or return if failed
+			
 			$ptr = $this->Connect();
 		
 			if($ptr < 0) {
@@ -104,11 +154,9 @@ class WhoisClient {
 			if (version_compare(phpversion(),'4.3.0')>=0)
 				stream_set_timeout($ptr,$this->STIMEOUT);
 
-			if (isset($this->WHOIS_PARAM[$this->Query['server']]))
-				fputs($ptr, $this->WHOIS_PARAM[$this->Query['server']].trim($string)."\r\n");
-			else
-				fputs($ptr, trim($string)."\r\n");
-
+			// Send query
+			fputs($ptr, trim($query_args)."\r\n");
+			
 			// Prepare to receive result
 			$raw = '';
 			$output = array();
@@ -134,7 +182,6 @@ class WhoisClient {
 		$result['rawdata'] = $output;
 
 		// If we have a handler, post-process it with that
-
 		if(isSet($this->Query['handler']))
 			$result = $this->Process($result);
 
@@ -142,6 +189,14 @@ class WhoisClient {
 		if (!isset($result['regyinfo']['whois']))
 			$result['regyinfo']['whois'] = $this->Query['server'];
 
+		// Set whois server full query
+		if (!isset($result['regyinfo']['args']))
+			$result['regyinfo']['args'] = $query_args;
+			
+		// Set whois server port
+		if (!isset($result['regyinfo']['port']))
+			$result['regyinfo']['port'] = $this->Query['server_port'] ;
+			
 		// Type defaults to domain
 		if (!isset($result['regyinfo']['type']))
 			$result['regyinfo']['type'] = 'domain';	
@@ -236,7 +291,7 @@ class WhoisClient {
 			return(-1);
 
 		// Get rid of protocol and/or get port
-		$port = $this->PORT;
+		$port = $this->Query['server_port'];
 		
 		$pos = strpos($server,'://');
 		

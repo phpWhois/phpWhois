@@ -39,6 +39,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 if (!defined('__IP_HANDLER__'))
 	define('__IP_HANDLER__', 1);
 
+require_once('whois.ip.lib.php');
+
 class ip_handler extends WhoisClient
 	{
 
@@ -212,13 +214,13 @@ class ip_handler extends WhoisClient
 			{
 			//Convert CDIR to inetnum
 			$result['regrinfo']['network']['cdir'] = $result['regrinfo']['network']['inetnum'];
-			$result['regrinfo']['network']['inetnum'] = $this->cidr_conv($result['regrinfo']['network']['cdir']);
+			$result['regrinfo']['network']['inetnum'] = cidr_conv($result['regrinfo']['network']['cdir']);
 			}
 
 		if (!isset($result['regrinfo']['network']['inetnum']) && isset($result['regrinfo']['network']['cdir']))
 			{
 			//Convert CDIR to inetnum
-			$result['regrinfo']['network']['inetnum'] = $this->cidr_conv($result['regrinfo']['network']['cdir']);
+			$result['regrinfo']['network']['inetnum'] = cidr_conv($result['regrinfo']['network']['cdir']);
 			}
 
 		// Try to find abuse email address
@@ -270,37 +272,5 @@ class ip_handler extends WhoisClient
 			
 		return $result;
 		}
-
-	//-----------------------------------------------------------------
-
-	function cidr_conv($net)
-		{
-		$start = strtok($net, '/');
-		$n = 3-substr_count($net, '.');
-
-		if ($n > 0)
-			{
-			for ($i = $n; $i > 0; $i--)
-				$start.= '.0';
-			}
-
-		$bits1 = str_pad(decbin(ip2long($start)), 32, '0', 'STR_PAD_LEFT');
-		$net = pow(2, (32-substr(strstr($net, '/'), 1))) - 1;
-		$bits2 = str_pad(decbin($net), 32, '0', 'STR_PAD_LEFT');
-		$final = '';
-
-		for ($i = 0; $i < 32; $i++)
-			{
-			if ($bits1[$i] == $bits2[$i])
-				$final.= $bits1[$i];
-			if ($bits1[$i] == 1 and $bits2[$i] == 0)
-				$final.= $bits1[$i];
-			if ($bits1[$i] == 0 and $bits2[$i] == 1)
-				$final.= $bits2[$i];
-			}
-
-		return $start." - ".long2ip(bindec($final));
-		}
-
 	}
 ?>

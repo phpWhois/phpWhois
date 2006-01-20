@@ -35,12 +35,6 @@ class Whois extends WhoisClient
 	// Recursion allowed ?
 	var $gtld_recurse = true;
 
-	// Full code and data version string (e.g. 'Whois2.php v3.01:16')
-	var $VERSION;
-
-	// This release of the package
-	var $CODE_VERSION = "4.0.1";
-
 	// Network Solutions registry server
 	var $NSI_REGISTRY = "whois.nsiregistry.net";
 
@@ -56,12 +50,20 @@ class Whois extends WhoisClient
 			$this->windows = true;
 		else
 			$this->windows = false;
-
+			
 		// Set version
-		$this->VERSION = sprintf("Whois.php v%s:%s", $this->CODE_VERSION, $this->DATA_VERSION);
+		$this->VERSION = sprintf("phpWhois v%s-%s", $this->CODE_VERSION, $this->DATA_VERSION);
 		}
 
-
+	/*
+	 *  Use special whois server
+	 */
+	
+	function UseServer ($tld, $server)
+		{
+		$this->WHOIS_SPECIAL[$tld] = $server;
+		}
+		
 	function Lookup($query = '')
 		{
 		// start clean
@@ -118,20 +120,7 @@ class Whois extends WhoisClient
 			// Test if we know in advance that no whois server is
 			// available for this domain and that we can get the
 			// data via http or whois request
-/*
-			reset($this->WHOIS_SPECIAL);
 
-			while (list($key, $val) = each($this->WHOIS_SPECIAL))
-				if ($tld == $key)
-					{
-					$domain = substr($query, 0,  - strlen($key) - 1);
-					$val = str_replace('{domain}', $domain, $val);
-					$server = str_replace('{tld}', $key, $val);
-					break;
-					}
-			if ($server != '')
-				break;				
-*/
 			if (isset($this->WHOIS_SPECIAL[$tld]))
 				{
 				$val = $this->WHOIS_SPECIAL[$tld];
@@ -140,23 +129,27 @@ class Whois extends WhoisClient
 				$server = str_replace('{tld}', $tld, $val);
 				break;
 				}
-				
-			// Determine the top level domain, and it's whois server using
-			// DNS lookups on 'whois-servers.net'.
-			// Assumes a valid DNS response indicates a recognised tld (!?)
-
-			if ($this->windows)
-				$cname = $this->checkdnsrr_win($tld.'.whois-servers.net', 'CNAME');
-			else
-				$cname = checkdnsrr($tld.'.whois-servers.net', 'CNAME');
-
-			if (!$cname)
-				continue;
-			//This also works
-			//$server = gethostbyname($tld.".whois-servers.net");
-			$server = $tld.'.whois-servers.net';
-			break;
 			}
+		
+		if ($server == '')
+			foreach($tldtests as $tld)
+				{
+				// Determine the top level domain, and it's whois server using
+				// DNS lookups on 'whois-servers.net'.
+				// Assumes a valid DNS response indicates a recognised tld (!?)
+
+				if ($this->windows)
+					$cname = $this->checkdnsrr_win($tld.'.whois-servers.net', 'CNAME');
+				else
+					$cname = checkdnsrr($tld.'.whois-servers.net', 'CNAME');
+
+				if (!$cname) continue;
+			
+				//This also works
+				//$server = gethostbyname($tld.".whois-servers.net");
+				$server = $tld.'.whois-servers.net';
+				break;
+				}
 
 		if ($tld && $server)
 			{
@@ -175,7 +168,7 @@ class Whois extends WhoisClient
 					}
 				}
 				
-			// If there is a handler process the data
+			// If there is a handler set it
 
 			if ($handler != '')
 				{
@@ -183,6 +176,11 @@ class Whois extends WhoisClient
 				$this->Query['handler'] = $handler;
 				}
 
+			// Special parameters ?
+			
+			if (isset($this->WHOIS_PARAM[$server]))
+				$this->Query['server'] = $this->Query['server'].'?'.$this->WHOIS_PARAM[$server].$domain;
+				
 			return $this->GetData();
 			}
 

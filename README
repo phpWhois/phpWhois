@@ -76,7 +76,51 @@ $result = $whois->Lookup('62.97.102.115');
 $whois = new Whois();
 $result = $whois->Lookup('AS220');
 
-Notes
+Using special whois server
+--------------------------
+
+Some registrars can give special access to registered whois gatewais
+in order to have more fine control against abusing the whois services.
+The currently know whois services that offer special acccess are:
+
+- ripe
+
+  The new ripe whois server software support some special parameters
+  that allow to pass the real client ip address. This feature is only
+  available to registered gateways. If you are registered you can use
+  this service when querying ripe ip addresses that way:
+  
+  $whois = new Whois();
+  $whois->UseServer('uk','whois.ripe.net?-V{version},{ip} {query}');
+  $result = $whois->Lookup('62.97.102.115');
+
+- whois.isoc.org.il
+
+  This server is also using the new ripe whois server software and
+  thus works the same way. If you are registered you can use this service
+  when querying .il domains that way:
+
+  $whois = new Whois();
+  $whois->UseServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
+  $result = $whois->Lookup('example.co.uk');
+
+- whois.nic.uk
+
+  They offer what they call WHOIS2 (see http://www.nominet.org.uk/go/whois2 )
+  to registered users (usually Nominet members) with a higher amount of
+  permited queries by hour. If you are registered you can use this service
+  when querying .uk domains that way:
+
+  $whois = new Whois();
+  $whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
+  $result = $whois->Lookup('example.co.uk');
+
+This new feature also allows you to use a different whois server than
+the preconfigured o discovered one by just calling whois->UseServer
+and passing the tld and the server and args to use for the named tld.
+UseServer can be called as many times as necessary.
+
+Notes 
 -----
 
 There is an extended class called "whois.utils.php" which contains a

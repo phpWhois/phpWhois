@@ -44,7 +44,12 @@ if(isSet($_GET['query']))
 	include_once('whois.utils.php');
 	
 	$whois = new Whois();
+	
+	// To use special whois servers (see README)
+	// $whois->UseServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
+	
 	$result = $whois->Lookup($query);
+	
 	echo "<b>Results for $query :</b><p>";
 
 	switch ($output)
