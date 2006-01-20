@@ -101,7 +101,13 @@ class WhoisClient {
 			substr($this->Query['server'],0,8)=='https://')
 			{
 			$output = $this->httpQuery($this->Query['server']);
-			$query_args = '';
+			$query_args = substr(strchr($this->Query['server'],'?'),1);
+			$this->Query['server'] = strtok($this->Query['server'],'?');
+			
+			if (substr($this->Query['server'],0,7)=='http://')
+				$this->Query['server_port'] = 80;
+			else
+				$this->Query['server_port'] = 483;
 			}
 		else
 			{
@@ -195,7 +201,7 @@ class WhoisClient {
 			
 		// Set whois server port
 		if (!isset($result['regyinfo']['port']))
-			$result['regyinfo']['port'] = $this->Query['server_port'] ;
+			$result['regyinfo']['port'] = $this->Query['server_port'];
 			
 		// Type defaults to domain
 		if (!isset($result['regyinfo']['type']))
