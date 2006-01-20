@@ -1,6 +1,8 @@
 2006/01/20  David Saez <david@ols.es>
 		- changed .es http based whois server
 		- added function to set specific whois servers
+		- updated .es handler
+		- formating fixes in whois.parser.php
 
 2006/01/18  David Saez <david@ols.es>
 		- minor fixes in enom handler

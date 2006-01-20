@@ -47,50 +47,53 @@ class es_handler
 		{
 
 		$items = array(
-                'domain.name' => 'Datos del Dominio',
-                'domain.status' => 'Estado ',
-                'domain.created' => 'Fecha de Alta ',
-				'domain.expires' => 'Fecha Caducidad ',
-                'domain.nserver' => 'Nombre Servidor  IP',
-                'domain.sponsor' => 'Agente	Registrador',
-                'owner' => 'PROPIETARIO DEL DOMINIO',
-                'admin' => 'PERSONA DE CONTACTO ADMINISTRATIVO',
-                'billing' => 'PERSONA DE CONTACTO DE FACTURACION',
-                'tech' => 'PERSONA DE CONTACTO TECNICO'
+                'domain.name' => 'Dominio:',
+                'domain.created' => 'Fecha de registro:',
+				'domain.expires' => 'Fecha de caducidad:',
+                'domain.nserver.0' => 'DNS primaria:',
+                'domain.nserver.1' => 'DNS secundaria:',
+                'owner.name' => 'Registrante:',
+                'admin' => 'Contacto administrativo:',
+                'billing' => 'Contacto de cobro:',
+                'tech' => 'Contacto tÃ©cnico:'
 		            );
 
 		$extra = array(
-                'domicilio' => 'address.street',
-                'población' => 'address.city',
-				'provincia' => '',
-                'código postal' => 'address.pcode',
-                'país' => 'address.country',
-                'nic_handle' => 'handle',
-                'nombre' =>	'name',
-                'organización ' => 'organization',
-                'tipo de titular'	=> '',
-                'titular' => 'organization',
-                'teléfono' => 'phone'
+                'e.:' => 'email',
+                't.:' => 'phone',
+                'f.:' => 'fax'
 		            );
 
+		$rawdata = array();
+		$data_ok = false;
+		$final = false;
+		
 		while (list($key, $val) = each($data_str['rawdata']))
 			{
-			if (strpos($val, 'Nombre del dominio') !== false)
-				{
-				$data_str['rawdata'][$key] = 'PROPIETARIO DEL DOMINIO:';
-				break;
-				}
+			if (substr($val,0,9)=='Dominio: ') 
+				$data_ok = true;
+			else
+				if (!$data_ok) continue;
+			
+			if (substr($val,0,4)=='DNS ') $final = true;
+			
+			if ($val=='' && $final) break;
+			
+			$rawdata[] = $val;
 			}
 
-		$rawdata = implode("\n", $data_str['rawdata']);
-		$rawdata = str_replace('CONTACTO ADMINISTRATIVO', 'CONTACTO ADMINISTRATIVO:', $rawdata);
-		$rawdata = explode("\n", $rawdata);
-
 		$r['regrinfo'] = get_blocks($rawdata, $items);
-
+		
+		$items['admin'].=' '.$r['regrinfo']['admin'];
+		$items['billing'].=' '.$r['regrinfo']['billing'];
+		$items['tech'].=' '.$r['regrinfo']['tech'];
+		
+		$r['regrinfo'] = get_blocks($rawdata, $items);
+		
+		$r['rawdata'] = $rawdata;
+		
 		if (isset($r['regrinfo']['domain']['name']))
 			{
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
 			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
 			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing'], $extra);
 			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
@@ -104,13 +107,6 @@ class es_handler
                 'registrar' => 'ES-NIC'
                 );
 
-		$rawdata = implode("\n", $rawdata);
-		$first = strpos($rawdata, 'Datos del Dominio '.$query);
-
-		if ($first !== false)
-			$rawdata = substr($rawdata, $first);
-
-		$r['rawdata'] = explode("\n", $rawdata);
 		format_dates($r, 'ymd');
 		return $r;
 		}
