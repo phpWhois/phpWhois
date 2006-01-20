@@ -378,18 +378,18 @@ while (list($key,$val)=each($array))
 
 		while (list($match,$field)=each($items))
 			{
-			$pos=strpos(strtolower($val),$match);
+			$pos = strpos(strtolower($val),$match);
 			
-			if ($pos===false) continue;
-			
-			$itm=trim(substr($val,$pos+strlen($match)));
-			
+			if ($pos === false) continue;
+		
+			$itm = trim(substr($val,$pos+strlen($match)));
+
 			if ($field!='' && $itm!='')
 				{
 				eval("\$r".getvarname($field)."=\$itm;");
 				}
 				
-			$val=trim(substr($val,0,$pos));
+			$val = trim(substr($val,0,$pos));
 
 			if ($val=='')
 				unset($array[$key]);
@@ -401,6 +401,7 @@ while (list($key,$val)=each($array))
 			break;
 			} 	
 		}
+		
 	if ($val=='') continue;
 
 	if (!preg_match("/[^0-9\(\)\-\.\+ ]/", $val) && strlen($val)>5)
@@ -408,33 +409,36 @@ while (list($key,$val)=each($array))
 	     if (isset($r['phone']))
 	        $r['fax']=$val;	
 	     else
-		$r['phone']=$val;
+			$r['phone']=$val;
 	     unset($array[$key]);
 	     continue;
 	   }
 
 	if (strstr($val,'@'))
-           {
-	     $val=str_replace("\t",' ',$val);	
-	     $parts=explode(' ',$val);
-             $top=count($parts)-1;
-             $r['email']=str_replace('(','',$parts[$top]);
-	     $r['email']=str_replace(')','',$r['email']);
-             array_pop($parts);
-             $val=implode(' ',$parts);
-	     if ($val=='') {
+		{
+		$val=str_replace("\t",' ',$val);	
+		$parts=explode(' ',$val);
+		$top=count($parts)-1;
+		$r['email']=str_replace('(','',$parts[$top]);
+		$r['email']=str_replace(')','',$r['email']);
+		array_pop($parts);
+		$val=implode(' ',$parts);
+		
+		if ($val=='') {
+			unset($array[$key]);
+			continue;
+			}
+			
+		$r['name']=$val;
 		unset($array[$key]);
-		continue;
-	     }
-             $r['name']=$val;
-             unset($array[$key]);
-	     if ($key==1)
-                {
-		  $r['organization']=$array[0];
-		  unset($array[0]);
-                }
-           }
-      }     
+		
+		if ($key==1)
+			{
+			$r['organization']=$array[0];
+			unset($array[0]);
+			}
+		}
+	}     
 
 if (!isset($r['name']) && isset($array[0]))
 	{
