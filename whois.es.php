@@ -84,9 +84,9 @@ class es_handler
 
 		$r['regrinfo'] = get_blocks($rawdata, $items);
 		
-		$items['admin'].=' '.$r['regrinfo']['admin'];
-		$items['billing'].=' '.$r['regrinfo']['billing'];
-		$items['tech'].=' '.$r['regrinfo']['tech'];
+		if (isset($r['regrinfo']['admin']))   $items['admin'].=' '.$r['regrinfo']['admin'];
+		if (isset($r['regrinfo']['billing'])) $items['billing'].=' '.$r['regrinfo']['billing'];
+		if (isset($r['regrinfo']['tech']))    $items['tech'].=' '.$r['regrinfo']['tech'];
 		
 		$r['regrinfo'] = get_blocks($rawdata, $items);
 		
@@ -100,8 +100,11 @@ class es_handler
 			$r['regrinfo']['registered'] = 'yes';
 			}
 		else
+			{
 			$r['regrinfo']['registered'] = 'no';
-
+			$r['rawdata'][] = 'Domain not found';
+			}
+			
 		$r['regyinfo'] = array(
                 'referrer' => 'http://www.nic.es',
                 'registrar' => 'ES-NIC'
