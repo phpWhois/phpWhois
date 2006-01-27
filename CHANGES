@@ -1,3 +1,7 @@
+2006/01/27  David Saez <david@ols.es>
+		- added deep_whois feature to get faster but
+		  less acurate results
+
 2006/01/24  David Saez <david@ols.es>
 		- minor fixes to .es handler
 

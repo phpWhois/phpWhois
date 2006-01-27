@@ -43,7 +43,9 @@ require_once('whois.ip.lib.php');
 
 class ip_handler extends WhoisClient
 	{
-
+	// Deep whois ?
+	var $deep_whois = true;
+	
 	var $HANDLER_VERSION = '1.0';
 
 	var $REGISTRARS = array(
@@ -67,14 +69,15 @@ class ip_handler extends WhoisClient
 
 	function parse($data, $query)
 		{
+		$result['rawdata'] = array();
+		$result['regyinfo'] = array();
+		$result['regyinfo']['registrar'] = 'American Registry for Internet Numbers (ARIN)';
+
+		if (!$this->deep_whois) return null;
 
 		$this->Query = array();
 		$this->Query['server'] = 'whois.arin.net';
 		$this->Query['string'] = $query;
-
-		$result['rawdata'] = array();
-		$result['regyinfo'] = array();
-		$result['regyinfo']['registrar'] = 'American Registry for Internet Numbers (ARIN)';
 
 		reset($this->REGISTRARS);
 

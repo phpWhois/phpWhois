@@ -29,6 +29,9 @@ require_once('whois.client.php');
 
 class Whois extends WhoisClient
 	{
+	// Deep whois ?
+	var $deep_whois = true;
+	
 	// Windows based ?
 	var $windows = false;
 
@@ -96,7 +99,7 @@ class Whois extends WhoisClient
 			$this->Query['string'] = $ip;
 			$this->Query['tld'] = 'ip';
 			$this->Query['host_name'] = @gethostbyaddr($ip);
-			return $this->GetData();
+			return $this->GetData('',$this->deep_whois);
 			}
 
 		// Build array of all possible tld's for that domain
@@ -181,7 +184,7 @@ class Whois extends WhoisClient
 			if (isset($this->WHOIS_PARAM[$server]))
 				$this->Query['server'] = $this->Query['server'].'?'.$this->WHOIS_PARAM[$server].$domain;
 				
-			return $this->GetData();
+			return $this->GetData('',$this->deep_whois);
 			}
 
 		// If tld not known, and domain not in DNS, return error

@@ -120,6 +120,19 @@ the preconfigured o discovered one by just calling whois->UseServer
 and passing the tld and the server and args to use for the named tld.
 UseServer can be called as many times as necessary.
 
+Getting results faster
+----------------------
+
+If you just want to know if a domain is registered or not but do not
+care about getting the real owner information you can set:
+
+$whois->deep_whois = false;
+
+this will tell phpWhois to just query one whois server. For .com and
+.net domains and ip addresses this will prevent phpWhois to ask more
+then whois server, you will just know if the donmain is registered or
+not and which is the registrar but not the owner information.
+
 Notes 
 -----
 

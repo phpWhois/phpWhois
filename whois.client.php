@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 require_once('whois.ip.lib.php');
 
 class WhoisClient {
-
+	
 	// Recursion allowed ?
 	var $gtld_recurse = false;
 
@@ -83,7 +83,7 @@ class WhoisClient {
 	 * populated too.
 	 */
 
-	function GetData ($query='') {
+	function GetData ($query='', $deep_whois=true) {
 		// If domain to query passed in, use it, otherwise use domain from initialisation
 		$string = !empty($query) ? $query : $this->Query['string'];
 		
@@ -189,7 +189,7 @@ class WhoisClient {
 
 		// If we have a handler, post-process it with that
 		if(isSet($this->Query['handler']))
-			$result = $this->Process($result);
+			$result = $this->Process($result,$deep_whois);
 
 		// Set whois server
 		if (!isset($result['regyinfo']['whois']))
@@ -340,9 +340,9 @@ class WhoisClient {
 	
 	/*
 	 * Post-process result with handler class. On success, returns the result
-	 * from the handler. On failure, returns passed in result unaltered.
+	 * from the handler. On failure, returns passed result unaltered.
 	 */
-	function Process (&$result) {
+	function Process (&$result, $deep_whois=true) {
 
 		// If the handler has not already been included somehow, include it now
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query['handler']));
@@ -361,13 +361,15 @@ class WhoisClient {
 
 		// Pass result to handler
 		$object = $this->Query['handler'].'_handler';
-
+		
 		$handler = new $object('');
 
 		// If handler returned an error, append it to the query errors list
 		if(isSet($handler->Query['errstr']))
 			$this->Query['errstr'][] = $handler->Query['errstr'];
 
+		$handler->deep_whois = $deep_whois;
+		
 		// Return the result
 		return $handler->parse($result,$this->Query['string']);
 	}	

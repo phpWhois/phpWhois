@@ -45,6 +45,9 @@ if(isSet($_GET['query']))
 	
 	$whois = new Whois();
 	
+	// uncomment the following line to get faster but less acurate results
+	// $whois->deep_whois = false;
+	
 	// To use special whois servers (see README)
 	// $whois->UseServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
 	

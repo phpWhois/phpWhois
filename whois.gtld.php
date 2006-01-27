@@ -36,7 +36,9 @@ require_once('whois.parser.php');
 
 class gtld_handler extends WhoisClient
 	{
-
+	// Deep whois ?
+	var $deep_whois = true;
+	
 	var $HANDLER_VERSION = '1.1';
 
 	var $REG_FIELDS = array(
@@ -105,8 +107,11 @@ class gtld_handler extends WhoisClient
 			$this->result['regrinfo']['registered'] = 'no';
 			return $this->result;
 			}
+						
+		$this->result['regrinfo']['registered'] = 'yes';
+		
+		if (!$this->deep_whois) return $this->result;
 			
-		$this->result['regrinfo']['registered'] = 'yes';			
 		unset($this->Query['handler']);
 
 		if (isset($this->result['regyinfo']['whois']))
