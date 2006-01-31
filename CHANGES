@@ -1,5 +1,6 @@
 2006/01/31  David Saez <david@ols.es>
 		- fixed lookup error on .co.za domains
+		- minor fix to whois.pareser.php
 
 2006/01/27  David Saez <david@ols.es>
 		- added deep_whois feature to get faster but

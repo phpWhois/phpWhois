@@ -432,7 +432,7 @@ while (list($key,$val)=each($array))
 		$r['name']=$val;
 		unset($array[$key]);
 		
-		if ($key==1)
+		if ($key==1 && isset($array[0]))
 			{
 			$r['organization']=$array[0];
 			unset($array[0]);
