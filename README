@@ -125,7 +125,10 @@ information) using this:
   $whois = new Whois();
   $whois->UseServer('au','whois-check.ausregistry.net.au');
 
-UseServer can be called as many times as necessary.
+UseServer can be called as many times as necessary. Please note that
+if there is a handler for that domain it will also be called but
+returned data from the whois server may be different than the data
+expected by the handler, and thus results could be different.
 
 Getting results faster
 ----------------------
@@ -137,8 +140,8 @@ $whois->deep_whois = false;
 
 this will tell phpWhois to just query one whois server. For .com and
 .net domains and ip addresses this will prevent phpWhois to ask more
-then whois server, you will just know if the donmain is registered or
-not and which is the registrar but not the owner information.
+than one whois server, you will just know if the donmain is registered
+or not and which is the registrar but not the owner information.
 
 Notes 
 -----
