@@ -1,5 +1,7 @@
 2006/02/01  David Saez <david@ols.es>
 		- fixed README documentation
+		- improved .au handler for user with
+		  whois-check.ausregistry.net.au
 
 2006/01/31  David Saez <david@ols.es>
 		- fixed lookup error on .co.za domains
