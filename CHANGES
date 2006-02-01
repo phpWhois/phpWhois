@@ -2,6 +2,7 @@
 		- fixed README documentation
 		- improved .au handler for user with
 		  whois-check.ausregistry.net.au
+		- added testsuite for verifying handlers
 
 2006/01/31  David Saez <david@ols.es>
 		- fixed lookup error on .co.za domains
