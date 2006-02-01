@@ -1,3 +1,6 @@
+2006/02/01  David Saez <david@ols.es>
+		- fixed README documentation
+
 2006/01/31  David Saez <david@ols.es>
 		- fixed lookup error on .co.za domains
 		- minor fix to whois.pareser.php

@@ -79,7 +79,7 @@ $result = $whois->Lookup('AS220');
 Using special whois server
 --------------------------
 
-Some registrars can give special access to registered whois gatewais
+Some registrars can give special access to registered whois gateways
 in order to have more fine control against abusing the whois services.
 The currently know whois services that offer special acccess are:
 
@@ -116,8 +116,15 @@ The currently know whois services that offer special acccess are:
   $result = $whois->Lookup('example.co.uk');
 
 This new feature also allows you to use a different whois server than
-the preconfigured o discovered one by just calling whois->UseServer
+the preconfigured or discovered one by just calling whois->UseServer
 and passing the tld and the server and args to use for the named tld.
+For example you could use another whois server for .au domains that
+does not limit the number of requests (but provides no owner 
+information) using this:
+
+  $whois = new Whois();
+  $whois->UseServer('au','whois-check.ausregistry.net.au');
+
 UseServer can be called as many times as necessary.
 
 Getting results faster
