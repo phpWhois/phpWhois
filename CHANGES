@@ -1,3 +1,5 @@
+2006/02/03  Released phpWhois 4.1.0
+
 2006/02/03  David Saez <david@ols.es>
 		- fixed README documentation
 		- minor fixes to some handlers
