@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* hunic.whois	0.01	Manuel Machajdik <machajdik@gmxpro.net> */
 /* based upon org.whois and atnic.whois */
 
-if(!defined("__HU_HANDLER__"))
-  define("__HU_HANDLER__",1);
+if(!defined('__HU_HANDLER__'))
+  define('__HU_HANDLER__',1);
 
 require_once('whois.parser.php');
 
@@ -39,90 +39,93 @@ class hu_handler {
 
 
     $translate = array (
-                        "fax-no" => "fax",
-                        "e-mail" => "email",
-                        "hun-id" => "handle",
-                        "person" => "name",
-                        "domain_pri_ns" => "nserver",
-                        "domain_sec_ns" => "nserver",
-                        "person" => "name",
-                        "org" => "organization",
-                        "registered" => "created"
+                        'fax-no'		=> 'fax',
+                        'e-mail'		=> 'email',
+                        'hun-id'		=> 'handle',
+                        'person'		=> 'name',
+                        'domain_pri_ns' => 'nserver',
+                        'domain_sec_ns' => 'nserver',
+                        'person'		=> 'name',
+                        'org'			=> 'organization',
+                        'registered'	=> 'created'
                         );
 
     $contacts = array (
-                        "registrar" => "owner",
-                        "admin-c" => "admin",
-                        "tech-c" => "tech",
-                        "billing-c" => "billing",
-                        "zone-c" => "zone"		
+                        'registrar'		=> 'owner',
+                        'admin-c'		=> 'admin',
+                        'tech-c'		=> 'tech',
+                        'billing-c'		=> 'billing',
+                        'zone-c'		=> 'zone'		
                       );
-
-    $r["rawdata"]=$data_str["rawdata"];
-
-    $r["regyinfo"]=array("referrer"=>"http://www.nic.hu","registrar"=>"HUNIC");
-
+    
     // make those broken hungary comments standards-conforming
 
-    for ($i=1; $i<count($data_str['rawdata']); $i++) {
+	for ($i=1; $i<count($data_str['rawdata']); $i++) {
 
-      if (substr($data_str['rawdata'][$i+1],0,7) != "domain:") {
-        $data_str['rawdata'][$i] = "% ".$data_str['rawdata'][$i];
+      if (substr($data_str['rawdata'][$i+1],0,7) != 'domain:') {
+        $data_str['rawdata'][$i] = '% '.$data_str['rawdata'][$i];
 	     }
       else {
 		  break;
 	   }
     }
 
-  // replace first found hun-id with owner-hun-id (will be parsed later on)
+	// replace first found hun-id with owner-hun-id (will be parsed later on)
 
-  for ($i=1; $i<count($data_str['rawdata']); $i++) {
+	for ($i=1; $i<count($data_str['rawdata']); $i++) {
 
-	 if (substr($data_str['rawdata'][$i],0,7) == "hun-id:") {
-		  $data_str['rawdata'][$i] = "owner-".$data_str['rawdata'][$i];
-		  break;
-	   }
+		if (substr($data_str['rawdata'][$i],0,7) == 'hun-id:') {
+			$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
+			break;
+			}
 
-  }
+		}
 
-  $reg = generic_parser_a($data_str["rawdata"],$translate,$contacts);
+	$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
 
-  if ($reg['domain']) {
+	if ($reg['domain']) {
 
-  while (list($key,$val)=each($reg['domain']))
-      {
-        if (is_array($val)) continue;
-        $v=trim(substr(strstr($val,":"),1));
-        if ($key == "organization")
-           { $reg["owner"]["organization"]=$val;
-             unset($reg['domain'][$key]);
-             continue;
-           }
-        if ($key == "owner-hun-id")
-           { $reg["owner"]["handle"]=$val;
-             unset($reg['domain'][$key]);
-             continue;
-           }
-        if ($key == "address")
-           { $reg["owner"]["address"]=$val;
-             unset($reg['domain'][$key]);
-             continue;
-           }
-        if ($key == "phone")
-           { $reg["owner"]["phone"]=$val;
-             unset($reg['domain'][$key]);
-             continue;
-           }
-        if ($key == "fax")
-           { $reg["owner"]["fax"]=$val;
-             unset($reg['domain'][$key]);
-             continue;
-           }
-      }
-  }
-
-  $r["regrinfo"]=$reg;
-  format_dates($r,'ymd');
-  return($r);
-  }
+		while (list($key,$val)=each($reg['domain']))
+			{
+			if (is_array($val)) continue;
+			$v=trim(substr(strstr($val,':'),1));
+			if ($key == 'organization')
+				{
+				$reg['owner']['organization']=$val;
+				unset($reg['domain'][$key]);
+				continue;
+				}
+			if ($key == 'owner-hun-id')
+				{
+				$reg['owner']['handle']=$val;
+				unset($reg['domain'][$key]);
+				continue;
+				}
+			if ($key == 'address')
+				{
+				$reg['owner']['address']=$val;
+				unset($reg['domain'][$key]);
+				continue;
+				}
+			if ($key == 'phone')
+				{
+				$reg['owner']['phone']=$val;
+				unset($reg['domain'][$key]);
+				continue;
+				}
+			if ($key == 'fax')
+				{
+				$reg['owner']['fax']=$val;
+				unset($reg['domain'][$key]);
+				continue;
+				}
+			}
+	}
+	
+	$r['regrinfo']=$reg;
+	$r['regyinfo']=array('referrer'=>'http://www.nic.hu','registrar'=>'HUNIC');
+	$r['rawdata']=$data_str['rawdata'];
+	format_dates($r,'ymd');
+	return($r);
+	}
 }

@@ -48,9 +48,6 @@ class pro_handler
 				'admin' 			=> 'Administrative Contact:',
 				'tech' 				=> 'Technical Contact:'
 				);
-		
-		$r['regyinfo']['referrer'] = 'http://www.registrypro.pro';
-		$r['regyinfo']['registrar'] = 'RegistryPRO';
 
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
@@ -68,6 +65,9 @@ class pro_handler
 		else
 			$r['regrinfo']['registered'] = 'no';
 
+		
+		$r['regyinfo']['referrer'] = 'http://www.registrypro.pro';
+		$r['regyinfo']['registrar'] = 'RegistryPRO';
 		$r['rawdata'] = $data['rawdata'];
 		return ($r);
 		}

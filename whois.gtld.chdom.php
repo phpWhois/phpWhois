@@ -46,10 +46,7 @@ class chdom_handler
                 'domain.sponsor' => "Registrar:"
 		            );
 
-		$r['rawdata'] = $data_str;
-
-		$r['regrinfo'] = get_blocks($data_str, $items);
-
+		$r = get_blocks($data_str, $items);
 		$r = format_dates($r, 'dmy');
 		return $r;
 		}

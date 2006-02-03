@@ -115,7 +115,7 @@ class utils extends Whois {
 
 	function debugObject($obj,$indent=0) {
 		if (is_Array($obj) || is_Object($obj)) {
-			$return = "";
+			$return = '';
 			while (list($k,$v)=each($obj)) {
 				for ($i=0;$i<$indent;$i++) {
 					$return .= "&nbsp;";

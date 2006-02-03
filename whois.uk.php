@@ -71,6 +71,10 @@ class uk_handler
 		else
 			$r['regrinfo']['registered'] = 'no';
 			
+		$r['regyinfo'] = array(
+                    'referrer' => 'http://www.monimet.uk',
+                    'registrar' => 'Nominet UK'
+		                );					
 		return $r;
 		}
 

@@ -1,3 +1,7 @@
+2006/02/03  David Saez <david@ols.es>
+		- fixed README documentation
+		- minor fixes to some handlers
+
 2006/02/01  David Saez <david@ols.es>
 		- fixed README documentation
 		- improved .au handler for user with

@@ -69,10 +69,11 @@ class ip_handler extends WhoisClient
 
 	function parse($data, $query)
 		{
-		$result['rawdata'] = array();
+		$result['regrinfo'] = array();
 		$result['regyinfo'] = array();
 		$result['regyinfo']['registrar'] = 'American Registry for Internet Numbers (ARIN)';
-
+		$result['rawdata'] = array();
+		
 		if (!$this->deep_whois) return null;
 
 		$this->Query = array();

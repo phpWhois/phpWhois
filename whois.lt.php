@@ -48,11 +48,6 @@ class lt_handler
                     'zone-c' => 'zone'
 		                );
 
-		$r['regyinfo'] = array(
-                    'referrer' => 'http://www.domreg.lt',
-                    'registrar' => 'DOMREG.LT'
-                    );
-
 		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 		
 		if (isset($reg['domain']['holder/descr']))
@@ -63,43 +58,13 @@ class lt_handler
 			$reg['owner']['address'] = $owner;
 			unset($reg['domain']['holder/descr']);
 			}
-/*
-		if (isset($reg["domain"]["remarks"]))
-			unset($reg["domain"]["remarks"]);
 
-		if (isset($reg["domain"]["descr"]))
-			{
-			while (list($key, $val) = each($reg["domain"]["descr"]))
-				{
-				$v = trim(substr(strstr($val, ":"), 1));
-				if (strstr($val, "[organization]:"))
-					{
-					$reg["owner"]["organization"] = $v;
-					continue;
-					}
-				if (strstr($val, "[phone]:"))
-					{
-					$reg["owner"]["phone"] = $v;
-					continue;
-					}
-				if (strstr($val, "[fax-no]:"))
-					{
-					$reg["owner"]["fax"] = $v;
-					continue;
-					}
-				if (strstr($val, "[e-mail]:"))
-					{
-					$reg["owner"]["email"] = $v;
-					continue;
-					}
-
-				$reg["owner"]["address"][$key] = $v;
-				}
-
-			unset($reg["domain"]["descr"]);
-			}
-*/
 		$r['regrinfo'] = $reg;
+		$r['regyinfo'] = array(
+                    'referrer' => 'http://www.domreg.lt',
+                    'registrar' => 'DOMREG.LT'
+                    );
+
 		return ($r);
 		}
 	}

@@ -138,8 +138,8 @@ care about getting the real owner information you can set:
 
 $whois->deep_whois = false;
 
-this will tell phpWhois to just query one whois server. For .com and
-.net domains and ip addresses this will prevent phpWhois to ask more
+this will tell phpWhois to just query one whois server. For .com, .net
+and .tv domains and ip addresses this will prevent phpWhois to ask more
 than one whois server, you will just know if the donmain is registered
 or not and which is the registrar but not the owner information.
 

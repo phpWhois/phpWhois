@@ -30,8 +30,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if (!defined("__BE_HANDLER__"))
-	define("__BE_HANDLER__", 1);
+if (!defined('__BE_HANDLER__'))
+	define('__BE_HANDLER__', 1);
 
 class be_handler
 	{
@@ -40,21 +40,17 @@ class be_handler
 		{
 
 		$items = array(
-                "domain.name" => "Domain:",
-                "domain.status" => "Status:",
-				"domain.nserver" => "Nameservers:",
-                "domain.created" => "Registered:",
-                "owner" => "Licensee:",
-                "admin" => "Onsite Contacts:",
-                "tech" => "Agent Technical Contacts:",
-				'agent' => 'Agent:'
+                'domain.name'		=> 'Domain:',
+                'domain.status'		=> 'Status:',
+				'domain.nserver'	=> 'Nameservers:',
+                'domain.created'	=> 'Registered:',
+                'owner'				=> 'Licensee:',
+                'admin'				=> 'Onsite Contacts:',
+                'tech'				=> 'Agent Technical Contacts:',
+				'agent'				=> 'Agent:'
 				);
-
-		$r["rawdata"] = $data["rawdata"];
-		$r["regyinfo"]["referrer"] = "http://www.domain-registry.nl";
-		$r["regyinfo"]["registrar"] = "DNS Belgium";
-
-		$r["regrinfo"] = get_blocks($data["rawdata"], $items);
+		
+		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
 		if (isset($r['regrinfo']['domain']['name']))
 			{
@@ -77,6 +73,10 @@ class be_handler
 		else
 			$r['regrinfo']['registered'] = 'no';
 
+		$r['regyinfo']['referrer'] = 'http://www.domain-registry.nl';
+		$r['regyinfo']['registrar'] = 'DNS Belgium';
+		$r['rawdata'] = $data['rawdata'];
+		
 		return ($r);
 		}
 	}

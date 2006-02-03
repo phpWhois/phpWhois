@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* dotfm.whois    1.0    David Saez 4/4/2003 */
 
-if (!defined("__FM_HANDLER__"))
-	define("__FM_HANDLER__", 1);
+if (!defined('__FM_HANDLER__'))
+	define('__FM_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -39,19 +39,19 @@ class fm_handler
 		{
 
 		$items = array(
-                  "owner" => "Registrant",
-                  "admin" => "Administrative",
-                  "tech" => "Technical",
-                  "billing" => "Billing"
+                  'owner' => 'Registrant',
+                  'admin' => 'Administrative',
+                  'tech' => 'Technical',
+                  'billing' => 'Billing'
                   );
 
 		$blocks = get_blocks($data['rawdata'], $items);
 
 		$items = array(
-                  "FM Domain:" => "name",
-                  "Primary Hostname:" => "nserver.0",
-                  "Secondary Hostname:" => "nserver.1",
-                  "Renewal Date:" => "expires"
+                  'FM Domain:' => 'name',
+                  'Primary Hostname:' => 'nserver.0',
+                  'Secondary Hostname:' => 'nserver.1',
+                  'Renewal Date:' => 'expires'
 		              );
 
 		$r['regrinfo']['domain'] = generic_parser_b($data['rawdata'], $items);
@@ -67,8 +67,6 @@ class fm_handler
                 'Email:' => 'email'
 		            );
 
-		$r['rawdata'] = $data['rawdata'];
-
 		while (list($key, $val) = each($blocks))
 			{
 			$r['regrinfo'][$key] = generic_parser_b($val, $items);
@@ -76,7 +74,8 @@ class fm_handler
 
 		$r['regyinfo']['referrer'] = 'http://www.dot.dm';
 		$r['regyinfo']['registrar'] = 'dotFM';
-
+		$r['rawdata'] = $data['rawdata'];
+		
 		return ($r);
 		}
 	}

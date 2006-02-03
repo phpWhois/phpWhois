@@ -67,7 +67,7 @@ museum		nic.museum
 name		peter.morgan.name
 org		example.org
 pro		registrypro.pro
-travel		nic.travel
+travel		whois.travel
 
 // IP whois
 

@@ -86,12 +86,12 @@ class name_handler
                   "Billing Email:" => "billing.email"
 		            );
 
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
+
 		$r['regyinfo'] = array(
                           'referrer' => 'http://www.nic.name/',
                           'registrar' => 'Global Name Registry'
                           );
-
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
 		return $r;
 		}
 

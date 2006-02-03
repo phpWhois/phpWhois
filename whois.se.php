@@ -46,15 +46,14 @@ class se_handler
                     ' NS ' => 'domain.nserver.'
                     );
 
-		$r['regyinfo'] = array(
-                    'referrer' => 'http://www.nic-se.se',
-                    'registrar' => 'NIC-SE'
-		                );
-
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'mdy', false);
 		
 		$r['regrinfo']['registered'] = isset($r['regrinfo']['domain']['name']) ? 'yes' : 'no';
-		
+
+		$r['regyinfo'] = array(
+                    'referrer' => 'http://www.nic-se.se',
+                    'registrar' => 'NIC-SE'
+		                );		
 		return ($r);
 		}
 

@@ -77,16 +77,22 @@ class coop_handler
 			$r['regrinfo']['registered'] = 'yes';
 				
 			if (isset($blocks['owner']))
+				{
 				$r['regrinfo']['owner'] = generic_parser_b($blocks['owner'],$translate,'dmy',false);
 		
-			if (isset($blocks['tech']))
-				$r['regrinfo']['tech'] = generic_parser_b($blocks['tech'],$translate,'dmy',false);
+				if (isset($blocks['tech']))
+					$r['regrinfo']['tech'] = generic_parser_b($blocks['tech'],$translate,'dmy',false);
 		
-			if (isset($blocks['admin']))
-				$r['regrinfo']['admin'] = generic_parser_b($blocks['admin'],$translate,'dmy',false);
+				if (isset($blocks['admin']))
+					$r['regrinfo']['admin'] = generic_parser_b($blocks['admin'],$translate,'dmy',false);
 	
-			if (isset($blocks['billing']))
-				$r['regrinfo']['billing'] = generic_parser_b($blocks['billing'],$translate,'dmy',false);
+				if (isset($blocks['billing']))
+					$r['regrinfo']['billing'] = generic_parser_b($blocks['billing'],$translate,'dmy',false);
+				}
+			else
+				{
+				$r['regrinfo']['owner'] = generic_parser_b($data_str['rawdata'],$translate,'dmy',false);
+				}
 			}
 		else
 			$r['regrinfo']['registered'] = 'no';

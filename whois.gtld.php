@@ -42,18 +42,18 @@ class gtld_handler extends WhoisClient
 	var $HANDLER_VERSION = '1.1';
 
 	var $REG_FIELDS = array(
-                        "Domain Name:" => "regrinfo.domain.name",
-                        "Registrar:" => "regyinfo.registrar",
-                        "Whois Server:" => "regyinfo.whois",
-                        "Referral URL:" => "regyinfo.referrer",
-                        "Name Server:" => "regrinfo.domain.nserver.",  // identical descriptors
-						"Updated Date:" => "regrinfo.domain.changed",
-                        "Last Updated On:" => "regrinfo.domain.changed",
-                        "Status:" => "regrinfo.domain.status",
-                        "Creation Date:" => "regrinfo.domain.created",
-                        "Created On:" => "regrinfo.domain.created",
-                        "Expiration Date:" => "regrinfo.domain.expires",
-                        "Updated Date:" => "regrinfo.domain.changed",
+                        'Domain Name:' => 'regrinfo.domain.name',
+                        'Registrar:' => 'regyinfo.registrar',
+                        'Whois Server:' => 'regyinfo.whois',
+                        'Referral URL:' => 'regyinfo.referrer',
+                        'Name Server:' => 'regrinfo.domain.nserver.',  // identical descriptors
+						'Updated Date:' => 'regrinfo.domain.changed',
+                        'Last Updated On:' => 'regrinfo.domain.changed',
+                        'Status:' => 'regrinfo.domain.status',
+                        'Creation Date:' => 'regrinfo.domain.created',
+                        'Created On:' => 'regrinfo.domain.created',
+                        'Expiration Date:' => 'regrinfo.domain.expires',
+                        'Updated Date:' => 'regrinfo.domain.changed',
                         'No match for ' => 'nodomain'
 	                     );
 
@@ -71,6 +71,8 @@ class gtld_handler extends WhoisClient
 						'DOMAIN BANK, INC.' => 'domainbank',
 						'DOMAINDISCOVER' => 'buydomains',
 						'DOTSTER, INC.' =>	'dotster',
+						'DSTR ACQUISITION PA I, LLC DBA DOMAINBANK.COM' => 'domainbank',
+						'DSTR ACQUISITION VII, LLC' => 'dotregistrar',
 						'ENOM, INC.' => 'enom',
 						'GO DADDY SOFTWARE, INC.' => 'godaddy',
 						'IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM' => 'dotregistrar',
@@ -96,8 +98,8 @@ class gtld_handler extends WhoisClient
 	function parse($data, $query)
 		{
 		$this->Query = array();
-		$this->SUBVERSION = sprintf("%s-%s", $query["handler"], $this->HANDLER_VERSION);
-		$this->result = generic_parser_b($data["rawdata"], $this->REG_FIELDS, 'dmy');
+		$this->SUBVERSION = sprintf('%s-%s', $query['handler'], $this->HANDLER_VERSION);
+		$this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
 		
 		unset($this->result['registered']);
 		
@@ -127,7 +129,7 @@ class gtld_handler extends WhoisClient
 
 			if (!empty($this->Query['handler']))
 				{			
-				$this->Query['file'] = sprintf("whois.gtld.%s.php", $this->Query['handler']);
+				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);
 				$regrinfo = $this->Process($this->result['rawdata']);
 				$this->result['regrinfo'] = merge_results($this->result['regrinfo'], $regrinfo);
 				}
