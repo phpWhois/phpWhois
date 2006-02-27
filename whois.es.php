@@ -98,15 +98,15 @@ class es_handler
 			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing'], $extra);
 			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
 			$r['regrinfo']['registered'] = 'yes';
+
+			if (is_array($r['regrinfo']['domain']['nserver'][0]))
+				unset($r['regrinfo']['domain']['nserver'][0]);
 			}
 		else
 			{
 			$r['regrinfo']['registered'] = 'no';
 			$r['rawdata'][] = 'Domain not found';
 			}
-
-		if (is_array($r['regrinfo']['domain']['nserver'][0]))
-			unset($r['regrinfo']['domain']['nserver'][0]);
 			
 		$r['regyinfo'] = array(
                 'referrer' => 'http://www.nic.es',

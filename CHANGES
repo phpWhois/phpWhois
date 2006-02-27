@@ -1,3 +1,6 @@
+2006/02/27  David Saez <david@ols.es>
+		- minor fixes for non-existing .es domains
+
 2006/02/13  David Saez <david@ols.es>
 		- fixed nserver detection in whois.es.php
 
