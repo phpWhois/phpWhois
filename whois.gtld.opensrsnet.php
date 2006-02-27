@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* opensrsnet.whois	1.0	jeremiah bellomy	2000/04/06 */
 /* opensrsnet.whois     2.1     david@ols.es            2003/02/15 */
 
-if (!defined("__OPENSRSNET_HANDLER__"))
-	define("__OPENSRSNET_HANDLER__", 1);
+if (!defined('__OPENSRSNET_HANDLER__'))
+	define('__OPENSRSNET_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -40,15 +40,15 @@ class opensrsnet_handler
 		{
 
 		$items = array(
-                  "owner" => "Registrant:",
-                  "admin" => "Administrative Contact",
-                  "tech" => "Technical Contact",
-                  "domain.name" => "Domain name:",
-                  "domain.sponsor" => "Registrar of Record:",
-                  "domain.nserver" => "Domain servers in listed order:",
-                  "domain.changed" => "Record last updated on",
-                  "domain.created" => "Record created on",
-                  "domain.expires" => "Record expires on"
+                  'owner'			=> 'Registrant:',
+                  'admin'			=> 'Administrative Contact',
+                  'tech'			=> 'Technical Contact',
+                  'domain.name'		=> 'Domain name:',
+                  'domain.sponsor'	=> 'Registration Service Provider:',
+                  'domain.nserver'	=> 'Domain servers in listed order:',
+                  'domain.changed'	=> 'Record last updated on',
+                  'domain.created'	=> 'Record created on',
+                  'domain.expires'	=> 'Record expires on'
 		              );
 
 		$r = get_blocks($data_str, $items);
