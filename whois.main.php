@@ -269,7 +269,7 @@ class Whois extends WhoisClient
 				{
 				if ($p == '')
 					continue;
-				if (ip2long($p) == - 1)
+				if ((ip2long($p) == - 1) or (ip2long($p) === false))
 					{
 					if ($host == '')
 						$host = $p;

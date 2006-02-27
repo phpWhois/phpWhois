@@ -30,8 +30,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 	
 function validip($ip)
 {
-	if (!empty($ip) && ip2long($ip)!=-1) {
-		$reserved_ips = array (
+
+	if (empty($ip))
+		return false;
+	
+	if ((ip2long($p) == -1) or (ip2long($p) === false))
+		return false;
+		
+	$reserved_ips = array (
 			array('0.0.0.0','2.255.255.255'),
 			array('10.0.0.0','10.255.255.255'),
 			array('127.0.0.0','127.255.255.255'),
@@ -42,15 +48,13 @@ function validip($ip)
 			array('255.255.255.0','255.255.255.255')
 			);
 			
-			foreach ($reserved_ips as $r) {
-				$min = ip2long($r[0]);
-				$max = ip2long($r[1]);
-				if ((ip2long($ip) >= $min) && (ip2long($ip) <= $max)) return false;
-				}
-		return true;
-	}
-	else
-		return false;			
+	foreach ($reserved_ips as $r) {
+		$min = ip2long($r[0]);
+		$max = ip2long($r[1]);
+		if ((ip2long($ip) >= $min) && (ip2long($ip) <= $max)) return false;
+		}
+
+	return true;
 }
 
 //-----------------------------------------------------------------
