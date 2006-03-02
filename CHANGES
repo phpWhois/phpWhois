@@ -1,3 +1,6 @@
+2006/03/02  David Saez <david@ols.es>
+                - added handler for .pl
+
 2006/02/27  David Saez <david@ols.es>
 		- minor fixes for non-existing .es domains
 		- fixed ip2long PHP5 compatibility

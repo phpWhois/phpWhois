@@ -63,6 +63,7 @@ $this->DATA = array(
 	'nl'		=> 'nl',
 	'nu'		=> 'nu',
 	'org'		=> 'org',
+	'pl'		=> 'pl',
 	'pro'		=> 'pro',
 	'se'		=> 'se',
 	'travel'	=> 'travel',

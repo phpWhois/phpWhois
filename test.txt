@@ -20,6 +20,7 @@ lt		domreg.lt
 mx           	nic.mx
 nl		domain-registry.nl
 nu		nunames.nu
+pl		nic.pl
 se		nic-se.se
 uk		olsns.co.uk
 us		neustar.us
