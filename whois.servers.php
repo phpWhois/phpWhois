@@ -50,6 +50,7 @@ $this->DATA = array(
 	'es'		=> 'es',
 	'fm'		=> 'fm',
 	'hu'		=> 'hu',
+	'ie'		=> 'ie',
 	'info'		=> 'info',
 	'int'		=> 'int',
 	'is'		=> 'is',

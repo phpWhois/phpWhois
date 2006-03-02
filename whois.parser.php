@@ -29,14 +29,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 function generic_parser_a ($rawdata,$translate,$contacts,$main='domain',$dateformat='dmy')
 {
-$blocks=generic_parser_a_blocks($rawdata,$translate,$disclaimer);
+$blocks = generic_parser_a_blocks($rawdata,$translate,$disclaimer);
 
 if (isset($disclaimer) && is_array($disclaimer)) 
     $ret['disclaimer']=$disclaimer;
 
-if (!isset($blocks) || !is_array($blocks['main']))
-   { $ret['registered']='no';
-     return $ret;
+if (empty($blocks) || !is_array($blocks['main']))
+   {
+   $ret['registered']='no';
+   return $ret;
    }
 
 $r=$blocks['main'];
@@ -64,12 +65,13 @@ return $ret;
 
 function generic_parser_a_blocks ($rawdata, $translate, &$disclaimer)
 {
-$r=array();
-$newblock=false;
-$hasdata=false;
-$block=array();
-$gkey='main';
-$dend=false;
+$r = array();
+$newblock = false;
+$hasdata = false;
+$block = array();
+$blocks = false;
+$gkey = 'main';
+$dend = false;
 
 while (list($key,$val)=each($rawdata))
 	{

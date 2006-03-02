@@ -1,5 +1,6 @@
 2006/03/02  David Saez <david@ols.es>
-                - added handler for .pl
+                - added handler for .pl and .ie
+		- minor fixes in whois.parser.php
 
 2006/02/27  David Saez <david@ols.es>
 		- minor fixes for non-existing .es domains

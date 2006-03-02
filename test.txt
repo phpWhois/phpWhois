@@ -13,6 +13,7 @@ de		4ever.de
 es		ols.es
 fm		dot.fm
 hu		nic.hu
+ie		domainregistry.ie
 is		isnic.is
 li		nic.li
 lu		dns.lu
