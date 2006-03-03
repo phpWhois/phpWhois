@@ -1,3 +1,6 @@
+2006/03/03 David Saez <david@ols.es>
+		- added handler for gtld domaincontender.com
+
 2006/03/02  David Saez <david@ols.es>
                 - added handler for .pl and .ie
 		- minor fixes in whois.parser.php

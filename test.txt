@@ -33,6 +33,7 @@ ascio		ascio.com
 chdom		naturebox.com
 bulkr		bulkregister.com
 buydomains	buydomains.com
+contender	domaincontender.com
 core            corenic.com
 cronon		antiquea.com
 directi		directi.com

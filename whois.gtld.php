@@ -69,6 +69,7 @@ class gtld_handler extends WhoisClient
 						'CRONON AG BERLIN, NIEDERLASSUNG REGENSBURG' =>	'cronon',
 						'DIRECT INFORMATION PVT. LTD., DBA DIRECTI.COM' => 'directi',
 						'DOMAIN BANK, INC.' => 'domainbank',
+						'DOMAIN CONTENDER, LLC'	=> 'contender',
 						'DOMAINDISCOVER' => 'buydomains',
 						'DOTSTER, INC.' =>	'dotster',
 						'DSTR ACQUISITION PA I, LLC DBA DOMAINBANK.COM' => 'domainbank',
