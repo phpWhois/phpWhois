@@ -51,6 +51,7 @@ inwwcom         inww.com
 moniker		moniker.com
 netsol          networksolutions.com
 nicline		nicline.com
+nominalia	nominalia.com
 opensrsnet      tucows.com
 registercom     register.com
 schlund		schlund.com

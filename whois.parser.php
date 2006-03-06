@@ -356,6 +356,7 @@ $items = array (
 		'phone-' => 'phone',
 		'phone -' => 'phone',
 		'email:' => 'email',
+		'e-mail:' => 'email',
 		'company name:' => 'organization',
 		'first name:' => 'name.first',
 		'last name:' => 'name.last',

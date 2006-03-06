@@ -84,6 +84,7 @@ class gtld_handler extends WhoisClient
 						'MONIKER ONLINE SERVICES, INC.' => 'moniker',
                         'NETWORK SOLUTIONS, INC.' => 'netsol',
 						'NETWORK SOLUTIONS, LLC.' => 'netsol',
+						'NOMINALIA INTERNET S.L.' => 'nominalia',
                         'REGISTER.COM, INC.' => 'registercom',
                         'RESERVED-INTERNET ASSIGNED NUMBERS AUTHORITY' => 'iana',
                         'SCHLUND+PARTNER AG' => 'schlund',

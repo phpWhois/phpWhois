@@ -1,3 +1,6 @@
+2006/03/06 David Saez <david@ols.es>
+		- added gtld handler for nominalia
+
 2006/03/05 David Saez <david@ols.es>
                 - fixed .de handler
 		- .ca handler fixed and updated
