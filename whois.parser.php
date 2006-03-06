@@ -340,7 +340,7 @@ function get_contact ( $array, $extra_items='' )
 if (!is_array($array))
 	return array();
 
-$items = array (
+$items = array (		
 		'fax..:' => 'fax',
 		'fax.' => 'fax',
 		'fax -' => 'fax',
