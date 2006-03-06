@@ -1,3 +1,7 @@
+2006/03/05 David Saez <david@ols.es>
+                - fixed .de handler
+		- .ca handler fixed and updated
+
 2006/03/03 David Saez <david@ols.es>
 		- added handler for gtld domaincontender.com
 

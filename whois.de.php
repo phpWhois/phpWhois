@@ -48,15 +48,15 @@ class de_handler
 		{
 
 		$items = array(
-                'domain.name' => 'domain:',
-                'domain.nserver' => 'nserver',
-				'domain.status' => 'status:',
-                'domain.changed' => 'changed:',
-                'domain.desc.' => 'descr:',
-				'owner' => '[holder]',
-                'admin' => '[admin-c]',
-                'tech' =>	'[tech-c]',
-                'zone' => '[zone-c]'
+                'domain.name' => 'Domain:',
+                'domain.nserver' => 'Nserver',
+				'domain.status' => 'Status:',
+                'domain.changed' => 'Changed:',
+                'domain.desc.' => 'Descr:',
+				'owner' => '[Holder]',
+                'admin' => '[Admin-C]',
+                'tech' =>	'[Tech-C]',
+                'zone' => '[Zone-C]'
 		            );
 
 		$extra = array(
@@ -102,7 +102,7 @@ class de_handler
 		if (isset($r['regrinfo']['domain']))
 			$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
 		else
-			$r['regrinfo']['registered'] = 'unknown';
+			$r['regrinfo']['registered'] = 'no';
 			
 		$r = format_dates($r, 'ymd');
 		return ($r);
