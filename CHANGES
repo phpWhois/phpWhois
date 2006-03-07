@@ -1,3 +1,7 @@
+2006/03/07 David Saez <david@ols.es>
+		- added gtld handler for alldomains
+		- more improvemnts on whois.parser.php
+
 2006/03/06 David Saez <david@ols.es>
 		- added gtld handler for nominalia
 

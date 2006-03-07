@@ -29,6 +29,7 @@ ws		samoanic.ws
 
 // .com/.net/.tv
 
+alldomains	alldomains.com
 ascio		ascio.com
 chdom		naturebox.com
 bulkr		bulkregister.com

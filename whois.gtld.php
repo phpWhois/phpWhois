@@ -59,6 +59,7 @@ class gtld_handler extends WhoisClient
 
 	var $REGISTRARS = array(
                         'ALABANZA, INC.' => 'bulkr',
+                        'ALLINDOMAINS, LLC' => 'alldomains',
                         'ARSYS INTERNET, S.L. D/B/A NICLINE.COM' => 'nicline',
 						'ASCIO TECHNOLOGIES, INC.' => 'ascio',
 						'BULKREGISTER.COM, INC.' => 'bulkr',
