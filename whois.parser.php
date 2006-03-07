@@ -425,9 +425,9 @@ while (list($key,$val)=each($array))
 		$r['email']=str_replace('(','',$parts[$top]);
 		$r['email']=str_replace(')','',$r['email']);
 		array_pop($parts);
-		$val=implode(' ',$parts);
-		
-		if ($val=='') {
+		$val = trim(implode(' ',$parts));
+
+		if (strlen($val)<2) {
 			unset($array[$key]);
 			continue;
 			}
@@ -443,10 +443,9 @@ while (list($key,$val)=each($array))
 		}
 	}     
 
-if (!isset($r['name']) && isset($array[0]))
+if (!isset($r['name']) && count($array)>0)
 	{
-	$r['name']=$array[0];
-	unset($array[0]);
+	$r['name']=array_shift($array);
 	}
 
 if (isset($r['name']) && is_array($r['name']))
