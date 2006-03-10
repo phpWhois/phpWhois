@@ -1,3 +1,6 @@
+2006/03/10 David Saez <david@ols.es>
+		- added handler for .edu
+
 2006/03/07 David Saez <david@ols.es>
 		- added gtld handler for alldomains
 		- more improvemnts on whois.parser.php
