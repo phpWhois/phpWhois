@@ -1,3 +1,6 @@
+2006/03/14 David Saez <david@ols.es>
+		- fixed case detection on whois.parser.php
+
 2006/03/10 David Saez <david@ols.es>
 		- added handler for .edu
 
