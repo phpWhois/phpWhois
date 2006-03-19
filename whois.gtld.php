@@ -62,6 +62,7 @@ class gtld_handler extends WhoisClient
                         'ALLINDOMAINS, LLC' => 'alldomains',
                         'ARSYS INTERNET, S.L. D/B/A NICLINE.COM' => 'nicline',
 						'ASCIO TECHNOLOGIES, INC.' => 'ascio',
+						'BRANDON GRAY INTERNET SERVICES, INC. DBA NAMEJUICE.COM' => 'namejuice',
 						'BULKREGISTER.COM, INC.' => 'bulkr',
 						'BULKREGISTER, LLC.' => 'bulkr',
                         'CHINESEDOMAINS, LLC'	=> 'chdom',

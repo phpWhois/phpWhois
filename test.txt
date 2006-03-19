@@ -50,6 +50,7 @@ innerwise	sexido.com
 interdomain     interdominio.com
 inwwcom         inww.com
 moniker		moniker.com
+namejuice	namejuice.com
 netsol          networksolutions.com
 nicline		nicline.com
 nominalia	nominalia.com
