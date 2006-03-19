@@ -50,7 +50,10 @@ if(isSet($_GET['query']))
 	
 	$whois = new Whois();
 	
-	//$whois->deep_whois = false;
+ 	// uncomment the following line to get faster but less acurate results
+ 	// $whois->deep_whois = false;
+ 	
+ 	// To use special whois servers (see README)	
 	//$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
 	//$whois->UseServer('au','whois-check.ausregistry.net.au');
 	
