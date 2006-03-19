@@ -133,7 +133,7 @@ class utils extends Whois {
 
 	// adds links fort HTML output
 	
-	function showHTML($result, $link_myself=true, $params='query=$0&output=nice') {
+	function showHTML($result, $link_myself=true, $params='query=$0&amp;output=nice') {
 		
 		$email_regex = "/([-_\w\.]+)(@)([-_\w\.]+)\b/i";
 		$html_regex = "/(?:^|\b)((((http|https|ftp):\/\/)|(www\.))([\w\.]+)([,:%#&\/?~=\w+\.-]+))(?:\b|$)/is";
@@ -165,7 +165,7 @@ class utils extends Whois {
 				}
 			}
 			
-		return $out;
+		return str_replace("\n","<br></br>\n",$out);
 	}
 }
 

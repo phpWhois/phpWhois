@@ -25,42 +25,44 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>whois.php -base classes to do whois queries with php</title>
 </head>
-<body bgcolor="ffffff">
-<blockquote>
-<pre>
+<body bgcolor="white">
 <blockquote>
 
-<?php
+<?
 if(isSet($_GET['query']))
 	{
 	$query = $_GET['query'];
-	$output = $_GET['output'];
 	
+	if (!empty($_GET['output']))
+		$output = $_GET['output'];
+	else
+		$output = '';
+		
 	include_once('whois.main.php');
 	include_once('whois.utils.php');
 	
 	$whois = new Whois();
 	
-	// uncomment the following line to get faster but less acurate results
-	// $whois->deep_whois = false;
-	
-	// To use special whois servers (see README)
-	// $whois->UseServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
+	//$whois->deep_whois = false;
+	//$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
+	//$whois->UseServer('au','whois-check.ausregistry.net.au');
 	
 	$result = $whois->Lookup($query);
-	
-	echo "<b>Results for $query :</b><p>";
+	echo "<b>Results for $query :</b><br></br>";
 
 	switch ($output)
 		{
 		case 'object':
 			if ($whois->Query['status'] < 0)
 				{
-				echo implode($whois->Query['errstr'],"\n<br>");
+				echo implode($whois->Query['errstr'],"\n<br></br>");
 				}
 			else
 				{
@@ -70,54 +72,52 @@ if(isSet($_GET['query']))
 			break;
 			
 		case 'nice':			
-			if(!empty($result['rawdata'])) {				
+			if (!empty($result['rawdata'])) {				
 				$utils = new utils;
 				echo $utils->showHTML($result);
 				}
 			else {
-				echo implode($whois->Query['errstr'],"\n<br>");
+				echo implode($whois->Query['errstr'],"\n<br></br>");
 				}       
 			break;
 						
 		default:
 			if(!empty($result['rawdata'])) {
-				echo implode($result['rawdata'],"\n");
+				echo '<pre>'.implode($result['rawdata'],"\n").'</pre>';
 				}
 			else {
-				echo implode($whois->Query['errstr'],"\n<br>");
+				echo implode($whois->Query['errstr'],"\n<br></br>");
 				}       
 	}
 }
 ?>
 
 </blockquote>
-</pre>
-</blockquote>
 <center>
 <table>
-<tr><td bgcolor="55aaff">
-<form method="get" action="<?php echo  $_SERVER['PHP_SELF']; ?>">
+<tr><td bgcolor="#55aaff">
+<form method="get" action="<?echo  $_SERVER['PHP_SELF']; ?>">
 
 <table>
 <tr><td colspan=2>
 <center>
-<b>Enter any domain name, ip address or AS handle you would like to query whois for<b>
-<br><br>
-<input name="query"> <input type="submit" value="Whois">
+<b>Enter any domain name, ip address or AS handle you would like to query whois for</b>
+<br></br><br></br>
+<input name="query"></input> <input type="submit" value="Whois"></input>
 </center>
 </td></tr>
 
 <tr><td>
-<input type="radio" name="output" value="normal"> Show me regular output
-<br>
-<input type="radio" name="output" value="nice" checked> Show me HTMLized output
-<br>
-<input type="radio" name="output" value="object"> Show me the returned PHP object
+<input type="radio" name="output" value="normal"></input> Show me regular output
+<br></br>
+<input type="radio" name="output" value="nice" checked></input> Show me HTMLized output
+<br></br>
+<input type="radio" name="output" value="object"></input> Show me the returned PHP object
 </td>
 
 <td align=right valign=bottom>
 <a href="http://phpwhois.sourceforge.net">
-<img border=0 src="whois.icon.png" alt=""><br>
+<img border=0 src="whois.icon.png" alt=""></img><br></br>
 </a>
 </td>
 </tr>

@@ -1,5 +1,7 @@
 2006/03/19 Robert Apgood <rob@carpelaw.com>
 		- added gtld handler for namejuice
+	   David Saez <david@ols.es>
+		- example.php is now XHTML 1.0 compliant
 
 2006/03/14 David Saez <david@ols.es>
 		- fixed case detection on whois.parser.php
