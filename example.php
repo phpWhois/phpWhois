@@ -33,7 +33,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 <title>whois.php -base classes to do whois queries with php</title>
 </head>
 <body bgcolor="white">
-<blockquote>
 
 <?
 if(isSet($_GET['query']))
@@ -58,7 +57,7 @@ if(isSet($_GET['query']))
 	//$whois->UseServer('au','whois-check.ausregistry.net.au');
 	
 	$result = $whois->Lookup($query);
-	echo "<b>Results for $query :</b><br></br>";
+	echo "<blockquote><b>Results for $query :</b><br></br>";
 
 	switch ($output)
 		{
@@ -92,10 +91,10 @@ if(isSet($_GET['query']))
 				echo implode($whois->Query['errstr'],"\n<br></br>");
 				}       
 	}
+	echo '</blockquote>';
 }
 ?>
 
-</blockquote>
 <center>
 <table>
 <tr><td bgcolor="#55aaff">
