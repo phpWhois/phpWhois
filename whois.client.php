@@ -183,7 +183,8 @@ class WhoisClient {
 				$output = explode("\n", $raw);
 
 			// Drop empty last line
-			unset($output[count($output)-1]);
+			if (empty($output[count($output)-1])) 
+				unset($output[count($output)-1]);
 			}
 			
 		// Create result and set 'rawdata'

@@ -82,6 +82,10 @@ class org_handler
 		              );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
+		
+		if (!strncmp($data_str['rawdata'][0], 'WHOIS LIMIT EXCEEDED', 20))
+			$r['regrinfo']['registered'] = 'unknown';
+
 		$r['regyinfo']['referrer'] = 'http://www.pir.org/';
 		$r['regyinfo']['registrar'] = 'Public Interest Registry';
 		return ($r);

@@ -1,6 +1,9 @@
-2006/03/19 Robert Apgood <rob@carpelaw.com>
+2006/03/20  David Saez <david@ols.es>
+		- Aplied fix to bug #1453935
+
+2006/03/19 David Saez <david@ols.es>
 		- added gtld handler for namejuice
-	   David Saez <david@ols.es>
+		  (thanx to Robert Apgood <rob@carpelaw.com>)
 		- example.php is now XHTML 1.0 compliant
 
 2006/03/14 David Saez <david@ols.es>
