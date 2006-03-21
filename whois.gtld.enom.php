@@ -62,9 +62,15 @@ class enom_handler
                   );
 
 		$r = get_blocks($data_str, $items);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
+		
+		if (isset($r['owner']))
+			$r['owner'] = get_contact($r['owner']);
+			
+		if (isset($r['admin']))
+			$r['admin'] = get_contact($r['admin']);
+			
+		if (isset($r['tech']))
+			$r['tech'] = get_contact($r['tech']);
 		
 		if (isset($r['billing']))
 			$r['billing'] = get_contact($r['billing']);
