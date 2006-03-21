@@ -42,7 +42,7 @@ directnic	directnic.com
 domainbank	domainbank.com
 dotregistrar    dotregistrar.com
 dotster         dotster.com
-enom            enom.com
+enom            enom.com adultlaw.com
 godaddy		godaddy.com
 iana		example.com
 joker		joker.com
