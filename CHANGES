@@ -1,3 +1,7 @@
+2006/03/21  David Saez <david@ols.es>
+		- Fixed problems with some domains registered
+		  at enom
+
 2006/03/20  David Saez <david@ols.es>
 		- Aplied fix to bug #1453935
 

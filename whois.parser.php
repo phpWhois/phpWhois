@@ -324,7 +324,7 @@ while (list($key,$val) = each($rawdata))
 	while (list($field, $match)=each($items)) {
 		$pos=strpos($line,$match);
 		if ($pos!==false) {
-			$var=getvarname($field);
+			$var=getvarname(strtok($field,'#'));
 			eval("\$r".$var."=\$block;");
 			}
 		}

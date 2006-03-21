@@ -41,10 +41,14 @@ class enom_handler
 		{
 
 		$items = array(
-                  'owner'				=> 'Registrant Contact',
-                  'admin'				=> 'Administrative Contact',
-                  'tech'				=> 'Technical Contact',
-                  'billing'				=> 'Billing Contact',
+                  'owner#0'				=> 'Registrant Contact',
+                  'owner#1'				=> 'REGISTRANT Contact:',
+                  'admin#0'				=> 'Administrative Contact',
+                  'admin#1'				=> 'ADMINISTRATIVE Contact:',
+                  'tech#0'				=> 'Technical Contact',
+                  'tech#1'				=> 'TECHNICAL Contact:',
+                  'billing#0'			=> 'Billing Contact',
+                  'billing#1'			=> 'BILLING Contact:',
                   'domain.nserver'		=> 'Nameservers',
                   'domain.name#0'		=> 'Domain name:',
                   'domain.name#1'		=> 'Domain name-',
