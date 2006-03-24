@@ -84,6 +84,7 @@ class gtld_handler extends WhoisClient
                         'INTERDOMAIN, S.A.' => 'interdomain',
 						'MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE' => 'inwwcom',
 						'MONIKER ONLINE SERVICES, INC.' => 'moniker',
+						'NAMESDIRECT.COM, INC.' => 'ndirect',
                         'NETWORK SOLUTIONS, INC.' => 'netsol',
 						'NETWORK SOLUTIONS, LLC.' => 'netsol',
 						'NOMINALIA INTERNET S.L.' => 'nominalia',

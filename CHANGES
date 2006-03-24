@@ -1,3 +1,6 @@
+2006/03/24  David Saez <david@ols.es>
+		- added handler for NAMESDIRECT
+
 2006/03/21  David Saez <david@ols.es>
 		- Fixed problems with some domains registered
 		  at enom

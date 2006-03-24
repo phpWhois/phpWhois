@@ -45,12 +45,13 @@ dotster         dotster.com
 enom            enom.com adultlaw.com
 godaddy		godaddy.com
 iana		example.com
-joker		joker.com
 innerwise	sexido.com
 interdomain     interdominio.com
 inwwcom         inww.com
+joker           joker.com
 moniker		moniker.com
 namejuice	namejuice.com
+ndirect		namesdirect.com
 netsol          networksolutions.com
 nicline		nicline.com
 nominalia	nominalia.com
