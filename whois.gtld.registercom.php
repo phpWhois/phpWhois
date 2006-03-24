@@ -28,8 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* registercom.whois	1.0	mark jeftovic	1999/12/26 */
 /* registercom.whois    2.1     david@ols.es    2003/02/18 */
 
-if (!defined("__REGISTERCOM_HANDLER__"))
-	define("__REGISTERCOM_HANDLER__", 1);
+if (!defined('__REGISTERCOM_HANDLER__'))
+	define('__REGISTERCOM_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -40,23 +40,29 @@ class registercom_handler
 		{
 
 		$items = array(
-                  "owner" => "Organization:",
-                  "admin" => "Administrative Contact",
-                  "tech" => "Technical Contact",
-                  "zone" => "Zone Contact",
-                  "" => "Registrar Name....:",
-                  "domain.nserver" => "Domain servers in listed order:",
-                  "domain.name" => "Domain name:",
-                  "domain.created" => "Created on..............:",
-                  "domain.expires" => "Expires on..............:",
-                  "domain.changed" => "Record last updated on..:"
+                  'owner#0' => 'Registrant Info:',
+                  'owner#1' => 'Organization:',
+                  'admin' => 'Administrative',
+                  'tech' => 'Technical',
+                  'zone' => 'Zone',
+                  'domain.sponsor' => 'Registrar Name....:',
+                  'domain.nserver' => 'Domain servers in listed order:',
+                  'domain.name' => 'Domain name:',
+                  'domain.created' => 'Created on..............:',
+                  'domain.expires' => 'Expires on..............:',
+                  'domain.changed' => 'Record last updated on..:',
+                  'domain.status' => 'Status:'
 		            );
 
 		$r = get_blocks($data_str, $items);
-		$r["owner"] = get_contact($r["owner"]);
-		$r["admin"] = get_contact($r["admin"]);
-		$r["tech"] = get_contact($r["tech"]);
-		$r["zone"] = get_contact($r["zone"]);
+
+		$r['owner'] = get_contact($r['owner']);
+		$r['admin'] = get_contact($r['admin']);
+		$r['tech'] = get_contact($r['tech']);
+
+		if (isset($r['zone']))
+			$r['zone'] = get_contact($r['zone']);
+		
 		$r = format_dates($r, '-mdy');
 		return ($r);
 		}
