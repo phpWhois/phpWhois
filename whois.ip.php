@@ -246,7 +246,7 @@ class ip_handler extends WhoisClient
 			}
 			
 		//Check if Referral rwhois server has been reported
-	
+
 		if (isset($result['regrinfo']['rwhois']))
 			{			
 			$this->Query['server'] = $result['regrinfo']['rwhois'];
@@ -256,8 +256,8 @@ class ip_handler extends WhoisClient
 			$this->Query['handler'] = 'rwhois';		
 			$this->Query['file'] = 'whois.rwhois.php';
 
-			$rwdata = $this->GetData($query);			
-			
+			$rwdata = $this->GetData($query);
+		
 			if (!empty($rwdata))
 				{			
 				$rwres = $this->Process($rwdata);

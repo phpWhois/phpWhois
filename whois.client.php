@@ -139,6 +139,9 @@ class WhoisClient {
 			else
 				$query_args = $string;
 			
+			if (substr($this->Query['server'],0,9)=='rwhois://')
+				$this->Query['server']=substr($this->Query['server'],9);
+				
 			// Get port
 			
 			if (strpos($this->Query['server'],':'))
@@ -151,7 +154,7 @@ class WhoisClient {
 				$this->Query['server_port'] = $this->PORT;
 	
 			// Connect to whois server, or return if failed
-			
+
 			$ptr = $this->Connect();
 		
 			if($ptr < 0) {

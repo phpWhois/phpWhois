@@ -80,7 +80,7 @@ class arin_handler
 		
 		if (isset($r['abuse']['email'])) 
 		    $r['abuse']['email'] = implode(',',$r['abuse']['email']);
-			
+
 		return $r;
 		}
 
