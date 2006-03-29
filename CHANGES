@@ -1,5 +1,6 @@
 2006/03/29  David Saez <david@ols.es>
 		- fixed bad rwhois server/port detection
+		- added optional suport for non ICANN tld's
 
 2006/03/24  David Saez <david@ols.es>
 		- added handler for NAMESDIRECT

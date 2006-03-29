@@ -38,6 +38,9 @@ class Whois extends WhoisClient
 	// Recursion allowed ?
 	var $gtld_recurse = true;
 
+	// Support for non-ICANN tld's	
+	var $non_icann = false;
+	
 	// Network Solutions registry server
 	var $NSI_REGISTRY = "whois.nsiregistry.net";
 
@@ -118,15 +121,20 @@ class Whois extends WhoisClient
 
 		// Search the correct whois server
 
+		if ($this->non_icann)
+			$special_tlds = array_merge($this->WHOIS_SPECIAL,$this->WHOIS_NON_ICANN);
+		else
+			$special_tlds = $this->WHOIS_SPECIAL;
+			
 		foreach($tldtests as $tld)
 			{
 			// Test if we know in advance that no whois server is
 			// available for this domain and that we can get the
 			// data via http or whois request
 
-			if (isset($this->WHOIS_SPECIAL[$tld]))
+			if (isset($special_tlds[$tld]))
 				{
-				$val = $this->WHOIS_SPECIAL[$tld];
+				$val = $special_tlds[$tld];
 				$domain = substr($query, 0,  - strlen($tld) - 1);
 				$val = str_replace('{domain}', $domain, $val);
 				$server = str_replace('{tld}', $tld, $val);
