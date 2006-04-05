@@ -514,7 +514,7 @@ $date=str_replace("\t",' ',$date);
 
 $parts=explode(' ',$date);
 
-if (strlen($parts[0])==8 && is_numeric($parts[0]))
+if ((strlen($parts[0])==8 || count($parts)==1) && is_numeric($parts[0]))
 	{
 	$val=$parts[0];
 	for ($p=$i=0;$i<3;$i++)

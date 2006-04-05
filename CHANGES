@@ -1,3 +1,6 @@
+2006/04/03  David Saez <david@ols.es>
+		- fixed timestamp style date detection
+
 2006/03/29  David Saez <david@ols.es>
 		- fixed bad rwhois server/port detection
 		- added optional suport for non ICANN tld's
