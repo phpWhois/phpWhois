@@ -49,6 +49,7 @@ class gtld_handler extends WhoisClient
                         'Name Server:' => 'regrinfo.domain.nserver.',  // identical descriptors
 						'Updated Date:' => 'regrinfo.domain.changed',
                         'Last Updated On:' => 'regrinfo.domain.changed',
+                        'EPP Status:' => 'regrinfo.domain.epp_status.',                        
                         'Status:' => 'regrinfo.domain.status',
                         'Creation Date:' => 'regrinfo.domain.created',
                         'Created On:' => 'regrinfo.domain.created',

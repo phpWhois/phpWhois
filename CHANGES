@@ -1,3 +1,6 @@
+2006/04/05  David Saez <david@ols.es>
+		- Added support for EPP status (bug #1463866)
+
 2006/04/03  David Saez <david@ols.es>
 		- fixed timestamp style date detection
 
