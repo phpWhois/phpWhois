@@ -132,3 +132,5 @@ if(isSet($_GET['query']))
 </td></tr>
 </table>
 </center>
+</body>
+</html>
