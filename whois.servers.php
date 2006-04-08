@@ -49,6 +49,7 @@ $this->DATA = array(
 	'de'		=> 'de',
 	'edu'		=> 'edu',
 	'es'		=> 'es',
+	'eu'		=> 'eu',
 	'fm'		=> 'fm',
 	'hu'		=> 'hu',
 	'ie'		=> 'ie',

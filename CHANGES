@@ -1,3 +1,6 @@
+2006/04/08  David Saez <david@ols.es>
+		- Added handler for .eu
+
 2006/04/05  David Saez <david@ols.es>
 		- Added support for EPP status (bug #1463866)
 
