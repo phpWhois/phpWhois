@@ -104,7 +104,8 @@ class ip_handler extends WhoisClient
 
 				while (list($ln, $line) = each($rawdata))
 					{
-					if (strstr($line, 'KRNIC whois server at whois.krnic.net'))
+					if (strstr($line, 'KRNIC whois server at whois.krnic.net') ||
+					    strstr($line, 'KRNIC-KR'))
 						{
 						$this->Query['server'] = 'whois.krnic.net';
 						$result['regyinfo']['registrar'] = 'Korea Network Information Center (KRNIC)';

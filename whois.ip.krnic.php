@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* krnic.whois	1.0 	David Saez 7/6/2002 */
 
-if (!defined("__KRNIC_HANDLER__"))
-	define("__KRNIC_HANDLER__", 1);
+if (!defined('__KRNIC_HANDLER__'))
+	define('__KRNIC_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -39,34 +39,70 @@ class krnic_handler
 		{
 
 		$blocks = array(
-                    "owner" => "[ Organization Information ]",
-                    "admin" => "[ Admin Contact Information]",
-                    "tech" => "[ Technical Contact Information ]",
-                    "abuse" => "[ ISP Network Abuse Contact Information ]",
-                    "network.inetnum" => "IPv4 Address       :",
-                    "network.name" => "Network Name       :",
-                    "network.mnt-by" => "Connect ISP Name   :",
-                    "network.created" => "Registration Date  :"
+                    'owner1' => '[ Organization Information ]',
+                    'tech1' => '[ Technical Contact Information ]',
+                    
+                    'owner2' => '[ ISP Organization Information ]',
+                    'admin2' => '[ ISP IP Admin Contact Information ]',
+                    'tech2' => '[ ISP IP Tech Contact Information ]',
+
+                    'admin3' => '[ ISP IPv4 Admin Contact Information ]',
+                    'tech3' => '[ ISP IPv4 Tech Contact Information ]',
+                    
+                    'abuse' => '[ ISP Network Abuse Contact Information ]',
+                    
+                    'network.inetnum' => 'IPv4 Address       :',
+                    'network.name' => 'Network Name       :',
+                    'network.mnt-by' => 'Connect ISP Name   :',
+                    'network.created' => 'Registration Date  :'
 		              );
 
 		$items = array(
-                    "Orgnization ID     :" => "handle",
-                    "Org Name           :" => "organization",
-                    "Name               :" => "name",
-                    "Address            :" => "address.street",
-                    "Zip Code           :" => "address.pcode",
-                    "State              :" => "address.state",
-                    "Phone              :" => "phone",
-                    "Fax                :" => "fax",
-                    "E-Mail             :" => "email"
+                    'Orgnization ID     :' => 'handle',
+                    'Org Name      :' => 'organization',
+                    'Org Name           :' => 'organization',
+                    'Name          :' => 'name',
+                    'Name               :' => 'name',
+                    'Org Address   :' => 'address.street',
+                    'Zip Code      :' => 'address.pcode',
+                    'State         :' => 'address.state',
+                    'Address            :' => 'address.street',
+                    'Zip Code           :' => 'address.pcode',
+                    'Phone         :' => 'phone',
+                    'Phone              :' => 'phone',
+                    'Fax           :' => 'fax',
+                    'E-Mail        :' => 'email',
+                    'E-Mail             :' => 'email'              
 		              );
 
-		$r = get_blocks($data_str, $blocks);
+		$b = get_blocks($data_str, $blocks);
 
-		$r["owner"] = generic_parser_b($r["owner"], $items, 'Ymd', false);
-		$r["admin"] = generic_parser_b($r["admin"], $items, 'Ymd', false);
-		$r["tech"] = generic_parser_b($r["tech"], $items, 'Ymd', false);
-		$r["abuse"] = generic_parser_b($r["abuse"], $items, 'Ymd', false);
+		if (isset($b['network']))
+			$r['network'] = $b['network'];
+		
+		if (isset($b['owner1']))
+			$r['owner'] = generic_parser_b($b['owner1'], $items, 'Ymd', false);
+		else
+			if (isset($b['owner2']))
+				$r['owner'] = generic_parser_b($b['owner2'], $items, 'Ymd', false);
+			
+		if (isset($b['admin2']))
+			$r['admin'] = generic_parser_b($b['admin2'], $items, 'Ymd', false);
+		else
+			if (isset($b['admin3']))
+				$r['admin'] = generic_parser_b($b['admin3'], $items, 'Ymd', false);
+			
+		if (isset($b['tech1']))
+			$r['tech'] = generic_parser_b($b['tech1'], $items, 'Ymd', false);
+		else
+			if (isset($b['tech2']))
+				$r['tech'] = generic_parser_b($b['tech2'], $items, 'Ymd', false);
+			else
+				if (isset($b['tech3']))
+					$r['tech'] = generic_parser_b($b['tech3'], $items, 'Ymd', false);
+							
+		if (isset($b['abuse']))
+			$r['abuse'] = generic_parser_b($b['abuse'], $items, 'Ymd', false);
 
 		$r = format_dates($r, 'Ymd');
 		return ($r);
