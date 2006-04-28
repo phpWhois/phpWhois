@@ -56,7 +56,9 @@ while (list($key,$val)=each($contacts))
 		unset($r[$key]); 
 		}
 
-$ret[$main]=$r;
+if ($main)
+	$ret[$main]=$r;
+	
 format_dates($ret,$dateformat);
 
 return $ret;
