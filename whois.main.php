@@ -135,13 +135,22 @@ class Whois extends WhoisClient
 			if (isset($special_tlds[$tld]))
 				{
 				$val = $special_tlds[$tld];
+				
+				if ($val == '')
+					{
+					unset($this->Query['server']);
+					$this->Query['status'] =  - 1;
+					$this->Query['errstr'][] = $this->Query['string'].' domain is not supported';
+					return ;
+					}
+					
 				$domain = substr($query, 0,  - strlen($tld) - 1);
 				$val = str_replace('{domain}', $domain, $val);
 				$server = str_replace('{tld}', $tld, $val);
 				break;
 				}
 			}
-		
+	
 		if ($server == '')
 			foreach($tldtests as $tld)
 				{
