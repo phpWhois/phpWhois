@@ -37,23 +37,38 @@ class joker_handler
 
 	function parse($data_str, $query)
 		{
-
+		$translate = array(
+				'contact-hdl' => 'handle'
+				);
+		
+		$contacts = array(
+				'admin-c' => 'admin',
+				'tech-c' => 'tech',
+				'billing-c' => 'billing'
+				);
+				
 		$items = array(
-                'owner:' => 'owner.name',
-                'address:' => 'owner.address.street',
-				'postal-code:' => 'owner.address.pcode',
-                'city:' => 'owner.address.city',
-                'state:' => 'owner.address.state',
-				'country:' => 'owner.address.country',
-                'admin-c:' => 'admin.email',
-                'tech-c:' => 'tech.email',
-                'billing-c:' => 'billing.email',
-                'created:' => 'domain.created',
-                'modified:' => 'domain.changed',
-                'reseller-1:' => 'domain.sponsor'
+                'owner:' => 'name',
+				'organization:' => 'organization',
+				'email:'	=> 'email',
+                'address:' => 'address.street',
+				'postal-code:' => 'address.pcode',
+                'city:' => 'address.city',
+                'state:' => 'address.state',
+				'country:' => 'address.country',
+                'reseller:' => 'sponsor.'
 		            );
 
-		$r = generic_parser_b($data_str, $items);
+		$r = generic_parser_a($data_str, $translate, $contacts, false, 'Ymd');
+
+		$r['owner'] = generic_parser_b($data_str, $items);
+		
+		if (isset($r['owner']['sponsor']))
+			{
+			$r['domain']['sponsor'] = $r['owner']['sponsor'];
+			unset($r['owner']['sponsor']);
+			}
+			
 		return ($r);
 		}
 	}
