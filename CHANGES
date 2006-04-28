@@ -1,6 +1,7 @@
 2006/04/28  David Saez <david@ols.es>
 		- fixed special non handled domains support
 		- added not supported domain .cy
+		- fixed typo in test.txt
 
 2006/04/08  David Saez <david@ols.es>
 		- Added handler for .eu
