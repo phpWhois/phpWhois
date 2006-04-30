@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>whois.php -base classes to do whois queries with php</title>
+</head><body bgcolor="white">
+
+<!--results-->
+<blockquote>
+<b>Results for {query} :</b><br></br>
+{result}
+</blockquote>
+<!--/results-->
+
+<center>
+<table>
+<tr><td bgcolor="#55aaff">
+<form method="get" action="{self}">
+
+<table>
+<tr><td colspan=2>
+<center>
+<b>Enter any domain name, ip address or AS handle you would like to query whois for</b>
+<br></br><br></br>
+<input name="query"></input> <input type="submit" value="Whois"></input>
+</center>
+</td></tr>
+
+<tr><td>
+<input type="radio" name="output" value="normal"></input> Show me regular output
+<br></br>
+<input type="radio" name="output" value="nice" checked></input> Show me HTMLized output
+<br></br>
+<input type="radio" name="output" value="object"></input> Show me the returned PHP object
+</td>
+
+<td align=right valign=bottom>
+<a href="http://phpwhois.sourceforge.net">
+<img border=0 src="whois.icon.png" alt=""></img><br></br>
+</a>
+</td>
+</tr>
+
+</table>
+</form>
+</td></tr>
+</table>
+</center>
+</body>
+</html>

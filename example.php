@@ -24,18 +24,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<title>whois.php -base classes to do whois queries with php</title>
-</head>
-<body bgcolor="white">
+$out =  implode("\n", file('example.html'));
 
-<?
-if(isSet($_GET['query']))
+$out = str_replace('{self}', $_SERVER['PHP_SELF'], $out);
+
+$resout = extract_block($out, 'results');
+
+if (isSet($_GET['query']))
 	{
 	$query = $_GET['query'];
 	
@@ -49,6 +45,9 @@ if(isSet($_GET['query']))
 	
 	$whois = new Whois();
 	
+	// Set to true if you want to allow proxy requests
+	$allowproxy= false;
+	
  	// uncomment the following line to get faster but less acurate results
  	// $whois->deep_whois = false;
  	
@@ -60,77 +59,78 @@ if(isSet($_GET['query']))
 	// $whois->non_icann = true;
 	
 	$result = $whois->Lookup($query);
-	echo "<blockquote><b>Results for $query :</b><br></br>";
-
+	
+	$resout = str_replace('{query}', $query, $resout);
+	
 	switch ($output)
 		{
 		case 'object':
 			if ($whois->Query['status'] < 0)
 				{
-				echo implode($whois->Query['errstr'],"\n<br></br>");
+				$winfo = implode($whois->Query['errstr'],"\n<br></br>");
 				}
 			else
 				{
 				$utils = new utils;
-				echo $utils->showObject($result);
+				$winfo = $utils->showObject($result);
 				}
 			break;
 			
 		case 'nice':			
-			if (!empty($result['rawdata'])) {				
+			if (!empty($result['rawdata']))
+				{
 				$utils = new utils;
-				echo $utils->showHTML($result);
+				$winfo = $utils->showHTML($result);
 				}
-			else {
-				echo implode($whois->Query['errstr'],"\n<br></br>");
+			else
+				{
+				$winfo= implode($whois->Query['errstr'],"\n<br></br>");
 				}       
 			break;
-						
+
+		case 'proxy':
+			if ($allowproxy)
+				exit(serialize($result));
+			
 		default:
-			if(!empty($result['rawdata'])) {
-				echo '<pre>'.implode($result['rawdata'],"\n").'</pre>';
+			if(!empty($result['rawdata']))
+				{
+				$winfo .= '<pre>'.implode($result['rawdata'],"\n").'</pre>';
 				}
-			else {
-				echo implode($whois->Query['errstr'],"\n<br></br>");
+			else
+				{
+				$winfo = implode($whois->Query['errstr'],"\n<br></br>");
 				}       
 	}
-	echo '</blockquote>';
+	
+	$resout = str_replace('{result}', $winfo, $resout);
+}
+
+echo str_replace('{results}', $resout, $out);
+
+//-------------------------------------------------------------------------
+
+function extract_block (&$plantilla,$mark,$retmark='')
+{
+$start = strpos($plantilla,'<!--'.$mark.'-->');
+$final = strpos($plantilla,'<!--/'.$mark.'-->');
+
+if ($start === false || $final === false) return;
+
+$ini = $start+7+strlen($mark);
+
+$ret=substr($plantilla,$ini,$final-$ini);
+
+$final+=8+strlen($mark);
+
+if ($retmark===false)
+	$plantilla=substr($plantilla,0,$start).substr($plantilla,$final);
+else	
+	{
+	if ($retmark=='') $retmark=$mark;
+	$plantilla=substr($plantilla,0,$start).'{'.$retmark.'}'.substr($plantilla,$final);
+	}
+	
+return $ret;
 }
 ?>
-
-<center>
-<table>
-<tr><td bgcolor="#55aaff">
-<form method="get" action="<?echo  $_SERVER['PHP_SELF']; ?>">
-
-<table>
-<tr><td colspan=2>
-<center>
-<b>Enter any domain name, ip address or AS handle you would like to query whois for</b>
-<br></br><br></br>
-<input name="query"></input> <input type="submit" value="Whois"></input>
-</center>
-</td></tr>
-
-<tr><td>
-<input type="radio" name="output" value="normal"></input> Show me regular output
-<br></br>
-<input type="radio" name="output" value="nice" checked></input> Show me HTMLized output
-<br></br>
-<input type="radio" name="output" value="object"></input> Show me the returned PHP object
-</td>
-
-<td align=right valign=bottom>
-<a href="http://phpwhois.sourceforge.net">
-<img border=0 src="whois.icon.png" alt=""></img><br></br>
-</a>
-</td>
-</tr>
-
-</table>
-</form>
-</td></tr>
-</table>
-</center>
-</body>
-</html>
