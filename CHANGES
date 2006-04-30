@@ -1,8 +1,17 @@
-2006/04/28  David Saez <david@ols.es>
+2006/04/29  David Saez <david@ols.es>
+		- improved .edu handler
+		- testsuite finished
+
+2006/04/28 David Saez <david@ols.es>
 		- fixed special non handled domains support
 		- added not supported domain .cy
 		- fixed typo in test.txt
 		- fixed directi handler detection
+		- testsuit finished
+		- improved whois.parser
+		- fixed joker handler
+		- minor fix to namejuice handler
+		- fixed krnic handler
 
 2006/04/08  David Saez <david@ols.es>
 		- Added handler for .eu
