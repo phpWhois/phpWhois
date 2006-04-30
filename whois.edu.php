@@ -43,17 +43,31 @@ class edu_handler
                 'domain.created' => 'Domain record activated:',
                 'owner'	=> 'Registrant:',
                 'admin' => 'Administrative Contact:',
-                'tech' => 'Technical Contact:'                
+                'tech' => 'Technical Contact:',
+                'billing' => 'Billing Contact:'             
 		            );
 		
 		$b = get_blocks($data_str['rawdata'], $items);
-		$b['owner'] = get_contact($b['owner']);
-		$b['admin'] = get_contact($b['admin']);
-		$b['tech'] = get_contact($b['tech']);
 		
-		if ($b['tech']['name'] == 'Same as above')
-			$b['tech'] = $b['admin'];
-		
+		if (isset($b['owner']))
+			{
+			$b['owner'] = get_contact($b['owner']);
+			array_pop($b['owner']['address']);
+			}
+			
+		if (isset($b['admin']))		
+			$b['admin'] = get_contact($b['admin']);
+			
+		if (isset($b['tech']))
+			{
+			$b['tech'] = get_contact($b['tech']);
+			if ($b['tech']['name'] == 'Same as above')
+				$b['tech'] = $b['admin'];
+			}
+			
+		if (isset($b['billing']))		
+			$b['billing'] = get_contact($b['billing']);
+			
 		format_dates($b, 'dmy');
 
 		$r['regrinfo'] = $b;
