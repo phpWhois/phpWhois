@@ -58,8 +58,13 @@ class pl_handler
 		$r = get_blocks($data_str['rawdata'], $items);
 		
 		if (isset($r['tech']))
-			$r['tech'] = generic_parser_b($r['tech'], $fields, 'ymd', false);
-
+			{
+			if ($r['tech'] == 'data restricted')
+				unset($r['tech']);
+			else
+				$r['tech'] = generic_parser_b($r['tech'], $fields, 'ymd', false);
+			}
+			
 		if (isset($r['owner']))
 			{
 			if ($r['owner'] == 'data restricted')
@@ -69,8 +74,12 @@ class pl_handler
 			
 			$r['domain'] = generic_parser_b($r['domain'], $fields, 'ymd', false);
 		
-			unset($r['domain']['handle']);
-			
+			if (isset($r['domain']['handle']))
+				{
+				$r['owner']['handle'] = $r['domain']['handle'];
+				unset($r['domain']['handle']);
+				}
+				
 			// Get name servers
 			$found = false;
 			$ns = array();
@@ -93,6 +102,8 @@ class pl_handler
 				}
 			
 			$r['domain']['nserver'] = $ns;	
+			$r['registered'] = 'yes';
+			
 			$r = array ( 'regrinfo' => $r );
 			}
 		else

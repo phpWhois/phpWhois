@@ -46,7 +46,7 @@ if (isSet($_GET['query']))
 	$whois = new Whois();
 	
 	// Set to true if you want to allow proxy requests
-	$allowproxy= false;
+	$allowproxy = false;
 	
  	// uncomment the following line to get faster but less acurate results
  	// $whois->deep_whois = false;
@@ -101,11 +101,13 @@ if (isSet($_GET['query']))
 				{
 				$winfo = implode($whois->Query['errstr'],"\n<br></br>");
 				}       
-	}
+		}
 	
 	$resout = str_replace('{result}', $winfo, $resout);
-}
-
+	}
+else
+	$resout = '';
+	
 echo str_replace('{results}', $resout, $out);
 
 //-------------------------------------------------------------------------

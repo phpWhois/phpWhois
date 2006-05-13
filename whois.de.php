@@ -48,24 +48,24 @@ class de_handler
 		{
 
 		$items = array(
-                'domain.name' => 'Domain:',
-                'domain.nserver' => 'Nserver',
-				'domain.status' => 'Status:',
-                'domain.changed' => 'Changed:',
-                'domain.desc.' => 'Descr:',
-				'owner' => '[Holder]',
-                'admin' => '[Admin-C]',
-                'tech' =>	'[Tech-C]',
-                'zone' => '[Zone-C]'
+			'domain.name' =>	'Domain:',
+			'domain.nserver.' =>	'Nserver:',
+			'domain.status' =>	'Status:',
+			'domain.changed' =>	'Changed:',
+			'domain.desc.' =>	'Descr:',
+			'owner' =>	'[Holder]',
+			'admin' =>	'[Admin-C]',
+			'tech' =>	'[Tech-C]',
+			'zone' =>	'[Zone-C]'
 		            );
 
 		$extra = array(
-                'address:' => 'address.street',
-                'city:' => 'address.city',
-				'pcode:' => 'address.pcode',
-                'country:' => 'address.country',
-				'name:' => 'name',
-                'remarks:' => ''
+			'address:' => 'address.street',
+			'city:' => 'address.city',
+			'pcode:' => 'address.pcode',
+			'country:' => 'address.country',
+			'name:' => 'name',
+			'remarks:' => ''
 		            );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
