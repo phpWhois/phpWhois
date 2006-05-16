@@ -1,13 +1,22 @@
+2006/05/16  David Saez <david@ols.es>
+		- added handler for .sc (thanx to
+		  Hans-Peter Kohnle)
+
+2006/05/08  David Saez <david@ols.es>
+		- fixed exmaple.php
+		- fixed .pl and .de handler
+
 2006/04/29  David Saez <david@ols.es>
 		- improved .edu handler
 		- testsuite finished
-
+		- proxy support
+		- added template for example.php
+		
 2006/04/28 David Saez <david@ols.es>
 		- fixed special non handled domains support
 		- added not supported domain .cy
 		- fixed typo in test.txt
 		- fixed directi handler detection
-		- testsuit finished
 		- improved whois.parser
 		- fixed joker handler
 		- minor fix to namejuice handler

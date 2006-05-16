@@ -22,6 +22,7 @@ mx           	nic.mx
 nl		domain-registry.nl
 nu		nunames.nu
 pl		nic.pl
+sc		admin.sc
 se		nic-se.se
 uk		olsns.co.uk
 us		neustar.us
