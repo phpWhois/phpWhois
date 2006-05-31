@@ -52,7 +52,7 @@ class Whois extends WhoisClient
 		// Load DATA array
 		@require('whois.servers.php');
 
-		if ( ( substr( php_uname(), 0, 7 ) == "Windows" ) )
+		if ( ( substr( php_uname(), 0, 7 ) == 'Windows' ) )
 			$this->windows = true;
 		else
 			$this->windows = false;
@@ -158,13 +158,17 @@ class Whois extends WhoisClient
 				// DNS lookups on 'whois-servers.net'.
 				// Assumes a valid DNS response indicates a recognised tld (!?)
 
+				$cname = $tld.'.whois-servers.net';
+				
+				if (gethostbyname($cname) == $cname) continue;
+				/*
 				if ($this->windows)
 					$cname = $this->checkdnsrr_win($tld.'.whois-servers.net', 'CNAME');
 				else
 					$cname = checkdnsrr($tld.'.whois-servers.net', 'CNAME');
 
 				if (!$cname) continue;
-			
+				*/
 				//This also works
 				//$server = gethostbyname($tld.".whois-servers.net");
 				$server = $tld.'.whois-servers.net';
@@ -219,8 +223,8 @@ class Whois extends WhoisClient
 		{
 		if (!empty($hostName))
 			{
-			if ($recType == '')
-				$recType = "MX";
+			if ($recType == '')	$recType = 'MX';
+			
 			exec("nslookup -type=$recType $hostName", $result);
 			// check each line to find the one that starts with the host
 			// name. If it exists thenthe function succeeded.
@@ -249,9 +253,9 @@ class Whois extends WhoisClient
 		if (!isset($result['regrinfo']['registered']))
 			{
 			if ($this->windows)
-				$has_ns = $this->checkdnsrr_win($domain, "NS");
+				$has_ns = $this->checkdnsrr_win($domain, 'NS');
 			else
-				$has_ns = checkdnsrr($domain, "NS");
+				$has_ns = checkdnsrr($domain, 'NS');
 
 			if ($has_ns)
 				$result['regrinfo']['registered'] = 'yes';

@@ -1,3 +1,6 @@
+2006/05/31	David Saez <david@ols.es>
+		- Fixed bug #1495389
+
 2006/05/16  David Saez <david@ols.es>
 		- added handler for .sc (thanx to
 		  Hans-Peter Kohnle)
