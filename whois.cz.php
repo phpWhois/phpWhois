@@ -119,27 +119,27 @@ class cz_handler
 				$reg['bill'] = $blocks[$bill];
 			}
 			
-		unset($reg['domain']['tech-c']);
-		unset($reg['domain']['admin-c']);
-		unset($reg['domain']['bill-c']);
+		if (isset($reg['domain']['tech-c'])) unset($reg['domain']['tech-c']);
+		if (isset($reg['domain']['admin-c'])) unset($reg['domain']['admin-c']);
+		if (isset($reg['domain']['bill-c'])) unset($reg['domain']['bill-c']);
 		
-		unset($reg['owner']['tech-c']);
-		unset($reg['owner']['admin-c']);
-		unset($reg['owner']['bill-c']);
+		if (isset($reg['owner']['tech-c'])) unset($reg['owner']['tech-c']);
+		if (isset($reg['owner']['admin-c'])) unset($reg['owner']['admin-c']);
+		if (isset($reg['owner']['bill-c'])) unset($reg['owner']['bill-c']);
 		
-		unset($reg['admin']['tech-c']);
-		unset($reg['admin']['admin-c']);
-		unset($reg['admin']['bill-c']);
+		if (isset($reg['admin']['tech-c'])) unset($reg['admin']['tech-c']);
+		if (isset($reg['admin']['admin-c'])) unset($reg['admin']['admin-c']);
+		if (isset($reg['admin']['bill-c'])) unset($reg['admin']['bill-c']);
 
-		unset($reg['tech']['tech-c']);
-		unset($reg['tech']['admin-c']);
-		unset($reg['tech']['bill-c']);
+		if (isset($reg['tech']['tech-c'])) unset($reg['tech']['tech-c']);
+		if (isset($reg['tech']['admin-c'])) unset($reg['tech']['admin-c']);
+		if (isset($reg['tech']['bill-c'])) unset($reg['tech']['bill-c']);
 		
 		if (isset($reg['bill']))
 			{
-			unset($reg['bill']['tech-c']);
-			unset($reg['bill']['admin-c']);
-			unset($reg['bill']['bill-c']);
+			if (isset($reg['bill']['tech-c'])) unset($reg['bill']['tech-c']);
+			if (isset($reg['bill']['admin-c'])) unset($reg['bill']['admin-c']);
+			if (isset($reg['bill']['bill-c'])) unset($reg['bill']['bill-c']);
 			}
 
 		format_dates($reg,'Ymd');

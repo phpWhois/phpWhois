@@ -30,8 +30,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* dedicated to klopfer, *24.07.1999, +21.01.2001         */
 /* based upon brnic.whois by Marcelo Sanches  msanches@sitebox.com.br */
 
-if (!defined("__AT_HANDLER__"))
-	define("__AT_HANDLER__", 1);
+if (!defined('__AT_HANDLER__'))
+	define('__AT_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
@@ -54,56 +54,56 @@ class at_handler
 			);
 
 		$contacts = array(
-                    "owner-c" => "owner",
-                    "admin-c" => "admin",
-                    "tech-c" => "tech",
-                    "billing-c" => "billing",
-                    "zone-c" => "zone"
+                    'owner-c' => 'owner',
+                    'admin-c' => 'admin',
+                    'tech-c' => 'tech',
+                    'billing-c' => 'billing',
+                    'zone-c' => 'zone'
 		                );
 
-		$r["regyinfo"] = array(
-                    "referrer" => "http://www.nic.at",
-                    "registrar" => "NIC-AT"
+		$r['regyinfo'] = array(
+                    'referrer' => 'http://www.nic.at',
+                    'registrar' => 'NIC-AT'
                     );
 
-		$reg = generic_parser_a($data_str["rawdata"], $translate, $contacts, 'domain', 'Ymd');
+		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
-		if (isset($reg["domain"]["remarks"]))
-			unset($reg["domain"]["remarks"]);
+		if (isset($reg['domain']['remarks']))
+			unset($reg['domain']['remarks']);
 
-		if (isset($reg["domain"]["descr"]))
+		if (isset($reg['domain']['descr']))
 			{
-			while (list($key, $val) = each($reg["domain"]["descr"]))
+			while (list($key, $val) = each($reg['domain']['descr']))
 				{
-				$v = trim(substr(strstr($val, ":"), 1));
-				if (strstr($val, "[organization]:"))
+				$v = trim(substr(strstr($val, ':'), 1));
+				if (strstr($val, '[organization]:'))
 					{
-					$reg["owner"]["organization"] = $v;
+					$reg['owner']['organization'] = $v;
 					continue;
 					}
-				if (strstr($val, "[phone]:"))
+				if (strstr($val, '[phone]:'))
 					{
-					$reg["owner"]["phone"] = $v;
+					$reg['owner']['phone'] = $v;
 					continue;
 					}
-				if (strstr($val, "[fax-no]:"))
+				if (strstr($val, '[fax-no]:'))
 					{
-					$reg["owner"]["fax"] = $v;
+					$reg['owner']['fax'] = $v;
 					continue;
 					}
-				if (strstr($val, "[e-mail]:"))
+				if (strstr($val, '[e-mail]:'))
 					{
-					$reg["owner"]["email"] = $v;
+					$reg['owner']['email'] = $v;
 					continue;
 					}
 
-				$reg["owner"]["address"][$key] = $v;
+				$reg['owner']['address'][$key] = $v;
 				}
 
-			unset($reg["domain"]["descr"]);
+			if (isset($reg['domain']['descr'])) unset($reg['domain']['descr']);
 			}
 
-		$r["regrinfo"] = $reg;
+		$r['regrinfo'] = $reg;
 		return ($r);
 		}
 	}

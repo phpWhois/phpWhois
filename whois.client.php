@@ -90,7 +90,7 @@ class WhoisClient {
 		$this->Query['string'] = $string;
 		
 		// clear error description
-		unset($this->Query['errstr']);
+		if (isset($this->Query['errstr'])) unset($this->Query['errstr']);
 		
 		if (!isset($this->Query['server'])) {
 			$this->Query['status'] = -1;

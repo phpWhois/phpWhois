@@ -29,35 +29,35 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if(!defined("__APNIC_HANDLER__"))
-  define("__APNIC_HANDLER__",1);
+if(!defined('__APNIC_HANDLER__'))
+  define('__APNIC_HANDLER__',1);
 
 class apnic_handler {
 
   function parse ($data_str, $query)
   {
   $translate = array (
-                      "fax-no" => "fax",
-                      "e-mail" => "email",
-                      "nic-hdl" => "handle",
-                      "person" => "name",
-                      "country" => "address",
-                      "netname" => "name",
-                      "descr" => "desc"
+                      'fax-no' => 'fax',
+                      'e-mail' => 'email',
+                      'nic-hdl' => 'handle',
+                      'person' => 'name',
+                      'country' => 'address',
+                      'netname' => 'name',
+                      'descr' => 'desc'
                       );
 
   $contacts = array (
-                      "admin-c" => "admin",
-                      "tech-c" => "tech"
+                      'admin-c' => 'admin',
+                      'tech-c' => 'tech'
                       );
 
-  $r = generic_parser_a($data_str,$translate,$contacts,"network",'Ymd');
+  $r = generic_parser_a($data_str,$translate,$contacts,'network','Ymd');
 
-  $r["owner"]["organization"] = $r["network"]["desc"][0];
-  unset($r["network"]["desc"][0]);
-  $r["owner"]["address"]=$r["network"]["desc"];
-  unset($r["network"]["desc"]);
-  unset($r["network"]["address"]);
+  $r['owner']['organization'] = $r['network']['desc'][0];
+  if (isset($r['network']['desc'][0])) unset($r['network']['desc'][0]);
+  $r['owner']['address'] = $r['network']['desc'];
+  if (isset($r['network']['desc'])) unset($r['network']['desc']);
+  if (isset($r['network']['address'])) unset($r['network']['address']);
   return $r;
   }
 

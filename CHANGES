@@ -1,3 +1,6 @@
+200&/06/12  David Saez <david@ols.es>
+		- More PHP5 friendly (from Bug #1502777)
+
 2006/05/31	David Saez <david@ols.es>
 		- Fixed bug #1495389
 
