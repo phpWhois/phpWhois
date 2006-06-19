@@ -53,9 +53,12 @@ class ripe_handler
 
 		$r = generic_parser_a($data_str, $translate, $contacts, 'network');
 
-		$r['owner']['organization'] = $r['network']['desc'];
-		unset($r['network']['desc']);
-
+		if (isset($r['network']['desc']))
+			{
+			$r['owner']['organization'] = $r['network']['desc'];
+			unset($r['network']['desc']);
+			}
+			
 		if (isset($r['admin']['abuse-mailbox']))
 			{
 			$r['abuse']['email'] = $r['admin']['abuse-mailbox'];

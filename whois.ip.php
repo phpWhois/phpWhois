@@ -100,6 +100,13 @@ class ip_handler extends WhoisClient
 			{
 			case 'whois.apnic.net':
 				$rawdata = $this->GetData($query);
+				
+				if (!isset($rawdata['rawdata']))
+					{
+					$rawdata = $data['rawdata'];
+					break;
+					}
+					
 				$rawdata = $rawdata['rawdata'];
 
 				while (list($ln, $line) = each($rawdata))
@@ -158,6 +165,13 @@ class ip_handler extends WhoisClient
 
 			case 'whois.lacnic.net':
 				$rawdata = $this->GetData($query);
+				
+				if (!isset($rawdata['rawdata']))
+					{
+					$rawdata = $data['rawdata'];
+					break;
+					}
+					
 				$rawdata = $rawdata['rawdata'];
 
 				while (list($ln, $line) = each($rawdata))
@@ -180,6 +194,13 @@ class ip_handler extends WhoisClient
 
 			case 'whois.ripe.net':
 				$rawdata = $this->GetData($query);
+				
+				if (!isset($rawdata['rawdata']))
+					{
+					$rawdata = $data['rawdata'];
+					break;
+					}
+					
 				$rawdata = $rawdata['rawdata'];
 
 				while (list($ln, $line) = each($rawdata))
@@ -197,11 +218,14 @@ class ip_handler extends WhoisClient
 				
 			default:
 				$rawdata = $this->GetData($query);
+				
 				if (isset($rawdata['rawdata']))
 					$rawdata = $rawdata['rawdata'];
+				else
+					$rawdata = $data['rawdata'];
 			}
 
-		$result['rawdata'] = $rawdata;
+		$result['rawdata'] = $rawdata;		
 		$result['regyinfo']['whois'] = $this->Query['server'];
 
 		if (isset($this->HANDLERS[$this->Query['server']]))

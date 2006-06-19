@@ -1,3 +1,6 @@
+2006/06/19  David Saez <david@ols.es>
+		- better handling of errors in whois.ip.php
+
 2006/06/12  David Saez <david@ols.es>
 		- More PHP5 friendly (from Bug #1502777)
 		- rawdata reflects all rwhois output
