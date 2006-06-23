@@ -1,3 +1,6 @@
+2006/06/23  David Saez <david@ols.es>
+		- fixed warning in whois.ip.afrinic
+
 2006/06/19  David Saez <david@ols.es>
 		- better handling of errors in whois.ip.php
 

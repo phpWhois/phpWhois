@@ -57,7 +57,7 @@ class afrinic_handler
 
 		$r = generic_parser_a($data_str, $translate, $contacts, 'network', 'Ymd');
 
-		if (isset($r['owner']['remarks']))
+		if (isset($r['owner']['remarks']) && is_array($r['owner']['remarks']))
 			while (list($key, $val) = each($r['owner']['remarks']))
 				{ 
 				$pos = strpos($val,'rwhois://');
