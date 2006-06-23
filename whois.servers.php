@@ -66,6 +66,7 @@ $this->DATA = array(
 	'net'		=> 'gtld',
 	'nl'		=> 'nl',
 	'nu'		=> 'nu',
+	'nz'		=> 'nz',
 	'org'		=> 'org',
 	'pl'		=> 'pl',
 	'pro'		=> 'pro',

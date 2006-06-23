@@ -18,9 +18,10 @@ is		isnic.is
 li		nic.li
 lu		dns.lu
 lt		domreg.lt
-mx           	nic.mx
+mx		nic.mx
 nl		domain-registry.nl
 nu		nunames.nu
+nz		dnc.org.nz
 pl		nic.pl
 sc		admin.sc
 se		nic-se.se
