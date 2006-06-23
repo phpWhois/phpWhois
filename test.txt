@@ -10,7 +10,6 @@ ch		creart.ch blaueskreuz.ch
 cn		cnnic.net.cn
 cz		nic.cz
 de		4ever.de
-es		ols.es
 fm		dot.fm
 hu		nic.hu
 ie		domainregistry.ie

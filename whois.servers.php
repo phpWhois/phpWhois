@@ -106,7 +106,7 @@ $this->WHOIS_SPECIAL = array(
 		'by'	 => '',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.{tld}',
 		'cy'	 => '',
-		'es'	 => 'http://www.interdominios.com/dominios_es.aspx?whoisdomain={domain}.{tld}',
+		'es'	 => '',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.{tld}',
 		'in'     => 'whois.ncst.ernet.in',
