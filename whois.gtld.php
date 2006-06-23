@@ -66,7 +66,7 @@ class gtld_handler extends WhoisClient
 						'BRANDON GRAY INTERNET SERVICES, INC. DBA NAMEJUICE.COM' => 'namejuice',
 						'BULKREGISTER.COM, INC.' => 'bulkr',
 						'BULKREGISTER, LLC.' => 'bulkr',
-                        'CHINESEDOMAINS, LLC'	=> 'chdom',
+						'CHINESEDOMAINS, LLC'	=> 'chdom',
                         'COMPUTER SERVICES LANGENBACH GMBH DBA JOKER.COM' => 'joker',
                         'CORE INTERNET COUNCIL OF REGISTRARS' => 'core',
 						'CRONON AG BERLIN, NIEDERLASSUNG REGENSBURG' =>	'cronon',

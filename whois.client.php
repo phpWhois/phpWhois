@@ -60,7 +60,7 @@ class WhoisClient {
 		);
 
 	// This release of the package
-	var $CODE_VERSION = '4.1.0';
+	var $CODE_VERSION = '4.1.1';
 	
 	// Full code and data version string (e.g. 'Whois2.php v3.01:16')
 	var $VERSION;
