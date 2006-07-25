@@ -271,9 +271,11 @@ class WhoisClient {
 		$output = strip_tags($output);
 		
 		//$output = html_entity_decode($output); needs 4.3.0
+		/*
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES); 
 		$trans_tbl = array_flip ($trans_tbl); 
 		$output = strtr($output, $trans_tbl);		
+		*/
 			
 		$output = explode("\n",$output);
 

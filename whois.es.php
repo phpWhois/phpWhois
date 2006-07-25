@@ -44,63 +44,42 @@ class es_handler
 	{
 
 	function parse($data_str, $query)
-		{
-
+		{		
 		$items = array(
-                'domain.name' => 'Dominio:',
-                'domain.created' => 'Fecha de registro:',
-				'domain.expires' => 'Fecha de caducidad:',
-                'domain.nserver.0' => 'DNS primaria:',
-                'domain.nserver.1' => 'DNS secundaria:',
-                'owner.name' => 'Registrante:',
-                'admin' => 'Contacto administrativo:',
-                'billing' => 'Contacto de cobro:',
-                'tech' => 'Contacto técnico:'
+                'domain.created' => 'Fecha de Alta:',
+				'domain.expires' => 'Fecha de Caducidad:',
+                'owner.name' => 'Titular:',
+                'admin' => 'Contacto Administrativo:',
+                'tech' => 'Contacto T&eacute;cnico:',
+                'domain.nserver' => 'Servidores DNS:'
 		            );
 
 		$extra = array(
-                'e.:' => 'email',
-                't.:' => 'phone',
-                'f.:' => 'fax'
+				'nombre:' => 'name',
+                'organizaci&oacute;n:' => 'organization',
+                'direcci&oacute;n:' => 'address.street',
+                'poblaci&oacute;n:' => 'address.city',
+                'c&oacute;digo Postal:' => 'address.pcode',
+                'pa&iacute;s:' => 'address.country'
 		            );
 
-		$rawdata = array();
-		$data_ok = false;
-		$final = false;
+		array_shift($data_str['rawdata']);
+		array_shift($data_str['rawdata']);
 		
-		while (list($key, $val) = each($data_str['rawdata']))
-			{
-			if (substr($val,0,9)=='Dominio: ') 
-				$data_ok = true;
-			else
-				if (!$data_ok) continue;
-			
-			if (substr($val,0,4)=='DNS ') $final = true;
-			
-			if ($val=='' && $final) break;
-			
-			$rawdata[] = $val;
-			}
-
-		$r['regrinfo'] = get_blocks($rawdata, $items);
+		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 		
 		if (isset($r['regrinfo']['admin']))   $items['admin'].=' '.$r['regrinfo']['admin'];
-		if (isset($r['regrinfo']['billing'])) $items['billing'].=' '.$r['regrinfo']['billing'];
 		if (isset($r['regrinfo']['tech']))    $items['tech'].=' '.$r['regrinfo']['tech'];
 		
-		$r['regrinfo'] = get_blocks($rawdata, $items);
+		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 		
-		$r['rawdata'] = $rawdata;
+		$r['rawdata'] = $data_str['rawdata'];
 		
-		if (isset($r['regrinfo']['domain']['name']))
+		if (isset($r['regrinfo']['domain']['created']))
 			{
 			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
-			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing'], $extra);
 			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
 			$r['regrinfo']['registered'] = 'yes';
-
-			if (is_array($r['regrinfo']['domain']['nserver'][0]))
-				unset($r['regrinfo']['domain']['nserver'][0]);
 			}
 		else
 			{

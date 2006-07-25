@@ -1,3 +1,6 @@
+2006/07/25  David Saez <david@ols.es>
+		- enabled again .es handler
+
 2006/06/23  David Saez <david@ols.es>
 		- fixed warning in whois.ip.afrinic
 		- added handler for .nz
