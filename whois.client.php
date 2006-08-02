@@ -104,6 +104,14 @@ class WhoisClient {
 			substr($this->Query['server'],0,8)=='https://')
 			{
 			$output = $this->httpQuery($this->Query['server']);
+			
+			if (!$output)
+				{
+				$this->Query['status'] = -1;
+				$this->Query['errstr'][] = 'Connect failed to: '.$this->Query['server'];
+				return(array());
+				}
+				
 			$query_args = substr(strchr($this->Query['server'],'?'),1);
 			$this->Query['server'] = strtok($this->Query['server'],'?');
 			
@@ -233,7 +241,10 @@ class WhoisClient {
 	*   Convert html output to plain text
 	*/
 	function httpQuery ($query) {
-		$lines = file($this->Query['server']);
+		$lines = @file($this->Query['server']);
+		
+		if (!$lines) return false;
+		
 		$output = '';
 		$pre = '';
 

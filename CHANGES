@@ -1,3 +1,6 @@
+2006/08/02  David Saez <david@ols.es>
+		- Fixed bug #1495871: failed to open stream
+
 2006/07/25  David Saez <david@ols.es>
 		- enabled again .es handler
 
