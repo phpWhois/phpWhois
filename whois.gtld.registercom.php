@@ -42,6 +42,7 @@ class registercom_handler
 		$items = array(
                   'owner#0' => 'Registrant Info:',
                   'owner#1' => 'Organization:',
+                  'owner#2' => 'Registrant:',
                   'admin' => 'Administrative',
                   'tech' => 'Technical',
                   'zone' => 'Zone',

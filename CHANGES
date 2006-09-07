@@ -1,3 +1,6 @@
+2006/09/07  David Saez <david@ols.es>
+		- Fixed register.com owner detection
+
 2006/08/02  David Saez <david@ols.es>
 		- Fixed bug #1495871: failed to open stream
 
