@@ -1,3 +1,11 @@
+2006/09/29  David Saez <david@ols.es>
+		- Fixed .in whois server name
+		- Added handler for .in
+		- Added gtld handler for psiusa (Patch #1539553)
+		- Fixed .za.net handler
+		- testsuite domain listed updated
+		- ip handler improvments from bug #1533099
+
 2006/09/07  David Saez <david@ols.es>
 		- Fixed register.com owner detection
 
