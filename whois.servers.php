@@ -53,6 +53,7 @@ $this->DATA = array(
 	'fm'		=> 'fm',
 	'hu'		=> 'hu',
 	'ie'		=> 'ie',
+	'in'		=> 'in',
 	'info'		=> 'info',
 	'int'		=> 'int',
 	'is'		=> 'is',
