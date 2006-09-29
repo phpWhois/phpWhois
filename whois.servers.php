@@ -109,7 +109,6 @@ $this->WHOIS_SPECIAL = array(
 		'es'	 => 'http://www.neodigit.es/dominios/whois.php?dom={domain}.es',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.gs',
-		'in'     => 'whois.ncst.ernet.in',
 		'mobi'	 => 'whois.dotmobiregistry.net',
 		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.ms',
 		'mt'	 => 'http://www.um.edu.mt/cgi-bin/nic/whois?domain={domain}.mt',
