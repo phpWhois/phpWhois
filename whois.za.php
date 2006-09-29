@@ -55,11 +55,11 @@ class za_handler
 
 		while (list($key, $line) = each($data_str['rawdata']))
 			{
-			if (strpos($line, ' Contact ') !=  = false)
+			if (strpos($line, ' Contact ') !== false)
 				{
 				$pos = strpos($line, ':');
 
-				if ($pos !=  = false)
+				if ($pos !== false)
 					{
 					$rawdata[] = substr($line, 0, $pos + 1);
 					$rawdata[] = trim(substr($line, $pos + 1));
