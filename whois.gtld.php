@@ -92,6 +92,7 @@ class gtld_handler extends WhoisClient
 						'NOMINALIA INTERNET S.L.' => 'nominalia',
                         'REGISTER.COM, INC.' => 'registercom',
                         'RESERVED-INTERNET ASSIGNED NUMBERS AUTHORITY' => 'iana',
+                        'PSI-USA, INC. DBA DOMAIN ROBOT' => 'psiusa',
                         'SCHLUND+PARTNER AG' => 'schlund',
                         'STARGATE HOLDINGS CORP.' => 'stargate',
 						'TLDS, INC. DBA SRSPLUS' => 'srsplus',
