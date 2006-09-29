@@ -96,6 +96,9 @@ class ip_handler extends WhoisClient
 				break;
 				}
 
+		// More queries to get more accurated data
+		$more_data = array();
+		
 		switch ($this->Query['server'])
 			{
 			case 'whois.apnic.net':
@@ -129,38 +132,42 @@ class ip_handler extends WhoisClient
 				while (list($ln, $line) = each($rawdata))
 					{
 					$s = strstr($line, '(NETBLK-');
+					
+					if ($s == '')
+						$s = strstr($line, '(NET-');
+						
 					if ($s != '')
 						{
-						$newquery = substr(strtok($s, ') '), 1);
-						break;
+						$netname = substr(strtok($s, ') '), 1);
+						
+						if ($newquery == '')
+							$newquery = $netname;
+						else
+							$more_data[] = array (
+												'query' => '!'.$netname,
+												'server' => 'whois.arin.net',
+												'handler' => 'arin'
+												);
 						}
-
-					$s = strstr($line, '(NET-');
-
-					if ($s != '')
-						{
-						$newquery = substr(strtok($s, ') '), 1);
-						break;
-						}
-					}
-
-				if ($newquery != "")
-					$result['regyinfo']['netname'] = $newquery;
-
-				if (strstr($newquery, 'BRAZIL-BLK'))
-					{
-					$this->Query["server"] = 'whois.registro.br';
-					$result["regyinfo"]["registrar"] = 'Comite Gestor da Internet no Brasil';
-					$rawdata = $this->GetData($query);
-					$rawdata = $rawdata['rawdata'];
-					$newquery = '';
 					}
 
 				if ($newquery != '')
 					{
+					$result['regyinfo']['netname'] = $newquery;
+
+					if (strstr($newquery, 'BRAZIL-BLK'))
+						{
+						$this->Query['server'] = 'whois.registro.br';
+						$result['regyinfo']['registrar'] = 'Comite Gestor da Internet no Brasil';
+						$rawdata = $this->GetData($query);
+						$rawdata = $rawdata['rawdata'];
+						break;
+						}
+
 					$rawdata = $this->GetData('!'.$newquery);
 					$rawdata = $rawdata['rawdata'];
 					}
+					
 				break;
 
 			case 'whois.lacnic.net':
@@ -273,25 +280,55 @@ class ip_handler extends WhoisClient
 		//Check if Referral rwhois server has been reported
 
 		if (isset($result['regrinfo']['rwhois']))
-			{			
-			$this->Query['server'] = $result['regrinfo']['rwhois'];
-			unset($result['regrinfo']['rwhois']);				
+			{
+			$more_data[] = array (
+									'query' => $query,
+									'server' => $result['regrinfo']['rwhois'],
+									'handler' => 'rwhois'
+									);
+			$result['regyinfo']['rwhois'] = $result['regrinfo']['rwhois'];
+			unset($result['regrinfo']['rwhois']);
+			}
 			
-			//If so, get customer data from rwhois			
-			$this->Query['handler'] = 'rwhois';		
-			$this->Query['file'] = 'whois.rwhois.php';
+		// more queries can be done to get more accurated data
 
-			$rwdata = $this->GetData($query);
+		foreach ($more_data as $srv_data)		
+			{			
+			$this->Query['server'] = $srv_data['server'];
+			unset($this->Query['handler']);			
+			$rwdata = $this->GetData($srv_data['query']);
 
 			if (!empty($rwdata))
-				{			
+				{
+				// Merge rawdata results
 				$result['rawdata'][] = '';
-				$result['rawdata'] = array_merge($result['rawdata'], $rwdata['rawdata']);
 				
-				$rwres = $this->Process($rwdata);
-			
-				$result['regrinfo']['customer'] = $rwres;
-				$result['regyinfo']['rwhois'] = $this->Query['server'];				
+				foreach ($rwdata['rawdata'] as $line)
+					$result['rawdata'][] = $line;
+				
+				$this->Query['handler'] = $srv_data['handler'];
+				$this->Query['file'] = 'whois.'.$this->Query['handler'].'.php';
+				$rwres = $this->Process($rwdata['rawdata']);
+				
+				if (isset($rwres['network']))
+					$result['regrinfo']['network'] = $rwres['network'];
+					
+				if (isset($rwres['owner']))
+					{
+					if (!isset($result['regrinfo']['provider']))
+						$result['regrinfo']['provider'] = $result['regrinfo']['owner'];
+					$result['regrinfo']['owner'] = $rwres['owner'];
+					}
+					
+				if (isset($rwres['tech']))
+					{
+					$result['regrinfo']['tech'] = $rwres['tech'];
+					}				
+
+				if (isset($rwres['abuse']))
+					{
+					$result['regrinfo']['abuse'] = $rwres['abuse'];
+					}
 				}
 			}
 

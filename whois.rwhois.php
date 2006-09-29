@@ -51,8 +51,8 @@ class rwhois_handler
 						'network:Tech-Contact;I:' => 'tech.email',
 						'network:Admin-Contact;I:' => 'admin.email'
 						);
-												
-		$res = generic_parser_b($data_str['rawdata'], $items, 'Ymd', false);
+
+		$res = generic_parser_b($data_str, $items, 'Ymd', false);
 		
 		unset($res['disclaimer']);
 		return ($res);

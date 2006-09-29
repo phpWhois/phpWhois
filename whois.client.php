@@ -203,7 +203,7 @@ class WhoisClient {
 		$result['rawdata'] = $output;
 
 		// If we have a handler, post-process it with that
-		if(isSet($this->Query['handler']))
+		if (isSet($this->Query['handler']))
 			$result = $this->Process($result,$deep_whois);
 
 		// Set whois server
