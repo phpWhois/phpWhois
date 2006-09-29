@@ -10,13 +10,15 @@ ch		creart.ch blaueskreuz.ch
 cn		cnnic.net.cn
 cz		nic.cz
 de		4ever.de
+es		ols.es
 fm		dot.fm
 hu		nic.hu
 ie		domainregistry.ie
+in		registry.in
 is		isnic.is
 li		nic.li
+lt      domreg.lt
 lu		dns.lu
-lt		domreg.lt
 mx		nic.mx
 nl		domain-registry.nl
 nu		nunames.nu
@@ -57,6 +59,7 @@ netsol		networksolutions.com
 nicline		nicline.com
 nominalia	nominalia.com
 opensrsnet	tucows.com
+psiusa		urllog.net
 registercom	register.com
 schlund		schlund.com
 srsplus		olsns.com
@@ -70,6 +73,7 @@ biz		neulevel.biz
 cat		dominis.cat
 coop	sex.coop nic.coop
 edu		berkeley.edu
+eu		eurid.eu
 info	afilias.info
 int		who.int
 mobi	mtld.mobi
@@ -78,17 +82,19 @@ name	peter.morgan.name
 org		example.org
 pro		registrypro.pro
 travel	whois.travel
+za.net	sex.za.net
 
 // IP whois
 
 afrinic		66.18.70.6
 apnic		218.165.121.114
-arin            207.217.120.54
-arin+rwhois     70.84.47.210
+arin		207.217.120.54
+arin+rwhois	70.84.47.210
+arin+whois	63.95.254.3
 bripw		200.165.206.74
 krnic		210.178.148.129
 lacnic		200.44.33.31
-ripe            62.97.102.115
+ripe		62.97.102.115
 
 // ASN
 
