@@ -110,14 +110,12 @@ the following subkeys:
 		source		-> who provided that information
 		remarks		-> remarks
 
-	customer
+	provider
 	--------
 
-	when extra rwhois information about ip address space
-	delegation is available this subkey could contain the
-	following subkeys: owner, network, admin, tech, ...
-	which in turn could have the same subkeys as the same
-	keys in the previous level.
+	when extra rwhois or whois information about ip address space
+	delegation is available this subkey will contain the
+    information of the owner of the upstream ip block.
 
 Not all handlers fill values in each of the keys defined by the
 Common Object Model as not all registries return the same amount
@@ -125,7 +123,7 @@ of data about a domain or ip address. Also there are some differences
 on the format returned for some keys.
 
 Dates (created/changed/expires) are always returned in the format
-yyyy-mm-dd.
+yyyy-mm-dd when a handler is defined for the returned data.
 
 
 Writing handlers
