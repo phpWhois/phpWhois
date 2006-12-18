@@ -53,8 +53,11 @@ class apnic_handler {
 
   $r = generic_parser_a($data_str,$translate,$contacts,'network','Ymd');
 
-  $r['owner']['organization'] = $r['network']['desc'][0];
-  if (isset($r['network']['desc'][0])) unset($r['network']['desc'][0]);
+  if (isset($r['network']['desc'][0]))
+	{
+	$r['owner']['organization'] = $r['network']['desc'][0];
+	unset($r['network']['desc'][0]);
+	}
   $r['owner']['address'] = $r['network']['desc'];
   if (isset($r['network']['desc'])) unset($r['network']['desc']);
   if (isset($r['network']['address'])) unset($r['network']['address']);
