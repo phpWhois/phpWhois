@@ -70,7 +70,7 @@ class ca_handler
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
-		$r['regyinfo']['referrer'] = 'http://www.easydns.ca';
+		$r['regyinfo']['referrer'] = 'http://www.cira.ca/';
 		
 		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status']=='AVAIL')
 			$r['regrinfo']['registered'] = 'no';

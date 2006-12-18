@@ -68,6 +68,14 @@ class es_handler
 		
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 		
+		if (!isset($r['regrinfo']['domain']['created']) || is_array($r['regrinfo']['domain']['created']))
+			{
+			$r['regrinfo'] = array ( 'registered' => 'no');
+			$r['rawdata'] = $data_str['rawdata'];
+			$r['rawdata'][] = 'Domain not found';
+			return $r;
+			}
+		
 		if (isset($r['regrinfo']['admin']))   $items['admin'].=' '.$r['regrinfo']['admin'];
 		if (isset($r['regrinfo']['tech']))    $items['tech'].=' '.$r['regrinfo']['tech'];
 		
@@ -75,17 +83,9 @@ class es_handler
 		
 		$r['rawdata'] = $data_str['rawdata'];
 		
-		if (isset($r['regrinfo']['domain']['created']))
-			{
-			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
-			$r['regrinfo']['registered'] = 'yes';
-			}
-		else
-			{
-			$r['regrinfo']['registered'] = 'no';
-			$r['rawdata'][] = 'Domain not found';
-			}
+		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
+		$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
+		$r['regrinfo']['registered'] = 'yes';
 			
 		$r['regyinfo'] = array(
                 'referrer' => 'http://www.nic.es',

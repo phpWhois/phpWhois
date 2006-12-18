@@ -63,10 +63,21 @@ class iana_handler
 						
 		$r = get_blocks($data_str, $items);
 		
-		$r['owner'] = generic_parser_b($r['owner'],$fields,'ymd',false);
-		$r['admin'] = generic_parser_b($r['admin'],$fields,'ymd',false);
-		$r['tech'] = generic_parser_b($r['tech'],$fields,'ymd',false);
-
+		if (isset($r['owner']))
+			{
+			$r['owner'] = generic_parser_b($r['owner'],$fields,'ymd',false);
+			
+			if (isset($r['admin']))
+				$r['admin'] = generic_parser_b($r['admin'],$fields,'ymd',false);
+		
+			if (isset($r['tech']))
+				$r['tech'] = generic_parser_b($r['tech'],$fields,'ymd',false);
+				
+			$r['registered'] = 'yes';
+			}
+		else
+			$r['registered'] = 'no';
+			
 		return ($r);
 		}
 	}
