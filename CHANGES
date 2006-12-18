@@ -1,7 +1,9 @@
 2006/12/18
-		-  minor fixes to whois.ca.php, whois.es.php,
-		   whois.gtld.iana.php, whois.gtld.opensrsnet.php
-		   and whois.ip.apnic.php
+		- minor fixes to whois.ca.php, whois.es.php,
+		  whois.gtld.iana.php, whois.gtld.opensrsnet.php
+		  whois.ip.apnic.php, whois.biz.php and
+		  whois.gtld.psiusa.php
+		- added support and handler for .jobs
 
 2006/09/29  David Saez <david@ols.es>
 		- Fixed .in whois server name

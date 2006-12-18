@@ -78,6 +78,7 @@ class gtld_handler extends WhoisClient
 						'DOTSTER, INC.' =>	'dotster',
 						'DSTR ACQUISITION PA I, LLC DBA DOMAINBANK.COM' => 'domainbank',
 						'DSTR ACQUISITION VII, LLC' => 'dotregistrar',
+						'ENCIRCA INC' => 'encirca',
 						'ENOM, INC.' => 'enom',
 						'GO DADDY SOFTWARE, INC.' => 'godaddy',
 						'IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM' => 'dotregistrar',
