@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* joker.whois  1.10    David Saez <david@ols.es> */
 
-if (!defined("__JOKER_HANDLER__"))
-	define("__JOKER_HANDLER__", 1);
+if (!defined('__JOKER_HANDLER__'))
+	define('__JOKER_HANDLER__', 1);
 
 require_once('whois.parser.php');
 

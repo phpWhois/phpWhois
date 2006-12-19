@@ -52,7 +52,8 @@ while (list($key,$val)=each($contacts))
 		else
 			$blk=$r[$key];
 
-		$ret[$val]=$blocks[strtoupper($blk)];
+		$blk = strtoupper(strtok($blk,' '));
+		$ret[$val]=$blocks[$blk];
 		unset($r[$key]); 
 		}
 
@@ -117,8 +118,12 @@ while (list($key,$val)=each($rawdata))
            }
 	else $k=strtolower($k);
 
-	if ($k=='handle') $gkey = strtoupper($v);
-
+	if ($k=='handle')
+		{
+		$v = strtok($v,' ');
+		$gkey = strtoupper($v);
+		}
+		
 	if (isset($block[$k]) && is_array($block[$k]))
 		$block[$k][]=$v;
 	else
