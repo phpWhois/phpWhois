@@ -37,29 +37,36 @@ class lt_handler
 		{
 
 		$translate = array(
-					'e-mail' => 'email',
-					'nic-hdl' => 'handle',
-					'person' => 'name'
+					'contact nic-hdl:' => 'handle',
+					'contact name:' => 'name'
 					);
 
-		$contacts = array(
-                    'admin-c' => 'admin',
-                    'tech-c' => 'tech',
-                    'zone-c' => 'zone'
-		                );
+		$items = array(
+						'admin' 			=> 'Contact type:      Admin',
+						'tech'				=> 'Contact type:      Tech',
+						'zone'				=> 'Contact type:      Zone',
+						'owner.name'		=> 'Registrar:',
+						'owner.email'		=> 'Registrar email:',
+						'domain.status' 	=> 'Status:',
+						'domain.created'	=> 'Created:',
+						'domain.changed'	=> 'Last updated:',
+						'domain.nserver.'	=> 'NS:',
+						''		=> '%'
+						);
 
-		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
-		
-		if (isset($reg['domain']['holder/descr']))
-			{
-			$owner = $reg['domain']['holder/descr'];
-			$reg['owner']['organization'] = $owner[0];
-			array_shift($owner);
-			$reg['owner']['address'] = $owner;
-			unset($reg['domain']['holder/descr']);
-			}
+		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
-		$r['regrinfo'] = $reg;
+		if (isset($r['regrinfo']['admin']))
+			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'],$translate);
+			
+		if (isset($r['regrinfo']['tech']))
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'],$translate);
+			
+		if (isset($r['regrinfo']['zone']))
+			$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'],$translate);
+
+		$r = format_dates($r,'ymd');
+
 		$r['regyinfo'] = array(
                     'referrer' => 'http://www.domreg.lt',
                     'registrar' => 'DOMREG.LT'

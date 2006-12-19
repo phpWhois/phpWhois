@@ -49,7 +49,7 @@ class nl_handler
                   'domain.sponsor' => 'Record maintained by:',
                   'owner' => 'Registrant:',
                   'admin' => 'Administrative contact:',
-                  'tech' => 'Technical contact:',
+                  'tech' => 'Technical contact(s):',
                   'zone' => 'Registrar:'
 		            );
 		
@@ -64,15 +64,28 @@ class nl_handler
 			return $r;
 			}
 
-		$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-		$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
-		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
-		$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone']);
+		$r['regrinfo']['tech'] = $this->get_contact($r['regrinfo']['tech']);
+		$r['regrinfo']['owner'] = $this->get_contact($r['regrinfo']['owner']);
+		$r['regrinfo']['admin'] = $this->get_contact($r['regrinfo']['admin']);
+		$r['regrinfo']['zone'] = $this->get_contact($r['regrinfo']['zone']);
 
 		$r['regrinfo']['registered'] = 'yes';
 		format_dates($r, 'dmy');
 		
 		return ($r);
+		}
+		
+	function get_contact($data)
+		{
+		$r = get_contact($data);
+		
+		if (isset($r['name']) && preg_match('/^[A-Z0-9]+-[A-Z0-9]+$/',$r['name']))
+			{
+			$r['handle'] = $r['name'];
+			$r['name'] = array_shift ($r['address']);
+			}
+			
+		return $r;
 		}
 	}
 ?>
