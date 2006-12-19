@@ -106,30 +106,42 @@ foreach ($domains as $key => $domain)
 				// Add as it is
 				$results[$domain] = $result;
 				}
-			else
-				break;
 			}
 		else
 			echo "Handler for domain $domain gives same results as before ...\n";
 		}
 	}
 
+save_results();
+
+//--------------------------------------------------------------------------
+
+function save_results()
+{
+global $results;
+
 $fp = fopen('testsuite.txt','wt');
 fputs($fp, serialize($results));
 fclose($fp);
+}
 
 //--------------------------------------------------------------------------
 
 function get_answer($question)
 {
-echo "\n------ $question ? (y/n/a) ";
+echo "\n------ $question ? (y/n/a/c) ";
 
 while (true)
 	{
 	$res = trim(fgetc(STDIN));
 		
 	if ($res=='a') exit();
-	
+
+	if ($res=='c')
+		{
+		save_results();
+		exit();
+		}	
 	if ($res=='y') return true;
 	if ($res=='n') return false;
 	}
