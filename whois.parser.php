@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 //-------------------------------------------------------------------------
 
-function generic_parser_a ($rawdata,$translate,$contacts,$main='domain',$dateformat='dmy')
+function generic_parser_a ($rawdata, $translate, $contacts, $main='domain', $dateformat='dmy')
 {
 $blocks = generic_parser_a_blocks($rawdata,$translate,$disclaimer);
 
@@ -107,9 +107,9 @@ while (list($key,$val)=each($rawdata))
 
 	if (isset($translate[$k])) 
            {
-             $k=$translate[$k];
-	     if ($k=='') continue;
-	     if (strstr($k,'.'))
+            $k=$translate[$k];
+			if ($k=='') continue;
+			if (strstr($k,'.'))
                 {
                   eval("\$block".getvarname($k)."=\$v;");
                   continue;
@@ -232,6 +232,7 @@ while (list($key,$val) = each($rawdata))
 		$pos = strpos($val,$match);
 
 		if ($field != '' && $pos !== false) {
+
 			if ($val == $match) {
 				$found = true;
 				$endtag = '';
@@ -387,7 +388,7 @@ while (list($key,$val)=each($array))
 			$pos = strpos(strtolower($val),$match);
 			
 			if ($pos === false) continue;
-		
+
 			$itm = trim(substr($val,$pos+strlen($match)));
 
 			if ($field!='' && $itm!='')
@@ -479,7 +480,9 @@ while (list($key, $val) = each($res))
 			$res[$key]=get_date($val[0],$format);
 			}
 		else
+			{
 			$res[$key]=format_dates($val,$format);
+			}
 		}
 	else
 		{
@@ -568,7 +571,7 @@ while (!$ok)
 
 		if ($key!='y' && $val>1900)
 			{
-			$res[$key]=$res['y'];
+			$res[$key] = $res['y'];
 			$res['y']=$val;
 			$ok=false;
 			break;

@@ -1,8 +1,14 @@
+2006/12/19
+		- minor fixes to testsuite.php
+		- updated .nl handler
+
 2006/12/18
 		- minor fixes to whois.ca.php, whois.es.php,
 		  whois.gtld.iana.php, whois.gtld.opensrsnet.php
-		  whois.ip.apnic.php, whois.biz.php and
-		  whois.gtld.psiusa.php
+		  whois.ip.apnic.php, whois.biz.php,
+		  whois.gtld.psiusa.php, whois.parser.php
+		  whois.ch.php
+		- updated .lthandler
 		- added support and handler for .jobs
 
 2006/09/29  David Saez <david@ols.es>

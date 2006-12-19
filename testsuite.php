@@ -106,6 +106,8 @@ foreach ($domains as $key => $domain)
 				// Add as it is
 				$results[$domain] = $result;
 				}
+			else
+				break;
 			}
 		else
 			echo "Handler for domain $domain gives same results as before ...\n";
