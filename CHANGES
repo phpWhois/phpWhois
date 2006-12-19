@@ -1,6 +1,8 @@
 2006/12/19
 		- minor fixes to testsuite.php
 		- updated .nl handler
+		- enom has mixed with bulregister, so bulkr
+		  gtl handler has been removed
 
 2006/12/18
 		- minor fixes to whois.ca.php, whois.es.php,

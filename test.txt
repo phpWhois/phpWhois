@@ -34,8 +34,6 @@ ws		samoanic.ws
 
 alldomains	alldomains.com
 ascio		ascio.com
-chdom		naturebox.com
-bulkr		bulkregister.com
 buydomains	buydomains.com
 contender	domaincontender.com
 core		corenic.com
