@@ -52,6 +52,7 @@ class enom_handler
                   'domain.nserver'		=> 'Nameservers',
                   'domain.name#0'		=> 'Domain name:',
                   'domain.name#1'		=> 'Domain name-',
+                  'domain.sponsor'		=> 'Registration Service Provided By:',
                   'domain.status'		=> 'Status:',
                   'domain.created#0'	=> 'Creation date:',
                   'domain.expires#0'	=> 'Expiration date:',
