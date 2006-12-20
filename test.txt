@@ -63,7 +63,7 @@ registercom	register.com
 schlund		schlund.com
 srsplus		olsns.com
 stargate	stargate.com
-tvcorp		sex.tv
+tvcorp		www.tv
 
 // Other
 

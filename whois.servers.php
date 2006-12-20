@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* servers.whois	v17	ross golder	2003/02/09 */
 /* servers.whois	v16	mark jeftovic	2001/02/28 */
 
-$this->DATA_VERSION = '18';
+$this->DATA_VERSION = '19';
 
 $this->DATA = array(
 	'aero'		=> 'aero',
