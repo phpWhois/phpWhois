@@ -43,26 +43,28 @@ class registercom_handler
                   'owner#0' => 'Registrant Info:',
                   'owner#1' => 'Organization:',
                   'owner#2' => 'Registrant:',
+                  'owner#3'	=> 'Registrant Contact:',
                   'admin' => 'Administrative',
                   'tech' => 'Technical',
                   'zone' => 'Zone',
-                  'domain.sponsor' => 'Registrar Name....:',
+                  'domain.sponsor#0' => 'Registrar Name....:',
+                  'domain.sponsor#1' => 'Registration Service Provided By:',
                   'domain.nserver' => 'Domain servers in listed order:',
                   'domain.name' => 'Domain name:',
-                  'domain.created' => 'Created on..............:',
-                  'domain.expires' => 'Expires on..............:',
+                  'domain.created#0' => 'Created on..............:',
+                  'domain.created#1' => 'Creation date:',
+                  'domain.expires#0' => 'Expires on..............:',
+                  'domain.expires#1' => 'Expiration date:',
                   'domain.changed' => 'Record last updated on..:',
                   'domain.status' => 'Status:'
 		            );
 
 		$r = get_blocks($data_str, $items);
 
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-
-		if (isset($r['zone']))
-			$r['zone'] = get_contact($r['zone']);
+		if (isset($r['owner'])) $r['owner'] = get_contact($r['owner']);
+		if (isset($r['admin'])) $r['admin'] = get_contact($r['admin']);
+		if (isset($r['tech']))  $r['tech'] = get_contact($r['tech']);
+		if (isset($r['zone']))	$r['zone'] = get_contact($r['zone']);
 		
 		$r = format_dates($r, '-mdy');
 		return ($r);

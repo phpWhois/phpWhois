@@ -1,3 +1,6 @@
+2006/12/21
+		- fix/improvement for register.com handler
+
 2006/12/20
 		- Released version 4.1.2
 
