@@ -395,4 +395,62 @@ class WhoisClient {
 		// Return the result
 		return $handler->parse($result,$this->Query['string']);
 	}	
+	
+	/*
+	 * Does more (deeper) whois ...
+	 */
+	 
+	function DeepWhois ($query) {
+	
+		if (isset($this->result['regyinfo']['whois']))
+			$this->Query['server'] = $this->result['regyinfo']['whois'];
+
+		$subresult = $this->GetData($query);
+		
+		if (isset($subresult['rawdata']))
+			{
+			$this->result['rawdata'] = $subresult['rawdata'];
+		
+			@$this->Query['handler'] = $this->WHOIS_HANDLER[$this->result['regyinfo']['whois']];
+			
+			if (!empty($this->Query['handler']))
+				{			
+				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);
+				$regrinfo = $this->Process($this->result['rawdata']);
+				$this->result['regrinfo'] = $this->merge_results($this->result['regrinfo'], $regrinfo);
+				}
+			}
+		return $this->result;
+	}
+	
+	/*
+	 *  Merge results
+	 */
+	 
+	function merge_results($a1, $a2) {
+
+		reset($a2);
+	
+		while (list($key, $val) = each($a2))
+			{
+			if (isset($a1[$key]))
+				{
+				if (is_array($val))
+					{
+					if ($key != 'nserver')
+						$a1[$key] = $this->merge_results($a1[$key], $val);
+					}
+				else
+					{
+					$val = trim($val);
+					if ($val != '')
+						$a1[$key] = $val;
+					}
+				}
+			else
+				$a1[$key] = $val;
+			}
+	
+		return $a1;
+	}
 }

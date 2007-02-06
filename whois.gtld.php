@@ -37,7 +37,7 @@ require_once('whois.parser.php');
 class gtld_handler extends WhoisClient
 	{
 	// Deep whois ?
-	var $deep_whois = true;
+	//var $deep_whois = true;
 	
 	var $HANDLER_VERSION = '1.1';
 
@@ -58,58 +58,12 @@ class gtld_handler extends WhoisClient
                         'No match for ' => 'nodomain'
 	                     );
 
-	var $REGISTRARS = array(
-                        'ALABANZA, INC.' => 'bulkr',
-                        'ALLINDOMAINS, LLC' => 'alldomains',
-                        'ARSYS INTERNET, S.L. D/B/A NICLINE.COM' => 'nicline',
-						'ASCIO TECHNOLOGIES, INC.' => 'ascio',
-						'BRANDON GRAY INTERNET SERVICES, INC. DBA NAMEJUICE.COM' => 'namejuice',
-						'BULKREGISTER.COM, INC.' => 'enom',
-						'BULKREGISTER, LLC.' => 'enom',
-						'CHINESEDOMAINS, LLC'	=> 'chdom',
-                        'COMPUTER SERVICES LANGENBACH GMBH DBA JOKER.COM' => 'joker',
-                        'CORE INTERNET COUNCIL OF REGISTRARS' => 'core',
-						'CRONON AG BERLIN, NIEDERLASSUNG REGENSBURG' =>	'cronon',
-						'DIRECT INFORMATION PVT. LTD., DBA DIRECTI.COM' => 'directi',
-						'DIRECT INFORMATION PVT LTD D/B/A PUBLICDOMAINREGISTRY.COM' => 'directi',
-						'DOMAIN BANK, INC.' => 'domainbank',
-						'DOMAIN CONTENDER, LLC'	=> 'contender',
-						'DOMAINDISCOVER' => 'buydomains',
-						'DOTSTER, INC.' =>	'dotster',
-						'DSTR ACQUISITION PA I, LLC DBA DOMAINBANK.COM' => 'domainbank',
-						'DSTR ACQUISITION VII, LLC' => 'dotregistrar',
-						'ENCIRCA INC' => 'encirca',
-						'ENOM, INC.' => 'enom',
-						'GO DADDY SOFTWARE, INC.' => 'godaddy',
-						'IHOLDINGS.COM, INC. D/B/A DOTREGISTRAR.COM' => 'dotregistrar',
-						'INNERWISE, INC. D/B/A ITSYOURDOMAIN.COM' => 'innerwise',
-						'INTERCOSMOS MEDIA GROUP, INC. D/B/A DIRECTNIC.COM' => 'directnic',
-                        'INTERDOMAIN, S.A.' => 'interdomain',
-						'MELBOURNE IT, LTD. D/B/A INTERNET NAMES WORLDWIDE' => 'inwwcom',
-						'MONIKER ONLINE SERVICES, INC.' => 'moniker',
-						'NAMESDIRECT.COM, INC.' => 'ndirect',
-                        'NETWORK SOLUTIONS, INC.' => 'netsol',
-						'NETWORK SOLUTIONS, LLC.' => 'netsol',
-						'NOMINALIA INTERNET S.L.' => 'nominalia',
-                        'REGISTER.COM, INC.' => 'registercom',
-                        'RESERVED-INTERNET ASSIGNED NUMBERS AUTHORITY' => 'iana',
-                        'PSI-USA, INC. DBA DOMAIN ROBOT' => 'psiusa',
-                        'SCHLUND+PARTNER AG' => 'schlund',
-                        'STARGATE HOLDINGS CORP.' => 'stargate',
-						'TLDS, INC. DBA SRSPLUS' => 'srsplus',
-                        'TLDS, LLC DBA SRSPLUS' => 'srsplus',
-                        'TUCOWS, INC.' => 'opensrsnet',
-						'TUCOWS INC.' => 'opensrsnet',
-                        'TV CORPORATION' =>	'tvcorp',
-                        'WILD WEST DOMAINS, INC.' => 'godaddy'
-	                     );
-
 	function parse($data, $query)
 		{
 		$this->Query = array();
 		$this->SUBVERSION = sprintf('%s-%s', $query['handler'], $this->HANDLER_VERSION);
 		$this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
-		
+	
 		unset($this->result['registered']);
 		
 		if (isset($this->result['nodomain']))
@@ -121,59 +75,9 @@ class gtld_handler extends WhoisClient
 						
 		$this->result['regrinfo']['registered'] = 'yes';
 		
-		if (!$this->deep_whois) return $this->result;
-			
-		unset($this->Query['handler']);
-
-		if (isset($this->result['regyinfo']['whois']))
-			$this->Query['server'] = $this->result['regyinfo']['whois'];
-
-		$subresult = $this->GetData($query);
+		if ($this->deep_whois) $this->DeepWhois($query);
 		
-		if (isset($subresult['rawdata']))
-			{
-			$this->result['rawdata'] = $subresult['rawdata'];
-		
-			@$this->Query['handler'] = $this->REGISTRARS[$this->result['regyinfo']['registrar']];
-
-			if (!empty($this->Query['handler']))
-				{			
-				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);
-				$regrinfo = $this->Process($this->result['rawdata']);
-				$this->result['regrinfo'] = merge_results($this->result['regrinfo'], $regrinfo);
-				}
-			}
-			
 		return $this->result;
 		}
 	}
-
-function merge_results($a1, $a2)
-	{
-
-	reset($a2);
-
-	while (list($key, $val) = each($a2))
-		{
-		if (isset($a1[$key]))
-			{
-			if (is_array($val))
-				{
-				if ($key != 'nserver')
-					$a1[$key] = merge_results($a1[$key], $val);
-				}
-			else
-				{
-				$val = trim($val);
-				if ($val != '')
-					$a1[$key] = $val;
-				}
-			}
-		else
-			$a1[$key] = $val;
-		}
-
-	return $a1;
-	}
-
 ?>
