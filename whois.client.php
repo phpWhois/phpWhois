@@ -400,27 +400,27 @@ class WhoisClient {
 	 * Does more (deeper) whois ...
 	 */
 	 
-	function DeepWhois ($query) {
+	function DeepWhois ($query, $result) {
 	
-		if (isset($this->result['regyinfo']['whois']))
-			$this->Query['server'] = $this->result['regyinfo']['whois'];
+		if (isset($result['regyinfo']['whois']))
+			$this->Query['server'] = $result['regyinfo']['whois'];
 
 		$subresult = $this->GetData($query);
 		
 		if (isset($subresult['rawdata']))
 			{
-			$this->result['rawdata'] = $subresult['rawdata'];
+			$result['rawdata'] = $subresult['rawdata'];
 		
-			@$this->Query['handler'] = $this->WHOIS_HANDLER[$this->result['regyinfo']['whois']];
+			@$this->Query['handler'] = $this->WHOIS_HANDLER[$result['regyinfo']['whois']];
 			
 			if (!empty($this->Query['handler']))
 				{			
 				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);
-				$regrinfo = $this->Process($this->result['rawdata']);
-				$this->result['regrinfo'] = $this->merge_results($this->result['regrinfo'], $regrinfo);
+				$regrinfo = $this->Process($result['rawdata']);
+				$result['regrinfo'] = $this->merge_results($result['regrinfo'], $regrinfo);
 				}
 			}
-		return $this->result;
+		return $result;
 	}
 	
 	/*
