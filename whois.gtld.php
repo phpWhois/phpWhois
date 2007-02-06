@@ -76,7 +76,7 @@ class gtld_handler extends WhoisClient
 		$this->result['regrinfo']['registered'] = 'yes';
 		
 		if ($this->deep_whois) $this->result = $this->DeepWhois($query,$this->result);
-		
+	
 		return $this->result;
 		}
 	}

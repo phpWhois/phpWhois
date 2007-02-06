@@ -31,84 +31,52 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-if (!defined("__WS_HANDLER__"))
-  define("__WS_HANDLER__", 1);
+if (!defined('__WS_HANDLER__'))
+  define('__WS_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class ws_handler
+class ws_handler extends WhoisClient
   {
 
   function parse($data_str, $query)
     {
     $items = array(
-				"domain.name" => "Domain Name:", "owner.organization" =>
-				"Registrant:", "domain.created" => "Domain created on",
-				"domain.changed" => "Domain last updated on"
+				'Domain Name:' 						=> 'domain.name',
+				'Registrant Name:' 					=> 'owner.organization',
+				'Registrant Email:' 				=> 'owner.email',
+				'Domain created on' 				=> 'domain.created',
+				'Domain last updated on' 			=> 'domain.changed',
+				'Registrar Name:'					=> 'domain.sponsor',
+				'Current Nameservers:' 				=> 'domain.nserver.',
+				'Administrative Contact Email:' 	=> 'admin.email',
+				'Administrative Contact Telephone:' => 'admin.phone',
+				'Registrar Whois:'					=> 'rwhois'
 				);
 
-    while (list($key, $val) = each($data_str["rawdata"]))
-      {
-      $val = trim($val);
+	$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
+	   
+    $r['regyinfo']['referrer'] = 'http://www.samoanic.ws';
+    $r['regyinfo']['registrar'] = 'Samoa Nic';
 
-      if ($val != "")
-        {
-        if ($val == "Name servers:")
-          {
-          $breaker = 0;
-          while (list($key, $val) = each($data_str["rawdata"]))
-            {
-            // There's a blank line before the list- hack it out.
-            if (!($value = trim($val)))
-              $breaker++;
-            if ($breaker == 2)
-              break;
-            if ($value)
-              $r["regrinfo"]["domain"]["nserver"][] = strtok($value, ' ');
-            }
-          break;
-          }
-
-        reset($items);
-
-        while (list($field, $match) = each($items))
-        if (strstr($val, $match))
-          {
-          $v = trim(substr($val, strlen($match)));
-          if ($v == "")
-            {
-            $v = each($data_str["rawdata"]);
-            $v = trim($v["value"]);
-            }
-          $parts = explode(".", $field);
-          $var = "\$r[\"regrinfo\"]";
-          while (list($fn, $mn) = each($parts))
-            $var = $var."[\"".$mn."\"]";
-          eval($var."=\"".$v."\";");
-          break;
-          }
-        }
-      }
-    $r["regyinfo"]["referrer"] = "http://www.samoanic.ws";
-    $r["regyinfo"]["registrar"] = "Samoa Nic";
-
-    if (!empty($r["regrinfo"]["domain"]["name"]))
-      {
-      $r["regrinfo"]["registered"] = "yes";
-      if (!empty($r["regrinfo"]["domain"]["nserver"]))
-        $r["regrinfo"]["domain"]["status"] = "active";
-      else
-        {
-        if (strstr($r["regrinfo"]["domain"]["sponsor"], "DETAGGED"))
-          $r["regrinfo"]["domain"]["status"] = "detagged";
-        else
-          $r["regrinfo"]["domain"]["status"] = "inactive";
-        }
-      }
+    if (!empty($r['regrinfo']['domain']['name']))
+		{
+		$r['regrinfo']['registered'] = 'yes';      
+		
+		if (isset($r['regrinfo']['rwhois']))
+			{
+			if ($this->deep_whois)
+				{
+				$r['regyinfo']['whois']	= $r['regrinfo']['rwhois'];
+				$r = $this->DeepWhois($query,$r);
+				}
+							
+			unset($r['regrinfo']['rwhois']);			
+			}
+		}
     else
-      $r["regrinfo"]["registered"] = "no";
+		$r['regrinfo']['registered'] = 'no';
 
-    format_dates($r, 'ymd');
     return ($r);
     }
   }

@@ -102,16 +102,14 @@ class ip_handler extends WhoisClient
 		switch ($this->Query['server'])
 			{
 			case 'whois.apnic.net':
-				$rawdata = $this->GetData($query);
+				$rawdata = $this->GetRawData($query,$query_args);
 				
-				if (!isset($rawdata['rawdata']))
+				if (empty($rawdata))
 					{
 					$rawdata = $data['rawdata'];
 					break;
 					}
 					
-				$rawdata = $rawdata['rawdata'];
-
 				while (list($ln, $line) = each($rawdata))
 					{
 					if (strstr($line, 'KRNIC whois server at whois.krnic.net') ||
@@ -119,8 +117,7 @@ class ip_handler extends WhoisClient
 						{
 						$this->Query['server'] = 'whois.krnic.net';
 						$result['regyinfo']['registrar'] = 'Korea Network Information Center (KRNIC)';
-						$rawdata = $this->GetData($query);
-						$rawdata = $rawdata['rawdata'];
+						$rawdata = $this->GetRawData($query,$query_args);
 						break;
 						}
 					}
@@ -159,23 +156,21 @@ class ip_handler extends WhoisClient
 						{
 						$this->Query['server'] = 'whois.registro.br';
 						$result['regyinfo']['registrar'] = 'Comite Gestor da Internet no Brasil';
-						$rawdata = $this->GetData($query);
-						$rawdata = $rawdata['rawdata'];
+						$rawdata = $this->GetRawData($query,$query_args);
 						break;
 						}
 
-					$rawdata = $this->GetData('!'.$newquery);
-					$rawdata = $rawdata['rawdata'];
+					$rawdata = $this->GetRawData('!'.$newquery,$query_args);
+					//$rawdata = $rawdata['rawdata'];
 					}
 					
 				break;
 
 			case 'whois.lacnic.net':
-				$rawdata = $this->GetData($query);
+				$rawdata = $this->GetRawData($query,$query_args);
 				
-				if (!isset($rawdata['rawdata']))
+				if (empty($rawdata))
 					{
-					$rawdata = $data['rawdata'];
 					break;
 					}
 					
@@ -192,43 +187,37 @@ class ip_handler extends WhoisClient
 						{
 						$this->Query['server'] = 'whois.registro.br';
 						$result['regyinfo']['registrar'] = 'Comite Gestor da Internet do Brazil';
-						$rawdata = $this->GetData($query);
-						$rawdata = $rawdata['rawdata'];
+						$rawdata = $this->GetRawData($query,$query_args);
 						break;
 						}
 					}
 				break;
 
 			case 'whois.ripe.net':
-				$rawdata = $this->GetData($query);
+				$rawdata = $this->GetRawData($query,$query_args);
 				
-				if (!isset($rawdata['rawdata']))
+				if (empty($rawdata))
 					{
 					$rawdata = $data['rawdata'];
 					break;
 					}
 					
-				$rawdata = $rawdata['rawdata'];
-
 				while (list($ln, $line) = each($rawdata))
 					{
 					if (strstr($line, 'AFRINIC-NET-TRANSFERRED-'))
 						{
 						$this->Query['server'] = 'whois.afrinic.net';
 						$result['regyinfo']['registrar'] = 'African Network Information Center';
-						$rawdata = $this->GetData($query);
-						$rawdata = $rawdata['rawdata'];
+						$rawdata = $this->GetRawData($query,$query_args);
 						break;
 						}
 					}
 				break;
 				
 			default:
-				$rawdata = $this->GetData($query);
+				$rawdata = $this->GetRawData($query,$query_args);
 				
-				if (isset($rawdata['rawdata']))
-					$rawdata = $rawdata['rawdata'];
-				else
+				if (empty($rawdata))
 					$rawdata = $data['rawdata'];
 			}
 
@@ -296,7 +285,7 @@ class ip_handler extends WhoisClient
 			{			
 			$this->Query['server'] = $srv_data['server'];
 			unset($this->Query['handler']);			
-			$rwdata = $this->GetData($srv_data['query']);
+			$rwdata = $this->GetRawData($srv_data['query'],$query_args);
 
 			if (!empty($rwdata))
 				{

@@ -77,17 +77,12 @@ class WhoisClient {
 	}
 		
 	/*
-	 * Perform lookup. Returns an array. The 'rawdata' element contains an
-	 * array of lines gathered from the whois query. If a top level domain
-	 * handler class was found for the domain, other elements will have been
-	 * populated too.
+	 * Perform lookup
 	 */
 
-	function GetData ($query='', $deep_whois=true) {
-		// If domain to query passed in, use it, otherwise use domain from initialisation
-		$string = !empty($query) ? $query : $this->Query['string'];
+	function GetRawData ($query, &$query_args) {
 		
-		$this->Query['string'] = $string;
+		$this->Query['string'] = $query;
 		
 		// clear error description
 		if (isset($this->Query['errstr'])) unset($this->Query['errstr']);
@@ -131,7 +126,7 @@ class WhoisClient {
 				$query_args = trim($parts[1]);
 				
 				// replace substitution parameters			
-				$query_args = str_replace('{query}', $string, $query_args);
+				$query_args = str_replace('{query}', $query, $query_args);
 				$query_args = str_replace('{version}', 'phpWhois'.$this->CODE_VERSION, $query_args);
 				
 				if (strpos($query_args,'{ip}')!==false)
@@ -145,7 +140,7 @@ class WhoisClient {
 					}
 				}
 			else
-				$query_args = $string;
+				$query_args = $query;
 			
 			if (substr($this->Query['server'],0,9)=='rwhois://')
 				$this->Query['server']=substr($this->Query['server'],9);
@@ -197,10 +192,26 @@ class WhoisClient {
 			if (empty($output[count($output)-1])) 
 				unset($output[count($output)-1]);
 			}
-			
+		
+		return $output;	
+	}
+
+	/*
+	 * Perform lookup. Returns an array. The 'rawdata' element contains an
+	 * array of lines gathered from the whois query. If a top level domain
+	 * handler class was found for the domain, other elements will have been
+	 * populated too.
+	 */
+
+	function GetData ($query='', $deep_whois=true) {
+	
+		// If domain to query passed in, use it, otherwise use domain from initialisation
+		$query = !empty($query) ? $query : $this->Query['string'];
+				
+		$output = $this->GetRawData($query,$query_args);
+				
 		// Create result and set 'rawdata'
-		$result = array();			
-		$result['rawdata'] = $output;
+		$result = array( 'rawdata' => $output );
 
 		// If we have a handler, post-process it with that
 		if (isSet($this->Query['handler']))
@@ -227,12 +238,12 @@ class WhoisClient {
 			$result['errstr'] = $this->Query['errstr'];
 
 		// If no rawdata use rawdata from first whois server
-		if (!isset($result['rawdata']))
-			$result['rawdata'] = $output;
+		/*if (!isset($result['rawdata']))
+			$result['rawdata'] = $output;*/
 		
 		// Fix/add nameserver information
 		if (method_exists($this,'FixResult') && $this->Query['tld']!='ip')
-			$this->FixResult($result,$string);
+			$this->FixResult($result,$query);
 			
 		return($result);
 	}
@@ -369,7 +380,7 @@ class WhoisClient {
 		// If the handler has not already been included somehow, include it now
 		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query['handler']));
 
-		if(!defined($HANDLER_FLAG))
+		if (!defined($HANDLER_FLAG))
 			include($this->Query['file']);
 
 		// If the handler has still not been included, append to query errors list and return
@@ -391,9 +402,12 @@ class WhoisClient {
 			$this->Query['errstr'][] = $handler->Query['errstr'];
 
 		$handler->deep_whois = $deep_whois;
-		
+
+		// Process
+		$res = $handler->parse($result,$this->Query['string']);
+
 		// Return the result
-		return $handler->parse($result,$this->Query['string']);
+		return $res;
 	}	
 	
 	/*
@@ -405,11 +419,11 @@ class WhoisClient {
 		if (isset($result['regyinfo']['whois']))
 			$this->Query['server'] = $result['regyinfo']['whois'];
 
-		$subresult = $this->GetData($query);
+		$subresult = $this->GetRawData($query,$query_args);
 		
-		if (isset($subresult['rawdata']))
+		if (!empty($subresult))
 			{
-			$result['rawdata'] = $subresult['rawdata'];
+			$result['rawdata'] = $subresult;
 		
 			@$this->Query['handler'] = $this->WHOIS_HANDLER[$result['regyinfo']['whois']];
 			
@@ -418,8 +432,10 @@ class WhoisClient {
 				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);
 				$regrinfo = $this->Process($result['rawdata']);
 				$result['regrinfo'] = $this->merge_results($result['regrinfo'], $regrinfo);
+				$result['rawdata'] = $subresult;
 				}
 			}
+
 		return $result;
 	}
 	

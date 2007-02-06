@@ -1,3 +1,6 @@
+2007/02/06
+		- changed the way gTLD handlers are detected
+
 2006/12/21
 		- fix/improvement for register.com handler
 
