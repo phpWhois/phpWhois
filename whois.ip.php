@@ -174,8 +174,6 @@ class ip_handler extends WhoisClient
 					break;
 					}
 					
-				$rawdata = $rawdata['rawdata'];
-
 				while (list($ln, $line) = each($rawdata))
 					{
 					$s = strstr($line, 'at whois.registro.br or ');
