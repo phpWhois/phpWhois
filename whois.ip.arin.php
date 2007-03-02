@@ -39,6 +39,7 @@ class arin_handler
 		{
 		$items = array(
                   'OrgName:' 	=> 'owner.organization',
+                  'CustName:' 	=> 'owner.organization',
                   'OrgID:' 		=> 'owner.handle',
                   'Address:' 	=> 'owner.address.street',
                   'City:' 		=> 'owner.address.city',

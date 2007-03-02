@@ -59,7 +59,7 @@ class eu_handler
 			
 			default:
 				$r['regrinfo']['registered'] = 'yes';
-				$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
+				if (isset($r['regrinfo']['tech'])) $r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
 				$r['regrinfo']['domain']['registrar'] = get_contact($r['regrinfo']['domain']['registrar']);
 				$r['regrinfo']['domain']['registrar'] = $r['regrinfo']['domain']['registrar']['name'];
 				$created = strtotime($r['regrinfo']['domain']['created']);

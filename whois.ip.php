@@ -161,7 +161,6 @@ class ip_handler extends WhoisClient
 						}
 
 					$rawdata = $this->GetRawData('!'.$newquery,$query_args);
-					//$rawdata = $rawdata['rawdata'];
 					}
 					
 				break;
@@ -290,12 +289,12 @@ class ip_handler extends WhoisClient
 				// Merge rawdata results
 				$result['rawdata'][] = '';
 				
-				foreach ($rwdata['rawdata'] as $line)
+				foreach ($rwdata as $line)
 					$result['rawdata'][] = $line;
 				
 				$this->Query['handler'] = $srv_data['handler'];
 				$this->Query['file'] = 'whois.'.$this->Query['handler'].'.php';
-				$rwres = $this->Process($rwdata['rawdata']);
+				$rwres = $this->Process($rwdata);
 				
 				if (isset($rwres['network']))
 					$result['regrinfo']['network'] = $rwres['network'];

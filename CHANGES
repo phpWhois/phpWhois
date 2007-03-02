@@ -1,3 +1,6 @@
+2007/03/02
+		- minor fix to .eu handler
+
 2007/02/06
 		- changed the way gTLD handlers are detected
 
