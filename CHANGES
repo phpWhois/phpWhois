@@ -1,5 +1,9 @@
+2007/03/05
+		- fixed .cat registered yes/no detection
+
 2007/03/02
 		- minor fix to .eu handler
+		- fixes in arin ip handler
 
 2007/02/06
 		- changed the way gTLD handlers are detected

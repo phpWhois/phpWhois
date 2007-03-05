@@ -76,6 +76,10 @@ class cat_handler
 		              );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
+		
+		if (!isset($r['regrinfo']['domain']['name']))
+			$r['regrinfo']['registered'] = 'no';
+			
 		$r['regyinfo']['referrer'] = 'http://www.domini.cat/';
 		$r['regyinfo']['registrar'] = 'Domini punt CAT';
 		return ($r);
