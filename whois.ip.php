@@ -179,7 +179,10 @@ class ip_handler extends WhoisClient
 					
 					if ($s == '')
 						$s = strstr($line, 'Copyright registro.br');
-						
+					
+					if ($s == '')
+						$s = strstr($line, 'Copyright (c) Nic.br');
+							
 					if ($s != '')
 						{
 						$this->Query['server'] = 'whois.registro.br';

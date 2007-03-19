@@ -1,3 +1,6 @@
+2007/03/19
+		- Fixed nic.br ip handler detection
+
 2007/03/05
 		- fixed .cat registered yes/no detection
 
