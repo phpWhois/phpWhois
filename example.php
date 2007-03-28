@@ -84,7 +84,10 @@ if (isSet($_GET['query']))
 				}
 			else
 				{
-				$winfo= implode($whois->Query['errstr'],"\n<br></br>");
+				if (isset($whois->Query['errstr']))
+					$winfo = implode($whois->Query['errstr'],"\n<br></br>");
+				else
+					$winfo = 'Unexpected error';
 				}       
 			break;
 

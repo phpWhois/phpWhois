@@ -1,3 +1,6 @@
+2007/03/28
+		- some handlers where not seeting rawdata
+
 2007/03/19
 		- Fixed nic.br ip handler detection
 

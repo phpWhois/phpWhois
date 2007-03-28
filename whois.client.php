@@ -215,8 +215,14 @@ class WhoisClient {
 
 		// If we have a handler, post-process it with that
 		if (isSet($this->Query['handler']))
+			{
 			$result = $this->Process($result,$deep_whois);
-
+		
+			// Handler may fortget to set rawdata
+			if (!isset($result['rawdata']))
+				$result['rawdata'] = $output;
+			}
+			
 		// Set whois server
 		if (!isset($result['regyinfo']['whois']))
 			$result['regyinfo']['whois'] = $this->Query['server'];
