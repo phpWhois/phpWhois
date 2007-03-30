@@ -83,6 +83,9 @@ class ip_handler extends WhoisClient
 		reset($this->REGISTRARS);
 
 		$rawdata = $data['rawdata'];
+		
+		if (empty($rawata)) return $result;
+		
 		$orgname = trim($rawdata[0]);
 
 		if ($orgname == '')

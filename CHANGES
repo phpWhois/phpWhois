@@ -1,3 +1,6 @@
+2007/03/30
+		- minor fix on whois.ip.php
+
 2007/03/28
 		- some handlers where not seeting rawdata
 
