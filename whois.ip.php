@@ -84,7 +84,7 @@ class ip_handler extends WhoisClient
 
 		$rawdata = $data['rawdata'];
 		
-		if (empty($rawata)) return $result;
+		if (empty($rawdata)) return $result;
 		
 		$orgname = trim($rawdata[0]);
 

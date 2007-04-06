@@ -1,3 +1,6 @@
+2007/04/06
+		- fixed error in whois.ip.php
+
 2007/03/30
 		- minor fix on whois.ip.php
 
