@@ -149,9 +149,11 @@ contains the raw output of the query and is what need to be parsed
 in order to generate the Common Object Model. $query contains
 the domain, ip adrress or AS that it's being queried. That function
 must return an array with any available result in the format defined
-by this document. Country handlers must be defined in the file
-whois.servers.php on the array DATA where the key is the iso
-country code and the value the handler name (xx).
+by this document. Country handlers need not to be defined in
+the file whois.servers.php, only when you want to use some handler
+for several different country domains you need to add it to the array
+DATA where the key is the iso country code and the value the handler
+name (xx).
 
 Handlers for .com/.net/.tv domains are defined in whois.gtld.php
 and are named whois.gtld.xxx.php where xxx is the name of the

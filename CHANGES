@@ -4,6 +4,7 @@
 		- added .ru handler
 		- support for multiple status lines in whois.org.php
 		- removed whois.gtld.chdom handler
+		- allow easy plugin for new country handlers
 
 2007/04/06
 		- fixed error in whois.ip.php

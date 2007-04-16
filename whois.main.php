@@ -184,10 +184,19 @@ class Whois extends WhoisClient
 
 			foreach($tldtests as $htld)
 				{
-				// special handler exists for the tld ?				
+				// special handler exists for the tld ?
+				
 				if (isSet($this->DATA[$htld]))
-					{
+				    {
 					$handler = $this->DATA[$htld];
+					break;
+					}
+					
+				// Regular handler exists for the tld ?
+				
+				if (($fp = @fopen('whois.'.$htld.'.php', 'r', 1)) and fclose($fp))
+				    {
+					$handler = $htld;
 					break;
 					}
 				}
