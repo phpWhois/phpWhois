@@ -2,6 +2,7 @@
 		- added basic support for .bz
 		- whois.info.php cosmetic changes
 		- added .ru handler
+		- support for multiple status lines in whois.org.php
 
 2007/04/06
 		- fixed error in whois.ip.php

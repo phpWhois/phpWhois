@@ -39,7 +39,7 @@ class org_handler
 		{
 		$items = array(
                     'Domain Name:' 					=> 'domain.name',
-                    'Status:' 						=> 'domain.status',
+                    'Status:' 						=> 'domain.status.',
                     'Name Server:' 					=> 'domain.nserver.',
                     'Created On:' 					=> 'domain.created',
                     'Last Updated On:' 				=> 'domain.changed',
