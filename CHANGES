@@ -1,3 +1,7 @@
+2007/04/16
+		- added basic support for .bz
+		- whois.info.php cosmetic changes
+
 2007/04/06
 		- fixed error in whois.ip.php
 
