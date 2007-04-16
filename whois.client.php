@@ -422,9 +422,9 @@ class WhoisClient {
 	 
 	function DeepWhois ($query, $result) {
 	
-		if (isset($result['regyinfo']['whois']))
-			$this->Query['server'] = $result['regyinfo']['whois'];
-
+		if (!isset($result['regyinfo']['whois'])) return $result;
+		
+		$this->Query['server'] = $result['regyinfo']['whois'];
 		$subresult = $this->GetRawData($query,$query_args);
 		
 		if (!empty($subresult))
