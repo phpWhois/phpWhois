@@ -2,7 +2,8 @@
 		- added basic support for .bz
 		- whois.info.php cosmetic changes
 		- added .ru handler
-		- support for multiple status lines in whois.org.php
+		- support for multiple status lines in whois.org.php and
+          whois.gtl.php
 		- removed whois.gtld.chdom handler
 		- allow easy plugin for new country handlers
 

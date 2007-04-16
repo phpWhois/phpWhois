@@ -50,7 +50,7 @@ class gtld_handler extends WhoisClient
 						'Updated Date:' => 'regrinfo.domain.changed',
                         'Last Updated On:' => 'regrinfo.domain.changed',
                         'EPP Status:' => 'regrinfo.domain.epp_status.',                        
-                        'Status:' => 'regrinfo.domain.status',
+                        'Status:' => 'regrinfo.domain.status.',
                         'Creation Date:' => 'regrinfo.domain.created',
                         'Created On:' => 'regrinfo.domain.created',
                         'Expiration Date:' => 'regrinfo.domain.expires',
