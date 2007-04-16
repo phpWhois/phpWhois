@@ -81,7 +81,7 @@ while (list($key,$val)=each($rawdata))
 	{
 	$val=trim($val);
 
-	if ($val!='' && $val[0]=='%')
+	if ($val != '' && ($val[0] == '%' || $val[0] == '#'))
 		{
 		if (!$dend) $disclaimer[]=trim(substr($val,1));
 		continue;
