@@ -3,6 +3,7 @@
 		- whois.info.php cosmetic changes
 		- added .ru handler
 		- support for multiple status lines in whois.org.php
+		- removed whois.gtld.chdom handler
 
 2007/04/06
 		- fixed error in whois.ip.php
