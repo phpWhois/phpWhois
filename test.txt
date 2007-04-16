@@ -59,6 +59,7 @@ netsol		networksolutions.com
 nicline		nicline.com
 nominalia	nominalia.com
 opensrsnet	tucows.com
+ovh			ovh.com
 psiusa		urllog.net
 registercom	register.com
 schlund		schlund.com

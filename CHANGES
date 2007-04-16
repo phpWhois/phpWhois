@@ -6,7 +6,9 @@
           whois.gtl.php
 		- removed whois.gtld.chdom handler
 		- allow easy plugin for new country handlers
-		- minor improvment in whois.gtld.php
+		- minor improvement to whois.client.php and
+          whois.parser.php
+		- added gtld handler for OVH
 
 2007/04/06
 		- fixed error in whois.ip.php

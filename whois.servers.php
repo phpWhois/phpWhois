@@ -116,6 +116,7 @@ $this->WHOIS_HANDLER = array(
 		'whois.nicline.com'					=> 'nicline',
 		'whois.nominalia.com'				=> 'nominalia',
 		'whois.opensrs.net'					=> 'opensrsnet',
+		'whois.ovh.com'						=> 'ovh',
 		'whois.publicdomainregistry.com' 	=> 'directi',				
 		'whois.psi-usa.info'				=> 'psiusa',
 		'whois.register.com'				=> 'registercom',
