@@ -3,6 +3,7 @@
 		- minor improvement to testsuite.php
 		- fixed .se handler
 		- namesdirect has joined with dotster
+		- fixed tmagnic gtld handler
 
 2007/04/16
 		- added basic support for .bz

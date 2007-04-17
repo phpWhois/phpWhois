@@ -39,12 +39,12 @@ class tmagnic_handler
 		$items = array(
               'owner' => 'Owner Contact:',
               'admin' => 'Admin Contact',
-              'tech' => 'Technical Contact, Zone Contact',
+              'tech' => 'Technical Contact',
               'domain.name' => 'Domain Name:',
               'domain.nserver.' => 'Domain servers in listed order:',
               'domain.expires' => 'Record expires on: ',
               'domain.changed' => 'Record last updated on: ',
-              '' => 'RACE Name:'
+              '' => 'Zone Contact'
 		          );
 
 		$r = get_blocks($data_str, $items);
