@@ -85,6 +85,7 @@ foreach ($domains as $key => $domain)
 			// Add as it is
 			unset($result['regrinfo']['disclaimer']);
 			$results[$domain] = $result;
+			save_results();
 			}
 		
 		}
@@ -105,6 +106,7 @@ foreach ($domains as $key => $domain)
 				{
 				// Add as it is
 				$results[$domain] = $result;
+				save_results();
 				}
 			}
 		else
