@@ -41,7 +41,7 @@ domainbank	domainbank.com
 domaincontender domaincontender.com
 domaindiscover  buydomains.com
 dotregistrar    dotregistrar.com
-dotster		dotster.com
+dotster		dotster.com namesdirect.com
 encirca		nic.jobs
 enom		enom.com adultlaw.com alabanza.com
 godaddy		godaddy.com
@@ -52,7 +52,6 @@ joker		joker.com
 melbourneit     inww.com
 moniker		moniker.com
 namejuice	namejuice.com
-namesdirect		namesdirect.com
 networksolutions		networksolutions.com
 nicline		nicline.com
 nominalia	nominalia.com

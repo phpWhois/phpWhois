@@ -2,6 +2,7 @@
 		- allow easy plugin for new gtld handlers
 		- minor improvement to testsuite.php
 		- fixed .se handler
+		- namesdirect has joined with dotster
 
 2007/04/16
 		- added basic support for .bz
