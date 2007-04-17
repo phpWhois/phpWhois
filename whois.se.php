@@ -40,10 +40,13 @@ class se_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                    '*domainname.name:' => 'domain.name',
-                    '*domainname.status:' => 'domain.status',
-                    '*domainname.date_to_delete:' => 'domain.expires',
-                    ' NS ' => 'domain.nserver.'
+                    'domain' => 'domain.name',
+                    'state:' => 'domain.status.',
+                    'status:' => 'domain.status.',
+                    'expires:' => 'domain.expires',
+                    'created:' => 'domain.created',
+                    'nserver:' => 'domain.nserver.',
+                    'holder:' => 'owner.handle'
                     );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'mdy', false);
