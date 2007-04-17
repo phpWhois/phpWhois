@@ -28,17 +28,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* registercom.whois	1.0	mark jeftovic	1999/12/26 */
 /* registercom.whois    2.1     david@ols.es    2003/02/18 */
 
-if (!defined('__REGISTERCOM_HANDLER__'))
-	define('__REGISTERCOM_HANDLER__', 1);
+if (!defined('__REGISTER_HANDLER__'))
+	define('__REGISTER_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class registercom_handler
+class register_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'owner#0' => 'Registrant Info:',
                   'owner#1' => 'Organization:',
@@ -70,5 +68,4 @@ class registercom_handler
 		return ($r);
 		}
 	}
-
 ?>

@@ -30,36 +30,33 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 require_once('whois.parser.php');
 
-if (!defined("__INWWCOM_HANDLER__"))
-	define("__INWWCOM_HANDLER__", 1);
+if (!defined('__MELBOURNEIT_HANDLER__'))
+	define('__MELBOURNEIT_HANDLER__', 1);
 
-class inwwcom_handler
+class melbourneit_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
-                  "Domain Name.........." => "domain.name",
-                  "Registration Date...." => "domain.created",
-                  "Expiry Date.........." => "domain.expires",
-                  "Organisation Name...." => "owner.name",
-                  "Organisation Address." => "owner.address.",
-                  "Admin Name..........." => "admin.name",
-                  "Admin Address........" => "admin.address.",
-                  "Admin Email.........." => "admin.email",
-                  "Admin Phone.........." => "admin.phone",
-                  "Admin Fax............" => "admin.fax",
-                  "Tech Name............" => "tech.name",
-                  "Tech Address........." => "tech.address.",
-                  "Tech Email..........." => "tech.email",
-                  "Tech Phone..........." => "tech.phone",
-                  "Tech Fax............." => "tech.fax",
-                  "Name Server.........." => "domain.nserver."
+                  'Domain Name..........' => 'domain.name',
+                  'Registration Date....' => 'domain.created',
+                  'Expiry Date..........' => 'domain.expires',
+                  'Organisation Name....' => 'owner.name',
+                  'Organisation Address.' => 'owner.address.',
+                  'Admin Name...........' => 'admin.name',
+                  'Admin Address........' => 'admin.address.',
+                  'Admin Email..........' => 'admin.email',
+                  'Admin Phone..........' => 'admin.phone',
+                  'Admin Fax............' => 'admin.fax',
+                  'Tech Name............' => 'tech.name',
+                  'Tech Address.........' => 'tech.address.',
+                  'Tech Email...........' => 'tech.email',
+                  'Tech Phone...........' => 'tech.phone',
+                  'Tech Fax.............' => 'tech.fax',
+                  'Name Server..........' => 'domain.nserver.'
 		              );
 
 		return generic_parser_b($data_str, $items);
 		}
-
 	}
-
 ?>

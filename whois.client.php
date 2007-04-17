@@ -424,15 +424,24 @@ class WhoisClient {
 	
 		if (!isset($result['regyinfo']['whois'])) return $result;
 		
-		$this->Query['server'] = $result['regyinfo']['whois'];
+		$this->Query['server'] = $wserver = $result['regyinfo']['whois'];
 		$subresult = $this->GetRawData($query,$query_args);
 		
 		if (!empty($subresult))
 			{
 			$result['rawdata'] = $subresult;
 		
-			@$this->Query['handler'] = $this->WHOIS_HANDLER[$result['regyinfo']['whois']];
-			
+			if (isset($this->WHOIS_GTLD_HANDLER[$wserver]))
+				$this->Query['handler'] = $this->WHOIS_GTLD_HANDLER[$wserver];
+			else
+				{
+				$parts = explode('.',$wserver);
+				$hname = $parts[1];
+				
+				if (($fp = @fopen('whois.gtld.'.$hname.'.php', 'r', 1)) and fclose($fp))
+					$this->Query['handler'] = $hname;
+				}
+				
 			if (!empty($this->Query['handler']))
 				{			
 				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);

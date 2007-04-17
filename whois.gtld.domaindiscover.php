@@ -27,38 +27,35 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* buydomains.whois     1.0     david@ols.es            2003/03/30 */
 
-if (!defined("__BUYDOMAINS_HANDLER__"))
-	define("__BUYDOMAINS_HANDLER__", 1);
+if (!defined('__DOMAINDISCOVER_HANDLER__'))
+	define('__DOMAINDISCOVER_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class buydomains_handler
+class domaindiscover_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
-                "owner" => "Registrant:",
-                "admin" => "Administrative Contact",
-                "tech" => "Technical Contact",
-                "zone" => "Zone Contact",
-                "domain.name" => "Domain Name:",
-                "domain.changed" => "Last updated on",
-                "domain.created" => "Domain created on",
-                "domain.expires" => "Domain expires on"
+                'owner' => 'Registrant:',
+                'admin' => 'Administrative Contact',
+                'tech' => 'Technical Contact',
+                'zone' => 'Zone Contact',
+                'domain.name' => 'Domain Name:',
+                'domain.changed' => 'Last updated on',
+                'domain.created' => 'Domain created on',
+                'domain.expires' => 'Domain expires on'
 		            );
 
 		$r = get_blocks($data_str, $items);
 
-		$r["owner"] = get_contact($r["owner"]);
-		$r["admin"] = get_contact($r["admin"]);
-		$r["tech"] = get_contact($r["tech"]);
-		$r["zone"] = get_contact($r["zone"]);
+		$r['owner'] = get_contact($r['owner']);
+		$r['admin'] = get_contact($r['admin']);
+		$r['tech'] = get_contact($r['tech']);
+		$r['zone'] = get_contact($r['zone']);
 		format_dates($r, 'dmy');
 		return ($r);
 		}
-
 	}
 
 ?>

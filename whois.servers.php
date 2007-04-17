@@ -90,40 +90,9 @@ $this->WHOIS_SPECIAL = array(
 		
 /* handled gTLD whois servers */
 
-$this->WHOIS_HANDLER = array(
-		'rs.domainbank.net'					=> 'domainbank',		
-		'whois.allindomains.com'			=> 'alldomains',
-		'whois.ascio.com'					=> 'ascio',
+$this->WHOIS_GTLD_HANDLER = array(
 		'whois.bulkregister.com'			=> 'enom',
-		'whois.corenic.net'					=> 'core',		
-		'whois.directnic.com' 				=> 'directnic',		
-		'whois.domaincontender.com'			=> 'contender',
-		'whois.domaindiscover.com'			=> 'buydomains',		
-		'whois.dotregistrar.com'			=> 'dotregistrar',
-		'whois.dotster.com'					=> 'dotster',		
-		'whois.encirca.biz'					=> 'encirca',
-		'whois.enom.com'					=> 'enom',
-		'whois.godaddy.com'					=> 'godaddy',
-		'whois.iana.org'					=> 'iana',
-		'whois.interdomain.net'				=> 'interdomain',
-		'whois.itsyourdomain.com'			=> 'innerwise',		
-		'whois.joker.com'					=> 'joker',		
-		'whois.melbourneit.com'				=> 'inwwcom',
-		'whois.moniker.com'					=> 'moniker',		
-		'whois.namejuice.com'				=> 'namejuice',
-		'whois.namesdirect.com'				=> 'ndirect',		
-		'whois.networksolutions.com'		=> 'netsol',
-		'whois.nicline.com'					=> 'nicline',
-		'whois.nominalia.com'				=> 'nominalia',
-		'whois.opensrs.net'					=> 'opensrsnet',
-		'whois.ovh.com'						=> 'ovh',
-		'whois.publicdomainregistry.com' 	=> 'directi',				
 		'whois.psi-usa.info'				=> 'psiusa',
-		'whois.register.com'				=> 'registercom',
-		'whois.schlund.info'				=> 'schlund',
-		'whois.srsplus.com'					=> 'srsplus',
-		'whois.stargateinc.com'				=> 'stargate',
-		'whois.tmagnic.net'					=> 'cronon',		
 		'whois.www.tv'						=> 'tvcorp'
 		);
 		

@@ -155,10 +155,13 @@ for several different country domains you need to add it to the array
 DATA where the key is the iso country code and the value the handler
 name (xx).
 
-Handlers for .com/.net/.tv domains are defined in whois.gtld.php
-and are named whois.gtld.xxx.php where xxx is the name of the
-handler defined as the value in the array REGISTRARS in the
-file whois.gtld.php. It must be implemented the same way as
+Handlers for .com/.net/.tv domains are handled by whois.gtld.php
+and named whois.gtld.xxx.php where xxx is the 'midname' (for example,
+for whois.srsplus.com, the midname is srsplus) of the whois server who
+provides information for that domains. If you want to reuse another
+handler of your handler 'midname' conflicts with any existing gtld
+handler you could define the handler name in the array WHOIS_GTLD_HANDLER
+in the file whois.servers.php. It must be implemented the same way as
 country handlers.
 
 Some useful utility functions have been written to aid in developing

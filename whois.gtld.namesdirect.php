@@ -25,17 +25,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-if (!defined('__NDIRECT_HANDLER__'))
-        define('__NDIRECT_HANDLER__', 1);
+if (!defined('__NAMESDIRECT_HANDLER__'))
+        define('__NAMESDIRECT_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class ndirect_handler
+class namesdirect_handler
         {
-
         function parse($data_str, $query)
                 {
-
                 $items = array(
                                 'owner' => 'Registrant:',
                                 'admin' => 'Administrative',

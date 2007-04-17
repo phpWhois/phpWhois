@@ -1,3 +1,7 @@
+2007/04/17
+		- allow easy plugin for new gtld handlers
+		- minor improvement to testsuite.php
+
 2007/04/16
 		- added basic support for .bz
 		- whois.info.php cosmetic changes
