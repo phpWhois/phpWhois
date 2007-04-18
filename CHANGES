@@ -1,3 +1,6 @@
+200/04/18
+		- fixed warnings in nicline gtld handler
+
 2007/04/17
 		- allow easy plugin for new gtld handlers
 		- minor improvement to testsuite.php
