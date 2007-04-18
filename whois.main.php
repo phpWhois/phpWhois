@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
 require_once('whois.client.php');
+require_once('whois.idna.php');
 
 class Whois extends WhoisClient
 	{
@@ -69,7 +70,11 @@ class Whois extends WhoisClient
 		{
 		$this->WHOIS_SPECIAL[$tld] = $server;
 		}
-		
+	
+	/*
+	 *  Lookup query
+	 */
+	 
 	function Lookup($query = '')
 		{
 		// start clean
@@ -77,6 +82,9 @@ class Whois extends WhoisClient
 		
 		$query = trim($query);
 
+		$IDN = new idna_convert();
+		$query = $IDN->encode(utf8_encode($query));
+		
 		// If domain to query was not set
 		if (!isSet($query) || $query == '')
 			{

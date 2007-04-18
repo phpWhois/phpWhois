@@ -1,5 +1,8 @@
 200/04/18
-		- fixed warnings in nicline gtld handler
+		- fixed warnings in nicline and tmagnic gtld handlers
+		- added support for IDNA (internationalized) domains names
+		  as defined in RFC3490, RFC3491, RFC3492 and RFC3454
+		  using Matthias Sommerfeld idna_convert class
 
 2007/04/17
 		- allow easy plugin for new gtld handlers
