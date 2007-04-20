@@ -1,4 +1,7 @@
-200/04/18
+2007/04/20
+		- fixes and improvments in .pl handler
+
+2007/04/18
 		- fixed warnings in nicline and tmagnic gtld handlers
 		- added support for IDNA (internationalized) domains names
 		  as defined in RFC3490, RFC3491, RFC3492 and RFC3454

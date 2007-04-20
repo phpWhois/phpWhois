@@ -32,13 +32,11 @@ require_once('whois.parser.php');
 
 class pl_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
-                	'owner' 	=> 'Subscribers Contact object:',
-					'domain'	=> 'Domain object:',
+                	'owner' 	=> 'SUBSCRIBERS CONTACT OBJECT:',
+					'domain'	=> 'DOMAIN OBJECT:',
 					'tech'		=> 'Technical Contact:',
 					'x'			=> 'nservers:'
 					);
@@ -101,15 +99,36 @@ class pl_handler
 						}
 				}
 			
-			$r['domain']['nserver'] = $ns;	
-			$r['registered'] = 'yes';
-			
 			$r = array ( 'regrinfo' => $r );
+			
+			if (isset($r['regrinfo']['owner']['address']['city']))
+				$r['regrinfo']['owner']['address'] = $this->extract_zipcode($r['regrinfo']['owner']['address']);
+				
+			if (isset($r['regrinfo']['tech']['address']['city']))
+				$r['regrinfo']['tech']['address'] = $this->extract_zipcode($r['regrinfo']['owner']['address']);
+
+			$r['domain']['nserver'] = $ns;	
+			$r['registered'] = 'yes';			
 			}
 		else
 			$r['regrinfo']['registered'] = 'no';
 
+		$r['regyinfo'] = array(
+			'referrer' => 'http://www.dns.pl/english/index.html',
+			'registrar' => 'NASK'
+			);
+
 		return ($r);
+		}
+		
+	function extract_zipcode ($addr)
+		{
+		if(preg_match('/(\d{2}-\d{3}) (\w+)/',$addr['city'],$match))
+			{
+			$addr['city']=$match[2];
+			$addr['pcode']=$match[1];
+			}
+		return $addr;
 		}
 	}
 ?>
