@@ -75,7 +75,7 @@ class Whois extends WhoisClient
 	 *  Lookup query
 	 */
 	 
-	function Lookup($query = '')
+	function Lookup($query = '', $is_utf = true)
 		{
 		// start clean
 		$this->Query['status'] = 0;
@@ -83,7 +83,11 @@ class Whois extends WhoisClient
 		$query = trim($query);
 
 		$IDN = new idna_convert();
-		$query = $IDN->encode(utf8_encode($query));
+		
+		if ($is_utf)
+			$query = $IDN->encode($query);
+		else
+			$query = $IDN->encode(utf8_encode($query));
 		
 		// If domain to query was not set
 		if (!isSet($query) || $query == '')

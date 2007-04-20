@@ -1,5 +1,6 @@
 2007/04/20
 		- fixes and improvments in .pl handler
+		- improved IDNA support
 
 2007/04/18
 		- fixed warnings in nicline and tmagnic gtld handlers

@@ -59,10 +59,19 @@ Example usage
 include('whois.main.php');
 
 $whois = new Whois();
-$result = $whois->Lookup('example.com');
+$query = 'example.com';
+$result = $whois->Lookup($query,false);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
+
+If you provide the domain name to query in UTF8, then you
+must use:
+
+$result = $whois->Lookup($query);
+
+If the query string is not in UTF8 then it must be in
+ISO-8859-1 or IDNA support will not work.
 
 What you can query
 ------------------
