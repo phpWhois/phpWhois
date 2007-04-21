@@ -1,3 +1,6 @@
+2007/04/21
+		- added gtld handler for NICCO
+
 2007/04/20
 		- fixes and improvments in .pl handler
 		- improved IDNA support
