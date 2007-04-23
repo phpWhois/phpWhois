@@ -1,3 +1,6 @@
+2007/04/23
+		- added gtld handler for RRPPROXY
+
 2007/04/21
 		- added gtld handler for NICCO
 

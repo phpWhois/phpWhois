@@ -61,6 +61,7 @@ ovh			ovh.com
 publicdomainregistry	directi.com
 psiusa		urllog.net
 register	register.com
+rrpproxy	rrpproxy.net
 schlund		schlund.com
 srsplus		olsns.com
 stargateinc	stargate.com
