@@ -108,6 +108,8 @@ if (isSet($_GET['query']))
 				}       
 		}
 	
+	$winfo = utf8_encode($winfo);
+	
 	$resout = str_replace('{result}', $winfo, $resout);
 	}
 else
