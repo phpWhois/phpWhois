@@ -67,6 +67,7 @@ srsplus		olsns.com
 stargateinc	stargate.com
 tmagnic     antiquea.com
 tvcorp		www.tv
+wwdomains	wildwestdomains.com
 
 // Other
 

@@ -1,3 +1,6 @@
+200/04/24
+		- added gtld handler for Wild West Domains
+
 2007/04/23
 		- added gtld handler for RRPPROXY
 
