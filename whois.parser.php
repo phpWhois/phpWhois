@@ -387,8 +387,8 @@ while (list($key,$val)=each($array))
 		{
 		reset($items);
 		$ok=false;
-
-		while (list($match,$field)=each($items))
+	
+		while (list($match,$field) = each($items))
 			{
 			$pos = strpos(strtolower($val),$match);
 			
@@ -396,7 +396,7 @@ while (list($key,$val)=each($array))
 
 			$itm = trim(substr($val,$pos+strlen($match)));
 
-			if ($field!='' && $itm!='')
+			if ($field != '' && $itm != '')
 				{
 				eval("\$r".getvarname($field)."=\$itm;");
 				}
@@ -404,51 +404,96 @@ while (list($key,$val)=each($array))
 			$val = trim(substr($val,0,$pos));
 
 			if ($val=='')
+				{
 				unset($array[$key]);
+				break;
+				}
 			else
 				{
 				$array[$key]=$val;
 				$ok=true;
 				}
-			break;
-			} 	
-		}
-		
-	if ($val=='') continue;
+			//break;
+			} 
 
-	if (!preg_match("/[^0-9\(\)\-\.\+ ]/", $val) && strlen($val)>5)
-           {
-	     if (isset($r['phone']))
-	        $r['fax']=$val;	
-	     else
-			$r['phone']=$val;
-	     unset($array[$key]);
-	     continue;
-	   }
-
-	if (strstr($val,'@'))
-		{
-		$val=str_replace("\t",' ',$val);	
-		$parts=explode(' ',$val);
-		$top=count($parts)-1;
-		$r['email']=str_replace('(','',$parts[$top]);
-		$r['email']=str_replace(')','',$r['email']);
-		array_pop($parts);
-		$val = trim(implode(' ',$parts));
-
-		if (strlen($val)<2) {
-			unset($array[$key]);
-			continue;
-			}
+		if (preg_match("/([+]*[-0-9\(\)\. ]){7,}/", $val, $matches))
+			{		
+			$phone = trim(str_replace(' ','',$matches[0]));
 			
-		$r['name']=$val;
-		unset($array[$key]);
-		
-		if ($key==1 && isset($array[0]))
-			{
-			$r['organization']=$array[0];
-			unset($array[0]);
+			if (strlen($phone) > 8)
+				{
+				if (isset($r['phone']))
+					$r['fax'] = trim($matches[0]);
+				else
+					$r['phone'] = trim($matches[0]);
+			
+				$val = str_replace($matches[0],'',$val);	
+			 
+				if ($val=='')
+					{
+					unset($array[$key]);
+					continue;
+					}
+				else
+					{
+					$array[$key] = $val;
+					$ok = true;
+					}
+				}
 			}
+
+		if (preg_match('/([-0-9a-zA-Z._+&\/=]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6})/',$val, $matches))
+			{		
+			$r['email'] = $matches[0];
+	
+			$val = str_replace($matches[0],'',$val);	
+			 
+			if ($val=='')
+				{
+				unset($array[$key]);
+				continue;
+				}
+			else
+				{
+				$array[$key] = $val;
+				$ok = true;
+				}
+			}		
+/*			
+		if (strstr($val,'@'))
+			{
+			$val = str_replace("\t",' ',$val);	
+			$parts = explode(' ',$val);
+			$top = count($parts)-1;
+			
+			for ($i=0; $i<=$top; $i++)
+				if (strstr($parts[$i],'@'))
+					{
+					$r['email'] = str_replace('(','',$parts[$i]);
+					$r['email'] = str_replace(')','',$r['email']);
+					$parts[$i] = '';
+					break;
+					}
+					
+			$val = trim(implode(' ',$parts));
+	
+			if (strlen($val)<2) {
+				unset($array[$key]);
+				continue;
+				}
+			else
+				$array[$key] = $val;
+	/*
+			$r['name']=$val;
+			unset($array[$key]);
+			
+			if ($key==1 && isset($array[0]))
+				{
+				$r['organization']=$array[0];
+				unset($array[0]);
+				}					
+			}*/
+	//if ($val=='') continue;
 		}
 	}     
 
@@ -462,8 +507,13 @@ if (isset($r['name']) && is_array($r['name']))
 	$r['name']=implode($r['name'],' ');
 	}
 
-if (!empty($array) && !isset($r['address']))
-	$r['address']=$array;
+if (!empty($array))
+	{
+	if (isset($r['address']))
+		$r['address'] = array_merge($array,$r['address']);
+	else
+		$r['address'] = $array;
+	}
 
 return $r;
 }
