@@ -80,7 +80,7 @@ class WhoisClient {
 	 * Perform lookup
 	 */
 
-	function GetRawData ($query, &$query_args) {
+	function GetRawData ($query) {
 		
 		$this->Query['string'] = $query;
 		
@@ -107,7 +107,7 @@ class WhoisClient {
 				return(array());
 				}
 				
-			$query_args = substr(strchr($this->Query['server'],'?'),1);
+			$this->Query['args'] = substr(strchr($this->Query['server'],'?'),1);
 			$this->Query['server'] = strtok($this->Query['server'],'?');
 			
 			if (substr($this->Query['server'],0,7)=='http://')
@@ -142,8 +142,10 @@ class WhoisClient {
 			else
 				$query_args = $query;
 			
-			if (substr($this->Query['server'],0,9)=='rwhois://')
-				$this->Query['server']=substr($this->Query['server'],9);
+			$this->Query['args'] = $query_args;
+			
+			if (substr($this->Query['server'],0,9) == 'rwhois://')
+				$this->Query['server'] = substr($this->Query['server'],9);
 				
 			// Get port
 			
@@ -155,7 +157,7 @@ class WhoisClient {
 				}
 			else			
 				$this->Query['server_port'] = $this->PORT;
-	
+				
 			// Connect to whois server, or return if failed
 
 			$ptr = $this->Connect();
@@ -208,33 +210,30 @@ class WhoisClient {
 		// If domain to query passed in, use it, otherwise use domain from initialisation
 		$query = !empty($query) ? $query : $this->Query['string'];
 				
-		$output = $this->GetRawData($query,$query_args);
-				
+		$output = $this->GetRawData($query);
+						
 		// Create result and set 'rawdata'
-		$result = array( 'rawdata' => $output );
+		$result = array( 'rawdata' => $output );		
+		$result = $this->set_whois_info($result);
 
 		// If we have a handler, post-process it with that
 		if (isSet($this->Query['handler']))
 			{
+			// Keep server list
+			$servers = $result['regyinfo']['servers'];
+			unset($result['regyinfo']['servers']);
+			
+			// Process data
 			$result = $this->Process($result,$deep_whois);
 		
+			// Add new servers to the server list
+			$result['regyinfo']['servers'] = array_merge($servers,$result['regyinfo']['servers']);
+			
 			// Handler may fortget to set rawdata
 			if (!isset($result['rawdata']))
 				$result['rawdata'] = $output;
-			}
-			
-		// Set whois server
-		if (!isset($result['regyinfo']['whois']))
-			$result['regyinfo']['whois'] = $this->Query['server'];
-
-		// Set whois server full query
-		if (!isset($result['regyinfo']['args']))
-			$result['regyinfo']['args'] = $query_args;
-			
-		// Set whois server port
-		if (!isset($result['regyinfo']['port']))
-			$result['regyinfo']['port'] = $this->Query['server_port'];
-			
+			}	
+		
 		// Type defaults to domain
 		if (!isset($result['regyinfo']['type']))
 			$result['regyinfo']['type'] = 'domain';	
@@ -243,10 +242,6 @@ class WhoisClient {
 		if (isset($this->Query['errstr']))
 			$result['errstr'] = $this->Query['errstr'];
 
-		// If no rawdata use rawdata from first whois server
-		/*if (!isset($result['rawdata']))
-			$result['rawdata'] = $output;*/
-		
 		// Fix/add nameserver information
 		if (method_exists($this,'FixResult') && $this->Query['tld']!='ip')
 			$this->FixResult($result,$query);
@@ -254,6 +249,41 @@ class WhoisClient {
 		return($result);
 	}
 	
+	/*
+	*   Adds whois server query information to result
+	*/
+	
+	function set_whois_info ($result)
+		{
+		$info = array(
+					'server'=> $this->Query['server'],
+					'args' 	=> $this->Query['args'],
+					'port'	=> $this->Query['server_port']
+					);
+		
+		if (isset($result['regyinfo']['whois']))
+			unset($result['regyinfo']['whois']);
+		
+		if (isset($result['regyinfo']['rwhois']))
+			unset($result['regyinfo']['rwhois']);
+			
+		if (isset($result['regyinfo']['referrer']))
+			{
+			$info['referrer'] = $result['regyinfo']['referrer'];
+			unset($result['regyinfo']['referrer']);
+			}
+		
+		if (isset($result['regyinfo']['registrar']))
+			{
+			$info['registrar'] = $result['regyinfo']['registrar'];
+			unset($result['regyinfo']['registrar']);
+			}
+	
+		$result['regyinfo']['servers'][] = $info;
+		
+		return $result;
+		}
+
 	/*
 	*   Convert html output to plain text
 	*/
@@ -425,10 +455,12 @@ class WhoisClient {
 		if (!isset($result['regyinfo']['whois'])) return $result;
 		
 		$this->Query['server'] = $wserver = $result['regyinfo']['whois'];
-		$subresult = $this->GetRawData($query,$query_args);
 		
+		$subresult = $this->GetRawData($query);
+
 		if (!empty($subresult))
 			{
+			$result = $this->set_whois_info($result);
 			$result['rawdata'] = $subresult;
 		
 			if (isset($this->WHOIS_GTLD_HANDLER[$wserver]))
@@ -436,7 +468,7 @@ class WhoisClient {
 			else
 				{
 				$parts = explode('.',$wserver);
-				$hname = $parts[1];
+				$hname = strtolower($parts[1]);
 				
 				if (($fp = @fopen('whois.gtld.'.$hname.'.php', 'r', 1)) and fclose($fp))
 					$this->Query['handler'] = $hname;
@@ -445,12 +477,12 @@ class WhoisClient {
 			if (!empty($this->Query['handler']))
 				{			
 				$this->Query['file'] = sprintf('whois.gtld.%s.php', $this->Query['handler']);
-				$regrinfo = $this->Process($result['rawdata']);
+				$regrinfo = $this->Process($subresult); //$result['rawdata']);
 				$result['regrinfo'] = $this->merge_results($result['regrinfo'], $regrinfo);
-				$result['rawdata'] = $subresult;
+				//$result['rawdata'] = $subresult;
 				}
 			}
-
+				
 		return $result;
 	}
 	

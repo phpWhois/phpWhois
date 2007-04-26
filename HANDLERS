@@ -19,11 +19,12 @@ rawdata is always returned as it's filled by phpWhois itself. It
 contains the raw text output returned by the whois server.
 
 regyinfo contains information about the registry who returned that
-information. It has three subkeys: 'whois' (the whois server who
-returned the data), 'referrer' (the web address of the registry),
-'registar' (the company name of the registry), 'rwhois' is extra
-rwhois informatio has been found and 'type' which can be 'domain',
-'ip' or 'AS'.
+information. It has two subkeys: 'servers' which is an array with
+one entry for each whois server who returned the data (with keys
+'referrer' the web address of the registry, 'registar' the company
+name of the registry, 'seerver' the whois server, 'port' the whois
+server port and 'args' the query sent to the server. The second subkey
+is 'type' which can be 'domain', 'ip' or 'AS'.
 
 regrinfo holds the information about the domain itself. It could have
 the following subkeys:
