@@ -227,7 +227,10 @@ class WhoisClient {
 			$result = $this->Process($result,$deep_whois);
 		
 			// Add new servers to the server list
-			$result['regyinfo']['servers'] = array_merge($servers,$result['regyinfo']['servers']);
+			if (isset($result['regyinfo']['servers']))
+				$result['regyinfo']['servers'] = array_merge($servers,$result['regyinfo']['servers']);
+			else
+				$result['regyinfo']['servers'] = $servers;
 			
 			// Handler may fortget to set rawdata
 			if (!isset($result['rawdata']))
