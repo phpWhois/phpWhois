@@ -1,4 +1,12 @@
-200/04/24
+2007/04/26
+		- restrict .com/.net searches to domains
+		- regyinfo now contains a list of all servers
+	      servers contacted in key 'servers'
+		- improvements in contact data detection in
+		  whois.parser
+		- added gtld handler for OnlineNIC
+
+2007/04/24
 		- added gtld handler for Wild West Domains
 		- utf8 fixes in example.php
 
