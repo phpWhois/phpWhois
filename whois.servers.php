@@ -45,8 +45,8 @@ $this->DATA = array(
 /* If whois Server needs any parameters, enter it here */
 
 $this->WHOIS_PARAM = array(
-	'com.whois-servers.net' => '=',
-	'net.whois-servers.net' => '=',
+	'com.whois-servers.net' => 'domain =',
+	'net.whois-servers.net' => 'domain =',
 	'de.whois-servers.net'	=> '-T dn,ace '
 	);
 
