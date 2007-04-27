@@ -270,18 +270,6 @@ class WhoisClient {
 		if (isset($result['regyinfo']['rwhois']))
 			unset($result['regyinfo']['rwhois']);
 			
-		if (isset($result['regyinfo']['referrer']))
-			{
-			$info['referrer'] = $result['regyinfo']['referrer'];
-			unset($result['regyinfo']['referrer']);
-			}
-		
-		if (isset($result['regyinfo']['registrar']))
-			{
-			$info['registrar'] = $result['regyinfo']['registrar'];
-			unset($result['regyinfo']['registrar']);
-			}
-	
 		$result['regyinfo']['servers'][] = $info;
 		
 		return $result;
