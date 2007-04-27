@@ -65,7 +65,8 @@ class de_handler
 			'pcode:' => 'address.pcode',
 			'country:' => 'address.country',
 			'name:' => 'name',
-			'remarks:' => ''
+			'remarks:' => '',
+			'type:'	=> ''
 		            );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
