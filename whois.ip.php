@@ -109,9 +109,11 @@ class ip_handler extends WhoisClient
 				
 				if (empty($rawdata))
 					{
-					$rawdata = $data['rawdata'];
+					//$rawdata = $data['rawdata'];
 					break;
 					}
+				
+				$result = $this->set_whois_info($result);
 					
 				while (list($ln, $line) = each($rawdata))
 					{
@@ -165,6 +167,8 @@ class ip_handler extends WhoisClient
 
 					$rawdata = $this->GetRawData('!'.$newquery);
 					}
+				else
+					$rawdata = '';
 					
 				break;
 
@@ -201,7 +205,7 @@ class ip_handler extends WhoisClient
 				
 				if (empty($rawdata))
 					{
-					$rawdata = $data['rawdata'];
+					//$rawdata = $data['rawdata'];
 					break;
 					}
 					
@@ -220,13 +224,16 @@ class ip_handler extends WhoisClient
 			default:
 				$rawdata = $this->GetRawData($query);
 				
-				if (empty($rawdata))
-					$rawdata = $data['rawdata'];
+				//if (empty($rawdata))
+				//	$rawdata = $data['rawdata'];
 			}
-
-		$result = $this->set_whois_info($result);
+				
+		if (empty($rawdata))
+			$rawdata = $data['rawdata'];
+		else
+			$result = $this->set_whois_info($result);
+			
 		$result['rawdata'] = $rawdata;		
-		//$result['regyinfo']['whois'] = $this->Query['server'];
 
 		if (isset($this->HANDLERS[$this->Query['server']]))
 			$this->Query['handler'] = $this->HANDLERS[$this->Query['server']];
@@ -285,7 +292,9 @@ class ip_handler extends WhoisClient
 			
 		// more queries can be done to get more accurated data
 
-		foreach ($more_data as $srv_data)		
+		reset($more_data); 
+
+		while (list($key, $srv_data) = each ($more_data))
 			{			
 			$this->Query['server'] = $srv_data['server'];
 			unset($this->Query['handler']);			
@@ -306,23 +315,28 @@ class ip_handler extends WhoisClient
 				$rwres = $this->Process($rwdata);
 				
 				if (isset($rwres['network']))
-					$result['regrinfo']['network'] = $rwres['network'];
+					$result = $this->join_result($result,'network',$rwres);
 					
 				if (isset($rwres['owner']))
-					{
-					if (!isset($result['regrinfo']['provider']))
-						$result['regrinfo']['provider'] = $result['regrinfo']['owner'];
-					$result['regrinfo']['owner'] = $rwres['owner'];
-					}
+					$result = $this->join_result($result,'owner',$rwres);
 					
 				if (isset($rwres['tech']))
-					{
-					$result['regrinfo']['tech'] = $rwres['tech'];
-					}				
-
+					$result = $this->join_result($result,'tech',$rwres);
+					
 				if (isset($rwres['abuse']))
+					$result = $this->join_result($result,'abuse',$rwres);
+
+				if (isset($rwres['admin']))
+					$result = $this->join_result($result,'admin',$rwres);
+					
+				if (isset($rwres['rwhois']))
 					{
-					$result['regrinfo']['abuse'] = $rwres['abuse'];
+					$more_data[] = array (
+									'query' => $query,
+									'server' => $rwres['rwhois'],
+									'handler' => 'rwhois'
+									);
+					unset($rwres['rwhois']);
 					}
 				}
 			}
@@ -334,6 +348,18 @@ class ip_handler extends WhoisClient
 		else
 			$result['regyinfo']['type'] = 'ip';
 			
+		return $result;
+		}
+		
+	function join_result($result, $key, $newres)
+		{		
+		if (isset($result['regrinfo'][$key]) && !array_key_exists(0,$result['regrinfo'][$key]))
+			{
+			$r = $result['regrinfo'][$key];
+			$result['regrinfo'][$key] = array($r);
+			}
+
+		$result['regrinfo'][$key][] = $newres[$key];
 		return $result;
 		}
 	}

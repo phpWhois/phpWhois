@@ -111,12 +111,10 @@ the following subkeys:
 		source		-> who provided that information
 		remarks		-> remarks
 
-	provider
-	--------
-
-	when extra rwhois or whois information about ip address space
-	delegation is available this subkey will contain the
-    information of the owner of the upstream ip block.
+    When information is requested on ip addresses any of those
+	keys could be an array which will contain all data found on
+	different whois or rwhois servers (each owner, admin, tech,
+	etc ... found in each query).
 
 Not all handlers fill values in each of the keys defined by the
 Common Object Model as not all registries return the same amount
