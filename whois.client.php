@@ -263,7 +263,7 @@ class WhoisClient {
 					'args' 	=> $this->Query['args'],
 					'port'	=> $this->Query['server_port']
 					);
-		
+
 		if (isset($result['regyinfo']['whois']))
 			unset($result['regyinfo']['whois']);
 		
