@@ -171,10 +171,19 @@ foreach($array1 as $key => $value)
 				} 
 			}
 		}
-		elseif(!isset($array2[$key]) || $array2[$key] != $value)
+	else
+		if (!isset($array2[$key]) || $array2[$key] != $value)
 			{
 			$difference[$key] = array( 'previous' => $array2[$key], 'actual' => $value);
 			}
+	}
+	
+// Search missing items
+
+foreach($array2 as $key => $value)
+	{
+	if (!isset($array1[$key]))
+		$difference[$key] = array( 'previous' => $value, 'actual' => '(missing)');
 	}
 	
 return !isset($difference) ? false : $difference;

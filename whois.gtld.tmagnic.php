@@ -44,10 +44,11 @@ class tmagnic_handler
               'domain.nserver.' => 'Domain servers in listed order:',
               'domain.expires' => 'Record expires on: ',
               'domain.changed' => 'Record last updated on: ',
-              '' => 'Zone Contact'
+              '' => 'Zone Contact',
+              '#' => 'Punycode Name:'
 		          );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 		
 		if (isset($r['owner'])) $r['owner'] = get_contact($r['owner']);
 		if (isset($r['admin'])) $r['admin'] = get_contact($r['admin']);

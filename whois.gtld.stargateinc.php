@@ -48,11 +48,11 @@ class stargateinc_handler
                 'domain.status' => 'Status:'
 		            );
 
-		$r = get_blocks($data_str, $items);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		$r['billing'] = get_contact($r['billing']);
+		$r = get_blocks($data_str, $items,true);
+		$r['owner'] = get_contact($r['owner'],false,true);
+		$r['admin'] = get_contact($r['admin'],false,true);
+		$r['tech'] = get_contact($r['tech'],false,true);
+		$r['billing'] = get_contact($r['billing'],false,true);
 		$r = format_dates($r, 'dmy');
 		return ($r);
 		}

@@ -52,15 +52,17 @@ class edu_handler
 		if (isset($b['owner']))
 			{
 			$b['owner'] = get_contact($b['owner']);
-			array_pop($b['owner']['address']);
 			}
 			
-		if (isset($b['admin']))		
+		if (isset($b['admin']))
+			{
 			$b['admin'] = get_contact($b['admin']);
+			}
 			
 		if (isset($b['tech']))
 			{
 			$b['tech'] = get_contact($b['tech']);
+			
 			if ($b['tech']['name'] == 'Same as above')
 				$b['tech'] = $b['admin'];
 			}

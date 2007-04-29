@@ -46,7 +46,7 @@ class fm_handler
                   );
 
 		$blocks = get_blocks($data['rawdata'], $items);
-
+		
 		$items = array(
                   'FM Domain:' => 'name',
                   'Primary Hostname:' => 'nserver.0',
@@ -69,7 +69,7 @@ class fm_handler
 
 		while (list($key, $val) = each($blocks))
 			{
-			$r['regrinfo'][$key] = generic_parser_b($val, $items);
+			$r['regrinfo'][$key] = generic_parser_b($val, $items, 'mdy', false);
 			}
 
 		$r['regyinfo']['referrer'] = 'http://www.dot.dm';

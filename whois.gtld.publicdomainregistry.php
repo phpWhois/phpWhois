@@ -45,14 +45,16 @@ class publicdomainregistry_handler
               'domain.nserver' => 'Domain servers in listed order:',
               'domain.changed' => 'Record last updated ',
               'domain.created' => 'Record created on',
-              'domain.expires' => 'Record expires on'
+              'domain.created#' => 'Creation Date:',
+              'domain.expires' => 'Record expires on',
+              'domain.expires#' => 'Expiration Date:'
 		          );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items,true);
 
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
+		$r['owner'] = get_contact($r['owner'],false,true);
+		$r['admin'] = get_contact($r['admin'],false,true);
+		$r['tech'] = get_contact($r['tech'],false,true);
 		format_dates($r, 'mdy');
 		return ($r);
 		}

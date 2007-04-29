@@ -47,11 +47,11 @@ class networksolutions_handler
                   'domain.expires'	=> 'Record expires on'
 		              );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 
-		if (isset($r['owner']))	$r['owner'] = get_contact($r['owner']);
-		if (isset($r['admin']))	$r['admin'] = get_contact($r['admin']);
-		if (isset($r['tech']))	$r['tech'] = get_contact($r['tech']);
+		if (isset($r['owner']))	$r['owner'] = get_contact($r['owner'],false,true);
+		if (isset($r['admin']))	$r['admin'] = get_contact($r['admin'],false,true);
+		if (isset($r['tech']))	$r['tech'] = get_contact($r['tech'],false,true);
 		
 		$r = format_dates($r, 'dmy');
 

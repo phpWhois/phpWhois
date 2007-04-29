@@ -37,8 +37,7 @@ class pl_handler
 		$items = array(
                 	'owner' 	=> 'SUBSCRIBERS CONTACT OBJECT:',
 					'domain'	=> 'DOMAIN OBJECT:',
-					'tech'		=> 'Technical Contact:',
-					'x'			=> 'nservers:'
+					'tech'		=> 'Technical Contact:'
 					);
 
 		$fields = array (
@@ -79,6 +78,7 @@ class pl_handler
 				}
 				
 			// Get name servers
+
 			$found = false;
 			$ns = array();
 			

@@ -46,10 +46,11 @@ class opensrs_handler
                   'domain.nserver'	=> 'Domain servers in listed order:',
                   'domain.changed'	=> 'Record last updated on',
                   'domain.created'	=> 'Record created on',
-                  'domain.expires'	=> 'Record expires on'
+                  'domain.expires'	=> 'Record expires on',
+                  'domain.sponsor'	=> 'Registrar of Record:'
 		              );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 
 		if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
 			$r['domain']['sponsor'] = $r['domain']['sponsor'][0];

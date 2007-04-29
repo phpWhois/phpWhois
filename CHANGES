@@ -1,3 +1,11 @@
+200//04/29
+		- several improvments on whois.parser
+		- several handlers fixed to work with improved parser
+
+2007/04/27
+		- rearranged regyinfo array
+		- better info reporting on ip whois
+
 2007/04/26
 		- restrict .com/.net searches to domains
 		- regyinfo now contains a list of all servers

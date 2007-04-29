@@ -47,7 +47,7 @@ class domaindiscover_handler
                 'domain.expires' => 'Domain expires on'
 		            );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 
 		$r['owner'] = get_contact($r['owner']);
 		$r['admin'] = get_contact($r['admin']);

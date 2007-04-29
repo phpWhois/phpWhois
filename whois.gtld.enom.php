@@ -65,16 +65,16 @@ class enom_handler
 		$r = get_blocks($data_str, $items);
 		
 		if (isset($r['owner']))
-			$r['owner'] = get_contact($r['owner']);
+			$r['owner'] = get_contact($r['owner'],false,true);
 			
 		if (isset($r['admin']))
-			$r['admin'] = get_contact($r['admin']);
+			$r['admin'] = get_contact($r['admin'],false,true);
 			
 		if (isset($r['tech']))
-			$r['tech'] = get_contact($r['tech']);
+			$r['tech'] = get_contact($r['tech'],false,true);
 		
 		if (isset($r['billing']))
-			$r['billing'] = get_contact($r['billing']);
+			$r['billing'] = get_contact($r['billing'],false,true);
 			
 		$r = format_dates($r, 'dmy');
 		return ($r);

@@ -59,8 +59,10 @@ class es_handler
                 'organizaci&oacute;n:' => 'organization',
                 'direcci&oacute;n:' => 'address.street',
                 'poblaci&oacute;n:' => 'address.city',
-                'c&oacute;digo Postal:' => 'address.pcode',
-                'pa&iacute;s:' => 'address.country'
+                'c&oacute;digo postal:' => 'address.pcode',
+                'pa&iacute;s:' => 'address.country',
+                'tel&eacute;fono:' => 'phone',
+                'provincia:' => ''
 		            );
 
 		array_shift($data_str['rawdata']);

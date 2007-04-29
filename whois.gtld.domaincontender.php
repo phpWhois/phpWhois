@@ -38,14 +38,14 @@ class domaincontender_handler
                 'owner'	=> 'Registrant:',
                 'admin' => 'Administrative Contact:',
                 'tech' => 'Technical Contact:',
-                'domain.name' => 'Domain name:',
+                'domain.name' => 'Domain Name:',
                 'domain.nserver.' => 'Domain servers in listed order:',
                 'domain.created' => 'Record created on',
                 'domain.expires' => 'Record expires on',
                 'domain.changed' => 'Record last updated'
 		            );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 		$r['owner'] = get_contact($r['owner']);
 		$r['admin'] = get_contact($r['admin']);
 		$r['tech'] = get_contact($r['tech']);

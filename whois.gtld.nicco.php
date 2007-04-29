@@ -47,10 +47,10 @@ class nicco_handler
                   'domain.changed' => 'Last Updated on:'
 		              );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
+		$r['admin'] = get_contact($r['admin'],false,true);
+		$r['tech'] = get_contact($r['tech'],false,true);
 		$r = format_dates($r, 'dmy');
 		return ($r);
 		}

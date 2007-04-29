@@ -42,6 +42,7 @@ class onlinenic_handler
                   'tech' => 'Technical Contactor:',
                   'bill' => 'Billing Contactor:',
                   'domain.name' => 'Domain name:',
+                  'domain.name#' => 'Domain Name:',
                   'domain.nserver' => 'Domain servers in listed order:',
                   'domain.created' => 'Record created on ',
                   'domain.expires' => 'Record expired on ',
@@ -61,12 +62,12 @@ class onlinenic_handler
 					'postcode:' => 'address.pcode',
 					'address:' => 'address.street',
 					'city:' => 'address.city',
-					'province:' => 'address.city.',
+					'province:' => '',
 					',province:' => '',
 					',country:' => 'address.country'
 					);
 					
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 
 		if (isset($r['owner']))
 			$r['owner'] = get_contact($r['owner'],$extra);

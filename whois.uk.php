@@ -53,7 +53,8 @@ class uk_handler
                 'domain.expires' => 'Renewal date:',
                 'domain.nserver' => 'Name servers:',
                 'domain.sponsor' => "Registrant's agent:",
-                'domain.status'	 => 'Registration status:'
+                'domain.status'	 => 'Registration status:',
+                '' => 'WHOIS lookup made at'
 		        );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);

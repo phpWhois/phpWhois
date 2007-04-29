@@ -48,7 +48,7 @@ class lt_handler
 						'owner.name'		=> 'Registrar:',
 						'owner.email'		=> 'Registrar email:',
 						'domain.status' 	=> 'Status:',
-						'domain.created'	=> 'Created:',
+						'domain.created'	=> 'Registered:',
 						'domain.changed'	=> 'Last updated:',
 						'domain.nserver.'	=> 'NS:',
 						''		=> '%'
