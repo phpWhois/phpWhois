@@ -52,6 +52,7 @@ joker		joker.com
 melbourneit     inww.com
 moniker		moniker.com
 namejuice	namejuice.com
+nameking	nameking.com
 networksolutions		networksolutions.com
 nicco		nicco.com
 nicline		nicline.com

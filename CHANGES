@@ -1,6 +1,7 @@
 200//04/29
 		- several improvments on whois.parser
 		- several handlers fixed to work with improved parser
+		- added gtld handler for NameKing
 
 2007/04/27
 		- rearranged regyinfo array
