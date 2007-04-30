@@ -94,7 +94,8 @@ $this->WHOIS_GTLD_HANDLER = array(
 		'whois.bulkregister.com'			=> 'enom',
 		'whois.namesdirect.com'				=> 'dotster',
 		'whois.psi-usa.info'				=> 'psiusa',
-		'whois.www.tv'						=> 'tvcorp'
+		'whois.www.tv'						=> 'tvcorp',
+		'whois.tucows.com'					=> 'opensrs'
 		);
 		
 /* Non ICANN TLD's */
