@@ -44,6 +44,7 @@ dotregistrar    dotregistrar.com
 dotster		dotster.com namesdirect.com
 encirca		nic.jobs
 enom		enom.com
+fabulous	fabulous.com
 godaddy		godaddy.com
 iana		example.com
 interdomain	interdominio.com

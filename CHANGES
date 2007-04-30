@@ -1,4 +1,9 @@
-200//04/29
+2007/04/30
+		- fixed tucows/opensrs gtld handler detection
+		- more improvements and cleanup of whois.parser.php
+		- added gtld handler for Fabulous
+
+2007/04/29
 		- several improvments on whois.parser
 		- several handlers fixed to work with improved parser
 		- added gtld handler for NameKing
