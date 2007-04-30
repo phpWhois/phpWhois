@@ -264,9 +264,6 @@ while (list($key,$val) = each($rawdata))
 	if (!$found) continue;
 
 	$block = array();
-	$found = false;
-	$spaces = 0;
-//echo "<br> endtag [$endtag] $line";
 
 	// Block found, get data ...
 	
@@ -274,22 +271,12 @@ while (list($key,$val) = each($rawdata))
 		{ 
 		$val = trim($val);
 		
-		if ($val == '' || $val == str_repeat($val[0],strlen($val))) { 
-			//if ($found && ++$spaces == 2) break;	
-		    continue;
-            }
+		if ($val == '' || $val == str_repeat($val[0],strlen($val))) continue;
 
-		if (!$found) {
-			$found = true;
-			$block[] = $val;
-			continue;
-			}
-			
 		$last = substr($val,-1,1);
-//echo "<br> endtag [$endtag] [$last]";		
+
 		if ($last == $endtag) {
 			// Another block found
-			//echo "etag [$endtag]";
 			prev($rawdata);
 			break;
 			}
@@ -304,11 +291,9 @@ while (list($key,$val) = each($rawdata))
 				{
 				$pos = strpos($val,$match);
 				
-				//if ($val == $match)
 				if ($pos !== false && $pos == 0)
 					{
 					$et = true;
-					//echo "e $match ";
 					break;
 					}
 				}
@@ -321,27 +306,13 @@ while (list($key,$val) = each($rawdata))
 				}
 			}
 			
-		//if ($spaces>0) {
-		/*
-		echo "<br>spc $spaces cnt ".count($block);
-		if ($spaces>0 && count($block)>0) {
-			reset($items);
-			$ok = true;
-			while (list($field, $match)=each($items)) {
-				$pos=strpos($val,$match);
-				if ($pos!==false) $ok=false;
-				}
-			if (!$ok) {
-				prev($rawdata);
-				break;
-				}
-			}*/
 		$block[]=$val;
 		}
 
 	reset($items);
-//echo "<br>$line";
-//print_r($block);
+
+	if (empty($block)) continue;
+	
 	while (list($field, $match)=each($items)) {
 		$pos=strpos($line,$match);
 		if ($pos!==false) {
