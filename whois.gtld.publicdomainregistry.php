@@ -41,7 +41,7 @@ class publicdomainregistry_handler
               'admin' => 'Administrative Contact',
               'tech' => 'Technical Contact',
               'domain.name' => 'Domain name:',
-              'domain.sponsor' => 'Registration Service Provider:',
+              'domain.sponsor' => 'Registration Service Provided By:',
               'domain.nserver' => 'Domain servers in listed order:',
               'domain.changed' => 'Record last updated ',
               'domain.created' => 'Record created on',
