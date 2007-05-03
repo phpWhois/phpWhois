@@ -1,3 +1,7 @@
+2007/05/03
+		- minox fix in whois.gtld.publicdomainregistry.php
+		- removed unused handler whois.gtld.directi.php
+
 2007/04/30
 		- fixed tucows/opensrs gtld handler detection
 		- more improvements and cleanup of whois.parser.php
