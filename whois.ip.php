@@ -107,19 +107,14 @@ class ip_handler extends WhoisClient
 			case 'whois.apnic.net':
 				$rawdata = $this->GetRawData($query);
 				
-				if (empty($rawdata))
-					{
-					//$rawdata = $data['rawdata'];
-					break;
-					}
-				
-				$result = $this->set_whois_info($result);
+				if (empty($rawdata)) break;
 					
 				while (list($ln, $line) = each($rawdata))
 					{
 					if (strstr($line, 'KRNIC whois server at whois.krnic.net') ||
 					    strstr($line, 'KRNIC-KR'))
 						{
+						$result = $this->set_whois_info($result);
 						$this->Query['server'] = 'whois.krnic.net';
 						$result['regyinfo']['registrar'] = 'Korea Network Information Center (KRNIC)';
 						$rawdata = $this->GetRawData($query);
@@ -155,6 +150,7 @@ class ip_handler extends WhoisClient
 
 				if ($newquery != '')
 					{
+					$result = $this->set_whois_info($result);
 					$result['regyinfo']['netname'] = $newquery;
 
 					if (strstr($newquery, 'BRAZIL-BLK'))
@@ -175,10 +171,7 @@ class ip_handler extends WhoisClient
 			case 'whois.lacnic.net':
 				$rawdata = $this->GetRawData($query);
 				
-				if (empty($rawdata))
-					{
-					break;
-					}
+				if (empty($rawdata)) break;
 					
 				while (list($ln, $line) = each($rawdata))
 					{
@@ -192,6 +185,7 @@ class ip_handler extends WhoisClient
 							
 					if ($s != '')
 						{
+						$result = $this->set_whois_info($result);
 						$this->Query['server'] = 'whois.registro.br';
 						$result['regyinfo']['registrar'] = 'Comite Gestor da Internet do Brazil';
 						$rawdata = $this->GetRawData($query);
@@ -203,16 +197,13 @@ class ip_handler extends WhoisClient
 			case 'whois.ripe.net':
 				$rawdata = $this->GetRawData($query);
 				
-				if (empty($rawdata))
-					{
-					//$rawdata = $data['rawdata'];
-					break;
-					}
+				if (empty($rawdata)) break;
 					
 				while (list($ln, $line) = each($rawdata))
 					{
 					if (strstr($line, 'AFRINIC-NET-TRANSFERRED-'))
 						{
+						$result = $this->set_whois_info($result);
 						$this->Query['server'] = 'whois.afrinic.net';
 						$result['regyinfo']['registrar'] = 'African Network Information Center';
 						$rawdata = $this->GetRawData($query);
@@ -223,9 +214,6 @@ class ip_handler extends WhoisClient
 				
 			default:
 				$rawdata = $this->GetRawData($query);
-				
-				//if (empty($rawdata))
-				//	$rawdata = $data['rawdata'];
 			}
 				
 		if (empty($rawdata))

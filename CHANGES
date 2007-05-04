@@ -1,3 +1,6 @@
+2007/05/04
+		- fixes to ip handler and APNIC ip handler
+
 2007/05/03
 		- minox fix in whois.gtld.publicdomainregistry.php
 		- removed unused handler whois.gtld.directi.php
