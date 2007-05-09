@@ -1,3 +1,6 @@
+2007/05/09
+		- fixed reporting of ip query information
+
 2007/05/04
 		- fixes to ip handler and APNIC ip handler
 

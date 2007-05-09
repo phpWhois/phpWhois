@@ -260,10 +260,18 @@ class WhoisClient {
 		{
 		$info = array(
 					'server'=> $this->Query['server'],
-					'args' 	=> $this->Query['args'],
-					'port'	=> $this->Query['server_port']
 					);
 
+		if (!empty($this->Query['args']))
+			$info['args'] = $this->Query['args'];
+		else
+			$info['args'] = $this->Query['query'];
+		
+		if (!empty($this->Query['server_port']))
+			$info['port'] = $this->Query['server_port'];
+		else
+			$info['port'] = 43;
+			
 		if (isset($result['regyinfo']['whois']))
 			unset($result['regyinfo']['whois']);
 		

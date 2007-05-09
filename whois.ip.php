@@ -78,7 +78,7 @@ class ip_handler extends WhoisClient
 
 		$this->Query = array();
 		$this->Query['server'] = 'whois.arin.net';
-		$this->Query['string'] = $query;
+		$this->Query['query'] = $query;
 
 		reset($this->REGISTRARS);
 
@@ -150,17 +150,17 @@ class ip_handler extends WhoisClient
 
 				if ($newquery != '')
 					{
-					$result = $this->set_whois_info($result);
+					//$result = $this->set_whois_info($result);
 					$result['regyinfo']['netname'] = $newquery;
 
 					if (strstr($newquery, 'BRAZIL-BLK'))
-						{
+						{										
 						$this->Query['server'] = 'whois.registro.br';
 						$result['regyinfo']['registrar'] = 'Comite Gestor da Internet no Brasil';
 						$rawdata = $this->GetRawData($query);
 						break;
 						}
-
+					
 					$rawdata = $this->GetRawData('!'.$newquery);
 					}
 				else
