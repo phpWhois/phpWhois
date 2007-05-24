@@ -1,3 +1,6 @@
+2007/05/24
+		- uniform way to specify query array
+
 2007/05/09
 		- fixed reporting of ip query information
 

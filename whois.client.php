@@ -54,7 +54,7 @@ class WhoisClient {
 	var $Query = array(
 		'tld' => '',
 		'type' => 'domain',
-		'string' => '',
+		'query' => '',
 		'status',
 		'server'
 		);
@@ -82,7 +82,7 @@ class WhoisClient {
 
 	function GetRawData ($query) {
 		
-		$this->Query['string'] = $query;
+		$this->Query['query'] = $query;
 		
 		// clear error description
 		if (isset($this->Query['errstr'])) unset($this->Query['errstr']);
@@ -208,7 +208,7 @@ class WhoisClient {
 	function GetData ($query='', $deep_whois=true) {
 	
 		// If domain to query passed in, use it, otherwise use domain from initialisation
-		$query = !empty($query) ? $query : $this->Query['string'];
+		$query = !empty($query) ? $query : $this->Query['query'];
 				
 		$output = $this->GetRawData($query);
 						
@@ -420,7 +420,7 @@ class WhoisClient {
 
 		// If the handler has still not been included, append to query errors list and return
 		if(!defined($HANDLER_FLAG)) {
-			$this->Query['errstr'][] = "Can't find ".$this->Query['tld'].' handler: '.$this->Query["file"];
+			$this->Query['errstr'][] = "Can't find ".$this->Query['tld'].' handler: '.$this->Query['file'];
 			return($result);
 		}
 
@@ -439,7 +439,7 @@ class WhoisClient {
 		$handler->deep_whois = $deep_whois;
 
 		// Process
-		$res = $handler->parse($result,$this->Query['string']);
+		$res = $handler->parse($result,$this->Query['query']);
 
 		// Return the result
 		return $res;

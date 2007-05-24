@@ -99,7 +99,7 @@ class Whois extends WhoisClient
 
 		// Set domain to query in query array
 
-		$this->Query['string'] = $domain = strtolower($query);
+		$this->Query['query'] = $domain = strtolower($query);
 
 		// If query is an ip address do ip lookup
 
@@ -112,7 +112,7 @@ class Whois extends WhoisClient
 			$this->Query['host_ip'] = $ip;
 			$this->Query['file'] = 'whois.ip.php';
 			$this->Query['handler'] = 'ip';
-			$this->Query['string'] = $ip;
+			$this->Query['query'] = $ip;
 			$this->Query['tld'] = 'ip';
 			$this->Query['host_name'] = @gethostbyaddr($ip);
 			return $this->GetData('',$this->deep_whois);
@@ -153,7 +153,7 @@ class Whois extends WhoisClient
 					{
 					unset($this->Query['server']);
 					$this->Query['status'] =  - 1;
-					$this->Query['errstr'][] = $this->Query['string'].' domain is not supported';
+					$this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
 					return ;
 					}
 					
@@ -233,7 +233,7 @@ class Whois extends WhoisClient
 		// If tld not known, and domain not in DNS, return error
 		unset($this->Query['server']);
 		$this->Query['status'] =  - 1;
-		$this->Query['errstr'][] = $this->Query['string'].' domain is not supported';
+		$this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
 		return ;
 		}
 
