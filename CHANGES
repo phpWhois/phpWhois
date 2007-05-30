@@ -1,3 +1,6 @@
+2007/05/30
+		- removed support for .gr domains
+
 2007/05/24
 		- uniform way to specify query array
 

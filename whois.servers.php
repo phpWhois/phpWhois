@@ -71,6 +71,7 @@ $this->WHOIS_SPECIAL = array(
 		'es'	 => 'http://www.neodigit.es/dominios/whois.php?dom={domain}.es',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
 		'jobs'	 => 'jobswhois.verisign-grs.com',
+		'gr'	 => '',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.gs',
 		'mobi'	 => 'whois.dotmobiregistry.net',
 		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.ms',
