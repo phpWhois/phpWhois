@@ -24,6 +24,7 @@ nl		domain-registry.nl
 nu		nunames.nu
 nz		dnc.org.nz
 pl		nic.pl
+pt		dns.pt
 ru		nic.ru
 sc		admin.sc
 se		nic-se.se
