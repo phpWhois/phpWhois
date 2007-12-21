@@ -1,3 +1,8 @@
+2007/12/21
+		- fixed uninitialized variable in example.php
+		- fixes in publicdomainregistry and uk handlers
+		- improved regex for html output
+
 2007/05/30
 		- removed support for .gr domains
 
