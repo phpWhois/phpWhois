@@ -287,8 +287,12 @@ class WhoisClient {
 	*   Convert html output to plain text
 	*/
 	function httpQuery ($query) {
-		$lines = @file($this->Query['server']);
 		
+		//echo ini_get('allow_url_fopen');
+		
+		//if (ini_get('allow_url_fopen'))
+			$lines = @file($this->Query['server']);		
+			
 		if (!$lines) return false;
 		
 		$output = '';

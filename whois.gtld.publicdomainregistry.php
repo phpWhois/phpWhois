@@ -38,6 +38,7 @@ class publicdomainregistry_handler
 		{
 		$items = array(
               'owner' => 'Registrant:',
+              'owner#' => '(Registrant):',
               'admin' => 'Administrative Contact',
               'tech' => 'Technical Contact',
               'domain.name' => 'Domain name:',

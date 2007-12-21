@@ -63,7 +63,8 @@ if (isSet($_GET['query']))
 	$result = $whois->Lookup($query);
 	
 	$resout = str_replace('{query}', $query, $resout);
-	
+	$winfo = '';
+
 	switch ($output)
 		{
 		case 'object':

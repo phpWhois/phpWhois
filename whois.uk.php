@@ -52,7 +52,7 @@ class uk_handler
  				'domain.changed' => 'Last updated:',
                 'domain.expires' => 'Renewal date:',
                 'domain.nserver' => 'Name servers:',
-                'domain.sponsor' => "Registrant's agent:",
+                'domain.sponsor' => 'Registrar:',
                 'domain.status'	 => 'Registration status:',
                 '' => 'WHOIS lookup made at'
 		        );
@@ -64,7 +64,7 @@ class uk_handler
 			$r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
 			$r['regrinfo']['domain']['sponsor'] = $r['regrinfo']['domain']['sponsor'][0];
 
-			unset($r['regrinfo']['domain']['nserver'][count($r['regrinfo']['domain']['nserver']) - 1]);
+			//unset($r['regrinfo']['domain']['nserver'][count($r['regrinfo']['domain']['nserver']) - 1]);
 			$r['regrinfo']['registered'] = 'yes';
 			
 			$r = format_dates($r, 'dmy');
