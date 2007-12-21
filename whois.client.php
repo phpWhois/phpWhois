@@ -190,8 +190,8 @@ class WhoisClient {
 			if(!$this->BUFFER)
 				$output = explode("\n", $raw);
 
-			// Drop empty last line
-			if (empty($output[count($output)-1])) 
+			// Drop empty last line (if it's empty! - saleck)
+			if(empty($output[count($output)-1]))
 				unset($output[count($output)-1]);
 			}
 		

@@ -5,6 +5,7 @@
 		- added support for centralnic domains
 		- added handler for .pt
 		- fixed bug #1761156
+		- applied patch #1749389
 
 2007/05/30
 		- removed support for .gr domains
