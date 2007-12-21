@@ -3,7 +3,7 @@
 		- fixes in publicdomainregistry and uk handlers
 		- improved regex for html output
 		- added support for centralnic domains
-		- added handler for .pt
+		- added handler for .pt and .ae (pacth #1709470)
 		- fixed bug #1761156
 		- applied patch #1749389
 
