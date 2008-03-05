@@ -115,6 +115,7 @@ $this->WHOIS_SPECIAL = array(
 
 $this->WHOIS_GTLD_HANDLER = array(
 		'whois.bulkregister.com'			=> 'enom',
+		'whois.dotregistrar.com'			=> 'dotster',
 		'whois.namesdirect.com'				=> 'dotster',
 		'whois.psi-usa.info'				=> 'psiusa',
 		'whois.www.tv'						=> 'tvcorp',

@@ -1,3 +1,6 @@
+2008/05/05
+		- dotregistrar is now part of dotster
+
 2007/12/21
 		- fixed uninitialized variable in example.php
 		- fixes in publicdomainregistry and uk handlers

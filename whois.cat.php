@@ -39,7 +39,11 @@ class cat_handler
 		{
 		$items = array(
                     'Domain Name:' 					=> 'domain.name',
+                    'Expiration Date:'				=> 'domain.expires',
+                    'Created On:'					=> 'domain.created',
+                    'Last Updated On:'				=> 'domain.changed',
                     'Registrant Name:' 				=> 'owner.name',
+                    'Registrant ID:'				=> 'owner.handle',
                     'Registrant Organization:' 		=> 'owner.organization',
                     'Registrant Street1:' 			=> 'owner.address.address.0',
                     'Registrant Street2:' 			=> 'owner.address.address.1',
@@ -51,6 +55,7 @@ class cat_handler
                     'Registrant Phone:' 			=> 'owner.phone',
                     'Registrant FAX:' 				=> 'owner.fax',
                     'Registrant Email:' 			=> 'owner.email',
+                    'Admin ID:'						=> 'admin.handle',
                     'Admin Name:' 					=> 'admin.name',
                     'Admin Organization:' 			=> 'admin.organization',
                     'Admin Street1:' 				=> 'admin.address.address.0',
@@ -62,6 +67,7 @@ class cat_handler
                     'Admin Phone:' 					=> 'admin.phone',
                     'Admin FAX:' 					=> 'admin.fax',                    
                     'Admin Email:' 					=> 'admin.email',
+                    'Tech ID:'						=> 'tech.handle',
                     'Tech Name:' 					=> 'tech.name',
                     'Tech Organization:' 			=> 'tech.organization',
                     'Tech Street1:' 				=> 'tech.address.address.0',
@@ -72,7 +78,19 @@ class cat_handler
                     'Tech Country:' 				=> 'tech.address.country',
                     'Tech Phone:' 					=> 'tech.phone',
                     'Tech FAX:' 					=> 'tech.fax',
-                    'Tech Email:' 					=> 'tech.email'
+                    'Tech Email:' 					=> 'tech.email',
+                    'Billing ID:'					=> 'billing.handle',
+                    'Billing Name:' 				=> 'billing.name',
+                    'Billing Organization:' 		=> 'billing.organization',
+                    'Billing Street1:' 				=> 'billing.address.address.0',
+                    'Billing Street2:' 				=> 'billing.address.address.1',
+                    'Billing Street3:' 				=> 'billing.address.address.2',
+                    'Billing Postal Code:'			=> 'billing.address.pcode',
+                    'Billing City:' 				=> 'billing.address.city',
+                    'Billing Country:' 				=> 'billing.address.country',
+                    'Billing Phone:' 				=> 'billing.phone',
+                    'Billing FAX:' 					=> 'billing.fax',
+                    'Billing Email:' 				=> 'billing.email'
 		              );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
