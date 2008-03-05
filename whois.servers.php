@@ -68,6 +68,7 @@ $this->WHOIS_SPECIAL = array(
 		'br.com' => 'whois.centralnic.net',
 		'by'	 => '',
 		'bz'	 => 'whois2.afilias-grs.net',
+		'ch'	 => 'whois.nic.ch',
 		'cn.com' => 'whois.centralnic.net',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.co.za',
 		'cy'	 => '',
