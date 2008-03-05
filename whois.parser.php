@@ -522,97 +522,100 @@ return $res;
 
 function get_date($date,$format)
 {
-$months=array( 'jan'=>1, 'feb'=>2, 'mar'=>3, 'apr'=>4,  'may'=>5,  'jun'=>6, 
-               'jul'=>7, 'aug'=>8, 'sep'=>9, 'oct'=>10, 'nov'=>11, 'dec'=>12 );
+$months = array( 'jan'=>1, 'feb'=>2, 'mar'=>3, 'apr'=>4,  'may'=>5,  'jun'=>6, 
+                 'jul'=>7, 'aug'=>8, 'sep'=>9, 'oct'=>10, 'nov'=>11, 'dec'=>12 );
 
-$parts=explode(' ',$date);
+$parts = explode(' ',$date);
 
-if (strpos($parts[0],'@')!==false)
+if (strpos($parts[0],'@') !== false)
 	{
 	unset($parts[0]);
-	$date=implode(' ',$parts);
+	$date = implode(' ',$parts);
 	}
 
-$date=str_replace(',',' ',trim($date));
-$date=str_replace('.',' ',$date);
-$date=str_replace('-',' ',$date);
-$date=str_replace('/',' ',$date);
-$date=str_replace("\t",' ',$date);
+$date = str_replace(',',' ',trim($date));
+$date = str_replace('.',' ',$date);
+$date = str_replace('-',' ',$date);
+$date = str_replace('/',' ',$date);
+$date = str_replace("\t",' ',$date);
 
-$parts=explode(' ',$date);
+$parts = explode(' ',$date);
 
-if ((strlen($parts[0])==8 || count($parts)==1) && is_numeric($parts[0]))
+if ((strlen($parts[0]) == 8 || count($parts) == 1) && is_numeric($parts[0]))
 	{
-	$val=$parts[0];
-	for ($p=$i=0;$i<3;$i++)
+	$val = $parts[0];
+	for ($p=$i=0; $i<3; $i++)
 		{
-		if ($format[$i]!='Y')
+		if ($format[$i] != 'Y')
 			{
-			$res[$format[$i]]=substr($val,$p,2);
-			$p+=2;
+			$res[$format[$i]] = substr($val,$p,2);
+			$p += 2;
 			}
 		else
 			{
-			$res['y']=substr($val,$p,4);
-			$p+=4;
+			$res['y'] = substr($val,$p,4);
+			$p += 4;
 			}
 		}
 	}
 else
 	{
-	for ($p=$i=0;$p<count($parts) && $i<strlen($format);$p++)
+	$format = strtolower($format);
+
+	for ($p=$i=0; $p<count($parts) && $i<strlen($format); $p++)
 		{
-		if (trim($parts[$p])=='')
+		if (trim($parts[$p]) == '')
 			continue;
 
-		if ($format[$i]!='-')
+		if ($format[$i] != '-')
 			{
-			$res[$format[$i]]=$parts[$p];
+			$res[$format[$i]] = $parts[$p];
 			}
 		$i++;
 		}
 	}
 
-$ok=false;
+$ok = false;
 
 while (!$ok)
 	{
 	reset($res);
-	$ok=true;
+	$ok = true;
+
 	while (list($key, $val) = each($res)) 
 		{
-		if ($val=='' || $key=='') continue;
+		if ($val == '' || $key == '') continue;
 
 		if (!is_numeric($val) && isset($months[substr(strtolower($val),0,3)]))
 			{
-			$res[$key]=$res['m'];
-			$res['m']=$months[substr(strtolower($val),0,3)];
-			$ok=false;
+			$res[$key] = $res['m'];
+			$res['m'] = $months[substr(strtolower($val),0,3)];
+			$ok = false;
 			break;
 			}
 
-		if ($key!='y' && $val>1900)
+		if ($key != 'y' && $key != 'Y' && $val > 1900)
 			{
 			$res[$key] = $res['y'];
-			$res['y']=$val;
-			$ok=false;
+			$res['y'] = $val;
+			$ok = false;
 			break;
 			}
 		}
 	}
 
-if ($res['m']>12)
+if ($res['m'] > 12)
 	{
-	$v=$res['m'];
-	$res['m']=$res['d'];
-	$res['d']=$v;
+	$v = $res['m'];
+	$res['m'] = $res['d'];
+	$res['d'] = $v;
 	}
 
-if ($res['y']<70)
-	$res['y']+=2000;
+if ($res['y'] < 70)
+	$res['y'] += 2000;
 else
-	if ($res['y']<=99)
-		$res['y']+=1900;
+	if ($res['y'] <= 99)
+		$res['y'] += 1900;
 
 return sprintf("%.4d-%02d-%02d",$res['y'],$res['m'],$res['d']);
 }
