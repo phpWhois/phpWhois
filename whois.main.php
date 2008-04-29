@@ -123,7 +123,7 @@ class Whois extends WhoisClient
 		$tld = '';
 		$server = '';
 		$dp = explode('.', $domain);
-		$np = count($dp) - 1;
+		$np = count($dp)-1;
 		$tldtests = array();
 
 		for ($i = 0; $i < $np; $i++)
@@ -206,7 +206,7 @@ class Whois extends WhoisClient
 					}
 					
 				// Regular handler exists for the tld ?
-				
+
 				if (($fp = @fopen('whois.'.$htld.'.php', 'r', 1)) and fclose($fp))
 				    {
 					$handler = $htld;
@@ -301,34 +301,37 @@ class Whois extends WhoisClient
 
 		while (list($key, $val) = each($nserver))
 			{
-			$val = str_replace('[', '', trim($val));
-			$val = str_replace(']', '', $val);
+			$val = str_replace( array('[',']','(',')'), '', trim($val));
 			$val = str_replace("\t", ' ', $val);
 			$parts = explode(' ', $val);
 			$host = '';
 			$ip = '';
 
-			while (list($k, $p) = each($parts))
+			foreach($parts as $p)
 				{
-				if ($p == '')
-					continue;
 				if ((ip2long($p) == - 1) or (ip2long($p) === false))
 					{
-					if ($host == '')
-						$host = $p;
+					// Hostname ?
+					if (strpos($p,'.')) $host = $p;
 					}
 				else
+					// IP Address
 					$ip = $p;
 				}
+
+			// Valid host name ?
+
+			if ($host == '') continue;
+
+			// Get ip address
+
 			if ($ip == '')
 				{
 				$ip = gethostbyname($host);
-				if ($ip == $host)
-					$ip = '(DOES NOT EXIST)';
+				if ($ip == $host) $ip = '(DOES NOT EXIST)';
 				}
 
-			if (substr($host,-1,1) == '.')
-				$host = substr($host,0,-1);
+			if (substr($host,-1,1) == '.') $host = substr($host,0,-1);
 				
 			$dns[strtolower($host)] = $ip;
 			}

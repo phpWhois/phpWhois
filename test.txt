@@ -32,6 +32,8 @@ se		nic-se.se
 uk		olsns.co.uk
 us		neustar.us
 ws		samoanic.ws informe.ws
+.co.za	sex.co.za
+.org.za	sex.org.za
 
 // .com/.net/.tv/.jobs
 

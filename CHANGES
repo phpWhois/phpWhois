@@ -1,5 +1,16 @@
-2008/05/05
+2008/04/28
+		- whois.za.php renamed to whois.zanet.php
+		- added support & handler for .org.za
+		- added handler for .co.za
+		- minor improvemts on whois.client.php to allow
+		  handlers for second level domains
+		- improved nameserver detection
+
+2008/03/05
 		- dotregistrar is now part of dotster
+		- fixes in date parser
+		- .cz handler update
+		- fixed .ch whois server detection
 
 2007/12/21
 		- fixed uninitialized variable in example.php

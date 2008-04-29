@@ -344,6 +344,7 @@ $items = array (
 		'(fax)' => 'fax',
 		'fax' => 'fax',
 		'tel.' => 'phone',
+		'tel:' => 'phone',
 		'phone::' => 'phone',
 		'phone:' => 'phone',
 		'phone-' => 'phone',

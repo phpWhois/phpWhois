@@ -416,23 +416,26 @@ class WhoisClient {
 	 */
 	function Process (&$result, $deep_whois=true) {
 
+		$handler_name = str_replace('.','_',$this->Query['handler']);
+
 		// If the handler has not already been included somehow, include it now
-		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($this->Query['handler']));
+		$HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($handler_name));
 
 		if (!defined($HANDLER_FLAG))
 			include($this->Query['file']);
 
 		// If the handler has still not been included, append to query errors list and return
-		if(!defined($HANDLER_FLAG)) {
+		if (!defined($HANDLER_FLAG))
+			{
 			$this->Query['errstr'][] = "Can't find ".$this->Query['tld'].' handler: '.$this->Query['file'];
 			return($result);
-		}
+			}
 
-		if (!$this->gtld_recurse && $this->Query['file']=='whois.gtld.php')
+		if (!$this->gtld_recurse && $this->Query['file'] == 'whois.gtld.php')
 			return $result;
 
 		// Pass result to handler
-		$object = $this->Query['handler'].'_handler';
+		$object = $handler_name.'_handler';
 		
 		$handler = new $object('');
 
