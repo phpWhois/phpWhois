@@ -37,21 +37,38 @@ class nominalia_handler
 		{
 
 		$items = array(
-                'owner'	=> 'Registrant:',
-                'admin' => 'Administrative contact:',
-                'tech' => 'Technical contact',
-                'domain.name' => 'Domain name:',
-                'domain.nserver.' => 'Domain Servers in listed order:',
-                'domain.created' => 'Record created on',
-                'domain.expires' => 'Record expires on'
+                'Domain name:' 						=> 'domain.name',
+                'Primary Name Server Hostname:'		=> 'domain.nserver.0',
+                'Secondary Name Server Hostname:'	=>'domain.nserver.1',
+                'Created on:' 						=> 'domain.created',
+                'Expires on:'						=> 'domain.expires',
+                'Updated on:'						=> 'domain.changed',
+                'Registrant Name:' 					=> 'owner.name',
+                'Registrant Address:'				=> 'owner.address.street',
+                'Registrant City:'					=> 'owner.address.city',
+                'Registrant Postal Code:'			=> 'owner.address.pcode',
+                'Registrant Country:'				=> 'owner.address.country',
+                'Administrative Contact Name:'				=> 'admin.name',
+                'Administrative Contact Organization:'		=> 'admin.organization',
+                'Administrative Contact Address:'			=> 'admin.address.street',
+                'Administrative Contact City:'				=> 'admin.address.city',
+                'Administrative Contact Postal Code:'		=> 'admin.address.pcode',
+                'Administrative Contact Country:'			=> 'admin.address.country',
+                'Administrative Contact Email:'				=> 'admin.email',
+                'Administrative Contact Tel:'				=> 'admin.phone',
+                'Administrative Contact Fax:'				=> 'admin.fax',
+                'Technical Contact Contact Name:'			=> 'tech.name',
+                'Technical Contact Contact Organization:'	=> 'tech.organization',
+                'Technical Contact Contact Address:'		=> 'tech.address.street',
+                'Technical Contact Contact City:'			=> 'tech.address.city',
+                'Technical Contact Contact Postal Code:'	=> 'tech.address.pcode',
+                'Technical Contact Contact Country:'		=> 'tech.address.country',
+                'Technical Contact Contact Email:'			=> 'tech.email',
+                'Technical Contact Contact Tel:'			=> 'tech.phone',
+                'Technical Contact Contact Fax:'			=> 'tech.fax'
 		            );
 		
-		$r = get_blocks($data_str, $items);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		format_dates($r, 'ymd');
-		return ($r);
+		return generic_parser_b($data_str, $items, 'ymd');
 		}
 	}
 ?>

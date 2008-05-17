@@ -70,7 +70,7 @@ class onlinenic_handler
 		$r = get_blocks($data_str, $items, true);
 
 		if (isset($r['owner']))
-			$r['owner'] = get_contact($r['owner'],$extra);
+			$r['owner'] = get_contact($r['owner'],$extra);			
 		if (isset($r['admin']))
 			$r['admin'] = get_contact($r['admin'],$extra);
 		if (isset($r['tech']))
@@ -78,7 +78,16 @@ class onlinenic_handler
 		if (isset($r['bill']))
 			$r['bill'] = get_contact($r['bill'],$extra);
 
-		format_dates($r['domain'], 'mdy');
+		foreach($r as $key => $part)
+			if (isset($part['email']))
+				{
+				@list($email,$phone) = explode(' ',$part['email']);
+				$email = str_replace('(','',$email);
+				$email = str_replace(')','',$email);
+				$r[$key]['email'] = $email;
+				if ($phone != '') $r[$key]['phone'] = $phone;
+				}
+		format_dates($r['domain'], 'mdy');		
 		return ($r);
 		}
 

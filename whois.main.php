@@ -285,8 +285,7 @@ class Whois extends WhoisClient
 				$result['regrinfo']['registered'] = 'unknown';
 			}
 
-		if (!isset($result['regrinfo']['domain']['nserver']))
-			return ;
+		if (!isset($result['regrinfo']['domain']['nserver'])) return;
 
 		// Normalize nameserver fields
 		$nserver = $result['regrinfo']['domain']['nserver'];
@@ -299,7 +298,7 @@ class Whois extends WhoisClient
 
 		$dns = array();
 
-		while (list($key, $val) = each($nserver))
+		foreach($nserver as $val)
 			{
 			$val = str_replace( array('[',']','(',')'), '', trim($val));
 			$val = str_replace("\t", ' ', $val);
@@ -309,10 +308,15 @@ class Whois extends WhoisClient
 
 			foreach($parts as $p)
 				{
+				if (substr($p,-1) == '.') $p = substr($p,0,-1);
+
 				if ((ip2long($p) == - 1) or (ip2long($p) === false))
 					{
 					// Hostname ?
-					if (strpos($p,'.')) $host = $p;
+					if ($host == '' && preg_match('/^[\w\-]+(\.[\w\-]+)+$/',$p))
+						{
+						$host = $p;
+						}
 					}
 				else
 					// IP Address

@@ -35,83 +35,34 @@ class pl_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                	'owner' 	=> 'SUBSCRIBERS CONTACT OBJECT:',
-					'domain'	=> 'DOMAIN OBJECT:',
-					'tech'		=> 'Technical Contact:'
+                	'created:' 				=> 'domain.created',
+                	'last modified'			=> 'domain.changed',
+                	'REGISTRAR:'			=> 'domain.sponsor',
+                	"registrant's handle:"	=> 'owner.handle',
+                	
 					);
 
-		$fields = array (
-					'company:'			=> 'organization',
-					'street:'			=> 'address.street',
-					'city:'				=> 'address.city',
-					'location:'			=> 'address.country',
-					'handle:'			=> 'handle',
-					'created:'			=> 'created',
-					'last modified:'	=> 'changed',
-					'registrar:'		=> 'sponsor',
-					'phone:'			=> 'phone'
-					);
-					
-		$r = get_blocks($data_str['rawdata'], $items);
-		
-		if (isset($r['tech']))
-			{
-			if ($r['tech'] == 'data restricted')
-				unset($r['tech']);
-			else
-				$r['tech'] = generic_parser_b($r['tech'], $fields, 'ymd', false);
-			}
-			
-		if (isset($r['owner']))
-			{
-			if ($r['owner'] == 'data restricted')
-				unset($r['owner']);
-			else
-				$r['owner'] = generic_parser_b($r['owner'], $fields, 'ymd', false);
-			
-			$r['domain'] = generic_parser_b($r['domain'], $fields, 'ymd', false);
-		
-			if (isset($r['domain']['handle']))
-				{
-				$r['owner']['handle'] = $r['domain']['handle'];
-				unset($r['domain']['handle']);
-				}
-				
-			// Get name servers
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');			
 
+		if ($r['regrinfo']['registered'] == 'yes')
+			{
 			$found = false;
-			$ns = array();
 			
-			foreach ($data_str['rawdata'] as $line)
+			foreach($data_str['rawdata'] as $line)
 				{
-				if (substr($line,0,9) == 'nservers:')
+				if ($found)
+					{
+					if (strpos($line,':')) break;
+					$r['regrinfo']['domain']['nserver'][] = $line;
+					}
+	
+				if (strpos($line,'nameservers:') !== false)
 					{
 					$found = true;
-					$ns[] = strtok(trim(substr($line,9)),'[');
+					$r['regrinfo']['domain']['nserver'][] = substr($line,13);
 					}
-				else
-					if ($found)
-						{
-						if (substr($line,0,8) == 'created:')
-							break;
-						else
-							$ns[] = strtok($line,'[');
-						}
 				}
-			
-			$r = array ( 'regrinfo' => $r );
-			
-			if (isset($r['regrinfo']['owner']['address']['city']))
-				$r['regrinfo']['owner']['address'] = $this->extract_zipcode($r['regrinfo']['owner']['address']);
-				
-			if (isset($r['regrinfo']['tech']['address']['city']))
-				$r['regrinfo']['tech']['address'] = $this->extract_zipcode($r['regrinfo']['owner']['address']);
-
-			$r['domain']['nserver'] = $ns;	
-			$r['registered'] = 'yes';			
 			}
-		else
-			$r['regrinfo']['registered'] = 'no';
 
 		$r['regyinfo'] = array(
 			'referrer' => 'http://www.dns.pl/english/index.html',
@@ -119,16 +70,6 @@ class pl_handler
 			);
 
 		return ($r);
-		}
-		
-	function extract_zipcode ($addr)
-		{
-		if(preg_match('/(\d{2}-\d{3}) (\w+)/',$addr['city'],$match))
-			{
-			$addr['city']=$match[2];
-			$addr['pcode']=$match[1];
-			}
-		return $addr;
 		}
 	}
 ?>

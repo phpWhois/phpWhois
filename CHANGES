@@ -1,3 +1,21 @@
+2008/05/11
+		- fixed whois.museum
+
+2008/05/09
+		- do not use handlers on error
+
+2008/05/04
+		- improved nameserver detection (again)
+		- fixed whois.pl, whois.gtld.nominalia,
+	      whois.gtld.onlinenic, whois.ovh
+		- removed test for informe.ws
+		- minor fix to whois.gtld.enom
+		- minor chages to other handlers
+
+2008/04/29
+		- improved nameserver detection (again)
+		- fixes & improvements on whois.mx
+
 2008/04/28
 		- whois.za.php renamed to whois.zanet.php
 		- added support & handler for .org.za
@@ -5,6 +23,7 @@
 		- minor improvemts on whois.client.php to allow
 		  handlers for second level domains
 		- improved nameserver detection
+		- minor fix to .ie handler
 
 2008/03/05
 		- dotregistrar is now part of dotster

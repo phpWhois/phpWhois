@@ -35,29 +35,25 @@ class ovh_handler
 
 	function parse($data_str, $query)
 		{
-		$translate = array(
-                    'nic-hdl' => 'handle',
-                    'person' => 'name',
-                    'adresse' => 'address'
+		$items = array(
+						'owner'	=> 'Registrant:',
+						'admin'	=> 'Administrative Contact:',
+						'tech'	=> 'Technical Contact:',
+						'billing'	=> 'Billing Contact:',
+						'domain.sponsor'	=> 'Registrar of Record:',
+						'domain.changed'	=> 'Record last updated on',
+						'domain.expires'	=> 'Record expires on',
+						'domain.created'	=> 'Record created on'
                         );
-
-		$contacts = array(
-                    'tech-c' => 'tech',
-                    'admin-c' => 'admin',
-                    'bill-c' => 'billing'
-		                );
-
-		$r = generic_parser_a($data_str, $translate, $contacts, 'owner', 'ymd');
 		
-		if (isset($r['owner']['domain']))
-			{
-			unset($r['owner']['domain']);
-			unset($r['owner']['nserver']);
-			unset($r['owner']['created']);
-			unset($r['owner']['expires']);
-			unset($r['owner']['changed']);
-			}
+		$r = get_blocks($data_str, $items, true);
+
+		$r['owner'] = get_contact($r['owner']);
+		$r['admin'] = get_contact($r['admin']);
+		$r['tech'] = get_contact($r['tech']);
+		$r['billing'] = get_contact($r['billing']);
 		
+		format_dates($r, 'mdy');
 		return ($r);
 		}
 	}

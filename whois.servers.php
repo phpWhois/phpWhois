@@ -121,7 +121,8 @@ $this->WHOIS_GTLD_HANDLER = array(
 		'whois.namesdirect.com'				=> 'dotster',
 		'whois.psi-usa.info'				=> 'psiusa',
 		'whois.www.tv'						=> 'tvcorp',
-		'whois.tucows.com'					=> 'opensrs'
+		'whois.tucows.com'					=> 'opensrs',
+		'whois.35.com'						=> 'onlinenic'
 		);
 		
 /* Non ICANN TLD's */

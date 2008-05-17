@@ -216,7 +216,10 @@ class WhoisClient {
 		$result = array( 'rawdata' => $output );		
 		$result = $this->set_whois_info($result);
 
-		// If we have a handler, post-process it with that
+		// Return now on error
+		if (empty($output)) return $result;
+		
+		// If we have a handler, post-process it with it
 		if (isSet($this->Query['handler']))
 			{
 			// Keep server list
@@ -475,7 +478,7 @@ class WhoisClient {
 				{
 				$parts = explode('.',$wserver);
 				$hname = strtolower($parts[1]);
-				
+
 				if (($fp = @fopen('whois.gtld.'.$hname.'.php', 'r', 1)) and fclose($fp))
 					$this->Query['handler'] = $hname;
 				}

@@ -39,6 +39,7 @@ class ie_handler
 		$translate = array(
 			'nic-hdl' => 'handle',
 			'person' => 'name',
+			'renewal' => 'expires'
 			);
 
 		$contacts = array(

@@ -62,7 +62,7 @@ class enom_handler
                   'domain.expires#2'	=> 'Registered through-'
                   );
 
-		$r = get_blocks($data_str, $items);
+		$r = get_blocks($data_str, $items, true);
 		
 		if (isset($r['owner']))
 			$r['owner'] = get_contact($r['owner'],false,true);
