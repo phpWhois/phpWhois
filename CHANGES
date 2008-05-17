@@ -1,3 +1,7 @@
+2008/05/17
+		- Added support for .ve
+		- Released version 4.1.3
+
 2008/05/11
 		- fixed whois.museum
 

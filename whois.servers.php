@@ -83,6 +83,7 @@ $this->WHOIS_SPECIAL = array(
 		'tc'     => 'http://www.adamsnames.tc/whois/?domain={domain}.tc',
 		'tf'     => 'http://www.adamsnames.tc/whois/?domain={domain}.tf',
 		'travel' => 'http://www.whois.travel/whois.cgi?TLD=travel&dn={domain}&TYPE=DOMAIN',
+		've'	 => 'whois.nic.ve',
 		'vg'     => 'http://www.adamsnames.tc/whois/?domain={domain}.vg',
 		// Second level
 		'net.au' => 'whois.aunic.net',		
