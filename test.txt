@@ -13,6 +13,7 @@ cz		nic.cz
 de		4ever.de
 es		ols.es
 fm		dot.fm
+fr		nic.fr
 hu		nic.hu
 ie		domainregistry.ie
 in		registry.in

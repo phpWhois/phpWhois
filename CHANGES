@@ -1,5 +1,6 @@
 2008/05/28
-		- added habdler for .it
+		- added handler for .it
+		- added handler for .fr
 
 2008/05/17
 		- Added support for .ve
