@@ -478,7 +478,7 @@ if (isset($r['name']) && is_array($r['name']))
 if (!empty($array))
 	{
 	if (isset($r['address']))
-		$r['address'] = array_merge($array,$r['address']);
+		$r['address'] = array_merge($r['address'],$array);
 	else
 		$r['address'] = $array;
 	}

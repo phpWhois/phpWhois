@@ -1,3 +1,6 @@
+2008/05/28
+		- added habdler for .it
+
 2008/05/17
 		- Added support for .ve
 		- Released version 4.1.3
