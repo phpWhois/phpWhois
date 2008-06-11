@@ -38,6 +38,7 @@ class cz_handler
 
 		$translate = array(
                       'expire' 	=> 'expires',
+                      'registered' => 'created',
                       'nserver' => 'nserver',
                       'domain' 	=> 'name',
                       'contact' => 'handle',

@@ -1,3 +1,6 @@
+2008/06/11
+		- fixed .cz handler registered date
+
 2008/05/28
 		- added handler for .it
 		- added handler for .fr
