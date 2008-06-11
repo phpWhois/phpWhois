@@ -58,15 +58,21 @@ class fr_handler
 						'zone-c' 	=> 'zone'
 		                  );
 
-		$r = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain','dmY');
+		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain','dmY');
 
-		if (isset($r['domain']['holder']))
+		if (isset($reg['domain']['holder']))
 			{
-			$r['owner']['organization'] = $r['domain']['holder'];
-			unset($r['domain']['holder']);
-			$r['owner']['address'] = $r['domain']['address'];
-			unset($r['domain']['address']);
+			$reg['owner']['organization'] = $reg['domain']['holder'];
+			unset($reg['domain']['holder']);
+			$reg['owner']['address'] = $reg['domain']['address'];
+			unset($reg['domain']['address']);
 			}
+
+		$r['regrinfo'] = $reg;
+		$r['regyinfo'] = array(
+                          'referrer' => 'http://www.nic.fr',
+                          'registrar' => 'AFNIC'
+                          );
 
 		return ($r);
 		}
