@@ -53,7 +53,7 @@ while (list($key,$val)=each($contacts))
 			$blk=$r[$key];
 
 		$blk = strtoupper(strtok($blk,' '));
-		$ret[$val]=$blocks[$blk];
+		if (isset($blocks[$blk])) $ret[$val] = $blocks[$blk];
 		unset($r[$key]); 
 		}
 

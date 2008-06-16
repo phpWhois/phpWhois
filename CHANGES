@@ -1,3 +1,6 @@
+2008/06/16
+		- fixed .fr handler
+
 2008/06/11
 		- fixed .cz handler registered date
 		- fixed .fr handler

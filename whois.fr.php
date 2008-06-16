@@ -40,6 +40,7 @@ class fr_handler
 						'fax-no' => 'fax',
 						'e-mail' => 'email',
 						'nic-hdl' => 'handle',
+						'ns-list' => 'handle',
 						'person' => 'name',
 						'address' => 'address.',
 						'descr' => 'desc',
@@ -55,7 +56,8 @@ class fr_handler
 		$contacts = array(
 						'admin-c' 	=> 'admin',
 						'tech-c' 	=> 'tech',
-						'zone-c' 	=> 'zone'
+						'zone-c' 	=> 'zone',
+						'nsl-id'	=> 'nserver'
 		                  );
 
 		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain','dmY');
@@ -64,8 +66,23 @@ class fr_handler
 			{
 			$reg['owner']['organization'] = $reg['domain']['holder'];
 			unset($reg['domain']['holder']);
-			$reg['owner']['address'] = $reg['domain']['address'];
-			unset($reg['domain']['address']);
+			
+			if (isset($reg['nserver']))
+				{
+				$reg['domain'] = array_merge($reg['domain'],$reg['nserver']);
+				unset($reg['nserver']);
+				}
+			
+			$convert = array( 'address', 'phone', 'fax', 'email', 'ref-id' );
+			
+			foreach($convert as $key)
+				{
+				if (isset($reg['domain'][$key]))
+					{
+					$reg['owner'][$key] = $reg['domain'][$key];
+					unset($reg['domain'][$key]);
+					}
+				}
 			}
 
 		$r['regrinfo'] = $reg;
@@ -73,7 +90,6 @@ class fr_handler
                           'referrer' => 'http://www.nic.fr',
                           'registrar' => 'AFNIC'
                           );
-
 		return ($r);
 		}
 	}
