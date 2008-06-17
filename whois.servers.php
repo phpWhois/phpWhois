@@ -73,6 +73,7 @@ $this->WHOIS_SPECIAL = array(
 		'la'	 => 'whois.centralnic.net',		
 		'gr'	 => '',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.gs',
+		'me'	 => 'whois.meregistry.net',
 		'mobi'	 => 'whois.dotmobiregistry.net',
 		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.ms',
 		'mt'	 => 'http://www.um.edu.mt/cgi-bin/nic/whois?domain={domain}.mt',				

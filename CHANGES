@@ -1,4 +1,7 @@
 2008/06/16
+		- added support & handler for .me
+
+2008/06/16
 		- fixed .fr handler
 
 2008/06/11
