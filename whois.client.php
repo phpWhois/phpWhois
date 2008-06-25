@@ -42,10 +42,10 @@ class WhoisClient {
 	var $SLEEP = 2;
 
 	// Read buffer size (0 == char by char)
-	var $BUFFER = 255;
+	var $BUFFER = 1024;
 	
 	// Communications timeout
-	var $STIMEOUT = 20;
+	var $STIMEOUT = 10;
 
 	// List of servers and handlers (loaded from servers.whois)
 	var $DATA = array(); 	
@@ -88,7 +88,7 @@ class WhoisClient {
 		if (isset($this->Query['errstr'])) unset($this->Query['errstr']);
 		
 		if (!isset($this->Query['server'])) {
-			$this->Query['status'] = -1;
+			$this->Query['status'] = 'error';
 			$this->Query['errstr'][] = 'No server specified';
 			return(array());
 			}
@@ -102,7 +102,7 @@ class WhoisClient {
 			
 			if (!$output)
 				{
-				$this->Query['status'] = -1;
+				$this->Query['status'] = 'error';
 				$this->Query['errstr'][] = 'Connect failed to: '.$this->Query['server'];
 				return(array());
 				}
@@ -143,10 +143,12 @@ class WhoisClient {
 				$query_args = $query;
 			
 			$this->Query['args'] = $query_args;
-			
+
 			if (substr($this->Query['server'],0,9) == 'rwhois://')
+				{
 				$this->Query['server'] = substr($this->Query['server'],9);
-				
+				}
+
 			// Get port
 			
 			if (strpos($this->Query['server'],':'))
@@ -161,34 +163,41 @@ class WhoisClient {
 			// Connect to whois server, or return if failed
 
 			$ptr = $this->Connect();
-		
+
 			if($ptr < 0) {
-				$this->Query['status'] = -1;
+				$this->Query['status'] = 'error';
 				$this->Query['errstr'][] = 'Connect failed to: '.$this->Query['server'];
-				return(array());
+				return array();
 				}
 
-			if (version_compare(phpversion(),'4.3.0')>=0)
-				stream_set_timeout($ptr,$this->STIMEOUT);
-
+			stream_set_timeout($ptr,$this->STIMEOUT);
+			stream_set_blocking($ptr,0);
+			
 			// Send query
 			fputs($ptr, trim($query_args)."\r\n");
 			
 			// Prepare to receive result
 			$raw = '';
-			$output = array();
-			while(!feof($ptr)) {
-				// If a buffer size is set, fetch line-by-line into an array
-				if($this->BUFFER)
-					$output[] = trim(fgets($ptr, $this->BUFFER));
-				// If not, fetch char-by-char into a string
-				else
-					$raw .= fgetc($ptr);
+			$start = time();
+			$null = NULL;
+			$r = array($ptr);
+
+			while (!feof($ptr))
+				{
+				if (stream_select($r,$null,$null,$this->STIMEOUT))
+					{
+					$raw .= fgets($ptr, $this->BUFFER);
+					}
+
+				if (time()-$start > $this->STIMEOUT)
+					{
+					$this->Query['status'] = 'error';
+					$this->Query['errstr'][] = 'Timeout reading from '.$this->Query['server'];
+					return array();
+					}
 				}
 
-			// If captured char-by-char, convert to an array of lines
-			if(!$this->BUFFER)
-				$output = explode("\n", $raw);
+			$output = explode("\n", $raw);
 
 			// Drop empty last line (if it's empty! - saleck)
 			if(empty($output[count($output)-1]))
@@ -331,16 +340,7 @@ class WhoisClient {
 		$output = str_replace('<tr',"\n<tr",$output);
 		$output = str_replace('<TR',"\n<tr",$output);
 		$output = str_replace('&nbsp;',' ',$output);
-		
-		$output = strip_tags($output);
-		
-		//$output = html_entity_decode($output); needs 4.3.0
-		/*
-		$trans_tbl = get_html_translation_table (HTML_ENTITIES); 
-		$trans_tbl = array_flip ($trans_tbl); 
-		$output = strtr($output, $trans_tbl);		
-		*/
-			
+		$output = strip_tags($output);		
 		$output = explode("\n",$output);
 
 		$rawdata = array();
@@ -395,14 +395,16 @@ class WhoisClient {
 			$this->Query['status'] = 'ready';
 
 			// Connect to whois port
-			$ptr = @fsockopen($server, $port);
+			$ptr = @fsockopen($server, $port, $errno, $errstr, $this->STIMEOUT);
+			
 			if($ptr > 0) {
-				$this->Query['status']='ok';
+				$this->Query['status'] = 'ok';
 				return($ptr);
 			}
 			
 			// Failed this attempt
 			$this->Query['status'] = 'error';
+			$this->Query['error'][] = $errstr;
 			$retry++;
 
 			// Sleep before retrying

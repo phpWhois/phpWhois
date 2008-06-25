@@ -1,3 +1,7 @@
+2008/06/26
+		- fixed hangup bug on some non-responding rwhois
+		  servers (read result changed to non-blocking)
+
 2008/06/16
 		- added support & handler for .me
 

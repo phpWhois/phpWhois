@@ -267,17 +267,17 @@ class ip_handler extends WhoisClient
 			
 		//Check if Referral rwhois server has been reported
 
-		if (isset($result['regrinfo']['rwhois']))
+		if (isset($result['regrinfo']['rwhois']) && $this->deep_whois)
 			{
 			$more_data[] = array (
 									'query' => $query,
 									'server' => $result['regrinfo']['rwhois'],
 									'handler' => 'rwhois'
 									);
-			$result['regyinfo']['rwhois'] = $result['regrinfo']['rwhois'];
+			//$result['regyinfo']['rwhois'] = $result['regrinfo']['rwhois'];
 			unset($result['regrinfo']['rwhois']);
 			}
-			
+
 		// more queries can be done to get more accurated data
 
 		reset($more_data); 
@@ -316,8 +316,8 @@ class ip_handler extends WhoisClient
 
 				if (isset($rwres['admin']))
 					$result = $this->join_result($result,'admin',$rwres);
-					
-				if (isset($rwres['rwhois']))
+
+				if (isset($rwres['rwhois'])  && $this->deep_whois)
 					{
 					$more_data[] = array (
 									'query' => $query,

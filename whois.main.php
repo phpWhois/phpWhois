@@ -78,7 +78,7 @@ class Whois extends WhoisClient
 	function Lookup($query = '', $is_utf = true)
 		{
 		// start clean
-		$this->Query['status'] = 0;
+		$this->Query['status'] = '';
 		
 		$query = trim($query);
 
@@ -152,7 +152,7 @@ class Whois extends WhoisClient
 				if ($val == '')
 					{
 					unset($this->Query['server']);
-					$this->Query['status'] =  - 1;
+					$this->Query['status'] = 'error';
 					$this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
 					return ;
 					}
@@ -232,7 +232,7 @@ class Whois extends WhoisClient
 
 		// If tld not known, and domain not in DNS, return error
 		unset($this->Query['server']);
-		$this->Query['status'] =  - 1;
+		$this->Query['status'] = 'error';
 		$this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
 		return ;
 		}
