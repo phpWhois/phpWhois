@@ -1,4 +1,7 @@
 2008/06/26
+		- added handler for .asia
+
+2008/06/25
 		- fixed hangup bug on some non-responding rwhois
 		  servers (read result changed to non-blocking)
 
