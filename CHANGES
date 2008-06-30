@@ -1,3 +1,6 @@
+2008/06/30
+		- added handler for .fi
+
 2008/06/26
 		- added handler for .asia
 

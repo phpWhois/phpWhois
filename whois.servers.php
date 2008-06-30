@@ -66,7 +66,7 @@ $this->WHOIS_SPECIAL = array(
 		'bj'	 => 'whois.nic.bj',
 		'by'	 => '',
 		'bz'	 => 'whois2.afilias-grs.net',		
-		'cy'	 => '',		
+		'cy'	 => '',
 		'es'	 => 'http://www.neodigit.es/dominios/whois.php?dom={domain}.es',		
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',		
 		'jobs'	 => 'jobswhois.verisign-grs.com',				

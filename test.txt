@@ -12,6 +12,7 @@ cn		cnnic.net.cn
 cz		nic.cz
 de		4ever.de
 es		ols.es
+fi		ficora.fi
 fm		dot.fm
 fr		nic.fr lemonade.fr
 hu		nic.hu
@@ -80,6 +81,7 @@ wwdomains	wildwestdomains.com
 // Other
 
 aero	nic.aero
+asia	nic.asia
 biz		neulevel.biz
 cat		dominis.cat
 coop	smile.coop nic.coop
@@ -87,6 +89,7 @@ edu		berkeley.edu
 eu		eurid.eu
 info	afilias.info
 int		who.int
+me		domain.me
 mobi	mtld.mobi
 museum	nic.museum
 name	peter.morgan.name
