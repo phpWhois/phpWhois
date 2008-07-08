@@ -32,6 +32,7 @@ pt		dns.pt
 ru		nic.ru
 sc		admin.sc
 se		nic-se.se
+su		news.su
 uk		olsns.co.uk
 us		neustar.us
 ws		samoanic.ws

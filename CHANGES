@@ -1,3 +1,6 @@
+2008/07/08
+		- added handler for .su
+
 2008/06/30
 		- added handler for .fi
 
