@@ -46,23 +46,13 @@ class es_handler
 	function parse($data_str, $query)
 		{		
 		$items = array(
-                'domain.created' => 'Fecha de Alta:',
-				'domain.expires' => 'Fecha de Caducidad:',
-                'owner.name' => 'Titular:',
+                'domain.created' => 'Fecha Creación:',
+				'domain.expires' => 'Fecha Expiración:',
+                'owner.name' => 'Registrante:',
                 'admin' => 'Contacto Administrativo:',
-                'tech' => 'Contacto T&eacute;cnico:',
+                'tech.handle' => 'Contacto Técnico:',
+                'billing.handle' => 'Contacto Facturación:',
                 'domain.nserver' => 'Servidores DNS:'
-		            );
-
-		$extra = array(
-				'nombre:' => 'name',
-                'organizaci&oacute;n:' => 'organization',
-                'direcci&oacute;n:' => 'address.street',
-                'poblaci&oacute;n:' => 'address.city',
-                'c&oacute;digo postal:' => 'address.pcode',
-                'pa&iacute;s:' => 'address.country',
-                'tel&eacute;fono:' => 'phone',
-                'provincia:' => ''
 		            );
 
 		array_shift($data_str['rawdata']);
@@ -78,15 +68,19 @@ class es_handler
 			return $r;
 			}
 		
-		if (isset($r['regrinfo']['admin']))   $items['admin'].=' '.$r['regrinfo']['admin'];
-		if (isset($r['regrinfo']['tech']))    $items['tech'].=' '.$r['regrinfo']['tech'];
-		
+		if (isset($r['regrinfo']['admin']))
+			{
+			$handle = $r['regrinfo']['admin'];
+			$items['admin'].=' '.$r['regrinfo']['admin'];
+			}
+
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 		
 		$r['rawdata'] = $data_str['rawdata'];
 		
-		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
-		$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
+		$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
+		$r['regrinfo']['admin']['handle'] = $handle;
+
 		$r['regrinfo']['registered'] = 'yes';
 			
 		$r['regyinfo'] = array(

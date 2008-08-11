@@ -1,3 +1,6 @@
+2008/08/11
+		- fixed .es handler
+
 2008/07/08
 		- added handler for .su
 
