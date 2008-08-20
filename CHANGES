@@ -1,3 +1,6 @@
+200(/08/20
+		- added .ve handler by jlchafardet
+
 2008/08/11
 		- fixed .es handler
 

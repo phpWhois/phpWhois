@@ -327,6 +327,25 @@ return $r;
 
 //-------------------------------------------------------------------------
 
+function get_contacts ( $array, $extra_items='', $has_org= false )
+{
+if (isset($array['billing']))
+	$array['billing'] = get_contact($array['billing']);
+
+if (isset($array['tech']))
+	$array['tech'] = get_contact($array['tech']);
+		
+if (isset($array['admin']))
+	$array['admin'] = get_contact($array['admin']);
+		
+if (isset($array['owner']))
+	$array['owner'] = get_contact($array['owner']);
+	
+return $array;
+}
+
+//-------------------------------------------------------------------------
+
 function get_contact ( $array, $extra_items='', $has_org= false )
 {
 

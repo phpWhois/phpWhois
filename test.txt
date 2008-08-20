@@ -35,6 +35,7 @@ se		nic-se.se
 su		news.su
 uk		olsns.co.uk
 us		neustar.us
+ve		nic.ve
 ws		samoanic.ws
 .co.za	sex.co.za
 .org.za	sex.org.za
