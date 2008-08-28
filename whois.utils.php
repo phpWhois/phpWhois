@@ -148,7 +148,12 @@ class utils extends Whois {
 		
 		if ($link_myself)
 			{
-			$out = preg_replace ($ip_regex, '<a href="'.$_SERVER['PHP_SELF'].'?'.$params.'">$0</a>', $out); 			
+			if ($params[0] == '/')
+				$link = $params;
+			else
+				$link = $_SERVER['PHP_SELF'].'?'.$params;
+			
+			$out = preg_replace ($ip_regex, '<a href="'.$link.'">$0</a>', $out); 			
 				
 			if (isset($result['regrinfo']['domain']['nserver']))
 				{
@@ -159,7 +164,7 @@ class utils extends Whois {
 					reset($nserver); 
 					while (list($host, $ip) = each($nserver))
 						{
-						$url = '<a href="'. $_SERVER['PHP_SELF'].'?'.str_replace('$0',$ip,$params)."\">$host</a>";
+						$url = '<a href="'. str_replace('$0',$ip,$link)."\">$host</a>";
 						$out = str_replace($host, $url, $out);
 						$out = str_replace(strtoupper($host), $url, $out);
 						}
