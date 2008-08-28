@@ -131,12 +131,12 @@ class WhoisClient {
 				
 				if (strpos($query_args,'{ip}')!==false)
 					{
-					$query_args = str_replace('{ip}', getclientip(), $query_args);
+					$query_args = str_replace('{ip}', phpwhois_getclientip(), $query_args);
 					}
 					
 				if (strpos($query_args,'{hname}')!==false)
 					{
-					$query_args = str_replace('{hname}', gethostbyaddr(getclientip()), $query_args);
+					$query_args = str_replace('{hname}', gethostbyaddr(phpwhois_getclientip()), $query_args);
 					}
 				}
 			else

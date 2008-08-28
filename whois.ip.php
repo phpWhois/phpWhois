@@ -238,13 +238,13 @@ class ip_handler extends WhoisClient
 			{
 			//Convert CDIR to inetnum
 			$result['regrinfo']['network']['cdir'] = $result['regrinfo']['network']['inetnum'];
-			$result['regrinfo']['network']['inetnum'] = cidr_conv($result['regrinfo']['network']['cdir']);
+			$result['regrinfo']['network']['inetnum'] = phpwhois_cidr_conv($result['regrinfo']['network']['cdir']);
 			}
 
 		if (!isset($result['regrinfo']['network']['inetnum']) && isset($result['regrinfo']['network']['cdir']))
 			{
 			//Convert CDIR to inetnum
-			$result['regrinfo']['network']['inetnum'] = cidr_conv($result['regrinfo']['network']['cdir']);
+			$result['regrinfo']['network']['inetnum'] = phpwhois_cidr_conv($result['regrinfo']['network']['cdir']);
 			}
 
 		// Try to find abuse email address

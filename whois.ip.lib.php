@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //-----------------------------------------------------------------
 // Check if ip adddress is valid
 	
-function validip($ip)
+function phpwhois_validip($ip)
 {
 
 	if (empty($ip))
@@ -60,26 +60,26 @@ function validip($ip)
 //-----------------------------------------------------------------
 // Get real client ip address
 	
-function getclientip()
+function phpwhois_getclientip()
 {
-	if (!empty($_SERVER['HTTP_CLIENT_IP']) && validip($_SERVER['HTTP_CLIENT_IP']))
+	if (!empty($_SERVER['HTTP_CLIENT_IP']) && phpwhois_validip($_SERVER['HTTP_CLIENT_IP']))
 			return $_SERVER['HTTP_CLIENT_IP'];
    
 	if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
 		foreach (explode(',',$_SERVER['HTTP_X_FORWARDED_FOR']) as $ip)
-			if (validip(trim($ip)))
+			if (phpwhois_validip(trim($ip)))
 				return $ip;
 		
-   if (!empty($_SERVER['HTTP_X_FORWARDED']) && validip($_SERVER['HTTP_X_FORWARDED']))
+   if (!empty($_SERVER['HTTP_X_FORWARDED']) && phpwhois_validip($_SERVER['HTTP_X_FORWARDED']))
        return $_SERVER['HTTP_X_FORWARDED'];
        
-   if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && validip($_SERVER['HTTP_FORWARDED_FOR']))
+   if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && phpwhois_validip($_SERVER['HTTP_FORWARDED_FOR']))
        return $_SERVER['HTTP_FORWARDED_FOR'];
        
-   if (!empty($_SERVER['HTTP_FORWARDED']) && validip($_SERVER['HTTP_FORWARDED']))
+   if (!empty($_SERVER['HTTP_FORWARDED']) && phpwhois_validip($_SERVER['HTTP_FORWARDED']))
        return $_SERVER['HTTP_FORWARDED'];
    
-   if (!empty($_SERVER['HTTP_X_FORWARDED']) && validip($_SERVER['HTTP_X_FORWARDED']))
+   if (!empty($_SERVER['HTTP_X_FORWARDED']) && phpwhois_validip($_SERVER['HTTP_X_FORWARDED']))
        return $_SERVER['HTTP_X_FORWARDED'];
    
    return $_SERVER['REMOTE_ADDR'];
@@ -88,7 +88,7 @@ function getclientip()
 //-----------------------------------------------------------------
 // Convert from CIDR to net range
 
-function cidr_conv($net)
+function phpwhois_cidr_conv($net)
 {
 	$start = strtok($net, '/');
 	$n = 3-substr_count($net, '.');
