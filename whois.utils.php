@@ -192,7 +192,7 @@ class utils extends Whois {
 		
 		// Add bold field names
 		
-		$out = preg_replace ("/(?m)^([\w\t -&;']+:\s+)/", '<b>$1</b>', $out);
+		$out = preg_replace ("/(?m)^([- &;'\w\t]+:\s+)/", '<b>$1</b>', $out);
 		
 		// Add italics for disclaimer
 		
