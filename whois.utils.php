@@ -141,8 +141,26 @@ class utils extends Whois {
 		$html_regex = "/(?:^|\b)((((http|https|ftp):\/\/)|(www\.))([\w\.]+)([,:%#&\/?~=\w+\.-]+))(?:\b|$)/is";
 		$ip_regex = "/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/i";
 		
-		$out = implode($result['rawdata'],"\n");
+		$out = '';
+		$lempty = true;
 		
+		foreach($result['rawdata'] as $line)
+			{
+			$line = trim($line);
+
+			if ($line == '')
+				{
+				if ($lempty) continue;
+				else $lempty = true;
+				}
+			else
+				$lempty = false;
+				
+			$out .= $line."\n";
+			}
+
+		if ($lempty) $out = trim($out);
+
 		$out = preg_replace ($email_regex, '<a href="mailto:$0">$0</a>', $out); 
 		$out = preg_replace_callback ($html_regex, 'href_replace', $out); 
 		
@@ -174,7 +192,7 @@ class utils extends Whois {
 		
 		// Add bold field names
 		
-		$out = preg_replace ("/(?m)^([\w\s-&;]+:)/", '<b>$1</b>', $out);
+		$out = preg_replace ("/(?m)^([\w\t -&;']+:\s+)/", '<b>$1</b>', $out);
 		
 		// Add italics for disclaimer
 		
