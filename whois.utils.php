@@ -172,20 +172,28 @@ class utils extends Whois {
 				$link = $_SERVER['PHP_SELF'].'?'.$params;
 			
 			$out = preg_replace ($ip_regex, '<a href="'.$link.'">$0</a>', $out); 			
-				
+			
 			if (isset($result['regrinfo']['domain']['nserver']))
 				{
 				$nserver = $result['regrinfo']['domain']['nserver'];
-			
-				if (is_array($nserver))
+				}
+			else
+				$nserver = false;
+				
+			if (isset($result['regrinfo']['network']['nserver']))
+				{
+				$nserver = $result['regrinfo']['network']['nserver'];
+				}
+				
+			if (is_array($nserver))
+				{
+				print_r($nserver);
+				reset($nserver); 
+				while (list($host, $ip) = each($nserver))
 					{
-					reset($nserver); 
-					while (list($host, $ip) = each($nserver))
-						{
-						$url = '<a href="'. str_replace('$0',$ip,$link)."\">$host</a>";
-						$out = str_replace($host, $url, $out);
-						$out = str_replace(strtoupper($host), $url, $out);
-						}
+					$url = '<a href="'. str_replace('$0',$ip,$link)."\">$host</a>";
+					$out = str_replace($host, $url, $out);
+					$out = str_replace(strtoupper($host), $url, $out);
 					}
 				}
 			}

@@ -336,6 +336,16 @@ class ip_handler extends WhoisClient
 		else
 			$result['regyinfo']['type'] = 'ip';
 			
+				if (isset($result['regrinfo']['network']['nserver']))
+			{
+			if (!is_array($result['regrinfo']['network']['nserver']))
+				{
+				unset($result['regrinfo']['network']['nserver']);
+				}
+			else
+				$result['regrinfo']['network']['nserver'] = $this->FixNameServer($result['regrinfo']['network']['nserver']);
+			}
+			
 		return $result;
 		}
 		

@@ -266,7 +266,6 @@ class Whois extends WhoisClient
 	 */
 	function FixResult(&$result, $domain)
 		{
-
 		// Add usual fields
 		$result['regrinfo']['domain']['name'] = $domain;
 
@@ -285,62 +284,17 @@ class Whois extends WhoisClient
 				$result['regrinfo']['registered'] = 'unknown';
 			}
 
-		if (!isset($result['regrinfo']['domain']['nserver'])) return;
-
 		// Normalize nameserver fields
-		$nserver = $result['regrinfo']['domain']['nserver'];
-
-		if (!is_array($result['regrinfo']['domain']['nserver']))
+		
+		if (isset($result['regrinfo']['domain']['nserver']))
 			{
-			unset($result['regrinfo']['domain']['nserver']);
-			return ;
-			}
-
-		$dns = array();
-
-		foreach($nserver as $val)
-			{
-			$val = str_replace( array('[',']','(',')'), '', trim($val));
-			$val = str_replace("\t", ' ', $val);
-			$parts = explode(' ', $val);
-			$host = '';
-			$ip = '';
-
-			foreach($parts as $p)
+			if (!is_array($result['regrinfo']['domain']['nserver']))
 				{
-				if (substr($p,-1) == '.') $p = substr($p,0,-1);
-
-				if ((ip2long($p) == - 1) or (ip2long($p) === false))
-					{
-					// Hostname ?
-					if ($host == '' && preg_match('/^[\w\-]+(\.[\w\-]+)+$/',$p))
-						{
-						$host = $p;
-						}
-					}
-				else
-					// IP Address
-					$ip = $p;
+				unset($result['regrinfo']['domain']['nserver']);
 				}
-
-			// Valid host name ?
-
-			if ($host == '') continue;
-
-			// Get ip address
-
-			if ($ip == '')
-				{
-				$ip = gethostbyname($host);
-				if ($ip == $host) $ip = '(DOES NOT EXIST)';
-				}
-
-			if (substr($host,-1,1) == '.') $host = substr($host,0,-1);
-				
-			$dns[strtolower($host)] = $ip;
+			else
+				$result['regrinfo']['domain']['nserver'] = $this->FixNameServer($result['regrinfo']['domain']['nserver']);
 			}
-
-		$result['regrinfo']['domain']['nserver'] = $dns;
 		}
 	}
 
