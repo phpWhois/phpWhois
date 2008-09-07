@@ -187,7 +187,6 @@ class utils extends Whois {
 				
 			if (is_array($nserver))
 				{
-				print_r($nserver);
 				reset($nserver); 
 				while (list($host, $ip) = each($nserver))
 					{
