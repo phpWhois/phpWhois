@@ -38,37 +38,43 @@ class joker_handler
 	function parse($data_str, $query)
 		{
 		$translate = array(
-				'contact-hdl' => 'handle'
+				'contact-hdl'	=> 'handle',
+				'modified'		=> 'changed',
+				'reseller' 		=> 'sponsor',
+				'address' 		=> 'address.street',
+				'postal-code' 	=> 'address.pcode',
+                'city' 			=> 'address.city',
+                'state' 		=> 'address.state',
+				'country' 		=> 'address.country',
+				'person'		=> 'name',
+				'domain'		=> 'name'
 				);
 		
 		$contacts = array(
-				'admin-c' => 'admin',
-				'tech-c' => 'tech',
+				'admin-c' 	=> 'admin',
+				'tech-c' 	=> 'tech',
 				'billing-c' => 'billing'
 				);
 				
 		$items = array(
-                'owner:' => 'name',
-				'organization:' => 'organization',
-				'email:'	=> 'email',
-                'address:' => 'address.street',
-				'postal-code:' => 'address.pcode',
-                'city:' => 'address.city',
-                'state:' => 'address.state',
-				'country:' => 'address.country',
-                'reseller:' => 'sponsor.'
+                'owner' 		=> 'name',
+				'organization' 	=> 'organization',
+				'email'			=> 'email',
+				'phone' 		=> 'phone',
+                'address' 		=> 'address',
 		            );
 
-		$r = generic_parser_a($data_str, $translate, $contacts, false, 'Ymd');
-
-		$r['owner'] = generic_parser_b($data_str, $items);
+		$r = generic_parser_a($data_str, $translate, $contacts, 'domain', 'Ymd');
 		
-		if (isset($r['owner']['sponsor']))
+		foreach($items as $tag => $convert)
 			{
-			$r['domain']['sponsor'] = $r['owner']['sponsor'];
-			unset($r['owner']['sponsor']);
+			if (isset($r['domain'][$tag]))
+				{
+				$r['owner'][$convert] = $r['domain'][$tag];
+				unset($r['domain'][$tag]);
+				}
 			}
-			
+
 		return ($r);
 		}
 	}
