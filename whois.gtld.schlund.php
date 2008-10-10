@@ -51,7 +51,7 @@ class schlund_handler
                   'registrant-city:' => 'owner.address.city',
                   'registrant-ccode:' => 'owner.address.country',
                   'registrant-phone:' => 'owner.phone',
-                  'registrant-email:' => 'onwer.email',
+                  'registrant-email:' => 'owner.email',
                   'admin-c-firstname:' => 'admin.name.first',
                   'admin-c-lastname:' => 'admin.name.last',
                   'admin-c-organization:' => 'admin.organization',
