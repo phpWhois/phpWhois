@@ -50,6 +50,7 @@ class eu_handler
 		switch ($r['regrinfo']['domain']['status'])
 			{
 			case 'FREE':
+			case 'AVAILABLE':
 				$r['regrinfo']['registered'] = 'no';
 				break;
 			
