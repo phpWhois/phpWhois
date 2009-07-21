@@ -57,34 +57,18 @@ class fr_handler
 						'admin-c' 	=> 'admin',
 						'tech-c' 	=> 'tech',
 						'zone-c' 	=> 'zone',
+						'holder-c'	=> 'owner',
 						'nsl-id'	=> 'nserver'
 		                  );
 
 		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain','dmY');
 
-		if (isset($reg['domain']['holder']))
+		if (isset($reg['nserver']))
 			{
-			$reg['owner']['organization'] = $reg['domain']['holder'];
-			unset($reg['domain']['holder']);
-			
-			if (isset($reg['nserver']))
-				{
-				$reg['domain'] = array_merge($reg['domain'],$reg['nserver']);
-				unset($reg['nserver']);
-				}
-			
-			$convert = array( 'address', 'phone', 'fax', 'email', 'ref-id' );
-			
-			foreach($convert as $key)
-				{
-				if (isset($reg['domain'][$key]))
-					{
-					$reg['owner'][$key] = $reg['domain'][$key];
-					unset($reg['domain'][$key]);
-					}
-				}
+			$reg['domain'] = array_merge($reg['domain'],$reg['nserver']);
+			unset($reg['nserver']);
 			}
-
+				
 		$r['regrinfo'] = $reg;
 		$r['regyinfo'] = array(
                           'referrer' => 'http://www.nic.fr',
