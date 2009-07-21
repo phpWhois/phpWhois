@@ -67,7 +67,7 @@ $this->WHOIS_SPECIAL = array(
 		'by'	 => '',
 		'bz'	 => 'whois2.afilias-grs.net',		
 		'cy'	 => '',
-		'es'	 => 'http://shop.arsys.es/whois.php?dominio={domain}.es',
+		'es'	 => '',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',		
 		'jobs'	 => 'jobswhois.verisign-grs.com',				
 		'la'	 => 'whois.centralnic.net',		
