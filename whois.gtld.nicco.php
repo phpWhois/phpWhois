@@ -37,20 +37,27 @@ class nicco_handler
 		{
 
 		$items = array(
-                  'owner' => 'Registrant:',
-                  'admin' => 'Administrative Contact',
-                  'tech' => 'Technical Contact',
-                  'domain.name' => 'Domain Name:',
-                  'domain.nserver.' => 'Name servers in listed order:',
-                  'domain.created' => 'Record created on',
-                  'domain.expires' => 'Record expires on',
-                  'domain.changed' => 'Last Updated on:'
+                  'owner' => 'Holder Contact',
+                  'admin' => 'Admin Contact',
+                  'tech' => 'Tech. Contact',
+                  'domain.nserver.' => 'Nameservers',
+                  'domain.created' => 'Creation Date:',
+                  'domain.expires' => 'Expiration Date:'
 		              );
 
+		$translate = array(
+					'city:'			=> 'address.city',
+					'org. name:'	=> 'organization',
+					'address1:'		=> 'address.street.',
+					'address2:'		=> 'address.street.',
+					'state:'		=> 'address.state',
+					'postal code:'	=> 'address.zip'
+					);
+
 		$r = get_blocks($data_str, $items, true);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin'],false,true);
-		$r['tech'] = get_contact($r['tech'],false,true);
+		$r['owner'] = get_contact($r['owner'],$translate);
+		$r['admin'] = get_contact($r['admin'],$translate,true);
+		$r['tech'] = get_contact($r['tech'],$translate,true);
 		$r = format_dates($r, 'dmy');
 		return ($r);
 		}
