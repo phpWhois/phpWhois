@@ -32,11 +32,12 @@ pt		dns.pt
 ru		nic.ru
 sc		admin.sc
 se		nic-se.se
+si		arnes.si
 su		news.su
 uk		olsns.co.uk
 us		neustar.us
 ve		nic.ve
-ws		samoanic.ws
+ws		samoanic.ws surf.ws
 .co.za	sex.co.za
 .org.za	sex.org.za
 
@@ -56,7 +57,6 @@ fabulous	fabulous.com
 godaddy		godaddy.com
 iana		example.com
 interdomain	interdominio.com
-itsyourdomain   sexido.com
 joker		joker.com
 melbourneit     inww.com
 moniker		moniker.com
@@ -75,7 +75,7 @@ register	register.com
 rrpproxy	rrpproxy.net
 schlund		schlund.com
 srsplus		olsns.com
-stargateinc	stargate.com
+namevault	namevault.com
 tmagnic     antiquea.com
 tvcorp		www.tv
 wwdomains	wildwestdomains.com
