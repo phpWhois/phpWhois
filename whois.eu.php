@@ -42,30 +42,35 @@ class eu_handler
 				'domain.nserver'	=> 'Nameservers:',
                 'domain.created'	=> 'Registered:',
                 'domain.registrar'	=> 'Registrar:',
-                'tech'				=> 'Agent Technical Contacts:',
+                'tech'				=> 'Registrar Technical Contacts:',
+                'owner'				=> 'Registrant:'
 				);
 		
+		$extra = array(
+				'organisation:' => 'organization',
+				'website:'		=> 'url'
+				);
+
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 		
-		switch ($r['regrinfo']['domain']['status'])
-			{
-			case 'FREE':
-			case 'AVAILABLE':
-				$r['regrinfo']['registered'] = 'no';
-				break;
+		if (!empty($r['regrinfo']['domain']['status']))
+			switch ($r['regrinfo']['domain']['status'])
+				{
+				case 'FREE':
+				case 'AVAILABLE':
+					$r['regrinfo']['registered'] = 'no';
+					break;
 			
-			case 'APPLICATION PENDING':
-				$r['regrinfo']['registered'] = 'pending';
-				break;
-			
-			default:
-				$r['regrinfo']['registered'] = 'yes';
-				if (isset($r['regrinfo']['tech'])) $r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-				$r['regrinfo']['domain']['registrar'] = get_contact($r['regrinfo']['domain']['registrar']);
-				$r['regrinfo']['domain']['registrar'] = $r['regrinfo']['domain']['registrar']['name'];
-				$created = strtotime($r['regrinfo']['domain']['created']);
-				$r['regrinfo']['domain']['created'] = date('Y-m-d',$created);
-			}
+				case 'APPLICATION PENDING':
+					$r['regrinfo']['registered'] = 'pending';
+					break;
+				}
+
+		if (isset($r['regrinfo']['tech']))
+			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'],$extra);
+
+		if (isset($r['regrinfo']['domain']['registrar']))
+			$r['regrinfo']['domain']['registrar'] = get_contact($r['regrinfo']['domain']['registrar'],$extra);
 			
 		$r['regyinfo']['referrer'] = 'http://www.eurid.eu';
 		$r['regyinfo']['registrar'] = 'EURID';
