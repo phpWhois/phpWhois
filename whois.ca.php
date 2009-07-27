@@ -39,44 +39,36 @@ class ca_handler
 
 	function parse($data_str, $query)
 		{
-
 		$items = array(
-                  'Organization:' 	=> 'owner.organization',
-                  'Registrant-no:'	=> 'owner.handle',
-                  'Subdomain:' 		=> 'domain.name',
-                  'Date-Approved:' 	=> 'domain.created',
-                  'Date-Modified:' 	=> 'domain.changed',
-                  'Renewal-Date:' 	=> 'domain.expires',
-                  'Description:' 	=> 'domain.desc',
-                  'Registrar:' 		=> 'domain.sponsor',                  
-                  'Admin-Name:' 	=> 'admin.name',
-                  'Admin-Postal:' 	=> 'admin.address.',
-                  'Admin-Phone:' 	=> 'admin.phone',
-                  'Admin-Mailbox:' 	=> 'admin.email',
-                  'Admin-Fax:' 		=> 'admin.fax',
-                  'Tech-Name:' 		=> 'tech.name',
-                  'Tech-Postal:' 	=> 'tech.address.',
-                  'Tech-Phone:' 	=> 'tech.phone',
-                  'Tech-Mailbox:' 	=> 'tech.email',
-                  'Tech-Fax:' 		=> 'tech.fax',
-                  'NS1-Hostname:' 	=> 'domain.nserver.0',
-                  'NS2-Hostname:' 	=> 'domain.nserver.1',
-                  'NS3-Hostname:' 	=> 'domain.nserver.2',
-                  'NS4-Hostname:' 	=> 'domain.nserver.3',
-                  'NS5-Hostname:' 	=> 'domain.nserver.4',
-                  'NS6-Hostname:' 	=> 'domain.nserver.5',
-                  'Status:' 		=> 'domain.status'
-		              );
+						'owner'	=> 'Registrant:',
+						'admin'	=> 'Administrative contact:',
+						'tech'	=> 'Technical contact:',
+						'domain.nserver' => 'Name servers:',
+						'domain.status'	=> 'Domain status:',
+						'domain.created' => 'Approval date:',
+						'domain.expires' => 'Renewal date:',
+						'domain.changed' => 'Name servers last changed:'
+						);
 
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
+		$extra = array(
+						'postal address:' => 'address.0',
+						'job title:'	=> '',
+						'number:'	=> 'handle',
+						'description:'	=> 'organization'
+						);
 
-		$r['regyinfo']['referrer'] = 'http://www.cira.ca/';
+		$r['regrinfo'] = easy_parser($data_str['rawdata'],$items,'ymd',$extra);
+
+		$r['regyinfo'] = array(
+                  'registrar' => 'CIRA',
+                  'referrer' => 'http://www.cira.ca/'
+                  );		
 		
-		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status']=='AVAIL')
+		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'AVAIL')
 			$r['regrinfo']['registered'] = 'no';
 		else
 			$r['regrinfo']['registered'] = 'yes';
-			
+
 		return ($r);
 		}
 
