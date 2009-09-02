@@ -10,7 +10,7 @@ ca		cira.ca
 ch		creart.ch blaueskreuz.ch
 cn		cnnic.net.cn
 cz		nic.cz
-de		4ever.de
+de		4ever.de ks2-hanau.de
 fi		ficora.fi
 fm		dot.fm
 fr		nic.fr lemonade.fr
@@ -96,6 +96,7 @@ museum	nic.museum
 name	peter.morgan.name
 org		example.org
 pro		registrypro.pro
+tel		nic.tel
 travel	whois.travel
 za.net	sex.za.net
 

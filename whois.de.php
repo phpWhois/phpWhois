@@ -49,7 +49,8 @@ class de_handler
 
 		$items = array(
 			'domain.name' =>	'Domain:',
-			'domain.nserver.' =>	'Nserver:',
+			'domain.nserver.' =>'Nserver:',
+			'domain.nserver.#' =>'Nsentry:',
 			'domain.status' =>	'Status:',
 			'domain.changed' =>	'Changed:',
 			'domain.desc.' =>	'Descr:',
@@ -69,11 +70,9 @@ class de_handler
 			'type:'	=> ''
 		            );
 
-		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
+		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd',$extra);
 
-		if (isset($r['regrinfo']['owner']))
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
-		
+		/*
 		if (isset($r['regrinfo']['domain']['desc']))
 			{
 			if (!isset($r['regrinfo']['owner']['name']))
@@ -85,15 +84,7 @@ class de_handler
 					
 			unset($r['regrinfo']['domain']['desc']);
 			}
-			
-		if (isset($r['regrinfo']['admin']))
-			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
-		
-		if (isset($r['regrinfo']['tech']))
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
-			
-		if (isset($r['regrinfo']['zone']))
-			$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'], $extra);
+		*/
 
 		$r['regyinfo'] = array(
                   'registrar' => 'DENIC eG',
@@ -101,12 +92,15 @@ class de_handler
                   );
 
 		if (isset($r['regrinfo']['domain']))
+			{
 			$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
+			$r['regrinfo']['registered'] = 'yes';
+			}
 		else
 			$r['regrinfo']['registered'] = 'no';
-			
-		$r = format_dates($r, 'ymd');
-		return ($r);
+			echo "<br/><br/>";
+
+		return $r;
 		}
 	}
 ?>
