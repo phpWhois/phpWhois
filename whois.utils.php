@@ -108,18 +108,20 @@ class utils extends Whois {
 	// showObject() and debugObject()
 	// - debug code to show an object or array
 
-	function showObject(&$obj) {
+	function showObject(&$obj)
+		{
 		$r = $this->debugObject($obj);
 		return "<PRE>$r</PRE>\n";
-	}
+		}
 
-	function debugObject($obj,$indent=0) {
-		if (is_Array($obj) || is_Object($obj)) {
+	function debugObject($obj,$indent=0)
+		{
+		if (is_Array($obj))
+			{
 			$return = '';
-			while (list($k,$v)=each($obj)) {
-				for ($i=0;$i<$indent;$i++) {
-					$return .= '&nbsp;';
-				}
+			foreach($obj as $k => $v)
+				{
+				$return .= str_repeat('&nbsp;',$indent);
 				$return .= $k."->$v\n";
 				$return .= $this->debugObject($v,$indent+1);
 			}
@@ -199,7 +201,7 @@ class utils extends Whois {
 		
 		// Add bold field names
 		
-		$out = preg_replace ("/(?m)^([- &;'\w\t]+:\s+)/", '<b>$1</b>', $out);
+		$out = preg_replace ("/(?m)^([- &;'\w\t\/]+:\s+)/", '<b>$1</b>', $out);
 		
 		// Add italics for disclaimer
 		
