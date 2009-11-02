@@ -34,7 +34,7 @@ function phpwhois_validip($ip)
 	if (empty($ip))
 		return false;
 	
-	if ((ip2long($p) == -1) or (ip2long($p) === false))
+	if ((ip2long($ip) == -1) or (ip2long($ip) === false))
 		return false;
 		
 	$reserved_ips = array (
@@ -48,7 +48,8 @@ function phpwhois_validip($ip)
 			array('255.255.255.0','255.255.255.255')
 			);
 			
-	foreach ($reserved_ips as $r) {
+	foreach ($reserved_ips as $r)
+		{
 		$min = ip2long($r[0]);
 		$max = ip2long($r[1]);
 		if ((ip2long($ip) >= $min) && (ip2long($ip) <= $max)) return false;
