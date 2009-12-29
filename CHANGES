@@ -1,3 +1,5 @@
+2009/12/29
+		- released version 4.2.0
 		- added handler for .tel
 		- new easy_parser funtion applied to many handlers
 		- fixes for several handlers
