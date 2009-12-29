@@ -27,20 +27,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* stargate.whois 1.1	David Saez Padros <david@ols.es> */
 
-if (!defined('__STARGATEINC_HANDLER__'))
-	define('__STARGATEINC_HANDLER__', 1);
+if (!defined('__NAMEVAULT_HANDLER__'))
+	define('__NAMEVAULT_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class stargateinc_handler
+class namevault_handler
 	{
 	function parse($data_str, $query)
 		{
 		$items = array(
                 'owner' => 'Registrant',
-                'admin' => 'Administrative',
-                'tech' => 'Technical',
-                'billing' => 'Billing',
+                'admin' => 'Administrative Contact:',
+                'tech' => 'Technical Contact:',
+                'billing' => 'Billing Contact:',
                 'domain.name' => 'Domain Name:',
                 'domain.nserver.' => 'Name Servers',
 				'domain.created' => 'Creation Date:',
@@ -48,13 +48,7 @@ class stargateinc_handler
                 'domain.status' => 'Status:'
 		            );
 
-		$r = get_blocks($data_str, $items,true);
-		$r['owner'] = get_contact($r['owner'],false,true);
-		$r['admin'] = get_contact($r['admin'],false,true);
-		$r['tech'] = get_contact($r['tech'],false,true);
-		$r['billing'] = get_contact($r['billing'],false,true);
-		$r = format_dates($r, 'dmy');
-		return ($r);
+		return easy_parser($data_str, $items, 'dmy', false, true, true);
 		}
 	}
 ?>

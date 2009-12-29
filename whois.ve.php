@@ -70,8 +70,7 @@ class ve_handler
 			}
 			
 		$r['regrinfo']['domain']['nserver'] = $dns;
-		$r['regrinfo'] = get_contacts($r['regrinfo']);
-	
+		$r['regrinfo'] = get_contacts($r['regrinfo']);	
 		return ($r);		
 		}
 	}

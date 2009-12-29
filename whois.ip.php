@@ -35,6 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*            200.165.206.74  (brnic)  */
 /*            210.178.148.129 (krnic)  */
 /*	          200.44.33.31    (lacnic) */
+/*            210.255.180.14  (jpnic)  */
 
 if (!defined('__IP_HANDLER__'))
 	define('__IP_HANDLER__', 1);
@@ -80,8 +81,6 @@ class ip_handler extends WhoisClient
 		$this->Query['server'] = 'whois.arin.net';
 		$this->Query['query'] = $query;
 
-		reset($this->REGISTRARS);
-
 		$rawdata = $data['rawdata'];
 		
 		if (empty($rawdata)) return $result;
@@ -91,7 +90,8 @@ class ip_handler extends WhoisClient
 		if ($orgname == '')
 			$orgname = trim($rawdata[1]);
 
-		while (list($string, $whois) = each($this->REGISTRARS))
+		foreach($this->REGISTRARS as $string => $whois)
+
 			if (strstr($orgname, $string) != '')
 				{
 				$this->Query['server'] = $whois;
@@ -118,6 +118,15 @@ class ip_handler extends WhoisClient
 						$this->Query['server'] = 'whois.krnic.net';
 						$result['regyinfo']['registrar'] = 'Korea Network Information Center (KRNIC)';
 						$rawdata = $this->GetRawData($query);
+						break;
+						}
+						
+					if (strstr($line, 'Japan Network Information Center'))
+						{
+						$result = $this->set_whois_info($result);
+						$this->Query['server'] = 'whois.nic.ad.jp';
+						$result['regyinfo']['registrar'] = 'Japan Network Information Center';
+						$rawdata = $this->GetRawData($query.'/e');
 						break;
 						}
 					}
@@ -150,7 +159,6 @@ class ip_handler extends WhoisClient
 
 				if ($newquery != '')
 					{
-					//$result = $this->set_whois_info($result);
 					$result['regyinfo']['netname'] = $newquery;
 
 					if (strstr($newquery, 'BRAZIL-BLK'))

@@ -34,10 +34,8 @@ require_once('whois.parser.php');
 
 class tvcorp_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                 'owner' => 'Registrant',
                 'admin' => 'Admin',
@@ -48,15 +46,7 @@ class tvcorp_handler
 				'domain.expires' => 'Record expires on'
 		            );
 
-		$r = get_blocks($data_str, $items);
-		
-		if (isset($r['owner'])) $r['owner'] = get_contact($r['owner']);			
-		if (isset($r['admin'])) $r['admin'] = get_contact($r['admin']);
-		if (isset($r['tech'])) $r['tech'] = get_contact($r['tech']);
-		if (isset($r['billing'])) $r['billing'] = get_contact($r['billing']);
-
-		$r = format_dates($r, 'myd');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy');
 		}
 	}
 ?>

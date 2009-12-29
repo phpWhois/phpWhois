@@ -8,7 +8,7 @@ be		nic.be
 br		registro.br
 ca		cira.ca
 ch		creart.ch blaueskreuz.ch
-cn		cnnic.net.cn
+cn		china.cn
 cz		nic.cz
 de		4ever.de ks2-hanau.de
 fi		ficora.fi

@@ -197,10 +197,15 @@ class WhoisClient {
 					}
 				}
 
+			if (array_key_exists($this->Query['server'],$this->NON_UTF8))
+				{
+				$raw = utf8_encode($raw);
+				}
+
 			$output = explode("\n", $raw);
 
 			// Drop empty last line (if it's empty! - saleck)
-			if(empty($output[count($output)-1]))
+			if (empty($output[count($output)-1]))
 				unset($output[count($output)-1]);
 			}
 		
@@ -244,11 +249,11 @@ class WhoisClient {
 			else
 				$result['regyinfo']['servers'] = $servers;
 			
-			// Handler may fortget to set rawdata
+			// Handler may forget to set rawdata
 			if (!isset($result['rawdata']))
 				$result['rawdata'] = $output;
-			}	
-		
+			}
+
 		// Type defaults to domain
 		if (!isset($result['regyinfo']['type']))
 			$result['regyinfo']['type'] = 'domain';	
@@ -432,7 +437,7 @@ class WhoisClient {
 		// If the handler has still not been included, append to query errors list and return
 		if (!defined($HANDLER_FLAG))
 			{
-			$this->Query['errstr'][] = "Can't find ".$this->Query['tld'].' handler: '.$this->Query['file'];
+			$this->Query['errstr'][] = "Can't find $handler_name handler: ".$this->Query['file'];
 			return($result);
 			}
 

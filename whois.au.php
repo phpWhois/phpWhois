@@ -48,12 +48,12 @@ class au_handler
                     'Status:'			=> 'domain.status',
                     'Domain ROID:'		=> 'domain.handle',
                     'Registrant:'		=> 'owner.organization',
-                    'Registrant ID:'	=> 'owner.handle',
-                    'Registrant Email:' => 'owner.email',
+                    'Registrant Contact ID:'	=> 'owner.handle',
+                    'Registrant Contact Email:' => 'owner.email',
                     'Registrant Contact Name:' => 'owner.name',
-                    'Tech Name:'		=> 'tech.name',
-                    'Tech Email:'		=> 'tech.email',
-                    'Tech ID:'			=> 'tech.handle',
+                    'Tech Contact Name:'		=> 'tech.name',
+                    'Tech Contact Email:'		=> 'tech.email',
+                    'Tech Contact ID:'			=> 'tech.handle',
                     'Name Server:'		=> 'domain.nserver.'
 		              );
 

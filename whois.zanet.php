@@ -37,7 +37,6 @@ class zanet_handler
 
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'domain.name' => 'Domain Name            : ',
                   'domain.created' => 'Record Created         :',

@@ -156,6 +156,13 @@ and .tv domains and ip addresses this will prevent phpWhois to ask more
 than one whois server, you will just know if the donmain is registered
 or not and which is the registrar but not the owner information.
 
+UTF-8
+-----
+
+PHPWhois will assume that all whois servers resturn UTF-8 encoded output,
+if some whois server does not return UTF-8 data, you can include it in
+the NON_UTF8 array in whois.servers.php
+
 Notes 
 -----
 

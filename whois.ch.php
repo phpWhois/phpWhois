@@ -56,10 +56,8 @@ class ch_handler
 
 		if (!empty($r['regrinfo']['domain']['name']))
 			{
-
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-
+			$r['regrinfo'] = get_contacts($r['regrinfo']);
+			
 			$r['regrinfo']['domain']['name'] = $r['regrinfo']['domain']['name'][0];
 			
 			if (isset($r['regrinfo']['domain']['changed'][0]))

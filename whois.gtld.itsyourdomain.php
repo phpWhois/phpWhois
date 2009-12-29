@@ -48,13 +48,7 @@ class itsyourdomain_handler
                 'domain.changed' => 'Record last updated on '
 		            );
 
-		$r = get_blocks($data_str, $items);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		$r['billing'] = get_contact($r['billing']);
-		$r = format_dates($r, 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy');
 		}
 	}
 ?>

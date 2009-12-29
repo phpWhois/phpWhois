@@ -232,13 +232,14 @@ while (list($key,$val) = each($rawdata))
 	$found = false;
 	reset($items);
 
-	while (list($field, $match) = each($items)) {
-
+	while (list($field, $match) = each($items))
+		{
 		$pos = strpos($val,$match);
 
-		if ($field != '' && $pos !== false) {
-
-			if ($val == $match) {
+		if ($field != '' && $pos !== false)
+			{
+			if ($val == $match)
+				{
 				$found = true;
 				$endtag = '';
 				$line = $val;
@@ -247,19 +248,21 @@ while (list($key,$val) = each($rawdata))
 
 			$last = substr($val,-1,1);
 
-			if ($last == ':' || $last == '-' || $last == ']') {
+			if ($last == ':' || $last == '-' || $last == ']')
+				{
 				$found = true;
 				$endtag = $last;
 				$line = $val;
 				break;
-			}
-			else {
-				$var = getvarname(strtok($field,'#'));
+				}
+			else
+				{
+				$var = getvarname(strtok($field,'#'));				
 				$itm = trim(substr($val,$pos+strlen($match)));
 				eval('$r'.$var.'=$itm;');
+				}
 			}
 		}
-	}
 
 	if (!$found) continue;
 
@@ -313,11 +316,14 @@ while (list($key,$val) = each($rawdata))
 
 	if (empty($block)) continue;
 	
-	while (list($field, $match)=each($items)) {
-		$pos=strpos($line,$match);
-		if ($pos!==false) {
-			$var=getvarname(strtok($field,'#'));
-			eval('$r'.$var.'=$block;');
+	while (list($field, $match)=each($items))
+		{
+		$pos = strpos($line,$match);
+		
+		if ($pos !== false)
+			{
+			$var = getvarname(strtok($field,'#'));
+			if ($var != '[]') eval('$r'.$var.'=$block;');
 			}
 		}
 	}
@@ -327,19 +333,33 @@ return $r;
 
 //-------------------------------------------------------------------------
 
+function easy_parser($data_str, $items, $date_format, $translate = false , 
+					 $has_org = false, $partial_match = false )
+{
+$r = get_blocks($data_str, $items, $partial_match);
+$r = get_contacts($r, $translate, $has_org);
+format_dates($r, $date_format);
+return $r;
+}
+
+//-------------------------------------------------------------------------
+
 function get_contacts ( $array, $extra_items='', $has_org= false )
 {
 if (isset($array['billing']))
-	$array['billing'] = get_contact($array['billing']);
+	$array['billing'] = get_contact($array['billing'], $extra_items, $has_org);
 
 if (isset($array['tech']))
-	$array['tech'] = get_contact($array['tech']);
-		
+	$array['tech'] = get_contact($array['tech'], $extra_items, $has_org);
+
+if (isset($array['zone']))
+	$array['zone'] = get_contact($array['zone'], $extra_items, $has_org);
+			
 if (isset($array['admin']))
-	$array['admin'] = get_contact($array['admin']);
+	$array['admin'] = get_contact($array['admin'], $extra_items, $has_org);
 		
 if (isset($array['owner']))
-	$array['owner'] = get_contact($array['owner']);
+	$array['owner'] = get_contact($array['owner'], $extra_items, $has_org);
 	
 return $array;
 }
@@ -542,8 +562,9 @@ return $res;
 
 function get_date($date,$format)
 {
-$months = array( 'jan'=>1, 'feb'=>2, 'mar'=>3, 'apr'=>4,  'may'=>5,  'jun'=>6, 
-                 'jul'=>7, 'aug'=>8, 'sep'=>9, 'oct'=>10, 'nov'=>11, 'dec'=>12 );
+$months = array( 'jan'=>1,  'ene'=>1,  'feb'=>2,  'mar'=>3, 'apr'=>4, 'abr'=>4,
+                 'may'=>5,  'jun'=>6,  'jul'=>7,  'aug'=>8, 'ago'=>8, 'sep'=>9,
+                 'oct'=>10, 'nov'=>11, 'dec'=>12, 'dic'=>12 );
 
 $parts = explode(' ',$date);
 

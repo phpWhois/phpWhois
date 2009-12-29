@@ -49,12 +49,7 @@ class ascio_handler
                 'domain.changed' => 'Record last updated:'
 		            );
 
-		$r = get_blocks($data_str, $items, true);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		format_dates($r, 'ymd');
-		return ($r);
+		return easy_parser($data_str, $items, 'ymd',false,false,true);
 		}
 	}
 ?>

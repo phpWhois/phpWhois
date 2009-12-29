@@ -34,10 +34,8 @@ require_once('whois.parser.php');
 
 class srsplus_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'owner' => 'Registrant:',
                   'admin' => 'Administrative',
@@ -49,20 +47,7 @@ class srsplus_handler
                   'domain.expires' => 'Record expires on'
 		              );
 
-		$r = get_blocks($data_str, $items, true);
-
-		if (isset($r['owner']))
-			$r['owner'] = get_contact($r['owner'],false,true);
-		if (isset($r['admin']))
-			$r['admin'] = get_contact($r['admin'],false,true);
-		if (isset($r['tech']))
-			$r['tech'] = get_contact($r['tech'],false,true);
-		if (isset($r['billing']))
-			$r['billing'] = get_contact($r['billing'],false,true);
-		format_dates($r['domain'], 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'ymd',false,true,true);
 		}
-
 	}
-
 ?>

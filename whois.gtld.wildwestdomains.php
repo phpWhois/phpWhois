@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class wildwestdomains_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'owner' => 'Registrant:',
                   'admin' => 'Administrative Contact:',
@@ -48,19 +46,7 @@ class wildwestdomains_handler
                   'domain.changed' => 'Last Updated on:'
 		              );
 
-		$r = get_blocks($data_str, $items);
-
-		if (isset($r['owner']))
-			$r['owner'] = get_contact($r['owner']);
-		if (isset($r['admin']))
-			$r['admin'] = get_contact($r['admin']);
-		if (isset($r['tech']))
-			$r['tech'] = get_contact($r['tech']);
-		
-		format_dates($r['domain'], 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy');
 		}
-
 	}
-
 ?>

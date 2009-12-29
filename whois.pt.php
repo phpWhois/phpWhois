@@ -19,7 +19,7 @@ class pt_handler {
 					'domain.nserver.' 	=> 'Nameserver:',
 					'domain.status'	 	=> 'Estado / Status:',
 					'owner'				=> 'Titular / Registrant',
-					'bill'				=> 'Entidade Gestora / Billing Contact',
+					'billing'			=> 'Entidade Gestora / Billing Contact',
 					'admin'				=> 'Responsável Administrativo / Admin Contact',
 					'tech'				=> 'Responsável Técnico / Tech Contact',
 					'#'					=> 'Nameserver Information'
@@ -30,27 +30,18 @@ class pt_handler {
 		if (empty($r['regrinfo']['domain']['name']))
 			{
 			$r['regrinfo']['registered'] = 'no';
-			return;
+			return $r;
 			}
 
 		$r['regrinfo']['domain']['created'] = get_date($r['regrinfo']['domain']['created'], 'dmy');		
     
 		if ($r['regrinfo']['domain']['status'] == 'ACTIVE')
+			{
+			$r['regrinfo'] = get_contacts($r['regrinfo']);
 			$r['regrinfo']['registered'] = 'yes';
+			}
 		else
 			$r['regrinfo']['registered'] = 'no';
-
-		if (isset($r['regrinfo']['admin']))
-				$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
-				
-		if (isset($r['regrinfo']['owner']))
-				$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
-				
-		if (isset($r['regrinfo']['tech']))
-				$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-				
-		if (isset($r['regrinfo']['bill']))
-				$r['regrinfo']['bill'] = get_contact($r['regrinfo']['bill']);
 						
 		$r['regyinfo'] = array(
 			'referrer' => 'http://www.fccn.pt',

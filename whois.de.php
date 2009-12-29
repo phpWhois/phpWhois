@@ -65,6 +65,7 @@ class de_handler
 			'city:' => 'address.city',
 			'pcode:' => 'address.pcode',
 			'country:' => 'address.country',
+			'organisation:' => 'organization',
 			'name:' => 'name',
 			'remarks:' => '',
 			'type:'	=> ''
@@ -98,7 +99,6 @@ class de_handler
 			}
 		else
 			$r['regrinfo']['registered'] = 'no';
-			echo "<br/><br/>";
 
 		return $r;
 		}

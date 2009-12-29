@@ -1,5 +1,36 @@
-200(/08/20
+		- added handler for .tel
+		- new easy_parser funtion applied to many handlers
+		- fixes for several handlers
+		- stargateinc handler moved to namevault
+		- itsyourdomain seems to be now tucows
+		- domainbank is now handled by dotster
+		- domaincontender is now assorted
+		- fixed bug #2888773 validip function uses undefined variable
+		- improved .eu domain registration status detection
+		- fixes for html nice output and utf-8 support
+
+2008/10/10
+		- fixed Bugs item #2153003
+		- fixed bug #2153380 Bad info for joker.com domain owners
+
+2008/09/07
+		- check network nserver too
+		- added suport for spanish dates
+		- fixed ws handler
+
+2008/08/29
+		- fixed 'bold' regex and removed extra
+          blank lines in showHTML result
+
+2008/08/28
+		- fixed namespace in whois.ip.lib.php
+		- allow to specify full url in showHTML result
+
+2008/08/20
 		- added .ve handler by jlchafardet
+		- fixed some handlers reporting 'bill' instead of 'billing'
+		- added helper functions for some handlers
+		- fixed .au handler
 
 2008/08/11
 		- fixed .es handler

@@ -54,18 +54,7 @@ class lt_handler
 						''		=> '%'
 						);
 
-		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
-
-		if (isset($r['regrinfo']['admin']))
-			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'],$translate);
-			
-		if (isset($r['regrinfo']['tech']))
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'],$translate);
-			
-		if (isset($r['regrinfo']['zone']))
-			$r['regrinfo']['zone'] = get_contact($r['regrinfo']['zone'],$translate);
-
-		$r = format_dates($r,'ymd');
+		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd', $translate);
 
 		$r['regyinfo'] = array(
                     'referrer' => 'http://www.domreg.lt',

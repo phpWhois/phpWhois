@@ -64,7 +64,12 @@ class eu_handler
 				case 'APPLICATION PENDING':
 					$r['regrinfo']['registered'] = 'pending';
 					break;
+					
+				default:
+					$r['regrinfo']['registered'] = 'unknown';
 				}
+		else
+			$r['regrinfo']['registered'] = 'yes';
 
 		if (isset($r['regrinfo']['tech']))
 			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'],$extra);

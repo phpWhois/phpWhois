@@ -51,13 +51,7 @@ class publicdomainregistry_handler
               'domain.expires#' => 'Expiration Date:'
 		          );
 
-		$r = get_blocks($data_str, $items,true);
-
-		$r['owner'] = get_contact($r['owner'],false,true);
-		$r['admin'] = get_contact($r['admin'],false,true);
-		$r['tech'] = get_contact($r['tech'],false,true);
-		format_dates($r, 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy', false, true, true);
 		}
 	}
 ?>

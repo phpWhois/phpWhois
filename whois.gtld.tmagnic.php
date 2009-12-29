@@ -48,13 +48,7 @@ class tmagnic_handler
               '#' => 'Punycode Name:'
 		          );
 
-		$r = get_blocks($data_str, $items, true);
-		
-		if (isset($r['owner'])) $r['owner'] = get_contact($r['owner']);
-		if (isset($r['admin'])) $r['admin'] = get_contact($r['admin']);
-		if (isset($r['tech']))  $r['tech'] = get_contact($r['tech']);
-		format_dates($r, 'ymd');
-		return ($r);
+		return easy_parser($data_str, $items, 'ymd',false,false,true);
 		}
 	}
 ?>

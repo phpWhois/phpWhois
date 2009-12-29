@@ -55,12 +55,9 @@ class be_handler
 		if (isset($r['regrinfo']['domain']['name']))
 			{
 			$r['regrinfo']['registered'] = 'yes';
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
-
-			if (isset($r['regrinfo']['admin']))
-				$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
-
+			
+			$r['regrinfo'] = get_contacts($r['regrinfo']);
+			
 			if (isset($r['regrinfo']['agent']))
 				{
 				$sponsor = get_contact($r['regrinfo']['agent']);

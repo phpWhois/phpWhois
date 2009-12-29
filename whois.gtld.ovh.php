@@ -46,15 +46,7 @@ class ovh_handler
 						'domain.created'	=> 'Record created on'
                         );
 		
-		$r = get_blocks($data_str, $items, true);
-
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		$r['billing'] = get_contact($r['billing']);
-		
-		format_dates($r, 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy',false,false,true);
 		}
 	}
 ?>

@@ -38,91 +38,36 @@ class mx_handler
 
 	function parse($data_str, $query)
 		{
-
-		$contacts = array(
-                    'admin' 	=> 'ADMINISTRATIVO',
-                    'tech' 		=> 'TECNICO',
-                    'billing' 	=> 'DE PAGO'
-		                );
-
 		$items = array(
-                    'name' 		=> 'DOMINIO:',
-                    'created' 	=> 'FECHA DE CREACION:',
-                    'changed' 	=> 'FECHA DE ULTIMA MODIFICACION:'
-		              );
+						'owner'	=> 'Registrant:',
+						'admin'	=> 'Administrative Contact:',
+						'tech'	=> 'Technical Contact:',
+						'billing' => 'Billing Contact:',						
+						'domain.nserver' => 'Name Servers:',
+						'domain.created' => 'Created On:',
+						'domain.expires' => 'Expiration Date:',
+						'domain.changed' => 'Last Updated On:',
+						'domain.sponsor' => 'Registrar:'
+						);
 
-		$r['regrinfo'] = array();
-		$r['regrinfo']['domain']['nserver'] = array();
-		$r['regrinfo']['admin'] = array();
-		$r['regrinfo']['tech'] = array();
-		$r['regrinfo']['billing'] = array();
-		$r['regrinfo']['owner'] = array();
+		$extra = array(
+						'city:' => 'address.city',
+						'state:'	=> 'address.state',
+						'dns:'	=> '0'
+						);
 
-		$lastk = '';
-
-		while (list($key, $val) = each($data_str['rawdata']))
-			{
-			$val = trim($val);
-
-			if ($val != '')
-				{
-
-				foreach($contacts as $key => $contact)
-					{
-					if (strstr($val, "CONTACTO $contact:"))
-						{
-						preg_match("/CONTACTO $contact:\s*(.+?)\s*\[(.+?)\]/", $val, $refs);
-						$r['regrinfo'][$key]['name'] = $refs[1];
-						$r['regrinfo'][$key]['handle'] = $refs[2];
-						$lastk = $key;
-						break;
-						}
-					}
-					
-				if (strstr($val, 'ORGANIZACION:'))
-					{
-					preg_match('/ORGANIZACION:\s*(.+?)\s*\[(.+?)\]/', $val, $refs);
-					$r['regrinfo']['owner']['name'] = $refs[1];
-					$r['regrinfo']['owner']['handle'] = $refs[2];
-					continue;
-					}
-					
-				if (strstr($val, 'SERVIDOR DNS '))
-					{
-					$r['regrinfo']['domain']['nserver'][] = trim(substr($val, 16));
-					continue;				
-					}
-				
-				if (strstr($val, 'DOMICILIO:'))
-					{
-					if ($lastk == '') $lastk = 'owner';
-					$r['regrinfo'][$lastk]['address'] = trim(substr($val, 11));
-					continue;
-					}
-				
-				reset($items);
-
-				while (list($field, $match) = each($items))
-				
-				if (strstr($val, $match))
-					{
-					$r['regrinfo']['domain'][$field] = trim(substr($val, strlen($match)));
-					break;
-					}
-				}
-			}
-
-		if (!empty($r['regrinfo']['owner']['name']))
-			{
-			$r['regyinfo'] = array(
-                            'referrer' => 'http://www.nic.mx',
-                            'registrar' => 'NIC-Mexico'
-			                       );
-			}
+		$r['regrinfo'] = easy_parser($data_str['rawdata'],$items,'dmy',$extra);
+		
+		$r['regyinfo'] = array(
+                  'registrar' => 'NIC Mexico',
+                  'referrer' => 'http://www.nic.mx/'
+                  );
+		
+		if (empty($r['regrinfo']['domain']['created']))
+			$r['regrinfo']['registered'] = 'no';
 		else
-			$r = '';
+			$r['regrinfo']['registered'] = 'yes';
 
-		format_dates($r, 'dmy');
 		return ($r);
 		}
 

@@ -61,16 +61,7 @@ class it_handler
 			'last update:' 	=> 'changed'
 		            );
 
-		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
-
-		if (isset($r['regrinfo']['owner']))
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner'], $extra);
-
-		if (isset($r['regrinfo']['admin']))
-			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin'], $extra);
-		
-		if (isset($r['regrinfo']['tech']))
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech'], $extra);
+		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd',$extra);
 			
 		if (isset($r['regrinfo']['registrar']))
 			{
@@ -83,13 +74,6 @@ class it_handler
                   'referrer' => 'http://www.nic.it/'
                   );
 
-/*
-		if (isset($r['regrinfo']['domain']))
-			$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
-		else
-			$r['regrinfo']['registered'] = 'no';
-*/			
-		$r = format_dates($r, 'ymd');
 		return ($r);
 		}
 	}

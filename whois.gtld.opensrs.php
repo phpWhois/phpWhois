@@ -50,15 +50,11 @@ class opensrs_handler
                   'domain.sponsor'	=> 'Registrar of Record:'
 		              );
 
-		$r = get_blocks($data_str, $items, true);
+		$r = easy_parser($data_str, $items, 'dmy', false, false, true);
 
 		if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
 			$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
 
-		if (isset($r['owner'])) $r['owner'] = get_contact($r['owner']);
-		if (isset($r['admin'])) $r['admin'] = get_contact($r['admin']);
-		if (isset($r['tech'])) $r['tech'] = get_contact($r['tech']);
-		$r = format_dates($r, 'dmy');
 		return ($r);
 		}
 	}

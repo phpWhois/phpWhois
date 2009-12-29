@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 header('Content-Type: text/html; charset=UTF-8');
 
-$out =  implode("\n", file('example.html'));
+$out =  implode('', file('example.html'));
 
 $out = str_replace('{self}', $_SERVER['PHP_SELF'], $out);
 
@@ -109,7 +109,7 @@ if (isSet($_GET['query']))
 				}       
 		}
 	
-	$winfo = utf8_encode($winfo);
+	//$winfo = utf8_encode($winfo);
 	
 	$resout = str_replace('{result}', $winfo, $resout);
 	}

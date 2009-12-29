@@ -53,19 +53,14 @@ class org_za_handler
 			{
 			$r['regrinfo']['registered'] = 'yes';
 			$r['regrinfo']['domain']['handler'] = strtok(array_shift($r['regrinfo']['owner']),' ');
-
-			$r['regrinfo']['owner'] = get_contact($r['regrinfo']['owner']);
-			$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
-			$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
-			$r['regrinfo']['billing'] = get_contact($r['regrinfo']['billing']);
+			$r['regrinfo'] = get_contacts($r['regrinfo']);
 			}
 		else
 			$r['regrinfo']['registered'] = 'no';
 
 		$r['regyinfo']['referrer'] = 'http://www.org.za';
 		$r['regyinfo']['registrar'] = 'The ORG.ZA Domain';
-		$r['rawdata'] = $data['rawdata'];
-		
+		$r['rawdata'] = $data['rawdata'];		
 		return ($r);
 		}
 	}

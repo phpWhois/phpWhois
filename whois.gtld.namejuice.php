@@ -34,7 +34,6 @@ require_once('whois.parser.php');
 
 class namejuice_handler
         {
-
         function parse($data_str, $query)
                 {
 
@@ -46,23 +45,12 @@ class namejuice_handler
                                 'domain.nserver.' => 'Name Servers:',
                                 'domain.created' => 'Creation date:',
                                 'domain.expires' => 'Expiration date:',
+                                'domain.changed' => 'Update date:',
                                 'domain.status' => 'Status:',
                                 'domain.sponsor' => 'Registration Service Provided By:'
                               );
 
-                $r = get_blocks($data_str, $items);
-                
-                if (isset($r['owner']))
-					$r['owner'] = get_contact($r['owner'],false,true);
-					
-				if (isset($r['admin']))
-					$r['admin'] = get_contact($r['admin'],false,true);
-					
-				if (isset($r['tech']))
-					$r['tech'] = get_contact($r['tech'],false,true);
-
-                $r = format_dates($r, 'dmy');
-                return ($r);
+				return easy_parser($data_str, $items, 'dmy', false, true, true);
                 }
         }
 ?>

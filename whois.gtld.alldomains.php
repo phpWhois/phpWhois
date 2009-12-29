@@ -45,12 +45,7 @@ class alldomains_handler
                 'domain.nserver.' => 'Domain servers in listed order:'
 		            );
 		
-		$r = get_blocks($data_str, $items);
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		format_dates($r, 'ymd');
-		return ($r);
+		return easy_parser($data_str, $items, 'ymd');
 		}
 	}
 ?>

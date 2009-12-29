@@ -43,8 +43,7 @@ class hu_handler {
                         'e-mail'		=> 'email',
                         'hun-id'		=> 'handle',
                         'person'		=> 'name',
-                        'domain_pri_ns' => 'nserver',
-                        'domain_sec_ns' => 'nserver',
+                        'nameserver' 	=> 'nserver',
                         'person'		=> 'name',
                         'org'			=> 'organization',
                         'registered'	=> 'created'
@@ -55,76 +54,48 @@ class hu_handler {
                         'admin-c'		=> 'admin',
                         'tech-c'		=> 'tech',
                         'billing-c'		=> 'billing',
-                        'zone-c'		=> 'zone'		
+                        'zone-c'		=> 'zone',
+                        'owner-hun-id'  => 'owner'
                       );
     
     // make those broken hungary comments standards-conforming
-
-	for ($i=1; $i<count($data_str['rawdata']); $i++) {
-
-      if (substr($data_str['rawdata'][$i+1],0,7) != 'domain:') {
-        $data_str['rawdata'][$i] = '% '.$data_str['rawdata'][$i];
-	     }
-      else {
-		  break;
-	   }
-    }
-
 	// replace first found hun-id with owner-hun-id (will be parsed later on)
+	// make output UTF-8
 
-	for ($i=1; $i<count($data_str['rawdata']); $i++) {
-
-		if (substr($data_str['rawdata'][$i],0,7) == 'hun-id:') {
-			$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
-			break;
-			}
-
-		}
-
-	$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
-
-	if ($reg['domain']) {
-
-		while (list($key,$val)=each($reg['domain']))
-			{
-			if (is_array($val)) continue;
-			$v=trim(substr(strstr($val,':'),1));
-			if ($key == 'organization')
-				{
-				$reg['owner']['organization']=$val;
-				unset($reg['domain'][$key]);
-				continue;
-				}
-			if ($key == 'owner-hun-id')
-				{
-				$reg['owner']['handle']=$val;
-				unset($reg['domain'][$key]);
-				continue;
-				}
-			if ($key == 'address')
-				{
-				$reg['owner']['address']=$val;
-				unset($reg['domain'][$key]);
-				continue;
-				}
-			if ($key == 'phone')
-				{
-				$reg['owner']['phone']=$val;
-				unset($reg['domain'][$key]);
-				continue;
-				}
-			if ($key == 'fax')
-				{
-				$reg['owner']['fax']=$val;
-				unset($reg['domain'][$key]);
-				continue;
-				}
-			}
-	}
+	$comments = true;
+	$owner_id = true;
 	
-	$r['regrinfo']=$reg;
-	$r['regyinfo']=array('referrer'=>'http://www.nic.hu','registrar'=>'HUNIC');
-	$r['rawdata']=$data_str['rawdata'];
+	foreach ($data_str['rawdata'] as $i => $val)
+		{
+		if ($comments)
+			{
+			if (strpos($data_str['rawdata'][$i],'domain:') === false)
+				{
+				if ($i) $data_str['rawdata'][$i] = '% '.$data_str['rawdata'][$i];
+				}
+			else
+				$comments = false;
+			}
+		else
+			if ($owner_id && substr($data_str['rawdata'][$i],0,7) == 'hun-id:')
+				{
+				$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
+				$owner_id = false;
+				}
+				
+		$data_str['rawdata'][$i] = utf8_encode($data_str['rawdata'][$i]);
+		}
+		
+	$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
+	
+	unset($reg['domain']['organization']);
+	unset($reg['domain']['address']);
+	unset($reg['domain']['phone']);
+	unset($reg['domain']['fax']);
+
+	$r['regrinfo'] = $reg;
+	$r['regyinfo'] = array('referrer'=>'http://www.nic.hu','registrar'=>'HUNIC');
+	$r['rawdata'] = $data_str['rawdata'];
 	format_dates($r,'ymd');
 	return($r);
 	}

@@ -29,7 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* 		1.1 Mark Jeftovic <markjr@easydns.com> 1999/12/15 */
 
 class utils extends Whois {
-
+	/*
+	Not updated anymore
 	var $REGISTRARS = array(
 		'ac' => 'http://www.nic.ac/cgi-bin/whois',
 		'ad' => 'http://www.nic.ad/',
@@ -104,6 +105,7 @@ class utils extends Whois {
 			return false;
 		}
 	}
+	*/
 
 	// showObject() and debugObject()
 	// - debug code to show an object or array
@@ -163,6 +165,7 @@ class utils extends Whois {
 
 		if ($lempty) $out = trim($out);
 
+		$out = strip_tags($out);
 		$out = preg_replace ($email_regex, '<a href="mailto:$0">$0</a>', $out); 
 		$out = preg_replace_callback ($html_regex, 'href_replace', $out); 
 		
@@ -201,13 +204,13 @@ class utils extends Whois {
 		
 		// Add bold field names
 		
-		$out = preg_replace ("/(?m)^([- &;'\w\t\/]+:\s+)/", '<b>$1</b>', $out);
+		$out = preg_replace ("/(?m)^([-\s\.&;'\w\t\(\)\/]+:\s*)/", '<b>$1</b>', $out);
 		
 		// Add italics for disclaimer
 		
 		$out = preg_replace ("/(?m)^(%.*)/", '<i>$0</i>', $out);
 			
-		return str_replace("\n","<br></br>\n",$out);
+		return str_replace("\n","<br/>\n",$out);
 	}
 }
 

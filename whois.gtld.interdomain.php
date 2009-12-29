@@ -35,10 +35,8 @@ require_once('whois.parser.php');
 
 class interdomain_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                     'Domain Name................' => 'domain.name',
                     'Creation Date............' => 'domain.created',
@@ -82,5 +80,4 @@ class interdomain_handler
 		return generic_parser_b($data_str, $items, 'dmy');
 		}
 	}
-
 ?>

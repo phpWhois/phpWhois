@@ -32,15 +32,13 @@ require_once('whois.parser.php');
 
 class nameking_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'owner' => 'Registrant',
                   'admin' => 'Admin Contact',
                   'tech' => 'Tech Contact',
-                  'bill' => 'Billing Contact',
+                  'billing' => 'Billing Contact',
                   'domain.sponsor' => 'Registration Provided By:',
                   'domain.created' => 'Creation Date:',
                   'domain.expires' => 'Expiration Date:',
@@ -66,21 +64,7 @@ class nameking_handler
 					'city, province, post code:' => 'address.city'
 					);
 					
-		$r = get_blocks($data_str, $items, true);
-
-		if (isset($r['owner']))
-			$r['owner'] = get_contact($r['owner'],$extra);
-		if (isset($r['admin']))
-			$r['admin'] = get_contact($r['admin'],$extra);
-		if (isset($r['tech']))
-			$r['tech'] = get_contact($r['tech'],$extra);
-		if (isset($r['bill']))
-			$r['bill'] = get_contact($r['bill'],$extra);
-
-		format_dates($r['domain'], 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy', $extra, false, true);
 		}
-
 	}
-
 ?>

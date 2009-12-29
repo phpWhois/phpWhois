@@ -53,8 +53,7 @@ class nl_handler
                   'zone' => 'Registrar:'
 		            );
 		
-		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
-		
+		$r['regrinfo'] = get_blocks($data['rawdata'], $items);		
 		$r['regyinfo']['referrer'] = 'http://www.domain-registry.nl';
 		$r['regyinfo']['registrar'] = 'Stichting Internet Domeinregistratie NL';
 		
@@ -63,12 +62,19 @@ class nl_handler
 			$r['regrinfo']['registered'] = 'no';
 			return $r;
 			}
-
-		$r['regrinfo']['tech'] = $this->get_contact($r['regrinfo']['tech']);
-		$r['regrinfo']['owner'] = $this->get_contact($r['regrinfo']['owner']);
-		$r['regrinfo']['admin'] = $this->get_contact($r['regrinfo']['admin']);
-		$r['regrinfo']['zone'] = $this->get_contact($r['regrinfo']['zone']);
-
+		
+		if (isset($r['regrinfo']['tech']))
+			$r['regrinfo']['tech'] = $this->get_contact($r['regrinfo']['tech']);
+		
+		if (isset($r['regrinfo']['zone']))
+			$r['regrinfo']['zone'] = $this->get_contact($r['regrinfo']['zone']);
+					
+		if (isset($r['regrinfo']['admin']))
+			$r['regrinfo']['admin'] = $this->get_contact($r['regrinfo']['admin']);
+				
+		if (isset($r['regrinfo']['owner']))
+			$r['regrinfo']['owner'] = $this->get_contact($r['regrinfo']['owner']);
+		
 		$r['regrinfo']['registered'] = 'yes';
 		format_dates($r, 'dmy');
 		

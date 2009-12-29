@@ -40,7 +40,7 @@ class onlinenic_handler
                   'owner' => 'Registrant:',
                   'admin' => 'Administrator:',
                   'tech' => 'Technical Contactor:',
-                  'bill' => 'Billing Contactor:',
+                  'billing' => 'Billing Contactor:',
                   'domain.name' => 'Domain name:',
                   'domain.name#' => 'Domain Name:',
                   'domain.nserver' => 'Domain servers in listed order:',
@@ -67,16 +67,7 @@ class onlinenic_handler
 					',country:' => 'address.country'
 					);
 					
-		$r = get_blocks($data_str, $items, true);
-
-		if (isset($r['owner']))
-			$r['owner'] = get_contact($r['owner'],$extra);			
-		if (isset($r['admin']))
-			$r['admin'] = get_contact($r['admin'],$extra);
-		if (isset($r['tech']))
-			$r['tech'] = get_contact($r['tech'],$extra);
-		if (isset($r['bill']))
-			$r['bill'] = get_contact($r['bill'],$extra);
+		$r = easy_parser($data_str, $items, 'mdy',$extra,false,true);
 
 		foreach($r as $key => $part)
 			if (isset($part['email']))
@@ -87,7 +78,7 @@ class onlinenic_handler
 				$r[$key]['email'] = $email;
 				if ($phone != '') $r[$key]['phone'] = $phone;
 				}
-		format_dates($r['domain'], 'mdy');		
+				
 		return ($r);
 		}
 

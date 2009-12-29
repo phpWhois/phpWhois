@@ -49,13 +49,7 @@ class directnic_handler
               '' => 'By submitting a WHOIS query'
 		          );
 
-		$r = get_blocks($data_str, $items, true);
-
-		$r['owner'] = get_contact($r['owner']);
-		$r['admin'] = get_contact($r['admin']);
-		$r['tech'] = get_contact($r['tech']);
-		format_dates($r, 'mdy');
-		return ($r);
+		return easy_parser($data_str, $items, 'mdy',false,false,true);
 		}
 	}
 ?>

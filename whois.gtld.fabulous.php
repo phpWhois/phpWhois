@@ -40,37 +40,22 @@ class fabulous_handler
               'owner' => 'Domain '.$query.':',
               'admin' => 'Administrative contact:',
               'tech' => 'Technical contact:',
-              'bill' => 'Billing contact:',
+              'billing' => 'Billing contact:',
               '' => 'Record dates:'
 		          );
 
-		$r = get_blocks($data_str, $items, true);
+		$r = easy_parser($data_str, $items, 'mdy',false,false,true);
 
-		if (isset($r['bill']))
+		if (!isset($r['tech']))
 			{
-			$r['bill'] = get_contact($r['bill']);
+			$r['tech'] = $r['billing'];
 			}
-		
-		if (isset($r['tech']))
-			{
-			$r['tech'] = get_contact($r['tech']);
-			}
-		else
-			{
-			$r['tech'] = $r['bill'];
-			}
-		
-		if (isset($r['admin']))
-			{
-			$r['admin'] = get_contact($r['admin']);
-			}
-		else
+
+		if (!isset($r['admin']))
 			{
 			$r['admin'] = $r['tech'];
 			}
-			
-		$r['owner'] = get_contact($r['owner']);
-		format_dates($r, 'mdy');
+		
 		return ($r);
 		}
 	}

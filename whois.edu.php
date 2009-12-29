@@ -47,32 +47,14 @@ class edu_handler
                 'billing' => 'Billing Contact:'             
 		            );
 		
-		$b = get_blocks($data_str['rawdata'], $items);
-		
-		if (isset($b['owner']))
-			{
-			$b['owner'] = get_contact($b['owner']);
-			}
-			
-		if (isset($b['admin']))
-			{
-			$b['admin'] = get_contact($b['admin']);
-			}
-			
+		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'dmy');
+				
 		if (isset($b['tech']))
 			{
-			$b['tech'] = get_contact($b['tech']);
-			
-			if ($b['tech']['name'] == 'Same as above')
-				$b['tech'] = $b['admin'];
+			if ($r['regrinfo']['tech']['name'] == 'Same as above')
+				$r['regrinfo']['tech'] = $r['regrinfo']['admin'];
 			}
 			
-		if (isset($b['billing']))		
-			$b['billing'] = get_contact($b['billing']);
-			
-		format_dates($b, 'dmy');
-
-		$r['regrinfo'] = $b;
 		$r['regyinfo']['referrer'] = 'http://whois.educause.net';
 		$r['regyinfo']['registrar'] = 'EDUCASE';
 		return ($r);

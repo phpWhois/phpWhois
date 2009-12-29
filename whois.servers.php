@@ -42,6 +42,12 @@ $this->DATA = array(
 	'za.net'	=> 'zanet'
 	);
 
+/* Non UTF-8 servers */
+
+$this->NON_UTF8 = array(
+	'whois.interdomain.net' => 1
+	);
+
 /* If whois Server needs any parameters, enter it here */
 
 $this->WHOIS_PARAM = array(
@@ -83,7 +89,6 @@ $this->WHOIS_SPECIAL = array(
 		'sc'     => 'whois2.afilias-grs.net',		
 		'tc'     => 'http://www.adamsnames.tc/whois/?domain={domain}.tc',
 		'tf'     => 'http://www.adamsnames.tc/whois/?domain={domain}.tf',
-		'travel' => 'http://www.whois.travel/whois.cgi?TLD=travel&dn={domain}&TYPE=DOMAIN',
 		've'	 => 'whois.nic.ve',
 		'vg'     => 'http://www.adamsnames.tc/whois/?domain={domain}.vg',
 		// Second level

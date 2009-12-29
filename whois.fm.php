@@ -39,37 +39,36 @@ class fm_handler
 		{
 
 		$items = array(
-                  'owner' => 'Registrant',
+				  'owner' => 'Registrant',
                   'admin' => 'Administrative',
                   'tech' => 'Technical',
-                  'billing' => 'Billing'
+                  'billing' => 'Billing',
+                  'domain.nserver' => 'Name Servers:',
+                  'domain.created' => 'Created:',
+                  'domain.expires' => 'Expires:',
+                  'domain.changed' => 'Modified:',
+                  'domain.status' => 'Status:',
+                  'domain.sponsor' => 'Registrar:'
                   );
 
-		$blocks = get_blocks($data['rawdata'], $items);
+		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 		
-		$items = array(
-                  'FM Domain:' => 'name',
-                  'Primary Hostname:' => 'nserver.0',
-                  'Secondary Hostname:' => 'nserver.1',
-                  'Renewal Date:' => 'expires'
-		              );
+		$items = array( 'voice:' => 'phone' );
 
-		$r['regrinfo']['domain'] = generic_parser_b($data['rawdata'], $items);
-
-		$items = array(
-                'Organiztion:' => 'organization',
-                'Name:' => 'name',
- 				'Address:' => 'address.0',
-                'City, State Zip:' => 'address.1',
- 				'Country:' => 'address.country',
-                'Phone:' => 'phone',
-                'Fax:' => 'fax',
-                'Email:' => 'email'
-		            );
-
-		while (list($key, $val) = each($blocks))
+		if (!empty($r['regrinfo']['domain']['created']))
 			{
-			$r['regrinfo'][$key] = generic_parser_b($val, $items, 'mdy', false);
+			$r['regrinfo'] = get_contacts($r['regrinfo'],$items);
+			
+			if (count($r['regrinfo']['billing']['address']) > 4)
+				$r['regrinfo']['billing']['address'] = array_slice($r['regrinfo']['billing']['address'],0,4);
+
+			$r['regrinfo']['registered'] = 'yes';
+			format_dates($r['regrinfo']['domain'],'dmY');
+			}
+		else
+			{
+			$r = '';
+			$r['regrinfo']['registered'] = 'no';
 			}
 
 		$r['regyinfo']['referrer'] = 'http://www.dot.dm';
