@@ -1,3 +1,6 @@
+2010/04/13
+		- added .ly handler
+
 2009/12/29
 		- released version 4.2.0
 		- added handler for .tel

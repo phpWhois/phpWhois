@@ -61,7 +61,6 @@ if (isSet($_GET['query']))
 	// $whois->non_icann = true;
 	
 	$result = $whois->Lookup($query);
-	
 	$resout = str_replace('{query}', $query, $resout);
 	$winfo = '';
 

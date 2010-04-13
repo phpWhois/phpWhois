@@ -63,7 +63,7 @@ class gtld_handler extends WhoisClient
 		$this->Query = array();
 		$this->SUBVERSION = sprintf('%s-%s', $query['handler'], $this->HANDLER_VERSION);
 		$this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
-	
+
 		unset($this->result['registered']);
 		
 		if (isset($this->result['nodomain']))
@@ -72,11 +72,15 @@ class gtld_handler extends WhoisClient
 			$this->result['regrinfo']['registered'] = 'no';
 			return $this->result;
 			}
-						
+
+		if ($this->deep_whois) $this->result = $this->DeepWhois($query,$this->result);
+
+		// Next server could fail to return data
+		if (count($this->result['rawdata']) < 2) $this->result['rawdata'] = $data['rawdata'];
+
+		// Domain is registered no matter what next server says
 		$this->result['regrinfo']['registered'] = 'yes';
 		
-		if ($this->deep_whois) $this->result = $this->DeepWhois($query,$this->result);
-	
 		return $this->result;
 		}
 	}
