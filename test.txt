@@ -12,6 +12,7 @@ cn		china.cn
 cz		nic.cz
 de		4ever.de ks2-hanau.de
 fi		ficora.fi
+fj		usp.ac.fj
 fm		dot.fm
 fr		nic.fr lemonade.fr
 hu		nic.hu

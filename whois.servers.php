@@ -74,6 +74,7 @@ $this->WHOIS_SPECIAL = array(
 		'bz'	 => 'whois2.afilias-grs.net',		
 		'cy'	 => '',
 		'es'	 => '',
+		'fj'	 => 'whois.usp.ac.fj',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',		
 		'jobs'	 => 'jobswhois.verisign-grs.com',				
 		'la'	 => 'whois.centralnic.net',		

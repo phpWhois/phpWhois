@@ -1,5 +1,6 @@
 2010/04/13
 		- added .ly handler
+		- added .fj handler
 
 2009/12/29
 		- released version 4.2.0
@@ -15,7 +16,7 @@
 		- fixes for html nice output and utf-8 support
 
 2008/10/10
-		- fixed Bugs item #2153003
+		- fixed bug #2153003
 		- fixed bug #2153380 Bad info for joker.com domain owners
 
 2008/09/07
