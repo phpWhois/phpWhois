@@ -1,3 +1,8 @@
+2010/04/28
+		- fixed gtld handler: some registrars give no information
+          on pendingdelete domains that could appear as unregistered
+		- fixed bug #2991358 (owner not correctly set for .at domains)
+
 2010/04/13
 		- added .ly handler
 		- added .fj handler

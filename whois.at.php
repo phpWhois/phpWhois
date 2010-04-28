@@ -53,7 +53,7 @@ class at_handler
 			);
 
 		$contacts = array(
-                    'owner-c' => 'owner',
+                    'registrant' => 'owner',
                     'admin-c' => 'admin',
                     'tech-c' => 'tech',
                     'billing-c' => 'billing',
