@@ -2,6 +2,8 @@
 		- fixed gtld handler: some registrars give no information
           on pendingdelete domains that could appear as unregistered
 		- fixed bug #2991358 (owner not correctly set for .at domains)
+		- fixed bug #2991270 (added extra incorrecta nameserver
+          on .eu domains)
 
 2010/04/13
 		- added .ly handler

@@ -43,7 +43,8 @@ class eu_handler
                 'domain.created'	=> 'Registered:',
                 'domain.registrar'	=> 'Registrar:',
                 'tech'				=> 'Registrar Technical Contacts:',
-                'owner'				=> 'Registrant:'
+                'owner'				=> 'Registrant:',
+                ''					=> 'Please visit'
 				);
 		
 		$extra = array(
