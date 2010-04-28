@@ -76,7 +76,7 @@ class gtld_handler extends WhoisClient
 		if ($this->deep_whois) $this->result = $this->DeepWhois($query,$this->result);
 
 		// Next server could fail to return data
-		if (count($this->result['rawdata']) < 2) $this->result['rawdata'] = $data['rawdata'];
+		if (count($this->result['rawdata']) < 3) $this->result['rawdata'] = $data['rawdata'];
 
 		// Domain is registered no matter what next server says
 		$this->result['regrinfo']['registered'] = 'yes';
