@@ -1,3 +1,7 @@
+2010/05/20
+		- added gtld handlers for domainpeople,dremhost,fastdomain,
+		  marmonitor & names4ever (by Brandon Whaley)
+
 2010/04/28
 		- fixed gtld handler: some registrars give no information
           on pendingdelete domains that could appear as unregistered
