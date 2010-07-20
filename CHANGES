@@ -1,3 +1,6 @@
+2010/07/20
+		- fixed arin new query format
+
 2010/05/20
 		- added gtld handlers for domainpeople,dremhost,fastdomain,
 		  marmonitor & names4ever (by Brandon Whaley)

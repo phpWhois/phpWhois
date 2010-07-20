@@ -108,7 +108,7 @@ class Whois extends WhoisClient
 			// Prepare to do lookup via the 'ip' handler
 			$ip = @gethostbyname($query);
 			$this->Query['server'] = 'whois.arin.net';
-			$this->Query['args'] = $ip;
+			$this->Query['args'] = "n $ip";
 			$this->Query['host_ip'] = $ip;
 			$this->Query['file'] = 'whois.ip.php';
 			$this->Query['handler'] = 'ip';

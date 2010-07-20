@@ -150,7 +150,7 @@ class ip_handler extends WhoisClient
 							$newquery = $netname;
 						else
 							$more_data[] = array (
-												'query' => '!'.$netname,
+												'query' => 'n '.$netname,
 												'server' => 'whois.arin.net',
 												'handler' => 'arin'
 												);
@@ -169,7 +169,7 @@ class ip_handler extends WhoisClient
 						break;
 						}
 					
-					$rawdata = $this->GetRawData('!'.$newquery);
+					$rawdata = $this->GetRawData('n '.$newquery);
 					}
 				else
 					$rawdata = '';
