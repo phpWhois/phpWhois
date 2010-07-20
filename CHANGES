@@ -1,5 +1,7 @@
 2010/07/20
 		- fixed arin new query format
+		- better ip refferal whois follow-up
+		- avoid double rwhois queries
 
 2010/05/20
 		- added gtld handlers for domainpeople,dremhost,fastdomain,

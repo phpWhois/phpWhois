@@ -149,6 +149,11 @@ class WhoisClient {
 				$this->Query['server'] = substr($this->Query['server'],9);
 				}
 
+			if (substr($this->Query['server'],0,8) == 'whois://')
+				{
+				$this->Query['server'] = substr($this->Query['server'],8);
+				}
+			
 			// Get port
 			
 			if (strpos($this->Query['server'],':'))

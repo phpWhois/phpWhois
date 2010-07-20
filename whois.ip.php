@@ -67,7 +67,9 @@ class ip_handler extends WhoisClient
 						'whois.lacnic.net' => 'lacnic',
 						'whois.afrinic.net' => 'afrinic'
 	                     );
-
+	
+	var $more_data = array();	// More queries to get more accurated data
+	
 	function parse($data, $query)
 		{
 		$result['regrinfo'] = array();
@@ -91,7 +93,6 @@ class ip_handler extends WhoisClient
 			$orgname = trim($rawdata[1]);
 
 		foreach($this->REGISTRARS as $string => $whois)
-
 			if (strstr($orgname, $string) != '')
 				{
 				$this->Query['server'] = $whois;
@@ -99,9 +100,6 @@ class ip_handler extends WhoisClient
 				break;
 				}
 
-		// More queries to get more accurated data
-		$more_data = array();
-		
 		switch ($this->Query['server'])
 			{
 			case 'whois.apnic.net':
@@ -149,7 +147,7 @@ class ip_handler extends WhoisClient
 						if ($newquery == '')
 							$newquery = $netname;
 						else
-							$more_data[] = array (
+							$this->more_data[] = array (
 												'query' => 'n '.$netname,
 												'server' => 'whois.arin.net',
 												'handler' => 'arin'
@@ -273,27 +271,23 @@ class ip_handler extends WhoisClient
 				}
 			}
 			
-		//Check if Referral rwhois server has been reported
+		// Check if Referral rwhois server has been reported
 
 		if (isset($result['regrinfo']['rwhois']) && $this->deep_whois)
 			{
-			$more_data[] = array (
-									'query' => $query,
-									'server' => $result['regrinfo']['rwhois'],
-									'handler' => 'rwhois'
-									);
-			//$result['regyinfo']['rwhois'] = $result['regrinfo']['rwhois'];
+			$this->handle_rwhois($result['regrinfo']['rwhois'],$query);
 			unset($result['regrinfo']['rwhois']);
 			}
 
 		// more queries can be done to get more accurated data
 
-		reset($more_data); 
+		reset($this->more_data); 
 
-		while (list($key, $srv_data) = each ($more_data))
-			{			
+		while (list($key, $srv_data) = each($this->more_data))
+			{
 			$this->Query['server'] = $srv_data['server'];
 			unset($this->Query['handler']);			
+			// Use original query
 			$rwdata = $this->GetRawData($srv_data['query']);
 
 			if (!empty($rwdata))
@@ -307,7 +301,12 @@ class ip_handler extends WhoisClient
 				$result = $this->set_whois_info($result);
 				
 				$this->Query['handler'] = $srv_data['handler'];
-				$this->Query['file'] = 'whois.'.$this->Query['handler'].'.php';
+				
+				if (!empty($srv_data['file']))
+					$this->Query['file'] = $srv_data['file'];
+				else
+					$this->Query['file'] = 'whois.'.$this->Query['handler'].'.php';
+
 				$rwres = $this->Process($rwdata);
 				
 				if (isset($rwres['network']))
@@ -327,11 +326,7 @@ class ip_handler extends WhoisClient
 
 				if (isset($rwres['rwhois'])  && $this->deep_whois)
 					{
-					$more_data[] = array (
-									'query' => $query,
-									'server' => $rwres['rwhois'],
-									'handler' => 'rwhois'
-									);
+					$this->handle_rwhois($rwres['rwhois'],$query);
 					unset($rwres['rwhois']);
 					}
 				}
@@ -356,7 +351,34 @@ class ip_handler extends WhoisClient
 			
 		return $result;
 		}
+	
+	//-----------------------------------------------------------------
+	
+	
+	function handle_rwhois($server,$query)
+		{
+		// Avoid querying the same server twice
+
+		if (!empty($this->more_data[$server])) return;
 		
+		$parts = parse_url($server);
+		
+		if (isset($this->HANDLERS[$parts['host']]))
+			$handler = $this->HANDLERS[$parts['host']];
+		else
+			$handler = 'rwhois';
+
+		$this->more_data[$server] = 
+			array (
+					'query' => $query,
+					'server' => $server,
+					'handler' => $handler,
+					'file' => sprintf('whois.ip.%s.php', $handler)
+					);
+		}
+
+	//-----------------------------------------------------------------
+	
 	function join_result($result, $key, $newres)
 		{		
 		if (isset($result['regrinfo'][$key]) && !array_key_exists(0,$result['regrinfo'][$key]))
