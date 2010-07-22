@@ -57,6 +57,7 @@ the following subkeys:
 		referer -> sponsor's URL
 		handle  -> domain handle
 		source  -> who gives this information
+		dnssec  -> domains has dnssec (boolean)
 
 	network
 	-------

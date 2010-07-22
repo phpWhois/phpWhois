@@ -1,3 +1,6 @@
+2010/07/21
+		- added dnssec info to domain object
+
 2010/07/20
 		- fixed arin new query format
 		- better ip refferal whois follow-up

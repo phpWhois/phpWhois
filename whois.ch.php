@@ -49,7 +49,8 @@ class ch_handler
                 'domain.created' => 'Date of last registration:',
                 'domain.changed' => 'Date of last modification:',
                 'tech' => 'Technical contact:',
-                'domain.nserver' => 'Name servers:'
+                'domain.nserver' => 'Name servers:',
+                'domain.dnssec'	=> 'DNSSEC:'
 		            );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
