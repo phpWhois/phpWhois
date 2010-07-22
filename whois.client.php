@@ -140,8 +140,13 @@ class WhoisClient {
 					}
 				}
 			else
-				$query_args = $query;
-			
+				{
+				if (empty($this->Query['args']))
+					$query_args = $query;
+				else
+					$query_args = $this->Query['args'];
+				}
+
 			$this->Query['args'] = $query_args;
 
 			if (substr($this->Query['server'],0,9) == 'rwhois://')
