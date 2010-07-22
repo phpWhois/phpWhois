@@ -74,7 +74,7 @@ foreach ($domains as $key => $domain)
 	$result = $whois->Lookup($domain);
 	
 	unset($result['rawdata']);
-	
+	print_r($result);
 	if (!isset($results[$domain]))
 		{
 		print_r($result);

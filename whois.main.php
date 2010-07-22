@@ -78,7 +78,7 @@ class Whois extends WhoisClient
 	function Lookup($query = '', $is_utf = true)
 		{
 		// start clean
-		$this->Query['status'] = '';
+		$this->Query = array( 'status' => '' );
 		
 		$query = trim($query);
 
