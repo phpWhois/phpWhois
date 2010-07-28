@@ -42,7 +42,7 @@ class opensrs_handler
                   'admin'			=> 'Administrative Contact',
                   'tech'			=> 'Technical Contact',
                   'domain.name'		=> 'Domain name:',
-                  'domain.sponsor'	=> 'Registration Service Provider:',
+                  ''	=> 'Registration Service Provider:',
                   'domain.nserver'	=> 'Domain servers in listed order:',
                   'domain.changed'	=> 'Record last updated on',
                   'domain.created'	=> 'Record created on',

@@ -103,7 +103,7 @@ class Whois extends WhoisClient
 
 		// If query is an ip address do ip lookup
 
-		if ($query == long2ip(ip2long($query)) || !strpos($query, '.'))
+		if ($query == long2ip(ip2long($query)))
 			{
 			// Prepare to do lookup via the 'ip' handler
 			$ip = @gethostbyname($query);
@@ -115,6 +115,23 @@ class Whois extends WhoisClient
 			$this->Query['query'] = $ip;
 			$this->Query['tld'] = 'ip';
 			$this->Query['host_name'] = @gethostbyaddr($ip);
+			return $this->GetData('',$this->deep_whois);
+			}
+
+		if (!strpos($query, '.'))
+			{
+			// Prepare to do lookup via the 'ip' handler
+			$ip = @gethostbyname($query);
+			$this->Query['server'] = 'whois.arin.net';
+			if (strtolower(substr($ip,0,2)) == 'as')
+				$as = substr($ip,2);
+			else
+				$as = $ip;
+			$this->Query['args'] = "a $as";
+			$this->Query['file'] = 'whois.ip.php';
+			$this->Query['handler'] = 'ip';
+			$this->Query['query'] = $ip;
+			$this->Query['tld'] = 'ip';
 			return $this->GetData('',$this->deep_whois);
 			}
 

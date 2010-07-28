@@ -1,5 +1,14 @@
+2010/07/27
+		- better AS support
+		- ip handlers rewritten
+
 2010/07/21
 		- added dnssec info to domain object
+		- parser improved
+		- better support for some non utf-8 servers
+		- removed buydomains handler
+		- added afternic handler
+		- fixes for many handlers
 
 2010/07/20
 		- fixed arin new query format

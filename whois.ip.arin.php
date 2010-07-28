@@ -40,7 +40,7 @@ class arin_handler
 		$items = array(
                   'OrgName:' 	=> 'owner.organization',
                   'CustName:' 	=> 'owner.organization',
-                  'OrgID:' 		=> 'owner.handle',
+                  'OrgId:' 		=> 'owner.handle',
                   'Address:' 	=> 'owner.address.street',
                   'City:' 		=> 'owner.address.city',
                   'StateProv:' 	=> 'owner.address.state',
@@ -54,7 +54,7 @@ class arin_handler
                   'Comment:' 	=> 'network.desc.',
                   'RegDate:' 	=> 'network.created',
                   'Updated:' 	=> 'network.changed',
-                  'ASHandle:' 	=> 'AS.handle',
+                  'ASHandle:' 	=> 'network.handle',
                   'ASName:' 	=> 'network.name',
                   'NetHandle:' 	=> 'network.handle',
                   'NetName:' 	=> 'network.name',
@@ -70,20 +70,11 @@ class arin_handler
 		              );
 
 		$r = generic_parser_b($data_str, $items, 'ymd', false, true);
-		
-		if (isset($r['AS']))
-			{
-			$ash = $r['AS']['handle'];
-			$r['AS'] = $r['network'];
-			$r['AS']['handle'] = $ash;
-			unset($r['network']);			
-			}
-		
-		if (isset($r['abuse']['email'])) 
+
+		if (@isset($r['abuse']['email'])) 
 		    $r['abuse']['email'] = implode(',',$r['abuse']['email']);
 
-		return $r;
+		return array( 'regrinfo' => $r );
 		}
-
 	}
 ?>

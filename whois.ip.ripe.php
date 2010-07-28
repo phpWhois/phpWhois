@@ -77,6 +77,9 @@ class ripe_handler
 		if (isset($r['admin']['tech-c']))  unset($r['admin']['tech-c']);
 		if (isset($r['admin']['admin-c'])) unset($r['admin']['admin-c']);
 		
+		$r = array( 'regrinfo' => $r );
+		$r['regyinfo']['type'] ='ip';
+		$r['regyinfo']['registrar'] = 'RIPE Network Coordination Centre';
 		return $r;
 		}
 

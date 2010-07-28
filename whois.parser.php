@@ -40,28 +40,25 @@ if (empty($blocks) || !is_array($blocks['main']))
    return $ret;
    }
 
-$r=$blocks['main'];
+$r = $blocks['main'];
+$ret['registered'] = 'yes';
 
-$ret['registered']='yes';
-
-while (list($key,$val)=each($contacts))
+while (list($key,$val) = each($contacts))
 	if (isset($r[$key]))
 		{
 		if (is_array($r[$key]))
-	        $blk=$r[$key][count($r[$key])-1];
+	        $blk = $r[$key][count($r[$key])-1];
 		else
-			$blk=$r[$key];
+			$blk = $r[$key];
 
 		$blk = strtoupper(strtok($blk,' '));
 		if (isset($blocks[$blk])) $ret[$val] = $blocks[$blk];
 		unset($r[$key]); 
 		}
 
-if ($main)
-	$ret[$main]=$r;
+if ($main) $ret[$main] = $r;
 	
 format_dates($ret,$dateformat);
-
 return $ret;
 }
 
@@ -88,33 +85,33 @@ while (list($key,$val)=each($rawdata))
 		}
 	if ($val=='')
 		{
-		$newblock=true;
+		$newblock = true;
 		continue;
 		}
 	if ($newblock && $hasdata)
 		{
-		$blocks[$gkey]=$block;
-		$block=array();
-		$gkey='';
+		$blocks[$gkey] = $block;
+		$block = array();
+		$gkey = '';
 		}
-	$dend=true;
-	$newblock=false;
-	$k=trim(strtok($val,':'));
-	$v=trim(substr(strstr($val,':'),1));
+	$dend = true;
+	$newblock = false;
+	$k = trim(strtok($val,':'));
+	$v = trim(substr(strstr($val,':'),1));
 
-	if ($v=='') continue;
+	if ($v == '') continue;
 
-	$hasdata=true;
+	$hasdata = true;
 
 	if (isset($translate[$k])) 
-           {
-            $k=$translate[$k];
-			if ($k=='') continue;
-			if (strstr($k,'.'))
-                {
-                  eval("\$block".getvarname($k)."=\$v;");
-                  continue;
-                }
+		{
+		$k=$translate[$k];
+		if ($k=='') continue;
+		if (strstr($k,'.'))
+			{
+			eval("\$block".getvarname($k)."=\$v;");
+			continue;
+			}
            }
 	else $k=strtolower($k);
 
@@ -171,7 +168,7 @@ while (list($key,$val) = each($rawdata))
 			
 			if ($pos !== false)
 				{
-				if ($field!='')
+				if ($field != '')
 					{
 					$var = '$r'.getvarname($field);
 					$itm = trim(substr($val,$pos+strlen($match)));
@@ -277,14 +274,17 @@ while (list($key,$val) = each($rawdata))
 		if ($val == '' || $val == str_repeat($val[0],strlen($val))) continue;
 
 		$last = substr($val,-1,1);
-
-		if ($last == $endtag) {
+/*
+		if ($last == $endtag)
+			{
 			// Another block found
 			prev($rawdata);
 			break;
 			}
 			
 		if ($endtag == '' || $partial_match)
+		*/
+		if ($endtag == '' || $partial_match || $last == $endtag)
 			{
 			//Check if this line starts another block
 			reset($items);
@@ -315,7 +315,7 @@ while (list($key,$val) = each($rawdata))
 	reset($items);
 
 	if (empty($block)) continue;
-	
+
 	while (list($field, $match)=each($items))
 		{
 		$pos = strpos($line,$match);
@@ -372,7 +372,7 @@ function get_contact ( $array, $extra_items='', $has_org= false )
 if (!is_array($array))
 	return array();
 
-$items = array (		
+$items = array (
 		'fax..:' => 'fax',
 		'fax.' => 'fax',
 		'fax -' => 'fax',
@@ -382,7 +382,7 @@ $items = array (
 		'[fax]' => 'fax',
 		'(fax)' => 'fax',
 		'fax' => 'fax',
-		'tel.' => 'phone',
+		'tel. ' => 'phone',
 		'tel:' => 'phone',
 		'phone::' => 'phone',
 		'phone:' => 'phone',
@@ -397,12 +397,19 @@ $items = array (
 		'language:' => '',
 		'location:' => 'address.city',
 		'country:' => 'address.country',
-		'name:' => 'name'				
+		'name:' => 'name',
+		'address:' => 'address.',
+		'last modified:' => 'changed'	
 		);
 
 if ($extra_items)
-	$items = array_merge($extra_items,$items);
-
+	{
+	foreach($items as $match => $field)
+		if (!isset($extra_items[$match]))
+		$extra_items[$match] = $field;
+	$items = $extra_items;
+	}
+	
 while (list($key,$val)=each($array))
 	{
 	$ok=true;
@@ -415,7 +422,7 @@ while (list($key,$val)=each($array))
 		while (list($match,$field) = each($items))
 			{
 			$pos = strpos(strtolower($val),$match);
-			
+		
 			if ($pos === false) continue;
 
 			$itm = trim(substr($val,$pos+strlen($match)));
@@ -440,10 +447,10 @@ while (list($key,$val)=each($array))
 			//break;
 			} 
 
-		if (preg_match("/([+]*[-0-9\(\)\. x]){7,}/", $val, $matches))
+		if (preg_match("/([+]*[-\(\)\. x0-9]){7,}/", $val, $matches))
 			{
 			$phone = trim(str_replace(' ','',$matches[0]));
-			
+
 			if (strlen($phone) > 8 && !preg_match('/[0-9]{5}\-[0-9]{3}/',$phone))
 				{
 				if (isset($r['phone']))
@@ -472,7 +479,7 @@ while (list($key,$val)=each($array))
 			}
 
 		if (preg_match('/([-0-9a-zA-Z._+&\/=]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6})/',$val, $matches))
-			{		
+			{
 			$r['email'] = $matches[0];
 	
 			$val = str_replace($matches[0],'',$val);	

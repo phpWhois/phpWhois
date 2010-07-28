@@ -273,7 +273,7 @@ class WhoisClient {
 			$result['errstr'] = $this->Query['errstr'];
 
 		// Fix/add nameserver information
-		if (method_exists($this,'FixResult') && $this->Query['tld']!='ip')
+		if (method_exists($this,'FixResult') && $this->Query['tld'] != 'ip')
 			$this->FixResult($result,$query);
 			
 		return($result);
@@ -481,7 +481,7 @@ class WhoisClient {
 		if (!isset($result['regyinfo']['whois'])) return $result;
 		
 		$this->Query['server'] = $wserver = $result['regyinfo']['whois'];
-		
+		unset($result['regyinfo']['whois']);
 		$subresult = $this->GetRawData($query);
 
 		if (!empty($subresult))

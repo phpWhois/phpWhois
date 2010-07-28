@@ -41,19 +41,20 @@ class names4ever_handler
 		$items = array(
                   'owner' => 'Registrant:',
                   'admin' => 'Administrative Contact',
-                  'tech' => 'Technical Contact',
+                  'tech' => 'Technical  Contact',
                   'domain.name' => 'Domain Name:',
-                  'domain.sponsor' => 'Registrar of Record:',
-                  'domain.nserver' => 'Domain servers in listed order:',
+                  'domain.sponsor' => 'Registrar Name....:',
+                  'domain.referrer' => 'Registrar Homepage:',
+                  'domain.nserver' => 'DNS Servers:',
                   'domain.created' => 'Record created on',
                   'domain.expires' => 'Record expires on',
                   'domain.changed' => 'Record last updated on',
                   'domain.status' => 'Domain status:'
 		              );
-//print_r($data_str);
-                $r = easy_parser($data_str, $items, 'dmy', false, false, true);
-                if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
-			$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
+
+		$r = easy_parser($data_str, $items, 'dmy', false, false, true);
+		//if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
+		//$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
 		return ($r);
 		}
 	}

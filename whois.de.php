@@ -61,31 +61,18 @@ class de_handler
 		            );
 
 		$extra = array(
-			'address:' => 'address.street',
+			'address:' => 'address.street.',
 			'city:' => 'address.city',
 			'pcode:' => 'address.pcode',
 			'country:' => 'address.country',
 			'organisation:' => 'organization',
 			'name:' => 'name',
 			'remarks:' => '',
+			'sip:' => 'sip',
 			'type:'	=> ''
 		            );
 
 		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd',$extra);
-
-		/*
-		if (isset($r['regrinfo']['domain']['desc']))
-			{
-			if (!isset($r['regrinfo']['owner']['name']))
-				$r['regrinfo']['owner']['name'] = $r['regrinfo']['domain']['desc'][0];
-				
-			if (!isset($r['regrinfo']['owner']['address']))
-				for ($i=1; $i<count($r['regrinfo']['domain']['desc']); $i++)
-					$r['regrinfo']['owner']['address'][] = $r['regrinfo']['domain']['desc'][$i];
-					
-			unset($r['regrinfo']['domain']['desc']);
-			}
-		*/
 
 		$r['regyinfo'] = array(
                   'registrar' => 'DENIC eG',

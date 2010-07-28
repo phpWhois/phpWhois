@@ -46,8 +46,8 @@ class nl_handler
                   'domain.nserver' => 'Domain nameservers:',
                   'domain.created' => 'Date registered:',
                   'domain.changed' => 'Record last updated:',
-                  'domain.sponsor' => 'Record maintained by:',
-                  'owner' => 'Registrant:',
+                  'domain.sponsor' => 'Record maintained:',
+                  'owner' => 'Registrar:',
                   'admin' => 'Administrative contact:',
                   'tech' => 'Technical contact(s):',
                   'zone' => 'Registrar:'

@@ -14,7 +14,7 @@ class pt_handler {
 	function parse($data, $query)
 		{
 		$items = array(
-					'domain.name' 		=> 'Nome de domínio / Domain Name:',
+					'domain.name' 		=> ' / Domain Name:',
 					'domain.created' 	=> 'Data de registo / Creation Date (dd/mm/yyyy):',
 					'domain.nserver.' 	=> 'Nameserver:',
 					'domain.status'	 	=> 'Estado / Status:',
@@ -29,6 +29,7 @@ class pt_handler {
 
 		if (empty($r['regrinfo']['domain']['name']))
 			{
+			print_r($r['regrinfo']);
 			$r['regrinfo']['registered'] = 'no';
 			return $r;
 			}

@@ -25,38 +25,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-if (!defined('__RWHOIS_HANDLER__'))
-	define('__RWHOIS_HANDLER__', 1);
+/* buydomains.whois     1.0     david@ols.es            2003/03/30 */
+
+if (!defined('__AFTERNIC_HANDLER__'))
+	define('__AFTERNIC_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class rwhois_handler
+class afternic_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
-						'network:Organization-Name:' => 'owner.name',
-						'network:Organization;I:' => 'owner.organization',
-						'network:Organization-City:' => 'owner.address.city',
-						'network:Organization-Zip:' => 'owner.address.pcode',
-						'network:Organization-Country:' => 'owner.address.country',
-						'network:IP-Network-Block:' => 'network.inetnum',
-						'network:IP-Network:' => 'network.inetnum',
-						'network:Network-Name:' => 'network.name',
-						'network:ID:' => 'network.handle',						
-						'network:Created:' => 'network.created',
-						'network:Updated:' => 'network.changed',
-						'network:Tech-Contact;I:' => 'tech.email',
-						'network:Admin-Contact;I:' => 'admin.email'
-						);
+                'owner' => 'Registrant:',
+                'admin' => 'Administrative Contact',
+                'tech' => 'Technical Contact',
+                'zone' => 'Zone Contact',
+                'domain.name' => 'Domain Name:',
+                'domain.changed' => 'Last updated on',
+                'domain.created' => 'Domain created on',
+                'domain.expires' => 'Domain expires on'
+		            );
 
-		$res = generic_parser_b($data_str, $items, 'Ymd', false);
-
-		unset($res['disclaimer']);
-		$res = array( 'regrinfo' => $res );
-		return $res;
+		return easy_parser($data_str, $items, 'dmy', false, false, true);
 		}
 	}
+
 ?>

@@ -52,35 +52,31 @@ class fastdomain_handler
                   'domain.status' => 'Status:'
 		              );
 
-                //print_r($data_str);
-                while (list($key, $val) = each($data_str))
-                        {
-                        $faststr = strpos($val, ' (FAST-');
-                        if($faststr)
-                                {
-                                $data_str[$key] = substr($val, 0, $faststr);
-                                }
-                        }
+		while (list($key, $val) = each($data_str))
+			{
+			$faststr = strpos($val, ' (FAST-');
+			if ($faststr)
+				$data_str[$key] = substr($val, 0, $faststr);
+			}
 
 		$r = easy_parser($data_str, $items, 'dmy', false, false, true);
 
-                if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
-			$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
-                if (isset($r['domain']['nserver']))
-                        {
-                        reset($r['domain']['nserver']);
-                        $endnserver = false;
-                        while (list($key, $val) = each($r['domain']['nserver']))
-                                {
-                                if($val == '=-=-=-=')
-                                        $endnserver = true;
-                                if($endnserver)
-                                        unset($r['domain']['nserver'][$key]);
-                                }
-                        }
-//                print_r($r);
-		return ($r);
+		if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
+		
+		$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
+		
+		if (isset($r['domain']['nserver']))
+			{
+			reset($r['domain']['nserver']);
+			$endnserver = false;
+			while (list($key, $val) = each($r['domain']['nserver']))
+				{
+				if ($val == '=-=-=-=')
+					unset($r['domain']['nserver'][$key]);
+				}
+			}
 
+		return ($r);
 		}
 	}
 ?>

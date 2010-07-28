@@ -105,6 +105,11 @@ class krnic_handler
 			$r['abuse'] = generic_parser_b($b['abuse'], $items, 'Ymd', false);
 
 		$r = format_dates($r, 'Ymd');
+		
+		$r = array( 'regrinfo' => $r );
+		$r['regyinfo']['type'] ='ip';
+		$r['regyinfo']['registrar'] = 'Korean Network Information Centre';
+
 		return ($r);
 		}
 

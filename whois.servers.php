@@ -45,7 +45,10 @@ $this->DATA = array(
 /* Non UTF-8 servers */
 
 $this->NON_UTF8 = array(
-	'whois.interdomain.net' => 1
+	'whois.interdomain.net' => 1,
+	'pt.whois-servers.net' => 1,
+	'is.whois-servers.net' => 1,
+	'whois.lacnic.net' => 1
 	);
 
 /* If whois Server needs any parameters, enter it here */

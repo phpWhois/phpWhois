@@ -40,7 +40,7 @@ class fm_handler
 
 		$items = array(
 				  'owner' => 'Registrant',
-                  'admin' => 'Administrative',
+                  'admin' => 'Admin',
                   'tech' => 'Technical',
                   'billing' => 'Billing',
                   'domain.nserver' => 'Name Servers:',
@@ -48,12 +48,17 @@ class fm_handler
                   'domain.expires' => 'Expires:',
                   'domain.changed' => 'Modified:',
                   'domain.status' => 'Status:',
-                  'domain.sponsor' => 'Registrar:'
+                  'domain.sponsor' => 'Registrar Name:'
                   );
 
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 		
-		$items = array( 'voice:' => 'phone' );
+		$items = array(
+						'phone number:' => 'phone',
+						'email address:' => 'email',
+						'fax number:' => 'fax',
+						'organisation:' => 'organization'
+						);
 
 		if (!empty($r['regrinfo']['domain']['created']))
 			{
