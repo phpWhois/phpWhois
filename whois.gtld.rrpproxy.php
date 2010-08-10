@@ -75,17 +75,17 @@ class rrpproxy_handler
                   'tech-phone:' => 'tech.phone',
                   'tech-fax:' => 'tech.fax',
                   'tech-email:' => 'tech.email',
-                  'billing-nom.contact:' => 'bill.handle',
-                  'billing-fname:' => 'bill.name.first',
-                  'billing-lname:' => 'bill.name.last',
-                  'billing-organization:' => 'bill.organization',
-                  'billing-street:' => 'bill.address.street',
-                  'billing-city:' => 'bill.address.city',
-                  'billing-zip:' => 'bill.address.pcode',
-                  'billing-country:' => 'bill.address.country',
-                  'billing-phone:' => 'bill.phone',
-                  'billing-fax:' => 'bill.fax',
-                  'billing-email:' => 'bill.email'
+                  'billing-nom.contact:' => 'billing.handle',
+                  'billing-fname:' => 'billing.name.first',
+                  'billing-lname:' => 'billing.name.last',
+                  'billing-organization:' => 'billing.organization',
+                  'billing-street:' => 'billing.address.street',
+                  'billing-city:' => 'billing.address.city',
+                  'billing-zip:' => 'billing.address.pcode',
+                  'billing-country:' => 'billing.address.country',
+                  'billing-phone:' => 'billing.phone',
+                  'billing-fax:' => 'billing.fax',
+                  'billing-email:' => 'billing.email'
 		              );
 
 		$r = generic_parser_b($data_str, $items);
