@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 $lines = file('./test.txt');
 $domains = array();
 
-foreach ($lines as $key => $line)
+foreach ($lines as $line)
 	{ 
 	$pos = strpos($line,'/');
 	
@@ -39,13 +39,22 @@ foreach ($lines as $key => $line)
 	
 	$line = trim($line);
 	
-	if ($line=='') continue;
+	if ($line == '') continue;
 	
 	$parts = explode(' ',str_replace("\t",' ',$line));
+	$key = $parts[0];
 	
-	for ($i=1;$i<count($parts);$i++)	
-		if ($parts[$i]!='')
-			$domains[] = $parts[$i];
+	for ($i=1; $i<count($parts); $i++)	
+		if ($parts[$i] != '')
+			{
+			if ($key)
+				{
+				$domains[$key] = $parts[$i];
+				$key = false;
+				}
+			else
+				$domains[] = $parts[$i];
+			}
 	}
 
 // Load previous results
@@ -60,6 +69,13 @@ else
 	fclose($fp);
 	}
 
+// Specific test ?
+
+if (!empty($argv[1]) && isset($domains[$argv[1]]))
+	{
+	$domains = array($domains[$argv[1]]);
+	}
+
 // Test domains
 
 include('whois.main.php');
@@ -68,7 +84,7 @@ $whois = new Whois();
 
 set_file_buffer(STDIN, 0);
 
-foreach ($domains as $key => $domain)
+foreach ($domains as $domain)
 	{
 	echo "\nTesting $domain ---------------------------------\n";
 	$result = $whois->Lookup($domain);
