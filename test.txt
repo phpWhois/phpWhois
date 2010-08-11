@@ -54,7 +54,7 @@ afternic	buydomains.com
 domainpeople	domainpeople.com
 dotster		dotster.com namesdirect.com dotregistrar.com
 dreamhost	dreamhost.com
-encirca		nic.jobs
+encirca		encirca.com
 enom		enom.com
 fabulous	fabulous.com
 fastdomain	fastdomain.com

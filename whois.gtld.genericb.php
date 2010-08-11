@@ -25,22 +25,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* neulevel.whois        1.0        by David Saez <david @ ols . es>  */
-
-if(!defined('__US_HANDLER__')) define('__US_HANDLER__',1);
+if (!defined('__GENERICB_HANDLER__'))
+	define('__GENERICB_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class us_handler
+class genericb_handler
 	{
-	function parse ($data_str, $query)
+	function parse($data_str, $query)
 		{
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], false, '-md--y');
-		$r['regyinfo'] = array(
-								'referrer'=>'http://www.neustar.us',
-								'registrar' => 'NEUSTAR INC.'
-							);
-		return($r);
+		return generic_parser_b($data_str);
 		}
 	}
 ?>

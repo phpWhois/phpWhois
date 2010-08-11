@@ -1,3 +1,10 @@
+2010/08/10
+		- joined common whois field list
+		- some minor fixes
+		- testsuite can now test specific handlers
+		- fixed iana handler
+		- improved generic_parser_b
+
 2010/07/27
 		- better AS support
 		- ip handlers rewritten

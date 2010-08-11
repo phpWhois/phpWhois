@@ -43,7 +43,6 @@ require_once('whois.parser.php');
 
 class de_handler
 	{
-
 	function parse($data_str, $query)
 		{
 
@@ -61,12 +60,8 @@ class de_handler
 		            );
 
 		$extra = array(
-			'address:' => 'address.street.',
 			'city:' => 'address.city',
 			'pcode:' => 'address.pcode',
-			'country:' => 'address.country',
-			'organisation:' => 'organization',
-			'name:' => 'name',
 			'remarks:' => '',
 			'sip:' => 'sip',
 			'type:'	=> ''

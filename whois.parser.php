@@ -142,9 +142,202 @@ return $blocks;
 
 //-------------------------------------------------------------------------
 
-function generic_parser_b ( $rawdata, $items, $dateformat='mdy', $hasreg=true, $scanall=false )
-
+function generic_parser_b ( $rawdata, $items = false, $dateformat='mdy', $hasreg=true, $scanall=false )
 {
+if (!$items)
+	$items = array(
+				'Domain Name:' => 'domain.name',
+				'Domain ID:' => 'domain.handle',
+				'Sponsoring Registrar:' => 'domain.sponsor',
+				'Registrar ID:' => 'domain.sponsor',
+				'Domain Status:' => 'domain.status.',
+				'Status:' => 'domain.status.',
+				'Name Server:' => 'domain.nserver.',
+				'Nameservers:' => 'domain.nserver.',
+				'Maintainer:' => 'domain.referer',
+				 
+				'Domain Registration Date:' => 'domain.created',
+				'Domain Create Date:' => 'domain.created',
+				'Domain Expiration Date:' => 'domain.expires',
+				'Domain Last Updated Date:' => 'domain.changed',
+				'Creation Date:' => 'domain.created',
+				'Last Modification Date:' => 'domain.changed',
+				'Expiration Date:' => 'domain.expires',
+				'Created On:' => 'domain.created',
+                'Last Updated On:' => 'domain.changed',
+                'Expiration Date:' => 'domain.expires',
+				 
+				'Registrant ID:' => 'owner.handle',
+				'Registrant Name:' => 'owner.name',
+				'Registrant Organization:' => 'owner.organization',
+				'Registrant Address:' => 'owner.address.street.',
+				'Registrant Address1:' => 'owner.address.street.',
+				'Registrant Address2:' => 'owner.address.street.',
+				'Registrant Street:' => 'owner.address.street.',
+				'Registrant Street1:' => 'owner.address.street.',
+				'Registrant Street2:' => 'owner.address.street.',
+				'Registrant Street3:' => 'owner.address.street.',
+				'Registrant Postal Code:' => 'owner.address.pcode',
+				'Registrant City:' => 'owner.address.city',
+				'Registrant State/Province:' => 'owner.address.state',
+				'Registrant Country:' => 'owner.address.country',
+				'Registrant Country/Economy:' => 'owner.address.country',
+				'Registrant Phone Number:' => 'owner.phone',
+				'Registrant Phone:' => 'owner.phone',
+				'Registrant Facsimile Number:' => 'owner.fax',
+				'Registrant FAX:' => 'owner.fax',
+				'Registrant Email:' => 'owner.email',
+				'Registrant E-mail:' => 'owner.email',
+				
+				'Administrative Contact ID:' => 'admin.handle',
+				'Administrative Contact Name:' => 'admin.name',
+				'Administrative Contact Organization:' => 'admin.organization',
+				'Administrative Contact Address:' => 'admin.address.street.',
+				'Administrative Contact Address1:' => 'admin.address.street.',
+				'Administrative Contact Address2:' => 'admin.address.street.',
+				'Administrative Contact Postal Code:' => 'admin.address.pcode',
+				'Administrative Contact City:' => 'admin.address.city',
+				'Administrative Contact State/Province:' => 'admin.address.state',
+				'Administrative Contact Country:' => 'admin.address.country',
+				'Administrative Contact Phone Number:' => 'admin.phone',
+				'Administrative Contact Email:' => 'admin.email',
+				'Administrative Contact Facsimile Number:' => 'admin.fax',
+				'Administrative Contact Tel:' => 'admin.phone',
+				'Administrative Contact Fax:' => 'admin.fax',
+				'Administrative ID:' => 'admin.handle',
+				'Administrative Name:' => 'admin.name',
+				'Administrative Organization:' => 'admin.organization',
+				'Administrative Address:' => 'admin.address.street.',
+				'Administrative Address1:' => 'admin.address.street.',
+				'Administrative Address2:' => 'admin.address.street.',
+				'Administrative Postal Code:' => 'admin.address.pcode',
+				'Administrative City:' => 'admin.address.city',
+				'Administrative State/Province:' => 'admin.address.state',
+				'Administrative Country/Economy:' => 'admin.address.country',
+				'Administrative Phone:' => 'admin.phone',
+				'Administrative E-mail:' => 'admin.email',
+				'Administrative Facsimile Number:' => 'admin.fax',
+				'Administrative Tel:' => 'admin.phone',
+				'Administrative FAX:' => 'admin.fax',
+				'Admin ID:' => 'admin.handle',
+				'Admin Name:' => 'admin.name',
+				'Admin Organization:' => 'admin.organization',
+				'Admin Street:' => 'admin.address.street.',
+				'Admin Street1:' => 'admin.address.street.',
+				'Admin Street2:' => 'admin.address.street.',
+				'Admin Street3:' => 'admin.address.street.',
+				'Admin Address:' => 'admin.address.street.',
+				'Admin Address2:' => 'admin.address.street.',
+				'Admin Address3:' => 'admin.address.street.',
+				'Admin City:' => 'admin.address.city',
+				'Admin State/Province:' => 'admin.address.state',
+				'Admin Postal Code:' => 'admin.address.pcode',				  
+				'Admin Country:' => 'admin.address.country',
+				'Admin Country/Economy:' => 'admin.address.country',
+				'Admin Phone:' => 'admin.phone',
+				'Admin FAX:' => 'admin.fax',
+				'Admin Email:' => 'admin.email',
+				'Admin E-mail:' => 'admin.email',
+				
+				'Technical Contact ID:' => 'tech.handle',
+				'Technical Contact Name:' => 'tech.name',
+				'Technical Contact Organization:' => 'tech.organization',
+				'Technical Contact Address:' => 'tech.address.street.',
+				'Technical Contact Address1:' => 'tech.address.street.',
+				'Technical Contact Address2:' => 'tech.address.street.',
+				'Technical Contact Postal Code:' => 'tech.address.pcode',
+				'Technical Contact City:' => 'tech.address.city',
+				'Technical Contact State/Province:' => 'tech.address.state',
+				'Technical Contact Country:' => 'tech.address.country',
+				'Technical Contact Phone Number:' => 'tech.phone',
+				'Technical Contact Facsimile Number:' => 'tech.fax',
+				'Technical Contact Phone:' => 'tech.phone',
+				'Technical Contact Fax:' => 'tech.fax',
+				'Technical Contact Email:' => 'tech.email',
+				'Technical ID:' => 'tech.handle',
+				'Technical Name:' => 'tech.name',
+				'Technical Organization:' => 'tech.organization',
+				'Technical Address:' => 'tech.address.street.',
+				'Technical Address1:' => 'tech.address.street.',
+				'Technical Address2:' => 'tech.address.street.',
+				'Technical Postal Code:' => 'tech.address.pcode',
+				'Technical City:' => 'tech.address.city',
+				'Technical State/Province:' => 'tech.address.state',
+				'Technical Country/Economy:' => 'tech.address.country',
+				'Technical Phone Number:' => 'tech.phone',
+				'Technical Facsimile Number:' => 'tech.fax',
+				'Technical Phone:' => 'tech.phone',
+				'Technical Fax:' => 'tech.fax',
+				'Technical FAX:' => 'tech.fax',
+				'Technical E-mail:' => 'tech.email',
+				'Tech ID:' => 'tech.handle',
+				'Tech Name:' => 'tech.name',
+				'Tech Organization:' => 'tech.organization',
+				'Tech Address:' => 'tech.address.street.',
+				'Tech Address2:' => 'tech.address.street.',
+				'Tech Address3:' => 'tech.address.street.',
+				'Tech Street:' => 'tech.address.street.',
+				'Tech Street1:' => 'tech.address.street.',
+				'Tech Street2:' => 'tech.address.street.',
+				'Tech Street3:' => 'tech.address.street.',
+				'Tech City:' => 'tech.address.city',
+				'Tech Postal Code:' => 'tech.address.pcode',
+				'Tech State/Province:' => 'tech.address.state',
+				'Tech Country:' => 'tech.address.country',
+				'Tech Country/Economy:' => 'tech.address.country',
+				'Tech Phone:' => 'tech.phone',
+				'Tech FAX:' => 'tech.fax',
+				'Tech Email:' => 'tech.email',
+				'Tech E-mail:' => 'tech.email',
+				
+				'Billing Contact ID:' => 'billing.handle',
+				'Billing Contact Name:' => 'billing.name',
+				'Billing Contact Organization:' => 'billing.organization',
+				'Billing Contact Address1:' => 'billing.address.street.',
+				'Billing Contact Address2:' => 'billing.address.street.',
+				'Billing Contact Postal Code:' => 'billing.address.pcode',
+				'Billing Contact City:' => 'billing.address.city',
+				'Billing Contact State/Province:' => 'billing.address.state',
+				'Billing Contact Country:' => 'billing.address.country',
+				'Billing Contact Phone Number:' => 'billing.phone',
+				'Billing Contact Facsimile Number:' => 'billing.fax',
+				'Billing Contact Email:' => 'billing.email',
+				'Billing ID:' => 'billing.handle',
+				'Billing Name:' => 'billing.name',
+				'Billing Organization:' => 'billing.organization',
+				'Billing Address:' => 'billing.address.street.',
+				'Billing Address1:' => 'billing.address.street.',
+				'Billing Address2:' => 'billing.address.street.',
+				'Billing Address3:' => 'billing.address.street.',
+				'Billing Street:' => 'billing.address.street.',
+				'Billing Street1:' => 'billing.address.street.',
+				'Billing Street2:' => 'billing.address.street.',
+				'Billing Street3:' => 'billing.address.street.',
+				'Billing City:' => 'billing.address.city',
+				'Billing Postal Code:' => 'billing.address.pcode',
+				'Billing State/Province:' => 'billing.address.state',
+				'Billing Country:' => 'billing.address.country',
+				'Billing Country/Economy:' => 'billing.address.country',
+				'Billing Phone:' => 'billing.phone',
+				'Billing Fax:' => 'billing.fax',
+				'Billing FAX:' => 'billing.fax',
+				'Billing Email:' => 'billing.email',
+				'Billing E-mail:' => 'billing.email',
+				
+				'Zone ID:' => 'zone.handle',
+                'Zone Organization:' => 'zone.organization',
+                'Zone Name:' => 'zone.name',
+                'Zone Address:' => 'zone.address.street.',
+                'Zone Address 2:' => 'zone.address.street.',
+                'Zone City:' => 'zone.address.city',
+                'Zone State/Province:' => 'zone.address.state',
+                'Zone Postal Code:' => 'zone.address.pcode',
+                'Zone Country:' => 'zone.address.country',
+                'Zone Phone Number:' => 'zone.phone',
+                'Zone Fax Number:' => 'zone.fax',
+                'Zone Email:' => 'zone.email'
+		            );
+
 $r = '';
 $disok = true;
 
@@ -202,34 +395,32 @@ return $r;
 
 function getvarname ( $vdef )
 {
-$parts=explode(".",$vdef);
-$var="";
+$parts = explode('.',$vdef);
+$var = '';
 
-while (list($fn,$mn)=each($parts))
-       if ($mn=="")
-            $var=$var."[]";
-       else $var=$var."[\"".$mn."\"]";
+foreach($parts as $mn)
+	if ($mn == '') $var = $var.'[]';
+	else $var = $var.'["'.$mn.'"]';
 
 return $var;
 }
 
 //-------------------------------------------------------------------------
 
-function get_blocks ( $rawdata, $items, $partial_match = false )
+function get_blocks ( $rawdata, $items, $partial_match = false, $def_block = false )
 {
 
 $r = array();
-$endtag='';
+$endtag = '';
 
 while (list($key,$val) = each($rawdata))
 	{
 	$val = trim($val);
 	if ($val == '') continue;
 
-	$found = false;
-	reset($items);
+	$var = $found = false;
 
-	while (list($field, $match) = each($items))
+	foreach ($items as $field => $match)
 		{
 		$pos = strpos($val,$match);
 
@@ -250,18 +441,23 @@ while (list($key,$val) = each($rawdata))
 				$found = true;
 				$endtag = $last;
 				$line = $val;
-				break;
 				}
 			else
 				{
-				$var = getvarname(strtok($field,'#'));				
+				$var = getvarname(strtok($field,'#'));			
 				$itm = trim(substr($val,$pos+strlen($match)));
 				eval('$r'.$var.'=$itm;');
 				}
+
+			break;
 			}
 		}
 
-	if (!$found) continue;
+	if (!$found)
+		{
+		if (!$var && $def_block) $r[$def_block][] = $val;
+		continue;
+		}
 
 	$block = array();
 
@@ -287,10 +483,9 @@ while (list($key,$val) = each($rawdata))
 		if ($endtag == '' || $partial_match || $last == $endtag)
 			{
 			//Check if this line starts another block
-			reset($items);
 			$et = false;
 			
-			while (list($field, $match) = each($items)) 
+			foreach ($items as $field => $match)
 				{
 				$pos = strpos($val,$match);
 				
@@ -309,14 +504,12 @@ while (list($key,$val) = each($rawdata))
 				}
 			}
 			
-		$block[]=$val;
+		$block[] = $val;
 		}
-
-	reset($items);
 
 	if (empty($block)) continue;
 
-	while (list($field, $match)=each($items))
+	foreach ($items as $field => $match)
 		{
 		$pos = strpos($line,$match);
 		
@@ -334,9 +527,10 @@ return $r;
 //-------------------------------------------------------------------------
 
 function easy_parser($data_str, $items, $date_format, $translate = false , 
-					 $has_org = false, $partial_match = false )
+					 $has_org = false, $partial_match = false,
+					 $def_block = false )
 {
-$r = get_blocks($data_str, $items, $partial_match);
+$r = get_blocks($data_str, $items, $partial_match, $def_block);
 $r = get_contacts($r, $translate, $has_org);
 format_dates($r, $date_format);
 return $r;
@@ -375,6 +569,7 @@ if (!is_array($array))
 $items = array (
 		'fax..:' => 'fax',
 		'fax.' => 'fax',
+		'fax-no:' => 'fax',
 		'fax -' => 'fax',
 		'fax-' => 'fax',
 		'fax::'   => 'fax',
@@ -391,14 +586,15 @@ $items = array (
 		'email:' => 'email',
 		'e-mail:' => 'email',
 		'company name:' => 'organization',
+		'organisation:' => 'organization',
 		'first name:' => 'name.first',
 		'last name:' => 'name.last',
 		'street:' => 'address.street',
+		'address:' => 'address.street.',
 		'language:' => '',
 		'location:' => 'address.city',
 		'country:' => 'address.country',
 		'name:' => 'name',
-		'address:' => 'address.',
 		'last modified:' => 'changed'	
 		);
 
@@ -538,26 +734,26 @@ function format_dates (&$res,$format='mdy')
 {
 if (!is_array($res)) return $res;
 
-reset($res);
-
-while (list($key, $val) = each($res))
+foreach ($res as $key => $val)
 	{
 	if (is_array($val))
 		{
 		if (!is_numeric($key) && ($key=='expires' || $key=='created' || $key=='changed'))
 			{
-			$res[$key]=get_date($val[0],$format);
+			$d = get_date($val[0],$format);
+			if ($d) $res[$key] = $d;
 			}
 		else
 			{
-			$res[$key]=format_dates($val,$format);
+			$res[$key] = format_dates($val,$format);
 			}
 		}
 	else
 		{
 		if (!is_numeric($key) && ($key=='expires' || $key=='created' || $key=='changed'))
 			{
-			$res[$key]=get_date($val,$format);			
+			$d = get_date($val,$format);
+			if ($d) $res[$key] = $d;		
 			}
 		}
 	}
@@ -588,6 +784,7 @@ $date = str_replace('/',' ',$date);
 $date = str_replace("\t",' ',$date);
 
 $parts = explode(' ',$date);
+$res = false;
 
 if ((strlen($parts[0]) == 8 || count($parts) == 1) && is_numeric($parts[0]))
 	{
@@ -622,6 +819,8 @@ else
 		$i++;
 		}
 	}
+
+if (!$res) return $date;
 
 $ok = false;
 

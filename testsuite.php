@@ -111,22 +111,27 @@ foreach ($domains as $domain)
 		unset($result['regrinfo']['disclaimer']);
 		unset($results[$domain]['regrinfo']['disclaimer']);
 		
-		$diff = array_diff_assoc_recursive($result,$results[$domain]);
-		
-		if (is_array($diff))
-			{
-			print_r($diff);
-			$res = get_answer("Accept differences for $domain");
-		
-			if ($res)
-				{
-				// Add as it is
-				$results[$domain] = $result;
-				save_results();
-				}
-			}
+		if (empty($result))
+			echo "!! empty result\n";
 		else
-			echo "Handler for domain $domain gives same results as before ...\n";
+			{
+			$diff = array_diff_assoc_recursive($result,$results[$domain]);
+			
+			if (is_array($diff))
+				{
+				print_r($diff);
+				$res = get_answer("Accept differences for $domain");
+			
+				if ($res)
+					{
+					// Add as it is
+					$results[$domain] = $result;
+					save_results();
+					}
+				}
+			else
+				echo "Handler for domain $domain gives same results as before ...\n";
+			}
 		}
 	}
 

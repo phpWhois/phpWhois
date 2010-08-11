@@ -52,8 +52,6 @@ class apnic_handler
 							  'tech-c' => 'tech'
 							  );
 		
-		//$r = generic_parser_a($data_str,$translate,$contacts,'network','Ymd');
-		
 		$blocks = generic_parser_a_blocks($data_str,$translate,$disclaimer);
 
 		if (isset($disclaimer) && is_array($disclaimer)) $r['disclaimer'] = $disclaimer;
@@ -85,7 +83,7 @@ class apnic_handler
 					else
 						$blk = $rb[$key];
 			
-					$blk = strtoupper(strtok($blk,' '));
+					//$blk = strtoupper(strtok($blk,' '));
 					if (isset($blocks[$blk])) $r[$val] = $blocks[$blk];
 					unset($rb[$key]); 
 					}

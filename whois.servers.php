@@ -77,7 +77,7 @@ $this->WHOIS_SPECIAL = array(
 		'bz'	 => 'whois2.afilias-grs.net',		
 		'cy'	 => '',
 		'es'	 => '',
-		'fj'	 => 'whois.usp.ac.fj',
+		//'fj'	 => 'whois.usp.ac.fj',
 		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',		
 		'jobs'	 => 'jobswhois.verisign-grs.com',				
 		'la'	 => 'whois.centralnic.net',		
@@ -134,7 +134,10 @@ $this->WHOIS_GTLD_HANDLER = array(
 		'whois.psi-usa.info'				=> 'psiusa',
 		'whois.www.tv'						=> 'tvcorp',
 		'whois.tucows.com'					=> 'opensrs',
-		'whois.35.com'						=> 'onlinenic'
+		'whois.35.com'						=> 'onlinenic',
+		'whois.nominalia.com'				=> 'genericb',
+		'whois.encirca.com'					=> 'genericb',
+		'whois.corenic.net'					=> 'genericb'
 		);
 		
 /* Non ICANN TLD's */

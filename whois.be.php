@@ -55,7 +55,6 @@ class be_handler
 		if (isset($r['regrinfo']['domain']['name']))
 			{
 			$r['regrinfo']['registered'] = 'yes';
-			
 			$r['regrinfo'] = get_contacts($r['regrinfo']);
 			
 			if (isset($r['regrinfo']['agent']))

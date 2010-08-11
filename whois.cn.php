@@ -40,7 +40,8 @@ class cn_handler
 		{
 		$items = array(
                 'Domain Name:' => 'domain.name',
-                'Domain Status:' => 'domain.status',
+                'Domain Status:' => 'domain.status.',
+                'ROID:' => 'domain.handle',
                 'Name Server:' => 'domain.nserver.',
                 'Registration Date:' => 'domain.created',
                 'Expiration Date:' => 'domain.expires',
@@ -83,11 +84,11 @@ class cn_handler
                 'Billing Fax:' => 'billing.fax'
 		            );
 
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 		$r['regyinfo'] = array(
                 'referrer' => 'http://www.cnnic.net.cn',
                 'registrar' => 'China NIC'
                 );
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 		return ($r);
 		}
 	}
