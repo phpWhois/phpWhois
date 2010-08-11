@@ -4,6 +4,7 @@
 		- testsuite can now test specific handlers
 		- fixed iana handler
 		- improved generic_parser_b
+		- removed .es handler
 
 2010/07/27
 		- better AS support
