@@ -1,3 +1,7 @@
+2010/08/23
+		- improved extra whois parameters for better
+          support of .jp whois
+
 2010/08/10
 		- joined common whois field list
 		- some minor fixes

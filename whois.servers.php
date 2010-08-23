@@ -54,9 +54,10 @@ $this->NON_UTF8 = array(
 /* If whois Server needs any parameters, enter it here */
 
 $this->WHOIS_PARAM = array(
-	'com.whois-servers.net' => 'domain =',
-	'net.whois-servers.net' => 'domain =',
-	'de.whois-servers.net'	=> '-T dn,ace '
+	'com.whois-servers.net' => 'domain =$',
+	'net.whois-servers.net' => 'domain =$',
+	'de.whois-servers.net'	=> '-T dn,ace $',
+	'jp.whois-servers.net'	=> '$/e'
 	);
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
