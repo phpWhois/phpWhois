@@ -21,6 +21,7 @@ ie		domainregistry.ie
 in		registry.in
 is		isnic.is
 it		nic.it
+jp		google.co.jp jprs.jp
 li		nic.li
 lt      domreg.lt
 lu		dns.lu

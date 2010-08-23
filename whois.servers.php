@@ -57,7 +57,7 @@ $this->WHOIS_PARAM = array(
 	'com.whois-servers.net' => 'domain =$',
 	'net.whois-servers.net' => 'domain =$',
 	'de.whois-servers.net'	=> '-T dn,ace $',
-	'jp.whois-servers.net'	=> '$/e'
+	'jp.whois-servers.net'	=> 'DOM $/e'
 	);
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
