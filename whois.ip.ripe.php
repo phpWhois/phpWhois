@@ -34,7 +34,6 @@ if (!defined('__RIPE_HANDLER__'))
 
 class ripe_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$translate = array(
@@ -50,6 +49,8 @@ class ripe_handler
 						'admin-c' => 'admin',
 						'tech-c' => 'tech'
 		                  );
+		                  
+		if (!empty($data_str['rawdata'])) $data_str = $data_str['rawdata'];
 
 		$r = generic_parser_a($data_str, $translate, $contacts, 'network');
 

@@ -3,6 +3,7 @@
           support of .jp whois
 		- added handler for .jp
 		- added handler for .co
+		- added ipv6 support
 
 2010/08/10
 		- joined common whois field list
