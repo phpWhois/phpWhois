@@ -267,32 +267,9 @@ class Whois extends WhoisClient
 		}
 
 	/*
-	 *  Checks dns reverse records on win platform
-	 */
-
-	function checkdnsrr_win($hostName, $recType = '')
-		{
-		if (!empty($hostName))
-			{
-			if ($recType == '')	$recType = 'MX';
-			
-			exec("nslookup -type=$recType $hostName", $result);
-			// check each line to find the one that starts with the host
-			// name. If it exists thenthe function succeeded.
-			foreach($result as $line)
-				{
-				if (eregi("^$hostName", $line))
-					return true;
-				}
-			// otherwise there was no mail handler for the domain
-			return false;
-			}
-		return false;
-		}
-
-	/*
 	 *  Fix and/or add name server information
 	 */
+	 
 	function FixResult(&$result, $domain)
 		{
 		// Add usual fields
@@ -302,12 +279,7 @@ class Whois extends WhoisClient
 
 		if (!isset($result['regrinfo']['registered']))
 			{
-			if ($this->windows)
-				$has_ns = $this->checkdnsrr_win($domain, 'NS');
-			else
-				$has_ns = checkdnsrr($domain, 'NS');
-
-			if ($has_ns)
+			if (function_exists('checkdnsrr') && checkdnsrr($domain, 'NS'))
 				$result['regrinfo']['registered'] = 'yes';
 			else
 				$result['regrinfo']['registered'] = 'unknown';

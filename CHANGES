@@ -1,3 +1,6 @@
+2010/08/24
+		- removed dangerous exec call
+
 2010/08/23
 		- improved extra whois parameters for better
           support of .jp whois
