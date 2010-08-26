@@ -107,11 +107,20 @@ class Whois extends WhoisClient
 			{
 			// IPv4 Prepare to do lookup via the 'ip' handler
 			$ip = @gethostbyname($query);
-			$this->Query['server'] = 'whois.arin.net';
-			$this->Query['args'] = "n $ip";
+			
+			if (isset($this->WHOIS_SPECIAL['ip']))
+				{
+				$this->Query['server'] = $this->WHOIS_SPECIAL['ip'];
+				$this->Query['args'] = $ip;
+				}
+			else
+				{
+				$this->Query['server'] = 'whois.arin.net';
+				$this->Query['args'] = "n $ip";
+				$this->Query['file'] = 'whois.ip.php';
+				$this->Query['handler'] = 'ip';
+				}
 			$this->Query['host_ip'] = $ip;
-			$this->Query['file'] = 'whois.ip.php';
-			$this->Query['handler'] = 'ip';
 			$this->Query['query'] = $ip;
 			$this->Query['tld'] = 'ip';
 			$this->Query['host_name'] = @gethostbyaddr($ip);
@@ -122,9 +131,17 @@ class Whois extends WhoisClient
 			{
 			// IPv6 AS Prepare to do lookup via the 'ip' handler
 			$ip = @gethostbyname($query);
-			$this->Query['server'] = 'whois.ripe.net';
-			$this->Query['file'] = 'whois.ip.ripe.php';
-			$this->Query['handler'] = 'ripe';
+
+			if (isset($this->WHOIS_SPECIAL['ip']))
+				{
+				$this->Query['server'] = $this->WHOIS_SPECIAL['ip'];
+				}
+			else
+				{
+				$this->Query['server'] = 'whois.ripe.net';
+				$this->Query['file'] = 'whois.ip.ripe.php';
+				$this->Query['handler'] = 'ripe';
+				}
 			$this->Query['query'] = $ip;
 			$this->Query['tld'] = 'ip';
 			return $this->GetData('',$this->deep_whois);

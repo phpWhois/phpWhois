@@ -1,3 +1,6 @@
+2010/08/26
+		- UseServer can now be used for ip addresses
+
 2010/08/24
 		- removed dangerous exec call
 

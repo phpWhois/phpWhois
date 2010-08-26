@@ -94,7 +94,7 @@ Using special whois server
 
 Some registrars can give special access to registered whois gateways
 in order to have more fine control against abusing the whois services.
-The currently know whois services that offer special acccess are:
+The currently known whois services that offer special acccess are:
 
 - ripe
 
@@ -137,6 +137,21 @@ information) using this:
 
   $whois = new Whois();
   $whois->UseServer('au','whois-check.ausregistry.net.au');
+
+or:
+
+  $whois = new Whois();
+  $whois->UseServer('be','whois.tucows.com');
+
+to avoid the restrictions imposed by the .be whois server
+
+or:
+
+  $whois = new Whois();
+  $whois->UseServer('ip','whois.apnic.net');
+
+to lookup an ip address at specific whois server (but loosing the
+ability to get the results parsed by the appropiate handler)
 
 UseServer can be called as many times as necessary. Please note that
 if there is a handler for that domain it will also be called but
