@@ -40,6 +40,7 @@ class si_handler
         {
 		$translate = array(
 			'nic-hdl' => 'handle',
+			'nameserver' => 'nserver'
 			);
 
 		$contacts = array(

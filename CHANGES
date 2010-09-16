@@ -1,3 +1,6 @@
+2010/09/16
+		- fixed .si handler
+
 2010/08/26
 		- UseServer can now be used for ip addresses
 
