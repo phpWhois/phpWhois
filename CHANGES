@@ -1,3 +1,6 @@
+2010/09/20
+		- provided default object data for unsupported domains
+
 2010/09/16
 		- fixed .si handler
 

@@ -195,14 +195,8 @@ class Whois extends WhoisClient
 				{
 				$val = $special_tlds[$tld];
 				
-				if ($val == '')
-					{
-					unset($this->Query['server']);
-					$this->Query['status'] = 'error';
-					$this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
-					return ;
-					}
-					
+				if ($val == '') return $this->Unknown();
+
 				$domain = substr($query, 0,  - strlen($tld) - 1);
 				$val = str_replace('{domain}', $domain, $val);
 				$server = str_replace('{tld}', $tld, $val);
@@ -277,12 +271,29 @@ class Whois extends WhoisClient
 			}
 
 		// If tld not known, and domain not in DNS, return error
-		unset($this->Query['server']);
-		$this->Query['status'] = 'error';
-		$this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
-		return ;
+		return $this->Unknown();
 		}
 
+	/* Unsupported domains */
+
+	function Unknown()
+		{
+		unset($this->Query['server']);
+		$this->Query['status'] = 'error';
+		$result['rawdata'][] = $this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
+		
+		if (function_exists('dns_get_record'))
+			{
+			$ns = dns_get_record($this->Query['query'],DNS_NS);
+			$nserver = array();
+			foreach($ns as $row) $nserver[] = $row['target'];
+			$result['regrinfo']['domain']['nserver'] = $nserver;
+			}
+		
+		$this->FixResult($result, $this->Query['query']);	
+		return $result;
+		}
+	
 	/*
 	 *  Fix and/or add name server information
 	 */
