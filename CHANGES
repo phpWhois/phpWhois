@@ -1,4 +1,8 @@
+2010/11/05
+		- added support for .ke domains
+
 2010/09/20
+		- released version 4.2.0
 		- provided default object data for unsupported domains
 
 2010/09/16
