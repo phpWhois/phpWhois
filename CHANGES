@@ -1,3 +1,6 @@
+2010/11/22
+		- added handler for corporatedomains (Kyle Brost)
+
 2010/11/05
 		- added support for .ke domains
 

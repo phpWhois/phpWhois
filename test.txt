@@ -87,6 +87,7 @@ namevault	namevault.com
 tmagnic     antiquea.com
 tvcorp		www.tv
 wwdomains	wildwestdomains.com
+corporatedomains	cscglobal.com
 
 // Other
 
