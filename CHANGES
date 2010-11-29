@@ -1,3 +1,6 @@
+2010/11/29
+		- fixed .de handler
+
 2010/11/22
 		- added handler for corporatedomains (Kyle Brost)
 

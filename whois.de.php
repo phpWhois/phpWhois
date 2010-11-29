@@ -74,13 +74,15 @@ class de_handler
                   'referrer' => 'http://www.denic.de/'
                   );
 
-		if (isset($r['regrinfo']['domain']))
+		 if (!isset($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == "free")
+			{
+            $r['regrinfo']['registered'] = 'no';
+            }
+         else
 			{
 			$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
 			$r['regrinfo']['registered'] = 'yes';
 			}
-		else
-			$r['regrinfo']['registered'] = 'no';
 
 		return $r;
 		}
