@@ -1,3 +1,6 @@
+2010/12/03
+		- fixed .pl handler
+
 2010/11/29
 		- fixed .de handler
 

@@ -36,7 +36,7 @@ class pl_handler
 		{
 		$items = array(
                 	'created:' 				=> 'domain.created',
-                	'last modified'			=> 'domain.changed',
+                	'last modified:'		=> 'domain.changed',
                 	'REGISTRAR:'			=> 'domain.sponsor',
                 	"registrant's handle:"	=> 'owner.handle',
                 	
