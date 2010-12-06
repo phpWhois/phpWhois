@@ -1,3 +1,6 @@
+2010/12/06
+		- fixed .ca handler
+
 2010/12/03
 		- fixed .pl handler
 

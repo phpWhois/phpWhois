@@ -64,7 +64,7 @@ class ca_handler
                   'referrer' => 'http://www.cira.ca/'
                   );		
 		
-		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'AVAIL')
+		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'available')
 			$r['regrinfo']['registered'] = 'no';
 		else
 			$r['regrinfo']['registered'] = 'yes';
