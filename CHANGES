@@ -1,3 +1,7 @@
+2011/01/17
+		- fixed .co handler (bug #3159317)
+		- fixed .ca handler (bug #3141475)
+
 2010/12/06
 		- fixed .ca handler
 

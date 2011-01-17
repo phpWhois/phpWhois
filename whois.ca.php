@@ -43,11 +43,12 @@ class ca_handler
 						'owner'	=> 'Registrant:',
 						'admin'	=> 'Administrative contact:',
 						'tech'	=> 'Technical contact:',
+						'domain.sponsor' => 'Registrar:',
 						'domain.nserver' => 'Name servers:',
 						'domain.status'	=> 'Domain status:',
-						'domain.created' => 'Approval date:',
-						'domain.expires' => 'Renewal date:',
-						'domain.changed' => 'Name servers last changed:'
+						'domain.created' => 'Creation date:',
+						'domain.expires' => 'Expiry date:',
+						'domain.changed' => 'Updated date:'
 						);
 
 		$extra = array(
@@ -58,6 +59,12 @@ class ca_handler
 						);
 
 		$r['regrinfo'] = easy_parser($data_str['rawdata'],$items,'ymd',$extra);
+
+		if (!empty($r['regrinfo']['domain']['sponsor']))
+			{
+			list($v,$reg) = explode(':',$r['regrinfo']['domain']['sponsor'][0]);
+			$r['regrinfo']['domain']['sponsor'] = trim($reg);
+			}
 
 		$r['regyinfo'] = array(
                   'registrar' => 'CIRA',
