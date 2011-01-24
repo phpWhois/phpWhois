@@ -1,3 +1,6 @@
+2011/01/24
+		- fixed .pe server (bug #3164251)
+
 2011/01/17
 		- fixed .co handler (bug #3159317)
 		- fixed .ca handler (bug #3141475)

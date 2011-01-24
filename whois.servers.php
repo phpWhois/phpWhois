@@ -90,7 +90,7 @@ $this->WHOIS_SPECIAL = array(
 		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.ms',
 		'mt'	 => 'http://www.um.edu.mt/cgi-bin/nic/whois?domain={domain}.mt',
 		'ly'	 => 'whois.nic.ly',
-		'pe'	 => 'http://nic.pe/detpublic.php?decid=B&ndom={domain}.pe',
+		'pe'	 => 'kero.rcp.net.pe',
 		'pr'	 => 'whois.uprr.pr',
 		'pro'	 => 'whois.registry.pro',		
 		'sc'     => 'whois2.afilias-grs.net',		
