@@ -49,7 +49,7 @@ class se_handler
                     'holder:' => 'owner.handle'
                     );
 
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'mdy', false);
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd', false);
 		
 		$r['regrinfo']['registered'] = isset($r['regrinfo']['domain']['name']) ? 'yes' : 'no';
 

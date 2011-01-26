@@ -1,3 +1,6 @@
+2011/01/26
+		- fixed .se handler (bug #3165639)
+
 2011/01/24
 		- fixed .pe server (bug #3164251)
 
