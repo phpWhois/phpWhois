@@ -4,6 +4,8 @@
 		- fixed .eu hanlder (bug #3297823)
 		- fixed .ae handler (bug #3181964)
 		- fixed .uk handler (partial patch # 3314417)
+		- fixed .ru handler (bug #3178123)
+		- added handler for .ir
 
 2011/01/26
 		- fixed .se handler (bug #3165639)

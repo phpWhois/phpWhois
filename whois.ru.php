@@ -53,6 +53,9 @@ class ru_handler
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'dmy');
 
+		if (empty($r['regrinfo']['domain']['status']))
+			$r['regrinfo']['registered'] = 'no';
+
 		$r['regyinfo'] = array(
                             'referrer' => 'http://www.ripn.net',
                             'registrar' => 'RUCENTER-REG-RIPN'

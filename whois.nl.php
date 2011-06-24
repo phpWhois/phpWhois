@@ -49,8 +49,7 @@ class nl_handler
                   'domain.sponsor' => 'Record maintained:',
                   'owner' => 'Registrar:',
                   'admin' => 'Administrative contact:',
-                  'tech' => 'Technical contact(s):',
-                  'zone' => 'Registrar:'
+                  'tech' => 'Technical contact(s):'
 		            );
 		
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);		
@@ -77,7 +76,6 @@ class nl_handler
 		
 		$r['regrinfo']['registered'] = 'yes';
 		format_dates($r, 'dmy');
-		
 		return ($r);
 		}
 		
