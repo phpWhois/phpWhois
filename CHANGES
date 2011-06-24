@@ -1,3 +1,10 @@
+2011/06/24
+		- fixed .be handler (bug #3307363)
+		- fixed ip.lacnic handler array handling
+		- fixed .eu hanlder (bug #3297823)
+		- fixed .ae handler (bug #3181964)
+		- fixed .uk handler (partial patch # 3314417)
+
 2011/01/26
 		- fixed .se handler (bug #3165639)
 

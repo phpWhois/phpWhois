@@ -70,7 +70,7 @@ class lacnic_handler
 		if (!empty($r['network']['aut-num']))
 			$r['network']['handle'] = $r['network']['aut-num'];
 			
-		if (isset($r['network']['nserver']))
+		if (is_array($r['network']['nserver']))
 			$r['network']['nserver'] = array_unique($r['network']['nserver']);
 
 		$r = array( 'regrinfo' => $r );

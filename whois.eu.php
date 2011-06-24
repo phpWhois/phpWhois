@@ -39,7 +39,7 @@ class eu_handler
 		$items = array(
                 'domain.name'		=> 'Domain:',
                 'domain.status'		=> 'Status:',
-				'domain.nserver'	=> 'Nameservers:',
+				'domain.nserver'	=> 'Name servers:',
                 'domain.created'	=> 'Registered:',
                 'domain.registrar'	=> 'Registrar:',
                 'tech'				=> 'Registrar Technical Contacts:',

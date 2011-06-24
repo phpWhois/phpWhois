@@ -52,7 +52,7 @@ class be_handler
 		
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
-		if (isset($r['regrinfo']['domain']['name']))
+		if ($r['regrinfo']['domain']['status'] == 'REGISTERED')
 			{
 			$r['regrinfo']['registered'] = 'yes';
 			$r['regrinfo'] = get_contacts($r['regrinfo']);

@@ -47,14 +47,17 @@ class uk_handler
 
 		$items = array(
                 'owner.organization' => 'Registrant:',
-                'owner.address' => "Registrant's address:",
+                'owner.address'  => "Registrant's address:",
+                'owner.type' 	 => 'Registrant type:',
                 'domain.created' => 'Registered on:',
  				'domain.changed' => 'Last updated:',
                 'domain.expires' => 'Renewal date:',
                 'domain.nserver' => 'Name servers:',
                 'domain.sponsor' => 'Registrar:',
                 'domain.status'	 => 'Registration status:',
-                '' => 'WHOIS lookup made at'
+                'domain.dnssec'	 => 'DNSSEC:',
+                '' 				 => 'WHOIS lookup made at',
+                'disclaimer'	 => '--',
 		        );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
@@ -73,7 +76,7 @@ class uk_handler
 			$r['regrinfo']['registered'] = 'no';
 			
 		$r['regyinfo'] = array(
-                    'referrer' => 'http://www.monimet.uk',
+                    'referrer' => 'http://www.monimet.org.uk',
                     'registrar' => 'Nominet UK'
 		                );					
 		return $r;

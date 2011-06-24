@@ -70,6 +70,11 @@ class ae_handler
 			unset($reg['domain']['descr']);			
 			}
 
+		if (!empty($reg['domain']['blacklisted']))
+			{
+			$reg['registered'] = 'unknown';
+			}
+
 		$r['regrinfo'] = $reg;
 		return ($r);
 		}
