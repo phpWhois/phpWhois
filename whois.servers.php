@@ -51,7 +51,8 @@ $this->NON_UTF8 = array(
 	'whois.lacnic.net' => 1,
 	'cl.whois-servers.net' => 1,
 	'hu.whois-servers.net' => 1,
-	'br.whois-servers.net' => 1
+	'br.whois-servers.net' => 1,
+	'whois.ripe.net' => 1
 	);
 
 /* If whois Server needs any parameters, enter it here */
