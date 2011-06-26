@@ -41,40 +41,32 @@ class fj_handler
 		$items = array(
 				'owner' => 'Registrant:',
 				'domain.status' => 'Status:',
-				'domain.name' => 'Domain name:',
 				'domain.expires' => 'Expires:',
 				'domain.nserver' => 'Domain servers:'
 		            );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
-		if (!empty($r['regrinfo']['domain']['name']))
+		if (!empty($r['regrinfo']['domain']['status']))
 			{
 			$r['regrinfo'] = get_contacts($r['regrinfo']);
-			
-			$r['regrinfo']['domain']['name'] = $r['regrinfo']['domain']['name'][0];
 		
 			date_default_timezone_set("Pacific/Fiji");
 
 			if (isset($r['regrinfo']['domain']['expires']))
 				$r['regrinfo']['domain']['expires'] = strftime("%Y-%m-%d",strtotime($r['regrinfo']['domain']['expires']));
 
-			$r['regyinfo'] = array(
-                          'referrer' => 'http://www.domains.fj',
-                          'registrar' => 'FJ Domain Name Registry'
-                          );
-
 			$r['regrinfo']['registered'] = 'yes';
 			}
 		else
-			{
-			$r = '';
 			$r['regrinfo']['registered'] = 'no';
-			}
 
-		return ($r);
+		$r['regyinfo'] = array(
+                         'referrer' => 'http://www.domains.fj',
+                         'registrar' => 'FJ Domain Name Registry'
+                         );
+		return $r;
 		}
-
 	}
 ?>
 
