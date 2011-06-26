@@ -89,6 +89,7 @@ $this->WHOIS_SPECIAL = array(
 		'mobi'	 => 'whois.dotmobiregistry.net',
 		'ms'     => 'http://www.adamsnames.tc/whois/?domain={domain}.ms',
 		'mt'	 => 'http://www.um.edu.mt/cgi-bin/nic/whois?domain={domain}.mt',
+		'nl'	 => 'whois.domain-registry.nl',
 		'ly'	 => 'whois.nic.ly',
 		'pe'	 => 'kero.rcp.net.pe',
 		'pr'	 => 'whois.uprr.pr',

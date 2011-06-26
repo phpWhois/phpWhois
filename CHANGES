@@ -1,3 +1,6 @@
+2011/06/26
+		- added handler for gandi (request #3155752)
+
 2011/06/24
 		- fixed .be handler (bug #3307363)
 		- fixed ip.lacnic handler array handling
