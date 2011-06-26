@@ -46,7 +46,7 @@ class cz_handler
                       'descr'	=> 'desc',
                       'e-mail'	=> 'email',
                       'person'	=> 'name',
-                      'role'	=> 'organization',
+                      'org'		=> 'organization',
                       'fax-no'	=> 'fax'
 		                  );
 
@@ -57,14 +57,19 @@ class cz_handler
                       'registrant' => 'owner'
 		                  );
 
+		$r['regrinfo'] = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'dmy');
+
 		$r['regyinfo'] = array(
                           'referrer' => 'http://www.nic.cz',
                           'registrar' => 'CZ-NIC'
                           );
 
-		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'dmy');
-		$r['regrinfo'] = $reg;
-		return ($r);
+		if ($data_str['rawdata'][0] == 'Your connection limit exceeded. Please slow down and try again later.')
+			{
+			$r['regrinfo']['registered'] = 'unknown';
+			}
+
+		return $r;
 		}
 	}
 ?>
