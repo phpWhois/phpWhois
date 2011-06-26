@@ -35,34 +35,14 @@ class pl_handler
 	function parse($data_str, $query)
 		{
 		$items = array(
-                	'created:' 				=> 'domain.created',
-                	'last modified:'		=> 'domain.changed',
-                	'REGISTRAR:'			=> 'domain.sponsor',
-                	"registrant's handle:"	=> 'owner.handle',
+                	'domain.created' => 'created:',
+                	'domain.changed' => 'last modified:',
+                	'domain.sponsor' => 'REGISTRAR:',
+                	'#' => 'WHOIS displays data'
                 	
 					);
 
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');			
-
-		if ($r['regrinfo']['registered'] == 'yes')
-			{
-			$found = false;
-			
-			foreach($data_str['rawdata'] as $line)
-				{
-				if ($found)
-					{
-					if (strpos($line,':')) break;
-					$r['regrinfo']['domain']['nserver'][] = $line;
-					}
-	
-				if (strpos($line,'nameservers:') !== false)
-					{
-					$found = true;
-					$r['regrinfo']['domain']['nserver'][] = substr($line,13);
-					}
-				}
-			}
+		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd');
 
 		$r['regyinfo'] = array(
 			'referrer' => 'http://www.dns.pl/english/index.html',

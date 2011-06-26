@@ -45,9 +45,7 @@ class cl_handler
 					'organización:' => 'organization',
 					'nombre      :' => 'name');
 
-		$reg = easy_parser($data_str['rawdata'], $items, 'd-m-y', $trans);
-
-		$r['regrinfo'] = $reg;
+		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'd-m-y', $trans);
 		$r['regyinfo'] = array(
                     'referrer' => 'http://www.nic.cl',
                     'registrar' => 'NIC Chile'
