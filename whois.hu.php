@@ -82,8 +82,6 @@ class hu_handler {
 				$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
 				$owner_id = false;
 				}
-				
-		$data_str['rawdata'][$i] = utf8_encode($data_str['rawdata'][$i]);
 		}
 		
 	$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
