@@ -1,6 +1,7 @@
 2011/06/26
 		- added handler for gandi (request #3155752)
 		- fixed .org.za handler
+		- added handler for .cl
 
 2011/06/24
 		- fixed .be handler (bug #3307363)
