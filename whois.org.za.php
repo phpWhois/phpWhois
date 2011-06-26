@@ -39,8 +39,8 @@ class org_za_handler
 		$items = array(
                 'domain.status'		=> 'Status:',
 				'domain.nserver'	=> 'Domain name servers in listed order:',
-                'domain.updated'	=> 'Record last updated on',
-                'owner'				=> "rwhois search on 'sex.org.za':",
+                'domain.changed'	=> 'Record last updated on',
+                'owner'				=> 'rwhois search on',
                 'admin'				=> 'Administrative Contact:',
                 'tech'				=> 'Technical Contact:',
 				'billing'			=> 'Billing Contact:',

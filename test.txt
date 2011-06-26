@@ -60,6 +60,7 @@ encirca		encirca.com
 enom		enom.com
 fabulous	fabulous.com
 fastdomain	fastdomain.com
+gandi		gandi.net
 godaddy		godaddy.com
 iana		example.com
 interdomain	interdominio.com
