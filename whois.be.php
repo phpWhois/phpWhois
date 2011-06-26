@@ -47,8 +47,7 @@ class be_handler
                 'owner'				=> 'Licensee:',
                 'admin'				=> 'Onsite Contacts:',
                 'tech'				=> 'Agent Technical Contacts:',
-				'agent'				=> 'Agent:',
-				''					=> 'Company Name2:'
+				'agent'				=> 'Agent:'
 				);
 		
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
