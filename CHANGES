@@ -2,7 +2,7 @@
 		- added handler for gandi (request #3155752)
 		- fixed .org.za handler
 		- added handler for .cl
-		- corrected utf-8 support for .hu
+		- corrected utf-8 support for .hu, .br
 		- fixed. pl handler
 
 2011/06/24
