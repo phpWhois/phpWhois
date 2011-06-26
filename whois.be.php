@@ -50,16 +50,20 @@ class be_handler
 				'agent'				=> 'Agent:'
 				);
 		
+		$trans = array(
+				'company name2:' => ''
+				);
+
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
 		if ($r['regrinfo']['domain']['status'] == 'REGISTERED')
 			{
 			$r['regrinfo']['registered'] = 'yes';
-			$r['regrinfo'] = get_contacts($r['regrinfo']);
+			$r['regrinfo'] = get_contacts($r['regrinfo'],$trans);
 			
 			if (isset($r['regrinfo']['agent']))
 				{
-				$sponsor = get_contact($r['regrinfo']['agent']);
+				$sponsor = get_contact($r['regrinfo']['agent'],$trans);
 				unset($r['regrinfo']['agent']);
 				$r['regrinfo']['domain']['sponsor'] = $sponsor['name'];
 				}
