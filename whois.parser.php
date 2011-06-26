@@ -554,6 +554,9 @@ if (isset($array['admin']))
 		
 if (isset($array['owner']))
 	$array['owner'] = get_contact($array['owner'], $extra_items, $has_org);
+
+if (isset($array['registrar']))
+	$array['registrar'] = get_contact($array['registrar'], $extra_items, $has_org);
 	
 return $array;
 }

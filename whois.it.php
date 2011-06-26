@@ -58,14 +58,15 @@ class it_handler
 			'contactid:'	=> 'handle',
 			'organization:' => 'organization',
 			'created:'		=> 'created',
-			'last update:' 	=> 'changed'
+			'last update:' 	=> 'changed',
+			'web:'			=> 'web'
 		            );
 
 		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd',$extra);
 			
 		if (isset($r['regrinfo']['registrar']))
 			{
-			$r['domain']['registrar'] = $r['regrinfo']['registrar'][0];
+			$r['regrinfo']['domain']['registrar'] = $r['regrinfo']['registrar'];
 			unset($r['regrinfo']['registrar']);
 			}
 

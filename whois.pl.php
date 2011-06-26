@@ -38,7 +38,7 @@ class pl_handler
                 	'domain.created' => 'created:',
                 	'domain.changed' => 'last modified:',
                 	'domain.sponsor' => 'REGISTRAR:',
-                	'#' => 'WHOIS displays data'
+                	'#' => 'WHOIS displays data with a delay not exceeding 15 minutes in relation to the .pl Registry system'
                 	
 					);
 
