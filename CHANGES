@@ -2,7 +2,7 @@
 		- added handler for gandi (request #3155752)
 		- added handler for .cl
 		- corrected utf-8 support for .hu, .br and ripe
-		- fixes for .pl, .org.za, .be, .cz handlers
+		- fixes for .pl, .org.za, .be, .cz, .de handlers
 
 2011/06/24
 		- fixed .be handler (bug #3307363)
