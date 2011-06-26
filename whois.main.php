@@ -214,16 +214,6 @@ class Whois extends WhoisClient
 				$cname = $tld.'.whois-servers.net';
 				
 				if (gethostbyname($cname) == $cname) continue;
-				/*
-				if ($this->windows)
-					$cname = $this->checkdnsrr_win($tld.'.whois-servers.net', 'CNAME');
-				else
-					$cname = checkdnsrr($tld.'.whois-servers.net', 'CNAME');
-
-				if (!$cname) continue;
-				*/
-				//This also works
-				//$server = gethostbyname($tld.".whois-servers.net");
 				$server = $tld.'.whois-servers.net';
 				break;
 				}
@@ -247,7 +237,6 @@ class Whois extends WhoisClient
 					
 				// Regular handler exists for the tld ?				
 				if (($fp = @fopen('whois.'.$htld.'.php', 'r', 1)) and fclose($fp))
-				//if (file_exists('whois.'.$htld.'.php'))
 				    {
 					$handler = $htld;
 					break;
@@ -267,7 +256,9 @@ class Whois extends WhoisClient
 			if (isset($this->WHOIS_PARAM[$server]))
 				$this->Query['server'] = $this->Query['server'].'?'.str_replace('$',$domain,$this->WHOIS_PARAM[$server]);
 				
-			return $this->GetData('',$this->deep_whois);
+			$result = $this->GetData('',$this->deep_whois);
+			$this->Checkdns($result);
+			return $result;
 			}
 
 		// If tld not known, and domain not in DNS, return error
@@ -281,19 +272,23 @@ class Whois extends WhoisClient
 		unset($this->Query['server']);
 		$this->Query['status'] = 'error';
 		$result['rawdata'][] = $this->Query['errstr'][] = $this->Query['query'].' domain is not supported';
-		
-		if (function_exists('dns_get_record'))
-			{
-			$ns = dns_get_record($this->Query['query'],DNS_NS);
-			$nserver = array();
-			foreach($ns as $row) $nserver[] = $row['target'];
-			$result['regrinfo']['domain']['nserver'] = $nserver;
-			}
-		
+		$this->Checkdns($result);
 		$this->FixResult($result, $this->Query['query']);	
 		return $result;
 		}
 	
+	/* Get nameservers if missing */
+
+	function Checkdns(&$result)
+		{
+		if ($this->deep_whois && empty($result['regrinfo']['domain']['nserver']) && function_exists('dns_get_record'))
+			{
+			$ns = dns_get_record($this->Query['query'],DNS_NS);
+			$nserver = array();
+			foreach($ns as $row) $nserver[] = $row['target'];
+			$result['regrinfo']['domain']['nserver'] = $this->FixNameServer($nserver);
+			}
+		}
 	/*
 	 *  Fix and/or add name server information
 	 */
