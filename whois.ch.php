@@ -53,11 +53,15 @@ class ch_handler
                 'domain.dnssec'	=> 'DNSSEC:'
 		            );
 
+		$trans = array(
+					'contractual language:' => 'language'
+					);
+
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
 		if (!empty($r['regrinfo']['domain']['name']))
 			{
-			$r['regrinfo'] = get_contacts($r['regrinfo']);
+			$r['regrinfo'] = get_contacts($r['regrinfo'],$trans);
 			
 			$r['regrinfo']['domain']['name'] = $r['regrinfo']['domain']['name'][0];
 			

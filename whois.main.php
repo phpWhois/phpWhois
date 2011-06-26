@@ -286,7 +286,8 @@ class Whois extends WhoisClient
 			$ns = dns_get_record($this->Query['query'],DNS_NS);
 			$nserver = array();
 			foreach($ns as $row) $nserver[] = $row['target'];
-			$result['regrinfo']['domain']['nserver'] = $this->FixNameServer($nserver);
+			if (count($nserver) > 0)
+				$result['regrinfo']['domain']['nserver'] = $this->FixNameServer($nserver);
 			}
 		}
 	/*
