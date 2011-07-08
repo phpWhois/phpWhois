@@ -3,6 +3,7 @@
 		- fixed .nl handler (bug #3314404)
 		- fixed .ae whois server (bug #3354286)
 		- fixed bug #3333558
+		- .uk handler improvement (partial patch #3314417)
 
 2011/06/26
 		- added handler for gandi (request #3155752)

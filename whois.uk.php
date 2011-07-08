@@ -66,8 +66,6 @@ class uk_handler
 			{
 			$r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
 			$r['regrinfo']['domain']['sponsor'] = $r['regrinfo']['domain']['sponsor'][0];
-
-			//unset($r['regrinfo']['domain']['nserver'][count($r['regrinfo']['domain']['nserver']) - 1]);
 			$r['regrinfo']['registered'] = 'yes';
 			
 			$r = format_dates($r, 'dmy');
@@ -76,7 +74,7 @@ class uk_handler
 			$r['regrinfo']['registered'] = 'no';
 			
 		$r['regyinfo'] = array(
-                    'referrer' => 'http://www.monimet.org.uk',
+                    'referrer' => 'http://www.nonimet.org.uk',
                     'registrar' => 'Nominet UK'
 		                );					
 		return $r;
