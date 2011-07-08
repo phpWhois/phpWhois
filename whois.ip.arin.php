@@ -41,7 +41,7 @@ class arin_handler
                   'OrgName:' 	=> 'owner.organization',
                   'CustName:' 	=> 'owner.organization',
                   'OrgId:' 		=> 'owner.handle',
-                  'Address:' 	=> 'owner.address.street',
+                  'Address:' 	=> 'owner.address.street.',
                   'City:' 		=> 'owner.address.city',
                   'StateProv:' 	=> 'owner.address.state',
                   'PostalCode:' => 'owner.address.pcode',

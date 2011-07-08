@@ -103,6 +103,8 @@ class ip_handler extends WhoisClient
 			
 			foreach($rwdata as $line)
 				{
+				if (!strncmp($line,'American Registry for Internet Numbers',38)) continue;
+				
 				$p = strpos($line, '(NETBLK-');
 					
 				if ($p === false) $p = strpos($line, '(NET-');

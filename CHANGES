@@ -1,3 +1,6 @@
+2011/08/07
+		- fixes for arin (bug #3339783)
+
 2011/06/26
 		- added handler for gandi (request #3155752)
 		- added handler for .cl
