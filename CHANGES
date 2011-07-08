@@ -1,5 +1,6 @@
 2011/08/07
 		- fixes for arin (bug #3339783)
+		- fixed .nl handler (bug #3314404)
 
 2011/06/26
 		- added handler for gandi (request #3155752)
