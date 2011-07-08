@@ -283,7 +283,8 @@ class Whois extends WhoisClient
 		{
 		if ($this->deep_whois && empty($result['regrinfo']['domain']['nserver']) && function_exists('dns_get_record'))
 			{
-			$ns = dns_get_record($this->Query['query'],DNS_NS);
+			$ns = @dns_get_record($this->Query['query'],DNS_NS);
+			if (!is_array($ns)) return;
 			$nserver = array();
 			foreach($ns as $row) $nserver[] = $row['target'];
 			if (count($nserver) > 0)
