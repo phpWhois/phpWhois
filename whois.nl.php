@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,10 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* nlnic.whois	  1.2    David Saez - updated to use generic3.whois */
-/* nlnic.whois    1.1    David Saez - common object model */
-/* nlnic.whois    1.0    Matthijs Koot - 2003/01/14 - <koot@cyberwar.nl> */
-
 if (!defined('__NL_HANDLER__'))
 	define('__NL_HANDLER__', 1);
 
@@ -36,10 +32,8 @@ require_once('whois.parser.php');
 
 class nl_handler
 	{
-
 	function parse($data, $query)
 		{
-
 		$items = array(
                   'domain.name' => 'Domain name:',
                   'domain.status' => 'Status:',
@@ -50,20 +44,20 @@ class nl_handler
                   'admin' => 'Administrative contact:',
                   'tech' => 'Technical contact(s):'
 		            );
-		
-		$r['regrinfo'] = get_blocks($data['rawdata'], $items);		
+
+		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 		$r['regyinfo']['referrer'] = 'http://www.domain-registry.nl';
 		$r['regyinfo']['registrar'] = 'Stichting Internet Domeinregistratie NL';
-		
+
 		if (!isset($r['regrinfo']['domain']['status']))
 			{
 			$r['regrinfo']['registered'] = 'no';
 			return $r;
 			}
-		
+
 		if (isset($r['regrinfo']['tech']))
 			$r['regrinfo']['tech'] = $this->get_contact($r['regrinfo']['tech']);
-		
+
 		if (isset($r['regrinfo']['zone']))
 			$r['regrinfo']['zone'] = $this->get_contact($r['regrinfo']['zone']);
 					
@@ -72,22 +66,22 @@ class nl_handler
 				
 		if (isset($r['regrinfo']['owner']))
 			$r['regrinfo']['owner'] = $this->get_contact($r['regrinfo']['owner']);
-		
+
 		$r['regrinfo']['registered'] = 'yes';
-		format_dates($r, 'dmy');
-		return ($r);
+		format_dates($r,'dmy');
+		return $r;
 		}
-		
+
 	function get_contact($data)
 		{
 		$r = get_contact($data);
-		
+
 		if (isset($r['name']) && preg_match('/^[A-Z0-9]+-[A-Z0-9]+$/',$r['name']))
 			{
 			$r['handle'] = $r['name'];
 			$r['name'] = array_shift ($r['address']);
 			}
-			
+
 		return $r;
 		}
 	}

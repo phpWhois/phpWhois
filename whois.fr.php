@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class fr_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$translate = array(
 						'fax-no' => 'fax',
 						'e-mail' => 'email',
@@ -68,13 +66,13 @@ class fr_handler
 			$reg['domain'] = array_merge($reg['domain'],$reg['nserver']);
 			unset($reg['nserver']);
 			}
-				
+
 		$r['regrinfo'] = $reg;
 		$r['regyinfo'] = array(
                           'referrer' => 'http://www.nic.fr',
                           'registrar' => 'AFNIC'
                           );
-		return ($r);
+		return $r;
 		}
 	}
 ?>

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -35,13 +35,13 @@ class mobi_handler
 	function parse($data_str, $query)
 		{
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata']);
-		
+
 		if (!strncmp($data_str['rawdata'][0], 'WHOIS LIMIT EXCEEDED', 20))
 			$r['regrinfo']['registered'] = 'unknown';
 
 		$r['regyinfo']['referrer'] = 'http://www.mtld.mobi/';
 		$r['regyinfo']['registrar'] = 'Dot Mobi Registry';
-		return ($r);
+		return $r;
 		}
 	}
 ?>

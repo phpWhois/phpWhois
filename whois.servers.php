@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -79,14 +79,14 @@ $this->WHOIS_SPECIAL = array(
 		'bi'	 => 'whois.nic.bi',
 		'bj'	 => 'whois.nic.bj',
 		'by'	 => '',
-		'bz'	 => 'whois2.afilias-grs.net',		
+		'bz'	 => 'whois2.afilias-grs.net',
 		'cy'	 => '',
 		'es'	 => '',
 		'fj'	 => 'whois.usp.ac.fj',
-		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',		
+		'fm'     => 'http://www.dot.fm/query_whois.cfm?domain={domain}&tld=fm',
 		'jobs'	 => 'jobswhois.verisign-grs.com',
-		'ke'	 => 'kenic.or.ke',				
-		'la'	 => 'whois.centralnic.net',		
+		'ke'	 => 'kenic.or.ke',
+		'la'	 => 'whois.centralnic.net',
 		'gr'	 => '',
 		'gs'     => 'http://www.adamsnames.tc/whois/?domain={domain}.gs',
 		'gt'	 => 'http://www.gt/Inscripcion/whois.php?domain={domain}.gt',
@@ -98,20 +98,20 @@ $this->WHOIS_SPECIAL = array(
 		'ly'	 => 'whois.nic.ly',
 		'pe'	 => 'kero.rcp.net.pe',
 		'pr'	 => 'whois.uprr.pr',
-		'pro'	 => 'whois.registry.pro',		
-		'sc'     => 'whois2.afilias-grs.net',		
+		'pro'	 => 'whois.registry.pro',
+		'sc'     => 'whois2.afilias-grs.net',
 		'tc'     => 'http://www.adamsnames.tc/whois/?domain={domain}.tc',
 		'tf'     => 'http://www.adamsnames.tc/whois/?domain={domain}.tf',
 		've'	 => 'whois.nic.ve',
 		'vg'     => 'http://www.adamsnames.tc/whois/?domain={domain}.vg',
 		// Second level
-		'net.au' => 'whois.aunic.net',		
+		'net.au' => 'whois.aunic.net',
 		'ae.com' => 'whois.centralnic.net',
 		'br.com' => 'whois.centralnic.net',
 		'cn.com' => 'whois.centralnic.net',
 		'de.com' => 'whois.centralnic.net',
 		'eu.com' => 'whois.centralnic.net',
-		'hu.com' => 'whois.centralnic.net',		
+		'hu.com' => 'whois.centralnic.net',
 		'jpn.com'=> 'whois.centralnic.net',
 		'kr.com' => 'whois.centralnic.net',
 		'gb.com' => 'whois.centralnic.net',
@@ -119,20 +119,20 @@ $this->WHOIS_SPECIAL = array(
 		'qc.com' => 'whois.centralnic.net',
 		'ru.com' => 'whois.centralnic.net',
 		'sa.com' => 'whois.centralnic.net',
-		'se.com' => 'whois.centralnic.net',		
+		'se.com' => 'whois.centralnic.net',
 		'za.com' => 'whois.centralnic.net',
-		'uk.com' => 'whois.centralnic.net',		
+		'uk.com' => 'whois.centralnic.net',
 		'us.com' => 'whois.centralnic.net',
-		'uy.com' => 'whois.centralnic.net',		
+		'uy.com' => 'whois.centralnic.net',
 		'gb.net' => 'whois.centralnic.net',
 		'se.net' => 'whois.centralnic.net',
-		'uk.net' => 'whois.centralnic.net',		
+		'uk.net' => 'whois.centralnic.net',
 		'za.net' => 'whois.za.net',
 		'za.org' => 'whois.za.net',
 		'co.za'  => 'http://co.za/cgi-bin/whois.sh?Domain={domain}.co.za',
 		'org.za' => 'http://www.org.za/cgi-bin/rwhois?domain={domain}.org.za&format=full'
 		);
-		
+
 /* handled gTLD whois servers */
 
 $this->WHOIS_GTLD_HANDLER = array(
@@ -147,7 +147,7 @@ $this->WHOIS_GTLD_HANDLER = array(
 		'whois.encirca.com'					=> 'genericb',
 		'whois.corenic.net'					=> 'genericb'
 		);
-		
+
 /* Non ICANN TLD's */
 
 $this->WHOIS_NON_ICANN = array (
@@ -238,7 +238,7 @@ $this->WHOIS_NON_ICANN = array (
 		'tienda'	=> 'http://www.new.net/search_whois.tp?domain={domain}&tld={tld}',
 		'travel'	=> 'http://www.new.net/search_whois.tp?domain={domain}&tld={tld}',
 		'turismo'	=> 'http://www.new.net/search_whois.tp?domain={domain}&tld={tld}',
-		'usa' 		=> 'http://www.adns.net/whois.php?txtDOMAIN={domain}.{tld}',		
+		'usa' 		=> 'http://www.adns.net/whois.php?txtDOMAIN={domain}.{tld}',
 		'verein'	=> 'http://www.new.net/search_whois.tp?domain={domain}&tld={tld}',
 		'viaje'		=> 'http://www.new.net/search_whois.tp?domain={domain}&tld={tld}',
 		'viagem'	=> 'http://www.new.net/search_whois.tp?domain={domain}&tld={tld}',

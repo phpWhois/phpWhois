@@ -5,7 +5,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,19 +32,19 @@ $lines = file('./test.txt');
 $domains = array();
 
 foreach ($lines as $line)
-	{ 
+	{
 	$pos = strpos($line,'/');
-	
+
 	if ($pos !== false) $line = substr($line,0,$pos);
-	
+
 	$line = trim($line);
-	
+
 	if ($line == '') continue;
-	
+
 	$parts = explode(' ',str_replace("\t",' ',$line));
 	$key = $parts[0];
-	
-	for ($i=1; $i<count($parts); $i++)	
+
+	for ($i=1; $i<count($parts); $i++)
 		if ($parts[$i] != '')
 			{
 			if ($key)
@@ -88,14 +88,14 @@ foreach ($domains as $domain)
 	{
 	echo "\nTesting $domain ---------------------------------\n";
 	$result = $whois->Lookup($domain);
-	
+
 	unset($result['rawdata']);
 
 	if (!isset($results[$domain]))
 		{
 		print_r($result);
 		$res = get_answer("Add result for $domain");
-		
+
 		if ($res)
 			{
 			// Add as it is
@@ -103,25 +103,25 @@ foreach ($domains as $domain)
 			$results[$domain] = $result;
 			save_results();
 			}
-		
+
 		}
 	else
 		{
 		// Compare with previous result
 		unset($result['regrinfo']['disclaimer']);
 		unset($results[$domain]['regrinfo']['disclaimer']);
-		
+
 		if (empty($result))
 			echo "!! empty result\n";
 		else
 			{
 			$diff = array_diff_assoc_recursive($result,$results[$domain]);
-			
+
 			if (is_array($diff))
 				{
 				print_r($diff);
 				$res = get_answer("Accept differences for $domain");
-			
+
 				if ($res)
 					{
 					// Add as it is
@@ -157,14 +157,14 @@ echo "\n------ $question ? (y/n/a/c) ";
 while (true)
 	{
 	$res = trim(fgetc(STDIN));
-		
+
 	if ($res=='a') exit();
 
 	if ($res=='c')
 		{
 		save_results();
 		exit();
-		}	
+		}
 	if ($res=='y') return true;
 	if ($res=='n') return false;
 	}
@@ -182,14 +182,14 @@ foreach($array1 as $key => $value)
 			{
 			$difference[$key] = array( 'previous' => $array2[$key], 'actual' => $value);
 			}
-		else 
+		else
 			{
 			$new_diff = array_diff_assoc_recursive($value, $array2[$key]);
-			
+
 			if ($new_diff != false)
 				{
 				$difference[$key] = $new_diff;
-				} 
+				}
 			}
 		}
 	else
@@ -198,7 +198,7 @@ foreach($array1 as $key => $value)
 			$difference[$key] = array( 'previous' => $array2[$key], 'actual' => $value);
 			}
 	}
-	
+
 // Search missing items
 
 foreach($array2 as $key => $value)
@@ -206,7 +206,7 @@ foreach($array2 as $key => $value)
 	if (!isset($array1[$key]))
 		$difference[$key] = array( 'previous' => $value, 'actual' => '(missing)');
 	}
-	
+
 return !isset($difference) ? false : $difference;
 }
 

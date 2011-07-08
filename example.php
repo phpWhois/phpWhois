@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -36,30 +36,30 @@ $resout = extract_block($out, 'results');
 if (isSet($_GET['query']))
 	{
 	$query = $_GET['query'];
-	
+
 	if (!empty($_GET['output']))
 		$output = $_GET['output'];
 	else
 		$output = '';
-		
+
 	include_once('whois.main.php');
 	include_once('whois.utils.php');
-	
+
 	$whois = new Whois();
-	
+
 	// Set to true if you want to allow proxy requests
 	$allowproxy = false;
-	
+
  	// uncomment the following line to get faster but less acurate results
  	// $whois->deep_whois = false;
  	
- 	// To use special whois servers (see README)	
+ 	// To use special whois servers (see README)
 	//$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
 	//$whois->UseServer('au','whois-check.ausregistry.net.au');
-	
+
 	// uncomment the following line to add support for non ICANN tld's
 	// $whois->non_icann = true;
-	
+
 	$result = $whois->Lookup($query);
 	$resout = str_replace('{query}', $query, $resout);
 	$winfo = '';
@@ -77,8 +77,8 @@ if (isSet($_GET['query']))
 				$winfo = $utils->showObject($result);
 				}
 			break;
-			
-		case 'nice':			
+
+		case 'nice':
 			if (!empty($result['rawdata']))
 				{
 				$utils = new utils;
@@ -90,13 +90,13 @@ if (isSet($_GET['query']))
 					$winfo = implode($whois->Query['errstr'],"\n<br></br>");
 				else
 					$winfo = 'Unexpected error';
-				}       
+				}
 			break;
 
 		case 'proxy':
 			if ($allowproxy)
 				exit(serialize($result));
-			
+
 		default:
 			if(!empty($result['rawdata']))
 				{
@@ -105,16 +105,16 @@ if (isSet($_GET['query']))
 			else
 				{
 				$winfo = implode($whois->Query['errstr'],"\n<br></br>");
-				}       
+				}
 		}
-	
+
 	//$winfo = utf8_encode($winfo);
-	
+
 	$resout = str_replace('{result}', $winfo, $resout);
 	}
 else
 	$resout = '';
-	
+
 echo str_replace('{results}', $resout, $out);
 
 //-------------------------------------------------------------------------

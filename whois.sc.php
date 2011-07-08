@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* .sc    1.0    Hans-Peter Kohnle - 2006/05/06 - hp@kohnle.info */
-
 if (!defined('__SC_HANDLER__'))
 	define('__SC_HANDLER__', 1);
 
@@ -41,7 +39,7 @@ class sc_handler
                   'referrer' => 'http://www.nic.sc',
                   'registrar' => 'VCS (Pty) Limited'
                   );
-		return ($r);
+		return $r;
 		}
 	}
 ?>

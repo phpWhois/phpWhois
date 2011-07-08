@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -34,12 +34,11 @@ class aero_handler
 	{
 	function parse($data_str, $query)
 		{
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], false, 'ymd');
 		$r['regyinfo'] = array(
                           'referrer' => 'http://www.nic.aero',
                           'registrar' => 'Societe Internationale de Telecommunications Aeronautiques SC'
                           );
-
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], false, 'ymd');
 		return $r;
 		}
 	}

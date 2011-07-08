@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,18 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* ipw.whois	1.00	David Saez 12/07/2001 */
-/*              1.01    David Saez 06/07/2002  Added support for */
-/*                      BRNIC, KRNIC, TWNIC and LACNIC */
-
-/* Check with 218.165.121.114 (apnic)  */
-/*            62.97.102.115   (ripe)   */
-/*            207.217.120.54  (arin)   */
-/*            200.165.206.74  (brnic)  */
-/*            210.178.148.129 (krnic)  */
-/*	          200.44.33.31    (lacnic) */
-/*            210.255.180.14  (jpnic)  */
-
 if (!defined('__IP_HANDLER__'))
 	define('__IP_HANDLER__', 1);
 
@@ -46,7 +34,7 @@ class ip_handler extends WhoisClient
 	{
 	// Deep whois ?
 	var $deep_whois = true;
-	
+
 	var $HANDLER_VERSION = '1.0';
 
 	var $REGISTRARS = array(
@@ -66,7 +54,7 @@ class ip_handler extends WhoisClient
 						'whois.lacnic.net' => 'lacnic',
 						'whois.afrinic.net' => 'afrinic'
 	                     );
-	
+
 	var $more_data = array();	// More queries to get more accurated data
 	var $done = array();
 
@@ -89,9 +77,9 @@ class ip_handler extends WhoisClient
 		$this->Query['query'] = $query;
 
 		$rawdata = $data['rawdata'];
-		
+
 		if (empty($rawdata)) return $result;
-		
+
 		$presults[] = $rawdata;
 		$ip = ip2long($query);
 		$done = array();
@@ -100,24 +88,24 @@ class ip_handler extends WhoisClient
 			{
 			$rwdata = array_shift($presults);
 			$found = false;
-			
+
 			foreach($rwdata as $line)
 				{
 				if (!strncmp($line,'American Registry for Internet Numbers',38)) continue;
-				
+
 				$p = strpos($line, '(NETBLK-');
-					
+
 				if ($p === false) $p = strpos($line, '(NET-');
-						
+
 				if ($p !== false)
 					{
 					$net = strtok(substr($line,$p+1),') ');
 					list($low,$high) = explode('-',str_replace(' ','',substr($line,$p+strlen($net)+3)));
-					
+
 					if (!isset($done[$net]) && $ip >= ip2long($low) && $ip <= ip2long($high))
 						{
 						$owner = substr($line,0,$p-1);
-						
+
 						if (!empty($this->REGISTRARS['owner']))
 							{
 							$this->handle_rwhois($this->REGISTRARS['owner'],$query);
@@ -133,7 +121,7 @@ class ip_handler extends WhoisClient
 					$found = true;
 					}
 				}
-				
+
 			if (!$found)
 				{
 				$this->Query['file'] = 'whois.ip.arin.php';
@@ -148,7 +136,7 @@ class ip_handler extends WhoisClient
 			{
 			$srv_data = array_shift($this->more_data);
 			$this->Query['server'] = $srv_data['server'];
-			unset($this->Query['handler']);			
+			unset($this->Query['handler']);
 			// Use original query
 			$rwdata = $this->GetRawData($srv_data['query']);
 
@@ -157,7 +145,7 @@ class ip_handler extends WhoisClient
 				if (!empty($srv_data['handler']))
 					{
 					$this->Query['handler'] = $srv_data['handler'];
-				
+
 					if (!empty($srv_data['file']))
 						$this->Query['file'] = $srv_data['file'];
 					else
@@ -172,7 +160,7 @@ class ip_handler extends WhoisClient
 
 
 		// Normalize nameserver fields
-		
+
 		if (isset($result['regrinfo']['network']['nserver']))
 			{
 			if (!is_array($result['regrinfo']['network']['nserver']))
@@ -185,28 +173,28 @@ class ip_handler extends WhoisClient
 
 		return $result;
 		}
-	
+
 	//-----------------------------------------------------------------
 
 	function parse_results($result,$rwdata,$query,$reset)
 		{
 		$rwres = $this->Process($rwdata);
-		
+
 		if ($result['regyinfo']['type'] == 'AS' && !empty($rwres['regrinfo']['network']))
 			{
 			$rwres['regrinfo']['AS'] = $rwres['regrinfo']['network'];
 			unset($rwres['regrinfo']['network']);
 			}
-		
+
 		if ($reset)
 			{
 			$result['regrinfo'] = $rwres['regrinfo'];
 			$result['rawdata'] = $rwdata;
 			}
 		else
-			{			
+			{
 			$result['rawdata'][] = '';
-					
+
 			foreach ($rwdata as $line)
 				$result['rawdata'][] = $line;
 
@@ -230,7 +218,7 @@ class ip_handler extends WhoisClient
 						case 'KRNIC':
 							$this->handle_rwhois('whois.krnic.net',$query);
 							break;
-	
+
 						case 'African Network Information Center':
 							$this->handle_rwhois('whois.afrinic.net',$query);
 							break;
@@ -244,13 +232,13 @@ class ip_handler extends WhoisClient
 		}
 
 	//-----------------------------------------------------------------
-	
+
 	function handle_rwhois($server,$query)
 		{
 		// Avoid querying the same server twice
-		
+
 		$parts = parse_url($server);
-		
+
 		if (empty($parts['host']))
 			$host = $parts['path'];
 		else
@@ -262,7 +250,7 @@ class ip_handler extends WhoisClient
 					'query' => $query,
 					'server' => $server
 					);
-					
+
 		if (isset($this->HANDLERS[$host]))
 			{
 			$q['handler'] = $this->HANDLERS[$host];
@@ -281,9 +269,9 @@ class ip_handler extends WhoisClient
 		}
 
 	//-----------------------------------------------------------------
-	
+
 	function join_result($result, $key, $newres)
-		{		
+		{
 		if (isset($result['regrinfo'][$key]) && !array_key_exists(0,$result['regrinfo'][$key]))
 			{
 			$r = $result['regrinfo'][$key];

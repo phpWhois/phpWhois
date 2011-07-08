@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,11 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* aunic.whois 2.1 by David Saez <david@ols.es> update detection schema*/
-/* aunic.whois 2.0 by David Saez <david@ols.es> common object model */
-/* aunic.whois 1.0 by Edi Wibowo <edi@ausnik-it.com,http://www.ausnik-it.com> */
-/* check with telstra.com.au */
-
 if (!defined('__AU_HANDLER__'))
 	define('__AU_HANDLER__', 1);
 
@@ -37,7 +32,6 @@ require_once('whois.parser.php');
 
 class au_handler
 	{
-
 	function parse($data_str, $query)
 		{
 
@@ -57,24 +51,11 @@ class au_handler
                     'Name Server:'		=> 'domain.nserver.'
 		              );
 
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
 		$r['regyinfo'] = array(
                     'referrer' => 'http://www.aunic.net',
                     'registrar' => 'AU-NIC'
                     );
-
-		if ($data_str['rawdata'][0]=='Not Available')
-			{
-			$r['regrinfo']['registered']='yes';
-			return $r;
-			}
-		
-		if ($data_str['rawdata'][0]=='Available')
-			{
-			$r['regrinfo']['registered']='no';
-			return $r;
-			}
-				
-		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
 		return $r;
 		}
 	}

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,9 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* info.whois   2.0  David Seaz - updated to common object model */
-/* info.whois	1.0  David Saez Padros <david@ols.es> */
-
 if (!defined('__FI_HANDLER__'))
 	define('__FI_HANDLER__', 1);
 
@@ -35,10 +32,8 @@ require_once('whois.parser.php');
 
 class fi_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'domain:' => 'domain.name',
                   'created:' => 'domain.created',
@@ -51,15 +46,12 @@ class fi_handler
                     );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
-		
+
 		$r['regyinfo'] = array(
                           'referrer' => 'https://domain.ficora.fi/',
                           'registrar' => 'Finnish Communications Regulatory Authority'
                           );
-
 		return $r;
 		}
-
 	}
-
 ?>

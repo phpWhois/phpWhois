@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,17 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* denic.whois        1.0 by david saez */
-/* denic.whois        0.4 by Oliver Notka <notka@ettel-gmbh.de> */
-/* Fixed error when domain doesnt exist */
-
-/* denic.whois        0.3 by David Saez <david@ols.es> */
-/* denic.whois        0.2 by Elmar K. Bins <elmi@4ever.de> */
-/* based upon brnic.whois by Marcelo Sanches <msanches@sitebox.com.br> */
-/* and        atnic.whois by Martin Pircher <martin@pircher.net> */
-
-/* this version does not yet deliver contact data, but handles only */
-
 if (!defined('__DE_HANDLER__'))
 	define('__DE_HANDLER__', 1);
 
@@ -45,7 +34,6 @@ class de_handler
 	{
 	function parse($data_str, $query)
 		{
-
 		$items = array(
 			'domain.name' =>	'Domain:',
 			'domain.nserver.' =>'Nserver:',
@@ -84,7 +72,6 @@ class de_handler
 			$r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
 			$r['regrinfo']['registered'] = 'yes';
 			}
-
 		return $r;
 		}
 	}

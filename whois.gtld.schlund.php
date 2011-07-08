@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* schlund.whois  1.00    David Saez <david@ols.es> */
-
 if (!defined('__SCHLUND_HANDLER__'))
 	define('__SCHLUND_HANDLER__', 1);
 
@@ -34,10 +32,8 @@ require_once('whois.parser.php');
 
 class schlund_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'created:' => 'domain.created',
                   'last-changed:' => 'domain.changed',
@@ -84,8 +80,7 @@ class schlund_handler
                   'bill-c-email:' => 'billing.email'
 		              );
 
-		$r = generic_parser_b($data_str, $items);
-		return ($r);
+		return generic_parser_b($data_str, $items);
 		}
 	}
 ?>

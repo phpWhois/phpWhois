@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -24,9 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-/* info.whois   2.0  David Seaz - updated to common object model */
-/* info.whois	1.0  David Saez Padros <david@ols.es> */
 
 if (!defined('__ME_HANDLER__'))
 	define('__ME_HANDLER__', 1);

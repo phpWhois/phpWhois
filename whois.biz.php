@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,9 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* neulevel.whois        2.2        David Saez */
-/* neulevel.whois        1.0        by Brian Blood <brian@macserve.net>  */
-
 if (!defined('__BIZ_HANDLER__'))
 	define('__BIZ_HANDLER__', 1);
 
@@ -38,13 +35,11 @@ class biz_handler
 	function parse($data_str, $query)
 		{
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], false, '-md--y');
-
 		$r['regyinfo'] = array(
                   'referrer' => 'http://www.neulevel.biz',
                   'registrar' => 'NEULEVEL'
                   );
-		return ($r);
+		return $r;
 		}
-
 	}
 ?>

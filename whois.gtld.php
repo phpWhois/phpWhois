@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,10 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* gtld.whois	1.0	mark jeftovic	1999/12/06 */
-/* gtld.whois   1.1     david@ols.es    2003/02/09 */
-/* gtld.whois   1.2     david@ols.es    2003/09/12 */
-
 if (!defined('__GTLD_HANDLER__'))
 	define('__GTLD_HANDLER__', 1);
 
@@ -36,9 +32,6 @@ require_once('whois.parser.php');
 
 class gtld_handler extends WhoisClient
 	{
-	// Deep whois ?
-	//var $deep_whois = true;
-	
 	var $HANDLER_VERSION = '1.1';
 
 	var $REG_FIELDS = array(
@@ -49,7 +42,7 @@ class gtld_handler extends WhoisClient
                         'Name Server:' => 'regrinfo.domain.nserver.',  // identical descriptors
 						'Updated Date:' => 'regrinfo.domain.changed',
                         'Last Updated On:' => 'regrinfo.domain.changed',
-                        'EPP Status:' => 'regrinfo.domain.epp_status.',                        
+                        'EPP Status:' => 'regrinfo.domain.epp_status.',
                         'Status:' => 'regrinfo.domain.status.',
                         'Creation Date:' => 'regrinfo.domain.created',
                         'Created On:' => 'regrinfo.domain.created',
@@ -65,7 +58,7 @@ class gtld_handler extends WhoisClient
 		$this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
 
 		unset($this->result['registered']);
-		
+
 		if (isset($this->result['nodomain']))
 			{
 			unset($this->result['nodomain']);
@@ -81,7 +74,7 @@ class gtld_handler extends WhoisClient
 
 		// Domain is registered no matter what next server says
 		$this->result['regrinfo']['registered'] = 'yes';
-		
+
 		return $this->result;
 		}
 	}

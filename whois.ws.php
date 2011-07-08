@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,12 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/*
- * Samoan (ws) registration tool
- * Chewy - 2003/Sep/03
- *
- */
-
 if (!defined('__WS_HANDLER__'))
   define('__WS_HANDLER__', 1);
 
@@ -38,7 +32,6 @@ require_once('whois.parser.php');
 
 class ws_handler extends WhoisClient
   {
-
   function parse($data_str, $query)
     {
     $items = array(
@@ -55,14 +48,14 @@ class ws_handler extends WhoisClient
 				);
 
 	$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
-	   
+
     $r['regyinfo']['referrer'] = 'http://www.samoanic.ws';
     $r['regyinfo']['registrar'] = 'Samoa Nic';
 
     if (!empty($r['regrinfo']['domain']['name']))
 		{
-		$r['regrinfo']['registered'] = 'yes';      
-		
+		$r['regrinfo']['registered'] = 'yes';
+
 		if (isset($r['regrinfo']['rwhois']))
 			{
 			if ($this->deep_whois)
@@ -70,15 +63,14 @@ class ws_handler extends WhoisClient
 				$r['regyinfo']['whois']	= $r['regrinfo']['rwhois'];
 				$r = $this->DeepWhois($query,$r);
 				}
-							
-			unset($r['regrinfo']['rwhois']);			
+
+			unset($r['regrinfo']['rwhois']);
 			}
 		}
     else
 		$r['regrinfo']['registered'] = 'no';
 
-    return ($r);
+    return $r;
     }
   }
-
 ?>

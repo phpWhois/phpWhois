@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* lacnic.whois	1.0 	David Saez 3/7/2003 */
-
 require_once('whois.parser.php');
 
 if (!defined('__LACNIC_HANDLER__'))
@@ -34,7 +32,6 @@ if (!defined('__LACNIC_HANDLER__'))
 
 class lacnic_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$translate = array(
@@ -69,7 +66,7 @@ class lacnic_handler
 
 		if (!empty($r['network']['aut-num']))
 			$r['network']['handle'] = $r['network']['aut-num'];
-			
+
 		if (is_array($r['network']['nserver']))
 			$r['network']['nserver'] = array_unique($r['network']['nserver']);
 
@@ -78,6 +75,5 @@ class lacnic_handler
 		$r['regyinfo']['registrar'] = 'Latin American and Caribbean IP address Regional Registry';
 		return $r;
 		}
-
 	}
 ?>

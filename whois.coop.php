@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,7 +32,6 @@ require_once('whois.parser.php');
 
 class coop_handler
 	{
-
 	function parse($data_str, $query)
 		{
 
@@ -66,26 +65,26 @@ class coop_handler
 						'Fax:' => 'fax',
 						'Email:' => 'email'
 						);
-						
+
 		$blocks = get_blocks($data_str['rawdata'],$items);
-		
+
 		$r=array();
-		
+
 		if (isset($blocks['domain']))
 			{
 			$r['regrinfo']['domain'] = format_dates($blocks['domain'],'dmy');
 			$r['regrinfo']['registered'] = 'yes';
-				
+
 			if (isset($blocks['owner']))
 				{
 				$r['regrinfo']['owner'] = generic_parser_b($blocks['owner'],$translate,'dmy',false);
-		
+
 				if (isset($blocks['tech']))
 					$r['regrinfo']['tech'] = generic_parser_b($blocks['tech'],$translate,'dmy',false);
-		
+
 				if (isset($blocks['admin']))
 					$r['regrinfo']['admin'] = generic_parser_b($blocks['admin'],$translate,'dmy',false);
-	
+
 				if (isset($blocks['billing']))
 					$r['regrinfo']['billing'] = generic_parser_b($blocks['billing'],$translate,'dmy',false);
 				}
@@ -96,7 +95,11 @@ class coop_handler
 			}
 		else
 			$r['regrinfo']['registered'] = 'no';
-			
+
+		$r['regyinfo'] = array(
+                          'referrer' => 'http://www.nic.coop',
+                          'registrar' => '.coop registry'
+                          );
 		return $r;
 		}
 	}

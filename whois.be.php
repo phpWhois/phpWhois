@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,9 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* benic.whois        1.0        Matthijs Koot <koot@cyberwar.nl> */
-/* benic.whois        1.2	 David Saez */
-
 require_once('whois.parser.php');
 
 if (!defined('__BE_HANDLER__'))
@@ -35,10 +32,8 @@ if (!defined('__BE_HANDLER__'))
 
 class be_handler
 	{
-
 	function parse($data, $query)
 		{
-
 		$items = array(
                 'domain.name'		=> 'Domain:',
                 'domain.status'		=> 'Status:',
@@ -49,7 +44,7 @@ class be_handler
                 'tech'				=> 'Agent Technical Contacts:',
 				'agent'				=> 'Agent:'
 				);
-		
+
 		$trans = array(
 				'company name2:' => ''
 				);
@@ -60,7 +55,7 @@ class be_handler
 			{
 			$r['regrinfo']['registered'] = 'yes';
 			$r['regrinfo'] = get_contacts($r['regrinfo'],$trans);
-			
+
 			if (isset($r['regrinfo']['agent']))
 				{
 				$sponsor = get_contact($r['regrinfo']['agent'],$trans);
@@ -75,9 +70,7 @@ class be_handler
 
 		$r['regyinfo']['referrer'] = 'http://www.domain-registry.nl';
 		$r['regyinfo']['registrar'] = 'DNS Belgium';
-		$r['rawdata'] = $data['rawdata'];
-		
-		return ($r);
+		return $r;
 		}
 	}
 ?>

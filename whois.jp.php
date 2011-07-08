@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -55,16 +55,16 @@ class jp_handler extends WhoisClient
 						);
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
-		
+
 		$r['regyinfo'] = array(
                           'referrer' => 'http://www.jprs.jp',
                           'registrar' => 'Japan Registry Services'
                           );
-		
+
 		if (!$this->deep_whois) return $r;
-		
+
 		$r['rawdata'] = $data_str['rawdata'];
-	
+
 		$items = array(
 					'a. [JPNIC Handle]'	=> 'handle',
 					'c. [Last, First]'	=> 'name',
@@ -74,9 +74,9 @@ class jp_handler extends WhoisClient
 					'p. [FAX]'			=> 'fax',
 					'[Last Update]'		=> 'changed'
 					);
-			
+
 		$this->Query['server'] = 'jp.whois-servers.net';
-		
+
 		if (!empty($r['regrinfo']['admin']['handle']))
 			{
 			$rwdata = $this->GetRawData('CONTACT '.$r['regrinfo']['admin']['handle'].'/e');
@@ -91,7 +91,7 @@ class jp_handler extends WhoisClient
 			if (!empty($r['regrinfo']['admin']['handle']) &&
 				$r['regrinfo']['admin']['handle'] == $r['regrinfo']['tech']['handle'])
 				{
-				$r['regrinfo']['tech'] = $r['regrinfo']['admin']; 
+				$r['regrinfo']['tech'] = $r['regrinfo']['admin'];
 				}
 			else
 				{

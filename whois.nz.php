@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,7 +32,6 @@ require_once('whois.parser.php');
 
 class nz_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -79,26 +78,25 @@ class nz_handler
 		              );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
-		
+
 		if (!empty($r['regrinfo']['domain']['status']))
 			$domain_status = substr($r['regrinfo']['domain']['status'],0,3);
 		else
 			$domain_status = '';
-			
+
 		if ($domain_status=='200')
 			$r['regrinfo']['registered']='yes';
 		elseif ($domain_status=='220')
 			$r['regrinfo']['registered']='no';
 		else
 			$r['regrinfo']['registered']='unknown';
-			
+
 		if (!strncmp($data_str['rawdata'][0], 'WHOIS LIMIT EXCEEDED', 20))
 			$r['regrinfo']['registered'] = 'unknown';
 
 		$r['regyinfo']['referrer'] = 'http://www.dnc.org.nz';
 		$r['regyinfo']['registrar'] = 'New Zealand Domain Name Registry Limited';
-		return ($r);
+		return $r;
 		}
 	}
-
 ?>

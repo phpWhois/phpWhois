@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,32 +25,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* Example 'namejuice.com' */
-
 if (!defined('__NAMEJUICE_HANDLER__'))
         define('__NAMEJUICE_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
 class namejuice_handler
-        {
-        function parse($data_str, $query)
-                {
+	{
+	function parse($data_str, $query)
+		{
+		$items = array(
+					'owner' => 'Registrant Contact:',
+					'admin' => 'Administrative Contact:',
+					'tech' => 'Technical Contact:',
+					'domain.name' => 'Domain name:',
+					'domain.nserver.' => 'Name Servers:',
+					'domain.created' => 'Creation date:',
+					'domain.expires' => 'Expiration date:',
+					'domain.changed' => 'Update date:',
+					'domain.status' => 'Status:',
+					'domain.sponsor' => 'Registration Service Provided By:'
+				);
 
-                $items = array(
-                                'owner' => 'Registrant Contact:',
-                                'admin' => 'Administrative Contact:',
-                                'tech' => 'Technical Contact:',
-                                'domain.name' => 'Domain name:',
-                                'domain.nserver.' => 'Name Servers:',
-                                'domain.created' => 'Creation date:',
-                                'domain.expires' => 'Expiration date:',
-                                'domain.changed' => 'Update date:',
-                                'domain.status' => 'Status:',
-                                'domain.sponsor' => 'Registration Service Provided By:'
-                              );
-
-				return easy_parser($data_str, $items, 'dmy', false, true, true);
-                }
-        }
+		return easy_parser($data_str, $items, 'dmy', false, true, true);
+		}
+	}
 ?>

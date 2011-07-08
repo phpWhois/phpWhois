@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -39,7 +39,7 @@ class pl_handler
                 	'domain.changed' => 'last modified:',
                 	'domain.sponsor' => 'REGISTRAR:',
                 	'#' => 'WHOIS displays data with a delay not exceeding 15 minutes in relation to the .pl Registry system'
-                	
+
 					);
 
 		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd');
@@ -48,8 +48,7 @@ class pl_handler
 			'referrer' => 'http://www.dns.pl/english/index.html',
 			'registrar' => 'NASK'
 			);
-
-		return ($r);
+		return $r;
 		}
 	}
 ?>

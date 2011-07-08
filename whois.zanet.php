@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* zanic.whois	1.0	Brett Cave, based on code by David Saez */
-
 if (!defined('__ZANET_HANDLER__'))
 	define('__ZANET_HANDLER__', 1);
 
@@ -34,7 +32,6 @@ require_once('whois.parser.php');
 
 class zanet_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -79,16 +76,15 @@ class zanet_handler
 			{
 			if (isset($r['regrinfo']['admin']))
 				$r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
-				
+
 			if (isset($r['regrinfo']['tech']))
 				$r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
 			}
 
 		$r['regyinfo']['referrer'] = 'http://www.za.net/'; // or http://www.za.org
 		$r['regyinfo']['registrar'] = 'ZA NiC';
-		$r = format_dates($r, 'xmdxxy');
-		
-		return ($r);
+		format_dates($r, 'xmdxxy');
+		return $r;
 		}
 	}
 ?>

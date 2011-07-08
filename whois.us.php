@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* neulevel.whois        1.0        by David Saez <david @ ols . es>  */
-
 if(!defined('__US_HANDLER__')) define('__US_HANDLER__',1);
 
 require_once('whois.parser.php');
@@ -40,7 +38,7 @@ class us_handler
 								'referrer'=>'http://www.neustar.us',
 								'registrar' => 'NEUSTAR INC.'
 							);
-		return($r);
+		return $r;
 		}
 	}
 ?>

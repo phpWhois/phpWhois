@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,9 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* whois.arnes.si        Tomaz */
-
-
 if (!defined('__SI_HANDLER__'))
     define('__SI_HANDLER__', 1);
 
@@ -35,7 +32,6 @@ require_once('whois.parser.php');
 
 class si_handler
     {
-
     function parse($data_str, $query)
         {
 		$translate = array(
@@ -48,15 +44,12 @@ class si_handler
                     'tech-c' => 'tech'
                         );
 
+		$r['regrinfo'] = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');		
 		$r['regyinfo'] = array(
                   'referrer' => 'http://www.arnes.si',
                   'registrar' => 'ARNES'
                   );
-
-		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');		
-
-		$r['regrinfo'] = $reg;
-		return ($r);
+		return $r;
         }
     }
 ?>

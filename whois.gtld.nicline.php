@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,10 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* NICLINE.whois 1.0	Carlos Galvez <cgalvez@espaciowww.com> */
-/* NICLINE.whois 1.1	David Saez */
-/* Example 'niclide.com' */
-
 if (!defined('__NICLINE_HANDLER__'))
 	define('__NICLINE_HANDLER__', 1);
 
@@ -36,10 +32,8 @@ require_once('whois.parser.php');
 
 class nicline_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
 				'owner' => 'Registrant:',
 				'admin' => 'Administrative contact:',

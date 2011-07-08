@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* dotfm.whois    1.0    David Saez 4/4/2003 */
-
 if (!defined('__FM_HANDLER__'))
 	define('__FM_HANDLER__', 1);
 
@@ -34,10 +32,8 @@ require_once('whois.parser.php');
 
 class fm_handler
 	{
-
 	function parse($data, $query)
 		{
-
 		$items = array(
 				  'owner' => 'Registrant',
                   'admin' => 'Admin',
@@ -52,7 +48,7 @@ class fm_handler
                   );
 
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
-		
+
 		$items = array(
 						'phone number:' => 'phone',
 						'email address:' => 'email',
@@ -63,7 +59,7 @@ class fm_handler
 		if (!empty($r['regrinfo']['domain']['created']))
 			{
 			$r['regrinfo'] = get_contacts($r['regrinfo'],$items);
-			
+
 			if (count($r['regrinfo']['billing']['address']) > 4)
 				$r['regrinfo']['billing']['address'] = array_slice($r['regrinfo']['billing']['address'],0,4);
 
@@ -78,9 +74,7 @@ class fm_handler
 
 		$r['regyinfo']['referrer'] = 'http://www.dot.dm';
 		$r['regyinfo']['registrar'] = 'dotFM';
-		$r['rawdata'] = $data['rawdata'];
-		
-		return ($r);
+		return $r;
 		}
 	}
 ?>

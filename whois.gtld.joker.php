@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* joker.whois  1.10    David Saez <david@ols.es> */
-
 if (!defined('__JOKER_HANDLER__'))
 	define('__JOKER_HANDLER__', 1);
 
@@ -34,7 +32,6 @@ require_once('whois.parser.php');
 
 class joker_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$translate = array(
@@ -49,13 +46,13 @@ class joker_handler
 				'person'		=> 'name',
 				'domain'		=> 'name'
 				);
-		
+
 		$contacts = array(
 				'admin-c' 	=> 'admin',
 				'tech-c' 	=> 'tech',
 				'billing-c' => 'billing'
 				);
-				
+
 		$items = array(
                 'owner' 		=> 'name',
 				'organization' 	=> 'organization',
@@ -65,7 +62,7 @@ class joker_handler
 		            );
 
 		$r = generic_parser_a($data_str, $translate, $contacts, 'domain', 'Ymd');
-		
+
 		foreach($items as $tag => $convert)
 			{
 			if (isset($r['domain'][$tag]))
@@ -75,7 +72,7 @@ class joker_handler
 				}
 			}
 
-		return ($r);
+		return $r;
 		}
 	}
 ?>

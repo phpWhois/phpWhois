@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,10 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* cira.whois        1.0        by Mark Jeftovic <markjr@easydns.com>  */
-/*		     2.0	David Saez <david@ols.es> */
-/*				standarized object model */
-
 if (!defined('__CA_HANDLER__'))
 	define('__CA_HANDLER__', 1);
 
@@ -36,7 +32,6 @@ require_once('whois.parser.php');
 
 class ca_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -66,18 +61,16 @@ class ca_handler
 			$r['regrinfo']['domain']['sponsor'] = trim($reg);
 			}
 
-		$r['regyinfo'] = array(
-                  'registrar' => 'CIRA',
-                  'referrer' => 'http://www.cira.ca/'
-                  );		
-		
 		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'available')
 			$r['regrinfo']['registered'] = 'no';
 		else
 			$r['regrinfo']['registered'] = 'yes';
 
-		return ($r);
+		$r['regyinfo'] = array(
+                  'registrar' => 'CIRA',
+                  'referrer' => 'http://www.cira.ca/'
+                  );
+		return $r;
 		}
-
 	}
 ?>

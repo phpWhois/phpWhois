@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -33,7 +33,6 @@ require_once('whois.parser.php');
 
 class ve_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -50,11 +49,6 @@ class ve_handler
 		              );
 
 		$r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
-
-		$r['regyinfo'] = array(
-			'referrer'		=>	'http://registro.nic.ve',
-			'registrar'		=>	'NIC-Venezuela - CNTI'
-               );
 				
 		if (!isset($r['regrinfo']['domain']['created']) || is_array($r['regrinfo']['domain']['created']))
 			{
@@ -70,8 +64,12 @@ class ve_handler
 			}
 			
 		$r['regrinfo']['domain']['nserver'] = $dns;
-		$r['regrinfo'] = get_contacts($r['regrinfo']);	
-		return ($r);		
+		$r['regrinfo'] = get_contacts($r['regrinfo']);
+		$r['regyinfo'] = array(
+			'referrer'		=>	'http://registro.nic.ve',
+			'registrar'		=>	'NIC-Venezuela - CNTI'
+               );
+		return $r;		
 		}
 	}
 ?>

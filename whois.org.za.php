@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ if (!defined('__ORG_ZA_HANDLER__'))
 
 class org_za_handler
 	{
-
 	function parse($data, $query)
 		{
-
 		$items = array(
                 'domain.status'		=> 'Status:',
 				'domain.nserver'	=> 'Domain name servers in listed order:',
@@ -46,7 +44,7 @@ class org_za_handler
 				'billing'			=> 'Billing Contact:',
 				'#'					=> 'Search Again'
 				);
-		
+
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
 		if (isset($r['regrinfo']['domain']['status']))
@@ -60,8 +58,7 @@ class org_za_handler
 
 		$r['regyinfo']['referrer'] = 'http://www.org.za';
 		$r['regyinfo']['registrar'] = 'The ORG.ZA Domain';
-		$r['rawdata'] = $data['rawdata'];		
-		return ($r);
+		return $r;
 		}
 	}
 ?>

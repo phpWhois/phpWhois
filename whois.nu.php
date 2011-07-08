@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,9 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* nunames.whois	0.99	Stefan Alfredsson <stefan@alfredsson.org> */
-/* Based upon uknic.whois by David Saez Padros */
-
 if (!defined('__NU_HANDLER__'))
 	define('__NU_HANDLER__', 1);
 
@@ -35,7 +32,6 @@ require_once('whois.parser.php');
 
 class nu_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -80,16 +76,15 @@ class nu_handler
 			$r['regrinfo']['registered'] = 'yes';
 		else
 			$r['regrinfo']['registered'] = 'no';
-							
+
 		$r['regyinfo'] = array(
                           'whois' => 'whois.nic.nu',
                           'referrer' => 'http://www.nunames.nu',
                           'registrar' => '.NU Domain, Ltd'
 		                      );
-			
+
 		format_dates($r, 'dmy');
-		return ($r);
+		return $r;
 		}
 	}
-
 ?>

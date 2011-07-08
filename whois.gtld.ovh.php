@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,7 +32,6 @@ require_once('whois.parser.php');
 
 class ovh_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -45,7 +44,7 @@ class ovh_handler
 						'domain.expires'	=> 'Record expires on',
 						'domain.created'	=> 'Record created on'
                         );
-		
+
 		return easy_parser($data_str, $items, 'mdy',false,false,true);
 		}
 	}

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,20 +25,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* hunic.whois	0.01	Manuel Machajdik <machajdik@gmxpro.net> */
-/* based upon org.whois and atnic.whois */
-
 if(!defined('__HU_HANDLER__'))
   define('__HU_HANDLER__',1);
 
 require_once('whois.parser.php');
 
-class hu_handler {
-
-  function parse ($data_str, $query) {
-
-
-    $translate = array (
+class hu_handler
+	{
+	function parse ($data_str, $query)
+		{
+		$translate = array (
                         'fax-no'		=> 'fax',
                         'e-mail'		=> 'email',
                         'hun-id'		=> 'handle',
@@ -49,7 +45,7 @@ class hu_handler {
                         'registered'	=> 'created'
                         );
 
-    $contacts = array (
+		$contacts = array (
                         'registrar'		=> 'owner',
                         'admin-c'		=> 'admin',
                         'tech-c'		=> 'tech',
@@ -57,44 +53,43 @@ class hu_handler {
                         'zone-c'		=> 'zone',
                         'owner-hun-id'  => 'owner'
                       );
-    
-    // make those broken hungary comments standards-conforming
-	// replace first found hun-id with owner-hun-id (will be parsed later on)
-	// make output UTF-8
 
-	$comments = true;
-	$owner_id = true;
-	
-	foreach ($data_str['rawdata'] as $i => $val)
-		{
-		if ($comments)
+		// make those broken hungary comments standards-conforming
+		// replace first found hun-id with owner-hun-id (will be parsed later on)
+		// make output UTF-8
+
+		$comments = true;
+		$owner_id = true;
+
+		foreach ($data_str['rawdata'] as $i => $val)
 			{
-			if (strpos($data_str['rawdata'][$i],'domain:') === false)
+			if ($comments)
 				{
-				if ($i) $data_str['rawdata'][$i] = '% '.$data_str['rawdata'][$i];
+				if (strpos($data_str['rawdata'][$i],'domain:') === false)
+					{
+					if ($i) $data_str['rawdata'][$i] = '% '.$data_str['rawdata'][$i];
+					}
+				else
+					$comments = false;
 				}
 			else
-				$comments = false;
+				if ($owner_id && substr($data_str['rawdata'][$i],0,7) == 'hun-id:')
+					{
+					$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
+					$owner_id = false;
+					}
 			}
-		else
-			if ($owner_id && substr($data_str['rawdata'][$i],0,7) == 'hun-id:')
-				{
-				$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
-				$owner_id = false;
-				}
-		}
-		
-	$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
-	
-	unset($reg['domain']['organization']);
-	unset($reg['domain']['address']);
-	unset($reg['domain']['phone']);
-	unset($reg['domain']['fax']);
 
-	$r['regrinfo'] = $reg;
-	$r['regyinfo'] = array('referrer'=>'http://www.nic.hu','registrar'=>'HUNIC');
-	$r['rawdata'] = $data_str['rawdata'];
-	format_dates($r,'ymd');
-	return($r);
+		$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
+
+		unset($reg['domain']['organization']);
+		unset($reg['domain']['address']);
+		unset($reg['domain']['phone']);
+		unset($reg['domain']['fax']);
+
+		$r['regrinfo'] = $reg;
+		$r['regyinfo'] = array('referrer'=>'http://www.nic.hu','registrar'=>'HUNIC');
+		return format_dates($r,'ymd');
+		}
 	}
-}
+?>

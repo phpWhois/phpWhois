@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -37,7 +37,7 @@ class co_handler
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], false, '-md--y');
 		$r['regyinfo']['referrer'] = 'http://www.cointernet.com.co/';
 		$r['regyinfo']['registrar'] = '.CO Internet, S.A.S.';
-		return ($r);
+		return $r;
 		}
 	}
 ?>

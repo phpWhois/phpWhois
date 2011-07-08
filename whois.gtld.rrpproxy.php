@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class rrpproxy_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'created-date:' => 'domain.created',
                   'updated-date:' => 'domain.changed',
@@ -88,8 +86,7 @@ class rrpproxy_handler
                   'billing-email:' => 'billing.email'
 		              );
 
-		$r = generic_parser_b($data_str, $items);
-		return ($r);
+		return generic_parser_b($data_str, $items);
 		}
 	}
 ?>

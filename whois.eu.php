@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,7 +32,6 @@ if (!defined('__EU_HANDLER__'))
 
 class eu_handler
 	{
-
 	function parse($data, $query)
 		{
 
@@ -46,14 +45,14 @@ class eu_handler
                 'owner'				=> 'Registrant:',
                 ''					=> 'Please visit'
 				);
-		
+
 		$extra = array(
 				'organisation:' => 'organization',
 				'website:'		=> 'url'
 				);
 
 		$r['regrinfo'] = get_blocks($data['rawdata'], $items);
-		
+
 		if (!empty($r['regrinfo']['domain']['status']))
 			switch ($r['regrinfo']['domain']['status'])
 				{
@@ -61,11 +60,11 @@ class eu_handler
 				case 'AVAILABLE':
 					$r['regrinfo']['registered'] = 'no';
 					break;
-			
+
 				case 'APPLICATION PENDING':
 					$r['regrinfo']['registered'] = 'pending';
 					break;
-					
+
 				default:
 					$r['regrinfo']['registered'] = 'unknown';
 				}
@@ -77,12 +76,10 @@ class eu_handler
 
 		if (isset($r['regrinfo']['domain']['registrar']))
 			$r['regrinfo']['domain']['registrar'] = get_contact($r['regrinfo']['domain']['registrar'],$extra);
-			
+
 		$r['regyinfo']['referrer'] = 'http://www.eurid.eu';
 		$r['regyinfo']['registrar'] = 'EURID';
-		$r['rawdata'] = $data['rawdata'];
-		
-		return ($r);
+		return $r;
 		}
 	}
 ?>

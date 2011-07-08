@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class lt_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$translate = array(
 					'contact nic-hdl:' => 'handle',
 					'contact name:' => 'name'
@@ -60,8 +58,7 @@ class lt_handler
                     'referrer' => 'http://www.domreg.lt',
                     'registrar' => 'DOMREG.LT'
                     );
-
-		return ($r);
+		return $r;
 		}
 	}
 ?>

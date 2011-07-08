@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* cat.whois	1.0	David Saez */
-
 if (!defined('__CAT_HANDLER__'))
 	define('__CAT_HANDLER__', 1);
 
@@ -37,13 +35,13 @@ class cat_handler
 	function parse($data_str, $query)
 		{
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata']);
-		
+
 		if (!isset($r['regrinfo']['domain']['name']))
 			$r['regrinfo']['registered'] = 'no';
-			
+
 		$r['regyinfo']['referrer'] = 'http://www.domini.cat/';
 		$r['regyinfo']['registrar'] = 'Domini punt CAT';
-		return ($r);
+		return $r;
 		}
 	}
 ?>

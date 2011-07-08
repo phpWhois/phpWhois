@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -50,7 +50,7 @@ class nameking_handler
 					'tel --:' => 'phone',
 					'email-:' => 'email',
 					'email:' => 'email',
-					'mail:' => 'email',					
+					'mail:' => 'email',
 					'name--' => 'name',
 					'org:' => 'organization',
 					'zipcode:' => 'address.pcode',
@@ -63,7 +63,7 @@ class nameking_handler
 					'organization:' => 'organization',
 					'city, province, post code:' => 'address.city'
 					);
-					
+
 		return easy_parser($data_str, $items, 'mdy', $extra, false, true);
 		}
 	}

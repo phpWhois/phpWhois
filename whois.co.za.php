@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,7 +32,6 @@ require_once('whois.parser.php');
 
 class co_Za_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -65,11 +64,10 @@ class co_Za_handler
 		              );
 
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
-		
+
 		$r['regyinfo']['referrer'] = 'http://www.co.za';
 		$r['regyinfo']['registrar'] = 'UniForum Association';
-		return ($r);
+		return $r;
 		}
 	}
-
 ?>

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -39,10 +39,8 @@ require_once('whois.parser.php');
 
 class ro_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$translate = array(
 						'fax-no' => 'fax',
 						'e-mail' => 'email',
@@ -73,7 +71,7 @@ class ro_handler
 			{
 			$reg['owner'] = get_contact($reg['domain']['description'],$extra);
 			unset($reg['domain']['description']);
-			
+
 			foreach($reg as $key => $item)
 				{
 				if (isset($item['address']))
@@ -95,7 +93,7 @@ class ro_handler
                           'registrar' => 'nic.ro'
                           );
 
-		return ($r);
+		return $r;
 		}
 	}
 ?>

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class onlinenic_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'owner' => 'Registrant:',
                   'admin' => 'Administrator:',
@@ -55,7 +53,7 @@ class onlinenic_handler
 					'tel --:' => 'phone',
 					'email-:' => 'email',
 					'email:' => 'email',
-					'mail:' => 'email',					
+					'mail:' => 'email',
 					'name--' => 'name',
 					'org:' => 'organization',
 					'zipcode:' => 'address.pcode',
@@ -66,7 +64,7 @@ class onlinenic_handler
 					',province:' => '',
 					',country:' => 'address.country'
 					);
-					
+
 		$r = easy_parser($data_str, $items, 'mdy',$extra,false,true);
 
 		foreach($r as $key => $part)
@@ -78,10 +76,8 @@ class onlinenic_handler
 				$r[$key]['email'] = $email;
 				if ($phone != '') $r[$key]['phone'] = $phone;
 				}
-				
-		return ($r);
+
+		return $r;
 		}
-
 	}
-
 ?>

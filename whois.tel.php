@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -39,7 +39,7 @@ class tel_handler
                   'referrer' => 'http://www.telnic.org',
                   'registrar' => 'Telnic'
                   );
-		return ($r);
+		return $r;
 		}
 	}
 ?>

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,7 +32,6 @@ require_once('whois.parser.php');
 
 class edu_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$items = array(
@@ -44,21 +43,20 @@ class edu_handler
                 'owner'	=> 'Registrant:',
                 'admin' => 'Administrative Contact:',
                 'tech' => 'Technical Contact:',
-                'billing' => 'Billing Contact:'             
+                'billing' => 'Billing Contact:'
 		            );
-		
+
 		$r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'dmy');
-				
+
 		if (isset($b['tech']))
 			{
 			if ($r['regrinfo']['tech']['name'] == 'Same as above')
 				$r['regrinfo']['tech'] = $r['regrinfo']['admin'];
 			}
-			
+
 		$r['regyinfo']['referrer'] = 'http://whois.educause.net';
 		$r['regyinfo']['registrar'] = 'EDUCASE';
 		return ($r);
 		}
 	}
-
 ?>

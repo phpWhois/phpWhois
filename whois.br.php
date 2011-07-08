@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -24,9 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-/* brnic.whois	      2.1        David Saez <david@ols.es>
-/* brnic.whois        1.0        by Marcelo Sanches  msanches@sitebox.com.br */
 
 require_once('whois.parser.php');
 
@@ -57,11 +54,6 @@ class br_handler
 
 		$r = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
-		$a['regyinfo'] = array(
-                    'registrar' => 'BR-NIC',
-                    'referrer' => 'http://www.nic.br'
-                    );
-
 		if (in_array('Permission denied.', $r['disclaimer']))
 			{
 			$r['registered'] = 'unknown';
@@ -76,14 +68,17 @@ class br_handler
 			$r['owner']['organization'] = $r['domain']['owner'];
 			unset($r['domain']['owner']);
 			}
-			
+
 		if (isset($r['domain']['responsible'])) unset($r['domain']['responsible']);
 		if (isset($r['domain']['address'])) unset($r['domain']['address']);
 		if (isset($r['domain']['phone'])) unset($r['domain']['phone']);
 
 		$a['regrinfo'] = $r;
-
-		return ($a);
+		$a['regyinfo'] = array(
+                    'registrar' => 'BR-NIC',
+                    'referrer' => 'http://www.nic.br'
+                    );
+		return $a;
 		}
 	}
 ?>

@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* directnic.whois     1.0     david@ols.es            2003/03/30 */
-
 if (!defined('__FABULOUS_HANDLER__'))
 	define('__FABULOUS_HANDLER__', 1);
 
@@ -46,17 +44,11 @@ class fabulous_handler
 
 		$r = easy_parser($data_str, $items, 'mdy',false,false,true);
 
-		if (!isset($r['tech']))
-			{
-			$r['tech'] = $r['billing'];
-			}
+		if (!isset($r['tech'])) $r['tech'] = $r['billing'];
 
-		if (!isset($r['admin']))
-			{
-			$r['admin'] = $r['tech'];
-			}
-		
-		return ($r);
+		if (!isset($r['admin'])) $r['admin'] = $r['tech'];
+
+		return $r;
 		}
 	}
 ?>

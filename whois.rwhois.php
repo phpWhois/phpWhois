@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class rwhois_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
 						'network:Organization-Name:' => 'owner.name',
 						'network:Organization;I:' => 'owner.organization',
@@ -45,7 +43,7 @@ class rwhois_handler
 						'network:IP-Network-Block:' => 'network.inetnum',
 						'network:IP-Network:' => 'network.inetnum',
 						'network:Network-Name:' => 'network.name',
-						'network:ID:' => 'network.handle',						
+						'network:ID:' => 'network.handle',
 						'network:Created:' => 'network.created',
 						'network:Updated:' => 'network.changed',
 						'network:Tech-Contact;I:' => 'tech.email',
@@ -54,8 +52,7 @@ class rwhois_handler
 
 		$res = generic_parser_b($data_str, $items, 'Ymd', false);
 		if (isset($res['disclaimer'])) unset($res['disclaimer']);
-		$res = array( 'regrinfo' => $res );
-		return $res;
+		return array( 'regrinfo' => $res );
 		}
 	}
 ?>

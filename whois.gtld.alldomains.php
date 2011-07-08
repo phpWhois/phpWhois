@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class alldomains_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                 'owner'	=> 'Registrant:',
                 'admin' => 'Administrative',
@@ -44,7 +42,7 @@ class alldomains_handler
                 'domain.sponsor' => 'Registrar:',
                 'domain.nserver.' => 'Domain servers in listed order:'
 		            );
-		
+
 		return easy_parser($data_str, $items, 'ymd');
 		}
 	}

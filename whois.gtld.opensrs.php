@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -24,9 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-/* opensrsnet.whois	1.0	jeremiah bellomy	2000/04/06 */
-/* opensrsnet.whois     2.1     david@ols.es            2003/02/15 */
 
 if (!defined('__OPENSRS_HANDLER__'))
 	define('__OPENSRS_HANDLER__', 1);
@@ -55,7 +52,7 @@ class opensrs_handler
 		if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
 			$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
 
-		return ($r);
+		return $r;
 		}
 	}
 ?>

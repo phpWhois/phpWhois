@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -24,13 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-/* chnic.whois	1.1	David Saez Padros <david@ols.es>  For .ch & .li domains */
-/*  8/1/2002    1.2     Added status (active/inactive) and corrected error */
-/*                      for inactive domains */
-/*                      (like creart.ch) thanx to Roger Fichmann */
-/* 24/7/2002    2.0     David Saez - updated to new object model */
-/* 17/3/2003    2.1     David Saez - rewritten to use generic3.whois */
 
 require_once('whois.parser.php');
 
@@ -62,19 +55,14 @@ class ch_handler
 		if (!empty($r['regrinfo']['domain']['name']))
 			{
 			$r['regrinfo'] = get_contacts($r['regrinfo'],$trans);
-			
+
 			$r['regrinfo']['domain']['name'] = $r['regrinfo']['domain']['name'][0];
-			
+
 			if (isset($r['regrinfo']['domain']['changed'][0]))
 				$r['regrinfo']['domain']['changed'] = get_date($r['regrinfo']['domain']['changed'][0], 'dmy');
-				
+
 			if (isset($r['regrinfo']['domain']['created'][0]))
 				$r['regrinfo']['domain']['created'] = get_date($r['regrinfo']['domain']['created'][0], 'dmy');
-
-			$r['regyinfo'] = array(
-                          'referrer' => 'http://www.nic.ch',
-                          'registrar' => 'SWITCH Domain Name Registration'
-                          );
 
 			$r['regrinfo']['registered'] = 'yes';
 			}
@@ -84,8 +72,11 @@ class ch_handler
 			$r['regrinfo']['registered'] = 'no';
 			}
 
-		return ($r);
+		$r['regyinfo'] = array(
+                          'referrer' => 'http://www.nic.ch',
+                          'registrar' => 'SWITCH Domain Name Registration'
+                          );
+		return $r;
 		}
-
 	}
 ?>

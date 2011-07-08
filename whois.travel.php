@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -37,7 +37,7 @@ class travel_handler
 		$r['regrinfo'] = generic_parser_b($data_str['rawdata']);
 		$r['regyinfo']['referrer'] = 'http://www.nic.travel/';
 		$r['regyinfo']['registrar'] = 'Tralliance Corporation';
-		return ($r);
+		return $r;
 		}
 	}
 ?>

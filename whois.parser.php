@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -31,7 +31,7 @@ function generic_parser_a ($rawdata, $translate, $contacts, $main='domain', $dat
 {
 $blocks = generic_parser_a_blocks($rawdata,$translate,$disclaimer);
 
-if (isset($disclaimer) && is_array($disclaimer)) 
+if (isset($disclaimer) && is_array($disclaimer))
     $ret['disclaimer']=$disclaimer;
 
 if (empty($blocks) || !is_array($blocks['main']))
@@ -53,11 +53,11 @@ while (list($key,$val) = each($contacts))
 
 		$blk = strtoupper(strtok($blk,' '));
 		if (isset($blocks[$blk])) $ret[$val] = $blocks[$blk];
-		unset($r[$key]); 
+		unset($r[$key]);
 		}
 
 if ($main) $ret[$main] = $r;
-	
+
 format_dates($ret,$dateformat);
 return $ret;
 }
@@ -103,7 +103,7 @@ while (list($key,$val)=each($rawdata))
 
 	$hasdata = true;
 
-	if (isset($translate[$k])) 
+	if (isset($translate[$k]))
 		{
 		$k=$translate[$k];
 		if ($k=='') continue;
@@ -120,11 +120,11 @@ while (list($key,$val)=each($rawdata))
 		$v = strtok($v,' ');
 		$gkey = strtoupper($v);
 		}
-		
+
 	if (isset($block[$k]) && is_array($block[$k]))
 		$block[$k][]=$v;
 	else
-		if (!isset($block[$k]) || $block[$k]=='') 
+		if (!isset($block[$k]) || $block[$k]=='')
 			$block[$k]=$v;
 		else
 			{
@@ -188,7 +188,7 @@ if (!$items)
 				'Registrant FAX:' => 'owner.fax',
 				'Registrant Email:' => 'owner.email',
 				'Registrant E-mail:' => 'owner.email',
-				
+
 				'Administrative Contact ID:' => 'admin.handle',
 				'Administrative Contact Name:' => 'admin.name',
 				'Administrative Contact Organization:' => 'admin.organization',
@@ -231,14 +231,14 @@ if (!$items)
 				'Admin Address3:' => 'admin.address.street.',
 				'Admin City:' => 'admin.address.city',
 				'Admin State/Province:' => 'admin.address.state',
-				'Admin Postal Code:' => 'admin.address.pcode',				  
+				'Admin Postal Code:' => 'admin.address.pcode',
 				'Admin Country:' => 'admin.address.country',
 				'Admin Country/Economy:' => 'admin.address.country',
 				'Admin Phone:' => 'admin.phone',
 				'Admin FAX:' => 'admin.fax',
 				'Admin Email:' => 'admin.email',
 				'Admin E-mail:' => 'admin.email',
-				
+
 				'Technical Contact ID:' => 'tech.handle',
 				'Technical Contact Name:' => 'tech.name',
 				'Technical Contact Organization:' => 'tech.organization',
@@ -289,7 +289,7 @@ if (!$items)
 				'Tech FAX:' => 'tech.fax',
 				'Tech Email:' => 'tech.email',
 				'Tech E-mail:' => 'tech.email',
-				
+
 				'Billing Contact ID:' => 'billing.handle',
 				'Billing Contact Name:' => 'billing.name',
 				'Billing Contact Organization:' => 'billing.organization',
@@ -344,33 +344,33 @@ $disok = true;
 while (list($key,$val) = each($rawdata))
 	{
 	if (trim($val) != '')
-		{ 
+		{
 	     if (($val[0]=='%' || $val[0]=='#') && $disok)
 			{
 			$r['disclaimer'][] = trim(substr($val,1));
 			$disok = true;
 			continue;
 			}
-	     
+
 		$disok = false;
 		reset($items);
 
-		while (list($match, $field)=each($items)) 
+		while (list($match, $field)=each($items))
 			{
 			$pos = strpos($val,$match);
-			
+
 			if ($pos !== false)
 				{
 				if ($field != '')
 					{
 					$var = '$r'.getvarname($field);
 					$itm = trim(substr($val,$pos+strlen($match)));
-				
+
 					if ($itm!='')
 						eval($var.'="'.str_replace('"','\"',$itm).'";');
 					}
-					
-				if (!$scanall) 
+
+				if (!$scanall)
 					break;
 				}
 			}
@@ -384,7 +384,7 @@ if (empty($r))
 else
 	{
 	if ($hasreg) $r['registered'] = 'yes';
-	
+
 	$r = format_dates($r, $dateformat);
 	}
 
@@ -444,7 +444,7 @@ while (list($key,$val) = each($rawdata))
 				}
 			else
 				{
-				$var = getvarname(strtok($field,'#'));			
+				$var = getvarname(strtok($field,'#'));
 				$itm = trim(substr($val,$pos+strlen($match)));
 				eval('$r'.$var.'=$itm;');
 				}
@@ -462,11 +462,11 @@ while (list($key,$val) = each($rawdata))
 	$block = array();
 
 	// Block found, get data ...
-	
+
 	while (list($key,$val) = each($rawdata))
-		{ 
+		{
 		$val = trim($val);
-		
+
 		if ($val == '' || $val == str_repeat($val[0],strlen($val))) continue;
 
 		$last = substr($val,-1,1);
@@ -477,25 +477,25 @@ while (list($key,$val) = each($rawdata))
 			prev($rawdata);
 			break;
 			}
-			
+
 		if ($endtag == '' || $partial_match)
 		*/
 		if ($endtag == '' || $partial_match || $last == $endtag)
 			{
 			//Check if this line starts another block
 			$et = false;
-			
+
 			foreach ($items as $field => $match)
 				{
 				$pos = strpos($val,$match);
-				
+
 				if ($pos !== false && $pos == 0)
 					{
 					$et = true;
 					break;
 					}
 				}
-				
+
 			if ($et)
 				{
 				// Another block found
@@ -503,7 +503,7 @@ while (list($key,$val) = each($rawdata))
 				break;
 				}
 			}
-			
+
 		$block[] = $val;
 		}
 
@@ -512,7 +512,7 @@ while (list($key,$val) = each($rawdata))
 	foreach ($items as $field => $match)
 		{
 		$pos = strpos($line,$match);
-		
+
 		if ($pos !== false)
 			{
 			$var = getvarname(strtok($field,'#'));
@@ -526,7 +526,7 @@ return $r;
 
 //-------------------------------------------------------------------------
 
-function easy_parser($data_str, $items, $date_format, $translate = false , 
+function easy_parser($data_str, $items, $date_format, $translate = false ,
 					 $has_org = false, $partial_match = false,
 					 $def_block = false )
 {
@@ -557,7 +557,7 @@ if (isset($array['owner']))
 
 if (isset($array['registrar']))
 	$array['registrar'] = get_contact($array['registrar'], $extra_items, $has_org);
-	
+
 return $array;
 }
 
@@ -598,7 +598,7 @@ $items = array (
 		'location:' => 'address.city',
 		'country:' => 'address.country',
 		'name:' => 'name',
-		'last modified:' => 'changed'	
+		'last modified:' => 'changed'
 		);
 
 if ($extra_items)
@@ -608,7 +608,7 @@ if ($extra_items)
 		$extra_items[$match] = $field;
 	$items = $extra_items;
 	}
-	
+
 while (list($key,$val)=each($array))
 	{
 	$ok=true;
@@ -617,11 +617,11 @@ while (list($key,$val)=each($array))
 		{
 		reset($items);
 		$ok = false;
-	
+
 		while (list($match,$field) = each($items))
 			{
 			$pos = strpos(strtolower($val),$match);
-		
+
 			if ($pos === false) continue;
 
 			$itm = trim(substr($val,$pos+strlen($match)));
@@ -630,7 +630,7 @@ while (list($key,$val)=each($array))
 				{
 				eval('$r'.getvarname($field).'=$itm;');
 				}
-				
+
 			$val = trim(substr($val,0,$pos));
 
 			if ($val == '')
@@ -644,7 +644,7 @@ while (list($key,$val)=each($array))
 				$ok = true;
 				}
 			//break;
-			} 
+			}
 
 		if (preg_match("/([+]*[-\(\)\. x0-9]){7,}/", $val, $matches))
 			{
@@ -659,11 +659,11 @@ while (list($key,$val)=each($array))
 					}
 				else
 					{
-					$r['phone'] = trim($matches[0]);			
+					$r['phone'] = trim($matches[0]);
 					}
-				
-				$val = str_replace($matches[0],'',$val);	
-					
+
+				$val = str_replace($matches[0],'',$val);
+
 				if ($val == '')
 					{
 					unset($array[$key]);
@@ -680,10 +680,10 @@ while (list($key,$val)=each($array))
 		if (preg_match('/([-0-9a-zA-Z._+&\/=]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6})/',$val, $matches))
 			{
 			$r['email'] = $matches[0];
-	
-			$val = str_replace($matches[0],'',$val);	
+
+			$val = str_replace($matches[0],'',$val);
 			$val = trim(str_replace('()','',$val));
-			 
+
 			if ($val == '')
 				{
 				unset($array[$key]);
@@ -698,12 +698,12 @@ while (list($key,$val)=each($array))
 					}
 				else
 					$array[$key] = $val;
-					
+
 				$ok = true;
 				}
 			}
 		}
-	}     
+	}
 
 if (!isset($r['name']) && count($array)>0)
 	{
@@ -756,7 +756,7 @@ foreach ($res as $key => $val)
 		if (!is_numeric($key) && ($key=='expires' || $key=='created' || $key=='changed'))
 			{
 			$d = get_date($val,$format);
-			if ($d) $res[$key] = $d;		
+			if ($d) $res[$key] = $d;
 			}
 		}
 	}
@@ -832,7 +832,7 @@ while (!$ok)
 	reset($res);
 	$ok = true;
 
-	while (list($key, $val) = each($res)) 
+	while (list($key, $val) = each($res))
 		{
 		if ($val == '' || $key == '') continue;
 

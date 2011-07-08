@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -24,8 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-/* ripe.whois	1.0 	David Saez 7/6/2002 */
 
 require_once('whois.parser.php');
 
@@ -49,7 +47,7 @@ class ripe_handler
 						'admin-c' => 'admin',
 						'tech-c' => 'tech'
 		                  );
-		                  
+
 		if (!empty($data_str['rawdata'])) $data_str = $data_str['rawdata'];
 
 		$r = generic_parser_a($data_str, $translate, $contacts, 'network');
@@ -59,7 +57,7 @@ class ripe_handler
 			$r['owner']['organization'] = $r['network']['desc'];
 			unset($r['network']['desc']);
 			}
-			
+
 		if (isset($r['admin']['abuse-mailbox']))
 			{
 			$r['abuse']['email'] = $r['admin']['abuse-mailbox'];
@@ -71,18 +69,17 @@ class ripe_handler
 			$r['abuse']['email'] = $r['tech']['abuse-mailbox'];
 			unset($r['tech']['abuse-mailbox']);
 			}
-		
+
 		// Clean mess
 		if (isset($r['tech']['tech-c']))  unset($r['tech']['tech-c']);
 		if (isset($r['tech']['admin-c'])) unset($r['tech']['admin-c']);
 		if (isset($r['admin']['tech-c']))  unset($r['admin']['tech-c']);
 		if (isset($r['admin']['admin-c'])) unset($r['admin']['admin-c']);
-		
+
 		$r = array( 'regrinfo' => $r );
 		$r['regyinfo']['type'] ='ip';
 		$r['regyinfo']['registrar'] = 'RIPE Network Coordination Centre';
 		return $r;
 		}
-
 	}
 ?>

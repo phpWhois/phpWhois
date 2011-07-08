@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,17 +32,13 @@ require_once('whois.gtld.iana.php');
 
 class int_handler
 	{
-
 	function parse($data_str, $query)
 		{
 		$iana = new iana_handler();
-		
 		$r['regrinfo'] = $iana->parse($data_str['rawdata'], $query);
-		
 		$r['regyinfo']['referrer'] = 'http://www.iana.org/int-dom/int.htm';
 		$r['regyinfo']['registrar'] = 'Internet Assigned Numbers Authority';
 		return ($r);
 		}
 	}
-
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * PHPWhois IR Lookup Extension - http://github.com/sepehr/phpwhois-ir
  *
@@ -22,7 +21,6 @@
 // Define the handler flag.
 if (!defined('__IR_HANDLER__'))
   define('__IR_HANDLER__', 1);
-
 
 // Loadup the parser.
 require_once('whois.parser.php');
@@ -49,14 +47,14 @@ class ir_handler
                     'holder-c'	=> 'owner'
 		                );
 
+		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
+
+		$r['regrinfo'] = $reg;
 		$r['regyinfo'] = array(
                     'referrer'=>'http://whois.nic.ir/',
 					'registrar' => 'NIC-IR'
                     );
-
-		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
-	
-		$r['regrinfo'] = $reg;
-		return ($r);
+		return $r;
 		}
 	}
+?>

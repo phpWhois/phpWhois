@@ -4,7 +4,7 @@ Whois.php        PHP classes to conduct whois queries
 
 Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
 
-Maintained by David Saez (david@ols.es)
+Maintained by David Saez
 
 For the most recent version of this package visit:
 
@@ -32,10 +32,8 @@ require_once('whois.parser.php');
 
 class psiusa_handler
 	{
-
 	function parse($data_str, $query)
 		{
-
 		$items = array(
                   'created:' => 'domain.created',
                   'last-changed:' => 'domain.changed',
@@ -86,8 +84,7 @@ class psiusa_handler
                   '[zone-c] email:' => 'zone.email',
 		              );
 
-		$r = generic_parser_b($data_str, $items);
-		return ($r);
+		return generic_parser_b($data_str, $items);
 		}
 	}
 ?>
