@@ -53,8 +53,7 @@ class rwhois_handler
 						);
 
 		$res = generic_parser_b($data_str, $items, 'Ymd', false);
-
-		unset($res['disclaimer']);
+		if (isset($res['disclaimer'])) unset($res['disclaimer']);
 		$res = array( 'regrinfo' => $res );
 		return $res;
 		}
