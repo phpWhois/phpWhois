@@ -8,7 +8,7 @@
 		- cosmetic fixes to many handlers (removed unuseful
 		  spaces, removed change history, regyinfo position
 		  unification,...)
-		- cira.ca is non UTF8
+		- cira.ca,nicline are non UTF8
 
 2011/06/26
 		- added handler for gandi (request #3155752)

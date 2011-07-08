@@ -45,14 +45,15 @@ $this->DATA = array(
 /* Non UTF-8 servers */
 
 $this->NON_UTF8 = array(
+	'br.whois-servers.net' => 1,
 	'ca.whois-servers.net' => 1,
-	'whois.interdomain.net' => 1,
-	'pt.whois-servers.net' => 1,
-	'is.whois-servers.net' => 1,
-	'whois.lacnic.net' => 1,
 	'cl.whois-servers.net' => 1,
 	'hu.whois-servers.net' => 1,
-	'br.whois-servers.net' => 1,
+	'is.whois-servers.net' => 1,
+	'pt.whois-servers.net' => 1,
+	'whois.interdomain.net' => 1,
+	'whois.lacnic.net' => 1,
+	'whois.nicline.com' => 1,
 	'whois.ripe.net' => 1
 	);
 
