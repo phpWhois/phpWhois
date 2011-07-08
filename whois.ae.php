@@ -35,48 +35,27 @@ require_once('whois.parser.php');
 
 class ae_handler
 	{
-
 	function parse($data_str, $query)
 		{
+		$items = array(
+                    'Domain Name:'		=> 'domain.name',
+                    'Registrar Name:'	=> 'domain.sponsor',
+                    'Status:'			=> 'domain.status',
+                    'Registrant Contact ID:'	=> 'owner.handle',
+                    'Registrant Contact Name:' => 'owner.name',
+                    'Tech Contact Name:'		=> 'tech.name',
+                    'Tech Contact ID:'			=> 'tech.handle',
+                    'Name Server:'		=> 'domain.nserver.'
+		              );
 
-		$translate = array(
-			'fax-no' 		=> 'fax',
-			'e-mail' 		=> 'email',
-			'nic-hdl' 		=> 'handle',
-			'person' 		=> 'name'
-			);
-
-		$contacts = array(
-                    'owner-c' => 'owner',
-                    'admin-c' => 'admin',
-                    'tech-c' => 'tech',
-                    'billing-c' => 'billing',
-                    'zone-c' => 'zone'
-		                );
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
 		$r['regyinfo'] = array(
                     'referrer' => 'http://www.nic.ae',
                     'registrar' => 'UAENIC'
                     );
 
-		$reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
-
-		if (isset($reg['domain']['remarks']))
-			unset($reg['domain']['remarks']);
-
-		if (isset($reg['domain']['descr']))
-			{
-			$reg['owner'] = get_contact($reg['domain']['descr']);
-			unset($reg['domain']['descr']);			
-			}
-
-		if (!empty($reg['domain']['blacklisted']))
-			{
-			$reg['registered'] = 'unknown';
-			}
-
-		$r['regrinfo'] = $reg;
-		return ($r);
+		return $r;
 		}
 	}
 ?>

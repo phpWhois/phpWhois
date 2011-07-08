@@ -68,7 +68,7 @@ $this->WHOIS_PARAM = array(
 
 $this->WHOIS_SPECIAL = array(
 		'ad'	 => '',
-		'ae'	 => 'whois.nic.ae',
+		'ae'	 => 'whois.aeda.net.ae',
 		'af'	 => 'whois.nic.af',
 		'ai'	 => 'http://whois.offshore.ai/cgi-bin/whois.pl?domain-name={domain}.ai',
 		'al'	 => '',
