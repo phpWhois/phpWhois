@@ -1,43 +1,49 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
 <head>
 <title>whois.php -base classes to do whois queries with php</title>
-</head><body bgcolor="white">
+<style type="text/css">
+</style>
+</head>
 
-<!--results-->
-<blockquote>
-<b>Results for {query} :</b><br></br>
-{result}
-</blockquote>
-<!--/results-->
-
+<body>
 <center>
+
+<h1>phpWhois {ver} - base class to do whois queries with php</h1>
+
+<p>
+&copy; 1999 - 2011 <a href="http://www.easydns.com/">easyDNS
+Technologies Inc.</a> &amp; <a href="http://mark.jeftovic.net/">Mark Jeftovic</a><br/>
+Now maintained and hosted by David Saez at <a href="http://www.ols.es">OLS 20000</a><br/>
+Placed under the GPL. See the LICENSE file in the distribution.
+</p>
+
 <table>
 <tr><td bgcolor="#55aaff">
 <form method="get" action="{self}">
 
 <table>
-<tr><td colspan=2>
-<center>
+<tr><td colspan="3" align="center">
 <b>Enter any domain name, ip address or AS handle you would like to query whois for</b>
-<br></br><br></br>
-<input name="query"></input> <input type="submit" value="Whois"></input>
-</center>
+<br/><br/>
+<input name="query" /> <input type="submit" value="Whois" /><br/>
 </td></tr>
 
-<tr><td>
-<input type="radio" name="output" value="normal"></input> Show me regular output
-<br></br>
-<input type="radio" name="output" value="nice" checked></input> Show me HTMLized output
-<br></br>
-<input type="radio" name="output" value="object"></input> Show me the returned PHP object
+<tr>
+<td>
+<input type="radio" name="output" value="normal" /> Show me regular output<br/>
+<input type="radio" name="output" value="nice" checked="checked" /> Show me HTMLized output<br/>
+<input type="radio" name="output" value="object" /> Show me the returned PHP object
 </td>
 
-<td align=right valign=bottom>
-<a href="http://www.phpwhois.org">
-<img border=0 src="whois.icon.png" alt=""></img><br></br>
-</a>
+<td align="left" valign="top">
+<input type="checkbox" name="fast" value="1" /> Fast lookup
+</td>
+
+<td align="right" valign="bottom">
+<a href="http://www.phpwhois.org" title="phpWhois web page">
+<img border="0" src="whois.icon.png" alt="phpWhois web page" /></a>
 </td>
 </tr>
 
@@ -46,5 +52,13 @@
 </td></tr>
 </table>
 </center>
+
+<!--results-->
+<p><b>Results for {query} :</b></p>
+<blockquote>
+{result}
+</blockquote>
+<!--/results-->
+
 </body>
 </html>

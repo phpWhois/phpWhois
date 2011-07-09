@@ -1,4 +1,7 @@
-2011/08/07
+2011/07/09
+		- html & cosmetic changes in examples
+
+2011/07/08
 		- fixes for arin (bug #3339783)
 		- fixed .nl handler (bug #3314404)
 		- fixed .ae whois server (bug #3354286)

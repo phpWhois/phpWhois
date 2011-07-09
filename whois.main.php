@@ -43,7 +43,7 @@ class Whois extends WhoisClient
 	var $non_icann = false;
 
 	// Network Solutions registry server
-	var $NSI_REGISTRY = "whois.nsiregistry.net";
+	var $NSI_REGISTRY = 'whois.nsiregistry.net';
 
 	/*
 	 * Constructor function
