@@ -1,5 +1,6 @@
 2011/07/09
 		- html & cosmetic changes in examples
+		- released version 4.2.1
 
 2011/07/08
 		- fixes for arin (bug #3339783)
