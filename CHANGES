@@ -1,6 +1,6 @@
 2011/07/09
 		- html & cosmetic changes in examples
-		- released version 4.2.1
+		- released version 4.2.2
 
 2011/07/08
 		- fixes for arin (bug #3339783)
@@ -57,7 +57,7 @@
 		- added support for .ke domains
 
 2010/09/20
-		- released version 4.2.0
+		- released version 4.2.1
 		- provided default object data for unsupported domains
 
 2010/09/16
@@ -71,7 +71,7 @@
 
 2010/08/23
 		- improved extra whois parameters for better
-          support of .jp whois
+		support of .jp whois
 		- added handler for .jp
 		- added handler for .co
 		- added ipv6 support
