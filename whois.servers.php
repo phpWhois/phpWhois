@@ -78,6 +78,7 @@ $this->WHOIS_SPECIAL = array(
 		'ba'	 => '',
 		'bb'	 => 'http://domains.org.bb/regsearch/getdetails.cfm?DND={domain}.bb',
 		'bg'	 => 'http://www.register.bg/bg-nic/displaydomain.pl?domain={domain}.bg&search=exist',
+		'bh'	 => 'whois.nic.bh',
 		'bi'	 => 'whois.nic.bi',
 		'bj'	 => 'whois.nic.bj',
 		'by'	 => '',

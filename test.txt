@@ -6,6 +6,7 @@ am		isoc.am
 at		nic.at
 au		telstra.com.au
 be		nic.be
+bh		nic.bh
 br		registro.br
 ca		cira.ca
 ch		creart.ch blaueskreuz.ch
