@@ -70,6 +70,7 @@ joker		joker.com
 markmonitor	markmonitor.com
 melbourneit	inww.com
 moniker		moniker.com
+name		name.com
 namejuice	namejuice.com
 nameking	nameking.com
 names4ever	names4ever.com
