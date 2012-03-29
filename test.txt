@@ -44,8 +44,8 @@ uk		olsns.co.uk
 us		neustar.us
 ve		nic.ve
 ws		samoanic.ws surf.ws
-.co.za	sex.co.za
-.org.za	sex.org.za
+.co.za		sex.co.za
+.org.za		sex.org.za
 
 // .com/.net/.tv/.jobs
 
@@ -90,31 +90,32 @@ rrpproxy	rrpproxy.net
 schlund		schlund.com
 srsplus		olsns.com
 namevault	namevault.com
-tmagnic     antiquea.com
+tmagnic     	antiquea.com
 tvcorp		www.tv
 wwdomains	wildwestdomains.com
 corporatedomains	cscglobal.com
 
 // Other
 
-aero	nic.aero
-asia	nic.asia
+aero		nic.aero
+asia		nic.asia
 biz		neulevel.biz
 cat		dominis.cat
-coop	smile.coop nic.coop
+coop		smile.coop nic.coop
 edu		berkeley.edu
 eu		eurid.eu
-info	afilias.info
+info		afilias.info
 int		who.int
 me		domain.me
-mobi	mtld.mobi
-museum	nic.museum
-name	peter.morgan.name
+mobi		mtld.mobi
+museum		nic.museum
+name		peter.morgan.name
 org		example.org
 pro		registrypro.pro
 tel		nic.tel
-travel	whois.travel
-za.net	sex.za.net
+travel		whois.travel
+xxx		nic.xxx
+za.net		sex.za.net
 
 // IP whois
 
