@@ -23,7 +23,7 @@ class am_handler
 
 		if (!empty($r['regrinfo']['domain']['name']))
 			{
-			$r['regrinfo'] = get_contacts($r['regrinfo'],$trans);
+			$r['regrinfo'] = get_contacts($r['regrinfo']);
 			$r['regrinfo']['registered'] = 'yes';
 			}
 		else
