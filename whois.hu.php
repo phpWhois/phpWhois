@@ -34,62 +34,20 @@ class hu_handler
 	{
 	function parse ($data_str, $query)
 		{
-		$translate = array (
-                        'fax-no'		=> 'fax',
-                        'e-mail'		=> 'email',
-                        'hun-id'		=> 'handle',
-                        'person'		=> 'name',
-                        'nameserver' 	=> 'nserver',
-                        'person'		=> 'name',
-                        'org'			=> 'organization',
-                        'registered'	=> 'created'
-                        );
+		$items = array(
+		    'domain:' => 'domain.name',
+		    'record created:' => 'domain.created'
+	        );
 
-		$contacts = array (
-                        'registrar'		=> 'owner',
-                        'admin-c'		=> 'admin',
-                        'tech-c'		=> 'tech',
-                        'billing-c'		=> 'billing',
-                        'zone-c'		=> 'zone',
-                        'owner-hun-id'  => 'owner'
-                      );
+		$r['regrinfo'] = generic_parser_b($data_str['rawdata'],$items,'ymd');
 
-		// make those broken hungary comments standards-conforming
-		// replace first found hun-id with owner-hun-id (will be parsed later on)
-		// make output UTF-8
+		if (isset($r['regrinfo']['domain']))
+		    $r['regrinfo']['registered'] = 'yes';
+		else
+		    $r['regrinfo']['registered'] = 'no';
 
-		$comments = true;
-		$owner_id = true;
-
-		foreach ($data_str['rawdata'] as $i => $val)
-			{
-			if ($comments)
-				{
-				if (strpos($data_str['rawdata'][$i],'domain:') === false)
-					{
-					if ($i) $data_str['rawdata'][$i] = '% '.$data_str['rawdata'][$i];
-					}
-				else
-					$comments = false;
-				}
-			else
-				if ($owner_id && substr($data_str['rawdata'][$i],0,7) == 'hun-id:')
-					{
-					$data_str['rawdata'][$i] = 'owner-'.$data_str['rawdata'][$i];
-					$owner_id = false;
-					}
-			}
-
-		$reg = generic_parser_a($data_str['rawdata'],$translate,$contacts);
-
-		unset($reg['domain']['organization']);
-		unset($reg['domain']['address']);
-		unset($reg['domain']['phone']);
-		unset($reg['domain']['fax']);
-
-		$r['regrinfo'] = $reg;
 		$r['regyinfo'] = array('referrer'=>'http://www.nic.hu','registrar'=>'HUNIC');
-		return format_dates($r,'ymd');
+		return $r;
 		}
 	}
 ?>
