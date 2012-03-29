@@ -47,8 +47,18 @@ class markmonitor_handler
 		              );
 
 		$r = easy_parser($data_str, $items, 'dmy', false, false, true);
+
 		if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor']))
-		$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
+			$r['domain']['sponsor'] = $r['domain']['sponsor'][0];
+
+		foreach($r as $key => $part)
+			{
+			if (isset($part['address']))
+				{
+				$r[$key]['organization'] = array_shift($r[$key]['address']);
+				$r[$key]['address']['country'] = array_pop($r[$key]['address']);
+				}
+			}
 		return $r;
 		}
 	}
