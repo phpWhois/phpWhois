@@ -2,6 +2,7 @@
 
 ae		nic.ae
 ag		nic.ag
+am		isoc.am
 at		nic.at
 au		telstra.com.au
 be		nic.be
