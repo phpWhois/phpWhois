@@ -41,8 +41,8 @@ class be_handler
                 'domain.created'	=> 'Registered:',
                 'owner'				=> 'Licensee:',
                 'admin'				=> 'Onsite Contacts:',
-                'tech'				=> 'Agent Technical Contacts:',
-				'agent'				=> 'Agent:'
+                'tech'				=> 'Registrar Technical Contacts:',
+				'agent'				=> 'Registrar:'
 				);
 
 		$trans = array(
