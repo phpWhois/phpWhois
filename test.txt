@@ -18,6 +18,7 @@ fm		dot.fm
 fr		nic.fr lemonade.fr
 hu		nic.hu
 ie		domainregistry.ie
+il		tapuz.co.il
 in		registry.in
 is		isnic.is
 it		nic.it
