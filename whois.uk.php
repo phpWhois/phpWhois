@@ -60,7 +60,15 @@ class uk_handler
 			$r = format_dates($r, 'dmy');
 			}
 		else
-			$r['regrinfo']['registered'] = 'no';
+			{
+			if (strpos($data_str['rawdata'][1],'Error for '))
+				{
+				$r['regrinfo']['registered'] = 'yes';
+				$r['regrinfo']['domain']['status'] = 'invalid';
+				}
+			else
+				$r['regrinfo']['registered'] = 'no';
+			}
 
 		$r['regyinfo'] = array(
                     'referrer' => 'http://www.nominet.org.uk',
