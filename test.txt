@@ -44,8 +44,12 @@ uk		olsns.co.uk
 us		neustar.us
 ve		nic.ve
 ws		samoanic.ws surf.ws
-.co.za		sex.co.za
-.org.za		sex.org.za
+co.za		sex.co.za
+org.za		sex.org.za
+
+// Punicode
+
+xn--p1ai 	xn--c1ad6a.xn--p1ai
 
 // .com/.net/.tv/.jobs
 
