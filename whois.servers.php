@@ -39,7 +39,9 @@ $this->DATA = array(
 	'net'		=> 'gtld',
 	'tv'		=> 'gtld',
 	'za.org'	=> 'zanet',
-	'za.net'	=> 'zanet'
+	'za.net'	=> 'zanet',
+	// Punicode
+	'xn--p1ai' => 'ru'
 	);
 
 /* Non UTF-8 servers */

@@ -55,7 +55,7 @@ class ru_handler
 
 		$r['regyinfo'] = array(
                             'referrer' => 'http://www.ripn.net',
-                            'registrar' => 'RUCENTER-REG-RIPN'
+                            'registrar' => 'RU-CENTER-REG-RIPN'
                           );
 		return $r;
 		}
