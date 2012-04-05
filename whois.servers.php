@@ -37,6 +37,7 @@ $this->DATA = array(
 	'jobs'		=> 'gtld',
 	'li'		=> 'ch',
 	'net'		=> 'gtld',
+	'su'		=> 'ru',
 	'tv'		=> 'gtld',
 	'za.org'	=> 'zanet',
 	'za.net'	=> 'zanet',
