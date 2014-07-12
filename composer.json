@@ -1,6 +1,6 @@
 {
     "name": "phpwhois/phpwhois",
-    "description": "phpWhois - library for queries",
+    "description": "phpWhois - library for querying whois services and parsing results. Based on phpwhois.org",
     "keywords": ["PHP","Whois","phpWhois"],
     "homepage": "http://phpwhois.pw",
     "type": "library",
@@ -23,16 +23,17 @@
             "email": "dmitry@lukashin.ru"
         }
     ],
-    "version": "4.2.2.1",
+    "version": "4.2.3",
     "require": {
-        "php": ">=5.2.0"
+        "php": ">=5.3.0"
     },
     "suggest": {
         "lib-openssl": "*"
     },
     "autoload": {
-        "psr-4": {
-            "phpwhois\\": "src/"
-        }
+        "files": [
+            "whois.main.php",
+            "whois.utils.php"
+        ]
     }
 }
