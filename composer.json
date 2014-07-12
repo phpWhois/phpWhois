@@ -1,0 +1,38 @@
+{
+    "name": "phpwhois/phpwhois",
+    "description": "phpWhois - library for queries",
+    "keywords": ["PHP","Whois","phpWhois"],
+    "homepage": "http://phpwhois.pw",
+    "type": "library",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Mark Jeftovic",
+            "email": "markjr@easydns.com"
+        },
+        {
+            "name": "David Saez Padros",
+            "email": "david@ols.es"
+        },
+        {
+            "name": "Ross Golder",
+            "email": "ross@golder.org"
+        },
+        {
+            "name": "Dmitry Lukashin",
+            "email": "dmitry@lukashin.ru"
+        }
+    ],
+    "version": "4.2.2.1",
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "suggest": {
+        "lib-openssl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "phpwhois\\": "src/"
+        }
+    }
+}
