@@ -35,6 +35,14 @@ versions below 4.1.0
 Installation
 ------------
 
+### Via composer
+
+`php composer.phar require "phpwhois/phpwhois":"~4.0"`
+
+### Download package
+
+Download latest release from Github: https://github.com/phpWhois/phpWhois/releases
+
 Basically, untar the distribution somewhere outside your server's
 document root and make sure the directory is listed in `include_path`
 in your `php.ini` file, server configuration or in an `.htaccess` file.
