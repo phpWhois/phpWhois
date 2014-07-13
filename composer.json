@@ -32,8 +32,8 @@
     },
     "autoload": {
         "files": [
-            "whois.main.php",
-            "whois.utils.php"
+            "src/whois.main.php",
+            "src/whois.utils.php"
         ]
     }
 }
