@@ -188,9 +188,9 @@ or not and which is the registrar but not the owner information.
 UTF-8
 -----
 
-PHPWhois will assume that all whois servers resturn UTF-8 encoded output,
+PHPWhois will assume that all whois servers return UTF-8 encoded output,
 if some whois server does not return UTF-8 data, you can include it in
-the NON_UTF8 array in `whois.servers.php`
+the `NON_UTF8` array in `whois.servers.php`
 
 Notes 
 -----
@@ -201,21 +201,14 @@ it will output the total layout of the returned object to the
 web browser.
 
 The latest version of the package and a demo script resides at 
-<http://phpwhois.sourceforge.net/>
+https://github.com/phpWhois/phpWhois
 
-There is also be an article describing the package on devshed.com
-at <http://www.devshed.com/Server_Side/PHP/whois/>
-
-
-Support/Patches
+Contributing
 ---------------
 
-If you're really stuck and can't figure something out, or you want
-to contribute an extended class for one of the TLD's, file a patch
-or support request in the SourceForge tracker. One of the developers
-will get around to applying or responding.
-<http://sourceforge.net/projects/phpwhois>
-
+If you want to add support for new TLD, extend functionality or
+correct a bug, fill free to create a new pull request on Github's
+repository https://github.com/phpWhois/phpWhois
 
 Credits
 -------
@@ -223,3 +216,5 @@ Credits
 Mark Jeftovic <markjr@easydns.com>
 David Saez Padros <david@ols.es>
 Ross Golder <ross@golder.org>
+
+Dmitry Lukashin <dmitry@lukashin.ru>
