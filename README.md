@@ -37,7 +37,13 @@ Installation
 
 ### Via composer
 
+#### Stable version
+
 `php composer.phar require "phpwhois/phpwhois":"~4.0"`
+
+#### Latest development version
+
+`php composer.phar require "phpwhois/phpwhois":"dev-master"`
 
 ### Download package
 
