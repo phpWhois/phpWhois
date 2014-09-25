@@ -38,7 +38,7 @@ class utils extends Whois {
 
 	function debugObject($obj,$indent=0)
 		{
-		if (is_Array($obj))
+		if (is_array($obj))
 			{
 			$return = '';
 			foreach($obj as $k => $v)
