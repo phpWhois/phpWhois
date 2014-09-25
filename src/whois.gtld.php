@@ -54,7 +54,6 @@ class gtld_handler extends WhoisClient
 	function parse($data, $query)
 		{
 		$this->Query = array();
-		$this->SUBVERSION = sprintf('%s-%s', $query['handler'], $this->HANDLER_VERSION);
 		$this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
 
 		unset($this->result['registered']);
