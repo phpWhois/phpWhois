@@ -44,8 +44,15 @@ class utils extends Whois {
 			foreach($obj as $k => $v)
 				{
 				$return .= str_repeat('&nbsp;',$indent);
-				$return .= $k."->$v\n";
-				$return .= $this->debugObject($v,$indent+1);
+					if (is_array($v))
+						{
+						$return .= $k."->Array\n";
+						$return .= $this->debugObject($v,$indent+1);
+						}
+					else
+						{
+						$return .= $k."->$v\n";
+						}
 			}
 			return $return;
 		}
