@@ -38,14 +38,21 @@ class utils extends Whois {
 
 	function debugObject($obj,$indent=0)
 		{
-		if (is_Array($obj))
+		if (is_array($obj))
 			{
 			$return = '';
 			foreach($obj as $k => $v)
 				{
 				$return .= str_repeat('&nbsp;',$indent);
-				$return .= $k."->$v\n";
-				$return .= $this->debugObject($v,$indent+1);
+					if (is_array($v))
+						{
+						$return .= $k."->Array\n";
+						$return .= $this->debugObject($v,$indent+1);
+						}
+					else
+						{
+						$return .= $k."->$v\n";
+						}
 			}
 			return $return;
 		}
