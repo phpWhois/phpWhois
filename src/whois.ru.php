@@ -36,6 +36,7 @@ class ru_handler
 		{
 		$items = array(
                   'domain:' => 'domain.name',
+                  'registrar:' => 'domain.sponsor',
                   'state:' => 'domain.status',
                   'nserver:' => 'domain.nserver.',
                   'source:' => 'domain.source',
