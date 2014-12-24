@@ -181,6 +181,7 @@ handlers, those functions are stored on the following files:
   contains code to parse whois outputs in RPSL format, like this one.
   You could take a look at whois.at.php to see how you could use it:
 
+  ```
   domain:         nic.at
   registrant:     NAIV1117337-NICAT
   admin-c:        NAR567002-NICAT
@@ -238,12 +239,14 @@ handlers, those functions are stored on the following files:
   nic-hdl:        GW502425-NICAT
   changed:        20001205 14:06:15
   source:         AT-DOM
+  ```
 
 - generic_parser_b:
 
   contains code to parse whois outputs like this one, you could
   take a look at whois.neulevel.php to see how you could use it:
 
+  ```
   Domain Name:                                 NIC.BIZ
   Domain ID:                                   D714-BIZ
   Sponsoring Registrar:                        REGISTRY REGISTRAR
@@ -310,30 +313,32 @@ handlers, those functions are stored on the following files:
   Domain Registration Date:                    Wed Nov 07 00:01:00 GMT 2001
   Domain Expiration Date:                      Sat Nov 06 23:59:00 GMT 2004
   Domain Last Updated Date:                    Fri Nov 07 18:59:11 GMT 2003 
+  ```
 
 - get_blocks/get_contacts:
 
   contains code to parse whois outputs like this one, you could
   take a look at whois.ch.php to see how you could use it:
 
+  ```
   Domain name:
   nic.ch
 
   Holder of domain name:
   SWITCH Internet Domains
   Dana Djurdjevic
-  Neumühlequai 6
-  CH-8001 Zürich
+  NeumÑŒhlequai 6
+  CH-8001 ZÑŒrich
   Switzerland
   hostmaster@switch.ch
   Contractual Language: English
 
   Technical contact:
-  SWITCH Geschäftsstelle
+  SWITCH GeschÐ´ftsstelle
   Andrea Tognola
   Network
   Limmatquai 138
-  CH-8001 Zürich
+  CH-8001 ZÑŒrich
   Switzerland
   hostmaster@switch.ch
 
@@ -347,6 +352,7 @@ handlers, those functions are stored on the following files:
 
   Date of last modification:
   22.12.2003
+  ```
 
 Credits
 -------
