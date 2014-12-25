@@ -327,18 +327,18 @@ handlers, those functions are stored on the following files:
   Holder of domain name:
   SWITCH Internet Domains
   Dana Djurdjevic
-  Neumьhlequai 6
-  CH-8001 Zьrich
+  Neumühlequai 6
+  CH-8001 Zürich
   Switzerland
   hostmaster@switch.ch
   Contractual Language: English
 
   Technical contact:
-  SWITCH Geschдftsstelle
+  SWITCH Geschäftsstelle
   Andrea Tognola
   Network
   Limmatquai 138
-  CH-8001 Zьrich
+  CH-8001 Zürich
   Switzerland
   hostmaster@switch.ch
 
@@ -353,10 +353,3 @@ handlers, those functions are stored on the following files:
   Date of last modification:
   22.12.2003
   ```
-
-Credits
--------
-
-Mark Jeftovic <markjr@easydns.com>
-David Saez Padros <david@ols.es>
-Ross Golder <ross@golder.org>
