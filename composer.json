@@ -23,7 +23,7 @@
             "email": "dmitry@lukashin.ru"
         }
     ],
-    "version": "4.2.3",
+    "version": "4.2.4",
     "require": {
         "php": ">=5.3.0"
     },
