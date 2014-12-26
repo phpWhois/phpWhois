@@ -16,6 +16,10 @@ matrix:
 # faster builds on new travis containers
 sudo: false
 
+install:
+  - composer self-update && composer --version
+  - composer install --dev --prefer-dist
+
 script:
   - phpunit --verbose --coverage-clover=coverage.clover
 
