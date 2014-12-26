@@ -27,7 +27,6 @@
  */
 
 require_once('whois.client.php');
-require_once('whois.idna.php');
 
 class Whois extends WhoisClient {
 
