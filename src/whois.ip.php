@@ -35,7 +35,6 @@ class ip_handler extends WhoisClient {
 
     // Deep whois ?
     public $deep_whois = true;
-    public $HANDLER_VERSION = '1.0';
     public $REGISTRARS = array(
         'European Regional Internet Registry/RIPE NCC' => 'whois.ripe.net',
         'RIPE Network Coordination Centre' => 'whois.ripe.net',
@@ -254,5 +253,3 @@ class ip_handler extends WhoisClient {
     }
 
 }
-
-?>

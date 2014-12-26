@@ -75,30 +75,22 @@ class krnic_handler {
 
         if (isset($b['owner1'])) {
             $r['owner'] = generic_parser_b($b['owner1'], $items, 'Ymd', false);
-        } else {
-            if (isset($b['owner2'])) {
-                $r['owner'] = generic_parser_b($b['owner2'], $items, 'Ymd', false);
-            }
+        } elseif (isset($b['owner2'])) {
+            $r['owner'] = generic_parser_b($b['owner2'], $items, 'Ymd', false);
         }
 
         if (isset($b['admin2'])) {
             $r['admin'] = generic_parser_b($b['admin2'], $items, 'Ymd', false);
-        } else {
-            if (isset($b['admin3'])) {
-                $r['admin'] = generic_parser_b($b['admin3'], $items, 'Ymd', false);
-            }
+        } elseif (isset($b['admin3'])) {
+            $r['admin'] = generic_parser_b($b['admin3'], $items, 'Ymd', false);
         }
 
         if (isset($b['tech1'])) {
             $r['tech'] = generic_parser_b($b['tech1'], $items, 'Ymd', false);
-        } else {
-            if (isset($b['tech2'])) {
-                $r['tech'] = generic_parser_b($b['tech2'], $items, 'Ymd', false);
-            } else {
-                if (isset($b['tech3'])) {
-                    $r['tech'] = generic_parser_b($b['tech3'], $items, 'Ymd', false);
-                }
-            }
+        } elseif (isset($b['tech2'])) {
+            $r['tech'] = generic_parser_b($b['tech2'], $items, 'Ymd', false);
+        } elseif (isset($b['tech3'])) {
+            $r['tech'] = generic_parser_b($b['tech3'], $items, 'Ymd', false);
         }
         if (isset($b['abuse'])) {
             $r['abuse'] = generic_parser_b($b['abuse'], $items, 'Ymd', false);
@@ -114,5 +106,3 @@ class krnic_handler {
     }
 
 }
-
-?>

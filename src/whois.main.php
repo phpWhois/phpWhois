@@ -32,38 +32,34 @@ require_once('whois.idna.php');
 class Whois extends WhoisClient {
 
     // Deep whois ?
-    var $deep_whois = true;
+    public $deep_whois = true;
     // Windows based ?
-    var $windows = false;
+    public $windows = false;
     // Recursion allowed ?
-    var $gtld_recurse = true;
+    public $gtld_recurse = true;
     // Support for non-ICANN tld's
-    var $non_icann = false;
+    public $non_icann = false;
     // Network Solutions registry server
-    var $NSI_REGISTRY = 'whois.nsiregistry.net';
+    public $NSI_REGISTRY = 'whois.nsiregistry.net';
 
     /*
      * Constructor function
      */
 
-    function Whois() {
-        // Load DATA array
-        @require('whois.servers.php');
+    public function __construct() {
+        parent::__construct();
 
         if (( substr(php_uname(), 0, 7) == 'Windows'))
             $this->windows = true;
         else
             $this->windows = false;
-
-        // Set version
-        $this->VERSION = sprintf("phpWhois v%s-%s", $this->CODE_VERSION, $this->DATA_VERSION);
     }
 
     /*
      *  Use special whois server
      */
 
-    function UseServer($tld, $server) {
+    public function UseServer($tld, $server) {
         $this->WHOIS_SPECIAL[$tld] = $server;
     }
 
@@ -71,7 +67,7 @@ class Whois extends WhoisClient {
      *  Lookup query
      */
 
-    function Lookup($query = '', $is_utf = true) {
+    public function Lookup($query = '', $is_utf = true) {
         // start clean
         $this->Query = array('status' => '');
 
@@ -245,7 +241,7 @@ class Whois extends WhoisClient {
 
     /* Unsupported domains */
 
-    function Unknown() {
+    public function Unknown() {
         unset($this->Query['server']);
         $this->Query['status'] = 'error';
         $result['rawdata'][] = $this->Query['errstr'][] = $this->Query['query'] . ' domain is not supported';
@@ -256,7 +252,7 @@ class Whois extends WhoisClient {
 
     /* Get nameservers if missing */
 
-    function Checkdns(&$result) {
+    public function Checkdns(&$result) {
         if ($this->deep_whois && empty($result['regrinfo']['domain']['nserver']) && function_exists('dns_get_record')) {
             $ns = @dns_get_record($this->Query['query'], DNS_NS);
             if (!is_array($ns))
@@ -273,7 +269,7 @@ class Whois extends WhoisClient {
      *  Fix and/or add name server information
      */
 
-    function FixResult(&$result, $domain) {
+    public function FixResult(&$result, $domain) {
         // Add usual fields
         $result['regrinfo']['domain']['name'] = $domain;
 
@@ -297,5 +293,3 @@ class Whois extends WhoisClient {
     }
 
 }
-
-?>

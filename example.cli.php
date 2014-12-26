@@ -26,15 +26,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-include('src/whois.main.php');
+if (file_exists(__DIR__.'/vendor/autoload.php')) {
+    require_once __DIR__.'/vendor/autoload.php';
+} else {
+    require_once 'src/whois.main.php';
+}
 
-if (isset($argv[1]))
-	$domain = $argv[1];
-else
-	$domain = 'example.com';
+if (!isset($argv[1])) {
+    echo "\nUsage:\n\nphp ".__FILE__." domainname.com\n";
+    exit(1);
+}
+
+$domain = $argv[1];
 
 $whois = new Whois();
 $result = $whois->Lookup($domain);
 
 print_r($result);
-?>

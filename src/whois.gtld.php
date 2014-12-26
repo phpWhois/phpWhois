@@ -33,7 +33,6 @@ require_once('whois.parser.php');
 
 class gtld_handler extends WhoisClient {
 
-    var $HANDLER_VERSION = '1.1';
     var $REG_FIELDS = array(
         'Domain Name:' => 'regrinfo.domain.name',
         'Registrar:' => 'regyinfo.registrar',

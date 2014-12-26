@@ -558,7 +558,7 @@ class idna_convert {
      */
     function _nameprep($input) {
         $output = array();
-        $error = false;
+
         //
         // Mapping
         // Walking through the input array, performing the required steps on each of
@@ -963,5 +963,3 @@ class Net_IDNA_php4 extends idna_convert {
     }
 
 }
-
-?>

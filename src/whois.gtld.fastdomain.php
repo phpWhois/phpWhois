@@ -61,7 +61,7 @@ class fastdomain_handler {
 
         if (isset($r['domain']['nserver'])) {
             reset($r['domain']['nserver']);
-            $endnserver = false;
+
             while (list($key, $val) = each($r['domain']['nserver'])) {
                 if ($val == '=-=-=-=')
                     unset($r['domain']['nserver'][$key]);

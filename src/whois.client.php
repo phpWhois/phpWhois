@@ -31,21 +31,21 @@ require_once('whois.ip.lib.php');
 class WhoisClient {
 
     // Recursion allowed ?
-    var $gtld_recurse = false;
+    public $gtld_recurse = false;
     // Default WHOIS port
-    var $PORT = 43;
+    public $PORT = 43;
     // Maximum number of retries on connection failure
-    var $RETRY = 0;
+    public $RETRY = 0;
     // Time to wait between retries
-    var $SLEEP = 2;
+    public $SLEEP = 2;
     // Read buffer size (0 == char by char)
-    var $BUFFER = 1024;
+    public $BUFFER = 1024;
     // Communications timeout
-    var $STIMEOUT = 10;
+    public $STIMEOUT = 10;
     // List of servers and handlers (loaded from servers.whois)
-    var $DATA = array();
-    // Array to contain all query variables
-    var $Query = array(
+    public $DATA = array();
+    // Array to contain all query publiciables
+    public $Query = array(
         'tld' => '',
         'type' => 'domain',
         'query' => '',
@@ -53,15 +53,15 @@ class WhoisClient {
         'server'
     );
     // This release of the package
-    var $CODE_VERSION = '4.2.2';
+    public $CODE_VERSION = '4.2.2';
     // Full code and data version string (e.g. 'Whois2.php v3.01:16')
-    var $VERSION;
+    public $VERSION;
 
     /*
      * Constructor function
      */
 
-    function WhoisClient() {
+    public function __construct() {
         // Load DATA array
         @require('whois.servers.php');
 
@@ -73,7 +73,7 @@ class WhoisClient {
      * Perform lookup
      */
 
-    function GetRawData($query) {
+    public function GetRawData($query) {
 
         $this->Query['query'] = $query;
 
@@ -209,7 +209,7 @@ class WhoisClient {
      * populated too.
      */
 
-    function GetData($query = '', $deep_whois = true) {
+    public function GetData($query = '', $deep_whois = true) {
 
         // If domain to query passed in, use it, otherwise use domain from initialisation
         $query = !empty($query) ? $query : $this->Query['query'];
@@ -263,7 +263,7 @@ class WhoisClient {
      *   Adds whois server query information to result
      */
 
-    function set_whois_info($result) {
+    public function set_whois_info($result) {
         $info = array(
             'server' => $this->Query['server'],
         );
@@ -293,7 +293,7 @@ class WhoisClient {
      *   Convert html output to plain text
      */
 
-    function httpQuery($query) {
+    public function httpQuery($query) {
 
         //echo ini_get('allow_url_fopen');
         //if (ini_get('allow_url_fopen'))
@@ -359,7 +359,7 @@ class WhoisClient {
      * Returns a socket connection pointer on success, or -1 on failure.
      */
 
-    function Connect($server = '') {
+    public function Connect($server = '') {
 
         if ($server == '')
             $server = $this->Query['server'];
@@ -416,7 +416,7 @@ class WhoisClient {
      * from the handler. On failure, returns passed result unaltered.
      */
 
-    function Process(&$result, $deep_whois = true) {
+    public function Process(&$result, $deep_whois = true) {
 
         $handler_name = str_replace('.', '_', $this->Query['handler']);
 
@@ -457,7 +457,7 @@ class WhoisClient {
      * Does more (deeper) whois ...
      */
 
-    function DeepWhois($query, $result) {
+    public function DeepWhois($query, $result) {
 
         if (!isset($result['regyinfo']['whois']))
             return $result;
@@ -495,7 +495,7 @@ class WhoisClient {
      *  Merge results
      */
 
-    function merge_results($a1, $a2) {
+    public function merge_results($a1, $a2) {
 
         reset($a2);
 
@@ -517,7 +517,7 @@ class WhoisClient {
         return $a1;
     }
 
-    function FixNameServer($nserver) {
+    public function FixNameServer($nserver) {
         $dns = array();
 
         foreach ($nserver as $val) {
@@ -564,5 +564,3 @@ class WhoisClient {
     }
 
 }
-
-?>
