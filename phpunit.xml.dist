@@ -4,11 +4,16 @@
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
-    stopOnFailure="false"
->
+    stopOnFailure="false">
     <testsuites>
         <testsuite name="phpWhois Test suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <blacklist>
+            <directory>./vendor</directory>
+            <directory>./tests</directory>
+        </blacklist>
+    </filter>
 </phpunit>
