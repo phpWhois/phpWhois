@@ -1,17 +1,11 @@
 Introduction
 ------------
 
-This package contains a Whois (RFC954) library for PHP. It allows
-a PHP program to create a Whois object, and obtain the output of
-a whois query with the Lookup function.
+This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the Lookup function.
 
-The response is an array containing, at least, an element 'rawdata',
-containing the raw output from the whois request.
+The response is an array containing, at least, an element 'rawdata', containing the raw output from the whois request.
 
-In addition, if the domain belongs to a registrar for which a special
-handler exists, the special handler will parse the output and make
-additional elements available in the response. The keys of these
-additional elements are described in the file HANDLERS.
+In addition, if the domain belongs to a registrar for which a special handler exists, the special handler will parse the output and make additional elements available in the response. The keys of these additional elements are described in the file HANDLERS.md.
 
 It fully supports IDNA (internationalized) domains names as
 defined in RFC3490, RFC3491, RFC3492 and RFC3454.
@@ -25,12 +19,9 @@ provided.
 Requirements
 ------------
 
-phpWhois requires PHP 4.3.0 or better with OpenSSL support to
-work properly. Without SSL support you will not be able to
-query domains which do not have a whois server but that have
-a https based whois. Also, you can run it in lower PHP versions
-but without timeout control. phpWhois will not work with PHP
-versions below 4.1.0
+phpWhois requires PHP 5.3 or better with OpenSSL support to work properly.
+
+Without SSL support you will not be able to query domains which do not have a whois server but that have a https based whois.
 
 Installation
 ------------
@@ -45,22 +36,6 @@ Installation
 
 `php composer.phar require "phpwhois/phpwhois":"dev-master"`
 
-### Download package
-
-Download latest release from Github: https://github.com/phpWhois/phpWhois/releases
-
-Basically, untar the distribution somewhere outside your server's
-document root and make sure the directory is listed in `include_path`
-in your `php.ini` file, server configuration or in an `.htaccess` file.
-If you want to test it using a web browser just copy `example.php` ,
-`example.html` and `whois.icon.png` anywhere on your server's document
-root and try it.
-
-phpWhois is not a PHP aplication is a class that can be used in
-applications. There is no need to make the installation folder
-accesible to anyone but PHP, nevertheless you can install it inside
-your server's document root if you like, it will work without
-problems or security risks.
 
 Example usage
 -------------
@@ -186,9 +161,8 @@ care about getting the real owner information you can set:
 $whois->deep_whois = false;
 ```
 
-this will tell phpWhois to just query one whois server. For `.com`, `.net`
-and `.tv` domains and ip addresses this will prevent phpWhois to ask more
-than one whois server, you will just know if the donmain is registered
+this will tell phpWhois to just query one whois server. For `.com`, `.net` and `.tv` domains and ip addresses this will prevent phpWhois to ask more
+than one whois server, you will just know if the domain is registered
 or not and which is the registrar but not the owner information.
 
 UTF-8
@@ -213,14 +187,16 @@ Contributing
 ---------------
 
 If you want to add support for new TLD, extend functionality or
-correct a bug, fill free to create a new pull request on Github's
+correct a bug, feel free to create a new pull request at Github's
 repository https://github.com/phpWhois/phpWhois
 
 Credits
 -------
 
 Mark Jeftovic <markjr@easydns.com>
+
 David Saez Padros <david@ols.es>
+
 Ross Golder <ross@golder.org>
 
 Dmitry Lukashin <dmitry@lukashin.ru>
