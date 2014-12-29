@@ -32,9 +32,8 @@
         "lib-openssl": "*"
     },
     "autoload": {
-        "files": [
-            "src/whois.main.php",
-            "src/whois.utils.php"
-        ]
+        "psr-4": {
+            "phpWhois\\": "src"
+        }
     }
 }

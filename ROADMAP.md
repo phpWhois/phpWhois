@@ -10,6 +10,7 @@ Now it is needed to update the codebase to support the modern features like:
 - [Composer](https://getcomposer.org/ "Composer")
 - Continuous integration service [Travis](https://travis-ci.org/ "Travis") with [PHPUnit](https://phpunit.de/ "PHPUnit")
 - Code quality testing with [Scrutinizer](https://scrutinizer-ci.com "Scrutinizer")
+- Throw exceptions
 
 Code must be reworked to support [PSR standards](http://www.php-fig.org/ "PSR standards").
 

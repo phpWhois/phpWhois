@@ -1,49 +1,51 @@
 <?php
 
-/*
-  Whois.php        PHP classes to conduct whois queries
-
-  Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
-
-  Maintained by David Saez
-
-  For the most recent version of this package visit:
-
-  http://www.phpwhois.org
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * phpWhois main class
+ * 
+ * This class supposed to be instantiated for using the phpWhois library
+ * 
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-require_once('whois.client.php');
+namespace phpWhois;
 
+//require_once('whois.client.php');
+
+/**
+ * phpWhois main class
+ */
 class Whois extends WhoisClient {
 
-    // Deep whois ?
+    /** @var boolean Deep whois? */
     public $deep_whois = true;
-    // Windows based ?
+    /** @var boolean Windows based? */
     public $windows = false;
-    // Recursion allowed ?
+    /** @var boolean Recursion allowed? */
     public $gtld_recurse = true;
-    // Support for non-ICANN tld's
+    /** @var boolean Support for non-ICANN tld's */
     public $non_icann = false;
-    // Network Solutions registry server
+    /** @var string Network Solutions registry server */
     public $NSI_REGISTRY = 'whois.nsiregistry.net';
-
-    /*
-     * Constructor function
-     */
 
     public function __construct() {
         parent::__construct();
@@ -54,18 +56,16 @@ class Whois extends WhoisClient {
             $this->windows = false;
     }
 
-    /*
+    /**
      *  Use special whois server
      */
-
     public function UseServer($tld, $server) {
         $this->WHOIS_SPECIAL[$tld] = $server;
     }
 
-    /*
+    /**
      *  Lookup query
      */
-
     public function Lookup($query = '', $is_utf = true) {
         // start clean
         $this->Query = array('status' => '');
@@ -87,11 +87,9 @@ class Whois extends WhoisClient {
         }
 
         // Set domain to query in query array
-
         $this->Query['query'] = $domain = strtolower($query);
 
         // If query is an ip address do ip lookup
-
         if ($query == long2ip(ip2long($query))) {
             // IPv4 Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
@@ -145,7 +143,6 @@ class Whois extends WhoisClient {
         }
 
         // Build array of all possible tld's for that domain
-
         $tld = '';
         $server = '';
         $dp = explode('.', $domain);
@@ -158,7 +155,6 @@ class Whois extends WhoisClient {
         }
 
         // Search the correct whois server
-
         if ($this->non_icann)
             $special_tlds = array_merge($this->WHOIS_SPECIAL, $this->WHOIS_NON_ICANN);
         else
@@ -168,7 +164,6 @@ class Whois extends WhoisClient {
             // Test if we know in advance that no whois server is
             // available for this domain and that we can get the
             // data via http or whois request
-
             if (isset($special_tlds[$tld])) {
                 $val = $special_tlds[$tld];
 
@@ -187,7 +182,6 @@ class Whois extends WhoisClient {
                 // Determine the top level domain, and it's whois server using
                 // DNS lookups on 'whois-servers.net'.
                 // Assumes a valid DNS response indicates a recognised tld (!?)
-
                 $cname = $tld . '.whois-servers.net';
 
                 if (gethostbyname($cname) == $cname)
@@ -204,7 +198,6 @@ class Whois extends WhoisClient {
 
             foreach ($tldtests as $htld) {
                 // special handler exists for the tld ?
-
                 if (isSet($this->DATA[$htld])) {
                     $handler = $this->DATA[$htld];
                     break;
@@ -218,14 +211,12 @@ class Whois extends WhoisClient {
             }
 
             // If there is a handler set it
-
             if ($handler != '') {
                 $this->Query['file'] = "whois.$handler.php";
                 $this->Query['handler'] = $handler;
             }
 
             // Special parameters ?
-
             if (isset($this->WHOIS_PARAM[$server]))
                 $this->Query['server'] = $this->Query['server'] . '?' . str_replace('$', $domain, $this->WHOIS_PARAM[$server]);
 
@@ -238,8 +229,9 @@ class Whois extends WhoisClient {
         return $this->Unknown();
     }
 
-    /* Unsupported domains */
-
+    /**
+     * Unsupported domains
+     */
     public function Unknown() {
         unset($this->Query['server']);
         $this->Query['status'] = 'error';
@@ -249,8 +241,9 @@ class Whois extends WhoisClient {
         return $result;
     }
 
-    /* Get nameservers if missing */
-
+    /**
+     * Get nameservers if missing
+     */
     public function Checkdns(&$result) {
         if ($this->deep_whois && empty($result['regrinfo']['domain']['nserver']) && function_exists('dns_get_record')) {
             $ns = @dns_get_record($this->Query['query'], DNS_NS);
@@ -264,16 +257,14 @@ class Whois extends WhoisClient {
         }
     }
 
-    /*
+    /**
      *  Fix and/or add name server information
      */
-
     public function FixResult(&$result, $domain) {
         // Add usual fields
         $result['regrinfo']['domain']['name'] = $domain;
 
         // Check if nameservers exist
-
         if (!isset($result['regrinfo']['registered'])) {
             if (function_exists('checkdnsrr') && checkdnsrr($domain, 'NS'))
                 $result['regrinfo']['registered'] = 'yes';
@@ -282,7 +273,6 @@ class Whois extends WhoisClient {
         }
 
         // Normalize nameserver fields
-
         if (isset($result['regrinfo']['domain']['nserver'])) {
             if (!is_array($result['regrinfo']['domain']['nserver'])) {
                 unset($result['regrinfo']['domain']['nserver']);

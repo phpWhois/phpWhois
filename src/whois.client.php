@@ -1,50 +1,61 @@
 <?php
 
-/*
-  Whois.php        PHP classes to conduct whois queries
-
-  Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
-
-  Maintained by David Saez
-
-  For the most recent version of this package visit:
-
-  http://www.phpwhois.org
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * phpWhois basic class
+ * 
+ * This is the basic client class
+ * 
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
+namespace phpWhois;
 require_once('whois.ip.lib.php');
-
+/**
+ * phpWhois basic class
+ */
 class WhoisClient {
 
-    // Recursion allowed ?
+    /** @var boolean Recursion allowed? */
     public $gtld_recurse = false;
-    // Default WHOIS port
+
+    /** @var int Default WHOIS port */
     public $PORT = 43;
-    // Maximum number of retries on connection failure
+
+    /** @var int Maximum number of retries on connection failure */
     public $RETRY = 0;
-    // Time to wait between retries
+
+    /** @var int Time to wait between retries */
     public $SLEEP = 2;
-    // Read buffer size (0 == char by char)
+
+    /** @var int Read buffer size (0 == char by char) */
     public $BUFFER = 1024;
-    // Communications timeout
+
+    /** @var int Communications timeout */
     public $STIMEOUT = 10;
-    // List of servers and handlers (loaded from servers.whois)
+
+    /** @var string[] List of servers and handlers (loaded from servers.whois) */
     public $DATA = array();
-    // Array to contain all query publiciables
+
+    /** @var string[] Array to contain all query publiciables */
     public $Query = array(
         'tld' => '',
         'type' => 'domain',
@@ -52,15 +63,16 @@ class WhoisClient {
         'status',
         'server'
     );
-    // This release of the package
+
+    /** @var string Current release of the package */
     public $CODE_VERSION = '4.2.2';
-    // Full code and data version string (e.g. 'Whois2.php v3.01:16')
+
+    /** @var string Full code and data version string (e.g. 'Whois2.php v3.01:16') */
     public $VERSION;
 
-    /*
+    /**
      * Constructor function
      */
-
     public function __construct() {
         // Load DATA array
         @require('whois.servers.php');
@@ -69,10 +81,11 @@ class WhoisClient {
         $this->VERSION = sprintf("phpWhois v%s-%s", $this->CODE_VERSION, $this->DATA_VERSION);
     }
 
-    /*
+    /**
      * Perform lookup
+     * 
+     * @return array Raw response as array separated by "\n"
      */
-
     public function GetRawData($query) {
 
         $this->Query['query'] = $query;
@@ -88,7 +101,6 @@ class WhoisClient {
         }
 
         // Check if protocol is http
-
         if (substr($this->Query['server'], 0, 7) == 'http://' ||
                 substr($this->Query['server'], 0, 8) == 'https://') {
             $output = $this->httpQuery($this->Query['server']);
@@ -109,7 +121,6 @@ class WhoisClient {
         }
         else {
             // Get args
-
             if (strpos($this->Query['server'], '?')) {
                 $parts = explode('?', $this->Query['server']);
                 $this->Query['server'] = trim($parts[0]);
@@ -144,7 +155,6 @@ class WhoisClient {
             }
 
             // Get port
-
             if (strpos($this->Query['server'], ':')) {
                 $parts = explode(':', $this->Query['server']);
                 $this->Query['server'] = trim($parts[0]);
@@ -153,7 +163,6 @@ class WhoisClient {
                 $this->Query['server_port'] = $this->PORT;
 
             // Connect to whois server, or return if failed
-
             $ptr = $this->Connect();
 
             if ($ptr < 0) {
@@ -202,8 +211,10 @@ class WhoisClient {
         return $output;
     }
 
-    /*
-     * Perform lookup. Returns an array. The 'rawdata' element contains an
+    /**
+     * Perform lookup.
+     * 
+     * @return array The *rawdata* element contains an
      * array of lines gathered from the whois query. If a top level domain
      * handler class was found for the domain, other elements will have been
      * populated too.
@@ -259,10 +270,12 @@ class WhoisClient {
         return($result);
     }
 
-    /*
-     *   Adds whois server query information to result
+    /**
+     * Adds whois server query information to result
+     * 
+     * @param $result array Result array
+     * @return array Original result array with server query information
      */
-
     public function set_whois_info($result) {
         $info = array(
             'server' => $this->Query['server'],
@@ -289,11 +302,12 @@ class WhoisClient {
         return $result;
     }
 
-    /*
-     *   Convert html output to plain text
+    /**
+     * Convert html output to plain text
+     * 
+     * @return array Rawdata
      */
-
-    public function httpQuery($query) {
+    public function httpQuery() {
 
         //echo ini_get('allow_url_fopen');
         //if (ini_get('allow_url_fopen'))
@@ -353,12 +367,11 @@ class WhoisClient {
         return $rawdata;
     }
 
-    /*
+    /**
      * Open a socket to the whois server.
      *
-     * Returns a socket connection pointer on success, or -1 on failure.
+     * @return resource|integer Returns a socket connection pointer on success, or -1 on failure
      */
-
     public function Connect($server = '') {
 
         if ($server == '')
@@ -411,9 +424,11 @@ class WhoisClient {
         return(-1);
     }
 
-    /*
-     * Post-process result with handler class. On success, returns the result
-     * from the handler. On failure, returns passed result unaltered.
+    /**
+     * Post-process result with handler class.
+     * 
+     * @return array On success, returns the result from the handler.
+     * On failure, returns passed result unaltered.
      */
 
     public function Process(&$result, $deep_whois = true) {
@@ -429,7 +444,7 @@ class WhoisClient {
         // If the handler has still not been included, append to query errors list and return
         if (!defined($HANDLER_FLAG)) {
             $this->Query['errstr'][] = "Can't find $handler_name handler: " . $this->Query['file'];
-            return($result);
+            return $result;
         }
 
         if (!$this->gtld_recurse && $this->Query['file'] == 'whois.gtld.php')
@@ -453,10 +468,11 @@ class WhoisClient {
         return $res;
     }
 
-    /*
-     * Does more (deeper) whois ...
+    /**
+     * Does more (deeper) whois
+     * 
+     * @return array Resulting array
      */
-
     public function DeepWhois($query, $result) {
 
         if (!isset($result['regyinfo']['whois']))
@@ -491,10 +507,14 @@ class WhoisClient {
         return $result;
     }
 
-    /*
-     *  Merge results
+    /**
+     * Merge results
+     * 
+     * @param array $a1
+     * @param array $a2
+     * 
+     * @return array
      */
-
     public function merge_results($a1, $a2) {
 
         reset($a2);
@@ -517,6 +537,13 @@ class WhoisClient {
         return $a1;
     }
 
+    /**
+     * Remove unnecessary symbols from nameserver received from whois server
+     * 
+     * @param string[] $nserver List of received nameservers
+     * 
+     * @return string[]
+     */
     public function FixNameServer($nserver) {
         $dns = array();
 
@@ -536,18 +563,17 @@ class WhoisClient {
                     if ($host == '' && preg_match('/^[\w\-]+(\.[\w\-]+)+$/', $p)) {
                         $host = $p;
                     }
-                } else
-                // IP Address
+                } else {
+                    // IP Address
                     $ip = $p;
+                }
             }
 
             // Valid host name ?
-
             if ($host == '')
                 continue;
 
             // Get ip address
-
             if ($ip == '') {
                 $ip = gethostbyname($host);
                 if ($ip == $host)
