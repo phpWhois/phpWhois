@@ -1,3 +1,7 @@
+5.0
+---
+* Disable support for non ICANN domains (Used new.net doesn't exist anymore)
+
 2011/07/09
 ----------
 * html & cosmetic changes in examples

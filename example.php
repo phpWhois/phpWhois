@@ -60,8 +60,6 @@ if (isSet($_GET['query'])) {
     // To use special whois servers (see README)
     //$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
     //$whois->UseServer('au','whois-check.ausregistry.net.au');
-    // Comment the following line to disable support for non ICANN tld's
-    $whois->non_icann = true;
 
     $result = $whois->Lookup($query);
     $resout = str_replace('{query}', $query, $resout);

@@ -33,12 +33,13 @@ class Whois extends WhoisClient {
 
     /** @var boolean Deep whois? */
     public $deep_whois = true;
+
     /** @var boolean Windows based? */
     public $windows = false;
+
     /** @var boolean Recursion allowed? */
     public $gtld_recurse = true;
-    /** @var boolean Support for non-ICANN tld's */
-    public $non_icann = false;
+
     /** @var string Network Solutions registry server */
     public $NSI_REGISTRY = 'whois.nsiregistry.net';
 
@@ -150,10 +151,7 @@ class Whois extends WhoisClient {
         }
 
         // Search the correct whois server
-        if ($this->non_icann)
-            $special_tlds = array_merge($this->WHOIS_SPECIAL, $this->WHOIS_NON_ICANN);
-        else
-            $special_tlds = $this->WHOIS_SPECIAL;
+        $special_tlds = $this->WHOIS_SPECIAL;
 
         foreach ($tldtests as $tld) {
             // Test if we know in advance that no whois server is
