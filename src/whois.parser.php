@@ -25,6 +25,7 @@
 function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy') {
     $blocks = generic_parser_a_blocks($rawdata, $translate, $disclaimer);
 
+    $ret = array();
     if (isset($disclaimer) && is_array($disclaimer))
         $ret['disclaimer'] = $disclaimer;
 
@@ -128,7 +129,7 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
 }
 
 function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasreg = true, $scanall = false) {
-    if (!count($items))
+    if (is_array($items) && !count($items))
         $items = array(
             'Domain Name:' => 'domain.name',
             'Domain ID:' => 'domain.handle',
@@ -482,7 +483,7 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     return $r;
 }
 
-function easy_parser($data_str, $items, $date_format, $translate = false, $has_org = false, $partial_match = false, $def_block = false) {
+function easy_parser($data_str, $items, $date_format, $translate = array(), $has_org = false, $partial_match = false, $def_block = false) {
     $r = get_blocks($data_str, $items, $partial_match, $def_block);
     $r = get_contacts($r, $translate, $has_org);
     format_dates($r, $date_format);
@@ -570,6 +571,9 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
 
                 $itm = trim(substr($val, $pos + strlen($match)));
 
+                /**
+                 * @todo Get rid of eval
+                 */
                 if ($field != '' && $itm != '') {
                     eval('$r' . getvarname($field) . '=$itm;');
                 }

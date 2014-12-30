@@ -29,6 +29,7 @@ require_once('whois.parser.php');
 
 class xx_handler {
     function parse($data_str, $query) {
+        $r = array();
         return $r;
     }
 }

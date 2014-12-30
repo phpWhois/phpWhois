@@ -44,8 +44,8 @@ class godaddy_handler {
 
         $r = get_blocks($data_str, $items);
         $r['owner'] = get_contact($r['owner']);
-        $r['admin'] = get_contact($r['admin'], false, true);
-        $r['tech'] = get_contact($r['tech'], false, true);
+        $r['admin'] = get_contact($r['admin'], array(), true);
+        $r['tech'] = get_contact($r['tech'], array(), true);
         return format_dates($r, 'dmy');
     }
 
