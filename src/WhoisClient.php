@@ -73,10 +73,16 @@ class WhoisClient {
      */
     public function __construct() {
         // Load DATA array
-        @require('whois.servers.php');
+        $servers = require('whois.servers.php');
+
+        $this->DATA               = $servers['DATA'];
+        $this->NON_UTF8           = $servers['NON_UTF8'];
+        $this->WHOIS_PARAM        = $servers['WHOIS_PARAM'];
+        $this->WHOIS_SPECIAL      = $servers['WHOIS_SPECIAL'];
+        $this->WHOIS_GTLD_HANDLER = $servers['WHOIS_GTLD_HANDLER'];
 
         // Set version
-        $this->version = sprintf("phpWhois v%s-%s", $this->codeVersion, $this->DATA_VERSION);
+        $this->version = sprintf("phpWhois v%s", $this->codeVersion);
     }
 
     /**

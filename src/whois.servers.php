@@ -26,13 +26,8 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-/* servers.whois	v18   Markus Welters	2004/06/25 */
-/* servers.whois	v17	ross golder	2003/02/09 */
-/* servers.whois	v16	mark jeftovic	2001/02/28 */
-
-$this->DATA_VERSION = '19';
-
-$this->DATA = array(
+return array(
+'DATA' => array(
     'bz'       => 'gtld',
     'com'      => 'gtld',
     'jobs'     => 'gtld',
@@ -44,11 +39,11 @@ $this->DATA = array(
     'za.net'   => 'zanet',
     // Punicode
     'xn--p1ai' => 'ru',
-);
+),
 
 /* Non UTF-8 servers */
 
-$this->NON_UTF8 = array(
+'NON_UTF8' => array(
     'br.whois-servers.net'  => 1,
     'ca.whois-servers.net'  => 1,
     'cl.whois-servers.net'  => 1,
@@ -59,20 +54,20 @@ $this->NON_UTF8 = array(
     'whois.lacnic.net'      => 1,
     'whois.nicline.com'     => 1,
     'whois.ripe.net'        => 1,
-);
+),
 
 /* If whois Server needs any parameters, enter it here */
 
-$this->WHOIS_PARAM = array(
+'WHOIS_PARAM' => array(
     'com.whois-servers.net' => 'domain =$',
     'net.whois-servers.net' => 'domain =$',
     'de.whois-servers.net'  => '-T dn,ace $',
     'jp.whois-servers.net'  => 'DOM $/e',
-);
+),
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
 
-$this->WHOIS_SPECIAL = array(
+'WHOIS_SPECIAL' => array(
     'ac'                     => 'whois.nic.ac',
     'academy'                => 'whois.donuts.co',
     'accountants'            => 'whois.donuts.co',
@@ -643,11 +638,11 @@ $this->WHOIS_SPECIAL = array(
     'xn--yfro4i67o'          => 'whois.sgnic.sg',
     'xn--ygbi2ammx'          => 'whois.pnina.ps',
     'xn--zfr164b'            => 'whois.conac.cn',
-);
+),
 
 /* handled gTLD whois servers */
 
-$this->WHOIS_GTLD_HANDLER = array(
+'WHOIS_GTLD_HANDLER' => array(
     'whois.bulkregister.com' => 'enom',
     'whois.dotregistrar.com' => 'dotster',
     'whois.namesdirect.com'  => 'dotster',
@@ -658,4 +653,5 @@ $this->WHOIS_GTLD_HANDLER = array(
     'whois.nominalia.com'    => 'genericb',
     'whois.encirca.com'      => 'genericb',
     'whois.corenic.net'      => 'genericb'
+),
 );
