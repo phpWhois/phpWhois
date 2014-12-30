@@ -51,10 +51,12 @@ class ip_handler extends WhoisClient {
     public $done = array();
 
     public function parse($data, $query) {
-        $result['regrinfo'] = array();
-        $result['regyinfo'] = array();
+        $result = array(
+            'regrinfo' => array(),
+            'regyinfo' => array(),
+            'rawdata' => array(),
+        );
         $result['regyinfo']['registrar'] = 'American Registry for Internet Numbers (ARIN)';
-        $result['rawdata'] = array();
 
         if (strpos($query, '.') === false)
             $result['regyinfo']['type'] = 'AS';
@@ -73,6 +75,7 @@ class ip_handler extends WhoisClient {
         if (empty($rawdata))
             return $result;
 
+        $presults = array();
         $presults[] = $rawdata;
         $ip = ip2long($query);
         $done = array();

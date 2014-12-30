@@ -52,6 +52,7 @@ class jp_handler extends WhoisClient {
             '[Name Server]' => 'domain.nserver.'
         );
 
+        $r = array();
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
         $r['regyinfo'] = array(

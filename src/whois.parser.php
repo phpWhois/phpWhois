@@ -1,32 +1,26 @@
 <?php
-
-/*
-  Whois.php        PHP classes to conduct whois queries
-
-  Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
-
-  Maintained by David Saez
-
-  For the most recent version of this package visit:
-
-  http://www.phpwhois.org
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
-//-------------------------------------------------------------------------
 
 function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy') {
     $blocks = generic_parser_a_blocks($rawdata, $translate, $disclaimer);
@@ -61,8 +55,6 @@ function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $da
     format_dates($ret, $dateformat);
     return $ret;
 }
-
-//-------------------------------------------------------------------------
 
 function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
     $r = array();
@@ -134,8 +126,6 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
 
     return $blocks;
 }
-
-//-------------------------------------------------------------------------
 
 function generic_parser_b($rawdata, $items = false, $dateformat = 'mdy', $hasreg = true, $scanall = false) {
     if (!$items)
@@ -373,8 +363,6 @@ function generic_parser_b($rawdata, $items = false, $dateformat = 'mdy', $hasreg
     return $r;
 }
 
-//-------------------------------------------------------------------------
-
 function getvarname($vdef) {
     $parts = explode('.', $vdef);
     $var = '';
@@ -387,8 +375,6 @@ function getvarname($vdef) {
 
     return $var;
 }
-
-//-------------------------------------------------------------------------
 
 function get_blocks($rawdata, $items, $partial_match = false, $def_block = false) {
 
@@ -496,16 +482,12 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     return $r;
 }
 
-//-------------------------------------------------------------------------
-
 function easy_parser($data_str, $items, $date_format, $translate = false, $has_org = false, $partial_match = false, $def_block = false) {
     $r = get_blocks($data_str, $items, $partial_match, $def_block);
     $r = get_contacts($r, $translate, $has_org);
     format_dates($r, $date_format);
     return $r;
 }
-
-//-------------------------------------------------------------------------
 
 function get_contacts($array, $extra_items = '', $has_org = false) {
     if (isset($array['billing']))
@@ -528,8 +510,6 @@ function get_contacts($array, $extra_items = '', $has_org = false) {
 
     return $array;
 }
-
-//-------------------------------------------------------------------------
 
 function get_contact($array, $extra_items = '', $has_org = false) {
 
@@ -675,8 +655,6 @@ function get_contact($array, $extra_items = '', $has_org = false) {
     return $r;
 }
 
-//-------------------------------------------------------------------------
-
 function format_dates(&$res, $format = 'mdy') {
     if (!is_array($res))
         return $res;
@@ -702,8 +680,6 @@ function format_dates(&$res, $format = 'mdy') {
 
     return $res;
 }
-
-//-------------------------------------------------------------------------
 
 function get_date($date, $format) {
     $months = array('jan' => 1, 'ene' => 1, 'feb' => 2, 'mar' => 3, 'apr' => 4, 'abr' => 4,
@@ -794,5 +770,3 @@ function get_date($date, $format) {
 
     return sprintf("%.4d-%02d-%02d", $res['y'], $res['m'], $res['d']);
 }
-
-?>

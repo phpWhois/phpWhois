@@ -1,29 +1,25 @@
 <?php
-
-/*
-  Whois.php        PHP classes to conduct whois queries
-
-  Copyright (C) 2011 Bernhard Reutner Fischer <rep.dot.nop@gmail.com>
-
-  Maintained by David Saez
-
-  For the most recent version of this package visit:
-
-  http://www.phpwhois.org
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
 if (!defined('__BH_HANDLER__'))
@@ -41,6 +37,8 @@ class bh_handler {
             'Sponsoring Registrar Phone:' => 'domain.sponsor.phone'
         );
         $i = generic_parser_b($data_str['rawdata'], $items);
+
+        $r = array();
         $r['regrinfo'] = generic_parser_b($data_str['rawdata']);
         if (isset($r['regrinfo']['domain']) && is_array($r['regrinfo']['domain']))
             $r['regrinfo']['domain']['sponsor'] = $i['domain']['sponsor'];
@@ -56,5 +54,3 @@ class bh_handler {
     }
 
 }
-
-?>

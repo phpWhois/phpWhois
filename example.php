@@ -34,6 +34,7 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
 
 use phpWhois\Whois;
 use phpWhois\Utils;
+$whois = new Whois();
 
 $out = implode('', file('example.html'));
 
@@ -48,8 +49,6 @@ if (isset($_GET['query'])) {
         $output = $_GET['output'];
     else
         $output = '';
-
-    $whois = new Whois();
 
     // Set to true if you want to allow proxy requests
     $allowproxy = false;

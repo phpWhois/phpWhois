@@ -45,6 +45,7 @@ class ws_handler extends WhoisClient {
             'Registrar Whois:' => 'rwhois'
         );
 
+        $r = array();
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
         $r['regyinfo']['referrer'] = 'http://www.samoanic.ws';
