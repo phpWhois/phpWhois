@@ -1,9 +1,5 @@
 <?php
 /**
- * phpWhois Example
- * 
- * This class supposed to be instantiated for using the phpWhois library
- * 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
@@ -58,9 +54,9 @@ class ws_handler extends WhoisClient {
             $r['regrinfo']['registered'] = 'yes';
 
             if (isset($r['regrinfo']['rwhois'])) {
-                if ($this->deep_whois) {
+                if ($this->deepWhois) {
                     $r['regyinfo']['whois'] = $r['regrinfo']['rwhois'];
-                    $r = $this->DeepWhois($query, $r);
+                    $r = $this->deepWhois($query, $r);
                 }
 
                 unset($r['regrinfo']['rwhois']);

@@ -1,9 +1,5 @@
 <?php
 /**
- * phpWhois Example
- * 
- * This class supposed to be instantiated for using the phpWhois library
- * 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
@@ -53,7 +49,7 @@ class gtld_handler extends WhoisClient {
     );
 
     function parse($data, $query) {
-        $this->Query = array();
+        $this->query = array();
         $this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
 
         unset($this->result['registered']);
@@ -64,8 +60,8 @@ class gtld_handler extends WhoisClient {
             return $this->result;
         }
 
-        if ($this->deep_whois)
-            $this->result = $this->DeepWhois($query, $this->result);
+        if ($this->deepWhois)
+            $this->result = $this->deepWhois($query, $this->result);
 
         // Next server could fail to return data
         if (empty($this->result['rawdata']) || count($this->result['rawdata']) < 3)

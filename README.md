@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the Lookup function.
+This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the `lookup` function.
 
 The response is an array containing, at least, an element 'rawdata', containing the raw output from the whois request.
 
@@ -46,7 +46,7 @@ include('whois.main.php');
 
 $whois = new Whois();
 $query = 'example.com';
-$result = $whois->Lookup($query,false);
+$result = $whois->lookup($query,false);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
@@ -54,7 +54,7 @@ echo "</pre>";
 If you provide the domain name to query in UTF8, then you
 must use:
 ```php
-$result = $whois->Lookup($query);
+$result = $whois->lookup($query);
 ```
 If the query string is not in UTF8 then it must be in
 ISO-8859-1 or IDNA support will not work.
@@ -67,13 +67,13 @@ other information like AS, i.e, both of the following examples
 work:
 ```php
 $whois = new Whois();
-$result = $whois->Lookup('example.com');
+$result = $whois->lookup('example.com');
 
 $whois = new Whois();
-$result = $whois->Lookup('62.97.102.115');
+$result = $whois->lookup('62.97.102.115');
 
 $whois = new Whois();
-$result = $whois->Lookup('AS220');
+$result = $whois->lookup('AS220');
 ```
 Using special whois server
 --------------------------
@@ -90,8 +90,8 @@ The currently known whois services that offer special acccess are:
   this service when querying ripe ip addresses that way:
   ```php
   $whois = new Whois();
-  $whois->UseServer('uk','whois.ripe.net?-V{version},{ip} {query}');
-  $result = $whois->Lookup('62.97.102.115');
+  $whois->useServer('uk','whois.ripe.net?-V{version},{ip} {query}');
+  $result = $whois->lookup('62.97.102.115');
   ```
 
 ### whois.isoc.org.il
@@ -101,8 +101,8 @@ The currently known whois services that offer special acccess are:
 
 ```php
 $whois = new Whois();
-$whois->UseServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
-$result = $whois->Lookup('example.co.uk');
+$whois->useServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
+$result = $whois->lookup('example.co.uk');
 ```
 
 ### whois.nic.uk
@@ -114,24 +114,24 @@ $result = $whois->Lookup('example.co.uk');
 
 ```php
 $whois = new Whois();
-$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
-$result = $whois->Lookup('example.co.uk');
+$whois->useServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
+$result = $whois->lookup('example.co.uk');
 ```
 
 This new feature also allows you to use a different whois server than
-the preconfigured or discovered one by just calling whois->UseServer
+the preconfigured or discovered one by just calling whois->useServer
 and passing the tld and the server and args to use for the named tld.
 For example you could use another whois server for `.au` domains that
 does not limit the number of requests (but provides no owner 
 information) using this:
 ```php
 $whois = new Whois();
-$whois->UseServer('au','whois-check.ausregistry.net.au');
+$whois->useServer('au','whois-check.ausregistry.net.au');
 ```
 or:
 ```php
 $whois = new Whois();
-$whois->UseServer('be','whois.tucows.com');
+$whois->useServer('be','whois.tucows.com');
 ```
 
 to avoid the restrictions imposed by the `.be` whois server
@@ -140,13 +140,13 @@ or:
 
 ```php
 $whois = new Whois();
-$whois->UseServer('ip','whois.apnic.net');
+$whois->useServer('ip','whois.apnic.net');
 ```
 
 to lookup an ip address at specific whois server (but loosing the
 ability to get the results parsed by the appropiate handler)
 
-UseServer can be called as many times as necessary. Please note that
+`useServer` can be called as many times as necessary. Please note that
 if there is a handler for that domain it will also be called but
 returned data from the whois server may be different than the data
 expected by the handler, and thus results could be different.
@@ -158,7 +158,7 @@ If you just want to know if a domain is registered or not but do not
 care about getting the real owner information you can set:
 
 ```php
-$whois->deep_whois = false;
+$whois->deepWhois = false;
 ```
 
 this will tell phpWhois to just query one whois server. For `.com`, `.net` and `.tv` domains and ip addresses this will prevent phpWhois to ask more

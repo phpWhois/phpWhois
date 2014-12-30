@@ -41,7 +41,7 @@ $out = str_replace('{self}', $_SERVER['PHP_SELF'], $out);
 
 $resout = extract_block($out, 'results');
 
-if (isSet($_GET['query'])) {
+if (isset($_GET['query'])) {
     $query = $_GET['query'];
 
     if (!empty($_GET['output']))
@@ -55,20 +55,20 @@ if (isSet($_GET['query'])) {
     $allowproxy = false;
 
     // get faster but less acurate results
-    $whois->deep_whois = empty($_GET['fast']);
+    $whois->deepWhois = empty($_GET['fast']);
 
     // To use special whois servers (see README)
-    //$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
-    //$whois->UseServer('au','whois-check.ausregistry.net.au');
+    //$whois->useServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
+    //$whois->useServer('au','whois-check.ausregistry.net.au');
 
-    $result = $whois->Lookup($query);
+    $result = $whois->lookup($query);
     $resout = str_replace('{query}', $query, $resout);
     $winfo = '';
 
     switch ($output) {
         case 'object':
-            if ($whois->Query['status'] < 0) {
-                $winfo = implode($whois->Query['errstr'], "\n<br></br>");
+            if ($whois->query['status'] < 0) {
+                $winfo = implode($whois->query['errstr'], "\n<br></br>");
             } else {
                 $utils = new Utils;
                 $winfo = $utils->showObject($result);
@@ -80,8 +80,8 @@ if (isSet($_GET['query'])) {
                 $utils = new Utils;
                 $winfo = $utils->showHTML($result);
             } else {
-                if (isset($whois->Query['errstr']))
-                    $winfo = implode($whois->Query['errstr'], "\n<br></br>");
+                if (isset($whois->query['errstr']))
+                    $winfo = implode($whois->query['errstr'], "\n<br></br>");
                 else
                     $winfo = 'Unexpected error';
             }
@@ -95,7 +95,7 @@ if (isSet($_GET['query'])) {
             if (!empty($result['rawdata'])) {
                 $winfo .= '<pre>' . implode($result['rawdata'], "\n") . '</pre>';
             } else {
-                $winfo = implode($whois->Query['errstr'], "\n<br></br>");
+                $winfo = implode($whois->query['errstr'], "\n<br></br>");
             }
     }
 
@@ -103,7 +103,7 @@ if (isSet($_GET['query'])) {
 } else
     $resout = '';
 
-$out = str_replace('{ver}', $whois->CODE_VERSION, $out);
+$out = str_replace('{ver}', $whois->codeVersion, $out);
 exit(str_replace('{results}', $resout, $out));
 
 //-------------------------------------------------------------------------

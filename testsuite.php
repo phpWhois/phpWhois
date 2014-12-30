@@ -85,7 +85,7 @@ set_file_buffer(STDIN, 0);
 
 foreach ($domains as $domain) {
     echo "\nTesting $domain ---------------------------------\n";
-    $result = $whois->Lookup($domain);
+    $result = $whois->lookup($domain);
 
     unset($result['rawdata']);
 

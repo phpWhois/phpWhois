@@ -1,9 +1,5 @@
 <?php
 /**
- * phpWhois Example
- * 
- * This class supposed to be instantiated for using the phpWhois library
- * 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
@@ -63,7 +59,7 @@ class jp_handler extends WhoisClient {
             'registrar' => 'Japan Registry Services'
         );
 
-        if (!$this->deep_whois)
+        if (!$this->deepWhois)
             return $r;
 
         $r['rawdata'] = $data_str['rawdata'];
@@ -78,14 +74,14 @@ class jp_handler extends WhoisClient {
             '[Last Update]' => 'changed'
         );
 
-        $this->Query['server'] = 'jp.whois-servers.net';
+        $this->query['server'] = 'jp.whois-servers.net';
 
         if (!empty($r['regrinfo']['admin']['handle'])) {
-            $rwdata = $this->GetRawData('CONTACT ' . $r['regrinfo']['admin']['handle'] . '/e');
+            $rwdata = $this->getRawData('CONTACT ' . $r['regrinfo']['admin']['handle'] . '/e');
             $r['rawdata'][] = '';
             $r['rawdata'] = array_merge($r['rawdata'], $rwdata);
             $r['regrinfo']['admin'] = generic_parser_b($rwdata, $items, 'ymd', false);
-            $r = $this->set_whois_info($r);
+            $r = $this->setWhoisInfo($r);
         }
 
         if (!empty($r['regrinfo']['tech']['handle'])) {
@@ -93,13 +89,13 @@ class jp_handler extends WhoisClient {
                     $r['regrinfo']['admin']['handle'] == $r['regrinfo']['tech']['handle']) {
                 $r['regrinfo']['tech'] = $r['regrinfo']['admin'];
             } else {
-                unset($this->Query);
-                $this->Query['server'] = 'jp.whois-servers.net';
-                $rwdata = $this->GetRawData('CONTACT ' . $r['regrinfo']['tech']['handle'] . '/e');
+                unset($this->query);
+                $this->query['server'] = 'jp.whois-servers.net';
+                $rwdata = $this->getRawData('CONTACT ' . $r['regrinfo']['tech']['handle'] . '/e');
                 $r['rawdata'][] = '';
                 $r['rawdata'] = array_merge($r['rawdata'], $rwdata);
                 $r['regrinfo']['tech'] = generic_parser_b($rwdata, $items, 'ymd', false);
-                $r = $this->set_whois_info($r);
+                $r = $this->setWhoisInfo($r);
             }
         }
 

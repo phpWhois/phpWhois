@@ -1,9 +1,5 @@
 <?php
 /**
- * phpWhois Example
- * 
- * This class supposed to be instantiated for using the phpWhois library
- * 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
@@ -31,12 +27,10 @@ if (!defined('__IP_HANDLER__'))
 
 use phpWhois\WhoisClient;
 
-require_once('whois.ip.lib.php');
-
 class ip_handler extends WhoisClient {
 
-    // Deep whois ?
-    public $deep_whois = true;
+    /** @var Deep whois? */
+    public $deepWhois = true;
     public $REGISTRARS = array(
         'European Regional Internet Registry/RIPE NCC' => 'whois.ripe.net',
         'RIPE Network Coordination Centre' => 'whois.ripe.net',
@@ -67,12 +61,12 @@ class ip_handler extends WhoisClient {
         else
             $result['regyinfo']['type'] = 'ip';
 
-        if (!$this->deep_whois)
+        if (!$this->deepWhois)
             return null;
 
-        $this->Query = array();
-        $this->Query['server'] = 'whois.arin.net';
-        $this->Query['query'] = $query;
+        $this->query = array();
+        $this->query['server'] = 'whois.arin.net';
+        $this->query['query'] = $query;
 
         $rawdata = $data['rawdata'];
 
@@ -107,8 +101,8 @@ class ip_handler extends WhoisClient {
                             $this->handle_rwhois($this->REGISTRARS['owner'], $query);
                             break 2;
                         } else {
-                            $this->Query['args'] = 'n ' . $net;
-                            $presults[] = $this->GetRawData($net);
+                            $this->query['args'] = 'n ' . $net;
+                            $presults[] = $this->getRawData($net);
                             $done[$net] = 1;
                         }
                     }
@@ -117,33 +111,33 @@ class ip_handler extends WhoisClient {
             }
 
             if (!$found) {
-                $this->Query['file'] = 'whois.ip.arin.php';
-                $this->Query['handler'] = 'arin';
+                $this->query['file'] = 'whois.ip.arin.php';
+                $this->query['handler'] = 'arin';
                 $result = $this->parse_results($result, $rwdata, $query, true);
             }
         }
 
-        unset($this->Query['args']);
+        unset($this->query['args']);
 
         while (count($this->more_data) > 0) {
             $srv_data = array_shift($this->more_data);
-            $this->Query['server'] = $srv_data['server'];
-            unset($this->Query['handler']);
+            $this->query['server'] = $srv_data['server'];
+            unset($this->query['handler']);
             // Use original query
-            $rwdata = $this->GetRawData($srv_data['query']);
+            $rwdata = $this->getRawData($srv_data['query']);
 
             if (!empty($rwdata)) {
                 if (!empty($srv_data['handler'])) {
-                    $this->Query['handler'] = $srv_data['handler'];
+                    $this->query['handler'] = $srv_data['handler'];
 
                     if (!empty($srv_data['file']))
-                        $this->Query['file'] = $srv_data['file'];
+                        $this->query['file'] = $srv_data['file'];
                     else
-                        $this->Query['file'] = 'whois.' . $this->Query['handler'] . '.php';
+                        $this->query['file'] = 'whois.' . $this->query['handler'] . '.php';
                 }
 
                 $result = $this->parse_results($result, $rwdata, $query, $srv_data['reset']);
-                $result = $this->set_whois_info($result);
+                $result = $this->setWhoisInfo($result);
                 $reset = false;
             }
         }
@@ -155,7 +149,7 @@ class ip_handler extends WhoisClient {
             if (!is_array($result['regrinfo']['network']['nserver'])) {
                 unset($result['regrinfo']['network']['nserver']);
             } else
-                $result['regrinfo']['network']['nserver'] = $this->FixNameServer($result['regrinfo']['network']['nserver']);
+                $result['regrinfo']['network']['nserver'] = $this->fixNameServer($result['regrinfo']['network']['nserver']);
         }
 
         return $result;
@@ -164,7 +158,7 @@ class ip_handler extends WhoisClient {
     //-----------------------------------------------------------------
 
     public function parse_results($result, $rwdata, $query, $reset) {
-        $rwres = $this->Process($rwdata);
+        $rwres = $this->process($rwdata);
 
         if ($result['regyinfo']['type'] == 'AS' && !empty($rwres['regrinfo']['network'])) {
             $rwres['regrinfo']['AS'] = $rwres['regrinfo']['network'];
@@ -185,7 +179,7 @@ class ip_handler extends WhoisClient {
             }
         }
 
-        if ($this->deep_whois) {
+        if ($this->deepWhois) {
             if (isset($rwres['regrinfo']['rwhois'])) {
                 $this->handle_rwhois($rwres['regrinfo']['rwhois'], $query);
                 unset($result['regrinfo']['rwhois']);
