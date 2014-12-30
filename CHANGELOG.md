@@ -1,3 +1,8 @@
+v4.2.5
+------
+
+* New whois servers
+
 2011/07/09
 		- html & cosmetic changes in examples
 		- released version 4.2.2
