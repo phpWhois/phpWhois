@@ -34,14 +34,14 @@ class IpTools {
      * @param string $ip IP address for validation
      * @return boolean
      */
-    function validIp($ip) {
+    public function validIp($ip) {
 
         if (empty($ip))
             return false;
 
         $long = ip2long($ip);
 
-        if (($long == -1) or ( $long === false))
+        if ($long == -1 || $long === false)
             return false;
 
         $reserved_ips = array(
@@ -70,26 +70,23 @@ class IpTools {
      *
      * @return string
      */
-    function getClientIp() {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']) && phpwhois_validip($_SERVER['HTTP_CLIENT_IP']))
+    public function getClientIp() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']) && $this->validIp($_SERVER['HTTP_CLIENT_IP']))
             return $_SERVER['HTTP_CLIENT_IP'];
 
         if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
             foreach (explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']) as $ip)
-                if (phpwhois_validip(trim($ip)))
-                    return $ip;
+                if ($this->validIp(trim($ip)))
+                    return trim($ip);
 
-        if (!empty($_SERVER['HTTP_X_FORWARDED']) && phpwhois_validip($_SERVER['HTTP_X_FORWARDED']))
+        if (!empty($_SERVER['HTTP_X_FORWARDED']) && $this->validIp($_SERVER['HTTP_X_FORWARDED']))
             return $_SERVER['HTTP_X_FORWARDED'];
 
-        if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && phpwhois_validip($_SERVER['HTTP_FORWARDED_FOR']))
+        if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && $this->validIp($_SERVER['HTTP_FORWARDED_FOR']))
             return $_SERVER['HTTP_FORWARDED_FOR'];
 
-        if (!empty($_SERVER['HTTP_FORWARDED']) && phpwhois_validip($_SERVER['HTTP_FORWARDED']))
+        if (!empty($_SERVER['HTTP_FORWARDED']) && $this->validIp($_SERVER['HTTP_FORWARDED']))
             return $_SERVER['HTTP_FORWARDED'];
-
-        if (!empty($_SERVER['HTTP_X_FORWARDED']) && phpwhois_validip($_SERVER['HTTP_X_FORWARDED']))
-            return $_SERVER['HTTP_X_FORWARDED'];
 
         return $_SERVER['REMOTE_ADDR'];
     }
@@ -102,7 +99,7 @@ class IpTools {
      * @param string $net
      * @return string
      */
-    function cidrConv($net) {
+    public function cidrConv($net) {
         $start = strtok($net, '/');
         $n = 3 - substr_count($net, '.');
 
