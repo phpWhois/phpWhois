@@ -36,12 +36,6 @@ use phpWhois\Whois;
 use phpWhois\Utils;
 $whois = new Whois();
 
-$out = implode('', file('example.html'));
-
-$out = str_replace('{self}', $_SERVER['PHP_SELF'], $out);
-
-$resout = extract_block($out, 'results');
-
 if (isset($_GET['query'])) {
     $query = $_GET['query'];
 
@@ -61,7 +55,7 @@ if (isset($_GET['query'])) {
     //$whois->useServer('au','whois-check.ausregistry.net.au');
 
     $result = $whois->lookup($query);
-    $resout = str_replace('{query}', $query, $resout);
+
     $winfo = '';
 
     switch ($output) {
@@ -98,35 +92,72 @@ if (isset($_GET['query'])) {
             }
     }
 
-    $resout = str_replace('{result}', $winfo, $resout);
-} else
-    $resout = '';
-
-$out = str_replace('{ver}', $whois->codeVersion, $out);
-exit(str_replace('{results}', $resout, $out));
-
-//-------------------------------------------------------------------------
-
-function extract_block(&$plantilla, $mark, $retmark = '') {
-    $start = strpos($plantilla, '<!--' . $mark . '-->');
-    $final = strpos($plantilla, '<!--/' . $mark . '-->');
-
-    if ($start === false || $final === false)
-        return;
-
-    $ini = $start + 7 + strlen($mark);
-
-    $ret = substr($plantilla, $ini, $final - $ini);
-
-    $final+=8 + strlen($mark);
-
-    if ($retmark === false)
-        $plantilla = substr($plantilla, 0, $start) . substr($plantilla, $final);
-    else {
-        if ($retmark == '')
-            $retmark = $mark;
-        $plantilla = substr($plantilla, 0, $start) . '{' . $retmark . '}' . substr($plantilla, $final);
-    }
-
-    return $ret;
 }
+?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>whois.php -base classes to do whois queries with php</title>
+<style type="text/css">
+</style>
+</head>
+
+<body>
+<center>
+
+<h1>phpWhois <?php echo $whois->codeVersion?> - base class to do whois queries with php</h1>
+
+<p>
+&copy; 1999 - 2011 <a href="http://www.easydns.com/">easyDNS
+Technologies Inc.</a> &amp; <a href="http://mark.jeftovic.net/">Mark Jeftovic</a><br/>
+Now maintained and hosted by David Saez at <a href="http://www.ols.es">OLS 20000</a><br/>
+Placed under the GPL. See the LICENSE file in the distribution.
+</p>
+
+<table>
+<tr><td bgcolor="#55aaff">
+<form method="get" action="">
+
+<table>
+<tr><td colspan="3" align="center">
+<b>Enter any domain name, ip address or AS handle you would like to query whois for</b>
+<br/><br/>
+<input name="query" /> <input type="submit" value="Whois" /><br/>
+</td></tr>
+
+<tr>
+<td>
+<input type="radio" name="output" value="normal" /> Show me regular output<br/>
+<input type="radio" name="output" value="nice" checked="checked" /> Show me HTMLized output<br/>
+<input type="radio" name="output" value="object" /> Show me the returned PHP object
+</td>
+
+<td align="left" valign="top">
+<input type="checkbox" name="fast" value="1" /> Fast lookup
+</td>
+
+<td align="right" valign="bottom">
+<a href="http://www.phpwhois.org" title="phpWhois web page">
+<img border="0" src="whois.icon.png" alt="phpWhois web page" /></a>
+</td>
+</tr>
+
+</table>
+</form>
+</td></tr>
+</table>
+</center>
+
+<?php if (!empty($query)):?>
+<?php
+// @TODO
+//XSS attack here ?>
+<p><b>Results for <?php echo $query?> :</b></p>
+<blockquote>
+<?php echo $winfo ?>
+</blockquote>
+<!--/results-->
+<?php endif ?>
+
+</body>
+</html>
