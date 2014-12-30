@@ -42,7 +42,12 @@ Example usage
 
 (see `example.php`)
 ```php
-include('whois.main.php');
+// Load composer framework
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require(__DIR__ . '/vendor/autoload.php');
+}
+
+use phpWhois\Whois;
 
 $whois = new Whois();
 $query = 'example.com';
@@ -66,6 +71,7 @@ You can use phpWhois to query domain names, ip addresses and
 other information like AS, i.e, both of the following examples
 work:
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
 $result = $whois->lookup('example.com');
 
@@ -89,6 +95,7 @@ The currently known whois services that offer special acccess are:
   available to registered gateways. If you are registered you can use
   this service when querying ripe ip addresses that way:
   ```php
+  use phpWhois\Whois;
   $whois = new Whois();
   $whois->useServer('uk','whois.ripe.net?-V{version},{ip} {query}');
   $result = $whois->lookup('62.97.102.115');
@@ -100,6 +107,7 @@ The currently known whois services that offer special acccess are:
   when querying `.il` domains that way:
 
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
 $whois->useServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
 $result = $whois->lookup('example.co.uk');
@@ -113,6 +121,7 @@ $result = $whois->lookup('example.co.uk');
   when querying .uk domains that way:
 
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
 $whois->useServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
 $result = $whois->lookup('example.co.uk');
@@ -125,11 +134,13 @@ For example you could use another whois server for `.au` domains that
 does not limit the number of requests (but provides no owner 
 information) using this:
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
 $whois->useServer('au','whois-check.ausregistry.net.au');
 ```
 or:
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
 $whois->useServer('be','whois.tucows.com');
 ```
@@ -139,6 +150,7 @@ to avoid the restrictions imposed by the `.be` whois server
 or:
 
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
 $whois->useServer('ip','whois.apnic.net');
 ```
@@ -172,10 +184,18 @@ PHPWhois will assume that all whois servers return UTF-8 encoded output,
 if some whois server does not return UTF-8 data, you can include it in
 the `NON_UTF8` array in `whois.servers.php`
 
+Workflow of getting domain info
+-------------------------------
+
+1. Call method `phpWhois\Whois::lookup()` with domain name as parameter
+2. If second parameter of method is **true** (default), phpWhois will try to convert the domain name to punycode
+3. If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at `src/whois.servers.php`), try to query **[tld].whois-servers.net**. If it has ip address, assume that it is valid whois server
+4. Try to query found whois server or fill response array with `unknown()` method
+
 Notes 
 -----
 
-There is an extended class called `whois.utils.php` which contains a
+There is an extended class called `phpWhois\Utils` which contains a
 debugging function called `showObject()`, if you `showObject($result)`
 it will output the total layout of the returned object to the 
 web browser.

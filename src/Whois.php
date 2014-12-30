@@ -67,7 +67,7 @@ class Whois extends WhoisClient {
             $query = $IDN->encode(utf8_encode($query));
 
         // If domain to query was not set
-        if (!isSet($query) || $query == '') {
+        if (!isset($query) || $query == '') {
             // Configure to use default whois server
             $this->query['server'] = $this->nsiRegistry;
             return;
@@ -77,6 +77,7 @@ class Whois extends WhoisClient {
         $this->query['query'] = $domain = strtolower($query);
 
         // If query is an ip address do ip lookup
+        // @TODO use IpUtils method here
         if ($query == long2ip(ip2long($query))) {
             // IPv4 Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
@@ -97,6 +98,7 @@ class Whois extends WhoisClient {
             return $this->getData('', $this->deepWhois);
         }
 
+        // @TODO add validation for ipv6, add method for finding the type of query
         if (strpos($query, ':')) {
             // IPv6 AS Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
@@ -113,6 +115,7 @@ class Whois extends WhoisClient {
             return $this->getData('', $this->deepWhois);
         }
 
+        // Query Autonomous systems (AS)
         if (!strpos($query, '.')) {
             // AS Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
