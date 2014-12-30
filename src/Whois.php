@@ -76,9 +76,9 @@ class Whois extends WhoisClient {
         // Set domain to query in query array
         $this->query['query'] = $domain = strtolower($query);
 
-        // If query is an ip address do ip lookup
-        // @TODO use IpUtils method here
-        if ($query == long2ip(ip2long($query))) {
+        $ipTools = new IpTools;
+        // If query is an ip address perform ip lookup
+        if ($ipTools->validIp($query, 'ipv4')) {
             // IPv4 Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
 
@@ -98,8 +98,7 @@ class Whois extends WhoisClient {
             return $this->getData('', $this->deepWhois);
         }
 
-        // @TODO add validation for ipv6, add method for finding the type of query
-        if (strpos($query, ':')) {
+        if ($ipTools->validIp($query, 'ipv6')) {
             // IPv6 AS Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
 

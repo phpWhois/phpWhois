@@ -32,37 +32,57 @@ class IpTools {
      * Check if ip address is valid
      * 
      * @param string $ip IP address for validation
+     * @param string $type Type of ip address. Possible value are: any, ipv4, ipv6
      * @return boolean
      */
-    public function validIp($ip) {
-
-        if (empty($ip))
-            return false;
-
-        $long = ip2long($ip);
-
-        if ($long == -1 || $long === false)
-            return false;
-
-        $reserved_ips = array(
-            array('0.0.0.0', '2.255.255.255'),
-            array('10.0.0.0', '10.255.255.255'),
-            array('127.0.0.0', '127.255.255.255'),
-            array('169.254.0.0', '169.254.255.255'),
-            array('172.16.0.0', '172.31.255.255'),
-            array('192.0.2.0', '192.0.2.255'),
-            array('192.168.0.0', '192.168.255.255'),
-            array('255.255.255.0', '255.255.255.255')
-        );
-
-        foreach ($reserved_ips as $r) {
-            $min = ip2long($r[0]);
-            $max = ip2long($r[1]);
-            if (($long >= $min) && ($long <= $max))
+    public function validIp($ip, $type = 'any') {
+        switch ($type) {
+            case 'any':
+                return $this->validIpv4($ip) || $this->validIpv6($ip);
+                break;
+            case 'ipv4':
+                return $this->validIpv4($ip);
+                break;
+            case 'ipv6':
+                return $this->validIpv6($ip);
+                break;
+            default:
                 return false;
+                break;
         }
+    }
 
-        return true;
+    /**
+     * Check if given IP is valid ipv4 address and doesn't belong to private and
+     * reserved ranges
+     * 
+     * @param string $ip Ip address
+     * @return boolean
+     */
+    public function validIpv4($ip) {
+        if (filter_var($ip, FILTER_VALIDATE_IP, array(
+            'flags' => FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+            )) !== false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if given IP is valid ipv6 address and doesn't belong to private ranges
+     * 
+     * @param string $ip Ip address
+     * @return boolean
+     */
+    public function validIpv6($ip) {
+        if (filter_var($ip, FILTER_VALIDATE_IP, array(
+            'flags' => FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE
+            )) !== false) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
