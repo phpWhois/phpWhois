@@ -30,6 +30,7 @@ require_once('whois.parser.php');
 class cat_handler {
 
     function parse($data_str, $query) {
+        $r = array();
         $r['regrinfo'] = generic_parser_b($data_str['rawdata']);
 
         if (!isset($r['regrinfo']['domain']['name']))

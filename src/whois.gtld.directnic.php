@@ -43,7 +43,7 @@ class directnic_handler {
             '' => 'By submitting a WHOIS query'
         );
 
-        return easy_parser($data_str, $items, 'mdy', false, false, true);
+        return easy_parser($data_str, $items, 'mdy', array(), false, true);
     }
 
 }

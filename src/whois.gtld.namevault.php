@@ -42,7 +42,7 @@ class namevault_handler {
             'domain.status' => 'Status:'
         );
 
-        return easy_parser($data_str, $items, 'dmy', false, true, true);
+        return easy_parser($data_str, $items, 'dmy', array(), true, true);
     }
 
 }

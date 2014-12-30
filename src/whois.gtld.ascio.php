@@ -41,7 +41,7 @@ class ascio_handler {
             'domain.changed' => 'Record last updated:'
         );
 
-        return easy_parser($data_str, $items, 'ymd', false, false, true);
+        return easy_parser($data_str, $items, 'ymd', array(), false, true);
     }
 
 }

@@ -41,7 +41,7 @@ class iana_handler {
             'disclaimer.' => '% '
         );
 
-        return easy_parser($data_str, $items, 'Ymd', false, false, false, 'owner');
+        return easy_parser($data_str, $items, 'Ymd', false, array(), false, 'owner');
     }
 
 }

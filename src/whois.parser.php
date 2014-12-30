@@ -549,7 +549,7 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
         'last modified:' => 'changed'
     );
 
-    if (count($extra_items)) {
+    if (is_array($extra_items) && count($extra_items)) {
         foreach ($items as $match => $field)
             if (!isset($extra_items[$match]))
                 $extra_items[$match] = $field;

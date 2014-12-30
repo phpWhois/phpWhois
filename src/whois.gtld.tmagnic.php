@@ -42,7 +42,7 @@ class tmagnic_handler {
             '#' => 'Punycode Name:'
         );
 
-        return easy_parser($data_str, $items, 'ymd', false, false, true);
+        return easy_parser($data_str, $items, 'ymd', array(), false, true);
     }
 
 }

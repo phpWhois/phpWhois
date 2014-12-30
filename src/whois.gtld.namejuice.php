@@ -43,7 +43,7 @@ class namejuice_handler {
             'domain.sponsor' => 'Registration Service Provided By:'
         );
 
-        return easy_parser($data_str, $items, 'dmy', false, true, true);
+        return easy_parser($data_str, $items, 'dmy', array(), true, true);
     }
 
 }

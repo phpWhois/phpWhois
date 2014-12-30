@@ -41,7 +41,7 @@ class srsplus_handler {
             'domain.expires' => 'Record expires on'
         );
 
-        return easy_parser($data_str, $items, 'ymd', false, true, true);
+        return easy_parser($data_str, $items, 'ymd', array(), true, true);
     }
 
 }
