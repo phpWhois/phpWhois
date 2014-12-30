@@ -127,8 +127,8 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
     return $blocks;
 }
 
-function generic_parser_b($rawdata, $items = false, $dateformat = 'mdy', $hasreg = true, $scanall = false) {
-    if (!$items)
+function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasreg = true, $scanall = false) {
+    if (!count($items))
         $items = array(
             'Domain Name:' => 'domain.name',
             'Domain ID:' => 'domain.handle',
@@ -489,7 +489,7 @@ function easy_parser($data_str, $items, $date_format, $translate = false, $has_o
     return $r;
 }
 
-function get_contacts($array, $extra_items = '', $has_org = false) {
+function get_contacts($array, $extra_items = array(), $has_org = false) {
     if (isset($array['billing']))
         $array['billing'] = get_contact($array['billing'], $extra_items, $has_org);
 
@@ -511,7 +511,7 @@ function get_contacts($array, $extra_items = '', $has_org = false) {
     return $array;
 }
 
-function get_contact($array, $extra_items = '', $has_org = false) {
+function get_contact($array, $extra_items = array(), $has_org = false) {
 
     if (!is_array($array))
         return array();
@@ -548,7 +548,7 @@ function get_contact($array, $extra_items = '', $has_org = false) {
         'last modified:' => 'changed'
     );
 
-    if ($extra_items) {
+    if (count($extra_items)) {
         foreach ($items as $match => $field)
             if (!isset($extra_items[$match]))
                 $extra_items[$match] = $field;
