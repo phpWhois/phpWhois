@@ -53,6 +53,18 @@ class WhoisClient {
     /** @var string[] List of servers and handlers (loaded from servers.whois) */
     public $DATA = array();
 
+    /** @var string[] Non UTF-8 servers */
+    public $NON_UTF8 = array();
+
+    /** @var string[] List of Whois servers with special parameters */
+    public $WHOIS_PARAM = array();
+
+    /** @var string[] TLD's that have special whois servers or that can only be reached via HTTP */
+    public $WHOIS_SPECIAL = array();
+
+    /** @var string[] Handled gTLD whois servers */
+    public $WHOIS_GTLD_HANDLER = array();
+
     /** @var string[] Array to contain all query publiciables */
     public $query = array(
         'tld' => '',
