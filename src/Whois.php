@@ -219,6 +219,7 @@ class Whois extends WhoisClient {
     public function unknown() {
         unset($this->query['server']);
         $this->query['status'] = 'error';
+        $result = array('rawdata' => array());
         $result['rawdata'][] = $this->query['errstr'][] = $this->query['query'] . ' domain is not supported';
         $this->checkDns($result);
         $this->fixResult($result, $this->query['query']);
