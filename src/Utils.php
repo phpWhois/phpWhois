@@ -1,32 +1,33 @@
 <?php
-
-/*
-  Whois.php        PHP classes to conduct whois queries
-
-  Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
-
-  Maintained by David Saez
-
-  For the most recent version of this package visit:
-
-  http://www.phpwhois.org
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-class utils extends Whois {
+namespace phpWhois;
+
+/**
+ * Additional utils
+ */
+class Utils extends Whois {
 
     // showObject() and debugObject()
     // - debug code to show an object or array
@@ -56,8 +57,9 @@ class utils extends Whois {
         return checkdnsrr($query, 'NS');
     }
 
-    // get nice HTML output
-
+    /**
+     * Get nice HTML output
+     */
     function showHTML($result, $link_myself = true, $params = 'query=$0&amp;output=nice') {
 
         // adds links fort HTML output
@@ -88,7 +90,21 @@ class utils extends Whois {
 
         $out = strip_tags($out);
         $out = preg_replace($email_regex, '<a href="mailto:$0">$0</a>', $out);
-        $out = preg_replace_callback($html_regex, 'href_replace', $out);
+        $out = preg_replace_callback(
+                    $html_regex,
+                    function ($matches) {
+                        if (substr($matches[0], 0, 4) == 'www.') {
+                            $web = $matches[0];
+                            $url = 'http://' . $web;
+                        } else {
+                            $web = $matches[0];
+                            $url = $web;
+                        }
+
+                        return '<a href="' . $url . '" target="_blank">' . $web . '</a>';
+                    },
+                    $out
+               );
 
         if ($link_myself) {
             if ($params[0] == '/')
@@ -118,28 +134,12 @@ class utils extends Whois {
         }
 
         // Add bold field names
-
         $out = preg_replace("/(?m)^([-\s\.&;'\w\t\(\)\/]+:\s*)/", '<b>$1</b>', $out);
 
         // Add italics for disclaimer
-
         $out = preg_replace("/(?m)^(%.*)/", '<i>$0</i>', $out);
 
         return str_replace("\n", "<br/>\n", $out);
     }
 
 }
-
-function href_replace($matches) {
-    if (substr($matches[0], 0, 4) == 'www.') {
-        $web = $matches[0];
-        $url = 'http://' . $web;
-    } else {
-        $web = $matches[0];
-        $url = $web;
-    }
-
-    return '<a href="' . $url . '" target="_blank">' . $web . '</a>';
-}
-
-?>

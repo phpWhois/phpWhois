@@ -33,7 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "phpWhois\\": "src"
+            "phpWhois\\": "src/"
         }
     }
 }

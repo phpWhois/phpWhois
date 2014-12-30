@@ -1,10 +1,5 @@
 <?php
-
 /**
- * phpWhois basic class
- * 
- * This is the basic client class
- * 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
@@ -29,8 +24,11 @@
 
 namespace phpWhois;
 require_once('whois.ip.lib.php');
+
 /**
  * phpWhois basic class
+ * 
+ * This is the basic client class
  */
 class WhoisClient {
 

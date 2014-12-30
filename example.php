@@ -1,32 +1,39 @@
 <?php
-
-/*
-  Whois.php        PHP classes to conduct whois queries
-
-  Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
-
-  Maintained by David Saez
-
-  For the most recent version of this package visit:
-
-  http://www.phpwhois.org
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * phpWhois Example
+ * 
+ * This class supposed to be instantiated for using the phpWhois library
+ * 
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
 header('Content-Type: text/html; charset=UTF-8');
+
+if (file_exists(__DIR__.'/vendor/autoload.php')) {
+    require_once __DIR__.'/vendor/autoload.php';
+}
+
+use phpWhois\Whois;
+use phpWhois\Utils;
 
 $out = implode('', file('example.html'));
 
@@ -41,14 +48,6 @@ if (isSet($_GET['query'])) {
         $output = $_GET['output'];
     else
         $output = '';
-
-    
-    if (file_exists(__DIR__.'/vendor/autoload.php')) {
-        require_once __DIR__.'/vendor/autoload.php';
-    } else {
-        require_once 'src/whois.main.php';
-        require_once 'src/whois.utils.php';
-    }
 
     $whois = new Whois();
 
@@ -73,14 +72,14 @@ if (isSet($_GET['query'])) {
             if ($whois->Query['status'] < 0) {
                 $winfo = implode($whois->Query['errstr'], "\n<br></br>");
             } else {
-                $utils = new utils;
+                $utils = new Utils;
                 $winfo = $utils->showObject($result);
             }
             break;
 
         case 'nice':
             if (!empty($result['rawdata'])) {
-                $utils = new utils;
+                $utils = new Utils;
                 $winfo = $utils->showHTML($result);
             } else {
                 if (isset($whois->Query['errstr']))

@@ -1,10 +1,5 @@
 <?php
-
 /**
- * phpWhois main class
- * 
- * This class supposed to be instantiated for using the phpWhois library
- * 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
@@ -29,10 +24,10 @@
 
 namespace phpWhois;
 
-//require_once('whois.client.php');
-
 /**
  * phpWhois main class
+ *
+ * This class supposed to be instantiated for using the phpWhois library
  */
 class Whois extends WhoisClient {
 
@@ -72,7 +67,7 @@ class Whois extends WhoisClient {
 
         $query = trim($query);
 
-        $IDN = new idna_convert();
+        $IDN = new \idna_convert();
 
         if ($is_utf)
             $query = $IDN->encode($query);
