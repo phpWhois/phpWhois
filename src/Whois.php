@@ -279,7 +279,7 @@ class Whois extends WhoisClient {
     /**
      * Guess query type
      * 
-     * @param type $query
+     * @param string $query
      * 
      * @return int Query type
      */
