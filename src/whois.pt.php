@@ -46,8 +46,8 @@ class pt_handler
 					'domain.status'	 	=> 'Estado / Status:',
 					'owner'				=> 'Titular / Registrant',
 					'billing'			=> 'Entidade Gestora / Billing Contact',
-					'admin'				=> 'Responsável Administrativo / Admin Contact',
-					'tech'				=> 'Responsável Técnico / Tech Contact',
+					'admin'				=> 'ResponsÃ¡vel Administrativo / Admin Contact',
+					'tech'				=> 'ResponsÃ¡vel TÃ©cnico / Tech Contact',
 					'#'					=> 'Nameserver Information'
 					);
 
