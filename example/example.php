@@ -105,7 +105,7 @@ if (isset($_GET['query'])) {
 <body>
 <center>
 
-<h1>phpWhois <?php echo $whois->codeVersion?> - base class to do whois queries with php</h1>
+<h1>phpWhois - base class to do whois queries with php</h1>
 
 <p>
 &copy; 1999 - 2011 <a href="http://www.easydns.com/">easyDNS

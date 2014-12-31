@@ -254,7 +254,7 @@ class WhoisClient {
             return $result;
 
         // If we have a handler, post-process it with it
-        if (isSet($this->query['handler'])) {
+        if (isset($this->query['handler'])) {
             // Keep server list
             $servers = $result['regyinfo']['servers'];
             unset($result['regyinfo']['servers']);

@@ -33,18 +33,20 @@ class IpTools {
      * 
      * @param string $ip IP address for validation
      * @param string $type Type of ip address. Possible value are: any, ipv4, ipv6
+     * @param boolean $strict If true - fail validation on reserved and private ip ranges
+     * 
      * @return boolean
      */
-    public function validIp($ip, $type = 'any') {
+    public function validIp($ip, $type = 'any', $strict = true) {
         switch ($type) {
             case 'any':
-                return $this->validIpv4($ip) || $this->validIpv6($ip);
+                return $this->validIpv4($ip, $strict) || $this->validIpv6($ip, $strict);
                 break;
             case 'ipv4':
-                return $this->validIpv4($ip);
+                return $this->validIpv4($ip, $strict);
                 break;
             case 'ipv6':
-                return $this->validIpv6($ip);
+                return $this->validIpv6($ip, $strict);
                 break;
             default:
                 return false;
@@ -57,12 +59,18 @@ class IpTools {
      * reserved ranges
      * 
      * @param string $ip Ip address
+     * @param boolean $strict If true - fail validation on reserved and private ip ranges
+     * 
      * @return boolean
      */
-    public function validIpv4($ip) {
-        if (filter_var($ip, FILTER_VALIDATE_IP, array(
-            'flags' => FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
-            )) !== false) {
+    public function validIpv4($ip, $strict = true) {
+        if ($strict) {
+            $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
+        } else {
+            $flags = FILTER_FLAG_IPV4;
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false) {
             return true;
         } else {
             return false;
@@ -73,12 +81,18 @@ class IpTools {
      * Check if given IP is valid ipv6 address and doesn't belong to private ranges
      * 
      * @param string $ip Ip address
+     * @param boolean $strict If true - fail validation on reserved and private ip ranges
+     * 
      * @return boolean
      */
-    public function validIpv6($ip) {
-        if (filter_var($ip, FILTER_VALIDATE_IP, array(
-            'flags' => FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE
-            )) !== false) {
+    public function validIpv6($ip, $strict = true) {
+        if ($strict) {
+            $flags = FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE;
+        } else {
+            $flags = FILTER_FLAG_IPV6;
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false) {
             return true;
         } else {
             return false;

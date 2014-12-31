@@ -43,6 +43,12 @@ class Whois extends WhoisClient {
     /** @var string Network Solutions registry server */
     public $nsiRegistry = 'whois.nsiregistry.net';
 
+    const QTYPE_UNKNOWN = 0;
+    const QTYPE_DOMAIN  = 1;
+    const QTYPE_IPV4    = 2;
+    const QTYPE_IPV6    = 3;
+    const QTYPE_AS      = 4;
+
     /**
      *  Use special whois server
      */
@@ -59,12 +65,12 @@ class Whois extends WhoisClient {
 
         $query = trim($query);
 
-        $IDN = new \idna_convert();
+        $idn = new \idna_convert();
 
         if ($is_utf)
-            $query = $IDN->encode($query);
+            $query = $idn->encode($query);
         else
-            $query = $IDN->encode(utf8_encode($query));
+            $query = $idn->encode(utf8_encode($query));
 
         // If domain to query was not set
         if (!isset($query) || $query == '') {
@@ -74,11 +80,13 @@ class Whois extends WhoisClient {
         }
 
         // Set domain to query in query array
-        $this->query['query'] = $domain = strtolower($query);
+        $this->query['query'] = $domain = $query = strtolower($query);
 
-        $ipTools = new IpTools;
+        // Find a query type
+        $qType = $this->getQueryType($query);
+
         // If query is an ip address perform ip lookup
-        if ($ipTools->validIp($query, 'ipv4')) {
+        if ($qType == self::QTYPE_IPV4) {
             // IPv4 Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
 
@@ -98,7 +106,7 @@ class Whois extends WhoisClient {
             return $this->getData('', $this->deepWhois);
         }
 
-        if ($ipTools->validIp($query, 'ipv6')) {
+        if ($qType == self::QTYPE_IPV6) {
             // IPv6 AS Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
 
@@ -115,7 +123,7 @@ class Whois extends WhoisClient {
         }
 
         // Query Autonomous systems (AS)
-        if (!strpos($query, '.')) {
+        if ($qType == self::QTYPE_AS) {
             // AS Prepare to do lookup via the 'ip' handler
             $ip = @gethostbyname($query);
             $this->query['server'] = 'whois.arin.net';
@@ -184,13 +192,13 @@ class Whois extends WhoisClient {
 
             foreach ($tldtests as $htld) {
                 // special handler exists for the tld ?
-                if (isSet($this->DATA[$htld])) {
+                if (isset($this->DATA[$htld])) {
                     $handler = $this->DATA[$htld];
                     break;
                 }
 
                 // Regular handler exists for the tld ?
-                if (($fp = @fopen('whois.' . $htld . '.php', 'r', 1)) and fclose($fp)) {
+                if (file_exists('whois.' . $htld . '.php')) {
                     $handler = $htld;
                     break;
                 }
@@ -232,7 +240,7 @@ class Whois extends WhoisClient {
      * Get nameservers if missing
      */
     public function checkDns(&$result) {
-        if ($this->deepWhois && empty($result['regrinfo']['domain']['nserver']) && function_exists('dns_get_record')) {
+        if ($this->deepWhois && empty($result['regrinfo']['domain']['nserver'])) {
             $ns = @dns_get_record($this->query['query'], DNS_NS);
             if (!is_array($ns))
                 return;
@@ -268,4 +276,32 @@ class Whois extends WhoisClient {
         }
     }
 
+    /**
+     * Guess query type
+     * 
+     * @param type $query
+     * 
+     * @return int Query type
+     */
+    public function getQueryType($query) {
+        $ipTools = new IpTools;
+
+        if ($ipTools->validIp($query, 'ipv4', false)) {
+            if ($ipTools->validIp($query, 'ipv4'))
+                return self::QTYPE_IPV4;
+            else
+                return self::QTYPE_UNKNOWN;
+        } elseif ($ipTools->validIp($query, 'ipv6', false)) {
+            if ($ipTools->validIp($query, 'ipv6'))
+                return self::QTYPE_IPV6;
+            else
+                return self::QTYPE_UNKNOWN;
+        } elseif (!empty($query) && strpos($query, '.') !== false) {
+            return self::QTYPE_DOMAIN;
+        } elseif (!empty($query) && strpos($query, '.') === false) {
+            return self::QTYPE_AS;
+        } else {
+            return self::QTYPE_UNKNOWN;
+        }
+    }
 }
