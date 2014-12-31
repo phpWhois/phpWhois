@@ -4,48 +4,38 @@ use phpWhois\IpTools;
 
 class IpToolsTest extends \PHPUnit_Framework_TestCase
 {
-    public function testIpEmpty() {
+    /**
+     * @dataProvider validIpsProvider
+     */
+    public function testValidIp($ip) {
         $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp(''));
+        $this->assertTrue($ipTools->validIp($ip));
     }
 
-    public function testIpv4() {
-        $ipTools = new IpTools;
-        $this->assertTrue($ipTools->validIp('123.123.123.123'));
+    public function validIpsProvider() {
+        return array(
+            array('123.123.123.123'),
+            array('1a80:1f45::ebb:12'),
+        );
     }
 
-    public function testIpv4Reserved() {
+    /**
+     * @dataProvider invalidIpsProvider
+     */
+    public function testInvalidIp($ip) {
         $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp('169.254.255.200'));
+        $this->assertFalse($ipTools->validIp($ip));
     }
 
-    public function testIpv4Private() {
-        $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp('172.17.255.100'));
-    }
-
-    public function testIpv4Invalid() {
-        $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp('123.a15.255.100'));
-    }
-
-    public function testIpv6() {
-        $ipTools = new IpTools;
-        $this->assertTrue($ipTools->validIp('1a80:1f45::ebb:12'));
-    }
-
-    public function testIpv6Reserved1() {
-        $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp('fd80::1'));
-    }
-
-    public function testIpv6Reserved2() {
-        $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp('fc80:19c::1'));
-    }
-
-    public function testIpv6Invalid() {
-        $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp('1a80:1f45::ebm:12'));
+    public function invalidIpsProvider($ip) {
+        return array(
+            array(''),
+            array('169.254.255.200'),
+            array('172.17.255.100'),
+            array('123.a15.255.100'),
+            array('fd80::1'),
+            array('fc80:19c::1'),
+            array('1a80:1f45::ebm:12'),
+        );
     }
 }
