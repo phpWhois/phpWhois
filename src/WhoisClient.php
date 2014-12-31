@@ -75,7 +75,7 @@ class WhoisClient {
     );
 
     /** @var string Current release of the package */
-    public $codeVersion = '4.2.2';
+    public $codeVersion = null;
 
     /** @var string Full code and data version string (e.g. 'Whois2.php v3.01:16') */
     public $version;
@@ -93,6 +93,7 @@ class WhoisClient {
         $this->WHOIS_SPECIAL      = $servers['WHOIS_SPECIAL'];
         $this->WHOIS_GTLD_HANDLER = $servers['WHOIS_GTLD_HANDLER'];
 
+        $this->codeVersion = file_get_contents(__DIR__.'/../VERSION');
         // Set version
         $this->version = sprintf("phpWhois v%s", $this->codeVersion);
     }
@@ -118,7 +119,7 @@ class WhoisClient {
 
         // Check if protocol is http
         if (substr($this->query['server'], 0, 7) == 'http://' ||
-                substr($this->query['server'], 0, 8) == 'https://') {
+            substr($this->query['server'], 0, 8) == 'https://') {
             $output = $this->httpQuery($this->query['server']);
 
             if (!$output) {
@@ -133,7 +134,7 @@ class WhoisClient {
             if (substr($this->query['server'], 0, 7) == 'http://')
                 $this->query['server_port'] = 80;
             else
-                $this->query['server_port'] = 483;
+                $this->query['server_port'] = 443;
         } else {
             // Get args
             if (strpos($this->query['server'], '?')) {

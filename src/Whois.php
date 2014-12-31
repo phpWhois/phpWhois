@@ -50,7 +50,10 @@ class Whois extends WhoisClient {
     const QTYPE_AS      = 4;
 
     /**
-     *  Use special whois server
+     * Use special whois server (Populate WHOIS_SPECIAL array)
+     *
+     * @param string $tld Top-level domain
+     * @param string $server Server address
      */
     public function useServer($tld, $server) {
         $this->WHOIS_SPECIAL[$tld] = $server;
@@ -58,6 +61,10 @@ class Whois extends WhoisClient {
 
     /**
      *  Lookup query
+     * 
+     * @param string $query Domain name or other entity
+     * @param boolean $is_utf True if domain name encoding is utf-8 already, otherwise convert it with utf8_encode() first
+     * 
      */
     public function lookup($query = '', $is_utf = true) {
         // start clean
@@ -103,6 +110,7 @@ class Whois extends WhoisClient {
             $this->query['query'] = $ip;
             $this->query['tld'] = 'ip';
             $this->query['host_name'] = @gethostbyaddr($ip);
+
             return $this->getData('', $this->deepWhois);
         }
 
