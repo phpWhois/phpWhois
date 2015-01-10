@@ -36,6 +36,7 @@ class IpToolsTest extends \PHPUnit_Framework_TestCase
             array('fd80::1'),
             array('fc80:19c::1'),
             array('1a80:1f45::ebm:12'),
+            array('[1a80:1f45::ebb:12]'),
         );
     }
 }

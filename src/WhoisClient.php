@@ -184,7 +184,7 @@ class WhoisClient {
             // Connect to whois server, or return if failed
             $ptr = $this->connect();
 
-            if ($ptr < 0) {
+            if ($ptr === false) {
                 $this->query['status'] = 'error';
                 $this->query['errstr'][] = 'Connect failed to: ' . $this->query['server'];
                 return array();
@@ -389,30 +389,28 @@ class WhoisClient {
     /**
      * Open a socket to the whois server.
      *
-     * @return resource|integer Returns a socket connection pointer on success, or -1 on failure
+     * @param string|null $server Server address to connect. If null, $this->query['server'] will be used
+     *
+     * @return resource|false Returns a socket connection pointer on success, or -1 on failure
      */
-    public function connect($server = '') {
+    public function connect($server = null) {
 
-        if ($server == '')
+        if (empty($server)) {
             $server = $this->query['server'];
+        }
 
-        // Fail if server not set
-        if ($server == '')
-            return(-1);
+        /** @TODO Throw an exception here */
+        if (empty($server)) {
+            return false;
+        }
 
-        // Get rid of protocol and/or get port
         $port = $this->query['server_port'];
 
-        $pos = strpos($server, '://');
+        $parsed = $this->parseServer($server);
+        $server = $parsed['host'];
 
-        if ($pos !== false)
-            $server = substr($server, $pos + 3);
-
-        $pos = strpos($server, ':');
-
-        if ($pos !== false) {
-            $port = substr($server, $pos + 1);
-            $server = substr($server, 0, $pos);
+        if (array_key_exists('port', $parsed)) {
+            $port = $parsed['port'];
         }
 
         // Enter connection attempt loop
@@ -427,7 +425,7 @@ class WhoisClient {
 
             if ($ptr > 0) {
                 $this->query['status'] = 'ok';
-                return($ptr);
+                return $ptr;
             }
 
             // Failed this attempt
@@ -440,7 +438,7 @@ class WhoisClient {
         }
 
         // If we get this far, it hasn't worked
-        return(-1);
+        return false;
     }
 
     /**
@@ -608,4 +606,34 @@ class WhoisClient {
         return $dns;
     }
 
+    /**
+     * Parse server string into array with host and port keys
+     *
+     * @param $server   server string in various formattes
+     * @return array    Array containing 'host' key with server host and 'port' if defined in original $server string
+     */
+    public function parseServer($server) {
+        $server = trim($server);
+
+        $server = preg_replace('/\/$/', '', $server);
+        $ipTools = new IpTools;
+        if ($ipTools->validIpv6($server)) {
+            $result = array('host' => "[$server]");
+        } else {
+            $parsed = parse_url($server);
+            if (array_key_exists('path', $parsed) && !array_key_exists('host', $parsed)) {
+                $host = preg_replace('/\//', '', $parsed['path']);
+
+                // if host is ipv6 with port. Example: [1a80:1f45::ebb:12]:8080
+                if (preg_match('/^(\[[a-f0-9:]+\]):(\d{1,5})$/i', $host, $matches)) {
+                    $result = array('host' => $matches[1], 'port' => $matches[2]);
+                } else {
+                    $result = array('host' => $host);
+                }
+            } else {
+                $result = $parsed;
+            }
+        }
+        return $result;
+    }
 }

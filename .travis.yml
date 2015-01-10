@@ -21,7 +21,7 @@ install:
   - composer install --dev --prefer-dist
 
 script:
-  - phpunit --verbose --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
 
 after_script:
   - travis_retry wget https://scrutinizer-ci.com/ocular.phar

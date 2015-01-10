@@ -6,16 +6,16 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
@@ -29,7 +29,8 @@ namespace phpWhois;
  *
  * This class supposed to be instantiated for using the phpWhois library
  */
-class Whois extends WhoisClient {
+class Whois extends WhoisClient
+{
 
     /** @var boolean Deep whois? */
     public $deepWhois = true;
@@ -55,18 +56,20 @@ class Whois extends WhoisClient {
      * @param string $tld Top-level domain
      * @param string $server Server address
      */
-    public function useServer($tld, $server) {
+    public function useServer($tld, $server)
+    {
         $this->WHOIS_SPECIAL[$tld] = $server;
     }
 
     /**
      *  Lookup query
-     * 
+     *
      * @param string $query Domain name or other entity
      * @param boolean $is_utf True if domain name encoding is utf-8 already, otherwise convert it with utf8_encode() first
-     * 
+     *
      */
-    public function lookup($query = '', $is_utf = true) {
+    public function lookup($query = '', $is_utf = true)
+    {
         // start clean
         $this->query = array('status' => '');
 
@@ -74,10 +77,11 @@ class Whois extends WhoisClient {
 
         $idn = new \idna_convert();
 
-        if ($is_utf)
+        if ($is_utf) {
             $query = $idn->encode($query);
-        else
+        } else {
             $query = $idn->encode(utf8_encode($query));
+        }
 
         // If domain to query was not set
         if (!isset($query) || $query == '') {
@@ -92,59 +96,60 @@ class Whois extends WhoisClient {
         // Find a query type
         $qType = $this->getQueryType($query);
 
-        // If query is an ip address perform ip lookup
-        if ($qType == self::QTYPE_IPV4) {
-            // IPv4 Prepare to do lookup via the 'ip' handler
-            $ip = @gethostbyname($query);
+        switch ($qType) {
+            case self::QTYPE_IPV4:
+                // IPv4 Prepare to do lookup via the 'ip' handler
+                $ip = @gethostbyname($query);
 
-            if (isset($this->WHOIS_SPECIAL['ip'])) {
-                $this->query['server'] = $this->WHOIS_SPECIAL['ip'];
-                $this->query['args'] = $ip;
-            } else {
+                if (isset($this->WHOIS_SPECIAL['ip'])) {
+                    $this->query['server'] = $this->WHOIS_SPECIAL['ip'];
+                    $this->query['args'] = $ip;
+                } else {
+                    $this->query['server'] = 'whois.arin.net';
+                    $this->query['args'] = "n $ip";
+                    $this->query['file'] = 'whois.ip.php';
+                    $this->query['handler'] = 'ip';
+                }
+                $this->query['host_ip'] = $ip;
+                $this->query['query'] = $ip;
+                $this->query['tld'] = 'ip';
+                $this->query['host_name'] = @gethostbyaddr($ip);
+
+                return $this->getData('', $this->deepWhois);
+                break;
+
+            case self::QTYPE_IPV6:
+                // IPv6 AS Prepare to do lookup via the 'ip' handler
+                $ip = @gethostbyname($query);
+
+                if (isset($this->WHOIS_SPECIAL['ip'])) {
+                    $this->query['server'] = $this->WHOIS_SPECIAL['ip'];
+                } else {
+                    $this->query['server'] = 'whois.ripe.net';
+                    $this->query['file'] = 'whois.ip.ripe.php';
+                    $this->query['handler'] = 'ripe';
+                }
+                $this->query['query'] = $ip;
+                $this->query['tld'] = 'ip';
+                return $this->getData('', $this->deepWhois);
+                break;
+
+            case self::QTYPE_AS:
+                // AS Prepare to do lookup via the 'ip' handler
+                $ip = @gethostbyname($query);
                 $this->query['server'] = 'whois.arin.net';
-                $this->query['args'] = "n $ip";
+                if (strtolower(substr($ip, 0, 2)) == 'as') {
+                    $as = substr($ip, 2);
+                } else {
+                    $as = $ip;
+                }
+                $this->query['args'] = "a $as";
                 $this->query['file'] = 'whois.ip.php';
                 $this->query['handler'] = 'ip';
-            }
-            $this->query['host_ip'] = $ip;
-            $this->query['query'] = $ip;
-            $this->query['tld'] = 'ip';
-            $this->query['host_name'] = @gethostbyaddr($ip);
-
-            return $this->getData('', $this->deepWhois);
-        }
-
-        if ($qType == self::QTYPE_IPV6) {
-            // IPv6 AS Prepare to do lookup via the 'ip' handler
-            $ip = @gethostbyname($query);
-
-            if (isset($this->WHOIS_SPECIAL['ip'])) {
-                $this->query['server'] = $this->WHOIS_SPECIAL['ip'];
-            } else {
-                $this->query['server'] = 'whois.ripe.net';
-                $this->query['file'] = 'whois.ip.ripe.php';
-                $this->query['handler'] = 'ripe';
-            }
-            $this->query['query'] = $ip;
-            $this->query['tld'] = 'ip';
-            return $this->getData('', $this->deepWhois);
-        }
-
-        // Query Autonomous systems (AS)
-        if ($qType == self::QTYPE_AS) {
-            // AS Prepare to do lookup via the 'ip' handler
-            $ip = @gethostbyname($query);
-            $this->query['server'] = 'whois.arin.net';
-            if (strtolower(substr($ip, 0, 2)) == 'as')
-                $as = substr($ip, 2);
-            else
-                $as = $ip;
-            $this->query['args'] = "a $as";
-            $this->query['file'] = 'whois.ip.php';
-            $this->query['handler'] = 'ip';
-            $this->query['query'] = $ip;
-            $this->query['tld'] = 'as';
-            return $this->getData('', $this->deepWhois);
+                $this->query['query'] = $ip;
+                $this->query['tld'] = 'as';
+                return $this->getData('', $this->deepWhois);
+                break;
         }
 
         // Build array of all possible tld's for that domain
@@ -169,28 +174,31 @@ class Whois extends WhoisClient {
             if (isset($special_tlds[$tld])) {
                 $val = $special_tlds[$tld];
 
-                if ($val == '')
+                if ($val == '') {
                     return $this->unknown();
+                }
 
-                $domain = substr($query, 0, - strlen($tld) - 1);
+                $domain = substr($query, 0, -strlen($tld) - 1);
                 $val = str_replace('{domain}', $domain, $val);
                 $server = str_replace('{tld}', $tld, $val);
                 break;
             }
         }
 
-        if ($server == '')
+        if ($server == '') {
             foreach ($tldtests as $tld) {
                 // Determine the top level domain, and it's whois server using
                 // DNS lookups on 'whois-servers.net'.
                 // Assumes a valid DNS response indicates a recognised tld (!?)
                 $cname = $tld . '.whois-servers.net';
 
-                if (gethostbyname($cname) == $cname)
+                if (gethostbyname($cname) == $cname) {
                     continue;
+                }
                 $server = $tld . '.whois-servers.net';
                 break;
             }
+        }
 
         if ($tld && $server) {
             // If found, set tld and whois server in query array
@@ -219,8 +227,10 @@ class Whois extends WhoisClient {
             }
 
             // Special parameters ?
-            if (isset($this->WHOIS_PARAM[$server]))
-                $this->query['server'] = $this->query['server'] . '?' . str_replace('$', $domain, $this->WHOIS_PARAM[$server]);
+            if (isset($this->WHOIS_PARAM[$server])) {
+                $this->query['server'] = $this->query['server'] . '?' . str_replace('$', $domain,
+                        $this->WHOIS_PARAM[$server]);
+            }
 
             $result = $this->getData('', $this->deepWhois);
             $this->checkDns($result);
@@ -234,7 +244,8 @@ class Whois extends WhoisClient {
     /**
      * Unsupported domains
      */
-    public function unknown() {
+    public function unknown()
+    {
         unset($this->query['server']);
         $this->query['status'] = 'error';
         $result = array('rawdata' => array());
@@ -247,63 +258,73 @@ class Whois extends WhoisClient {
     /**
      * Get nameservers if missing
      */
-    public function checkDns(&$result) {
+    public function checkDns(&$result)
+    {
         if ($this->deepWhois && empty($result['regrinfo']['domain']['nserver'])) {
             $ns = @dns_get_record($this->query['query'], DNS_NS);
-            if (!is_array($ns))
+            if (!is_array($ns)) {
                 return;
+            }
             $nserver = array();
-            foreach ($ns as $row)
+            foreach ($ns as $row) {
                 $nserver[] = $row['target'];
-            if (count($nserver) > 0)
+            }
+            if (count($nserver) > 0) {
                 $result['regrinfo']['domain']['nserver'] = $this->fixNameServer($nserver);
+            }
         }
     }
 
     /**
      *  Fix and/or add name server information
      */
-    public function fixResult(&$result, $domain) {
+    public function fixResult(&$result, $domain)
+    {
         // Add usual fields
         $result['regrinfo']['domain']['name'] = $domain;
 
         // Check if nameservers exist
         if (!isset($result['regrinfo']['registered'])) {
-            if (function_exists('checkdnsrr') && checkdnsrr($domain, 'NS'))
+            if (function_exists('checkdnsrr') && checkdnsrr($domain, 'NS')) {
                 $result['regrinfo']['registered'] = 'yes';
-            else
+            } else {
                 $result['regrinfo']['registered'] = 'unknown';
+            }
         }
 
         // Normalize nameserver fields
         if (isset($result['regrinfo']['domain']['nserver'])) {
             if (!is_array($result['regrinfo']['domain']['nserver'])) {
                 unset($result['regrinfo']['domain']['nserver']);
-            } else
+            } else {
                 $result['regrinfo']['domain']['nserver'] = $this->fixNameServer($result['regrinfo']['domain']['nserver']);
+            }
         }
     }
 
     /**
      * Guess query type
-     * 
+     *
      * @param string $query
-     * 
+     *
      * @return int Query type
      */
-    public function getQueryType($query) {
+    public function getQueryType($query)
+    {
         $ipTools = new IpTools;
 
         if ($ipTools->validIp($query, 'ipv4', false)) {
-            if ($ipTools->validIp($query, 'ipv4'))
+            if ($ipTools->validIp($query, 'ipv4')) {
                 return self::QTYPE_IPV4;
-            else
+            } else {
                 return self::QTYPE_UNKNOWN;
+            }
         } elseif ($ipTools->validIp($query, 'ipv6', false)) {
-            if ($ipTools->validIp($query, 'ipv6'))
+            if ($ipTools->validIp($query, 'ipv6')) {
                 return self::QTYPE_IPV6;
-            else
+            } else {
                 return self::QTYPE_UNKNOWN;
+            }
         } elseif (!empty($query) && strpos($query, '.') !== false) {
             return self::QTYPE_DOMAIN;
         } elseif (!empty($query) && strpos($query, '.') === false) {
