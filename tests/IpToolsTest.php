@@ -27,7 +27,7 @@ class IpToolsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($ipTools->validIp($ip));
     }
 
-    public function invalidIpsProvider($ip) {
+    public function invalidIpsProvider() {
         return array(
             array(''),
             array('169.254.255.200'),
