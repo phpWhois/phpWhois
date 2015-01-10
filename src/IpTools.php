@@ -65,17 +65,15 @@ class IpTools
      */
     public function validIpv4($ip, $strict = true)
     {
+        $flags = FILTER_FLAG_IPV4;
         if ($strict) {
             $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
-        } else {
-            $flags = FILTER_FLAG_IPV4;
         }
 
         if (filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -88,17 +86,16 @@ class IpTools
      */
     public function validIpv6($ip, $strict = true)
     {
+        $flags = FILTER_FLAG_IPV6;
         if ($strict) {
             $flags = FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE;
-        } else {
-            $flags = FILTER_FLAG_IPV6;
         }
 
         if (filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
