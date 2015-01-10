@@ -4,7 +4,8 @@ use phpWhois\Whois;
 
 class WhoisTest extends \PHPUnit_Framework_TestCase
 {
-    public function testWhois() {
+    public function testWhois()
+    {
         $whois = new Whois;
         $result = $whois->lookup('phpwhois.pw');
         $this->assertEquals('yes', $result['regrinfo']['registered']);
@@ -13,12 +14,14 @@ class WhoisTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider domainsProvider
      */
-    public function testQtype($type, $domain) {
+    public function testQtype($type, $domain)
+    {
         $whois = new Whois;
         $this->assertEquals($type, $whois->getQueryType($domain));
     }
 
-    public function domainsProvider() {
+    public function domainsProvider()
+    {
         return array(
             array(Whois::QTYPE_DOMAIN,  'www.google.com'),
             array(Whois::QTYPE_DOMAIN,  'президент.рф'),

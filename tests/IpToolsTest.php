@@ -7,12 +7,14 @@ class IpToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validIpsProvider
      */
-    public function testValidIp($ip) {
+    public function testValidIp($ip)
+    {
         $ipTools = new IpTools;
         $this->assertTrue($ipTools->validIp($ip));
     }
 
-    public function validIpsProvider() {
+    public function validIpsProvider()
+    {
         return array(
             array('123.123.123.123'),
             array('1a80:1f45::ebb:12'),
@@ -22,12 +24,14 @@ class IpToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidIpsProvider
      */
-    public function testInvalidIp($ip) {
+    public function testInvalidIp($ip)
+    {
         $ipTools = new IpTools;
         $this->assertFalse($ipTools->validIp($ip));
     }
 
-    public function invalidIpsProvider() {
+    public function invalidIpsProvider()
+    {
         return array(
             array(''),
             array('169.254.255.200'),
