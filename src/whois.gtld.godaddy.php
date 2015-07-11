@@ -31,15 +31,15 @@ class godaddy_handler {
 
     function parse($data_str, $query) {
         $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact',
-            'tech' => 'Technical Contact',
+            'owner' => 'Registrant Name:',
+            'admin' => 'Admin Name:',
+            'tech' => 'Tech Name:',
             'domain.name' => 'Domain Name:',
-            'domain.nserver.' => 'Domain servers in listed order:',
-            'domain.created' => 'Created on:',
-            'domain.expires' => 'Expires on:',
-            'domain.changed' => 'Last Updated on:',
-            'domain.sponsor' => 'Registered through:'
+            'domain.nserver.' => 'Name Server:',
+            'domain.created' => 'Creation Date:',
+            'domain.expires' => 'Registrar Registration Expiration Date:',
+            'domain.changed' => 'Update Date:',
+            'domain.sponsor' => 'Registrar:'
         );
 
         $r = get_blocks($data_str, $items);
