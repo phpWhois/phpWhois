@@ -99,40 +99,6 @@ class IpTools
     }
 
     /**
-     * Try to get real IP from client web request
-     *
-     * @return string
-     */
-    public function getClientIp()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']) && $this->validIp($_SERVER['HTTP_CLIENT_IP'])) {
-            return $_SERVER['HTTP_CLIENT_IP'];
-        }
-
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            foreach (explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']) as $ip) {
-                if ($this->validIp(trim($ip))) {
-                    return trim($ip);
-                }
-            }
-        }
-
-        if (!empty($_SERVER['HTTP_X_FORWARDED']) && $this->validIp($_SERVER['HTTP_X_FORWARDED'])) {
-            return $_SERVER['HTTP_X_FORWARDED'];
-        }
-
-        if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && $this->validIp($_SERVER['HTTP_FORWARDED_FOR'])) {
-            return $_SERVER['HTTP_FORWARDED_FOR'];
-        }
-
-        if (!empty($_SERVER['HTTP_FORWARDED']) && $this->validIp($_SERVER['HTTP_FORWARDED'])) {
-            return $_SERVER['HTTP_FORWARDED'];
-        }
-
-        return $_SERVER['REMOTE_ADDR'];
-    }
-
-    /**
      * Convert CIDR to net range
      *
      * @TODO provide example
