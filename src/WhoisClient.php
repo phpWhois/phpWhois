@@ -151,15 +151,6 @@ class WhoisClient
                 // replace substitution parameters
                 $query_args = str_replace('{query}', $query, $query_args);
                 $query_args = str_replace('{version}', 'phpWhois' . $this->codeVersion, $query_args);
-
-                $iptools = new IpTools;
-                if (strpos($query_args, '{ip}') !== false) {
-                    $query_args = str_replace('{ip}', $iptools->getClientIp(), $query_args);
-                }
-
-                if (strpos($query_args, '{hname}') !== false) {
-                    $query_args = str_replace('{hname}', gethostbyaddr($iptools->getClientIp()), $query_args);
-                }
             } else {
                 if (empty($this->query['args'])) {
                     $query_args = $query;
