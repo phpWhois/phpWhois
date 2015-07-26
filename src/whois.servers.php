@@ -63,6 +63,7 @@ return array(
     'net.whois-servers.net' => 'domain =$',
     'de.whois-servers.net'  => '-T dn,ace $',
     'jp.whois-servers.net'  => 'DOM $/e',
+    'whois.dk-hostmaster.dk' => ' --charset=utf-8 --show-handles $.dk',
 ),
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
