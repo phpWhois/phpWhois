@@ -332,7 +332,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             reset($items);
 
             while (list($match, $field) = each($items)) {
-                $pos = strpos($val, $match);
+                $pos = stripos($val, $match);
 
                 if ($pos !== false) {
                     if ($field != '') {
