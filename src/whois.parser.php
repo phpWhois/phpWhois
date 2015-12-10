@@ -150,6 +150,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             'Created On:' => 'domain.created',
             'Last Updated On:' => 'domain.changed',
             'Expiration Date:' => 'domain.expires',
+            'Registry Expiry Date:' => 'domain.expires',
             'Registrant ID:' => 'owner.handle',
             'Registrant Name:' => 'owner.name',
             'Registrant Organization:' => 'owner.organization',
