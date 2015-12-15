@@ -44,7 +44,8 @@ class fr_handler {
             'registered' => 'created',
             'country' => 'address.country',
             'registrar' => 'sponsor',
-            'role' => 'organization'
+            'role' => 'organization',
+            'Expiry Date' => 'expires'
         );
 
         $contacts = array(
