@@ -7,5 +7,4 @@ What's new in v5?
 ----------------------------------------
 
 1. You can check the list of new features in CHANGELOG.md
-2. Minimum supported version of PHP is **5.3** because of namespaces
-3. Project has external depencies and can be installed only through composer
+1. Project has external depencies and can be installed only through composer

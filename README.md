@@ -1,7 +1,24 @@
+NEWS
+----
+
+phpWhois v5 is finally out!
+
+Fully rewritten with OOP, supports lot of new domains, fixed IP querying.
+Helper functions for obtaining most important information about domain:
+ - Created, Modified, Expires
+ - DNS
+ - Contact info
+
+Whois info is now serializable for easy monitoring for changes
+
+Tests for the list of top-level domains run daily at http://phpwhois.pw/tests 
+
+(!) Check whois.iana.org domain server to get the whois server of a top level domain of a given domain.
+
 Introduction
 ------------
 
-This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the `lookup` function.
+This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the `lookup` method.
 
 The response is an array containing, at least, an element 'rawdata', containing the raw output from the whois request.
 
@@ -19,7 +36,7 @@ provided.
 Requirements
 ------------
 
-phpWhois requires PHP 5.3 or better with OpenSSL support to work properly.
+phpWhois requires PHP 5.5 or later with OpenSSL support to work properly.
 
 Without SSL support you will not be able to query domains which do not have a whois server but that have a https based whois.
 
@@ -94,12 +111,12 @@ The currently known whois services that offer special acccess are:
   that allow to pass the real client ip address. This feature is only
   available to registered gateways. If you are registered you can use
   this service when querying ripe ip addresses that way:
-  ```php
-  use phpWhois\Whois;
-  $whois = new Whois();
-  $whois->useServer('uk','whois.ripe.net?-V{version},{ip} {query}');
-  $result = $whois->lookup('62.97.102.115');
-  ```
+```php
+use phpWhois\Whois;
+$whois = new Whois();
+$whois->useServer('uk','whois.ripe.net?-V{version},{ip} {query}');
+$result = $whois->lookup('62.97.102.115');
+```
 
 ### whois.isoc.org.il
   This server is also using the new ripe whois server software and

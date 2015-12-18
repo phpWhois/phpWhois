@@ -38,24 +38,21 @@ class IpTools
      *
      * @return boolean True if ip is valid. False otherwise
      */
-    public function validIp($ip, $type = 'any', $strict = true)
+    public static function validIp($ip, $type = 'any', $strict = true)
     {
         switch ($type) {
             case 'any':
-                return $this->validIpv4($ip, $strict) || $this->validIpv6($ip, $strict);
-                break;
+                return self::validIpv4($ip, $strict) || self::validIpv6($ip, $strict);
             case 'ipv4':
-                return $this->validIpv4($ip, $strict);
-                break;
+                return self::validIpv4($ip, $strict);
             case 'ipv6':
-                return $this->validIpv6($ip, $strict);
-                break;
+                return self::validIpv6($ip, $strict);
         }
         return false;
     }
 
     /**
-     * Check if given IP is valid ipv4 address and doesn't belong to private and
+     * Check if given IP is a valid ipv4 address and doesn't belong to private and
      * reserved ranges
      *
      * @param string $ip Ip address
@@ -63,7 +60,7 @@ class IpTools
      *
      * @return boolean
      */
-    public function validIpv4($ip, $strict = true)
+    public static function validIpv4($ip, $strict = true)
     {
         $flags = FILTER_FLAG_IPV4;
         if ($strict) {
@@ -77,14 +74,14 @@ class IpTools
     }
 
     /**
-     * Check if given IP is valid ipv6 address and doesn't belong to private ranges
+     * Check if given IP is a valid ipv6 address and doesn't belong to private ranges
      *
      * @param string $ip Ip address
      * @param boolean $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean
      */
-    public function validIpv6($ip, $strict = true)
+    public static function validIpv6($ip, $strict = true)
     {
         $flags = FILTER_FLAG_IPV6;
         if ($strict) {
@@ -99,40 +96,6 @@ class IpTools
     }
 
     /**
-     * Try to get real IP from client web request
-     *
-     * @return string
-     */
-    public function getClientIp()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']) && $this->validIp($_SERVER['HTTP_CLIENT_IP'])) {
-            return $_SERVER['HTTP_CLIENT_IP'];
-        }
-
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            foreach (explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']) as $ip) {
-                if ($this->validIp(trim($ip))) {
-                    return trim($ip);
-                }
-            }
-        }
-
-        if (!empty($_SERVER['HTTP_X_FORWARDED']) && $this->validIp($_SERVER['HTTP_X_FORWARDED'])) {
-            return $_SERVER['HTTP_X_FORWARDED'];
-        }
-
-        if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && $this->validIp($_SERVER['HTTP_FORWARDED_FOR'])) {
-            return $_SERVER['HTTP_FORWARDED_FOR'];
-        }
-
-        if (!empty($_SERVER['HTTP_FORWARDED']) && $this->validIp($_SERVER['HTTP_FORWARDED'])) {
-            return $_SERVER['HTTP_FORWARDED'];
-        }
-
-        return $_SERVER['REMOTE_ADDR'];
-    }
-
-    /**
      * Convert CIDR to net range
      *
      * @TODO provide example
@@ -140,7 +103,7 @@ class IpTools
      * @param string $net
      * @return string
      */
-    public function cidrConv($net)
+    public static function cidrConv($net)
     {
         $start = strtok($net, '/');
         $n = 3 - substr_count($net, '.');

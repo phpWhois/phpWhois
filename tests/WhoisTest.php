@@ -17,7 +17,7 @@ class WhoisTest extends \PHPUnit_Framework_TestCase
     public function testQtype($type, $domain)
     {
         $whois = new Whois;
-        $this->assertEquals($type, $whois->getQueryType($domain));
+        $this->assertEquals($type, $whois->guessQueryType($domain));
     }
 
     public function domainsProvider()

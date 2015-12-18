@@ -152,13 +152,12 @@ class WhoisClient
                 $query_args = str_replace('{query}', $query, $query_args);
                 $query_args = str_replace('{version}', 'phpWhois' . $this->codeVersion, $query_args);
 
-                $iptools = new IpTools;
                 if (strpos($query_args, '{ip}') !== false) {
-                    $query_args = str_replace('{ip}', $iptools->getClientIp(), $query_args);
+                    $query_args = str_replace('{ip}', IpTools::getClientIp(), $query_args);
                 }
 
                 if (strpos($query_args, '{hname}') !== false) {
-                    $query_args = str_replace('{hname}', gethostbyaddr($iptools->getClientIp()), $query_args);
+                    $query_args = str_replace('{hname}', gethostbyaddr(IpTools::getClientIp()), $query_args);
                 }
             } else {
                 if (empty($this->query['args'])) {
@@ -656,8 +655,7 @@ class WhoisClient
         $server = trim($server);
 
         $server = preg_replace('/\/$/', '', $server);
-        $ipTools = new IpTools;
-        if ($ipTools->validIpv6($server)) {
+        if (IpTools::validIpv6($server)) {
             $result = array('host' => "[$server]");
         } else {
             $parsed = parse_url($server);

@@ -9,8 +9,7 @@ class IpToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidIp($ip)
     {
-        $ipTools = new IpTools;
-        $this->assertTrue($ipTools->validIp($ip));
+        $this->assertTrue(IpTools::validIp($ip));
     }
 
     public function validIpsProvider()
@@ -26,8 +25,7 @@ class IpToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidIp($ip)
     {
-        $ipTools = new IpTools;
-        $this->assertFalse($ipTools->validIp($ip));
+        $this->assertFalse(IpTools::validIp($ip));
     }
 
     public function invalidIpsProvider()

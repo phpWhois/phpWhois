@@ -27,7 +27,7 @@ namespace phpWhois;
 /**
  * Additional utils
  */
-class Utils extends Whois
+class Utils
 {
     /**
      * Wrap result in <pre></pre> tags
