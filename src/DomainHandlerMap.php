@@ -25,16 +25,16 @@ namespace phpWhois;
 
 use phpWhois\Handler;
 
-class HandlerMap
+class DomainHandlerMap
 {
     /**
      * @var array   Mappings from domain name to handler class
      */
     protected static $map = [
         /**
-         * TODO: Some domains should be bound to registrars handlers rather than to specific domains handlers
+         * TODO: Some domains should be bound to registrars handlers rather than to the specific domains handlers
          */
-        'ru' => Handler\Ru::class,
+        '/\.ru$/' => Handler\Ru::class,
 //        TODO: su is utf8 as well
 //        TODO: ru.com is a different registrar (Available with centralnic)
 //        '/^(?:[a-z0-9\-]+?\.){1,2}ru$/i' => Handler\Registrar\NicRu::class,
@@ -49,25 +49,29 @@ class HandlerMap
     }
 
     /**
-     * Check if domain handler exists in mapping table
+     * Return handler class based on domain name analysis
      *
-     * @param string $domain
-     * @return bool
-     */
-    public static function mappingExists($domain = '')
-    {
-        return $domain && is_string($domain) && array_key_exists($domain, self::getMap());
-    }
-
-    /**
-     * @param string $domain
+     * Step 1. Look for domain in predefined map
+     * Step 2. Look for whois server on standard addresses like whois.nic.TLD
+     *
+     * @param string|\phpWhois\Query $query
+     *
      * @return Handler\HandlerAbstract|false
      */
-    public static function getHandler($domain = '')
+    public static function findHandler($query = null)
     {
-        if (self::mappingExists($domain)) {
-            $map = self::getMap();
-            return new $map[$domain];
+        if ($query instanceof \phpWhois\Query) {
+            $query = $query->getAddress();
+        }
+
+        if (!QueryUtils::validDomain($query)) {
+            return false;
+        }
+
+        foreach (self::getMap() as $pattern => $class) {
+            if (preg_match($pattern, $query)) {
+                return new $class;
+            }
         }
         /**
          * TODO: Try whois.nic.$tld, etc

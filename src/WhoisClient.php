@@ -24,7 +24,7 @@
 
 namespace phpWhois;
 
-use phpWhois\IpTools;
+use phpWhois\QueryUtils;
 
 /**
  * phpWhois basic class
@@ -153,11 +153,11 @@ class WhoisClient
                 $query_args = str_replace('{version}', 'phpWhois' . $this->codeVersion, $query_args);
 
                 if (strpos($query_args, '{ip}') !== false) {
-                    $query_args = str_replace('{ip}', IpTools::getClientIp(), $query_args);
+                    $query_args = str_replace('{ip}', QueryUtils::getClientIp(), $query_args);
                 }
 
                 if (strpos($query_args, '{hname}') !== false) {
-                    $query_args = str_replace('{hname}', gethostbyaddr(IpTools::getClientIp()), $query_args);
+                    $query_args = str_replace('{hname}', gethostbyaddr(QueryUtils::getClientIp()), $query_args);
                 }
             } else {
                 if (empty($this->query['args'])) {
@@ -655,7 +655,7 @@ class WhoisClient
         $server = trim($server);
 
         $server = preg_replace('/\/$/', '', $server);
-        if (IpTools::validIpv6($server)) {
+        if (QueryUtils::validIpv6($server)) {
             $result = array('host' => "[$server]");
         } else {
             $parsed = parse_url($server);

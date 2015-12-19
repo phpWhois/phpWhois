@@ -4,6 +4,11 @@ namespace phpWhois\Provider;
 
 use phpWhois\Query;
 
+/**
+ * Abstract class Provider - defines the algorithms for communicating with various whois servers
+ *
+ * @package phpWhois\Provider
+ */
 abstract class ProviderAbstract {
     /**
      * @var string  Address to lookup
@@ -29,5 +34,5 @@ abstract class ProviderAbstract {
         return $this;
     }
 
-    abstract protected function setQuery(Query $query);
+    //abstract protected function setQuery(Query $query);
 }

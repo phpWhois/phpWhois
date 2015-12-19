@@ -38,7 +38,7 @@ abstract class HandlerAbstract
      * @param \phpWhois\Provider\ProviderAbstract $provider Whois info provider
      * @return mixed
      */
-    public function setProvider(\phpWhois\Provider\ProviderAbstract $provider)
+    protected function setProvider(\phpWhois\Provider\ProviderAbstract $provider)
     {
         $this->provider = $provider;
     }

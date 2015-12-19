@@ -4,11 +4,11 @@ use phpWhois\WhoisClient;
 
 class WhoisClientTest extends \PHPUnit_Framework_TestCase
 {
-    public function testVersion()
+    /*public function testVersion()
     {
         $client = new WhoisClient;
         $this->assertRegExp('/^(\d+)\.(\d+)\.(\d+)(-\w+)*$/', $client->codeVersion);
-    }
+    }*/
 
     /**
      * @dataProvider serversProvider
@@ -21,29 +21,29 @@ class WhoisClientTest extends \PHPUnit_Framework_TestCase
 
     public function serversProvider()
     {
-        return array(
-            array('http://www.phpwhois.pw:80/', array('scheme' => 'http', 'host' => 'www.phpwhois.pw', 'port' => 80)),
-            array('http://www.phpwhois.pw:80', array('scheme' => 'http', 'host' => 'www.phpwhois.pw', 'port' => 80)),
-            array('http://www.phpwhois.pw', array('scheme' => 'http', 'host' => 'www.phpwhois.pw')),
-            array('www.phpwhois.pw:80', array('host' => 'www.phpwhois.pw', 'port' => 80)),
-            array('www.phpwhois.pw:80/', array('host' => 'www.phpwhois.pw', 'port' => 80)),
-            array('www.phpwhois.pw', array('host' => 'www.phpwhois.pw')),
-            array('www.phpwhois.pw/', array('host' => 'www.phpwhois.pw')),
-            array('http://127.0.0.1:80/', array('scheme' => 'http', 'host' => '127.0.0.1', 'port' => 80)),
-            array('http://127.0.0.1:80', array('scheme' => 'http', 'host' => '127.0.0.1', 'port' => 80)),
-            array('http://127.0.0.1', array('scheme' => 'http', 'host' => '127.0.0.1')),
-            array('127.0.0.1:80', array('host' => '127.0.0.1', 'port' => 80)),
-            array('127.0.0.1:80/', array('host' => '127.0.0.1', 'port' => 80)),
-            array('127.0.0.1', array('host' => '127.0.0.1')),
-            array('127.0.0.1/', array('host' => '127.0.0.1')),
-            array('http://[1a80:1f45::ebb:12]:80/', array('scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]', 'port' => 80)),
-            array('http://[1a80:1f45::ebb:12]:80', array('scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]', 'port' => 80)),
-            array('http://[1a80:1f45::ebb:12]', array('scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]')),
-            //array('http://1a80:1f45::ebb:12', array('scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]')),
-            array('[1a80:1f45::ebb:12]:80', array('host' => '[1a80:1f45::ebb:12]', 'port' => 80)),
-            array('[1a80:1f45::ebb:12]:80/', array('host' => '[1a80:1f45::ebb:12]', 'port' => 80)),
-            array('1a80:1f45::ebb:12', array('host' => '[1a80:1f45::ebb:12]')),
-            array('1a80:1f45::ebb:12/', array('host' => '[1a80:1f45::ebb:12]')),
-        );
+        return [
+            ['http://www.phpwhois.pw:80/', ['scheme' => 'http', 'host' => 'www.phpwhois.pw', 'port' => 80]],
+            ['http://www.phpwhois.pw:80', ['scheme' => 'http', 'host' => 'www.phpwhois.pw', 'port' => 80]],
+            ['http://www.phpwhois.pw', ['scheme' => 'http', 'host' => 'www.phpwhois.pw']],
+            ['www.phpwhois.pw:80', ['host' => 'www.phpwhois.pw', 'port' => 80]],
+            ['www.phpwhois.pw:80/', ['host' => 'www.phpwhois.pw', 'port' => 80]],
+            ['www.phpwhois.pw', ['host' => 'www.phpwhois.pw']],
+            ['www.phpwhois.pw/', ['host' => 'www.phpwhois.pw']],
+            ['http://127.0.0.1:80/', ['scheme' => 'http', 'host' => '127.0.0.1', 'port' => 80]],
+            ['http://127.0.0.1:80', ['scheme' => 'http', 'host' => '127.0.0.1', 'port' => 80]],
+            ['http://127.0.0.1', ['scheme' => 'http', 'host' => '127.0.0.1']],
+            ['127.0.0.1:80', ['host' => '127.0.0.1', 'port' => 80]],
+            ['127.0.0.1:80/', ['host' => '127.0.0.1', 'port' => 80]],
+            ['127.0.0.1', ['host' => '127.0.0.1']],
+            ['127.0.0.1/', ['host' => '127.0.0.1']],
+            ['http://[1a80:1f45::ebb:12]:80/', ['scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]', 'port' => 80]],
+            ['http://[1a80:1f45::ebb:12]:80', ['scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]', 'port' => 80]],
+            ['http://[1a80:1f45::ebb:12]', ['scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]']],
+            //['http://1a80:1f45::ebb:12', [scheme' => 'http', 'host' => '[1a80:1f45::ebb:12]']],
+            ['[1a80:1f45::ebb:12]:80', ['host' => '[1a80:1f45::ebb:12]', 'port' => 80]],
+            ['[1a80:1f45::ebb:12]:80/', ['host' => '[1a80:1f45::ebb:12]', 'port' => 80]],
+            ['1a80:1f45::ebb:12', ['host' => '[1a80:1f45::ebb:12]']],
+            ['1a80:1f45::ebb:12/', ['host' => '[1a80:1f45::ebb:12]']],
+        ];
     }
 }

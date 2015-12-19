@@ -11,12 +11,15 @@ echo "Memory used: ".memory_get_usage()."\n";
 try {
     $a = $whois
         //->setAddress(true)
-        ->lookup('ru');
+        ->lookup('www.HELLO.su');
+        //->lookup();
+    $address = $whois->getAddress();
     echo $a;
+    echo "\n$address";
 } catch (Exception $e) {
     echo 'Error: '.$e->getMessage();
 }
 
-echo "Memory used: ".memory_get_usage()."\n";
+echo "\nMemory used: ".memory_get_usage()."\n";
 
 echo "\n";

@@ -33,29 +33,130 @@ class Query
     const QTYPE_AS      = 4;
 
     /**
-     * Guess query type
-     *
-     * @param string $query
-     *
-     * @return int Query type
+     * @var int Query type (see constants)
      */
-    public static function guessQueryType($query)
+    private $type;
+
+    /**
+     * @var string  Original address received
+     */
+    private $addressOrig;
+
+    /**
+     * @var string  Address optimized for querying the whois server
+     */
+    private $address;
+
+    public function __construct($address = null)
     {
-        if (IpTools::validIp($query, 'ipv4', false)) {
-            if (IpTools::validIp($query, 'ipv4')) {
+        if (!is_null($address)) {
+            $this->setAddress($address);
+        }
+    }
+
+    /**
+     * Set address, make necessary checks and transformations
+     *
+     * @param   string $address
+     *
+     * @return  $this
+     *
+     * @throws  \InvalidArgumentException    if address is not recognized
+     */
+    public function setAddress($address)
+    {
+        $type = $this->guessType($address);
+
+        if ($type == self::QTYPE_UNKNOWN) {
+            throw new \InvalidArgumentException('Address is not recognized, can\'t find whois server');
+        } else {
+            $this->setType($type);
+        }
+
+        $this->setAddressOrig($address);
+
+        $address = $this->optimizeAddress($address);
+
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    private function setAddressOrig($address)
+    {
+        $this->addressOrig = $address;
+    }
+
+    /**
+     * @return string   Original unoptimized address
+     */
+    public function getAddressOrig()
+    {
+        return $this->addressOrig;
+    }
+
+    private function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Find the type of a given address and make some optimizations like removing www.
+     *
+     * @param   $address
+     *
+     * @return  string   optimized address
+     */
+    public static function optimizeAddress($address)
+    {
+        $type = self::guessType($address);
+        // TODO: handle IDN
+        if ($type == self::QTYPE_DOMAIN) {
+            $address = strtolower($address);
+
+            $address_nowww = preg_replace('/^www./', '', $address);
+            if (QueryUtils::validDomain($address_nowww)) {
+                $address = $address_nowww;
+            }
+        }
+        return $address;
+    }
+
+    /**
+     * Guess address type
+     *
+     * @param   string  $query
+     *
+     * @return  int Query type
+     */
+    public static function guessType($query)
+    {
+        if (QueryUtils::validIp($query, 'ipv4', false)) {
+            if (QueryUtils::validIp($query, 'ipv4')) {
                 return self::QTYPE_IPV4;
             } else {
                 return self::QTYPE_UNKNOWN;
             }
-        } elseif (IpTools::validIp($query, 'ipv6', false)) {
-            if (IpTools::validIp($query, 'ipv6')) {
+        } elseif (QueryUtils::validIp($query, 'ipv6', false)) {
+            if (QueryUtils::validIp($query, 'ipv6')) {
                 return self::QTYPE_IPV6;
             } else {
                 return self::QTYPE_UNKNOWN;
             }
-        } elseif ($query && strpos($query, '.') !== false) {
+        } elseif (QueryUtils::validDomain($query)) {
             return self::QTYPE_DOMAIN;
-        } elseif ($query && strpos($query, '.') === false) {
+        // TODO: replace with AS validator
+        } elseif ($query && is_string($query) && strpos($query, '.') === false) {
             return self::QTYPE_AS;
         } else {
             return self::QTYPE_UNKNOWN;

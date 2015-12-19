@@ -25,16 +25,16 @@
 namespace phpWhois;
 
 /**
- * Utilities for parsing ip addresses
+ * Utilities for parsing and validating queries
  */
-class IpTools
+class QueryUtils
 {
     /**
      * Check if ip address is valid
      *
-     * @param string $ip IP address for validation
-     * @param string $type Type of ip address. Possible value are: any, ipv4, ipv6
-     * @param boolean $strict If true - fail validation on reserved and private ip ranges
+     * @param string    $ip     IP address for validation
+     * @param string    $type   Type of ip address. Possible value are: any, ipv4, ipv6
+     * @param boolean   $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean True if ip is valid. False otherwise
      */
@@ -55,8 +55,8 @@ class IpTools
      * Check if given IP is a valid ipv4 address and doesn't belong to private and
      * reserved ranges
      *
-     * @param string $ip Ip address
-     * @param boolean $strict If true - fail validation on reserved and private ip ranges
+     * @param   string  $ip     Ip address
+     * @param   boolean $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean
      */
@@ -76,8 +76,8 @@ class IpTools
     /**
      * Check if given IP is a valid ipv6 address and doesn't belong to private ranges
      *
-     * @param string $ip Ip address
-     * @param boolean $strict If true - fail validation on reserved and private ip ranges
+     * @param string    $ip     Ip address
+     * @param boolean   $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean
      */
@@ -96,41 +96,22 @@ class IpTools
     }
 
     /**
-     * Convert CIDR to net range
+     * Check if given domain name is valid
      *
-     * @TODO provide example
+     * @param $domain   Domain name to check
+     * @param $type     'latin', 'idn', 'any'
      *
-     * @param string $net
-     * @return string
+     * @return  boolean
      */
-    public static function cidrConv($net)
+    public static function validDomain($domain, $type = 'any')
     {
-        $start = strtok($net, '/');
-        $n = 3 - substr_count($net, '.');
-
-        if ($n > 0) {
-            for ($i = $n; $i > 0; $i--) {
-                $start .= '.0';
-            }
+        // TODO: Implement IDN
+        $pattern = '/^[a-z\d\.\-]*\.[a-z]{2,6}$/i';
+        // preg_match doesn't return boolean
+        if (preg_match($pattern, $domain)) {
+            return true;
+        } else {
+            return false;
         }
-
-        $bits1 = str_pad(decbin(ip2long($start)), 32, '0', 'STR_PAD_LEFT');
-        $net = pow(2, (32 - substr(strstr($net, '/'), 1))) - 1;
-        $bits2 = str_pad(decbin($net), 32, '0', 'STR_PAD_LEFT');
-        $final = '';
-
-        for ($i = 0; $i < 32; $i++) {
-            if ($bits1[$i] == $bits2[$i]) {
-                $final .= $bits1[$i];
-            }
-            if ($bits1[$i] == 1 and $bits2[$i] == 0) {
-                $final .= $bits1[$i];
-            }
-            if ($bits1[$i] == 0 and $bits2[$i] == 1) {
-                $final .= $bits2[$i];
-            }
-        }
-
-        return $start . " - " . long2ip(bindec($final));
     }
 }

@@ -22,7 +22,6 @@
 
 namespace phpWhois;
 
-
 /**
  * phpWhois main class
  *
@@ -36,37 +35,58 @@ class Whois
     protected $handler;
 
     /**
-     * @var string  Address to lookup
+     * @var \phpWhois\Query   Query object created from given domain name
      */
-    protected $address;
+    public $query;
 
-    /**
-     * @param string $address
-     * @return $this
-     * @throws \InvalidArgumentException    if address is empty
-     */
-    public function setAddress($address = '')
+    public function __construct($address = null)
     {
-        if ($address && is_string($address)) {
-            $this->address = $address;
-        } else {
-            throw new \InvalidArgumentException('Address cannot be empty');
+        $this->setQuery(new Query());
+
+        if (!is_null($address)) {
+            $this->setAddress($address);
         }
+    }
+
+    protected function setQuery(\phpWhois\Query $query)
+    {
+        $this->query = $query;
+    }
+
+    public function setAddress($address)
+    {
+        $this->query->setAddress($address);
+
+        // TODO: Allow people to use their own handlers
+        $handler = DomainHandlerMap::findHandler($this->query);
+        if ($handler === false) {
+            throw new \InvalidArgumentException('Handler not found for this address. Giving up');
+        }
+        $this->setHandler($handler);
+
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return null|string  Optimized address
      */
     public function getAddress()
     {
-        return $this->address;
+        return $this->query->getAddress();
     }
 
     /**
-     * @param Handler\HandlerAbstract $handler  Handler for obtaining address whois information
+     * @return null|string  Original unoptimized address
      */
-    public function setHandler(\phpWhois\Handler\HandlerAbstract $handler)
+    public function getAddressOrig()
+    {
+        return $this->query->getAddressOrig();
+    }
+
+    /**
+     * @param Handler\HandlerAbstract $handler  Handler for querying whois server
+     */
+    protected function setHandler(\phpWhois\Handler\HandlerAbstract $handler)
     {
         $this->handler = $handler;
     }
@@ -76,18 +96,16 @@ class Whois
      * @return mixed
      * @throws \InvalidArgumentException    if address is empty
      */
-    public function lookup($address = '')
+    public function lookup($address = null)
     {
-        if ($address) {
+        if (!is_null($address)) {
             $this->setAddress($address);
         }
 
-        if (!($address = $this->getAddress())) {
+        if (is_null($this->getAddress())) {
             throw new \InvalidArgumentException('Address cannot be empty');
         }
 
-        $handler = HandlerMap::getHandler($address);
-        $this->setHandler($handler);
         return $this->handler->parse();
     }
 }
