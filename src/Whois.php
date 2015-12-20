@@ -22,6 +22,9 @@
 
 namespace phpWhois;
 
+use phpWhois\Query;
+use phpWhois\Handler\HandlerAbstract;
+
 /**
  * phpWhois main class
  *
@@ -30,12 +33,12 @@ namespace phpWhois;
 class Whois
 {
     /**
-     * @var \phpWhois\Handler\HandlerAbstract   Handler for obtaining address whois information
+     * @var HandlerAbstract   Handler for obtaining address whois information
      */
     protected $handler;
 
     /**
-     * @var \phpWhois\Query   Query object created from given domain name
+     * @var Query   Query object created from given domain name
      */
     public $query;
 
@@ -48,11 +51,20 @@ class Whois
         }
     }
 
-    protected function setQuery(\phpWhois\Query $query)
+    protected function setQuery(Query $query)
     {
         $this->query = $query;
     }
 
+    /**
+     * Set query
+     *
+     * @param   string  $address  Address
+     *
+     * @return \phpWhois\Whois
+     *
+     * @throws \InvalidArgumentException    When handler not found
+     */
     public function setAddress($address)
     {
         $this->query->setAddress($address);
@@ -84,16 +96,20 @@ class Whois
     }
 
     /**
-     * @param Handler\HandlerAbstract $handler  Handler for querying whois server
+     * @param HandlerAbstract $handler  Handler for querying whois server
      */
-    protected function setHandler(\phpWhois\Handler\HandlerAbstract $handler)
+    public function setHandler(HandlerAbstract $handler)
     {
         $this->handler = $handler;
     }
 
     /**
-     * @param string $address
+     * Perform a lookup of address
+     *
+     * @param null|string $address
+     *
      * @return mixed
+     *
      * @throws \InvalidArgumentException    if address is empty
      */
     public function lookup($address = null)

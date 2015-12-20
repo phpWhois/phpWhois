@@ -10,9 +10,9 @@ echo "Memory used: ".memory_get_usage()."\n";
 
 try {
     $a = $whois
-        //->setAddress(true)
-        ->lookup('www.HELLO.su');
-        //->lookup();
+        ->setAddress('Www.HellO.ru')
+        //->lookup('www.HELLO.ru');
+        ->lookup();
     $address = $whois->getAddress();
     echo $a;
     echo "\n$address";

@@ -21,16 +21,17 @@
  */
 
 namespace phpWhois\Provider;
+use phpWhois\Query;
 
 class WhoisServer extends ProviderAbstract {
-    /**
-     * @inheritdoc
-     */
-    public function lookup($address = '')
+
+    public function lookup(Query $query)
     {
-        if (!empty($address)) {
-            $this->setAddress($address);
-        }
         return true;
+    }
+
+    public function setPort($port = 53)
+    {
+        $this->port = $port;
     }
 }

@@ -23,18 +23,13 @@
 namespace phpWhois\Provider;
 
 class HttpServer extends ProviderAbstract {
-    /**
-     * @inheritdoc
-     */
-    public function setAddress($address)
+
+    public function setPort($port = 80)
     {
-        // TODO: Implement setAddress() method.
+        $this->port = $port;
     }
 
-    /**
-     * @param $address
-     */
-    public function lookup($address)
+    public function lookup(\phpWhois\Query $query)
     {
         // TODO: Implement lookup() method.
     }

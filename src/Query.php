@@ -23,7 +23,7 @@
 namespace phpWhois;
 
 
-class Query
+final class Query
 {
 
     const QTYPE_UNKNOWN = -1;
@@ -47,6 +47,11 @@ class Query
      */
     private $address;
 
+    /**
+     * Query constructor.
+     *
+     * @param   null|string  $address
+     */
     public function __construct($address = null)
     {
         if (!is_null($address)) {
@@ -57,9 +62,11 @@ class Query
     /**
      * Set address, make necessary checks and transformations
      *
-     * @param   string $address
+     * @api
      *
-     * @return  $this
+     * @param   string  $address
+     *
+     * @return  Query
      *
      * @throws  \InvalidArgumentException    if address is not recognized
      */
@@ -82,11 +89,17 @@ class Query
         return $this;
     }
 
+    /**
+     * @return string   Address, optimized for querying whois server
+     */
     public function getAddress()
     {
         return $this->address;
     }
 
+    /**
+     * @param   string  $address
+     */
     private function setAddressOrig($address)
     {
         $this->addressOrig = $address;
@@ -100,11 +113,17 @@ class Query
         return $this->addressOrig;
     }
 
+    /**
+     * @param int    $type
+     */
     private function setType($type)
     {
         $this->type = $type;
     }
 
+    /**
+     * @return int
+     */
     public function getType()
     {
         return $this->type;
@@ -113,9 +132,11 @@ class Query
     /**
      * Find the type of a given address and make some optimizations like removing www.
      *
-     * @param   $address
+     * @api
      *
-     * @return  string   optimized address
+     * @param   string  $address
+     *
+     * @return  string  optimized address
      */
     public static function optimizeAddress($address)
     {
@@ -135,6 +156,8 @@ class Query
     /**
      * Guess address type
      *
+     * @api
+     *
      * @param   string  $query
      *
      * @return  int Query type
@@ -142,17 +165,9 @@ class Query
     public static function guessType($query)
     {
         if (QueryUtils::validIp($query, 'ipv4', false)) {
-            if (QueryUtils::validIp($query, 'ipv4')) {
-                return self::QTYPE_IPV4;
-            } else {
-                return self::QTYPE_UNKNOWN;
-            }
+            return (QueryUtils::validIp($query, 'ipv4')) ? self::QTYPE_IPV4 : self::QTYPE_UNKNOWN;
         } elseif (QueryUtils::validIp($query, 'ipv6', false)) {
-            if (QueryUtils::validIp($query, 'ipv6')) {
-                return self::QTYPE_IPV6;
-            } else {
-                return self::QTYPE_UNKNOWN;
-            }
+            return (QueryUtils::validIp($query, 'ipv6')) ? self::QTYPE_IPV6 : self::QTYPE_UNKNOWN;
         } elseif (QueryUtils::validDomain($query)) {
             return self::QTYPE_DOMAIN;
         // TODO: replace with AS validator

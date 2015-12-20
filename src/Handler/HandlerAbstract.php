@@ -22,23 +22,46 @@
 
 namespace phpWhois\Handler;
 
+use phpWhois\Provider\ProviderAbstract;
+use phpWhois\Query;
 
 abstract class HandlerAbstract
 {
     /**
-     * @var \phpWhois\Provider\ProviderAbstract $provider   Whois info provider
+     * @var ProviderAbstract Whois information provider
      */
     protected $provider;
+
+    /**
+     * @var Query
+     */
+    protected $query;
+
+    /**
+     * Handler constructor
+     * @param Query $query    Query for whois server
+     */
+    public function __construct(Query $query)
+    {
+        $this->setQuery($query);
+    }
 
     /**
      * TODO: Set certain parser here
      */
 
     /**
-     * @param \phpWhois\Provider\ProviderAbstract $provider Whois info provider
-     * @return mixed
+     * @param Query $query
      */
-    protected function setProvider(\phpWhois\Provider\ProviderAbstract $provider)
+    protected function setQuery(Query $query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * @param ProviderAbstract $provider
+     */
+    protected function setProvider(ProviderAbstract $provider)
     {
         $this->provider = $provider;
     }

@@ -23,7 +23,7 @@
 
 namespace phpWhois;
 
-use phpWhois\Handler;
+use phpWhois\Handler\HandlerAbstract;
 
 class DomainHandlerMap
 {
@@ -54,23 +54,24 @@ class DomainHandlerMap
      * Step 1. Look for domain in predefined map
      * Step 2. Look for whois server on standard addresses like whois.nic.TLD
      *
-     * @param string|\phpWhois\Query $query
+     * @param null|string|Query $query
      *
-     * @return Handler\HandlerAbstract|false
+     * @return false|HandlerAbstract
      */
     public static function findHandler($query = null)
     {
-        if ($query instanceof \phpWhois\Query) {
-            $query = $query->getAddress();
+        if (!($query instanceof Query)) {
+            $query = new Query($query);
         }
+        $address = $query->getAddress();
 
-        if (!QueryUtils::validDomain($query)) {
+        if ($query->getType() != Query::QTYPE_DOMAIN) {
             return false;
         }
 
         foreach (self::getMap() as $pattern => $class) {
-            if (preg_match($pattern, $query)) {
-                return new $class;
+            if (preg_match($pattern, $address)) {
+                return new $class($query);
             }
         }
         /**

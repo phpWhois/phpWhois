@@ -22,13 +22,15 @@
 
 namespace phpWhois\Handler;
 
+use phpWhois\Query;
 use phpWhois\Provider\WhoisServer;
 
 class Ru extends HandlerAbstract
 {
-    public function __construct()
+    public function __construct(Query $query)
     {
-        $this->setProvider(new WhoisServer());
+        parent::__construct($query);
+        $this->setProvider(new WhoisServer($query, 'whois.nic.ru'));
     }
 
     public function parse()
