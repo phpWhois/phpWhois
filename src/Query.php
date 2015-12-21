@@ -114,6 +114,16 @@ final class Query
     }
 
     /**
+     * Check if class instance has valid address set
+     *
+     * @return bool
+     */
+    public function hasData()
+    {
+        return !is_null($this->getAddress());
+    }
+
+    /**
      * @param int    $type
      */
     private function setType($type)
@@ -126,7 +136,7 @@ final class Query
      */
     public function getType()
     {
-        return $this->type;
+        return !is_null($this->type) ? $this->type : self::QTYPE_UNKNOWN;
     }
 
     /**
@@ -143,9 +153,9 @@ final class Query
         $type = self::guessType($address);
         // TODO: handle IDN
         if ($type == self::QTYPE_DOMAIN) {
-            $address = strtolower($address);
+            $address = strtoupper($address);
 
-            $address_nowww = preg_replace('/^www./', '', $address);
+            $address_nowww = preg_replace('/^www./i', '', $address);
             if (QueryUtils::validDomain($address_nowww)) {
                 $address = $address_nowww;
             }

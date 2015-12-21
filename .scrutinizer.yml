@@ -1,7 +1,6 @@
 filter:
   excluded_paths:
     - example/example.php
-    - handler.template.php
     - src/old/
     - src/Whois_Old.php
     - src/whois.parser.php

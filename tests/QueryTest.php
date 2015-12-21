@@ -37,11 +37,11 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     public function optimizeProvider()
     {
         return [
-            ['Help.Co.uk', 'help.co.uk'],
-            ['www.help.co.uk', 'help.co.uk'],
-            ['WWW.Help.co.Uk', 'help.co.uk'],
-            ['WWW.SPACE', 'www.space'],
-            ['www.co.uk', 'co.uk'], // Sad but true
+            ['Help.Co.uk', 'HELP.CO.UK'],
+            ['www.help.co.uk', 'HELP.CO.UK'],
+            ['WWW.Help.co.Uk', 'HELP.CO.UK'],
+            ['WWW.SPACE', 'WWW.SPACE'],
+            ['www.co.uk', 'CO.UK'], // Sad but true
         ];
     }
 }

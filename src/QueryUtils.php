@@ -114,4 +114,21 @@ class QueryUtils
             return false;
         }
     }
+
+    /**
+     * Check if given AS is valid
+     *
+     * @param $as   AS number
+     *
+     * @return boolean
+     */
+    public static function validAS($as)
+    {
+        $pattern = '/^[a-z\d\-]*$/i';
+        if (preg_match($pattern, $as)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

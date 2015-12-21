@@ -23,6 +23,7 @@
 namespace phpWhois\Handler;
 
 use phpWhois\Query;
+use phpWhois\Response;
 use phpWhois\Provider\WhoisServer;
 
 class Ru extends HandlerAbstract
@@ -33,8 +34,13 @@ class Ru extends HandlerAbstract
         $this->setProvider(new WhoisServer($query, 'whois.nic.ru'));
     }
 
-    public function parse()
+    /**
+     * Perform a lookup on defined query
+     *
+     * @return Response
+     */
+    public function lookup()
     {
-        return 'Parsing stub';
+        return $this->provider->lookup();
     }
 }

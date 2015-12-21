@@ -24,6 +24,7 @@ namespace phpWhois\Handler;
 
 use phpWhois\Provider\ProviderAbstract;
 use phpWhois\Query;
+use phpWhois\Response;
 
 abstract class HandlerAbstract
 {
@@ -36,6 +37,13 @@ abstract class HandlerAbstract
      * @var Query
      */
     protected $query;
+
+    /**
+     * Perform a lookup
+     *
+     * @return Response
+     */
+    abstract public function lookup();
 
     /**
      * Handler constructor
@@ -55,7 +63,20 @@ abstract class HandlerAbstract
      */
     protected function setQuery(Query $query)
     {
+        if (!$query->hasData()) {
+            throw new \InvalidArgumentException('Cannot assign an empty query');
+        }
         $this->query = $query;
+    }
+
+    /**
+     * Get assigned query
+     *
+     * @return null|Query
+     */
+    public function getQuery()
+    {
+        return $this->query;
     }
 
     /**
@@ -64,5 +85,15 @@ abstract class HandlerAbstract
     protected function setProvider(ProviderAbstract $provider)
     {
         $this->provider = $provider;
+    }
+
+    /**
+     * Check if handler has all the necessary data assigned
+     *
+     * @return bool
+     */
+    public function hasData()
+    {
+        return $this->query instanceof Query && $this->query->hasData();
     }
 }

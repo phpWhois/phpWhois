@@ -40,7 +40,7 @@ class Whois
     /**
      * @var Query   Query object created from given domain name
      */
-    public $query;
+    protected $query;
 
     public function __construct($address = null)
     {
@@ -80,22 +80,6 @@ class Whois
     }
 
     /**
-     * @return null|string  Optimized address
-     */
-    public function getAddress()
-    {
-        return $this->query->getAddress();
-    }
-
-    /**
-     * @return null|string  Original unoptimized address
-     */
-    public function getAddressOrig()
-    {
-        return $this->query->getAddressOrig();
-    }
-
-    /**
      * @param HandlerAbstract $handler  Handler for querying whois server
      */
     public function setHandler(HandlerAbstract $handler)
@@ -108,7 +92,7 @@ class Whois
      *
      * @param null|string $address
      *
-     * @return mixed
+     * @return Response
      *
      * @throws \InvalidArgumentException    if address is empty
      */
@@ -118,10 +102,10 @@ class Whois
             $this->setAddress($address);
         }
 
-        if (is_null($this->getAddress())) {
+        if (!$this->query->hasData()) {
             throw new \InvalidArgumentException('Address cannot be empty');
         }
 
-        return $this->handler->parse();
+        return $this->handler->lookup();
     }
 }

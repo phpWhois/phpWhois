@@ -81,4 +81,35 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
             ['domain.co.u'],
         ];
     }
+
+    /**
+     * @dataProvider validASProvider
+     */
+    public function testValidAS($as)
+    {
+        $this->assertTrue(QueryUtils::validAS($as));
+    }
+
+    public function validASProvider()
+    {
+        return [
+            ['AS-13245'],
+            ['aS-12345']
+        ];
+    }
+
+    /**
+     * @dataProvider invalidASProvider
+     */
+    public function testInvalidAS($as)
+    {
+        $this->assertFalse(QueryUtils::validAS($as));
+    }
+
+    public function invalidASProvider()
+    {
+        return [
+            ['ЯЯ-12345'],
+        ];
+    }
 }

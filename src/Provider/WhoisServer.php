@@ -21,17 +21,100 @@
  */
 
 namespace phpWhois\Provider;
-use phpWhois\Query;
 
 class WhoisServer extends ProviderAbstract {
 
-    public function lookup(Query $query)
+    /**
+     * @var int Stream reading timeout
+     */
+    private $streamTimeout = 5;
+
+    protected $port = 43;
+
+    protected function connect()
     {
-        return true;
+        $server = $this->getServer();
+        $port = $this->getPort();
+
+        if (!$server || !$port) {
+            throw new \InvalidArgumentException('Whois server is not defined. Cannot connect');
+        }
+
+        $attempt = 0;
+        while ($attempt <= $this->getRetry()) {
+
+            // Sleep before retrying next attempt
+            if ($attempt > 0) {
+                sleep($this->getSleep());
+            }
+
+            $fp = fsockopen('tcp://'.$server, $port, $errno, $errstr, $this->getTimeout());
+
+            if (!$fp) {
+                $this->response
+                     ->setConnectionErrNo($errno)
+                     ->setConnectionErrStr($errstr);
+                $attempt++;
+            } else {
+                stream_set_timeout($fp, $this->getStreamTimeout());
+                stream_set_blocking($fp, true);
+                $this->setConnectionPointer($fp);
+
+                return $this;
+            }
+        }
     }
 
-    public function setPort($port = 53)
+    /**
+     * Perform an actual request to the whois server
+     */
+    protected function performRequest()
     {
-        $this->port = $port;
+        if (!$this->isConnected()) {
+            throw new \InvalidArgumentException('Connection to the whois server must be established before performing request');
+        }
+
+        $fp = $this->getConnectionPointer();
+
+        $request = $this->query->getAddress()."\r\n";
+
+        fwrite($fp, $request);
+
+        $r = [$fp];
+        $w = null;
+        $e = null;
+        stream_select($r, $w, $e, $this->getStreamTimeout());
+
+        $raw = stream_get_contents($fp);
+
+        $this->response->setRawData($raw);
+    }
+
+    /**
+     * Set stream timeout
+     *
+     * @param int $timeout
+     * @return ProviderAbstract
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function setStreamTimeout($timeout = 5)
+    {
+        if (!is_int($timeout)) {
+            throw new \InvalidArgumentException("Stream timeout must be integer number of seconds");
+        }
+        $this->streamTimeout = $timeout;
+
+        return $this;
+    }
+
+    /**
+     * Get stream timeout
+     *
+     * @return int
+     */
+    private function getStreamTimeout()
+    {
+        return $this->streamTimeout;
     }
 }
