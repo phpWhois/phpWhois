@@ -22,41 +22,46 @@
 
 namespace phpWhois;
 
+use phpWhois\Query;
+use phpWhois\Provider\ProviderAbstract;
+
 /**
  * Response from WhoisServer
  */
 class Response
 {
     /**
-     * @var int Connection error number
+     * @var Query
      */
-    protected $connectionErrNo;
+    protected $query;
 
     /**
-     * @var string  Connection error string
+     * @var ProviderAbstract
      */
-    protected $connectionErrStr;
+    protected $provider;
 
     /**
      * @var string Raw data received from whois server
      */
-    protected $rawData;
+    protected $raw;
 
-    public function __construct($raw = null)
+    /**
+     * Response constructor.
+     * @param Query $query
+     */
+    public function __construct(Query $query)
     {
-        if (!is_null($raw)) {
-            $this->setRawData($raw);
-        }
+        $this->setQuery($query);
     }
 
     /**
-     * Get not parsed raw response from the whois server
+     * Set not parsed raw response from the whois server
      *
      * @var string  $raw;
      */
-    public function setRawData($raw)
+    public function setRaw($raw)
     {
-        $this->rawData = $raw;
+        $this->raw = $raw;
     }
 
     /**
@@ -64,56 +69,63 @@ class Response
      *
      * @return string|null
      */
-    public function getRawData()
+    public function getRaw()
     {
-        return $this->rawData;
+        return $this->raw;
     }
 
     /**
-     * Set connection error number
+     * Set query
      *
-     * @param int   $errno
+     * @param Query $query
      *
-     * @return Response
+     * @return $this
+     *
+     * @throws \InvalidArgumentException    if query is empty
      */
-    public function setConnectionErrNo($errno)
+    public function setQuery(Query $query)
     {
-        $this->connectionErrNo = $errno;
+        if (!$query->hasData()){
+            throw new \InvalidArgumentException('Cannot assign an empty query');
+        }
+
+        $this->query = $query;
 
         return $this;
     }
 
     /**
-     * Get connection error number
-     *
-     * @return null|int
-     */
-    public function getConnectionErrNo()
-    {
-        return $this->connectionErrNo;
-    }
-
-    /**
-     * Set connection error message as a string
-     *
-     * @param string    $errstr
+     * @param ProviderAbstract &$provider
      *
      * @return $this
      */
-    public function setConnectionErrStr($errstr)
+    public function setProvider(ProviderAbstract &$provider)
     {
-        $this->connectionErrStr = $errstr;
+        $this->provider = $provider;
 
         return $this;
     }
 
-    /**
-     * Get connection error message as a string
-     *
-     * @return null|string
-     */
-    public function getConnectionErrStr()
+    public function getData()
     {
-        return $this->connectionErrStr;
+        $result = [
+            'query' => [
+                'address' => $this->query->getAddress(),
+                'addressOrig' => $this->query->getAddressOrig(),
+            ],
+            'server' => [
+                'name' => $this->provider->getServer(),
+                'port' => $this->provider->getPort(),
+                'errno' => $this->provider->getConnectionErrNo(),
+                'errstr' => $this->provider->getConnectionErrStr(),
+            ],
+            'responseRaw' => $this->getRaw(),
+        ];
+        return $result;
+    }
+
+    public function getJson()
+    {
+        return json_encode($this->getData());
     }
 }

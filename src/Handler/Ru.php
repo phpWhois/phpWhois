@@ -23,24 +23,17 @@
 namespace phpWhois\Handler;
 
 use phpWhois\Query;
-use phpWhois\Response;
 use phpWhois\Provider\WhoisServer;
 
 class Ru extends HandlerAbstract
 {
     public function __construct(Query $query)
     {
+        /**
+         * TODO: Using $query twice is ugly
+         */
         parent::__construct($query);
         $this->setProvider(new WhoisServer($query, 'whois.nic.ru'));
     }
 
-    /**
-     * Perform a lookup on defined query
-     *
-     * @return Response
-     */
-    public function lookup()
-    {
-        return $this->provider->lookup();
-    }
 }

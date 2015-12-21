@@ -66,7 +66,7 @@ final class Query
      *
      * @param   string  $address
      *
-     * @return  Query
+     * @return  $this
      *
      * @throws  \InvalidArgumentException    if address is not recognized
      */
@@ -99,10 +99,14 @@ final class Query
 
     /**
      * @param   string  $address
+     *
+     * @return $this
      */
     private function setAddressOrig($address)
     {
         $this->addressOrig = $address;
+
+        return $this;
     }
 
     /**
@@ -125,10 +129,14 @@ final class Query
 
     /**
      * @param int    $type
+     *
+     * @return $this
      */
     private function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -187,5 +195,4 @@ final class Query
             return self::QTYPE_UNKNOWN;
         }
     }
-
 }

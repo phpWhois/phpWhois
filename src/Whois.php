@@ -61,7 +61,7 @@ class Whois
      *
      * @param   string  $address  Address
      *
-     * @return \phpWhois\Whois
+     * @return $this
      *
      * @throws \InvalidArgumentException    When handler not found
      */
@@ -102,8 +102,8 @@ class Whois
             $this->setAddress($address);
         }
 
-        if (!$this->query->hasData()) {
-            throw new \InvalidArgumentException('Address cannot be empty');
+        if (!($this->handler instanceof HandlerAbstract) || !$this->handler->hasData()) {
+            throw new \InvalidArgumentException('Domain handler wasn\'t set up correctly');
         }
 
         return $this->handler->lookup();

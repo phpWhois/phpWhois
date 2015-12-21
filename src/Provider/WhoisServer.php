@@ -27,74 +27,15 @@ class WhoisServer extends ProviderAbstract {
     /**
      * @var int Stream reading timeout
      */
-    private $streamTimeout = 5;
+    private $streamTimeout = 2;
 
     protected $port = 43;
-
-    protected function connect()
-    {
-        $server = $this->getServer();
-        $port = $this->getPort();
-
-        if (!$server || !$port) {
-            throw new \InvalidArgumentException('Whois server is not defined. Cannot connect');
-        }
-
-        $attempt = 0;
-        while ($attempt <= $this->getRetry()) {
-
-            // Sleep before retrying next attempt
-            if ($attempt > 0) {
-                sleep($this->getSleep());
-            }
-
-            $fp = fsockopen('tcp://'.$server, $port, $errno, $errstr, $this->getTimeout());
-
-            if (!$fp) {
-                $this->response
-                     ->setConnectionErrNo($errno)
-                     ->setConnectionErrStr($errstr);
-                $attempt++;
-            } else {
-                stream_set_timeout($fp, $this->getStreamTimeout());
-                stream_set_blocking($fp, true);
-                $this->setConnectionPointer($fp);
-
-                return $this;
-            }
-        }
-    }
-
-    /**
-     * Perform an actual request to the whois server
-     */
-    protected function performRequest()
-    {
-        if (!$this->isConnected()) {
-            throw new \InvalidArgumentException('Connection to the whois server must be established before performing request');
-        }
-
-        $fp = $this->getConnectionPointer();
-
-        $request = $this->query->getAddress()."\r\n";
-
-        fwrite($fp, $request);
-
-        $r = [$fp];
-        $w = null;
-        $e = null;
-        stream_select($r, $w, $e, $this->getStreamTimeout());
-
-        $raw = stream_get_contents($fp);
-
-        $this->response->setRawData($raw);
-    }
 
     /**
      * Set stream timeout
      *
      * @param int $timeout
-     * @return ProviderAbstract
+     * @return $this
      *
      * @throws \InvalidArgumentException
      */
@@ -116,5 +57,71 @@ class WhoisServer extends ProviderAbstract {
     private function getStreamTimeout()
     {
         return $this->streamTimeout;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function connect()
+    {
+        $server = $this->getServer();
+        $port = $this->getPort();
+
+        if (!$server || !$port) {
+            throw new \InvalidArgumentException('Whois server is not defined. Cannot connect');
+        }
+
+        $attempt = 0;
+        while ($attempt <= $this->getRetry()) {
+
+            // Sleep before retrying next attempt
+            if ($attempt > 0) {
+                sleep($this->getSleep());
+            }
+
+            $fp = @fsockopen('tcp://'.$server, $port, $errno, $errstr, $this->getTimeout());
+
+            $this
+                ->setConnectionErrNo($errno)
+                ->setConnectionErrStr($errstr);
+
+            if (!$fp) {
+                $attempt++;
+            } else {
+                stream_set_timeout($fp, $this->getStreamTimeout());
+                stream_set_blocking($fp, true);
+                $this->setConnectionPointer($fp);
+                break; // Connection established, exit loop
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function performRequest()
+    {
+        if ($this->isConnected()) {
+            $fp = $this->getConnectionPointer();
+
+            $request = $this->query->getAddress()."\r\n";
+
+            fwrite($fp, $request);
+
+            $r = [$fp];
+            $w = null;
+            $e = null;
+            stream_select($r, $w, $e, $this->getStreamTimeout());
+
+            $raw = stream_get_contents($fp);
+
+            $this->response->setRaw($raw);
+
+            fclose($fp);
+        }
+
+        return $this;
     }
 }

@@ -2,6 +2,7 @@
 
 use phpWhois\Provider\WhoisServer;
 use phpWhois\Query;
+use phpWhois\Response;
 
 class WhoisServerTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,6 +14,7 @@ class WhoisServerTest extends \PHPUnit_Framework_TestCase
         $w = new WhoisServer(new Query('www.google.ru'), $server);
 
         $this->assertEquals($parsed, ['server' => $w->getServer(), 'port' => $w->getPort()]);
+        $this->assertInstanceOf(Response::class, $w->getResponse());
     }
 
     public function constructProvider()

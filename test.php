@@ -13,10 +13,11 @@ try {
         ->setAddress('Www.GOOgle.ru')
         //->lookup('www.HELLO.ru');
         ->lookup();
-    echo $a->getRawData();
 } catch (Exception $e) {
     echo 'Error: '.$e->getMessage();
 }
+print_r($a->getData());
+echo $a->getJson();
 
 echo "\nMemory used: ".memory_get_usage()."\n";
 

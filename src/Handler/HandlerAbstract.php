@@ -39,14 +39,10 @@ abstract class HandlerAbstract
     protected $query;
 
     /**
-     * Perform a lookup
-     *
-     * @return Response
-     */
-    abstract public function lookup();
-
-    /**
      * Handler constructor
+     *
+     * Each handler must inherit this method and set provider
+     *
      * @param Query $query    Query for whois server
      */
     public function __construct(Query $query)
@@ -60,6 +56,8 @@ abstract class HandlerAbstract
 
     /**
      * @param Query $query
+     *
+     * @return $this
      */
     protected function setQuery(Query $query)
     {
@@ -67,6 +65,8 @@ abstract class HandlerAbstract
             throw new \InvalidArgumentException('Cannot assign an empty query');
         }
         $this->query = $query;
+
+        return $this;
     }
 
     /**
@@ -81,10 +81,14 @@ abstract class HandlerAbstract
 
     /**
      * @param ProviderAbstract $provider
+     *
+     * @return $this
      */
     protected function setProvider(ProviderAbstract $provider)
     {
         $this->provider = $provider;
+
+        return $this;
     }
 
     /**
@@ -94,6 +98,23 @@ abstract class HandlerAbstract
      */
     public function hasData()
     {
-        return $this->query instanceof Query && $this->query->hasData();
+        return $this->query instanceof Query && $this->query->hasData()
+            && $this->provider instanceof ProviderAbstract;
+    }
+
+    /**
+     * Perform a lookup of defined query
+     *
+     * @return Response
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function lookup()
+    {
+        if ($this->hasData()) {
+            return $this->provider->lookup();
+        } else {
+            throw new \InvalidArgumentException('Handler doesn\'t have query or provider set');
+        }
     }
 }
