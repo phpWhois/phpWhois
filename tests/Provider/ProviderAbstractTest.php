@@ -21,20 +21,13 @@ class ProviderAbstractMock extends ProviderAbstract
 
     public function performRequest()
     {
-        $this->response->setRaw('');
+        $this->response->setRaw($this->query->getAddressOrig());
         return $this;
     }
 }
 
 class ProviderAbstractTest extends \PHPUnit_Framework_TestCase
 {
-    protected $provider;
-
-    protected function setUp()
-    {
-        //$this->provider = new ProviderAbstractMock(new Query('www.google.com'), 'whois.iana.org');
-    }
-
     /**
      * @dataProvider constructProvider
      */
@@ -76,5 +69,16 @@ class ProviderAbstractTest extends \PHPUnit_Framework_TestCase
 
         $provider->setSleep(100);
         $this->assertEquals(100, $response->getProvider()->getSleep());
+    }
+
+    public function testLookup()
+    {
+        $address = 'www.Google.COM';
+
+        $provider = new ProviderAbstractMock(new Query($address), 'whois.iana.org');
+        $response = $provider->lookup();
+
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals($address, $response->getRaw());
     }
 }

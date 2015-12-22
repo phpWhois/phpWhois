@@ -214,7 +214,7 @@ abstract class ProviderAbstract {
         if (!is_int($retry)) {
             throw new \InvalidArgumentException("Number of retries must be integer value");
         }
-        $this->retry = 0;
+        $this->retry = $retry;
 
         return $this;
     }

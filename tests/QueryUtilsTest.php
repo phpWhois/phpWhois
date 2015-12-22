@@ -85,7 +85,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validASProvider
      */
-    public function testValidAS($as)
+    public function testValidAs($as)
     {
         $this->assertTrue(QueryUtils::validAS($as));
     }
@@ -101,7 +101,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidASProvider
      */
-    public function testInvalidAS($as)
+    public function testInvalidAs($as)
     {
         $this->assertFalse(QueryUtils::validAS($as));
     }

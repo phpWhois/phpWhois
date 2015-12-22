@@ -95,6 +95,16 @@ class Response
     }
 
     /**
+     * Get current query object
+     *
+     * @return Query
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
      * @param ProviderAbstract &$provider
      *
      * @return $this
