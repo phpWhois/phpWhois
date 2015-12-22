@@ -99,11 +99,16 @@ class Response
      *
      * @return $this
      */
-    public function setProvider(ProviderAbstract &$provider)
+    public function setProvider(ProviderAbstract $provider)
     {
         $this->provider = $provider;
 
         return $this;
+    }
+
+    public function getProvider()
+    {
+        return $this->provider;
     }
 
     public function getData()

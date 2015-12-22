@@ -76,6 +76,11 @@ abstract class ProviderAbstract {
     protected $query;
 
     /**
+     * @var string  This is a raw query which will be sent to the Whois server (e.g. add "\r\n" to domain)
+     */
+    protected $rawQuery;
+
+    /**
      * @var Response
      */
     protected $response;
@@ -232,12 +237,13 @@ abstract class ProviderAbstract {
      *
      * @throws \InvalidArgumentException
      */
-    public function setSleep($sleep = 1)
+    public function setSleep($sleep = 0)
     {
         if (!is_int($sleep)) {
             throw new \InvalidArgumentException("Number of seconds to sleep must be integer");
         }
-        $this->sleep = 0;
+
+        $this->sleep = $sleep;
 
         return $this;
     }
@@ -357,10 +363,37 @@ abstract class ProviderAbstract {
         if ($query->hasData()) {
             $this->query = $query;
         } else {
-            throw new \InvalidArgumentException('Cannot assign empty query');
+            throw new \InvalidArgumentException('Cannot assign an empty query');
         }
 
         return $this;
+    }
+
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * Set raw query for querying whois server
+     *
+     * @param $rawQuery
+     *
+     * @return $this
+     */
+    public function setRawQuery($rawQuery)
+    {
+        $this->rawQuery = $rawQuery;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawQuery()
+    {
+        return $this->rawQuery;
     }
 
     /**

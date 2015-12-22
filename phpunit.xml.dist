@@ -11,6 +11,18 @@
         </testsuite>
     </testsuites>
     <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+            <file>./phpwhois</file>
+            <exclude>
+                <directory suffix=".php">./src/old</directory>
+                <file>./whois.parser.php</file>
+                <file>./whois.servers.php</file>
+                <file>./Whois_Old.php</file>
+                <file>./WhoisClient.php</file>
+                <file>./phpwhois</file>
+            </exclude>
+        </whitelist>
         <blacklist>
             <directory>./vendor</directory>
             <directory>./tests</directory>

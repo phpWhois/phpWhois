@@ -27,7 +27,7 @@ class WhoisServer extends ProviderAbstract {
     /**
      * @var int Stream reading timeout
      */
-    private $streamTimeout = 2;
+    private $streamTimeout = 7;
 
     protected $port = 43;
 
@@ -39,7 +39,7 @@ class WhoisServer extends ProviderAbstract {
      *
      * @throws \InvalidArgumentException
      */
-    private function setStreamTimeout($timeout = 5)
+    private function setStreamTimeout($timeout = 7)
     {
         if (!is_int($timeout)) {
             throw new \InvalidArgumentException("Stream timeout must be integer number of seconds");

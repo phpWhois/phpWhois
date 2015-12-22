@@ -79,4 +79,16 @@ class DomainHandlerMap
          */
         return false;
     }
+
+    /**
+     * Find whois server for domain by querying whois.iana.org
+     *
+     * @param $address  null|string
+     *
+     * @return false|HandlerAbstract
+     */
+    public static function findWithIANA($address)
+    {
+
+    }
 }

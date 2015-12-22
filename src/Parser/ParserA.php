@@ -2,7 +2,7 @@
 
 namespace phpWhois\Parser;
 
-class ParserA implements iParser {
+class ParserA extends ParserAbstract {
 
     public function setData($data)
     {
