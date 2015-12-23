@@ -55,8 +55,8 @@ class QueryUtils
      * Check if given IP is a valid ipv4 address and doesn't belong to private and
      * reserved ranges
      *
-     * @param   string  $ip     Ip address
-     * @param   boolean $strict If true - fail validation on reserved and private ip ranges
+     * @param string  $ip     Ip address
+     * @param boolean $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean
      */
@@ -98,10 +98,10 @@ class QueryUtils
     /**
      * Check if given domain name is valid
      *
-     * @param $domain   Domain name to check
-     * @param $type     'latin', 'idn', 'any'
+     * @param string  $domain   Domain name to check
+     * @param string  $type     'latin', 'idn', 'any'
      *
-     * @return  boolean
+     * @return boolean
      */
     public static function validDomain($domain, $type = 'any')
     {
@@ -118,7 +118,7 @@ class QueryUtils
     /**
      * Check if given AS is valid
      *
-     * @param $as   AS number
+     * @param string  $as   AS number
      *
      * @return boolean
      */

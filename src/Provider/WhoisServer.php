@@ -106,7 +106,9 @@ class WhoisServer extends ProviderAbstract {
         if ($this->isConnected()) {
             $fp = $this->getConnectionPointer();
 
-            $request = $this->query->getAddress()."\r\n";
+            $request = $this->query->getAddress();
+            $request .= implode($this->query->getParams());
+            $request .= "\r\n";
 
             fwrite($fp, $request);
 

@@ -126,6 +126,7 @@ abstract class ProviderAbstract {
     {
         /**
          * TODO: Handle ipv6 servers here as well
+         * TODO: Check if server is not empty
          */
         $parts = explode(':', $server);
         $this->server = $parts[0];
@@ -265,7 +266,7 @@ abstract class ProviderAbstract {
      *
      * @return $this
      */
-    public function setConnectionErrNo($errno)
+    protected function setConnectionErrNo($errno)
     {
         $this->connectionErrNo = $errno;
 
@@ -289,7 +290,7 @@ abstract class ProviderAbstract {
      *
      * @return $this
      */
-    public function setConnectionErrStr($errstr)
+    protected function setConnectionErrStr($errstr)
     {
         $this->connectionErrStr = $errstr;
 

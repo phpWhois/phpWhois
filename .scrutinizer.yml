@@ -1,5 +1,6 @@
 filter:
   excluded_paths:
+    - tests/
     - example/example.php
     - src/old/
     - src/Whois_Old.php

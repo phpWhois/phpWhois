@@ -48,14 +48,24 @@ final class Query
     private $address;
 
     /**
+     * @var string[]    Additional params to apply to address when querying whois server
+     */
+    private $params = [];
+
+    /**
      * Query constructor.
      *
      * @param   null|string  $address
+     * @param   string[]    Array of params for whois server
      */
-    public function __construct($address = null)
+    public function __construct($address = null, array $params = [])
     {
         if (!is_null($address)) {
             $this->setAddress($address);
+        }
+
+        foreach ($params as $param) {
+            $this->addParam($param);
         }
     }
 
@@ -82,9 +92,7 @@ final class Query
 
         $this->setAddressOrig($address);
 
-        $address = $this->optimizeAddress($address);
-
-        $this->address = $address;
+        $this->address = $this->optimizeAddress($address);
 
         return $this;
     }
@@ -98,6 +106,8 @@ final class Query
     }
 
     /**
+     * Set original unoptimized address
+     *
      * @param   string  $address
      *
      * @return $this
@@ -110,6 +120,8 @@ final class Query
     }
 
     /**
+     * Get original unoptimized address
+     *
      * @return string   Original unoptimized address
      */
     public function getAddressOrig()
@@ -128,6 +140,8 @@ final class Query
     }
 
     /**
+     * Set query type (See constants)
+     *
      * @param int    $type
      *
      * @return $this
@@ -135,6 +149,30 @@ final class Query
     private function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get params array
+     *
+     * @return array|null
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * Add param to query
+     *
+     * @param string    $param
+     *
+     * @return $this
+     */
+    public function addParam($param)
+    {
+        $this->params[] = strval($param);
 
         return $this;
     }

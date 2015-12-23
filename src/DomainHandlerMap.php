@@ -83,7 +83,7 @@ class DomainHandlerMap
     /**
      * Find whois server for domain by querying whois.iana.org
      *
-     * @param $address  null|string
+     * @param null|string   $address
      *
      * @return false|HandlerAbstract
      */
