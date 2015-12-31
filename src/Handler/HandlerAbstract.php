@@ -23,6 +23,7 @@
 namespace phpWhois\Handler;
 
 use phpWhois\Provider\ProviderAbstract;
+use phpWhois\Parser\ParserAbstract;
 use phpWhois\Query;
 use phpWhois\Response;
 
@@ -39,15 +40,35 @@ abstract class HandlerAbstract
     protected $query;
 
     /**
+     * @var Response
+     */
+    protected $response;
+
+    /**
+     * @var string  Whois server address
+     */
+    protected $server;
+
+    /**
+     * @var Parser  Parser instance
+     */
+    protected $parser;
+
+    /**
      * Handler constructor
      *
      * Each handler must inherit this method and set provider
      *
      * @param Query $query    Query for whois server
+     * @param string $server    Whois server address
      */
-    public function __construct(Query $query)
+    public function __construct(Query $query, $server = null)
     {
         $this->setQuery($query);
+
+        if (!is_null($server)) {
+            $this->setServer();
+        }
     }
 
     /**
@@ -79,6 +100,30 @@ abstract class HandlerAbstract
     }
 
     /**
+     * Set server address
+     *
+     * @param $server
+     *
+     * @return $this
+     */
+    public function setServer($server)
+    {
+        $this->server = $server;
+
+        return $this;
+    }
+
+    /**
+     * Get server address
+     *
+     * @return string $server
+     */
+    public function getServer()
+    {
+        return $this->server;
+    }
+
+    /**
      * Set provider
      *
      * @param ProviderAbstract $provider
@@ -103,6 +148,50 @@ abstract class HandlerAbstract
     }
 
     /**
+     * Set parser
+     *
+     * @param ParserAbstract $parser
+     *
+     * @return $this
+     */
+    public function setParser(ParserAbstract $parser)
+    {
+        $this->parser = $parser;
+
+        return $this;
+    }
+
+    /**
+     * Get parser
+     *
+     * @return ParserAbstract
+     */
+    public function getParser()
+    {
+        return $this->parser;
+    }
+
+    /**
+     * Set Response
+     *
+     * @param Response $response    Response instance
+     */
+    protected function setResponse(Response $response)
+    {
+        $this->response = $response;
+    }
+
+    /**
+     * Get response
+     *
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
      * Check if handler has all the necessary data assigned
      *
      * TODO: Probably this is redundant check
@@ -112,7 +201,8 @@ abstract class HandlerAbstract
     public function hasData()
     {
         return $this->getQuery()->hasData()
-                && !is_null($this->getProvider());
+                && !is_null($this->getProvider())
+                && !is_null($this->getParser());
     }
 
     /**
@@ -125,7 +215,17 @@ abstract class HandlerAbstract
     public function lookup()
     {
         if ($this->hasData()) {
-            return $this->provider->lookup();
+            $response = $this->getProvider()->lookup();
+
+            $this->setResponse($response);
+
+            $this->getParser()->setRaw($this->getResponse()->getRaw());
+
+            $parsed = $this->getParser()->parse();
+
+            $this->getResponse()->setParsed($parsed);
+
+            return $this->getResponse();
         } else {
             throw new \InvalidArgumentException('Handler doesn\'t have query or provider set');
         }

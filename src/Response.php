@@ -46,10 +46,16 @@ class Response
     private $raw;
 
     /**
-     * Response constructor.
+     * @var array Parsed
+     */
+    private $parsed;
+
+    /**
+     * Response constructor
+     *
      * @param Query $query
      */
-    public function __construct(Query $query)
+    public function __construct(Query $query = null)
     {
         $this->setQuery($query);
     }
@@ -61,7 +67,7 @@ class Response
      *
      * @return $this
      */
-    public function setRaw($raw)
+    public function setRaw($raw = null)
     {
         $this->raw = $raw;
 
@@ -85,7 +91,7 @@ class Response
      *
      * @return $this
      */
-    public function setQuery(Query $query)
+    public function setQuery(Query $query = null)
     {
         $this->query = $query;
 
@@ -109,7 +115,7 @@ class Response
      *
      * @return $this
      */
-    public function setProvider(ProviderAbstract $provider)
+    public function setProvider(ProviderAbstract $provider = null)
     {
         $this->provider = $provider;
 
@@ -124,6 +130,48 @@ class Response
     public function getProvider()
     {
         return $this->provider;
+    }
+
+    /**
+     * Set parsed
+     *
+     * @param array $parsed
+     *
+     * @return $this
+     */
+    public function setParsed(array $parsed = [])
+    {
+        $this->parsed = $parsed;
+
+        return $this;
+    }
+
+    /**
+     * Get parsed array
+     *
+     * @return array
+     */
+    public function getParsed()
+    {
+        return $this->parsed;
+    }
+
+    /**
+     * Look for key in rows array
+     *
+     * @param $key
+     *
+     * @return mixed|null
+     */
+    public function getByKey($key)
+    {
+        $parsed = $this->getParsed();
+
+        if (array_key_exists('rows', $parsed) && array_key_exists($key, $parsed['rows'])) {
+            return $parsed['rows'][$key];
+        }
+
+        return null;
     }
 
     public function getData()
