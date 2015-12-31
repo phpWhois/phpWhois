@@ -1,5 +1,4 @@
-NEWS
-----
+# NEWS
 
 phpWhois v5 is finally out!
 
@@ -15,17 +14,43 @@ Tests for the list of top-level domains run daily at http://phpwhois.pw/tests
 
 (!) Check whois.iana.org domain server to get the whois server of a top level domain of a given domain.
 
-Introduction
-------------
+# Introduction
 
-This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the `lookup` method.
+This package contains the Whois (RFC954) library for PHP.
+The workflow of this class:
+1. Query `whois.iana.org` for the default whois server for the TLD of the specified address
+2. Query the whois server provided by `whois.iana.org` for the specified address 
+3. Query the whois server specified by this library. Usually it provides more detailed information than default whois server specified by `whois.iana.org`
+
+Code example:
+```php
+$whois = new \phpWhois\Whois('google.com');
+try {
+    $response = $whois->lookup();
+} catch (Exception $e) {
+    echo 'Error: '.$e->getMessage();
+}
+
+if (is_null($response)) {
+    exit('Can\'t get information about this address');
+}
+
+$responseIana = $whois->getResponseIana(); // Response from whois.iana.org
+                                           // It provides the whois server for TLD in `refer` and `whois` fields
+$responseIanaWhois = $whois->getResponseIanaWhois(); // Response from whois server provided by IANA
+$response = $whois->getResponse(); // Response from the whois server specified by library or by user.
+                                   // Returned with $whois->lookup()
+                                   // If no special whois server was set - this is a copy of `$whois->responseIanaWhois`
+```
+The client is `\phpWhois\Whois` class. You can query whois servers with `lookup` method. After performing `lookup`
 
 The response is an array containing, at least, an element 'rawdata', containing the raw output from the whois request.
 
-In addition, if the domain belongs to a registrar for which a special handler exists, the special handler will parse the output and make additional elements available in the response. The keys of these additional elements are described in the file HANDLERS.md.
+In addition, if the domain belongs to a registrar for which a special handler exists, the special 
+handler will parse the output and make additional elements available in the response. The keys of 
+these additional elements are described in the file HANDLERS.md.
 
-It fully supports IDNA (internationalized) domains names as
-defined in RFC3490, RFC3491, RFC3492 and RFC3454.
+It fully supports IDNA (internationalized) domains names as defined in RFC3490, RFC3491, RFC3492 and RFC3454.
 
 It also supports ip/AS whois queries which are very useful to trace
 SPAM. You just only need to pass the doted quad ip address or the
@@ -33,15 +58,23 @@ AS (Autonomus System) handle instead of the domain name. Limited,
 non-recursive support for Referral Whois (RFC 1714/2167) is also
 provided.
 
-Requirements
-------------
+# Extending library
+
+phpWhois consists of classes, which can be extended with user-developed implementations
+ - `\phpWhois\Provider\ProviderAbstract` - Performs connection to the whois server and fetches results. Currently implemented: WhoisServer and HttpServer
+ - `\phpWhois\Parser\ParserAbstract` - Parses results obtained from the whois server
+ - `\phpWhois\Handler\HandlerAbstract` - Handler defines Provider and Parser
+ - `\phpWhois\DomainHandlerMap` - set of custom handlers for specific domains
+ - `\phpWhois\Query` - contains query for whois server, including optional query parameters
+ - `\phpWhois\Response` - contains response from whois server, including raw and parsed data
+
+# Requirements
 
 phpWhois requires PHP 5.5 or later with OpenSSL support to work properly.
 
 Without SSL support you will not be able to query domains which do not have a whois server but that have a https based whois.
 
-Installation
-------------
+# Installation
 
 ### Via composer
 
@@ -54,8 +87,7 @@ Installation
 `php composer.phar require "phpwhois/phpwhois":"dev-master"`
 
 
-Example usage
--------------
+# Example usage
 
 (see `example.php`)
 ```php
@@ -81,8 +113,7 @@ $result = $whois->lookup($query);
 If the query string is not in UTF8 then it must be in
 ISO-8859-1 or IDNA support will not work.
 
-What you can query
-------------------
+# What you can query
 
 You can use phpWhois to query domain names, ip addresses and
 other information like AS, i.e, both of the following examples
@@ -98,8 +129,7 @@ $result = $whois->lookup('62.97.102.115');
 $whois = new Whois();
 $result = $whois->lookup('AS220');
 ```
-Using special whois server
---------------------------
+# Using special whois server
 
 Some registrars can give special access to registered whois gateways
 in order to have more fine control against abusing the whois services.
@@ -180,8 +210,7 @@ if there is a handler for that domain it will also be called but
 returned data from the whois server may be different than the data
 expected by the handler, and thus results could be different.
 
-Getting results faster
-----------------------
+# Getting results faster
 
 If you just want to know if a domain is registered or not but do not
 care about getting the real owner information you can set:
@@ -194,23 +223,20 @@ this will tell phpWhois to just query one whois server. For `.com`, `.net` and `
 than one whois server, you will just know if the domain is registered
 or not and which is the registrar but not the owner information.
 
-UTF-8
------
+# UTF-8
 
 PHPWhois will assume that all whois servers return UTF-8 encoded output,
 if some whois server does not return UTF-8 data, you can include it in
 the `NON_UTF8` array in `whois.servers.php`
 
-Workflow of getting domain info
--------------------------------
+# Workflow of getting domain info
 
 1. Call method `phpWhois\Whois::lookup()` with domain name as parameter
 2. If second parameter of method is **true** (default), phpWhois will try to convert the domain name to punycode
 3. If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at `src/whois.servers.php`), try to query **[tld].whois-servers.net**. If it has ip address, assume that it is valid whois server
 4. Try to query found whois server or fill response array with `unknown()` method
 
-Notes 
------
+# Notes
 
 There is an extended class called `phpWhois\Utils` which contains a
 debugging function called `showObject()`, if you `showObject($result)`
@@ -220,15 +246,13 @@ web browser.
 The latest version of the package and a demo script resides at 
 https://github.com/phpWhois/phpWhois
 
-Contributing
----------------
+# Contributing
 
 If you want to add support for new TLD, extend functionality or
 correct a bug, feel free to create a new pull request at Github's
 repository https://github.com/phpWhois/phpWhois
 
-Credits
--------
+# Credits
 
 Mark Jeftovic <markjr@easydns.com>
 

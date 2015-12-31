@@ -429,9 +429,11 @@ abstract class ProviderAbstract {
      */
     public function lookup()
     {
-        $this
-            ->connect()
-            ->performRequest();
+        $raw = $this
+                ->connect()
+                ->performRequest();
+
+        $this->getResponse()->setRaw($raw);
 
         return $this->getResponse();
     }

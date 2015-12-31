@@ -55,24 +55,23 @@ abstract class HandlerAbstract
      */
 
     /**
+     * Set query
+     *
      * @param Query $query
      *
      * @return $this
      */
     protected function setQuery(Query $query)
     {
-        if (!$query->hasData()) {
-            throw new \InvalidArgumentException('Cannot assign an empty query');
-        }
         $this->query = $query;
 
         return $this;
     }
 
     /**
-     * Get assigned query
+     * Get query
      *
-     * @return null|Query
+     * @return Query
      */
     public function getQuery()
     {
@@ -80,6 +79,8 @@ abstract class HandlerAbstract
     }
 
     /**
+     * Set provider
+     *
      * @param ProviderAbstract $provider
      *
      * @return $this
@@ -92,14 +93,26 @@ abstract class HandlerAbstract
     }
 
     /**
+     * Get provider
+     *
+     * @return ProviderAbstract
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
      * Check if handler has all the necessary data assigned
+     *
+     * TODO: Probably this is redundant check
      *
      * @return bool
      */
     public function hasData()
     {
-        return $this->query instanceof Query && $this->query->hasData()
-            && $this->provider instanceof ProviderAbstract;
+        return $this->getQuery()->hasData()
+                && !is_null($this->getProvider());
     }
 
     /**

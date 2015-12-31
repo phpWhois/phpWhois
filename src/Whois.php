@@ -24,6 +24,7 @@ namespace phpWhois;
 
 use phpWhois\Query;
 use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Handler\Registrar\Iana as IanaHandler;
 
 /**
  * phpWhois main class
@@ -42,6 +43,26 @@ class Whois
      */
     protected $query;
 
+    /**
+     * @var Response    Response from IANA whois server
+     */
+    protected $responseIana;
+
+    /**
+     * @var Response    Response from IANA-specified whois server
+     */
+    protected $responseIanaWhois;
+
+    /**
+     * @var Response    Response from IANA suggested whois server
+     */
+    protected $response;
+
+    /**
+     * Whois constructor.
+     *
+     * @param null|string $address  Address to query
+     */
     public function __construct($address = null)
     {
         $this->setQuery(new Query());
@@ -51,61 +72,175 @@ class Whois
         }
     }
 
+    /**
+     * Set query instance
+     *
+     * @param Query $query  Set query instance
+     *
+     * @return $this
+     */
     protected function setQuery(Query $query)
     {
         $this->query = $query;
-    }
-
-    /**
-     * Set query
-     *
-     * @param   string  $address  Address
-     *
-     * @return $this
-     *
-     * @throws \InvalidArgumentException    When handler not found
-     */
-    public function setAddress($address)
-    {
-        $this->query->setAddress($address);
-
-        // TODO: Allow people to use their own handlers
-        $handler = DomainHandlerMap::findHandler($this->query);
-        if ($handler === false) {
-            throw new \InvalidArgumentException('Handler not found for this address. Giving up');
-        }
-        $this->setHandler($handler);
 
         return $this;
     }
 
     /**
-     * @param HandlerAbstract $handler  Handler for querying whois server
+     * Get instance
+     *
+     * @return Query
      */
-    public function setHandler(HandlerAbstract $handler)
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * Set address
+     *
+     * @param   string  $address  Address
+     *
+     * @return $this
+     *
+     * @throws \InvalidArgumentException    When address is not recognized
+     */
+    public function setAddress($address)
+    {
+        $this->getQuery()->setAddress($address);
+
+        return $this;
+    }
+
+    /**
+     * Set Query handler
+     *
+     * @param null|HandlerAbstract $handler  Handler for querying whois server
+     *
+     * @return $this
+     */
+    public function setHandler(HandlerAbstract $handler = null)
     {
         $this->handler = $handler;
+
+        return $this;
+    }
+
+    /**
+     * Get query handler
+     *
+     * @return null|HandlerAbstract
+     */
+    public function getHandler()
+    {
+        return $this->handler;
+    }
+
+    /**
+     * Set response from IANA whois server
+     *
+     * @param Response $response
+     *
+     * @return $this
+     */
+    protected function setResponseIana(Response $response)
+    {
+        $this->responseIana = $response;
+
+        return $this;
+    }
+
+    /**
+     * @return Response Response from IANA whois server
+     */
+    public function getResponseIana()
+    {
+        return $this->responseIana;
+    }
+
+    /**
+     * Set response from Iana-specified whois server
+     *
+     * @param Response $response
+     *
+     * @return $this
+     */
+    protected function setResponseIanaWhois(Response $response)
+    {
+        $this->responseIanaWhois = $response;
+
+        return $this;
+    }
+
+    public function getResponseIanaWhois()
+    {
+        return $this->responseIanaWhois;
+    }
+
+    /**
+     * Get response from IANA-specified whois server
+     *
+     * @param Response $response
+     *
+     * @return $this
+     */
+    protected function setResponse(Response $response)
+    {
+        $this->response = $response;
+
+        return $this;
+    }
+
+    /**
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**
      * Perform a lookup of address
      *
+     * 1. Query IANA whois server first to obtain the default whois server.
+     * 2. If IANA returned the default server address - query it
+     * 3. If special handler is set - try to query it as well
+     *
      * @param null|string $address
+     * @param bool  $ignoreIana Don't query IANA server
      *
-     * @return Response
-     *
+     * @return Response Response from the whois server
      * @throws \InvalidArgumentException    if address is empty
      */
-    public function lookup($address = null)
+    public function lookup($address = null, $ignoreIana = false)
     {
         if (!is_null($address)) {
             $this->setAddress($address);
         }
 
-        if (!($this->handler instanceof HandlerAbstract) || !$this->handler->hasData()) {
-            throw new \InvalidArgumentException('Domain handler wasn\'t set up correctly');
+        if (!$this->getQuery()->hasData()) {
+            throw new \InvalidArgumentException('Address wasn\'t set, can\'t perform a query');
         }
 
-        return $this->handler->lookup();
+        if ($ignoreIana === false) {
+            $ianaHandler = new IanaHandler($this->query);
+            $response = $ianaHandler->lookup();
+            $this->setResponseIana($response);
+
+            // TODO: Query Iana provided server
+            // $this->setResponse();
+        }
+
+        // TODO: If handler is not set - try to find custom handler
+        if (!($this->getHandler() instanceof HandlerAbstract)) {
+            $handler = DomainHandlerMap::findHandler($this->getQuery());
+            $this->setHandler($handler);
+        }
+        if ($this->getHandler() instanceof HandlerAbstract) {
+            $response = $this->getHandler()->lookup();
+            $this->setResponse($response);
+        }
+
+        return $this->getResponse();
     }
 }

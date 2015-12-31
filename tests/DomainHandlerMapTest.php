@@ -25,18 +25,19 @@ class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider queryProvider_NotDomain
+     * @dataProvider queryProviderNotDomain
      */
-    public function testFindHandler_NotDomain($query)
+    public function testFindHandlerNotDomain($query)
     {
-        $this->assertFalse(DomainHandlerMap::findHandler($query));
+        $this->assertNull(DomainHandlerMap::findHandler($query));
     }
 
-    public function queryProvider_NotDomain()
+    public function queryProviderNotDomain()
     {
         return [
             [new Query('212.12.212.12')],
             ['212.12.212.12'],
+            [new Query()],
         ];
     }
 }

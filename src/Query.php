@@ -35,7 +35,7 @@ final class Query
     /**
      * @var int Query type (see constants)
      */
-    private $type;
+    private $type = self::QTYPE_UNKNOWN;
 
     /**
      * @var string  Original address received
@@ -214,20 +214,20 @@ final class Query
      *
      * @api
      *
-     * @param   string  $query
+     * @param   string  $address
      *
      * @return  int Query type
      */
-    public static function guessType($query)
+    public static function guessType($address)
     {
-        if (QueryUtils::validIp($query, 'ipv4', false)) {
-            return (QueryUtils::validIp($query, 'ipv4')) ? self::QTYPE_IPV4 : self::QTYPE_UNKNOWN;
-        } elseif (QueryUtils::validIp($query, 'ipv6', false)) {
-            return (QueryUtils::validIp($query, 'ipv6')) ? self::QTYPE_IPV6 : self::QTYPE_UNKNOWN;
-        } elseif (QueryUtils::validDomain($query)) {
+        if (QueryUtils::validIp($address, 'ipv4', false)) {
+            return (QueryUtils::validIp($address, 'ipv4')) ? self::QTYPE_IPV4 : self::QTYPE_UNKNOWN;
+        } elseif (QueryUtils::validIp($address, 'ipv6', false)) {
+            return (QueryUtils::validIp($address, 'ipv6')) ? self::QTYPE_IPV6 : self::QTYPE_UNKNOWN;
+        } elseif (QueryUtils::validDomain($address)) {
             return self::QTYPE_DOMAIN;
         // TODO: replace with AS validator
-        } elseif ($query && is_string($query) && strpos($query, '.') === false) {
+        } elseif ($address && is_string($address) && strpos($address, '.') === false) {
             return self::QTYPE_AS;
         } else {
             return self::QTYPE_UNKNOWN;

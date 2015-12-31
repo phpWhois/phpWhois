@@ -10,6 +10,7 @@ namespace phpWhois\Handler\Registrar;
 
 use phpWhois\Handler\HandlerAbstract;
 use phpWhois\Provider\WhoisServer;
+use phpWhois\Query;
 
 class Iana extends HandlerAbstract
 {

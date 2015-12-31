@@ -29,6 +29,9 @@ class WhoisServer extends ProviderAbstract {
      */
     private $streamTimeout = 7;
 
+    /**
+     * @var int Whois server port
+     */
     protected $port = 43;
 
     /**
@@ -103,11 +106,14 @@ class WhoisServer extends ProviderAbstract {
      */
     protected function performRequest()
     {
+        $raw = null;
         if ($this->isConnected()) {
             $fp = $this->getConnectionPointer();
 
-            $request = $this->query->getAddress();
-            $request .= implode($this->query->getParams());
+            $query = $this->getQuery();
+
+            $request = $query->getAddress();
+            $request .= implode($query->getParams());
             $request .= "\r\n";
 
             fwrite($fp, $request);
@@ -119,11 +125,9 @@ class WhoisServer extends ProviderAbstract {
 
             $raw = stream_get_contents($fp);
 
-            $this->response->setRaw($raw);
-
             fclose($fp);
         }
 
-        return $this;
+        return $raw;
     }
 }

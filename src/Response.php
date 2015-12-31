@@ -33,17 +33,17 @@ class Response
     /**
      * @var Query
      */
-    protected $query;
+    private $query;
 
     /**
      * @var ProviderAbstract
      */
-    protected $provider;
+    private $provider;
 
     /**
      * @var string Raw data received from whois server
      */
-    protected $raw;
+    private $raw;
 
     /**
      * Response constructor.
@@ -57,17 +57,21 @@ class Response
     /**
      * Set not parsed raw response from the whois server
      *
-     * @var string  $raw;
+     * @var string  $raw
+     *
+     * @return $this
      */
     public function setRaw($raw)
     {
         $this->raw = $raw;
+
+        return $this;
     }
 
     /**
      * Get not parsed raw response from whois server
      *
-     * @return string|null
+     * @return null|string
      */
     public function getRaw()
     {
@@ -80,15 +84,9 @@ class Response
      * @param Query $query
      *
      * @return $this
-     *
-     * @throws \InvalidArgumentException    if query is empty
      */
     public function setQuery(Query $query)
     {
-        if (!$query->hasData()){
-            throw new \InvalidArgumentException('Cannot assign an empty query');
-        }
-
         $this->query = $query;
 
         return $this;
@@ -105,7 +103,9 @@ class Response
     }
 
     /**
-     * @param ProviderAbstract &$provider
+     * Set provider
+     *
+     * @param ProviderAbstract $provider
      *
      * @return $this
      */
@@ -116,6 +116,11 @@ class Response
         return $this;
     }
 
+    /**
+     * Get provider
+     *
+     * @return ProviderAbstract
+     */
     public function getProvider()
     {
         return $this->provider;

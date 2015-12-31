@@ -56,7 +56,7 @@ class DomainHandlerMap
      *
      * @param null|string|Query $query
      *
-     * @return false|HandlerAbstract
+     * @return null|HandlerAbstract
      */
     public static function findHandler($query = null)
     {
@@ -66,7 +66,7 @@ class DomainHandlerMap
         $address = $query->getAddress();
 
         if ($query->getType() != Query::QTYPE_DOMAIN) {
-            return false;
+            return null;
         }
 
         foreach (self::getMap() as $pattern => $class) {
@@ -77,7 +77,7 @@ class DomainHandlerMap
         /**
          * TODO: Try whois.nic.$tld, etc
          */
-        return false;
+        return null;
     }
 
     /**

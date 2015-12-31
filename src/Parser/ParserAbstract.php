@@ -28,4 +28,6 @@ abstract class ParserAbstract {
     {
         $this->raw = $raw;
     }
+
+    abstract public function parse();
 }

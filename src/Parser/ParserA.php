@@ -4,13 +4,8 @@ namespace phpWhois\Parser;
 
 class ParserA extends ParserAbstract {
 
-    public function setData($data)
+    public function parse()
     {
-
-    }
-
-    public function parseData()
-    {
-
+        // TODO: Implement parse() method.
     }
 }

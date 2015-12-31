@@ -14,15 +14,19 @@ class ProviderAbstractMock extends ProviderAbstract
         return $this;
     }
 
+    public function setConnectionPointer($pointer)
+    {
+        return parent::setConnectionPointer($pointer);
+    }
+
     public function isConnected()
     {
-        return true;
+        return parent::isConnected();
     }
 
     public function performRequest()
     {
-        $this->response->setRaw($this->query->getAddressOrig());
-        return $this;
+        return $this->getQuery()->getAddressOrig();
     }
 }
 
@@ -80,5 +84,13 @@ class ProviderAbstractTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals($address, $response->getRaw());
+    }
+
+
+    public function testIsConnected()
+    {
+        $provider = new ProviderAbstractMock(new Query('www.google.com'), 'whois.iana.org');
+        $provider->setConnectionPointer(true);
+        $this->assertTrue($provider->isConnected());
     }
 }

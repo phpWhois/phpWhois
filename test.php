@@ -8,7 +8,7 @@ $whois = new phpWhois\Whois();
 
 echo "Memory used: ".memory_get_usage()."\n";
 
-try {
+/*try {
     $a = $whois
         ->setAddress('Www.GOOgle.ru')
         //->lookup('www.HELLO.ru');
@@ -21,4 +21,6 @@ echo $a->getJson();
 
 echo "\nMemory used: ".memory_get_usage()."\n";
 
-echo "\n";
+echo "\n";*/
+
+$whois->setHandler();
