@@ -81,11 +81,6 @@ abstract class ProviderAbstract {
     protected $rawQuery;
 
     /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
      * Connect to the defined server
      *
      * @return $this
@@ -112,7 +107,6 @@ abstract class ProviderAbstract {
     {
         $this->setQuery($query);
         $this->setServer($server);
-        $this->setResponse(new Response($query));
     }
 
     /**
@@ -398,31 +392,6 @@ abstract class ProviderAbstract {
     }
 
     /**
-     * Attach response object
-     *
-     * @param Response $response
-     *
-     * @return $this
-     */
-    protected function setResponse(Response $response)
-    {
-        $this->response = $response;
-        $this->response->setProvider($this);
-
-        return $this;
-    }
-
-    /**
-     * Get response object
-     *
-     * @return Response
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
      * Perform a lookup and return Response object
      *
      * @return Response
@@ -433,8 +402,6 @@ abstract class ProviderAbstract {
                 ->connect()
                 ->performRequest();
 
-        $this->getResponse()->setRaw($raw);
-
-        return $this->getResponse();
+        return $raw;
     }
 }

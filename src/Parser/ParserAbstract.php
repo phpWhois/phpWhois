@@ -133,6 +133,47 @@ abstract class ParserAbstract {
     }
 
     /**
+     * Try to extract some useful info from the lines
+     *
+     * @return array    $rows   Rows in key=>value format
+     *
+     * @return void
+     */
+    protected function extractInfo(array $rows)
+    {
+        $info = [];
+        foreach ($rows as $key => $value) {
+            // TODO: Convert dates here
+            // Expiration date
+            if (preg_match('/expir(y|es|ation)/i', $key)
+                || preg_match('/paid-till/i', $key)
+               ) {
+                if (strtotime($value) !== false) {
+                    $info['expires'] = $value;
+                }
+            }
+            // Registration date
+            elseif (preg_match('/creat(ed|ion)/i', $key)
+                    || preg_match('/regist(ered|ration)/i', $key)
+                ) {
+                if (strtotime($value) !== false) {
+                    $info['registered'] = $value;
+                }
+            }
+            // Updated date
+            elseif (!preg_match('/last update/i', $key) &&
+                (preg_match('/updated/i', $key)
+                || preg_match('/modifi(ed|cation)/i', $key))
+            ) {
+                if (strtotime($value) !== false) {
+                    $info['modified'] = $value;
+                }
+            }
+        }
+        return $info;
+    }
+
+    /**
      * Perform parsing and set necessary properties
      *
      * @return array
@@ -144,6 +185,9 @@ abstract class ParserAbstract {
         $this->setLines($lines);
 
         $parsed = $this->parseLines($this->getLines());
+
+        $parsed['info'] = $this->extractInfo($parsed['rows']);
+
         $this->setParsed($parsed);
 
         return $this->getParsed();

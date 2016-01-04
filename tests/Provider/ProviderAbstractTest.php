@@ -43,7 +43,6 @@ class ProviderAbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($provider->getQuery()->hasData());
         $this->assertEquals($provider->getServer(), $serverE);
         $this->assertEquals($provider->getPort(), $portE);
-        $this->assertInstanceOf(Response::class, $provider->getResponse());
     }
 
     public function constructProvider()
@@ -62,28 +61,14 @@ class ProviderAbstractTest extends \PHPUnit_Framework_TestCase
         $provider = new ProviderAbstractMock(new Query(), 'whois.iana.org');
     }
 
-    public function testSetResponseHasProviderReference()
-    {
-        $provider = new ProviderAbstractMock(new Query('www.GOOGLE.com'), 'whois.iana.org');
-
-        $provider->setSleep(200);
-        $response = $provider->getResponse();
-        $this->assertEquals(200, $response->getProvider()->getSleep());
-
-
-        $provider->setSleep(100);
-        $this->assertEquals(100, $response->getProvider()->getSleep());
-    }
-
     public function testLookup()
     {
         $address = 'www.Google.COM';
 
         $provider = new ProviderAbstractMock(new Query($address), 'whois.iana.org');
-        $response = $provider->lookup();
+        $provider->lookup();
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals($address, $response->getRaw());
+        $this->assertEquals($address, $provider->getQuery()->getAddressOrig());
     }
 
 

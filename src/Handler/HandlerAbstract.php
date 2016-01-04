@@ -40,11 +40,6 @@ abstract class HandlerAbstract
     protected $query;
 
     /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
      * @var string  Whois server address
      */
     protected $server;
@@ -67,7 +62,7 @@ abstract class HandlerAbstract
         $this->setQuery($query);
 
         if (!is_null($server)) {
-            $this->setServer();
+            $this->setServer($server);
         }
     }
 
@@ -172,29 +167,7 @@ abstract class HandlerAbstract
     }
 
     /**
-     * Set Response
-     *
-     * @param Response $response    Response instance
-     */
-    protected function setResponse(Response $response)
-    {
-        $this->response = $response;
-    }
-
-    /**
-     * Get response
-     *
-     * @return Response
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
      * Check if handler has all the necessary data assigned
-     *
-     * TODO: Probably this is redundant check
      *
      * @return bool
      */
@@ -214,20 +187,26 @@ abstract class HandlerAbstract
      */
     public function lookup()
     {
-        if ($this->hasData()) {
-            $response = $this->getProvider()->lookup();
-
-            $this->setResponse($response);
-
-            $this->getParser()->setRaw($this->getResponse()->getRaw());
-
-            $parsed = $this->getParser()->parse();
-
-            $this->getResponse()->setParsed($parsed);
-
-            return $this->getResponse();
-        } else {
+        if (!$this->hasData()) {
             throw new \InvalidArgumentException('Handler doesn\'t have query or provider set');
         }
+
+        // Get raw response from provider
+        $raw = $this->getProvider()->lookup();
+
+        // Set Response raw fields
+        $response = new Response($this->getQuery());
+        $response->setRaw($raw);
+
+        /**
+         * TODO: most probably pass response to parser for ability to properly parse all necessary fields
+         */
+        $this->getParser()->setRaw($response->getRaw());
+
+        $parsed = $this->getParser()->parse();
+
+        $response->setParsed($parsed);
+
+        return $response;
     }
 }

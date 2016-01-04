@@ -14,7 +14,6 @@ class WhoisServerTest extends \PHPUnit_Framework_TestCase
         $w = new WhoisServer(new Query('www.google.ru'), $server);
 
         $this->assertEquals($parsed, ['server' => $w->getServer(), 'port' => $w->getPort()]);
-        $this->assertInstanceOf(Response::class, $w->getResponse());
     }
 
     public function constructProvider()

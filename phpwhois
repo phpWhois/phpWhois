@@ -50,6 +50,11 @@ if ($argc != 2) {
 try {
     $whois = new \phpWhois\Whois($argv[1]);
     echo $whois->lookup()->getRaw();
+    echo "\nPhpWhois info:\n\n";
+    foreach ($whois->getResponse()->getParsed()['info'] as $key => $value) {
+        echo "$key: $value\n";
+    }
+    echo "\n";
 } catch (\Exception $e) {
     echo "\n".$e->getMessage()."\n\n";
     exit(1);

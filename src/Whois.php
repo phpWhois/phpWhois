@@ -49,12 +49,12 @@ class Whois
     protected $responseIana;
 
     /**
-     * @var Response    Response from IANA-specified whois server
+     * @var Response    Response from IANA-suggested whois server
      */
     protected $responseIanaWhois;
 
     /**
-     * @var Response    Response from IANA suggested whois server
+     * @var Response    Response from custom or IANA-suggested whois server
      */
     protected $response;
 
@@ -223,22 +223,30 @@ class Whois
         }
 
         if ($ignoreIana === false) {
-            $ianaHandler = new IanaHandler($this->query);
-            $response = $ianaHandler->lookup();
-            $this->setResponseIana($response);
+            $ianaHandler = new IanaHandler($this->query, 'whois.iana.org');
+            $responseIana = $ianaHandler->lookup();
+            $this->setResponseIana($responseIana);
 
             // TODO: Query Iana provided server
-            // $this->setResponse();
+            $ianaWhoisServer = $this->getResponseIana()->getByKey('whois');
+
+            $handler = new IanaHandler($this->query, $ianaWhoisServer);
+            $response = $handler->lookup();
+            $this->setResponseIanaWhois($response);
+            //$this->setResponse($response);
         }
 
-        // TODO: If handler is not set - try to find custom handler
+        // TODO: If handler is not set - try to find a custom handler
         if (!($this->getHandler() instanceof HandlerAbstract)) {
             $handler = DomainHandlerMap::findHandler($this->getQuery());
             $this->setHandler($handler);
         }
+
         if ($this->getHandler() instanceof HandlerAbstract) {
             $response = $this->getHandler()->lookup();
             $this->setResponse($response);
+        } elseif ($ignoreIana === false) {
+            $this->setResponse($this->getResponseIanaWhois());
         }
 
         return $this->getResponse();

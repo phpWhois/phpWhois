@@ -58,6 +58,14 @@ AS (Autonomus System) handle instead of the domain name. Limited,
 non-recursive support for Referral Whois (RFC 1714/2167) is also
 provided.
 
+# Useful method
+
+PhpWhois returns Response object upon querying whois server.
+`Response->getQuery()->getAddress()` - returns optimized query (remove www. and few other optimizations)
+`Response->getQuery()->getAddressOrig()` - returns unoptimized query
+`Response->getParsed()`
+
+
 # Extending library
 
 phpWhois consists of classes, which can be extended with user-developed implementations

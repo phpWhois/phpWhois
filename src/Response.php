@@ -35,10 +35,6 @@ class Response
      */
     private $query;
 
-    /**
-     * @var ProviderAbstract
-     */
-    private $provider;
 
     /**
      * @var string Raw data received from whois server
@@ -109,30 +105,6 @@ class Response
     }
 
     /**
-     * Set provider
-     *
-     * @param ProviderAbstract $provider
-     *
-     * @return $this
-     */
-    public function setProvider(ProviderAbstract $provider = null)
-    {
-        $this->provider = $provider;
-
-        return $this;
-    }
-
-    /**
-     * Get provider
-     *
-     * @return ProviderAbstract
-     */
-    public function getProvider()
-    {
-        return $this->provider;
-    }
-
-    /**
      * Set parsed
      *
      * @param array $parsed
@@ -157,7 +129,7 @@ class Response
     }
 
     /**
-     * Look for key in rows array
+     * Look for the key in the rows array
      *
      * @param $key
      *

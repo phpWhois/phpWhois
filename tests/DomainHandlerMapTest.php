@@ -11,7 +11,7 @@ class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider queryProvider
      */
-    public function testFindHandler($query)
+    /*public function testFindHandler($query)
     {
         $this->assertInstanceOf(HandlerAbstract::class, DomainHandlerMap::findHandler($query));
     }
@@ -22,7 +22,7 @@ class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
             [new Query('www.google.ru')],
             ['www.google.ru'],
         ];
-    }
+    }*/
 
     /**
      * @dataProvider queryProviderNotDomain

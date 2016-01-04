@@ -15,7 +15,7 @@ use phpWhois\Query;
 
 class Iana extends HandlerAbstract
 {
-    public function __construct(Query $query, $server = null)
+    public function __construct(Query $query, $server)
     {
         parent::__construct($query, $server);
 

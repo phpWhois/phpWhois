@@ -23,9 +23,16 @@ class ParserA extends ParserAbstract {
 
             $row = preg_split('/(:)/', $line, 2);
 
-            $row[1] = trim($row[1]);
+            if (count($row) == 2) {
+                $row[1] = trim($row[1]);
 
-            $rows[$row[0]] = $row[1];
+                /**
+                 * @TODO: handle rows with the same key
+                 */
+                $rows[$row[0]] = $row[1];
+            } else {
+                $rows[$row[0]] = '';
+            }
         }
 
         return [
