@@ -20,18 +20,13 @@
  * @copyright Copyright (c) 2016 Dmitry Lukashin
  */
 
-namespace phpWhois\Handler;
+namespace phpWhois\Handler\Registrar;
 
-class Ru extends HandlerAbstract
+use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Provider\WhoisServer;
+use phpWhois\Query;
+
+class Generic extends HandlerAbstract
 {
-    protected $dateFormat = ['Y.m.d'];
 
-    // There is no updated date record
-    protected $patternsUpdated = [];
-
-    protected $patternsStatusRegistered = [
-        '/^state$/i' => '/^REGISTERED/',
-    ];
-
-    protected $server = 'whois.tcinet.ru';
 }

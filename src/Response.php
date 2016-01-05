@@ -31,18 +31,17 @@ use phpWhois\Provider\ProviderAbstract;
 class Response
 {
     /**
-     * @var Query
+     * @var Query Query object
      */
     private $query;
 
-
     /**
-     * @var string Raw data received from whois server
+     * @var string Raw data received from the whois server
      */
     private $raw;
 
     /**
-     * @var array Parsed
+     * @var array Parsed data
      */
     private $parsed;
 
@@ -130,6 +129,7 @@ class Response
 
     /**
      * Look for the key in the rows array
+     * TODO: Search across the blocks
      *
      * @param $key
      *
@@ -139,8 +139,8 @@ class Response
     {
         $parsed = $this->getParsed();
 
-        if (array_key_exists('rows', $parsed) && array_key_exists($key, $parsed['rows'])) {
-            return $parsed['rows'][$key];
+        if (array_key_exists('keyValue', $parsed) && array_key_exists($key, $parsed['keyValue'])) {
+            return $parsed['keyValue'][$key];
         }
 
         return null;
@@ -153,12 +153,13 @@ class Response
                 'address' => $this->query->getAddress(),
                 'addressOrig' => $this->query->getAddressOrig(),
             ],
-            'server' => [
+            // TODO: Add provider object to the response
+            /*'server' => [
                 'name' => $this->provider->getServer(),
                 'port' => $this->provider->getPort(),
                 'errno' => $this->provider->getConnectionErrNo(),
                 'errstr' => $this->provider->getConnectionErrStr(),
-            ],
+            ],*/
             'responseRaw' => $this->getRaw(),
         ];
         return $result;

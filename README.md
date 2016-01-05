@@ -2,25 +2,25 @@
 
 phpWhois v5 is finally out!
 
-Fully rewritten with OOP, supports lot of new domains, fixed IP querying.
-Helper functions for obtaining most important information about domain:
- - Created, Modified, Expires
- - DNS
- - Contact info
+Fully rewritten with OOP, supports new domains, fixed IP querying.
+Extracting most important information about address:
+ - Created, Modified, Expires dates
+ - Registrant/Administrative/Technical/Billing Contacts
+ - Name servers
+ - Status
+ - Comments
+
+`whois.iana.org` is queried for unknown addresses first
 
 Whois info is now serializable for easy monitoring for changes
-
-Tests for the list of top-level domains run daily at http://phpwhois.pw/tests 
-
-(!) Check whois.iana.org domain server to get the whois server of a top level domain of a given domain.
 
 # Introduction
 
 This package contains the Whois (RFC954) library for PHP.
-The workflow of this class:
-1. Query `whois.iana.org` for the default whois server for the TLD of the specified address
-2. Query the whois server provided by `whois.iana.org` for the specified address 
-3. Query the whois server specified by this library. Usually it provides more detailed information than default whois server specified by `whois.iana.org`
+The workflow of this library:
+1. Check if handler specified for the given address
+2. If handler is not specified, query `whois.iana.org` for the default whois server
+3. Query the whois server provided by `whois.iana.org` for the specified address
 
 Code example:
 ```php
@@ -58,19 +58,34 @@ AS (Autonomus System) handle instead of the domain name. Limited,
 non-recursive support for Referral Whois (RFC 1714/2167) is also
 provided.
 
-# Useful method
+# Useful methods
 
 PhpWhois returns Response object upon querying whois server.
 `Response->getQuery()->getAddress()` - returns optimized query (remove www. and few other optimizations)
 `Response->getQuery()->getAddressOrig()` - returns unoptimized query
 `Response->getParsed()`
 
+# Response structure
+
+Response is based on extracting data rather than parsing all possible data. That means that some fields presented in
+raw response may be missing in parsed structure.
+
+Response consists of 10 blocks which were possible to extract from the raw response:
+ - Registrant
+ - Administrative
+ - Technical
+ - Billing
+ - Registrar
+ - Name servers
+ - Status
+ - Dates
+ - Comments
+ - KeyValue
 
 # Extending library
 
 phpWhois consists of classes, which can be extended with user-developed implementations
  - `\phpWhois\Provider\ProviderAbstract` - Performs connection to the whois server and fetches results. Currently implemented: WhoisServer and HttpServer
- - `\phpWhois\Parser\ParserAbstract` - Parses results obtained from the whois server
  - `\phpWhois\Handler\HandlerAbstract` - Handler defines Provider and Parser
  - `\phpWhois\DomainHandlerMap` - set of custom handlers for specific domains
  - `\phpWhois\Query` - contains query for whois server, including optional query parameters

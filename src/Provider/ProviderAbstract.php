@@ -100,10 +100,10 @@ abstract class ProviderAbstract {
     abstract protected function performRequest();
 
     /**
-     * @param Query     $query
-     * @param string    $server
+     * @param Query|null     $query
+     * @param string|null    $server
      */
-    public function __construct(Query $query, $server)
+    public function __construct(Query $query = null, $server = null)
     {
         $this->setQuery($query);
         $this->setServer($server);
@@ -389,6 +389,17 @@ abstract class ProviderAbstract {
     public function getRawQuery()
     {
         return $this->rawQuery;
+    }
+
+    /**
+     * Check if instance has set query, server and server port
+     *
+     * @return bool
+     */
+    public function hasData() {
+        return $this->getQuery()->hasData()
+            && !empty($this->getServer())
+            && !empty($this->getPort());
     }
 
     /**

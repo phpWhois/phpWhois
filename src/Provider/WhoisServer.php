@@ -37,17 +37,17 @@ class WhoisServer extends ProviderAbstract {
     /**
      * Set stream timeout
      *
-     * @param int $timeout
+     * @param int $streamTimeout
      * @return $this
      *
      * @throws \InvalidArgumentException
      */
-    private function setStreamTimeout($timeout = 7)
+    private function setStreamTimeout($streamTimeout = 7)
     {
-        if (!is_int($timeout)) {
+        if (!is_int($streamTimeout)) {
             throw new \InvalidArgumentException("Stream timeout must be integer number of seconds");
         }
-        $this->streamTimeout = $timeout;
+        $this->streamTimeout = $streamTimeout;
 
         return $this;
     }

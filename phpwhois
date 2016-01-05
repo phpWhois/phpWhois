@@ -49,10 +49,11 @@ if ($argc != 2) {
 
 try {
     $whois = new \phpWhois\Whois($argv[1]);
-    echo $whois->lookup()->getRaw();
+    $response = $whois->lookup();
+    echo $response->getRaw();
     echo "\nPhpWhois info:\n\n";
-    foreach ($whois->getResponse()->getParsed()['info'] as $key => $value) {
-        echo "$key: $value\n";
+    foreach ($response->getParsed()['dates'] as $key => $value) {
+        echo "$key: ".(($value) ? date('c', $value) : '[NOT FOUND]')."\n";
     }
     echo "\n";
 } catch (\Exception $e) {

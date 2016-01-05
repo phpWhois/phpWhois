@@ -22,16 +22,12 @@
 
 namespace phpWhois\Handler;
 
-class Ru extends HandlerAbstract
+/**
+ * Class De
+ * @package phpWhois\Handler
+ */
+
+class De extends HandlerAbstract
 {
-    protected $dateFormat = ['Y.m.d'];
 
-    // There is no updated date record
-    protected $patternsUpdated = [];
-
-    protected $patternsStatusRegistered = [
-        '/^state$/i' => '/^REGISTERED/',
-    ];
-
-    protected $server = 'whois.tcinet.ru';
 }

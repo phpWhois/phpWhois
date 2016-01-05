@@ -34,7 +34,10 @@ class DomainHandlerMap
         /**
          * TODO: Some domains should be bound to registrars handlers rather than to the specific domains handlers
          */
-        //'/\.ru$/i' => Handler\Ru::class,
+        '/\.fr/i' => Handler\Fr::class,
+        '/\.hu/i' => Handler\Hu::class,
+        '/\.pl/i' => Handler\Pl::class,
+        '/\.(ru|su)$/i' => Handler\Ru::class,
 //        TODO: su is utf8 as well
 //        TODO: ru.com is a different registrar (Available with centralnic)
 //        '/^(?:[a-z0-9\-]+?\.){1,2}ru$/i' => Handler\Registrar\NicRu::class,

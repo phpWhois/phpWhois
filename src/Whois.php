@@ -24,7 +24,7 @@ namespace phpWhois;
 
 use phpWhois\Query;
 use phpWhois\Handler\HandlerAbstract;
-use phpWhois\Handler\Registrar\Iana as IanaHandler;
+use phpWhois\Handler\Registrar\Generic as IanaHandler;
 
 /**
  * phpWhois main class
@@ -207,12 +207,11 @@ class Whois
      * 3. If special handler is set - try to query it as well
      *
      * @param null|string $address
-     * @param bool  $ignoreIana Don't query IANA server
      *
      * @return Response Response from the whois server
      * @throws \InvalidArgumentException    if address is empty
      */
-    public function lookup($address = null, $ignoreIana = false)
+    public function lookup($address = null)
     {
         if (!is_null($address)) {
             $this->setAddress($address);
@@ -222,32 +221,31 @@ class Whois
             throw new \InvalidArgumentException('Address wasn\'t set, can\'t perform a query');
         }
 
-        if ($ignoreIana === false) {
-            $ianaHandler = new IanaHandler($this->query, 'whois.iana.org');
-            $responseIana = $ianaHandler->lookup();
-            $this->setResponseIana($responseIana);
-
-            // TODO: Query Iana provided server
-            $ianaWhoisServer = $this->getResponseIana()->getByKey('whois');
-
-            $handler = new IanaHandler($this->query, $ianaWhoisServer);
-            $response = $handler->lookup();
-            $this->setResponseIanaWhois($response);
-            //$this->setResponse($response);
-        }
-
-        // TODO: If handler is not set - try to find a custom handler
+        // If handler is not set yet, then try to find a custom handler
         if (!($this->getHandler() instanceof HandlerAbstract)) {
             $handler = DomainHandlerMap::findHandler($this->getQuery());
             $this->setHandler($handler);
         }
 
-        if ($this->getHandler() instanceof HandlerAbstract) {
-            $response = $this->getHandler()->lookup();
-            $this->setResponse($response);
-        } elseif ($ignoreIana === false) {
-            $this->setResponse($this->getResponseIanaWhois());
+        // If handler isn't set or custom handler doesn't have server address defined - obtain server address from IANA
+        if (!($this->getHandler() instanceof HandlerAbstract) || empty($this->getHandler()->getServer())) {
+            $ianaHandler = new IanaHandler($this->getQuery(), 'whois.iana.org');
+            $responseIana = $ianaHandler->lookup();
+
+            $serverAddress = $responseIana->getByKey('whois');
+
+            if (empty($serverAddress)) {
+                throw new \InvalidArgumentException('Cannot find whois server. Consider creating custom handler with predefined server address');
+            }
+
+            if (!($this->getHandler() instanceof HandlerAbstract)) {
+                $handler = new IanaHandler($this->query);
+            }
+            $handler->setServer($serverAddress);
         }
+
+        $response = $handler->lookup();
+        $this->setResponse($response);
 
         return $this->getResponse();
     }
