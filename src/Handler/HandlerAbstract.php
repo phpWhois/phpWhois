@@ -284,6 +284,9 @@ abstract class HandlerAbstract
 
     public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(:)/i')
     {
+        /**
+         * TODO: Trim row's custom symbols (See .JP)
+         */
         $result = false;
 
         // If ignorePrefix is not empty and row matches it - return false
@@ -420,9 +423,6 @@ abstract class HandlerAbstract
         $lines = $this->splitLines();
         $this->setLines($lines);
 
-        /**
-         * TODO: Split into blocks first. Useful info cannot be extracted from the blocks in most cases
-         */
         $parsed['dates'] = $this->extractDates($lines);
         $parsed['keyValue'] = $this->extractKeyValue($lines);
 

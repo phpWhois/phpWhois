@@ -99,20 +99,25 @@ class QueryUtils
      * Check if given domain name is valid
      *
      * @param string  $domain   Domain name to check
-     * @param string  $type     'latin', 'idn', 'any'
      *
      * @return boolean
      */
-    public static function validDomain($domain, $type = 'any')
+    public static function validDomain($domain)
     {
-        // TODO: Implement IDN
-        $pattern = '/^[a-z\d\.\-]*\.[a-z]{2,6}$/i';
-        // preg_match doesn't return boolean
-        if (preg_match($pattern, $domain)) {
-            return true;
-        } else {
-            return false;
+        $punycode = new \TrueBV\Punycode();
+        $domain = $punycode->encode($domain);
+
+        $patterns = [
+            '/^[a-z\d\.\-]*\.[a-z]{2,6}$/i',
+            '/^[a-z\d\.\-]*\.xn--[a-z\d]{4,}$/i',
+        ];
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $domain)) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     /**

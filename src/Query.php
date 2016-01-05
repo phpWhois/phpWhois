@@ -197,8 +197,10 @@ final class Query
     public static function optimizeAddress($address)
     {
         $type = self::guessType($address);
-        // TODO: handle IDN
         if ($type == self::QTYPE_DOMAIN) {
+            $punycode = new \TrueBV\Punycode();
+            $address = $punycode->encode($address);
+
             $address = strtoupper($address);
 
             $address_nowww = preg_replace('/^www./i', '', $address);

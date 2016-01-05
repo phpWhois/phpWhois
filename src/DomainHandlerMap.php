@@ -31,9 +31,6 @@ class DomainHandlerMap
      * @var array   Mappings from domain name to handler class
      */
     protected static $map = [
-        /**
-         * TODO: Some domains should be bound to registrars handlers rather than to the specific domains handlers
-         */
         '/\.bg$/i' => Handler\Bg::class,
         '/\.fr$/i' => Handler\Registrar\Frnic::class,
         '/\.hm$/i' => Handler\Hm::class,
@@ -47,14 +44,13 @@ class DomainHandlerMap
         '/\.pm$/i' => Handler\Registrar\Frnic::class,
         '/\.pt$/i' => Handler\Pt::class,
         '/\.re$/i' => Handler\Registrar\Frnic::class,
-        '/\.(ru|su)$/i' => Handler\Ru::class,
+        '/\.(ru|su|xn--p1ai)$/i' => Handler\Ru::class, //.рф
         '/\.sk$/i' => Handler\Sk::class,
         '/\.sm$/i' => Handler\Sm::class,
         '/\.tf$/i' => Handler\Registrar\Frnic::class,
         '/\.uy$/i' => Handler\Uy::class,
         '/\.wf$/i' => Handler\Registrar\Frnic::class,
         '/\.yt$/i' => Handler\Registrar\Frnic::class,
-//        TODO: su is utf8 as well
 //        '/^(?:[a-z0-9\-]+?\.){1,2}ru$/i' => Handler\Registrar\NicRu::class,
 //        '/^(?:[a-z0-9\-]+?\.){1,2}su$/i' => Handler\Registrar\NicRu::class,
 //        '/^(?:[a-z0-9\-]+?\.){1}ru\.net$/i' => Handler\Registrar\NicRu::class,
@@ -92,21 +88,7 @@ class DomainHandlerMap
                 return new $class($query);
             }
         }
-        /**
-         * TODO: Try whois.nic.$tld, etc
-         */
+
         return null;
-    }
-
-    /**
-     * Find whois server for domain by querying whois.iana.org
-     *
-     * @param null|string   $address
-     *
-     * @return false|HandlerAbstract
-     */
-    public static function findWithIANA($address)
-    {
-
     }
 }

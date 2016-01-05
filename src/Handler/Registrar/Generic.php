@@ -26,5 +26,5 @@ use phpWhois\Handler\HandlerAbstract;
 
 class Generic extends HandlerAbstract
 {
-    
+
 }

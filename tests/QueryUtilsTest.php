@@ -59,7 +59,10 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
             ['www.sub.domain.space'],
             ['domain.co.uk'],
             ['www.domain.co.uk'],
-            ['sub.www.domain.co.uk']
+            ['sub.www.domain.co.uk'],
+            ['президент.рф'],
+            ['www.президент.рф'],
+            ['xn--e1afmkfd.xn--80akhbyknj4f'],
         ];
     }
 
@@ -79,6 +82,10 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
             ['domain.1com'],
             ['domain.abcdefg'], // 7 symbols TLD
             ['domain.co.u'],
+            ['xn--e1afmkfd.xn--80akhb.yknj4f'],
+            ['xn--e1afmkfd.xn--80akhbyknj4f.'],
+            ['президент.рф.'],
+            ['президент.рф2'],
         ];
     }
 

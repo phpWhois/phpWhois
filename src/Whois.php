@@ -24,7 +24,7 @@ namespace phpWhois;
 
 use phpWhois\Query;
 use phpWhois\Handler\HandlerAbstract;
-use phpWhois\Handler\Registrar\Generic as IanaHandler;
+use phpWhois\Handler\Registrar\Generic as GenericHandler;
 
 /**
  * phpWhois main class
@@ -42,16 +42,6 @@ class Whois
      * @var Query   Query object created from given domain name
      */
     protected $query;
-
-    /**
-     * @var Response    Response from IANA whois server
-     */
-    protected $responseIana;
-
-    /**
-     * @var Response    Response from IANA-suggested whois server
-     */
-    protected $responseIanaWhois;
 
     /**
      * @var Response    Response from custom or IANA-suggested whois server
@@ -137,47 +127,6 @@ class Whois
     }
 
     /**
-     * Set response from IANA whois server
-     *
-     * @param Response $response
-     *
-     * @return $this
-     */
-    protected function setResponseIana(Response $response)
-    {
-        $this->responseIana = $response;
-
-        return $this;
-    }
-
-    /**
-     * @return Response Response from IANA whois server
-     */
-    public function getResponseIana()
-    {
-        return $this->responseIana;
-    }
-
-    /**
-     * Set response from Iana-specified whois server
-     *
-     * @param Response $response
-     *
-     * @return $this
-     */
-    protected function setResponseIanaWhois(Response $response)
-    {
-        $this->responseIanaWhois = $response;
-
-        return $this;
-    }
-
-    public function getResponseIanaWhois()
-    {
-        return $this->responseIanaWhois;
-    }
-
-    /**
      * Get response from IANA-specified whois server
      *
      * @param Response $response
@@ -229,7 +178,7 @@ class Whois
 
         // If handler isn't set or custom handler doesn't have server address defined - obtain server address from IANA
         if (!($this->getHandler() instanceof HandlerAbstract) || empty($this->getHandler()->getServer())) {
-            $ianaHandler = new IanaHandler($this->getQuery(), 'whois.iana.org');
+            $ianaHandler = new GenericHandler($this->getQuery(), 'whois.iana.org');
             $responseIana = $ianaHandler->lookup();
 
             $serverAddress = $responseIana->getByKey('whois');
@@ -239,7 +188,7 @@ class Whois
             }
 
             if (!($this->getHandler() instanceof HandlerAbstract)) {
-                $handler = new IanaHandler($this->query);
+                $handler = new GenericHandler($this->query);
                 $this->setHandler($handler);
             }
 
