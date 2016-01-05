@@ -48,7 +48,7 @@ class Response
     /**
      * Response constructor
      *
-     * @param Query $query
+     * @param null|Query $query
      */
     public function __construct(Query $query = null)
     {

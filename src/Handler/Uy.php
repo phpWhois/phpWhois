@@ -20,11 +20,12 @@
  * @copyright Copyright (c) 2016 Dmitry Lukashin
  */
 
-namespace phpWhois\Handler\Registrar;
+namespace phpWhois\Handler;
 
-use phpWhois\Handler\HandlerAbstract;
 
-class Generic extends HandlerAbstract
+class Uy extends HandlerAbstract
 {
-    
+    protected $patternsRegistered = ['/creacion/i'];
+
+    protected $patternsUpdated = ['/actualizacion/i'];
 }

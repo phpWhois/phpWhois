@@ -20,11 +20,29 @@
  * @copyright Copyright (c) 2016 Dmitry Lukashin
  */
 
-namespace phpWhois\Handler\Registrar;
+namespace phpWhois\Handler;
 
-use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Query;
 
-class Generic extends HandlerAbstract
+/**
+ * TODO: strip brackets [] around keys
+ */
+class Jp extends HandlerAbstract
 {
-    
+    // TODO: No single idea why trailing parentheses is missing but it works
+    protected $dateFormat = ['Y/m/d', 'Y/m/d H:i:s (T'];
+
+    //protected $server = 'whois.jprs.jp';
+
+    public function __construct(Query $query, $server = 'whois.jprs.jp')
+    {
+        parent::__construct($query, $server);
+
+        // Request response in English
+        $this->getQuery()->addParam('/e');
+    }
+
+    public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(\])/i') {
+        return parent::splitRow($row, $ignorePrefix, $splitBy);
+    }
 }

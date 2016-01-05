@@ -37,17 +37,21 @@ abstract class HandlerAbstract
     protected $patternsExpires = [
         '/expir(e|y|es|ation)/i',
         '/renew(al)?/i',
-        '/paid\-till/i'
+        '/paid\-till/i',
+        '/validity/i',
+        '/billeduntil/i'
     ];
 
     protected $patternsRegistered = [
         '/creat(ed|ion)/i',
         '/regist(ered|ration)/i',
+        '/commencement/i',
     ];
 
     protected $patternsUpdated = [
         '/update(d)?/i',
-        '/modif(y|ied|ication)/i'
+        '/modif(y|ied|ication)/i',
+        '/changed/i',
     ];
 
     protected $patternsStatusRegistered = [
@@ -75,9 +79,20 @@ abstract class HandlerAbstract
     protected $raw;
 
     /**
+     * @var array   Array of response lines split by newlines
+     */
+    protected $lines;
+
+    /**
+     * @var array   Parsed data
+     */
+    protected $parsed;
+    /**
      * Handler constructor
      *
      * Each handler must inherit this method and set provider
+     *
+     * TODO: Child constructor doesn't work well when server is set as an instance var. See Jp handler
      *
      * @param Query $query    Query for whois server
      * @param string $server    Whois server address
@@ -298,11 +313,11 @@ abstract class HandlerAbstract
     {
         $result = false;
         if ($this->dateFormat == null) {
-            $result =  strtotime($date);
+            $result = strtotime($date);
         } elseif (count($this->dateFormat)) {
             foreach ($this->dateFormat as $format) {
-                if ($date = \DateTime::createFromFormat($format, $date)) {
-                    $result = $date->format('U');
+                if ($dateTime = \DateTime::createFromFormat($format, $date)) {
+                    $result = $dateTime->format('U');
                     break;
                 }
             }

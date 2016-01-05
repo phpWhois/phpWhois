@@ -20,11 +20,11 @@
  * @copyright Copyright (c) 2016 Dmitry Lukashin
  */
 
-namespace phpWhois\Handler\Registrar;
+namespace phpWhois\Handler;
 
-use phpWhois\Handler\HandlerAbstract;
 
-class Generic extends HandlerAbstract
+class Kz extends HandlerAbstract
 {
-    
+    // TODO: quite dirty hack for parsing 2012-11-28 03:16:59 (GMT+0:00)
+    protected $dateFormat = ['Y-m-d H:i:s (T'];
 }

@@ -240,11 +240,13 @@ class Whois
 
             if (!($this->getHandler() instanceof HandlerAbstract)) {
                 $handler = new IanaHandler($this->query);
+                $this->setHandler($handler);
             }
-            $handler->setServer($serverAddress);
+
+            $this->getHandler()->setServer($serverAddress);
         }
 
-        $response = $handler->lookup();
+        $response = $this->getHandler()->lookup();
         $this->setResponse($response);
 
         return $this->getResponse();

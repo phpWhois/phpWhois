@@ -20,11 +20,12 @@
  * @copyright Copyright (c) 2016 Dmitry Lukashin
  */
 
-namespace phpWhois\Handler\Registrar;
+namespace phpWhois\Handler;
 
-use phpWhois\Handler\HandlerAbstract;
 
-class Generic extends HandlerAbstract
+class Pf extends HandlerAbstract
 {
-    
+    protected $dateFormat = ['d/m/Y'];
+
+    protected $patternsExpires = ['/Expire/i'];
 }

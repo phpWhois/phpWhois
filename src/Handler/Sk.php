@@ -22,12 +22,13 @@
 
 namespace phpWhois\Handler;
 
-/**
- * Class De
- * @package phpWhois\Handler
- */
 
-class De extends HandlerAbstract
+class Sk extends HandlerAbstract
 {
+    protected $patternsExpires = ['/valid/i'];
 
+    public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(\s)/i')
+    {
+        return parent::splitRow($row, $ignorePrefix, $splitBy);
+    }
 }

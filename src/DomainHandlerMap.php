@@ -34,12 +34,27 @@ class DomainHandlerMap
         /**
          * TODO: Some domains should be bound to registrars handlers rather than to the specific domains handlers
          */
-        '/\.fr/i' => Handler\Fr::class,
-        '/\.hu/i' => Handler\Hu::class,
-        '/\.pl/i' => Handler\Pl::class,
+        '/\.bg$/i' => Handler\Bg::class,
+        '/\.fr$/i' => Handler\Registrar\Frnic::class,
+        '/\.hm$/i' => Handler\Hm::class,
+        '/\.hu$/i' => Handler\Hu::class,
+        '/\.im$/i' => Handler\Im::class,
+        '/\.jp$/i' => Handler\Jp::class,
+        '/\.kr$/i' => Handler\Kr::class,
+        '/\.kz$/i' => Handler\Kz::class,
+        '/\.pf$/i' => Handler\Pf::class,
+        '/\.pl$/i' => Handler\Pl::class,
+        '/\.pm$/i' => Handler\Registrar\Frnic::class,
+        '/\.pt$/i' => Handler\Pt::class,
+        '/\.re$/i' => Handler\Registrar\Frnic::class,
         '/\.(ru|su)$/i' => Handler\Ru::class,
+        '/\.sk$/i' => Handler\Sk::class,
+        '/\.sm$/i' => Handler\Sm::class,
+        '/\.tf$/i' => Handler\Registrar\Frnic::class,
+        '/\.uy$/i' => Handler\Uy::class,
+        '/\.wf$/i' => Handler\Registrar\Frnic::class,
+        '/\.yt$/i' => Handler\Registrar\Frnic::class,
 //        TODO: su is utf8 as well
-//        TODO: ru.com is a different registrar (Available with centralnic)
 //        '/^(?:[a-z0-9\-]+?\.){1,2}ru$/i' => Handler\Registrar\NicRu::class,
 //        '/^(?:[a-z0-9\-]+?\.){1,2}su$/i' => Handler\Registrar\NicRu::class,
 //        '/^(?:[a-z0-9\-]+?\.){1}ru\.net$/i' => Handler\Registrar\NicRu::class,

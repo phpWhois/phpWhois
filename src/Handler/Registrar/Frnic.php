@@ -24,7 +24,7 @@ namespace phpWhois\Handler\Registrar;
 
 use phpWhois\Handler\HandlerAbstract;
 
-class Generic extends HandlerAbstract
+class Frnic extends HandlerAbstract
 {
-    
+    protected $dateFormat = ['d/m/Y', 'd/m/Y H:i:s'];
 }
