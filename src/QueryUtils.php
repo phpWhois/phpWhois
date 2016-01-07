@@ -107,9 +107,7 @@ class QueryUtils
     public static function validDomain($domain)
     {
         $punycode = new Punycode();
-        /**
-         * TODO: convert domain to lowercase (If original class won't implement this)
-         */
+
         $domain = $punycode->encode($domain);
 
         $patterns = [

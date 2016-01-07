@@ -200,8 +200,6 @@ final class Query
         $type = self::guessType($address);
         if ($type == self::QTYPE_DOMAIN) {
 
-            $address = mb_strtolower($address, 'UTF-8');
-
             $punycode = new Punycode();
             $address = $punycode->encode($address);
 

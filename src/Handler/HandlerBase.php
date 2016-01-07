@@ -316,7 +316,7 @@ class HandlerBase
     /**
      * Split raw data response into array by newline
      *
-     * @param string $raw  Raw response from whois server
+     * @param string $raw|null  Raw response from whois server
      *
      * @return string[]
      */
@@ -336,7 +336,7 @@ class HandlerBase
      *
      * @param string $row  Line to parse
      * @param string[] $splitBy Regexp for splitting the line. Method only looks for the first occurence of regexp
-     * @param string[]|null $ignorePattern  Don't parse rows which match the given expression, just return false
+     * @param string[] $ignorePattern  Don't parse rows which match the given expression, just return false
      * @return array|false Return key => value array if regex found, or array with just 1 element otherwise
      */
     public function splitRow($row, array $splitBy = [], array $ignorePattern = [])
