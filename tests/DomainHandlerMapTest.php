@@ -1,30 +1,35 @@
 <?php
 
-use phpWhois\Query;
 use phpWhois\DomainHandlerMap;
-use phpWhois\Handler\HandlerBase;
+use phpWhois\Handler\Jp;
 
 
 class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * @dataProvider queryProvider
+     * Test that findHandler returns valid classname
+     *
+     * @param $address
+     * @param $className
+     * @dataProvider addressesProvider
      */
-    /*public function testFindHandler($query)
+    public function testFindHandler($address, $className)
     {
-        $this->assertInstanceOf(HandlerAbstract::class, DomainHandlerMap::findHandler($query));
+        $this->assertEquals($className, DomainHandlerMap::findHandler($address));
     }
 
-    public function queryProvider()
+    public function addressesProvider()
     {
         return [
-            [new Query('www.google.ru')],
-            ['www.google.ru'],
+            ['www.google.jp', Jp::class],
+            ['www.google.co.jp', Jp::class],
         ];
-    }*/
+    }
 
     /**
+     * Test that findHandler method returns null when handler not found
+     *
+     * @param $query
      * @dataProvider queryProviderNotDomain
      */
     public function testFindHandlerNotDomain($query)
@@ -32,12 +37,15 @@ class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
         $this->assertNull(DomainHandlerMap::findHandler($query));
     }
 
+    /**
+     * Missing handlers provider
+     *
+     * @return array
+     */
     public function queryProviderNotDomain()
     {
         return [
-            [new Query('212.12.212.12')],
             ['212.12.212.12'],
-            [new Query()],
         ];
     }
 }

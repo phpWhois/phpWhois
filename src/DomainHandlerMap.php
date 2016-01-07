@@ -63,29 +63,17 @@ class DomainHandlerMap
     }
 
     /**
-     * Return handler class based on domain name analysis
+     * Look for domain handler in the predefined map
      *
-     * Step 1. Look for domain in predefined map
-     * Step 2. Look for whois server on standard addresses like whois.nic.TLD
+     * @param string $address
      *
-     * @param Query|string|null $query
-     *
-     * @return HandlerBase|null
+     * @return string|null
      */
-    public static function findHandler($query = null)
+    public static function findHandler($address)
     {
-        if (!($query instanceof Query)) {
-            $query = new Query($query);
-        }
-        $address = $query->getAddress();
-
-        if ($query->getType() != Query::QTYPE_DOMAIN) {
-            return null;
-        }
-
         foreach (self::getMap() as $pattern => $class) {
             if (preg_match($pattern, $address)) {
-                return new $class($query);
+                return $class;
             }
         }
 

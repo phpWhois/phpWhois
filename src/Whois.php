@@ -38,14 +38,9 @@ class Whois
     protected $handler;
 
     /**
-     * @var Query   Query object created from given domain name
+     * @var Query   Query object created from the given domain name
      */
     protected $query;
-
-    /**
-     * @var Response    Response from custom or IANA-suggested whois server
-     */
-    protected $response;
 
     /**
      * Whois constructor.
@@ -54,11 +49,7 @@ class Whois
      */
     public function __construct($address = null)
     {
-        $this->setQuery(new Query());
-
-        if (!is_null($address)) {
-            $this->setAddress($address);
-        }
+        $this->setQuery(new Query($address));
     }
 
     /**
@@ -88,7 +79,7 @@ class Whois
     /**
      * Set address
      *
-     * @param   string  $address  Address
+     * @param string  $address  Address
      *
      * @return $this
      *
@@ -102,49 +93,38 @@ class Whois
     }
 
     /**
-     * Set Query handler
+     * Instantiate handler by the given class name
      *
-     * @param null|HandlerBase $handler  Handler for querying whois server
+     * @param string $handler Name of handler class. Must inherit HandlerBase
      *
      * @return $this
+     * @throws \InvalidArgumentException
      */
-    public function setHandler(HandlerBase $handler = null)
+    public function setHandler($handler)
     {
+        if (!class_exists($handler)) {
+            throw new \InvalidArgumentException('Specified handler class wasn\'t found');
+        }
+
+        $handler = new $handler($this->getQuery());
+
+        if (!($handler instanceof HandlerBase)) {
+            throw new \InvalidArgumentException('Handler must be an instance of phpWhois\Handler\HandlerBase');
+        }
+
         $this->handler = $handler;
 
         return $this;
     }
 
     /**
-     * Get query handler
+     * Get handler instance
      *
      * @return null|HandlerBase
      */
-    public function getHandler()
+    protected function getHandler()
     {
         return $this->handler;
-    }
-
-    /**
-     * Get response from IANA-specified whois server
-     *
-     * @param Response $response
-     *
-     * @return $this
-     */
-    protected function setResponse(Response $response)
-    {
-        $this->response = $response;
-
-        return $this;
-    }
-
-    /**
-     * @return Response
-     */
-    public function getResponse()
-    {
-        return $this->response;
     }
 
     /**
@@ -169,10 +149,10 @@ class Whois
             throw new \InvalidArgumentException('Address wasn\'t set, can\'t perform a query');
         }
 
-        // If handler is not set yet, then try to find a custom handler
+        // If handler is not set yet, try to find a custom handler
         if (!($this->getHandler() instanceof HandlerBase)) {
-            $handler = DomainHandlerMap::findHandler($this->getQuery());
-            $this->setHandler($handler);
+            $handlerClass = DomainHandlerMap::findHandler($this->getQuery()->getAddress());
+            $this->setHandler($handlerClass);
         }
 
         // If handler isn't set or custom handler doesn't have server address defined - obtain server address from IANA
@@ -187,16 +167,14 @@ class Whois
             }
 
             if (!($this->getHandler() instanceof HandlerBase)) {
-                $handler = new HandlerBase($this->query);
-                $this->setHandler($handler);
+                $this->setHandler(HandlerBase::class);
             }
 
             $this->getHandler()->setServer($serverAddress);
         }
 
         $response = $this->getHandler()->lookup();
-        $this->setResponse($response);
 
-        return $this->getResponse();
+        return $response;
     }
 }
