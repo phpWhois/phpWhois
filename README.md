@@ -86,7 +86,7 @@ Response consists of 10 blocks which were possible to extract from the raw respo
 
 phpWhois consists of classes, which can be extended with user-developed implementations
  - `\phpWhois\Provider\ProviderAbstract` - Performs connection to the whois server and fetches results. Currently implemented: WhoisServer and HttpServer
- - `\phpWhois\Handler\HandlerAbstract` - Handler defines Provider and Parser
+ - `\phpWhois\Handler\HandlerBase` - Handler defines Provider and parsing patterns
  - `\phpWhois\DomainHandlerMap` - set of custom handlers for specific domains
  - `\phpWhois\Query` - contains query for whois server, including optional query parameters
  - `\phpWhois\Response` - contains response from whois server, including raw and parsed data

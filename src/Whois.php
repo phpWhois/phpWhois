@@ -24,7 +24,6 @@ namespace phpWhois;
 
 use phpWhois\Query;
 use phpWhois\Handler\HandlerBase;
-use phpWhois\Handler\Registrar\Generic as GenericHandler;
 
 /**
  * phpWhois main class
@@ -178,7 +177,7 @@ class Whois
 
         // If handler isn't set or custom handler doesn't have server address defined - obtain server address from IANA
         if (!($this->getHandler() instanceof HandlerBase) || empty($this->getHandler()->getServer())) {
-            $ianaHandler = new GenericHandler($this->getQuery(), 'whois.iana.org');
+            $ianaHandler = new HandlerBase($this->getQuery(), 'whois.iana.org');
             $responseIana = $ianaHandler->lookup();
 
             $serverAddress = $responseIana->getByKey('whois');
@@ -188,7 +187,7 @@ class Whois
             }
 
             if (!($this->getHandler() instanceof HandlerBase)) {
-                $handler = new GenericHandler($this->query);
+                $handler = new HandlerBase($this->query);
                 $this->setHandler($handler);
             }
 

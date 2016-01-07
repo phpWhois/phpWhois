@@ -22,7 +22,6 @@
 
 namespace phpWhois\Handler;
 
-
 class Yt extends HandlerBase
 {
     protected $dateFormat = ['d/m/Y'];

@@ -73,12 +73,7 @@ class HandlerBase
     /**
      * @var string Name of whois information class provider. Class must extend ProviderAbstract
      */
-    protected $provider = WhoisServer::class;
-
-    /**
-     * @var Query
-     */
-    protected $query;
+    protected $providerClass = WhoisServer::class;
 
     /**
      * @var string Server address for the provider
@@ -86,26 +81,39 @@ class HandlerBase
     protected $server;
 
     /**
-     * @var string Raw response from whois server
+     * ***************************************************************
+     * WARNING: Variables below are not supposed to be overwritten in
+     * inherited classes
+     * ***************************************************************
      */
-    protected $raw;
-
-    /**
-     * @var array Response rows split by newline
-     */
-    protected $rows;
 
     /**
      * @var array Parsed data
      */
-    protected $parsed;
+    private $parsed;
+
+    /**
+     * @var ProviderAbstract Provider instance
+     */
+    private $provider;
+
+    /**
+     * @var Query
+     */
+    private $query;
+
+    /**
+     * @var string Raw response from whois server
+     */
+    private $raw;
+
+    /**
+     * @var array Response rows split by newline
+     */
+    private $rows;
 
     /**
      * Handler constructor
-     *
-     * Each handler must inherit this method and set provider
-     *
-     * TODO: Child constructor doesn't work well when server is set as an instance var. See Jp handler
      *
      * @param Query $query    Query for whois server
      * @param string|null $server    Whois server address
@@ -115,11 +123,11 @@ class HandlerBase
         $this->setQuery($query);
 
         // Default provider is WhoisServer
-        $provider = new $this->provider($query);
+        $provider = new $this->providerClass($query);
         if (!($provider instanceof ProviderAbstract)) {
             throw new \InvalidArgumentException('Provider class must extend phpWhois\Provider\ProviderAbstract');
         }
-        $this->setProvider(new $this->provider($query));
+        $this->setProvider($provider);
 
         if (is_null($server)) {
             $server = $this->getServer();
