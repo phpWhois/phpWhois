@@ -37,7 +37,7 @@ class HandlerBase
     /**
      * @var string[] Patterns for finding Expires field in response
      */
-    protected $patternsExpires = [
+    protected $patternExpires = [
         '/expir(e|y|es|ation)/i',
         '/renew(al)?/i',
         '/paid\-till/i',
@@ -48,7 +48,7 @@ class HandlerBase
     /**
      * @var string[] Patterns for finding Registered field in response
      */
-    protected $patternsRegistered = [
+    protected $patternRegistered = [
         '/creat(ed|ion)/i',
         '/regist(ered|ration)/i',
         '/commencement/i',
@@ -57,7 +57,7 @@ class HandlerBase
     /**
      * @var string[] Patterns for finding Updated field in response
      */
-    protected $patternsUpdated = [
+    protected $patternUpdated = [
         '/update(d)?/i',
         '/modif(y|ied|ication)/i',
         '/changed/i',
@@ -66,8 +66,30 @@ class HandlerBase
     /**
      * @var array Patterns for realizing that domain is registered
      */
-    protected $patternsStatusRegistered = [
+    protected $patternStatusRegistered = [
         '/status$/i' => '/^ok/i',
+    ];
+
+    /**
+     * @var string[] Patterns for finding name servers
+     */
+    protected $patternNServer = [
+        '/nserver/i',
+        '/name server/i'
+    ];
+
+    /**
+     * @var string[] Indicates that line is a comment
+     */
+    protected $patternComment = [
+        '/^%/i',
+    ];
+
+    /**
+     * @var string[] Row separators arranged descending by priority
+     */
+    protected $patternRowSeparator = [
+        '/(:)/i',
     ];
 
     /**
@@ -108,7 +130,7 @@ class HandlerBase
     private $raw;
 
     /**
-     * @var array Response rows split by newline
+     * @var string[] Response rows split by newline
      */
     private $rows;
 
@@ -313,31 +335,44 @@ class HandlerBase
      * Try to split row into key => value array
      *
      * @param string $row  Line to parse
-     * @param string $ignorePrefix  Don't parse rows which match the given expression, just return false
-     * @param string $splitBy Regexp for splitting the line. Method only looks for the first occurence of regexp
+     * @param string[] $splitBy Regexp for splitting the line. Method only looks for the first occurence of regexp
+     * @param string[]|null $ignorePattern  Don't parse rows which match the given expression, just return false
      * @return array|false Return key => value array if regex found, or array with just 1 element otherwise
      */
-    public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(:)/i')
+    public function splitRow($row, array $splitBy = [], array $ignorePattern = [])
     {
+
         /**
          * TODO: Trim row's custom symbols (See .JP)
          */
-        $result = false;
 
         // If ignorePrefix is not empty and row matches it - return false
-        if (!empty($ignorePrefix) && preg_match($ignorePrefix, $row)) {
-            $result = false;
-            return $result;
+        if (!count($ignorePattern)) {
+            $ignorePattern = $this->patternComment;
+        }
+        foreach ($ignorePattern as $pattern) {
+            if (preg_match($pattern, $row)) {
+                return false;
+            }
         }
 
         $row = trim($row);
-        $parts = preg_split($splitBy, $row, 2);
-        if (count($parts) == 2) {
-            $parts[1] = trim($parts[1]);
-        }
-        $result = $parts;
 
-        return $result;
+        if (!count($splitBy)) {
+            $splitBy = $this->patternRowSeparator;
+        }
+        $parts = [];
+        foreach ($splitBy as $separator) {
+            $parts = preg_split($separator, $row, 2);
+            if (count($parts) == 2) {
+                $parts[1] = trim($parts[1]);
+                // If string was split by two parts - return immediately
+                // Otherwise try another patterns
+                return $parts;
+            }
+        }
+
+        return $parts;
     }
 
     /**
@@ -415,15 +450,15 @@ class HandlerBase
         foreach ($rows as $row) {
             // Registration date
             if (!$dates['registered']) {
-                $dates['registered'] = ($this->extractDate($row, $this->patternsRegistered)) ?: $dates['registered'];
+                $dates['registered'] = ($this->extractDate($row, $this->patternRegistered)) ?: $dates['registered'];
             }
             // Expiration date
             if (!$dates['expires']) {
-                $dates['expires'] = ($this->extractDate($row, $this->patternsExpires)) ?: $dates['expires'];
+                $dates['expires'] = ($this->extractDate($row, $this->patternExpires)) ?: $dates['expires'];
             }
             // Updated date
             if (!$dates['updated']) {
-                $dates['updated'] = ($this->extractDate($row, $this->patternsUpdated, ['/>>>/i'])) ?: $dates['updated'];
+                $dates['updated'] = ($this->extractDate($row, $this->patternUpdated, ['/>>>/i'])) ?: $dates['updated'];
             }
         }
         return $dates;

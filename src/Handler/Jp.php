@@ -34,15 +34,15 @@ class Jp extends HandlerBase
 
     protected $server = 'whois.jprs.jp';
 
+    protected $patternRowSeparator = [
+        '/(\])/i',
+    ];
+
     public function __construct(Query $query)
     {
         parent::__construct($query);
 
         // Request response in English
         $this->getQuery()->addParam('/e');
-    }
-
-    public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(\])/i') {
-        return parent::splitRow($row, $ignorePrefix, $splitBy);
     }
 }

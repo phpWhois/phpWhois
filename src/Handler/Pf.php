@@ -27,5 +27,5 @@ class Pf extends HandlerBase
 {
     protected $dateFormat = ['d/m/Y'];
 
-    protected $patternsExpires = ['/Expire/i'];
+    protected $patternExpires = ['/Expire/i'];
 }

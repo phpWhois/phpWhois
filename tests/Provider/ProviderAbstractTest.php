@@ -2,7 +2,6 @@
 
 use phpWhois\Provider\ProviderAbstract;
 use phpWhois\Query;
-use phpWhois\Response;
 
 class ProviderAbstractMock extends ProviderAbstract
 {

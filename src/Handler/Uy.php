@@ -24,7 +24,7 @@ namespace phpWhois\Handler;
 
 class Uy extends HandlerBase
 {
-    protected $patternsRegistered = ['/creacion/i'];
+    protected $patternRegistered = ['/creacion/i'];
 
-    protected $patternsUpdated = ['/actualizacion/i'];
+    protected $patternUpdated = ['/actualizacion/i'];
 }

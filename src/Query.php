@@ -157,7 +157,7 @@ final class Query
     /**
      * Get params array
      *
-     * @return array|null
+     * @return string[]
      */
     public function getParams()
     {
@@ -183,7 +183,7 @@ final class Query
      */
     public function getType()
     {
-        return !is_null($this->type) ? $this->type : self::QTYPE_UNKNOWN;
+        return ($this->type) ?: self::QTYPE_UNKNOWN;
     }
 
     /**

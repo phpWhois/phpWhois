@@ -25,10 +25,9 @@ namespace phpWhois\Handler;
 
 class Sk extends HandlerBase
 {
-    protected $patternsExpires = ['/valid/i'];
+    protected $patternExpires = ['/valid/i'];
 
-    public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(\s)/i')
-    {
-        return parent::splitRow($row, $ignorePrefix, $splitBy);
-    }
+    protected $patternRowSeparator = [
+        '/(\s)/i',
+    ];
 }

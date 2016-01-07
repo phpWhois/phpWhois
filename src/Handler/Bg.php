@@ -27,5 +27,5 @@ class Bg extends HandlerBase
 {
     protected $dateFormat = ['d/m/Y H:i:s T'];
 
-    protected $patternsRegistered = ['/activated on/i'];
+    protected $patternRegistered = ['/activated on/i'];
 }
