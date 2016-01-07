@@ -23,7 +23,7 @@
 namespace phpWhois\Handler;
 
 
-class Uy extends HandlerAbstract
+class Uy extends HandlerBase
 {
     protected $patternsRegistered = ['/creacion/i'];
 

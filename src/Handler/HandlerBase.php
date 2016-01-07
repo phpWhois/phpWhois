@@ -27,13 +27,16 @@ use phpWhois\Provider\WhoisServer;
 use phpWhois\Query;
 use phpWhois\Response;
 
-abstract class HandlerAbstract
+class HandlerBase
 {
     /**
-     * @var null|array Date format in php date() format
+     * @var string[]|null Date format in php date() format
      */
     protected $dateFormat = null;
 
+    /**
+     * @var string[] Patterns for finding Expires field in response
+     */
     protected $patternsExpires = [
         '/expir(e|y|es|ation)/i',
         '/renew(al)?/i',
@@ -42,26 +45,35 @@ abstract class HandlerAbstract
         '/billeduntil/i'
     ];
 
+    /**
+     * @var string[] Patterns for finding Registered field in response
+     */
     protected $patternsRegistered = [
         '/creat(ed|ion)/i',
         '/regist(ered|ration)/i',
         '/commencement/i',
     ];
 
+    /**
+     * @var string[] Patterns for finding Updated field in response
+     */
     protected $patternsUpdated = [
         '/update(d)?/i',
         '/modif(y|ied|ication)/i',
         '/changed/i',
     ];
 
+    /**
+     * @var array Patterns for realizing that domain is registered
+     */
     protected $patternsStatusRegistered = [
         '/status$/i' => '/^ok/i',
     ];
 
     /**
-     * @var ProviderAbstract Whois information provider
+     * @var string Name of whois information class provider. Class must extend ProviderAbstract
      */
-    protected $provider;
+    protected $provider = WhoisServer::class;
 
     /**
      * @var Query
@@ -69,24 +81,25 @@ abstract class HandlerAbstract
     protected $query;
 
     /**
-     * @var Server address for the provider
+     * @var string Server address for the provider
      */
     protected $server;
 
     /**
-     * @var string  Raw response from whois server
+     * @var string Raw response from whois server
      */
     protected $raw;
 
     /**
-     * @var array   Array of response lines split by newlines
+     * @var array Response rows split by newline
      */
-    protected $lines;
+    protected $rows;
 
     /**
-     * @var array   Parsed data
+     * @var array Parsed data
      */
     protected $parsed;
+
     /**
      * Handler constructor
      *
@@ -95,19 +108,22 @@ abstract class HandlerAbstract
      * TODO: Child constructor doesn't work well when server is set as an instance var. See Jp handler
      *
      * @param Query $query    Query for whois server
-     * @param string $server    Whois server address
+     * @param string|null $server    Whois server address
      */
     public function __construct(Query $query, $server = null)
     {
         $this->setQuery($query);
 
         // Default provider is WhoisServer
-        $this->setProvider(new WhoisServer($query));
+        $provider = new $this->provider($query);
+        if (!($provider instanceof ProviderAbstract)) {
+            throw new \InvalidArgumentException('Provider class must extend phpWhois\Provider\ProviderAbstract');
+        }
+        $this->setProvider(new $this->provider($query));
 
         if (is_null($server)) {
             $server = $this->getServer();
         }
-
         $this->setServer($server);
     }
 
@@ -144,6 +160,7 @@ abstract class HandlerAbstract
      */
     public function setServer($server)
     {
+        $this->server = $server;
         $this->getProvider()->setServer($server);
 
         return $this;
@@ -151,10 +168,12 @@ abstract class HandlerAbstract
 
     /**
      * Get provider server address
+     *
+     * @return string|null
      */
     public function getServer()
     {
-        return $this->getProvider()->getServer();
+        return $this->server;
     }
 
     /**
@@ -184,7 +203,7 @@ abstract class HandlerAbstract
     /**
      * Set raw response from the whois server
      *
-     * @param $raw
+     * @param string|null $raw
      *
      * @return $this
      */
@@ -206,15 +225,15 @@ abstract class HandlerAbstract
     }
 
     /**
-     * Set response split into lines by newline
+     * Set response split into rows by newline
      *
-     * @param array $lines
+     * @param string[] $rows
      *
      * @return $this
      */
-    protected function setLines(array $lines)
+    protected function setRows(array $rows)
     {
-        $this->lines = $lines;
+        $this->rows = $rows;
 
         return $this;
     }
@@ -224,9 +243,9 @@ abstract class HandlerAbstract
      *
      * @return array
      */
-    public function getLines()
+    public function getRows()
     {
-        return $this->lines;
+        return $this->rows;
     }
 
     /**
@@ -261,27 +280,35 @@ abstract class HandlerAbstract
     public function hasData()
     {
         return $this->getQuery()->hasData()
-                && !is_null($this->getProvider());
+                && ($this->getProvider() instanceof ProviderAbstract);
     }
 
     /**
      * Split raw data response into array by newline
      *
-     * @param $raw  Raw response from whois server
+     * @param string $raw  Raw response from whois server
      *
-     * @return array
+     * @return string[]
      */
-    public function splitLines($raw = null)
+    public function splitRows($raw = null)
     {
         if (is_null($raw)) {
             $raw = $this->getRaw();
         }
 
         // Line ending could be \r\n, \r, \n
-        $lines = preg_split('/(\r\n|[\r\n])/', $raw);
-        return $lines;
+        $rows = preg_split('/(\r\n|[\r\n])/', $raw);
+        return $rows;
     }
 
+    /**
+     * Try to split row into key => value array
+     *
+     * @param string $row  Line to parse
+     * @param string $ignorePrefix  Don't parse rows which match the given expression, just return false
+     * @param string $splitBy Regexp for splitting the line. Method only looks for the first occurence of regexp
+     * @return array|false Return key => value array if regex found, or array with just 1 element otherwise
+     */
     public function splitRow($row, $ignorePrefix = '/^[%]/i', $splitBy = '/(:)/i')
     {
         /**
@@ -308,9 +335,9 @@ abstract class HandlerAbstract
     /**
      * Extract unix timestamp from the defined string
      *
-     * @param string    $date    Date
+     * @param string $date Date
      *
-     * @return int|false  Unix timestamp
+     * @return int|false Unix timestamp
      */
     protected function parseDate($date)
     {
@@ -331,9 +358,9 @@ abstract class HandlerAbstract
     /**
      * Try to extract the date from the given key and value
      *
-     * @param string    $row    Line from raw whois response
-     * @param array     $patterns       Array with patterns for matching the $key
-     * @param array     $antiPatterns   Array with patterns which $key must not match
+     * @param string $row           Line from raw whois response
+     * @param string[] $patterns       Array with patterns for matching the $key
+     * @param string[] $antiPatterns   Array with patterns which $key must not match
      *
      * @return false|int    Unix timestamp
      */
@@ -367,24 +394,24 @@ abstract class HandlerAbstract
     }
 
     /**
-     * Try to extract some useful info from the lines
+     * Try to extract `registered`, `expires` and `updated` dates from the rows
      *
-     * @param array    $rows   Rows in key => value format
+     * @param string[] $rows Rows in key => value format
      *
-     * @return array
+     * @return string[]
      */
     protected function extractDates(array $rows)
     {
         $dates = ['expires' => false, 'registered' => false, 'updated' => false];
 
         foreach ($rows as $row) {
-            // Expiration date
-            if (!$dates['expires']) {
-                $dates['expires'] = ($this->extractDate($row, $this->patternsExpires)) ?: $dates['expires'];
-            }
             // Registration date
             if (!$dates['registered']) {
                 $dates['registered'] = ($this->extractDate($row, $this->patternsRegistered)) ?: $dates['registered'];
+            }
+            // Expiration date
+            if (!$dates['expires']) {
+                $dates['expires'] = ($this->extractDate($row, $this->patternsExpires)) ?: $dates['expires'];
             }
             // Updated date
             if (!$dates['updated']) {
@@ -398,7 +425,7 @@ abstract class HandlerAbstract
      * Try to parse response into key => value array
      * WARNING: This is very dirty solution, since multiple keys will override each other
      *
-     * @param array $rows
+     * @param string[] $rows
      * @return array
      */
     protected function extractKeyValue(array $rows)
@@ -420,12 +447,12 @@ abstract class HandlerAbstract
      */
     protected function parse()
     {
-        $lines = $this->splitLines();
-        $this->setLines($lines);
+        $rows = $this->splitRows();
+        $this->setRows($rows);
 
         $parsed = [];
-        $parsed['dates'] = $this->extractDates($lines);
-        $parsed['keyValue'] = $this->extractKeyValue($lines);
+        $parsed['dates'] = $this->extractDates($rows);
+        $parsed['keyValue'] = $this->extractKeyValue($rows);
 
         $this->setParsed($parsed);
 

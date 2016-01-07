@@ -23,7 +23,7 @@
 namespace phpWhois;
 
 use phpWhois\Query;
-use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Handler\HandlerBase;
 use phpWhois\Handler\Registrar\Generic as GenericHandler;
 
 /**
@@ -34,7 +34,7 @@ use phpWhois\Handler\Registrar\Generic as GenericHandler;
 class Whois
 {
     /**
-     * @var HandlerAbstract   Handler for obtaining address whois information
+     * @var HandlerBase   Handler for obtaining address whois information
      */
     protected $handler;
 
@@ -105,11 +105,11 @@ class Whois
     /**
      * Set Query handler
      *
-     * @param null|HandlerAbstract $handler  Handler for querying whois server
+     * @param null|HandlerBase $handler  Handler for querying whois server
      *
      * @return $this
      */
-    public function setHandler(HandlerAbstract $handler = null)
+    public function setHandler(HandlerBase $handler = null)
     {
         $this->handler = $handler;
 
@@ -119,7 +119,7 @@ class Whois
     /**
      * Get query handler
      *
-     * @return null|HandlerAbstract
+     * @return null|HandlerBase
      */
     public function getHandler()
     {
@@ -171,13 +171,13 @@ class Whois
         }
 
         // If handler is not set yet, then try to find a custom handler
-        if (!($this->getHandler() instanceof HandlerAbstract)) {
+        if (!($this->getHandler() instanceof HandlerBase)) {
             $handler = DomainHandlerMap::findHandler($this->getQuery());
             $this->setHandler($handler);
         }
 
         // If handler isn't set or custom handler doesn't have server address defined - obtain server address from IANA
-        if (!($this->getHandler() instanceof HandlerAbstract) || empty($this->getHandler()->getServer())) {
+        if (!($this->getHandler() instanceof HandlerBase) || empty($this->getHandler()->getServer())) {
             $ianaHandler = new GenericHandler($this->getQuery(), 'whois.iana.org');
             $responseIana = $ianaHandler->lookup();
 
@@ -187,7 +187,7 @@ class Whois
                 throw new \InvalidArgumentException('Cannot find whois server. Consider creating custom handler with predefined server address');
             }
 
-            if (!($this->getHandler() instanceof HandlerAbstract)) {
+            if (!($this->getHandler() instanceof HandlerBase)) {
                 $handler = new GenericHandler($this->query);
                 $this->setHandler($handler);
             }

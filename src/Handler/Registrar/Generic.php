@@ -22,9 +22,9 @@
 
 namespace phpWhois\Handler\Registrar;
 
-use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Handler\HandlerBase;
 
-class Generic extends HandlerAbstract
+class Generic extends HandlerBase
 {
 
 }

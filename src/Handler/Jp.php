@@ -27,16 +27,16 @@ use phpWhois\Query;
 /**
  * TODO: strip brackets [] around keys
  */
-class Jp extends HandlerAbstract
+class Jp extends HandlerBase
 {
     // TODO: No single idea why trailing parentheses is missing but it works
     protected $dateFormat = ['Y/m/d', 'Y/m/d H:i:s (T'];
 
-    //protected $server = 'whois.jprs.jp';
+    protected $server = 'whois.jprs.jp';
 
-    public function __construct(Query $query, $server = 'whois.jprs.jp')
+    public function __construct(Query $query)
     {
-        parent::__construct($query, $server);
+        parent::__construct($query);
 
         // Request response in English
         $this->getQuery()->addParam('/e');

@@ -93,17 +93,17 @@ abstract class ProviderAbstract {
      * Perform a request
      *
      * Perform a request to the defined whois server through the established connection
-     * and write the results to Response
+     * and return raw response
      *
-     * @return $this
+     * @return string
      */
     abstract protected function performRequest();
 
     /**
-     * @param Query|null     $query
+     * @param Query     $query
      * @param string|null    $server
      */
-    public function __construct(Query $query = null, $server = null)
+    public function __construct(Query $query, $server = null)
     {
         $this->setQuery($query);
         $this->setServer($server);
@@ -132,7 +132,7 @@ abstract class ProviderAbstract {
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getServer()
     {
@@ -160,7 +160,7 @@ abstract class ProviderAbstract {
     /**
      * Get whois server port number
      *
-     * @return null|int
+     * @return int|null
      */
     public function getPort()
     {
@@ -269,7 +269,7 @@ abstract class ProviderAbstract {
     /**
      * Get connection error number
      *
-     * @return null|int
+     * @return int|null
      */
     public function getConnectionErrNo()
     {
@@ -293,7 +293,7 @@ abstract class ProviderAbstract {
     /**
      * Get connection error message as a string
      *
-     * @return null|string
+     * @return string|null
      */
     public function getConnectionErrStr()
     {
@@ -303,7 +303,7 @@ abstract class ProviderAbstract {
     /**
      * Set connection pointer
      *
-     * @param $pointer
+     * @param resource $pointer
      * @return $this
      *
      * @throws \InvalidArgumentException    if pointer is not valid
@@ -322,7 +322,7 @@ abstract class ProviderAbstract {
     /**
      * Get connection pointer
      *
-     * @return null|resource
+     * @return resource|null
      */
     protected function getConnectionPointer()
     {
@@ -371,7 +371,7 @@ abstract class ProviderAbstract {
     /**
      * Set raw query for querying whois server
      *
-     * @param $rawQuery
+     * @param string $rawQuery
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ abstract class ProviderAbstract {
     /**
      * Perform a lookup and return Response object
      *
-     * @return Response
+     * @return string
      */
     public function lookup()
     {

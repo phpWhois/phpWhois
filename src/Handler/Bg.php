@@ -23,7 +23,7 @@
 namespace phpWhois\Handler;
 
 
-class Bg extends HandlerAbstract
+class Bg extends HandlerBase
 {
     protected $dateFormat = ['d/m/Y H:i:s T'];
 

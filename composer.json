@@ -26,6 +26,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.0",
+        "ext-mbstring": "*",
         "true/punycode": "~2.0"
     },
     "require-dev": {

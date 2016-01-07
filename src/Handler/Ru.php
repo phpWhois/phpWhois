@@ -22,7 +22,7 @@
 
 namespace phpWhois\Handler;
 
-class Ru extends HandlerAbstract
+class Ru extends HandlerBase
 {
     protected $dateFormat = ['Y.m.d'];
 

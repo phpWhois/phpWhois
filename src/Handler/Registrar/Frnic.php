@@ -22,9 +22,9 @@
 
 namespace phpWhois\Handler\Registrar;
 
-use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Handler\HandlerBase;
 
-class Frnic extends HandlerAbstract
+class Frnic extends HandlerBase
 {
     protected $dateFormat = ['d/m/Y', 'd/m/Y H:i:s'];
 }

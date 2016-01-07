@@ -23,7 +23,7 @@
 namespace phpWhois\Handler;
 
 
-class Sk extends HandlerAbstract
+class Sk extends HandlerBase
 {
     protected $patternsExpires = ['/valid/i'];
 

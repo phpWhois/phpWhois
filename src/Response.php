@@ -48,7 +48,7 @@ class Response
     /**
      * Response constructor
      *
-     * @param null|Query $query
+     * @param Query|null $query
      */
     public function __construct(Query $query = null)
     {
@@ -58,7 +58,7 @@ class Response
     /**
      * Set not parsed raw response from the whois server
      *
-     * @param string  $raw
+     * @param string|null  $raw
      *
      * @return $this
      */
@@ -72,7 +72,7 @@ class Response
     /**
      * Get not parsed raw response from whois server
      *
-     * @return null|string
+     * @return string|null
      */
     public function getRaw()
     {
@@ -82,7 +82,7 @@ class Response
     /**
      * Set query
      *
-     * @param Query $query
+     * @param Query|null $query
      *
      * @return $this
      */
@@ -96,7 +96,7 @@ class Response
     /**
      * Get current query object
      *
-     * @return Query
+     * @return Query|null
      */
     public function getQuery()
     {
@@ -133,7 +133,7 @@ class Response
      *
      * @param string $key
      *
-     * @return null|string
+     * @return string|null
      */
     public function getByKey($key)
     {

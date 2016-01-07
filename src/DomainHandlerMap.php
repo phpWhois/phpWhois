@@ -23,7 +23,7 @@
 
 namespace phpWhois;
 
-use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Handler\HandlerBase;
 
 class DomainHandlerMap
 {
@@ -68,9 +68,9 @@ class DomainHandlerMap
      * Step 1. Look for domain in predefined map
      * Step 2. Look for whois server on standard addresses like whois.nic.TLD
      *
-     * @param null|string|Query $query
+     * @param Query|string|null $query
      *
-     * @return null|HandlerAbstract
+     * @return HandlerBase|null
      */
     public static function findHandler($query = null)
     {

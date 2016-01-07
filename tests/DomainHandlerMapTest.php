@@ -2,7 +2,7 @@
 
 use phpWhois\Query;
 use phpWhois\DomainHandlerMap;
-use phpWhois\Handler\HandlerAbstract;
+use phpWhois\Handler\HandlerBase;
 
 
 class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
