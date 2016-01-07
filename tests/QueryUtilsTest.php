@@ -5,19 +5,74 @@ use phpWhois\QueryUtils;
 class QueryUtilsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider validIpsProvider
+     * Test if given ipv4 address is valid
+     *
+     * @param string $ip
+     * @return string
+     * @dataProvider validIpv4Provider
      */
-    public function testValidIp($ip)
+    public function testValidIpIpv4($ip)
+    {
+        $this->assertTrue(QueryUtils::validIp($ip, 'ipv4'));
+        return $ip;
+    }
+
+    /**
+     * Provides only ipv4 valid addresses
+     *
+     * @return array
+     */
+    public function validIpv4Provider()
+    {
+        return [
+            ['123.123.123.123'],
+        ];
+    }
+
+    /**
+     * Test if given ipv6 address is valid
+     *
+     * @param string $ip
+     * @return string
+     * @dataProvider validIpv6Provider
+     */
+    public function testValidIpIpv6($ip)
+    {
+        $this->assertTrue(QueryUtils::validIp($ip, 'ipv6'));
+        return $ip;
+    }
+
+    /**
+     * Provides only ipv6 valid addresses
+     *
+     * @return array
+     */
+    public function validIpv6Provider()
+    {
+        return [
+            ['1a80:1f45::ebb:12'],
+        ];
+    }
+
+    /**
+     * Test if given ipv4 or ipv6 is valid
+     *
+     * @param string $ip
+     * @dataProvider validIpProvider
+     */
+    public function testValidIpAny($ip)
     {
         $this->assertTrue(QueryUtils::validIp($ip));
     }
 
-    public function validIpsProvider()
+    /**
+     * Provides both ipv4 and ipv6 valid addresses
+     *
+     * @return array
+     */
+    public function validIpProvider()
     {
-        return [
-            ['123.123.123.123'],
-            ['1a80:1f45::ebb:12'],
-        ];
+        return array_merge($this->validIpv4Provider(), $this->validIpv6Provider());;
     }
 
     /**
@@ -57,11 +112,11 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
             ['www.domain.space'],
             ['sub.domain.space'],
             ['www.sub.domain.space'],
-            ['domain.co.uk'],
+            ['domain.CO.uk'],
             ['www.domain.co.uk'],
             ['sub.www.domain.co.uk'],
             ['президент.рф'],
-            ['www.президент.рф'],
+            ['www.ПРЕЗИДЕНТ.рф'],
             ['xn--e1afmkfd.xn--80akhbyknj4f'],
         ];
     }
@@ -80,7 +135,6 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
             ['212.12.212.12'],
             ['domain'],
             ['domain.1com'],
-            ['domain.abcdefg'], // 7 symbols TLD
             ['domain.co.u'],
             ['xn--e1afmkfd.xn--80akhb.yknj4f'],
             ['xn--e1afmkfd.xn--80akhbyknj4f.'],

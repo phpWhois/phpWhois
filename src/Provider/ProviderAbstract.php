@@ -119,7 +119,6 @@ abstract class ProviderAbstract {
     public function setServer($server)
     {
         /**
-         * TODO: Handle ipv6 servers here as well
          * TODO: Check if server is not empty
          */
         $parts = explode(':', $server);

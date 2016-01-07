@@ -423,6 +423,7 @@ abstract class HandlerAbstract
         $lines = $this->splitLines();
         $this->setLines($lines);
 
+        $parsed = [];
         $parsed['dates'] = $this->extractDates($lines);
         $parsed['keyValue'] = $this->extractKeyValue($lines);
 

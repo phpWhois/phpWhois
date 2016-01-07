@@ -22,6 +22,7 @@
 
 namespace phpWhois;
 
+use TrueBV\Punycode;
 
 final class Query
 {
@@ -198,10 +199,11 @@ final class Query
     {
         $type = self::guessType($address);
         if ($type == self::QTYPE_DOMAIN) {
-            $punycode = new \TrueBV\Punycode();
-            $address = $punycode->encode($address);
 
-            $address = strtoupper($address);
+            $address = mb_strtolower($address, 'UTF-8');
+
+            $punycode = new Punycode();
+            $address = $punycode->encode($address);
 
             $address_nowww = preg_replace('/^www./i', '', $address);
             if (QueryUtils::validDomain($address_nowww)) {

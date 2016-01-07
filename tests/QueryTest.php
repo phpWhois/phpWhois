@@ -16,8 +16,8 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     public function domainsProvider()
     {
         return [
-            [Query::QTYPE_DOMAIN,  'www.google.com'],
-            [Query::QTYPE_DOMAIN,  'президент.рф'],
+            [Query::QTYPE_DOMAIN,  'www.GooGLe.com'],
+            [Query::QTYPE_DOMAIN,  'ПРЕЗиДЕНТ.рф'],
             [Query::QTYPE_IPV4,    '212.212.12.12'],
             [Query::QTYPE_UNKNOWN, '127.0.0.1'],
             [Query::QTYPE_IPV6,    '1a80:1f45::ebb:12'],
@@ -37,12 +37,12 @@ class QueryTest extends \PHPUnit_Framework_TestCase
     public function optimizeProvider()
     {
         return [
-            ['Help.Co.uk', 'HELP.CO.UK'],
-            ['www.help.co.uk', 'HELP.CO.UK'],
-            ['WWW.Help.co.Uk', 'HELP.CO.UK'],
-            ['WWW.SPACE', 'WWW.SPACE'],
-            ['www.co.uk', 'CO.UK'], // Sad but true
-            ['www.президент.рф', 'XN--D1ABBGF6AIIY.XN--P1AI'],
+            ['Help.Co.uk', 'help.co.uk'],
+            ['www.help.co.uk', 'help.co.uk'],
+            ['WWW.Help.co.Uk', 'help.co.uk'],
+            ['WWW.SPACE', 'www.space'],
+            ['www.co.uk', 'co.uk'], // Sad but true
+            ['wWw.ПРЕЗИДент.рФ', 'xn--d1abbgf6aiiy.xn--p1ai'],
         ];
     }
 }

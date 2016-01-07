@@ -24,6 +24,8 @@
 
 namespace phpWhois;
 
+use TrueBV\Punycode;
+
 /**
  * Utilities for parsing and validating queries
  */
@@ -104,12 +106,15 @@ class QueryUtils
      */
     public static function validDomain($domain)
     {
-        $punycode = new \TrueBV\Punycode();
+        $punycode = new Punycode();
+        /**
+         * TODO: convert domain to lowercase (If original class won't implement this)
+         */
         $domain = $punycode->encode($domain);
 
         $patterns = [
-            '/^[a-z\d\.\-]*\.[a-z]{2,6}$/i',
-            '/^[a-z\d\.\-]*\.xn--[a-z\d]{4,}$/i',
+            '/^[a-z\d\.\-]*\.[a-z]{2,63}$/i',
+            '/^[a-z\d\.\-]*\.xn--[a-z\d]{4,59}$/i',
         ];
         foreach ($patterns as $pattern) {
             if (preg_match($pattern, $domain)) {

@@ -3,3 +3,4 @@ composer.lock
 /vendor
 nbproject
 .idea
+test.php

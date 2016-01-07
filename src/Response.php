@@ -58,7 +58,7 @@ class Response
     /**
      * Set not parsed raw response from the whois server
      *
-     * @var string  $raw
+     * @param string  $raw
      *
      * @return $this
      */
@@ -131,9 +131,9 @@ class Response
      * Look for the key in the rows array
      * TODO: Search across the blocks
      *
-     * @param $key
+     * @param string $key
      *
-     * @return mixed|null
+     * @return null|string
      */
     public function getByKey($key)
     {

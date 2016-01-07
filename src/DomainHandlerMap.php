@@ -38,7 +38,7 @@ class DomainHandlerMap
         '/\.im$/i' => Handler\Im::class,
         '/\.jp$/i' => Handler\Jp::class,
         '/\.kr$/i' => Handler\Kr::class,
-        '/\.kz$/i' => Handler\Kz::class,
+        '/\.(kz|xn--80ao21a)$/i' => Handler\Kz::class, //.қаз
         '/\.pf$/i' => Handler\Pf::class,
         '/\.pl$/i' => Handler\Pl::class,
         '/\.pm$/i' => Handler\Registrar\Frnic::class,
