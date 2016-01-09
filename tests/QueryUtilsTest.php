@@ -4,6 +4,13 @@ use phpWhois\QueryUtils;
 
 class QueryUtilsTest extends \PHPUnit_Framework_TestCase
 {
+    protected $q;
+
+    protected function setUp()
+    {
+        $this->q = new QueryUtils();
+    }
+
     /**
      * Test if given ipv4 address is valid
      *
@@ -13,7 +20,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidIpIpv4($ip)
     {
-        $this->assertTrue(QueryUtils::validIp($ip, 'ipv4'));
+        $this->assertTrue($this->q->validIp($ip, 'ipv4'));
         return $ip;
     }
 
@@ -38,7 +45,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidIpIpv6($ip)
     {
-        $this->assertTrue(QueryUtils::validIp($ip, 'ipv6'));
+        $this->assertTrue($this->q->validIp($ip, 'ipv6'));
         return $ip;
     }
 
@@ -62,7 +69,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidIpAny($ip)
     {
-        $this->assertTrue(QueryUtils::validIp($ip));
+        $this->assertTrue($this->q->validIp($ip));
     }
 
     /**
@@ -80,7 +87,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidIp($ip)
     {
-        $this->assertFalse(QueryUtils::validIp($ip));
+        $this->assertFalse($this->q->validIp($ip));
     }
 
     public function invalidIpsProvider()
@@ -102,7 +109,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidDomain($domain)
     {
-        $this->assertTrue(QueryUtils::validDomain($domain));
+        $this->assertTrue($this->q->validDomain($domain));
     }
 
     public function validDomainsProvider()
@@ -126,7 +133,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidDomain($domain)
     {
-        $this->assertFalse(QueryUtils::validDomain($domain));
+        $this->assertFalse($this->q->validDomain($domain));
     }
 
     public function invalidDomainsProvider()
@@ -148,7 +155,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidAs($as)
     {
-        $this->assertTrue(QueryUtils::validAS($as));
+        $this->assertTrue($this->q->validAS($as));
     }
 
     public function validASProvider()
@@ -164,7 +171,7 @@ class QueryUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidAs($as)
     {
-        $this->assertFalse(QueryUtils::validAS($as));
+        $this->assertFalse($this->q->validAS($as));
     }
 
     public function invalidASProvider()

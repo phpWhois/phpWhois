@@ -195,16 +195,15 @@ final class Query
      *
      * @return  string  optimized address
      */
-    public static function optimizeAddress($address)
+    public function optimizeAddress($address)
     {
-        $type = self::guessType($address);
+        $type = $this->guessType($address);
         if ($type == self::QTYPE_DOMAIN) {
 
-            $punycode = new Punycode();
-            $address = $punycode->encode($address);
+            $address = (new Punycode())->encode($address);
 
             $address_nowww = preg_replace('/^www./i', '', $address);
-            if (QueryUtils::validDomain($address_nowww)) {
+            if ((new QueryUtils())->validDomain($address_nowww)) {
                 $address = $address_nowww;
             }
         }
@@ -214,19 +213,19 @@ final class Query
     /**
      * Guess address type
      *
-     * @api
-     *
      * @param   string  $address
      *
      * @return  int Query type
      */
-    public static function guessType($address)
+    public function guessType($address)
     {
-        if (QueryUtils::validIp($address, 'ipv4', false)) {
-            return (QueryUtils::validIp($address, 'ipv4')) ? self::QTYPE_IPV4 : self::QTYPE_UNKNOWN;
-        } elseif (QueryUtils::validIp($address, 'ipv6', false)) {
-            return (QueryUtils::validIp($address, 'ipv6')) ? self::QTYPE_IPV6 : self::QTYPE_UNKNOWN;
-        } elseif (QueryUtils::validDomain($address)) {
+        $q = new QueryUtils();
+
+        if ($q->validIp($address, 'ipv4', false)) {
+            return ($q->validIp($address, 'ipv4')) ? self::QTYPE_IPV4 : self::QTYPE_UNKNOWN;
+        } elseif ($q->validIp($address, 'ipv6', false)) {
+            return ($q->validIp($address, 'ipv6')) ? self::QTYPE_IPV6 : self::QTYPE_UNKNOWN;
+        } elseif ($q->validDomain($address)) {
             return self::QTYPE_DOMAIN;
         // TODO: replace with AS validator
         } elseif ($address && is_string($address) && strpos($address, '.') === false) {

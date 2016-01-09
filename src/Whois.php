@@ -49,6 +49,7 @@ class Whois
      */
     public function __construct($address = null)
     {
+        // Omitting $this->setAddress()
         $this->setQuery(new Query($address));
     }
 
@@ -95,13 +96,17 @@ class Whois
     /**
      * Instantiate handler by the given class name
      *
-     * @param string $handler Name of handler class. Must inherit HandlerBase
+     * @param string|null $handler Name of handler class. Must inherit HandlerBase
      *
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setHandler($handler)
     {
+        if (is_null($handler)) {
+            return $this;
+        }
+
         if (!class_exists($handler)) {
             throw new \InvalidArgumentException('Specified handler class wasn\'t found');
         }
@@ -151,7 +156,7 @@ class Whois
 
         // If handler is not set yet, try to find a custom handler
         if (!($this->getHandler() instanceof HandlerBase)) {
-            $handlerClass = DomainHandlerMap::findHandler($this->getQuery()->getAddress());
+            $handlerClass = (new DomainHandlerMap())->findHandler($this->getQuery()->getAddress());
             $this->setHandler($handlerClass);
         }
 

@@ -655,7 +655,7 @@ class WhoisClient
         $server = trim($server);
 
         $server = preg_replace('/\/$/', '', $server);
-        if (QueryUtils::validIpv6($server)) {
+        if ((new QueryUtils())->validIpv6($server)) {
             $result = array('host' => "[$server]");
         } else {
             $parsed = parse_url($server);

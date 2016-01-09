@@ -316,7 +316,7 @@ class HandlerBase
     /**
      * Split raw data response into array by newline
      *
-     * @param string $raw|null  Raw response from whois server
+     * @param string|null $raw Raw response from whois server
      *
      * @return string[]
      */

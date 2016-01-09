@@ -15,9 +15,14 @@ class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindHandler($address, $className)
     {
-        $this->assertEquals($className, DomainHandlerMap::findHandler($address));
+        $this->assertEquals($className, (new DomainHandlerMap)->findHandler($address));
     }
 
+    /**
+     * Addresses provider for finding handler
+     *
+     * @return array
+     */
     public function addressesProvider()
     {
         return [
@@ -34,7 +39,7 @@ class DomainHandlerMapTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindHandlerNotDomain($query)
     {
-        $this->assertNull(DomainHandlerMap::findHandler($query));
+        $this->assertNull((new DomainHandlerMap)->findHandler($query));
     }
 
     /**

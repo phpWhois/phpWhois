@@ -23,14 +23,12 @@
 
 namespace phpWhois;
 
-use phpWhois\Handler\HandlerBase;
-
 class DomainHandlerMap
 {
     /**
      * @var array   Mappings from domain name to handler class
      */
-    protected static $map = [
+    private $map = [
         '/\.bg$/i' => Handler\Bg::class,
         '/\.fr$/i' => Handler\Registrar\Frnic::class,
         '/\.hm$/i' => Handler\Hm::class,
@@ -57,9 +55,14 @@ class DomainHandlerMap
 //        '/^(?:[a-z0-9\-]+?\.){1}\.moscow$/i' => Handler\Registrar\NicRu::class,
     ];
 
-    protected static function getMap()
+    /**
+     * Return map pattern => handler
+     *
+     * @return array
+     */
+    protected function getMap()
     {
-        return self::$map;
+        return $this->map;
     }
 
     /**
@@ -69,9 +72,9 @@ class DomainHandlerMap
      *
      * @return string|null
      */
-    public static function findHandler($address)
+    public function findHandler($address)
     {
-        foreach (self::getMap() as $pattern => $class) {
+        foreach ($this->getMap() as $pattern => $class) {
             if (preg_match($pattern, $address)) {
                 return $class;
             }

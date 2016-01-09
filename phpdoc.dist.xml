@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdoc>
+    <title>phpWhois</title>
     <parser>
         <target>docs/phpdoc</target>
     </parser>

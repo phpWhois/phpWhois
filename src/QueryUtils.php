@@ -40,15 +40,15 @@ class QueryUtils
      *
      * @return boolean True if ip is valid. False otherwise
      */
-    public static function validIp($ip, $type = 'any', $strict = true)
+    public function validIp($ip, $type = 'any', $strict = true)
     {
         switch ($type) {
             case 'any':
-                return self::validIpv4($ip, $strict) || self::validIpv6($ip, $strict);
+                return $this->validIpv4($ip, $strict) || $this->validIpv6($ip, $strict);
             case 'ipv4':
-                return self::validIpv4($ip, $strict);
+                return $this->validIpv4($ip, $strict);
             case 'ipv6':
-                return self::validIpv6($ip, $strict);
+                return $this->validIpv6($ip, $strict);
         }
         return false;
     }
@@ -62,7 +62,7 @@ class QueryUtils
      *
      * @return boolean
      */
-    public static function validIpv4($ip, $strict = true)
+    public function validIpv4($ip, $strict = true)
     {
         $flags = FILTER_FLAG_IPV4;
         if ($strict) {
@@ -83,7 +83,7 @@ class QueryUtils
      *
      * @return boolean
      */
-    public static function validIpv6($ip, $strict = true)
+    public function validIpv6($ip, $strict = true)
     {
         $flags = FILTER_FLAG_IPV6;
         if ($strict) {
@@ -104,11 +104,9 @@ class QueryUtils
      *
      * @return boolean
      */
-    public static function validDomain($domain)
+    public function validDomain($domain)
     {
-        $punycode = new Punycode();
-
-        $domain = $punycode->encode($domain);
+        $domain = (new Punycode())->encode($domain);
 
         $patterns = [
             '/^[a-z\d\.\-]*\.[a-z]{2,63}$/i',
@@ -130,7 +128,7 @@ class QueryUtils
      *
      * @return boolean
      */
-    public static function validAS($as)
+    public function validAS($as)
     {
         $pattern = '/^[a-z\d\-]*$/i';
         if (preg_match($pattern, $as)) {

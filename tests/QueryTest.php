@@ -6,14 +6,28 @@ class QueryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @dataProvider domainsProvider
+     * Pass query params to constructor and see if they were assigned correctly
+     */
+    public function testConstructorWithParams()
+    {
+        $params = ['param1', 'param2'];
+        $query = new Query(null, $params);
+        $this->assertEquals($params, $query->getParams());
+    }
+    /**
+     * @dataProvider addressesProvider
      */
     public function testGuessType($type, $domain)
     {
-        $this->assertEquals($type, Query::guessType($domain));
+        $this->assertEquals($type, (new Query())->guessType($domain));
     }
 
-    public function domainsProvider()
+    /**
+     * Return addresses of all possible types
+     *
+     * @return array
+     */
+    public function addressesProvider()
     {
         return [
             [Query::QTYPE_DOMAIN,  'www.GooGLe.com'],
@@ -31,7 +45,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptimizeAddress($unoptimized, $optimized)
     {
-        $this->assertEquals($optimized, Query::optimizeAddress($unoptimized));
+        $this->assertEquals($optimized, (new Query())->optimizeAddress($unoptimized));
     }
 
     public function optimizeProvider()
