@@ -75,7 +75,7 @@ class Whois extends WhoisClient
 
         $query = trim($query);
 
-        $idn = new \idna_convert();
+        $idn = new \Mso\IdnaConvert\IdnaConvert();
 
         if ($is_utf) {
             $query = $idn->encode($query);
