@@ -631,6 +631,7 @@ $this->WHOIS_SPECIAL = array(
     'xn--mgba3a4f16a'        => 'whois.nic.ir',
     'xn--mgbaam7a8h'         => 'whois.aeda.net.ae',
     'xn--mgbab2bd'           => 'whois.bazaar.coreregistry.net',
+    'xn--mgbbh1a71e'         => 'whois.registry.in',
     'xn--mgberp4a5d4ar'      => 'whois.nic.net.sa',
     'xn--mgbx4cd0ab'         => 'whois.mynic.my',
     'xn--ngbc5azd'           => 'whois.nic.xn--ngbc5azd',
