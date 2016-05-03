@@ -350,11 +350,27 @@ class WhoisClient
 
         //echo ini_get('allow_url_fopen');
         //if (ini_get('allow_url_fopen'))
-        $lines = @file($this->query['server']);
+        // if specific source IP was requested
+        if(!empty($this->sourceIP)) {
+            $opts = array(
+                'socket' => array(
+                    'bindto' => $this->sourceIP.':0',
+                ),
+            );             
+        }
+        else {
+            $opts = array();
+        }
 
-        if (!$lines) {
+        // create the context...
+        $context = stream_context_create($opts);
+        
+        $http_raw_data = file_get_contents($this->query['server'], false , $context);
+        
+        if (!$http_raw_data) {
             return false;
         }
+        $lines = explode("\n", str_replace("\r", '', $http_raw_data));
 
         $output = '';
         $pre = '';
@@ -444,8 +460,24 @@ class WhoisClient
             // Set query status
             $this->query['status'] = 'ready';
 
+            // if specific source IP was requested
+            if(!empty($this->sourceIP)) {
+                $opts = array(
+                    'socket' => array(
+                        'bindto' => $this->sourceIP.':0',
+                    ),
+                );             
+            }
+            else {
+                $opts = array();
+            }
+
+            // create the context...
+            $context = stream_context_create($opts);   
+                
             // Connect to whois port
-            $ptr = @fsockopen($server, $port, $errno, $errstr, $this->stimeout);
+            $ptr = @stream_socket_client ($server.':'.$port, $errno, $errstr, $this->stimeout, STREAM_CLIENT_CONNECT, $context);  
+
 
             if ($ptr > 0) {
                 $this->query['status'] = 'ok';
