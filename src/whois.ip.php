@@ -87,7 +87,12 @@ class ip_handler extends WhoisClient {
             foreach ($rwdata as $line) {
                 if (!strncmp($line, 'American Registry for Internet Numbers', 38))
                     continue;
-
+                
+				if (($p = strpos($line, 'NetRange:')) !== false)
+				{
+					list($low,$high) = explode('-',str_replace(' ','',substr($line,$p+9)));
+				}
+				
                 $p = strpos($line, '(NETBLK-');
 
                 if ($p === false)
@@ -95,7 +100,11 @@ class ip_handler extends WhoisClient {
 
                 if ($p !== false) {
                     $net = strtok(substr($line, $p + 1), ') ');
-                    list($low, $high) = explode('-', str_replace(' ', '', substr($line, $p + strlen($net) + 3)));
+                    
+					if (substr($line,$p+strlen($net)+3) !== false)
+					{
+						list($low,$high) = explode('-',str_replace(' ','',substr($line,$p+strlen($net)+3)));
+					}
 
                     if (!isset($done[$net]) && $ip >= ip2long($low) && $ip <= ip2long($high)) {
                         $owner = substr($line, 0, $p - 1);
