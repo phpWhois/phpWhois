@@ -44,6 +44,9 @@ class Whois extends WhoisClient
     /** @var string Network Solutions registry server */
     public $nsiRegistry = 'whois.nsiregistry.net';
 
+    /** @var string What source IP to use when making a connection. Usefull for getting around whois rate limiting */
+    public $sourceIP = '';
+    
     const QTYPE_UNKNOWN = 0;
     const QTYPE_DOMAIN  = 1;
     const QTYPE_IPV4    = 2;
