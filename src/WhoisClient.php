@@ -222,7 +222,7 @@ class WhoisClient
                 }
             }
 
-            if (array_key_exists($this->query['server'], $this->NON_UTF8)) {
+            if (array_key_exists($this->query['server'], $this->NON_UTF8) || !mb_check_encoding($raw, 'UTF-8')) {
                 $raw = utf8_encode($raw);
             }
 
