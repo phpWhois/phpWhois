@@ -50,6 +50,7 @@ return array(
     'hu.whois-servers.net'  => 1,
     'is.whois-servers.net'  => 1,
     'pt.whois-servers.net'  => 1,
+    'whois.fi' => 1,
     'whois.interdomain.net' => 1,
     'whois.lacnic.net'      => 1,
     'whois.nicline.com'     => 1,
