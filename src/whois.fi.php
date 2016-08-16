@@ -42,7 +42,7 @@ class fi_handler {
         );
 
         $r = array();
-        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
+        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'dmy');
 
         $r['regyinfo'] = array(
             'referrer' => 'https://domain.ficora.fi/',
