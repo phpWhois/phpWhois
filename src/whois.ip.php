@@ -85,6 +85,8 @@ class ip_handler extends WhoisClient {
             $found = false;
 
             foreach ($rwdata as $line) {
+                if (strstr($line,'CIDR')){
+                }
                 if (!strncmp($line, 'American Registry for Internet Numbers', 38))
                     continue;
 
