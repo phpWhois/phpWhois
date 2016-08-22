@@ -23,7 +23,6 @@
  */
 
 namespace phpWhois;
-use Mso\IdnaConvert\IdnaConvert;
 
 /**
  * phpWhois main class
@@ -76,7 +75,7 @@ class Whois extends WhoisClient
 
         $query = trim($query);
 
-        $idn = new IdnaConvert();
+        $idn = new \idna_convert();
 
         if ($is_utf) {
             $query = $idn->encode($query);
