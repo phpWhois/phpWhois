@@ -6,28 +6,30 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy') {
+function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy')
+{
     $blocks = generic_parser_a_blocks($rawdata, $translate, $disclaimer);
 
     $ret = array();
-    if (isset($disclaimer) && is_array($disclaimer))
+    if (isset($disclaimer) && is_array($disclaimer)) {
         $ret['disclaimer'] = $disclaimer;
+    }
 
     if (empty($blocks) || !is_array($blocks['main'])) {
         $ret['registered'] = 'no';
@@ -37,27 +39,32 @@ function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $da
     $r = $blocks['main'];
     $ret['registered'] = 'yes';
 
-    while (list($key, $val) = each($contacts))
+    while (list($key, $val) = each($contacts)) {
         if (isset($r[$key])) {
-            if (is_array($r[$key]))
+            if (is_array($r[$key])) {
                 $blk = $r[$key][count($r[$key]) - 1];
-            else
+            } else {
                 $blk = $r[$key];
+            }
 
-            $blk = strtoupper(strtok($blk, ' '));
-            if (isset($blocks[$blk]))
+                    $blk = strtoupper(strtok($blk, ' '));
+            if (isset($blocks[$blk])) {
                 $ret[$val] = $blocks[$blk];
-            unset($r[$key]);
+            }
+                    unset($r[$key]);
         }
+    }
 
-    if ($main)
+    if ($main) {
         $ret[$main] = $r;
+    }
 
     format_dates($ret, $dateformat);
     return $ret;
 }
 
-function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
+function generic_parser_a_blocks($rawdata, $translate, &$disclaimer)
+{
     $r = array();
     $newblock = false;
     $hasdata = false;
@@ -70,8 +77,9 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
         $val = trim($val);
 
         if ($val != '' && ($val[0] == '%' || $val[0] == '#')) {
-            if (!$dend)
+            if (!$dend) {
                 $disclaimer[] = trim(substr($val, 1));
+            }
             continue;
         }
         if ($val == '') {
@@ -88,33 +96,35 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
         $k = trim(strtok($val, ':'));
         $v = trim(substr(strstr($val, ':'), 1));
 
-        if ($v == '')
+        if ($v == '') {
             continue;
+        }
 
         $hasdata = true;
 
         if (isset($translate[$k])) {
             $k = $translate[$k];
-            if ($k == '')
+            if ($k == '') {
                 continue;
+            }
             if (strstr($k, '.')) {
                 eval("\$block" . getvarname($k) . "=\$v;");
                 continue;
             }
-        } else
+        } else {
             $k = strtolower($k);
+        }
 
         if ($k == 'handle') {
             $v = strtok($v, ' ');
             $gkey = strtoupper($v);
         }
 
-        if (isset($block[$k]) && is_array($block[$k]))
+        if (isset($block[$k]) && is_array($block[$k])) {
             $block[$k][] = $v;
-        else
-        if (!isset($block[$k]) || $block[$k] == '')
+        } else if (!isset($block[$k]) || $block[$k] == '') {
             $block[$k] = $v;
-        else {
+        } else {
             $x = $block[$k];
             unset($block[$k]);
             $block[$k][] = $x;
@@ -122,14 +132,16 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
         }
     }
 
-    if ($hasdata)
+    if ($hasdata) {
         $blocks[$gkey] = $block;
+    }
 
     return $blocks;
 }
 
-function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasreg = true, $scanall = false) {
-    if (is_array($items) && !count($items))
+function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasreg = true, $scanall = false)
+{
+    if (is_array($items) && !count($items)) {
         $items = array(
             'Domain Name:' => 'domain.name',
             'Domain ID:' => 'domain.handle',
@@ -316,6 +328,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             'Zone Fax Number:' => 'zone.fax',
             'Zone Email:' => 'zone.email'
         );
+    }
 
     $r = '';
     $disok = true;
@@ -339,24 +352,27 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
                         $var = '$r' . getvarname($field);
                         $itm = trim(substr($val, $pos + strlen($match)));
 
-                        if ($itm != '')
+                        if ($itm != '') {
                             eval($var . '="' . str_replace('"', '\"', $itm) . '";');
+                        }
                     }
 
-                    if (!$scanall)
+                    if (!$scanall) {
                         break;
+                    }
                 }
             }
         }
     }
 
     if (empty($r)) {
-        if ($hasreg)
+        if ($hasreg) {
             $r['registered'] = 'no';
-    }
-    else {
-        if ($hasreg)
+        }
+    } else {
+        if ($hasreg) {
             $r['registered'] = 'yes';
+        }
 
         $r = format_dates($r, $dateformat);
     }
@@ -364,28 +380,33 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
     return $r;
 }
 
-function getvarname($vdef) {
+function getvarname($vdef)
+{
     $parts = explode('.', $vdef);
     $var = '';
 
-    foreach ($parts as $mn)
-        if ($mn == '')
+    foreach ($parts as $mn) {
+        if ($mn == '') {
             $var = $var . '[]';
-        else
+        } else {
             $var = $var . '["' . $mn . '"]';
+        }
+    }
 
     return $var;
 }
 
-function get_blocks($rawdata, $items, $partial_match = false, $def_block = false) {
+function get_blocks($rawdata, $items, $partial_match = false, $def_block = false)
+{
 
     $r = array();
     $endtag = '';
 
     while (list($key, $val) = each($rawdata)) {
         $val = trim($val);
-        if ($val == '')
+        if ($val == '') {
             continue;
+        }
 
         $var = $found = false;
 
@@ -417,8 +438,9 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
         }
 
         if (!$found) {
-            if (!$var && $def_block)
+            if (!$var && $def_block) {
                 $r[$def_block][] = $val;
+            }
             continue;
         }
 
@@ -429,8 +451,9 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
         while (list($key, $val) = each($rawdata)) {
             $val = trim($val);
 
-            if ($val == '' || $val == str_repeat($val[0], strlen($val)))
+            if ($val == '' || $val == str_repeat($val[0], strlen($val))) {
                 continue;
+            }
 
             $last = substr($val, -1, 1);
             /*
@@ -466,16 +489,18 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
             $block[] = $val;
         }
 
-        if (empty($block))
+        if (empty($block)) {
             continue;
+        }
 
         foreach ($items as $field => $match) {
             $pos = strpos($line, $match);
 
             if ($pos !== false) {
                 $var = getvarname(strtok($field, '#'));
-                if ($var != '[]')
+                if ($var != '[]') {
                     eval('$r' . $var . '=$block;');
+                }
             }
         }
     }
@@ -483,39 +508,49 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     return $r;
 }
 
-function easy_parser($data_str, $items, $date_format, $translate = array(), $has_org = false, $partial_match = false, $def_block = false) {
+function easy_parser($data_str, $items, $date_format, $translate = array(), $has_org = false, $partial_match = false, $def_block = false)
+{
     $r = get_blocks($data_str, $items, $partial_match, $def_block);
     $r = get_contacts($r, $translate, $has_org);
     format_dates($r, $date_format);
     return $r;
 }
 
-function get_contacts($array, $extra_items = array(), $has_org = false) {
-    if (isset($array['billing']))
+function get_contacts($array, $extra_items = array(), $has_org = false)
+{
+    if (isset($array['billing'])) {
         $array['billing'] = get_contact($array['billing'], $extra_items, $has_org);
+    }
 
-    if (isset($array['tech']))
+    if (isset($array['tech'])) {
         $array['tech'] = get_contact($array['tech'], $extra_items, $has_org);
+    }
 
-    if (isset($array['zone']))
+    if (isset($array['zone'])) {
         $array['zone'] = get_contact($array['zone'], $extra_items, $has_org);
+    }
 
-    if (isset($array['admin']))
+    if (isset($array['admin'])) {
         $array['admin'] = get_contact($array['admin'], $extra_items, $has_org);
+    }
 
-    if (isset($array['owner']))
+    if (isset($array['owner'])) {
         $array['owner'] = get_contact($array['owner'], $extra_items, $has_org);
+    }
 
-    if (isset($array['registrar']))
+    if (isset($array['registrar'])) {
         $array['registrar'] = get_contact($array['registrar'], $extra_items, $has_org);
+    }
 
     return $array;
 }
 
-function get_contact($array, $extra_items = array(), $has_org = false) {
+function get_contact($array, $extra_items = array(), $has_org = false)
+{
 
-    if (!is_array($array))
+    if (!is_array($array)) {
         return array();
+    }
 
     $items = array(
         'fax..:' => 'fax',
@@ -550,9 +585,11 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
     );
 
     if (is_array($extra_items) && count($extra_items)) {
-        foreach ($items as $match => $field)
-            if (!isset($extra_items[$match]))
+        foreach ($items as $match => $field) {
+            if (!isset($extra_items[$match])) {
                 $extra_items[$match] = $field;
+            }
+        }
         $items = $extra_items;
     }
 
@@ -566,8 +603,9 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
             while (list($match, $field) = each($items)) {
                 $pos = strpos(strtolower($val), $match);
 
-                if ($pos === false)
+                if ($pos === false) {
                     continue;
+                }
 
                 $itm = trim(substr($val, $pos + strlen($match)));
 
@@ -595,11 +633,11 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
 
                 if (strlen($phone) > 8 && !preg_match('/[0-9]{5}\-[0-9]{3}/', $phone)) {
                     if (isset($r['phone'])) {
-                        if (isset($r['fax']))
+                        if (isset($r['fax'])) {
                             continue;
+                        }
                         $r['fax'] = trim($matches[0]);
-                    }
-                    else {
+                    } else {
                         $r['phone'] = trim($matches[0]);
                     }
 
@@ -628,8 +666,9 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
                     if (!isset($r['name'])) {
                         $r['name'] = $val;
                         unset($array[$key]);
-                    } else
+                    } else {
                         $array[$key] = $val;
+                    }
 
                     $ok = true;
                 }
@@ -650,34 +689,38 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
     }
 
     if (!empty($array)) {
-        if (isset($r['address']))
+        if (isset($r['address'])) {
             $r['address'] = array_merge($r['address'], $array);
-        else
+        } else {
             $r['address'] = $array;
+        }
     }
 
     return $r;
 }
 
-function format_dates(&$res, $format = 'mdy') {
-    if (!is_array($res))
+function format_dates(&$res, $format = 'mdy')
+{
+    if (!is_array($res)) {
         return $res;
+    }
 
     foreach ($res as $key => $val) {
         if (is_array($val)) {
             if (!is_numeric($key) && ($key == 'expires' || $key == 'created' || $key == 'changed')) {
                 $d = get_date($val[0], $format);
-                if ($d)
+                if ($d) {
                     $res[$key] = $d;
-            }
-            else {
+                }
+            } else {
                 $res[$key] = format_dates($val, $format);
             }
         } else {
             if (!is_numeric($key) && ($key == 'expires' || $key == 'created' || $key == 'changed')) {
                 $d = get_date($val, $format);
-                if ($d)
+                if ($d) {
                     $res[$key] = $d;
+                }
             }
         }
     }
@@ -685,7 +728,8 @@ function format_dates(&$res, $format = 'mdy') {
     return $res;
 }
 
-function get_date($date, $format) {
+function get_date($date, $format)
+{
     $months = array('jan' => 1, 'ene' => 1, 'feb' => 2, 'mar' => 3, 'apr' => 4, 'abr' => 4,
         'may' => 5, 'jun' => 6, 'jul' => 7, 'aug' => 8, 'ago' => 8, 'sep' => 9,
         'oct' => 10, 'nov' => 11, 'dec' => 12, 'dic' => 12);
@@ -721,8 +765,9 @@ function get_date($date, $format) {
         $format = strtolower($format);
 
         for ($p = $i = 0; $p < count($parts) && $i < strlen($format); $p++) {
-            if (trim($parts[$p]) == '')
+            if (trim($parts[$p]) == '') {
                 continue;
+            }
 
             if ($format[$i] != '-') {
                 $res[$format[$i]] = $parts[$p];
@@ -731,8 +776,9 @@ function get_date($date, $format) {
         }
     }
 
-    if (!$res)
+    if (!$res) {
         return $date;
+    }
 
     $ok = false;
 
@@ -741,8 +787,9 @@ function get_date($date, $format) {
         $ok = true;
 
         while (list($key, $val) = each($res)) {
-            if ($val == '' || $key == '')
+            if ($val == '' || $key == '') {
                 continue;
+            }
 
             if (!is_numeric($val) && isset($months[substr(strtolower($val), 0, 3)])) {
                 $res[$key] = $res['m'];
@@ -766,11 +813,11 @@ function get_date($date, $format) {
         $res['d'] = $v;
     }
 
-    if ($res['y'] < 70)
+    if ($res['y'] < 70) {
         $res['y'] += 2000;
-    else
-    if ($res['y'] <= 99)
+    } else if ($res['y'] <= 99) {
         $res['y'] += 1900;
+    }
 
     return sprintf("%.4d-%02d-%02d", $res['y'], $res['m'], $res['d']);
 }

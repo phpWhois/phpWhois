@@ -230,8 +230,11 @@ class Whois extends WhoisClient
 
             // Special parameters ?
             if (isset($this->WHOIS_PARAM[$server])) {
-                $this->query['server'] = $this->query['server'] . '?' . str_replace('$', $domain,
-                        $this->WHOIS_PARAM[$server]);
+                $this->query['server'] = $this->query['server'] . '?' . str_replace(
+                    '$',
+                    $domain,
+                    $this->WHOIS_PARAM[$server]
+                );
             }
 
             $result = $this->getData('', $this->deepWhois);
