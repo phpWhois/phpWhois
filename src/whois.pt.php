@@ -55,7 +55,7 @@ class pt_handler
 
 		if (empty($r['regrinfo']['domain']['name']))
 			{
-			print_r($r['regrinfo']);
+			//print_r($r['regrinfo']);
 			$r['regrinfo']['registered'] = 'no';
 			return $r;
 			}
