@@ -118,8 +118,8 @@ class ip_handler extends WhoisClient
                                 $done[$net] = 1;
                             }
                         }
+                        $found = true;
                     }
-                    $found = true;
                 }
             }
 
