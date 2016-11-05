@@ -32,6 +32,7 @@ class fi_handler {
     function parse($data_str, $query) {
         $items = array(
             'domain.............:' => 'domain.name',
+            'domain:'              => 'domain.name',
             'created............:' => 'domain.created',
             'expires............:' => 'domain.expires',
             'status.............:' => 'domain.status',
