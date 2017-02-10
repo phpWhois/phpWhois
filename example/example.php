@@ -40,9 +40,11 @@ if (isset($_GET['query'])) {
     $query = $_GET['query'];
 
     if (!empty($_GET['output']))
+    {
         $output = $_GET['output'];
-    else
+    } else {
         $output = '';
+    }
 
     // Set to true if you want to allow proxy requests
     $allowproxy = false;
