@@ -1,0 +1,7 @@
+### Composer template
+composer.lock
+composer.phar
+/vendor/
+
+### JetBrains template
+.idea/
