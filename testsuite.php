@@ -59,7 +59,7 @@ foreach ($lines as $line)
 
 // Load previous results
 
-$fp = fopen('testsuite.txt','rt');
+$fp = @fopen('testsuite.txt','rt');
 
 if (!$fp)
 	$results = array();
@@ -68,6 +68,8 @@ else
 	$results = unserialize(fgets($fp));
 	fclose($fp);
 	}
+
+$isContinuousIntegration = !empty($argv[1]) && $argv[1] === '--ci';
 
 // Specific test ?
 
@@ -94,7 +96,7 @@ foreach ($domains as $domain)
 	if (!isset($results[$domain]))
 		{
 		print_r($result);
-		$res = get_answer("Add result for $domain");
+		$res = $isContinuousIntegration || get_answer("Add result for $domain");
 
 		if ($res)
 			{
