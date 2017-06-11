@@ -122,7 +122,7 @@ foreach ($domains as $domain)
 			if (is_array($diff))
 				{
 				print_r($diff);
-				$res = get_answer("Accept differences for $domain");
+				$res = !$isContinuousIntegration && get_answer("Accept differences for $domain");
 
 				if ($res)
 					{
