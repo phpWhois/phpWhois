@@ -8,8 +8,6 @@ php:
   - 7.0
   - 7.1
   - nightly
-  - hhvm
-  - hhvm-nightly
 
 matrix:
   fast_finish: true
@@ -17,7 +15,6 @@ matrix:
     - php
         - 7.1
         - nightly
-        - hhvm-nightly
 # faster builds on new travis containers
 sudo: false
 
