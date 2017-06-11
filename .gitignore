@@ -5,3 +5,5 @@ composer.phar
 
 ### JetBrains template
 .idea/
+
+*.phar
