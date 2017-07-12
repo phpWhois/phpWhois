@@ -31,7 +31,7 @@ require_once('whois.parser.php');
 
 class ws_handler extends WhoisClient {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'Domain Name:' => 'domain.name',
             'Registrant Name:' => 'owner.organization',

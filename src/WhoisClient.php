@@ -76,7 +76,7 @@ class WhoisClient
     );
 
     /** @var string Current release of the package */
-    public $codeVersion = null;
+    public $codeVersion;
 
     /** @var string Full code and data version string (e.g. 'Whois2.php v3.01:16') */
     public $version;
@@ -200,7 +200,7 @@ class WhoisClient
             stream_set_blocking($ptr, 0);
 
             // Send query
-            fputs($ptr, trim($query_args) . "\r\n");
+            fwrite($ptr, trim($query_args) . "\r\n");
 
             // Prepare to receive result
             $raw = '';
@@ -209,10 +209,8 @@ class WhoisClient
             $r = array($ptr);
 
             while (!feof($ptr)) {
-                if (!empty($r)) {
-                    if (stream_select($r, $null, $null, $this->stimeout)) {
-                        $raw .= fgets($ptr, $this->buffer);
-                    }
+                if (!empty($r) && stream_select($r, $null, $null, $this->stimeout)) {
+                    $raw .= fgets($ptr, $this->buffer);
                 }
 
                 if (time() - $start > $this->stimeout) {
@@ -296,7 +294,7 @@ class WhoisClient
         }
 
         // Fix/add nameserver information
-        if (method_exists($this, 'fixResult') && $this->query['tld'] != 'ip') {
+        if ($this->query['tld'] !== 'ip' && method_exists($this, 'fixResult')) {
             $this->fixResult($result, $query);
         }
 
@@ -359,7 +357,7 @@ class WhoisClient
         $output = '';
         $pre = '';
 
-        while (list($key, $val) = each($lines)) {
+        foreach ($lines as $val) {
             $val = trim($val);
 
             $pos = strpos(strtoupper($val), '<PRE>');
@@ -395,7 +393,7 @@ class WhoisClient
         $rawdata = array();
         $null = 0;
 
-        while (list($key, $val) = each($output)) {
+        foreach ($output as $val) {
             $val = trim($val);
             if ($val == '') {
                 if (++$null > 2) {
@@ -568,7 +566,7 @@ class WhoisClient
 
         reset($a2);
 
-        while (list($key, $val) = each($a2)) {
+        foreach ($a2 as $key=>$val) {
             if (isset($a1[$key])) {
                 if (is_array($val)) {
                     if ($key != 'nserver') {
@@ -607,11 +605,13 @@ class WhoisClient
             $ip = '';
 
             foreach ($parts as $p) {
-                if (substr($p, -1) == '.') {
+                if (substr($p, -1) === '.') {
                     $p = substr($p, 0, -1);
                 }
 
-                if ((ip2long($p) == -1) or (ip2long($p) === false)) {
+                $longIp = ip2long($p);
+
+                if (($longIp === -1) || ($longIp === false)) {
                     // Hostname ?
                     if ($host == '' && preg_match('/^[\w\-]+(\.[\w\-]+)+$/', $p)) {
                         $host = $p;
@@ -635,7 +635,7 @@ class WhoisClient
                 }
             }
 
-            if (substr($host, -1, 1) == '.') {
+            if (substr($host, -1, 1) === '.') {
                 $host = substr($host, 0, -1);
             }
 

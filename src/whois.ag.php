@@ -22,14 +22,15 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-if (!defined('__AG_HANDLER__'))
+if (!defined('__AG_HANDLER__')) {
     define('__AG_HANDLER__', 1);
+}
 
 require_once('whois.parser.php');
 
 class ag_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $r = array();
         $r['regrinfo'] = generic_parser_b($data_str['rawdata']);
         $r['regyinfo'] = array(
