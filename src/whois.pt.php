@@ -37,7 +37,7 @@ require_once('whois.parser.php');
 
 class pt_handler
 	{
-	function parse($data, $query)
+	public function parse($data, $query)
 		{
 		$items = array(
 					'domain.name' 		=> ' / Domain Name:',

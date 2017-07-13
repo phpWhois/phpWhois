@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class fm_handler {
 
-    function parse($data, $query) {
+    public function parse($data, $query) {
         $items = array(
             'owner' => 'Registrant',
             'admin' => 'Admin',

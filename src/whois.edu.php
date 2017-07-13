@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class edu_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'domain.name' => 'Domain name:',
             'domain.sponsor' => 'Registrar:',

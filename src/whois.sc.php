@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class sc_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $r = array();
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], array(), 'dmy');
         $r['regyinfo'] = array(

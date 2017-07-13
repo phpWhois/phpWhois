@@ -29,7 +29,7 @@ if (!defined('__AFRINIC_HANDLER__'))
 
 class afrinic_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $translate = array(
             'fax-no' => 'fax',
             'e-mail' => 'email',

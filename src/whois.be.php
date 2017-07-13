@@ -29,7 +29,7 @@ if (!defined('__BE_HANDLER__'))
 
 class be_handler {
 
-    function parse($data, $query) {
+    public function parse($data, $query) {
         $items = array(
             'domain.name' => 'Domain:',
             'domain.status' => 'Status:',

@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class name_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'REGISTRANT CONTACT INFO',
             'admin' => 'ADMINISTRATIVE CONTACT INFO',

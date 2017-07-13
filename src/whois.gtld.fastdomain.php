@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class fastdomain_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Registrant Info:',
             'admin' => 'Administrative Info:',

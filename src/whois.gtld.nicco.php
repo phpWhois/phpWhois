@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class nicco_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Holder Contact',
             'admin' => 'Admin Contact',

@@ -318,8 +318,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
 
     $r = '';
     $disok = true;
-
-    while (list($key, $val) = each($rawdata)) {
+    foreach ($rawdata as $val) {
         if (trim($val) != '') {
             if (($val[0] == '%' || $val[0] == '#') && $disok) {
                 $r['disclaimer'][] = trim(substr($val, 1));
@@ -329,8 +328,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
 
             $disok = false;
             reset($items);
-
-            while (list($match, $field) = each($items)) {
+            foreach($items as $match => $field) {
                 $pos = strpos($val, $match);
 
                 if ($pos !== false) {
@@ -339,6 +337,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
                         $itm = trim(substr($val, $pos + strlen($match)));
 
                         if ($itm != '')
+                            //todo: remove eval.
                             eval($var . '="' . str_replace('"', '\"', $itm) . '";');
                     }
 
@@ -381,7 +380,7 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     $r = array();
     $endtag = '';
 
-    while (list($key, $val) = each($rawdata)) {
+    foreach($rawdata as $val) {
         $val = trim($val);
         if ($val == '')
             continue;

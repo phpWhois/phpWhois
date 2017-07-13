@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class schlund_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'created:' => 'domain.created',
             'last-changed:' => 'domain.changed',

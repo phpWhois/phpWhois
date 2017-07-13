@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class namejuice_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Registrant Contact:',
             'admin' => 'Administrative Contact:',

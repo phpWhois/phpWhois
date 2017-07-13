@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class nz_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'domain_name:' => 'domain.name',
             'query_status:' => 'domain.status',

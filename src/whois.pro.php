@@ -29,7 +29,7 @@ if (!defined('__PRO_HANDLER__'))
 
 class pro_handler {
 
-    function parse($data, $query) {
+    public function parse($data, $query) {
         $r = array();
         $r['regrinfo'] = generic_parser_b($data['rawdata']);
         $r['regyinfo']['referrer'] = 'http://www.registrypro.pro';

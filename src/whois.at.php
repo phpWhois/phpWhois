@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class at_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $translate = array(
             'fax-no' => 'fax',
             'e-mail' => 'email',

@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class fabulous_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Domain ' . $query . ':',
             'admin' => 'Administrative contact:',

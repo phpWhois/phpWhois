@@ -29,7 +29,7 @@ require_once('whois.gtld.iana.php');
 
 class int_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $iana = new iana_handler();
         $r = array();
         $r['regrinfo'] = $iana->parse($data_str['rawdata'], $query);
