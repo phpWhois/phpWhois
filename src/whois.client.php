@@ -499,7 +499,7 @@ class WhoisClient {
 				$parts = explode('.',$wserver);
 				$hname = strtolower($parts[1]);
 
-				if (($fp = @fopen('whois.gtld.'.$hname.'.php', 'r', 1)) and fclose($fp))
+				if (file_exists('whois.gtld.'.$hname.'.php'))
 					$this->Query['handler'] = $hname;
 				}
 				

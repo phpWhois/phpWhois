@@ -1,8 +1,8 @@
 {
-    "name": "phpwhois/phpwhois",
+    "name": "Adlaran/phpwhois",
     "description": "phpWhois - library for querying whois services and parsing results. Based on phpwhois.org",
     "keywords": ["PHP","Whois","phpWhois"],
-    "homepage": "http://phpwhois.pw",
+    "homepage": "https://github.com/Adlaran/phpWhois",
     "type": "library",
     "license": "GPL-2.0",
     "authors": [
