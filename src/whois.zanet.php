@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class zanet_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'domain.name' => 'Domain Name            : ',
             'domain.created' => 'Record Created         :',
@@ -43,10 +43,10 @@ class zanet_handler {
         );
 
         // Arrange contacts ...
-
         $rawdata = array();
 
-        while (list($key, $line) = each($data_str['rawdata'])) {
+        foreach ($data_str['rawdata'] as $line) {
+
             if (strpos($line, ' Contact ') !== false) {
                 $pos = strpos($line, ':');
 
@@ -65,11 +65,13 @@ class zanet_handler {
         if (isset($r['regrinfo']['registered'])) {
             $r['regrinfo']['registered'] = 'no';
         } else {
-            if (isset($r['regrinfo']['admin']))
+            if (isset($r['regrinfo']['admin'])) {
                 $r['regrinfo']['admin'] = get_contact($r['regrinfo']['admin']);
+            }
 
-            if (isset($r['regrinfo']['tech']))
+            if (isset($r['regrinfo']['tech'])) {
                 $r['regrinfo']['tech'] = get_contact($r['regrinfo']['tech']);
+            }
         }
 
         $r['regyinfo']['referrer'] = 'http://www.za.net/'; // or http://www.za.org
@@ -77,5 +79,4 @@ class zanet_handler {
         format_dates($r, 'xmdxxy');
         return $r;
     }
-
 }

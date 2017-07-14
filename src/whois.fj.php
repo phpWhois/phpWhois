@@ -29,7 +29,7 @@ if (!defined('__FJ_HANDLER__'))
 
 class fj_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Registrant:',
             'domain.status' => 'Status:',

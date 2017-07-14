@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class enom_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner#0' => 'Registrant Contact',
             'owner#1' => 'REGISTRANT Contact:',

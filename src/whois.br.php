@@ -29,7 +29,7 @@ if (!defined('__BR_HANDLER__'))
 
 class br_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $translate = array(
             'fax-no' => 'fax',
             'e-mail' => 'email',

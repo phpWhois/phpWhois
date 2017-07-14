@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class tmagnic_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Owner Contact:',
             'admin' => 'Admin Contact',

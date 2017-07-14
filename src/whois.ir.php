@@ -34,7 +34,7 @@ require_once('whois.parser.php');
  */
 class ir_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $translate = array(
             'nic-hdl' => 'handle',
             'org' => 'organization',

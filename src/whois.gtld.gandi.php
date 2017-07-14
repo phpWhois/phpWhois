@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class gandi_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'owner-c',
             'admin' => 'admin-c',

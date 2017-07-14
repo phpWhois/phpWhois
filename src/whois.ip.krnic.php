@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class krnic_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $blocks = array(
             'owner1' => '[ Organization Information ]',
             'tech1' => '[ Technical Contact Information ]',

@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class au_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
 
         $items = array(
             'Domain Name:' => 'domain.name',

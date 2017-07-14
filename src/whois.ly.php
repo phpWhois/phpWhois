@@ -29,7 +29,7 @@ if (!defined('__LY_HANDLER__'))
 
 class ly_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'owner' => 'Registrant:',
             'admin' => 'Administrative Contact:',

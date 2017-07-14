@@ -29,7 +29,7 @@ require_once('whois.parser.php');
 
 class rrpproxy_handler {
 
-    function parse($data_str, $query) {
+    public function parse($data_str, $query) {
         $items = array(
             'created-date:' => 'domain.created',
             'updated-date:' => 'domain.changed',
