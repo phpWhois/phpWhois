@@ -1,5 +1,5 @@
 {
-    "name": "phpwhois/phpwhois",
+    "name": "idevin/phpwhois",
     "description": "phpWhois - library for querying whois services and parsing results. Based on phpwhois.org",
     "keywords": ["PHP","Whois","phpWhois"],
     "homepage": "http://phpwhois.pw",
