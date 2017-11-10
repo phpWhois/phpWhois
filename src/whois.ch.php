@@ -61,7 +61,7 @@ class ch_handler {
 
             $r['regrinfo']['registered'] = 'yes';
         } else {
-            $r = '';
+            $r = [];
             $r['regrinfo']['registered'] = 'no';
         }
 

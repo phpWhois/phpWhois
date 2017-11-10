@@ -63,7 +63,7 @@ class fm_handler {
             format_dates($r['regrinfo']['domain'], 'dmY');
         }
         else {
-            $r = '';
+            $r = [];
             $r['regrinfo']['registered'] = 'no';
         }
 
