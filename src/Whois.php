@@ -215,7 +215,7 @@ class Whois extends WhoisClient
                 }
 
                 // Regular handler exists for the tld ?
-                if (file_exists('whois.' . $htld . '.php')) {
+                if (realpath(dirname(__FILE__) . '/whois.' . $htld . '.php')) {
                     $handler = $htld;
                     break;
                 }
