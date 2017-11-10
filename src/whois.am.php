@@ -48,7 +48,7 @@ class am_handler {
             $r['regrinfo'] = get_contacts($r['regrinfo']);
             $r['regrinfo']['registered'] = 'yes';
         } else {
-            $r = '';
+            $r = [];
             $r['regrinfo']['registered'] = 'no';
         }
 

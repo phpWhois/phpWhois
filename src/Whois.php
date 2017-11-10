@@ -23,6 +23,7 @@
  */
 
 namespace phpWhois;
+use Mso\IdnaConvert\IdnaConvert;
 
 /**
  * phpWhois main class
@@ -75,7 +76,7 @@ class Whois extends WhoisClient
 
         $query = trim($query);
 
-        $idn = new \idna_convert();
+        $idn = new IdnaConvert();
 
         if ($is_utf) {
             $query = $idn->encode($query);
@@ -214,7 +215,7 @@ class Whois extends WhoisClient
                 }
 
                 // Regular handler exists for the tld ?
-                if (file_exists('whois.' . $htld . '.php')) {
+                if (realpath(dirname(__FILE__) . '/whois.' . $htld . '.php')) {
                     $handler = $htld;
                     break;
                 }
