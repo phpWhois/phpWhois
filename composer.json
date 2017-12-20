@@ -23,16 +23,17 @@
             "email": "dmitry@lukashin.ru"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "mso/idna-convert": "*"
     },
     "suggest": {
         "lib-openssl": "*"
     },
     "autoload": {
-        "files": [
-            "src/whois.main.php",
-            "src/whois.utils.php"
-        ]
+        "psr-4": {
+            "phpWhois\\": "src/"
+        }
     }
 }

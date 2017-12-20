@@ -1,17 +1,11 @@
 Introduction
 ------------
 
-This package contains a Whois (RFC954) library for PHP. It allows
-a PHP program to create a Whois object, and obtain the output of
-a whois query with the Lookup function.
+This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the `lookup` function.
 
-The response is an array containing, at least, an element 'rawdata',
-containing the raw output from the whois request.
+The response is an array containing, at least, an element 'rawdata', containing the raw output from the whois request.
 
-In addition, if the domain belongs to a registrar for which a special
-handler exists, the special handler will parse the output and make
-additional elements available in the response. The keys of these
-additional elements are described in the file HANDLERS.
+In addition, if the domain belongs to a registrar for which a special handler exists, the special handler will parse the output and make additional elements available in the response. The keys of these additional elements are described in the file HANDLERS.md.
 
 It fully supports IDNA (internationalized) domains names as
 defined in RFC3490, RFC3491, RFC3492 and RFC3454.
@@ -25,12 +19,9 @@ provided.
 Requirements
 ------------
 
-phpWhois requires PHP 4.3.0 or better with OpenSSL support to
-work properly. Without SSL support you will not be able to
-query domains which do not have a whois server but that have
-a https based whois. Also, you can run it in lower PHP versions
-but without timeout control. phpWhois will not work with PHP
-versions below 4.1.0
+phpWhois requires PHP 5.3 or better with OpenSSL support to work properly.
+
+Without SSL support you will not be able to query domains which do not have a whois server but that have a https based whois.
 
 Installation
 ------------
@@ -45,33 +36,22 @@ Installation
 
 `php composer.phar require "phpwhois/phpwhois":"dev-master"`
 
-### Download package
-
-Download latest release from Github: https://github.com/phpWhois/phpWhois/releases
-
-Basically, untar the distribution somewhere outside your server's
-document root and make sure the directory is listed in `include_path`
-in your `php.ini` file, server configuration or in an `.htaccess` file.
-If you want to test it using a web browser just copy `example.php` ,
-`example.html` and `whois.icon.png` anywhere on your server's document
-root and try it.
-
-phpWhois is not a PHP aplication is a class that can be used in
-applications. There is no need to make the installation folder
-accesible to anyone but PHP, nevertheless you can install it inside
-your server's document root if you like, it will work without
-problems or security risks.
 
 Example usage
 -------------
 
 (see `example.php`)
 ```php
-include('whois.main.php');
+// Load composer framework
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require(__DIR__ . '/vendor/autoload.php');
+}
+
+use phpWhois\Whois;
 
 $whois = new Whois();
 $query = 'example.com';
-$result = $whois->Lookup($query,false);
+$result = $whois->lookup($query,false);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
@@ -79,7 +59,7 @@ echo "</pre>";
 If you provide the domain name to query in UTF8, then you
 must use:
 ```php
-$result = $whois->Lookup($query);
+$result = $whois->lookup($query);
 ```
 If the query string is not in UTF8 then it must be in
 ISO-8859-1 or IDNA support will not work.
@@ -91,14 +71,15 @@ You can use phpWhois to query domain names, ip addresses and
 other information like AS, i.e, both of the following examples
 work:
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
-$result = $whois->Lookup('example.com');
+$result = $whois->lookup('example.com');
 
 $whois = new Whois();
-$result = $whois->Lookup('62.97.102.115');
+$result = $whois->lookup('62.97.102.115');
 
 $whois = new Whois();
-$result = $whois->Lookup('AS220');
+$result = $whois->lookup('AS220');
 ```
 Using special whois server
 --------------------------
@@ -114,9 +95,10 @@ The currently known whois services that offer special acccess are:
   available to registered gateways. If you are registered you can use
   this service when querying ripe ip addresses that way:
   ```php
+  use phpWhois\Whois;
   $whois = new Whois();
-  $whois->UseServer('uk','whois.ripe.net?-V{version},{ip} {query}');
-  $result = $whois->Lookup('62.97.102.115');
+  $whois->useServer('uk','whois.ripe.net?-V{version},{ip} {query}');
+  $result = $whois->lookup('62.97.102.115');
   ```
 
 ### whois.isoc.org.il
@@ -125,9 +107,10 @@ The currently known whois services that offer special acccess are:
   when querying `.il` domains that way:
 
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
-$whois->UseServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
-$result = $whois->Lookup('example.co.uk');
+$whois->useServer('uk','whois.isoc.org.il?-V{version},{ip} {query}');
+$result = $whois->lookup('example.co.uk');
 ```
 
 ### whois.nic.uk
@@ -138,25 +121,28 @@ $result = $whois->Lookup('example.co.uk');
   when querying .uk domains that way:
 
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
-$whois->UseServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
-$result = $whois->Lookup('example.co.uk');
+$whois->useServer('uk','whois.nic.uk:1043?{hname} {ip} {query}');
+$result = $whois->lookup('example.co.uk');
 ```
 
 This new feature also allows you to use a different whois server than
-the preconfigured or discovered one by just calling whois->UseServer
+the preconfigured or discovered one by just calling whois->useServer
 and passing the tld and the server and args to use for the named tld.
 For example you could use another whois server for `.au` domains that
 does not limit the number of requests (but provides no owner 
 information) using this:
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
-$whois->UseServer('au','whois-check.ausregistry.net.au');
+$whois->useServer('au','whois-check.ausregistry.net.au');
 ```
 or:
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
-$whois->UseServer('be','whois.tucows.com');
+$whois->useServer('be','whois.tucows.com');
 ```
 
 to avoid the restrictions imposed by the `.be` whois server
@@ -164,14 +150,15 @@ to avoid the restrictions imposed by the `.be` whois server
 or:
 
 ```php
+use phpWhois\Whois;
 $whois = new Whois();
-$whois->UseServer('ip','whois.apnic.net');
+$whois->useServer('ip','whois.apnic.net');
 ```
 
 to lookup an ip address at specific whois server (but loosing the
 ability to get the results parsed by the appropiate handler)
 
-UseServer can be called as many times as necessary. Please note that
+`useServer` can be called as many times as necessary. Please note that
 if there is a handler for that domain it will also be called but
 returned data from the whois server may be different than the data
 expected by the handler, and thus results could be different.
@@ -183,12 +170,11 @@ If you just want to know if a domain is registered or not but do not
 care about getting the real owner information you can set:
 
 ```php
-$whois->deep_whois = false;
+$whois->deepWhois = false;
 ```
 
-this will tell phpWhois to just query one whois server. For `.com`, `.net`
-and `.tv` domains and ip addresses this will prevent phpWhois to ask more
-than one whois server, you will just know if the donmain is registered
+this will tell phpWhois to just query one whois server. For `.com`, `.net` and `.tv` domains and ip addresses this will prevent phpWhois to ask more
+than one whois server, you will just know if the domain is registered
 or not and which is the registrar but not the owner information.
 
 UTF-8
@@ -198,10 +184,18 @@ PHPWhois will assume that all whois servers return UTF-8 encoded output,
 if some whois server does not return UTF-8 data, you can include it in
 the `NON_UTF8` array in `whois.servers.php`
 
+Workflow of getting domain info
+-------------------------------
+
+1. Call method `phpWhois\Whois::lookup()` with domain name as parameter
+2. If second parameter of method is **true** (default), phpWhois will try to convert the domain name to punycode
+3. If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at `src/whois.servers.php`), try to query **[tld].whois-servers.net**. If it has ip address, assume that it is valid whois server
+4. Try to query found whois server or fill response array with `unknown()` method
+
 Notes 
 -----
 
-There is an extended class called `whois.utils.php` which contains a
+There is an extended class called `phpWhois\Utils` which contains a
 debugging function called `showObject()`, if you `showObject($result)`
 it will output the total layout of the returned object to the 
 web browser.
@@ -213,14 +207,16 @@ Contributing
 ---------------
 
 If you want to add support for new TLD, extend functionality or
-correct a bug, fill free to create a new pull request on Github's
+correct a bug, feel free to create a new pull request at Github's
 repository https://github.com/phpWhois/phpWhois
 
 Credits
 -------
 
 Mark Jeftovic <markjr@easydns.com>
+
 David Saez Padros <david@ols.es>
+
 Ross Golder <ross@golder.org>
 
 Dmitry Lukashin <dmitry@lukashin.ru>

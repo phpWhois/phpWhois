@@ -8,7 +8,7 @@ namespace Whois;
 
 use PHPUnit\Framework\TestCase;
 
-require_once '../src/whois.parser.php';
+require_once __DIR__ . '/../src/whois.parser.php';
 
 /**
  * ParserTest

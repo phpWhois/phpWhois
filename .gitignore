@@ -1,7 +1,9 @@
 ### Composer template
 composer.lock
 composer.phar
-/vendor/
+/vendor
+
+nbproject
 
 ### JetBrains template
 .idea/

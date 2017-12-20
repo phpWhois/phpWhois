@@ -1,76 +1,72 @@
 <?php
-/*
-Whois.php        PHP classes to conduct whois queries
-
-Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
-
-Maintained by David Saez
-
-For the most recent version of this package visit:
-
-http://www.phpwhois.org
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+/**
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
 if (!defined('__CA_HANDLER__'))
-	define('__CA_HANDLER__', 1);
+    define('__CA_HANDLER__', 1);
 
 require_once('whois.parser.php');
 
-class ca_handler
-	{
-	function parse($data_str, $query)
-		{
-		$items = array(
-						'owner'	=> 'Registrant:',
-						'admin'	=> 'Administrative contact:',
-						'tech'	=> 'Technical contact:',
-						'domain.sponsor' => 'Registrar:',
-						'domain.nserver' => 'Name servers:',
-						'domain.status'	=> 'Domain status:',
-						'domain.created' => 'Creation date:',
-						'domain.expires' => 'Expiry date:',
-						'domain.changed' => 'Updated date:'
-						);
+class ca_handler {
 
-		$extra = array(
-						'postal address:' => 'address.0',
-						'job title:'	=> '',
-						'number:'	=> 'handle',
-						'description:'	=> 'organization'
-						);
+    function parse($data_str, $query) {
+        $items = array(
+            'owner' => 'Registrant:',
+            'admin' => 'Administrative contact:',
+            'tech' => 'Technical contact:',
+            'domain.sponsor' => 'Registrar:',
+            'domain.nserver' => 'Name servers:',
+            'domain.status' => 'Domain status:',
+            'domain.created' => 'Creation date:',
+            'domain.expires' => 'Expiry date:',
+            'domain.changed' => 'Updated date:'
+        );
 
-		$r['regrinfo'] = easy_parser($data_str['rawdata'],$items,'ymd',$extra);
+        $extra = array(
+            'postal address:' => 'address.0',
+            'job title:' => '',
+            'number:' => 'handle',
+            'description:' => 'organization'
+        );
 
-		if (!empty($r['regrinfo']['domain']['sponsor']))
-			{
-			list($v,$reg) = explode(':',$r['regrinfo']['domain']['sponsor'][0]);
-			$r['regrinfo']['domain']['sponsor'] = trim($reg);
-			}
+        $r = array();
+        $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd', $extra);
 
-		if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'available')
-			$r['regrinfo']['registered'] = 'no';
-		else
-			$r['regrinfo']['registered'] = 'yes';
+        if (!empty($r['regrinfo']['domain']['sponsor'])) {
+            list($v, $reg) = explode(':', $r['regrinfo']['domain']['sponsor'][0]);
+            $r['regrinfo']['domain']['sponsor'] = trim($reg);
+        }
 
-		$r['regyinfo'] = array(
-                  'registrar' => 'CIRA',
-                  'referrer' => 'http://www.cira.ca/'
-                  );
-		return $r;
-		}
-	}
-?>
+        if (empty($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'available')
+            $r['regrinfo']['registered'] = 'no';
+        else
+            $r['regrinfo']['registered'] = 'yes';
+
+        $r['regyinfo'] = array(
+            'registrar' => 'CIRA',
+            'referrer' => 'http://www.cira.ca/'
+        );
+        return $r;
+    }
+
+}

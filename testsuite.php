@@ -1,215 +1,193 @@
 #!/usr/local/bin/php -n
 <?php
-/*
-Whois.php        PHP classes to conduct whois queries
+/**
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @license
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ * @link http://phpwhois.pw
+ * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+ * @copyright Maintained by David Saez
+ * @copyright Copyright (c) 2014 Dmitry Lukashin
+ */
 
-Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
 
-Maintained by David Saez
-
-For the most recent version of this package visit:
-
-http://www.phpwhois.org
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+use phpWhois\Whois;
 
 // Read domain list to test
 
 $lines = file('./test.txt');
 $domains = array();
 
-foreach ($lines as $line)
-	{
-	$pos = strpos($line,'/');
+foreach ($lines as $line) {
+    $pos = strpos($line, '/');
 
-	if ($pos !== false) $line = substr($line,0,$pos);
+    if ($pos !== false)
+        $line = substr($line, 0, $pos);
 
-	$line = trim($line);
+    $line = trim($line);
 
-	if ($line == '') continue;
+    if ($line == '')
+        continue;
 
-	$parts = explode(' ',str_replace("\t",' ',$line));
-	$key = $parts[0];
+    $parts = explode(' ', str_replace("\t", ' ', $line));
+    $key = $parts[0];
 
-	for ($i=1; $i<count($parts); $i++)
-		if ($parts[$i] != '')
-			{
-			if ($key)
-				{
-				$domains[$key] = $parts[$i];
-				$key = false;
-				}
-			else
-				$domains[] = $parts[$i];
-			}
-	}
+    for ($i = 1; $i < count($parts); $i++) {
+        if ($parts[$i] != '') {
+            if ($key) {
+                $domains[$key] = $parts[$i];
+                $key = false;
+            } else {
+                $domains[] = $parts[$i];
+            }
+        }
+    }
+}
 
 // Load previous results
 
 $fp = @fopen('testsuite.txt','rt');
 
-if (!$fp)
-	$results = array();
-else
-	{
-	$results = unserialize(fgets($fp));
-	fclose($fp);
-	}
+if (!$fp) {
+    $results = array();
+} else {
+    $results = unserialize(fgets($fp));
+    fclose($fp);
+}
 
 $isContinuousIntegration = !empty($argv[1]) && $argv[1] === '--ci';
 
 // Specific test ?
 
-if (!empty($argv[1]) && isset($domains[$argv[1]]))
-	{
-	$domains = array($domains[$argv[1]]);
-	}
+if (!empty($argv[1]) && isset($domains[$argv[1]])) {
+    $domains = array($domains[$argv[1]]);
+}
 
 // Test domains
-
-include('src/whois.main.php');
 
 $whois = new Whois();
 
 set_file_buffer(STDIN, 0);
 
-foreach ($domains as $domain)
-	{
-	echo "\nTesting $domain ---------------------------------\n";
-	$result = $whois->Lookup($domain);
+foreach ($domains as $domain) {
+    echo "\nTesting $domain ---------------------------------\n";
+    $result = $whois->lookup($domain);
 
-	unset($result['rawdata']);
+    unset($result['rawdata']);
 
-	if (!isset($results[$domain]))
-		{
-		print_r($result);
-		$res = $isContinuousIntegration || get_answer("Add result for $domain");
+    if (!isset($results[$domain])) {
+        print_r($result);
+        $res = $isContinuousIntegration || get_answer("Add result for $domain");
 
-		if ($res)
-			{
-			// Add as it is
-			unset($result['regrinfo']['disclaimer']);
-			$results[$domain] = $result;
-			save_results();
-			}
+        if ($res) {
+            // Add as it is
+            unset($result['regrinfo']['disclaimer']);
+            $results[$domain] = $result;
+            save_results();
+            }
+    } else {
+        // Compare with previous result
+        unset($result['regrinfo']['disclaimer']);
+        unset($results[$domain]['regrinfo']['disclaimer']);
 
-		}
-	else
-		{
-		// Compare with previous result
-		unset($result['regrinfo']['disclaimer']);
-		unset($results[$domain]['regrinfo']['disclaimer']);
+        if (empty($result)) {
+            echo "!! empty result\n";
+        } else {
+            $diff = array_diff_assoc_recursive($result, $results[$domain]);
 
-		if (empty($result))
-			echo "!! empty result\n";
-		else
-			{
-			$diff = array_diff_assoc_recursive($result,$results[$domain]);
+            if (is_array($diff)) {
+                print_r($diff);
+                $res = !$isContinuousIntegration && get_answer("Accept differences for $domain");
 
-			if (is_array($diff))
-				{
-				print_r($diff);
-				$res = !$isContinuousIntegration && get_answer("Accept differences for $domain");
-
-				if ($res)
-					{
-					// Add as it is
-					$results[$domain] = $result;
-					save_results();
-					}
-				}
-			else
-				echo "Handler for domain $domain gives same results as before ...\n";
-			}
-		}
-	}
+                if ($res) {
+                    // Add as it is
+                    $results[$domain] = $result;
+                    save_results();
+                }
+            } else {
+                echo "Handler for domain $domain gives same results as before ...\n";
+            }
+        }
+    }
+}
 
 save_results();
 
 //--------------------------------------------------------------------------
 
-function save_results()
-{
-global $results;
+function save_results() {
+    global $results;
 
-$fp = fopen('testsuite.txt','wt');
-fputs($fp, serialize($results));
-fclose($fp);
+    $fp = fopen('testsuite.txt', 'wt');
+    fputs($fp, serialize($results));
+    fclose($fp);
 }
 
 //--------------------------------------------------------------------------
 
-function get_answer($question)
-{
-echo "\n------ $question ? (y/n/a/c) ";
+function get_answer($question) {
+    echo "\n------ $question ? (y/n/a/c) ";
 
-while (true)
-	{
-	$res = trim(fgetc(STDIN));
+    while (true) {
+        $res = trim(fgetc(STDIN));
 
-	if ($res=='a') exit();
+        if ($res == 'a')
+            exit();
 
-	if ($res=='c')
-		{
-		save_results();
-		exit();
-		}
-	if ($res=='y') return true;
-	if ($res=='n') return false;
-	}
+        if ($res == 'c') {
+            save_results();
+            exit();
+        }
+        if ($res == 'y')
+            return true;
+        if ($res == 'n')
+            return false;
+    }
 }
 
 //--------------------------------------------------------------------------
 
 function array_diff_assoc_recursive($array1, $array2)
 {
-foreach($array1 as $key => $value)
-	{
-	if (is_array($value))
-		{
-		if (!is_array($array2[$key] ?? ''))
-			{
-			$difference[$key] = array( 'previous' => $array2[$key] ?? '', 'actual' => $value);
-			}
-		else
-			{
-			$new_diff = array_diff_assoc_recursive($value, $array2[$key]);
+    foreach ($array1 as $key => $value) {
+        if (is_array($value)) {
+            if (!is_array($array2[$key] ?? '')) {
+                $difference[$key] = ['previous' => $array2[$key] ?? '', 'actual' => $value];
+            } else {
+                $new_diff = array_diff_assoc_recursive($value, $array2[$key]);
 
-			if ($new_diff != false)
-				{
-				$difference[$key] = $new_diff;
-				}
-			}
-		}
-	else
-		if (!isset($array2[$key]) || $array2[$key] != $value)
-			{
-			$difference[$key] = array( 'previous' => $array2[$key] ?? '', 'actual' => $value);
-			}
-	}
+                if ($new_diff != false) {
+                    $difference[$key] = $new_diff;
+                }
+            }
+        } else if (!isset($array2[$key]) || $array2[$key] != $value) {
+            $difference[$key] = ['previous' => $array2[$key] ?? '', 'actual' => $value];
+        }
+    }
 
-// Search missing items
+    // Search missing items
 
-foreach($array2 as $key => $value)
-	{
-	if (!isset($array1[$key]))
-		$difference[$key] = array( 'previous' => $value, 'actual' => '(missing)');
-	}
+    foreach ($array2 as $key => $value) {
+        if (!isset($array1[$key])) {
+            $difference[$key] = ['previous' => $value, 'actual' => '(missing)'];
+        }
+    }
 
-return !isset($difference) ? false : $difference;
+    return !isset($difference) ? false : $difference;
 }
-
-?>

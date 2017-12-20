@@ -13,20 +13,20 @@ Common Object Model
 -------------------
 
 The keys that you could find in the result array returned by phpWhois
-are 'rawdata' , 'regyinfo' and 'regrinfo'. 
+are **rawdata**, **regyinfo** and **regrinfo**. 
 
-rawdata is always returned as it's filled by phpWhois itself. It
+**rawdata** is always returned as it's filled by phpWhois itself. It
 contains the raw text output returned by the whois server.
 
-regyinfo contains information about the registry who returned that
-information. It has four subkeys: 'servers' which is an array with
-one entry for each whois server who returned the data, 'referrer' the
-web address of the registry, 'registar' the company name of the registry
-and 'type' which can be 'domain', 'ip' or 'AS'. The 'servers' array
-has subkeys 'server' the whois server, 'port' the whois server port and
-'args' the query sent to the server.
+**regyinfo** contains information about the registry who returned that
+information. It has four subkeys: `servers` which is an array with
+one entry for each whois server who returned the data, `referrer` the
+web address of the registry, `registar` the company name of the registry
+and `type` which can be **domain**, **ip** or **AS**. The `servers` array
+has subkeys **server** the whois server, **port** the whois server port and
+**args** the query sent to the server.
 
-regrinfo holds the information about the domain itself. It could have
+**regrinfo** holds the information about the domain itself. It could have
 the following subkeys:
 
 	disclaimer
@@ -80,13 +80,11 @@ the following subkeys:
 
 	AS
 	--
-
-	Only when dealing with Autonomus systems, could contain
+	Only when dealing with Autonomous systems, could contain
 	the same subkeys as network.
 
 	owner,admin,tech,zone,billing,abuse
 	-----------------------------------
-
 	All of these possible keys hold information about the different
 	contacts of the domain or ip address. They all could have the
 	same subkeys, that are:
@@ -133,7 +131,7 @@ Writing handlers is easy, just look at how some of them are coded.
 If you write a new handler, please try to map as many as possible
 returned data to keys defined by the 'Common Object Model'. You can
 create new keys if need, but please do not do create new keys where
-existing predefined keys exists. Nevertheless all handlers submited
+existing predefined keys exists. Nevertheless all handlers submitted
 will be checked before they are added to phpWhois distribution. 
 
 If some tld needs special parameters or can be queried in
@@ -146,8 +144,8 @@ code. The handler must also define __XX_HANDLER__ and implement
 a class named xx_handler with a function named parse that takes
 two arguments: $data_str and $query. $data_str['rawdata']
 contains the raw output of the query and is what need to be parsed
-in order to generate the Common Object Model. $query contains
-the domain, ip adrress or AS that it's being queried. That function
+in order to generate the Common Object Model. `$query` contains
+the domain, ip address or AS that it's being queried. That function
 must return an array with any available result in the format defined
 by this document. Country handlers need not to be defined in
 the file whois.servers.php, only when you want to use some handler
@@ -168,7 +166,7 @@ Some useful utility functions have been written to aid in developing
 handlers. They are contained in whois.parser.php. Almost all handlers
 use functions provided by that file. You can see how they work by
 looking into the code. You also have a handler.template.php file
-with the squeleton of a handler.
+with the skeleton of a handler.
 
 Please try to mimic the coding style of the other handlers, as this
 will make it easier for other people to understand and maintain.
