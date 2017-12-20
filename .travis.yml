@@ -9,8 +9,6 @@ php:
 matrix:
   fast_finish: true
   allow_failures:
-    - php: 7.1
-    - php: 7.2
     - php: nightly
 
 # faster builds on new travis containers
@@ -22,7 +20,7 @@ install:
 
 script:
   - php testsuite.php --ci
-#  - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
 
 after_script:
   - travis_retry wget https://scrutinizer-ci.com/ocular.phar
