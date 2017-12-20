@@ -28,7 +28,7 @@ class am_handler
 			}
 		else
 			{
-			$r = '';
+			$r = [];
 			$r['regrinfo']['registered'] = 'no';
 			}
 

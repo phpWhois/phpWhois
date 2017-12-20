@@ -58,7 +58,7 @@ class ly_handler
 			}
 		else
 			{
-			$r = '';
+			$r = [];
 			$r['regrinfo']['registered'] = 'no';
 			}
 
