@@ -180,9 +180,9 @@ foreach($array1 as $key => $value)
 	{
 	if (is_array($value))
 		{
-		if (!is_array($array2[$key]))
+		if (!is_array($array2[$key] ?? ''))
 			{
-			$difference[$key] = array( 'previous' => $array2[$key], 'actual' => $value);
+			$difference[$key] = array( 'previous' => $array2[$key] ?? '', 'actual' => $value);
 			}
 		else
 			{
@@ -197,7 +197,7 @@ foreach($array1 as $key => $value)
 	else
 		if (!isset($array2[$key]) || $array2[$key] != $value)
 			{
-			$difference[$key] = array( 'previous' => $array2[$key], 'actual' => $value);
+			$difference[$key] = array( 'previous' => $array2[$key] ?? '', 'actual' => $value);
 			}
 	}
 
