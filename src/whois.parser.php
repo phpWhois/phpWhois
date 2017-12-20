@@ -796,19 +796,15 @@ function get_date($date, $format)
         $date = implode(' ', $parts);
     }
 
-    $date = str_replace(',', ' ', trim($date));
-    $date = str_replace('.', ' ', $date);
-    $date = str_replace('-', ' ', $date);
-    $date = str_replace('/', ' ', $date);
-    $date = str_replace("\t", ' ', $date);
+    $date = str_replace([',', '.', '-', '/', "\t"], ' ', trim($date));
 
     $parts = explode(' ', $date);
-    $res   = false;
+    $res   = [];
 
-    if ((strlen($parts[0]) == 8 || count($parts) == 1) && is_numeric($parts[0])) {
+    if ((strlen($parts[0]) === 8 || count($parts) === 1) && is_numeric($parts[0])) {
         $val = $parts[0];
         for ($p = $i = 0; $i < 3; $i++) {
-            if ($format[$i] != 'Y') {
+            if ($format[$i] !== 'Y') {
                 $res[$format[$i]] = substr($val, $p, 2);
                 $p                += 2;
             } else {
@@ -820,11 +816,11 @@ function get_date($date, $format)
         $format = strtolower($format);
 
         for ($p = $i = 0; $p < count($parts) && $i < strlen($format); $p++) {
-            if (trim($parts[$p]) == '') {
+            if (trim($parts[$p]) === '') {
                 continue;
             }
 
-            if ($format[$i] != '-') {
+            if ($format[$i] !== '-') {
                 $res[$format[$i]] = $parts[$p];
             }
             $i++;
@@ -838,22 +834,21 @@ function get_date($date, $format)
     $ok = false;
 
     while (!$ok) {
-        reset($res);
         $ok = true;
 
-        while (list($key, $val) = each($res)) {
-            if ($val == '' || $key == '') {
+        foreach ($res as $key => $val) {
+            if ($val === '' || $key === '') {
                 continue;
             }
 
-            if (!is_numeric($val) && isset($months[substr(strtolower($val), 0, 3)])) {
+            if (!is_numeric($val) && isset($months[strtolower(substr($val, 0, 3))])) {
                 $res[$key] = $res['m'];
-                $res['m']  = $months[substr(strtolower($val), 0, 3)];
+                $res['m']  = $months[strtolower(substr($val, 0, 3))];
                 $ok        = false;
                 break;
             }
 
-            if ($key != 'y' && $key != 'Y' && $val > 1900) {
+            if ($key !== 'y' && $key !== 'Y' && $val > 1900) {
                 $res[$key] = $res['y'];
                 $res['y']  = $val;
                 $ok        = false;
@@ -874,7 +869,5 @@ function get_date($date, $format)
         $res['y'] += 1900;
     }
 
-    return sprintf("%.4d-%02d-%02d", $res['y'], $res['m'], $res['d']);
+    return sprintf('%.4d-%02d-%02d', $res['y'], $res['m'], $res['d']);
 }
-
-?>
