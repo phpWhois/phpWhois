@@ -23,10 +23,12 @@
             "email": "dmitry@lukashin.ru"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0",
-        "mso/idna-convert": "*"
+        "mso/idna-convert": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
     },
     "suggest": {
         "lib-openssl": "*"
