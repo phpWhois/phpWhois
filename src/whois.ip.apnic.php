@@ -67,18 +67,21 @@ class apnic_handler {
 
             $r['registered'] = 'yes';
 
-            while (list($key, $val) = each($contacts))
+            foreach ($contacts as $key => $val) {
                 if (isset($rb[$key])) {
-                    if (is_array($rb[$key]))
+                    if (is_array($rb[$key])) {
                         $blk = $rb[$key][count($rb[$key]) - 1];
-                    else
+                    } else {
                         $blk = $rb[$key];
+                    }
 
                     //$blk = strtoupper(strtok($blk,' '));
-                    if (isset($blocks[$blk]))
+                    if (isset($blocks[$blk])) {
                         $r[$val] = $blocks[$blk];
+                    }
                     unset($rb[$key]);
                 }
+            }
 
             $r['network'] = $rb;
             format_dates($r, 'Ymd');

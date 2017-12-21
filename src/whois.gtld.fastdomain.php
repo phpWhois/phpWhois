@@ -44,7 +44,7 @@ class fastdomain_handler {
             'domain.status' => 'Status:'
         );
 
-        while (list($key, $val) = each($data_str)) {
+        foreach ($data_str as $key => $val) {
             $faststr = strpos($val, ' (FAST-');
             if ($faststr)
                 $data_str[$key] = substr($val, 0, $faststr);
@@ -56,10 +56,8 @@ class fastdomain_handler {
             $r['domain']['sponsor'] = $r['domain']['sponsor'][0];
 
         if (isset($r['domain']['nserver'])) {
-            reset($r['domain']['nserver']);
-
-            while (list($key, $val) = each($r['domain']['nserver'])) {
-                if ($val == '=-=-=-=')
+            foreach ($$r['domain']['nserver'] as $key => $val) {
+                if ($val === '=-=-=-=')
                     unset($r['domain']['nserver'][$key]);
             }
         }

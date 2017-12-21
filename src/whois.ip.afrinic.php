@@ -55,7 +55,7 @@ class afrinic_handler {
         }
 
         if (isset($r['owner']['remarks']) && is_array($r['owner']['remarks']))
-            while (list($key, $val) = each($r['owner']['remarks'])) {
+            foreach ($r['owner']['remarks'] as $val) {
                 $pos = strpos($val, 'rwhois://');
 
                 if ($pos !== false)

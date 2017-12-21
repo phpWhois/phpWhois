@@ -45,8 +45,7 @@ class zanet_handler {
         // Arrange contacts ...
 
         $rawdata = array();
-
-        while (list($key, $line) = each($data_str['rawdata'])) {
+        foreach ($data_str['rawdata'] as $line) {
             if (strpos($line, ' Contact ') !== false) {
                 $pos = strpos($line, ':');
 

@@ -56,7 +56,7 @@ class at_handler {
             unset($reg['domain']['remarks']);
 
         if (isset($reg['domain']['descr'])) {
-            while (list($key, $val) = each($reg['domain']['descr'])) {
+            foreach ($reg['domain']['descr'] as $key => $val) {
                 $v = trim(substr(strstr($val, ':'), 1));
                 if (strstr($val, '[organization]:')) {
                     $reg['owner']['organization'] = $v;
@@ -78,8 +78,7 @@ class at_handler {
                 $reg['owner']['address'][$key] = $v;
             }
 
-            if (isset($reg['domain']['descr']))
-                unset($reg['domain']['descr']);
+            unset($reg['domain']['descr']);
         }
 
         $r = array();
