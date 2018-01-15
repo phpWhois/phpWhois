@@ -22,8 +22,9 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-if (!defined('__GTLD_HANDLER__'))
+if (!defined('__GTLD_HANDLER__')) {
     define('__GTLD_HANDLER__', 1);
+}
 
 use phpWhois\WhoisClient;
 
@@ -61,17 +62,18 @@ class gtld_handler extends WhoisClient {
             return $this->result;
         }
 
-        if ($this->deepWhois)
+        if ($this->deepWhois) {
             $this->result = $this->deepWhois($query, $this->result);
+        }
 
         // Next server could fail to return data
-        if (empty($this->result['rawdata']) || count($this->result['rawdata']) < 3)
+        if (empty($this->result['rawdata']) || count($this->result['rawdata']) < 3) {
             $this->result['rawdata'] = $data['rawdata'];
+        }
 
         // Domain is registered no matter what next server says
         $this->result['regrinfo']['registered'] = 'yes';
 
         return $this->result;
     }
-
 }
