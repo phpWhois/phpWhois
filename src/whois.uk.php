@@ -30,6 +30,21 @@ require_once 'whois.parser.php';
 
 class uk_handler
 {
+    const ITEMS = [
+        'owner.organization' => 'Registrant:',
+        'owner.address'      => "Registrant's address:",
+        'owner.type'         => 'Registrant type:',
+        'domain.created'     => 'Registered on:',
+        'domain.changed'     => 'Last updated:',
+        'domain.expires'     => 'Expiry date:',
+        'domain.nserver'     => 'Name servers:',
+        'domain.sponsor'     => 'Registrar:',
+        'domain.status'      => 'Registration status:',
+        'domain.dnssec'      => 'DNSSEC:',
+        ''                   => 'WHOIS lookup made at',
+        'disclaimer'         => '--',
+    ];
+
     /**
      * @param array  $data_str
      * @param string $query
@@ -38,23 +53,8 @@ class uk_handler
      */
     public function parse($data_str, $query)
     {
-        $items = [
-            'owner.organization' => 'Registrant:',
-            'owner.address'      => "Registrant's address:",
-            'owner.type'         => 'Registrant type:',
-            'domain.created'     => 'Registered on:',
-            'domain.changed'     => 'Last updated:',
-            'domain.expires'     => 'Expiry date:',
-            'domain.nserver'     => 'Name servers:',
-            'domain.sponsor'     => 'Registrar:',
-            'domain.status'      => 'Registration status:',
-            'domain.dnssec'      => 'DNSSEC:',
-            ''                   => 'WHOIS lookup made at',
-            'disclaimer'         => '--',
-        ];
-
         $r             = [];
-        $r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
+        $r['regrinfo'] = get_blocks($data_str['rawdata'], static::ITEMS);
 
         if (isset($r['regrinfo']['owner'])) {
             $r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
