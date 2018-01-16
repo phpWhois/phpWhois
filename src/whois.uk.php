@@ -76,6 +76,10 @@ class uk_handler
             'registrar' => 'Nominet UK',
         ];
 
+        if (!array_key_exists('rawdata', $r) && array_key_exists('rawdata', $data_str)) {
+            $r['rawdata'] = $data_str['rawdata'];
+        }
+
         return $r;
     }
 }

@@ -61,7 +61,7 @@ class UkHandlerTest extends HandlerTest
 
         $expected = [
             'domain'     => [
-                'name'    => 'vibrantdigitalfuture.uk',
+                // 'name'    => 'vibrantdigitalfuture.uk',
                 'changed' => '2017-07-28',
                 'created' => '2016-07-27',
                 'expires' => '2018-07-27',
