@@ -1,7 +1,11 @@
 {
     "name": "phpwhois/phpwhois",
     "description": "phpWhois - library for querying whois services and parsing results. Based on phpwhois.org",
-    "keywords": ["PHP","Whois","phpWhois"],
+    "keywords": [
+        "PHP",
+        "Whois",
+        "phpWhois"
+    ],
     "homepage": "http://phpwhois.pw",
     "type": "library",
     "license": "GPL-2.0",
@@ -37,5 +41,11 @@
         "psr-4": {
             "phpWhois\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "src/",
+            "tests/"
+        ]
     }
 }
