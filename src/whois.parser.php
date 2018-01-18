@@ -396,7 +396,9 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     $r = array();
     $endtag = '';
 
-    foreach ($rawdata as $key => $val) {
+    while ($val = current($rawdata)) {
+        next($rawdata);
+        
         $val = trim($val);
         if ($val == '')
             continue;
@@ -440,7 +442,9 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
 
         // Block found, get data ...
 
-        foreach ($rawdata as $val) {
+        while ($val = current($rawdata)) {
+            next($rawdata);
+            
             $val = trim($val);
 
             if ($val == '' || $val == str_repeat($val[0], strlen($val)))
