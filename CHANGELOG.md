@@ -1,6 +1,11 @@
-5.0
----
+5.0.0 - 2017-12-21
+------------------
 * Disable support for non ICANN domains (Used new.net doesn't exist anymore)
+* Configure TravisCI
+* Eliminate PHP 4 constructors
+* PHP 7.1 compatibility
+* Fix inaccurate date formats for various TLDs
+* Add additional parse strings for domain.sponsor, domain.changed, and domain.expires
 
 v4.2.5
 ------
