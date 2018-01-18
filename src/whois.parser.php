@@ -391,6 +391,14 @@ function getvarname($vdef) {
     return $var;
 }
 
+/**
+ * @param string[] $rawdata
+ * @param string[] $items
+ * @param bool     $partial_match
+ * @param bool     $def_block
+ *
+ * @return array
+ */
 function get_blocks($rawdata, $items, $partial_match = false, $def_block = false) {
 
     $r = array();
