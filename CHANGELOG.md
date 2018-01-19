@@ -1,3 +1,9 @@
+5.0.1 - 2018-01-18
+------------------
+* Correctly retrieve expiration date in GTLD handler
+* Fix retrieval of .uk expiry date
+* Replace broken foreach() construct in get_blocks()
+
 5.0.0 - 2017-12-21
 ------------------
 * Disable support for non ICANN domains (Used new.net doesn't exist anymore)
