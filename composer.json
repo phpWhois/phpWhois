@@ -8,7 +8,7 @@
     ],
     "homepage": "http://phpwhois.pw",
     "type": "library",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Mark Jeftovic",
@@ -47,5 +47,8 @@
             "src/",
             "tests/"
         ]
+    },
+    "config": {
+        "sort-packages": true
     }
 }
