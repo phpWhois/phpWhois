@@ -11,12 +11,20 @@ matrix:
   allow_failures:
     - php: nightly
 
+env:
+  matrix:
+    - PREFER_LOWEST="--prefer-lowest --prefer-stable"
+    - PREFER_LOWEST=""
+
 # faster builds on new travis containers
 sudo: false
 
 install:
   - composer self-update && composer --version
-  - composer install --prefer-dist
+
+before_script:
+  - composer validate --no-check-all --strict
+  - composer update $PREFER_LOWEST
 
 script:
   - php testsuite.php --ci
