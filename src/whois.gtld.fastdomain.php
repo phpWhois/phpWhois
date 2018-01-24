@@ -56,7 +56,7 @@ class fastdomain_handler {
             $r['domain']['sponsor'] = $r['domain']['sponsor'][0];
 
         if (isset($r['domain']['nserver'])) {
-            foreach ($$r['domain']['nserver'] as $key => $val) {
+            foreach (${$r['domain']['nserver']} as $key => $val) {
                 if ($val === '=-=-=-=')
                     unset($r['domain']['nserver'][$key]);
             }
