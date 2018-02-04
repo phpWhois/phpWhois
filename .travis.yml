@@ -24,7 +24,7 @@ install:
 
 before_script:
   - composer validate --no-check-all --strict
-  - composer update $PREFER_LOWEST
+  - composer update --ignore-platform-reqs $PREFER_LOWEST
 
 script:
   - php testsuite.php --ci

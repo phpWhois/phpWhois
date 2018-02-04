@@ -1,6 +1,6 @@
 {
-    "name": "phpwhois/phpwhois",
-    "description": "phpWhois - library for querying whois services and parsing results. Based on phpwhois.org",
+    "name": "jsmitty12/phpwhois",
+    "description": "phpWhois - library for querying whois services and parsing results.",
     "keywords": [
         "PHP",
         "Whois",
@@ -25,10 +25,14 @@
         {
             "name": "Dmitry Lukashin",
             "email": "dmitry@lukashin.ru"
+        },
+        {
+            "name": "Joshua Smith",
+            "email": "jsmith@jssm.com"
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": "7.0.*|7.1.*|7.2.*",
         "mso/idna-convert": "^1.1"
     },
     "require-dev": {
@@ -50,5 +54,8 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "replace": {
+        "phpwhois/phpwhois": "4.2.*"
     }
 }
