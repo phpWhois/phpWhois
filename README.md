@@ -1,27 +1,33 @@
 Introduction
 ------------
 
-This package contains a Whois (RFC954) library for PHP. It allows a PHP program to create a Whois object, and obtain the output of a whois query with the `lookup` function.
+This package contains a Whois (RFC954) library for PHP. It allows a PHP program
+to create a Whois object, and obtain the output of a whois query with the
+`lookup` function.
 
-The response is an array containing, at least, an element 'rawdata', containing the raw output from the whois request.
+The response is an array containing, at least, an element 'rawdata', containing
+the raw output from the whois request.
 
-In addition, if the domain belongs to a registrar for which a special handler exists, the special handler will parse the output and make additional elements available in the response. The keys of these additional elements are described in the file HANDLERS.md.
+In addition, if the domain belongs to a registrar for which a special handler
+exists, the special handler will parse the output and make additional elements
+available in the response. The keys of these additional elements are described
+in the file HANDLERS.md.
 
-It fully supports IDNA (internationalized) domains names as
-defined in RFC3490, RFC3491, RFC3492 and RFC3454.
+It fully supports IDNA (internationalized) domains names as defined in RFC3490,
+RFC3491, RFC3492 and RFC3454.
 
-It also supports ip/AS whois queries which are very useful to trace
-SPAM. You just only need to pass the doted quad ip address or the
-AS (Autonomus System) handle instead of the domain name. Limited,
-non-recursive support for Referral Whois (RFC 1714/2167) is also
-provided.
+It also supports ip/AS whois queries which are very useful to trace SPAM. You
+just only need to pass the doted quad ip address or the AS (Autonomus System)
+handle instead of the domain name. Limited, non-recursive support for Referral
+Whois (RFC 1714/2167) is also provided.
 
 Requirements
 ------------
 
 phpWhois requires PHP 5.3 or better with OpenSSL support to work properly.
 
-Without SSL support you will not be able to query domains which do not have a whois server but that have a https based whois.
+Without SSL support you will not be able to query domains which do not have a
+whois server but that have a https based whois.
 
 Installation
 ------------
@@ -30,11 +36,11 @@ Installation
 
 #### Stable version
 
-`php composer.phar require "phpwhois/phpwhois":"~4.0"`
+`php composer.phar require "jsmitty12/phpwhois":"^5.0"`
 
 #### Latest development version
 
-`php composer.phar require "phpwhois/phpwhois":"dev-master"`
+`php composer.phar require "jsmitty12/phpwhois":"dev-master"`
 
 
 Example usage
@@ -56,20 +62,18 @@ echo "<pre>";
 print_r($result);
 echo "</pre>";
 ```
-If you provide the domain name to query in UTF8, then you
-must use:
+If you provide the domain name to query in UTF8, then you must use:
 ```php
 $result = $whois->lookup($query);
 ```
-If the query string is not in UTF8 then it must be in
-ISO-8859-1 or IDNA support will not work.
+If the query string is not in UTF8 then it must be in ISO-8859-1 or IDNA support
+will not work.
 
 What you can query
 ------------------
 
-You can use phpWhois to query domain names, ip addresses and
-other information like AS, i.e, both of the following examples
-work:
+You can use phpWhois to query domain names, ip addresses and other information
+like AS, i.e, both of the following examples work:
 ```php
 use phpWhois\Whois;
 $whois = new Whois();
@@ -173,9 +177,10 @@ care about getting the real owner information you can set:
 $whois->deepWhois = false;
 ```
 
-this will tell phpWhois to just query one whois server. For `.com`, `.net` and `.tv` domains and ip addresses this will prevent phpWhois to ask more
-than one whois server, you will just know if the domain is registered
-or not and which is the registrar but not the owner information.
+this will tell phpWhois to just query one whois server. For `.com`, `.net` and
+`.tv` domains and ip addresses this will prevent phpWhois to ask more than one
+whois server, you will just know if the domain is registered or not and which is
+the registrar but not the owner information.
 
 UTF-8
 -----
@@ -188,9 +193,13 @@ Workflow of getting domain info
 -------------------------------
 
 1. Call method `phpWhois\Whois::lookup()` with domain name as parameter
-2. If second parameter of method is **true** (default), phpWhois will try to convert the domain name to punycode
-3. If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at `src/whois.servers.php`), try to query **[tld].whois-servers.net**. If it has ip address, assume that it is valid whois server
-4. Try to query found whois server or fill response array with `unknown()` method
+2. If second parameter of method is **true** (default), phpWhois will try to
+    convert the domain name to punycode
+3. If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at
+    `src/whois.servers.php`), try to query **[tld].whois-servers.net**. If it
+    has ip address, assume that it is valid whois server
+4. Try to query found whois server or fill response array with `unknown()`
+    method
 
 Notes 
 -----
@@ -201,14 +210,14 @@ it will output the total layout of the returned object to the
 web browser.
 
 The latest version of the package and a demo script resides at 
-https://github.com/phpWhois/phpWhois
+https://github.com/jsmitty12/phpwhois
 
 Contributing
 ---------------
 
 If you want to add support for new TLD, extend functionality or
 correct a bug, feel free to create a new pull request at Github's
-repository https://github.com/phpWhois/phpWhois
+repository https://github.com/jsmitty12/phpwhois
 
 Credits
 -------
