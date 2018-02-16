@@ -32,11 +32,11 @@
         }
     ],
     "require": {
-        "php": "7.0.*|7.1.*|7.2.*",
+        "php": "^7.0,<7.3 || 7.3.0-dev",
         "mso/idna-convert": "^1.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^6.0 || ^7.0"
     },
     "suggest": {
         "lib-openssl": "*"
