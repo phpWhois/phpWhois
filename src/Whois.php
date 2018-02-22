@@ -24,6 +24,8 @@
 
 namespace phpWhois;
 
+use Mso\IdnaConvert\IdnaConvert;
+
 /**
  * phpWhois main class
  *
@@ -75,7 +77,7 @@ class Whois extends WhoisClient
 
         $query = trim($query);
 
-        $idn = new \idna_convert();
+        $idn = new IdnaConvert();
 
         if ($is_utf) {
             $query = $idn->encode($query);
@@ -228,8 +230,11 @@ class Whois extends WhoisClient
 
             // Special parameters ?
             if (isset($this->WHOIS_PARAM[$server])) {
-                $this->query['server'] = $this->query['server'] . '?' . str_replace('$', $domain,
-                        $this->WHOIS_PARAM[$server]);
+                $this->query['server'] = $this->query['server'] . '?' . str_replace(
+                    '$',
+                    $domain,
+                    $this->WHOIS_PARAM[$server]
+                );
             }
 
             $result = $this->getData('', $this->deepWhois);

@@ -6,32 +6,35 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-if (!defined('__WS_HANDLER__'))
+if (!defined('__WS_HANDLER__')) {
     define('__WS_HANDLER__', 1);
+}
 
 use phpWhois\WhoisClient;
 
 require_once('whois.parser.php');
 
-class ws_handler extends WhoisClient {
+class ws_handler extends WhoisClient
+{
 
-    function parse($data_str, $query) {
+    function parse($data_str, $query)
+    {
         $items = array(
             'Domain Name:' => 'domain.name',
             'Registrant Name:' => 'owner.organization',
@@ -62,8 +65,9 @@ class ws_handler extends WhoisClient {
 
                 unset($r['regrinfo']['rwhois']);
             }
-        } else
+        } else {
             $r['regrinfo']['registered'] = 'no';
+        }
 
         return $r;
     }

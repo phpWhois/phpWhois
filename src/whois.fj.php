@@ -6,16 +6,16 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
@@ -24,12 +24,15 @@
 
 require_once('whois.parser.php');
 
-if (!defined('__FJ_HANDLER__'))
+if (!defined('__FJ_HANDLER__')) {
     define('__FJ_HANDLER__', 1);
+}
 
-class fj_handler {
+class fj_handler
+{
 
-    function parse($data_str, $query) {
+    function parse($data_str, $query)
+    {
         $items = array(
             'owner' => 'Registrant:',
             'domain.status' => 'Status:',
@@ -45,8 +48,9 @@ class fj_handler {
 
             date_default_timezone_set("Pacific/Fiji");
 
-            if (isset($r['regrinfo']['domain']['expires']))
+            if (isset($r['regrinfo']['domain']['expires'])) {
                 $r['regrinfo']['domain']['expires'] = strftime("%Y-%m-%d", strtotime($r['regrinfo']['domain']['expires']));
+            }
 
             $r['regrinfo']['registered'] = 'yes';
         } else {
@@ -59,5 +63,4 @@ class fj_handler {
         );
         return $r;
     }
-
 }
