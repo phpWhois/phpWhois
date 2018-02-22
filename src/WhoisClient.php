@@ -359,7 +359,7 @@ class WhoisClient
         $output = '';
         $pre = '';
 
-        while (list($key, $val) = each($lines)) {
+        foreach ($lines as $key => $val) {
             $val = trim($val);
 
             $pos = strpos(strtoupper($val), '<PRE>');
@@ -395,7 +395,7 @@ class WhoisClient
         $rawdata = array();
         $null = 0;
 
-        while (list($key, $val) = each($output)) {
+        foreach ($output as $key => $val) {
             $val = trim($val);
             if ($val == '') {
                 if (++$null > 2) {
@@ -568,7 +568,7 @@ class WhoisClient
 
         reset($a2);
 
-        while (list($key, $val) = each($a2)) {
+        foreach ($a2 as $key => $val) {
             if (isset($a1[$key])) {
                 if (is_array($val)) {
                     if ($key != 'nserver') {

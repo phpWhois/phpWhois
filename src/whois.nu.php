@@ -43,12 +43,12 @@ class nu_handler
         );
 
         $r = array();
-        while (list($key, $val) = each($data_str['rawdata'])) {
+        foreach ($data_str['rawdata'] as $key => $val) {
             $val = trim($val);
 
             if ($val != '') {
                 if ($val == 'Domain servers in listed order:') {
-                    while (list($key, $val) = each($data_str['rawdata'])) {
+                    foreach ($data_str['rawdata'] as $key => $val) {
                         $val = trim($val);
                         if ($val == '') {
                             break;
@@ -60,7 +60,7 @@ class nu_handler
 
                 reset($items);
 
-                while (list($field, $match) = each($items)) {
+                foreach ($items as $field => $match) {
                     if (strstr($val, $match)) {
                         $r['regrinfo']['domain'][$field] = trim(substr($val, strlen($match)));
                         break;

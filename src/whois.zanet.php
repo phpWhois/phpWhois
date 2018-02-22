@@ -49,7 +49,7 @@ class zanet_handler
 
         $rawdata = array();
 
-        while (list($key, $line) = each($data_str['rawdata'])) {
+        foreach ($data_str['rawdata'] as $key => $line) {
             if (strpos($line, ' Contact ') !== false) {
                 $pos = strpos($line, ':');
 
