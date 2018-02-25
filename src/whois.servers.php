@@ -59,10 +59,11 @@ return array(
 /* If whois Server needs any parameters, enter it here */
 
 'WHOIS_PARAM' => array(
-    'com.whois-servers.net' => 'domain =$',
-    'net.whois-servers.net' => 'domain =$',
-    'de.whois-servers.net'  => '-T dn,ace $',
-    'jp.whois-servers.net'  => 'DOM $/e',
+    'com.whois-servers.net' => 'domain =$domain',
+    'net.whois-servers.net' => 'domain =$domain',
+    'de.whois-servers.net'  => '-T dn,ace $domain',
+    'jp.whois-servers.net'  => 'DOM $domain/e',
+    'whois.denic.de'        => '-T dn,ace $domain.$tld',
 ),
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
