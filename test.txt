@@ -13,7 +13,7 @@ ch		creart.ch blaueskreuz.ch
 cn		china.cn
 co		nic.co
 cz		nic.cz
-de		4ever.de ks2-hanau.de
+de		4ever.de denic.de google.de nic.de
 fi		ficora.fi
 fj		usp.ac.fj
 fm		dot.fm
