@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jsmitty12/phpWhois.svg?branch=master)](https://travis-ci.org/jsmitty12/phpWhois)
+
 Introduction
 ------------
 

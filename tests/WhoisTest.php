@@ -7,7 +7,7 @@ class WhoisTest extends \PHPUnit\Framework\TestCase
     public function testWhois()
     {
         $whois = new Whois;
-        $result = $whois->lookup('phpwhois.pw');
+        $result = $whois->lookup('google.com');
         $this->assertEquals('yes', $result['regrinfo']['registered']);
     }
 
