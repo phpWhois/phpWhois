@@ -133,4 +133,87 @@ class ParserTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * @return void
+     *
+     * @test
+     * @group CVE-2015-5243
+     */
+    public function generic_parser_a_blocks()
+    {
+        $rawData    = ["Registrant Name: \${k}\n"];
+        $translate  = [
+            'Registrant Name' => 'owner.name',
+        ];
+        $disclaimer = '';
+
+        $output = generic_parser_a_blocks($rawData, $translate, $disclaimer);
+        $this->assertEquals('${k}', $output['main']['owner']['name']);
+    }
+
+    /**
+     * @return void
+     *
+     * @test
+     * @group CVE-2015-5243
+     */
+    public function generic_parser_b()
+    {
+        $rawData = ["Registrant Name: \${field}\n"];
+
+        $output = generic_parser_b($rawData);
+        $this->assertEquals('${field}', $output['owner']['name']);
+    }
+
+    /**
+     * @return void
+     *
+     * @test
+     * @group CVE-2015-5243
+     */
+    public function get_blocks_one()
+    {
+        $rawData = ["Domain: \${field}\n"];
+        $items   = [
+            'domain.name' => 'Domain:',
+        ];
+
+        $output = get_blocks($rawData, $items);
+        $this->assertEquals('${field}', $output['domain']['name']);
+    }
+
+    /**
+     * @return void
+     *
+     * @test
+     * @group CVE-2015-5243
+     */
+    public function get_blocks_two()
+    {
+        $rawData = [
+            "Registrar:\n",
+            "\tName:\t \${field}\n",
+        ];
+        $items   = [
+            'agent' => 'Registrar:',
+        ];
+
+        $output = get_blocks($rawData, $items);
+        $this->assertEquals("Name:\t \${field}", $output['agent'][0]);
+    }
+
+    /**
+     * @return void
+     *
+     * @test
+     * @group CVE-2015-5243
+     */
+    public function get_contact()
+    {
+        $rawData = ["fax: \${field}\n"];
+
+        $output = get_contact($rawData);
+        $this->assertEquals('${field}', $output['fax']);
+    }
 }
