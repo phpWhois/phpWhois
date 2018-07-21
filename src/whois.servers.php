@@ -84,6 +84,7 @@ return array(
     'airforce'               => 'whois.unitedtld.com',
     'al'                     => '',
     'am'                     => 'whois.amnic.net',
+    'app'                    => 'whois.nic.google',
     'archi'                  => 'whois.ksregistry.net',
     'army'                   => 'whois.rightside.co',
     'arpa'                   => 'whois.iana.org',
