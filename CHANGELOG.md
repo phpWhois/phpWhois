@@ -1,3 +1,7 @@
+5.2.0 - 2018-07-21
+------------------
+* Support .app domains (fideloper)
+
 5.1.0 - 2018-05-29
 ------------------
 * Fix broken CI build (#20)

@@ -1,0 +1,144 @@
+From 06caf6bb333a1953b557f8d7ec46668b778e508a Mon Sep 17 00:00:00 2001
+From: Joshua Smith <jsmith@jssm.com>
+Date: Fri, 18 May 2018 13:32:33 -0400
+Subject: [PATCH] Fix CVE-2015-5243 based on code by David Saez PAdros sparc
+ See
+ https://github.com/sparc/phpWhois.org/compare/18849d1a98b992190612cdb2561e7b4492c505f5...8c6a18686775b25f05592dd67d7706e47167a498#diff-b8adbe1292f8abca1f943aa844db52aa
+
+---
+ src/whois.parser.php | 72 ++++++++++++++++++++++++++++++--------------
+ 1 file changed, 49 insertions(+), 23 deletions(-)
+
+diff --git a/src/whois.parser.php b/src/whois.parser.php
+index ab822ea..655de3e 100644
+--- a/src/whois.parser.php
++++ b/src/whois.parser.php
+@@ -110,7 +110,7 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
+             if ($k == '')
+                 continue;
+             if (strstr($k, '.')) {
+-                eval("\$block" . getvarname($k) . "=\$v;");
++                $block = assign($block, $k, $v);
+                 continue;
+             }
+         } else
+@@ -350,11 +350,11 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
+ 
+                 if ($pos !== false) {
+                     if ($field != '') {
+-                        $var = '$r' . getvarname($field);
+                         $itm = trim(substr($val, $pos + strlen($match)));
+ 
+-                        if ($itm != '')
+-                            eval($var . '="' . str_replace('"', '\"', $itm) . '";');
++                        if ($itm != '') {
++                            $r = assign($r, $field, str_replace('"', '\"', $itm));
++                        }
+                     }
+ 
+                     if (!$scanall)
+@@ -378,17 +378,45 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
+     return $r;
+ }
+ 
+-function getvarname($vdef) {
+-    $parts = explode('.', $vdef);
+-    $var = '';
++/**
++ * @param array    $array The array to populate
++ * @param string[] $parts
++ * @param mixed    $value The value to be assigned to the $vDef key
++ *
++ * @return array The updated array
++ * @see https://github.com/sparc/phpWhois.org/compare/18849d1a98b992190612cdb2561e7b4492c505f5...8c6a18686775b25f05592dd67d7706e47167a498#diff-b8adbe1292f8abca1f943aa844db52aa Original fix by David Saez PAdros sparc
++ */
++function assign_recursive(array $array, array $parts, $value)
++{
++    $key = array_shift($parts);
+ 
+-    foreach ($parts as $mn)
+-        if ($mn == '')
+-            $var = $var . '[]';
+-        else
+-            $var = $var . '["' . $mn . '"]';
++    if (count($parts) === 0) {
++        if (!$key) {
++            $array[] = $value;
++        } else {
++            $array[$key] = $value;
++        }
++    } else {
++        if (!isset($array[$key])) {
++            $array[$key] = [];
++        }
++        $array[$key] = assign_recursive($array[$key], $parts, $value);
++    }
+ 
+-    return $var;
++    return $array;
++}
++
++/**
++ * @param array  $array The array to populate
++ * @param string $vDef  A period-separated string of nested array keys
++ * @param mixed  $value The value to be assigned to the $vDef key
++ *
++ * @return array The updated array
++ * @see https://github.com/sparc/phpWhois.org/compare/18849d1a98b992190612cdb2561e7b4492c505f5...8c6a18686775b25f05592dd67d7706e47167a498#diff-b8adbe1292f8abca1f943aa844db52aa Original fix by David Saez PAdros sparc
++ */
++function assign(array $array, string $vDef, $value)
++{
++    return assign_recursive($array, explode('.', $vDef), $value);
+ }
+ 
+ /**
+@@ -431,9 +459,8 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
+                     $endtag = $last;
+                     $line = $val;
+                 } else {
+-                    $var = getvarname(strtok($field, '#'));
+-                    $itm = trim(substr($val, $pos + strlen($match)));
+-                    eval('$r' . $var . '=$itm;');
++                    $var = strtok($field, '#');
++                    $r   = assign($r, $var, trim(substr($val, $pos + strlen($match))));
+                 }
+ 
+                 break;
+@@ -499,9 +526,10 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
+             $pos = strpos($line, $match);
+ 
+             if ($pos !== false) {
+-                $var = getvarname(strtok($field, '#'));
+-                if ($var != '[]')
+-                    eval('$r' . $var . '=$block;');
++                $var = strtok($field, '#');
++                if ($var != '[]') {
++                    $r = assign($r, $var, $block);
++                }
+             }
+         }
+     }
+@@ -582,6 +610,7 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
+         $items = $extra_items;
+     }
+ 
++    $r = [];
+     foreach ($array as $key => $val) {
+         $ok = true;
+ 
+@@ -597,11 +626,8 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
+ 
+                 $itm = trim(substr($val, $pos + strlen($match)));
+ 
+-                /**
+-                 * @todo Get rid of eval
+-                 */
+                 if ($field != '' && $itm != '') {
+-                    eval('$r' . getvarname($field) . '=$itm;');
++                    $r = assign($r, $field, $itm);
+                 }
+ 
+                 $val = trim(substr($val, 0, $pos));
+-- 
+2.17.0.windows.1
+
