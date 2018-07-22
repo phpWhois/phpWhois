@@ -1,6 +1,5 @@
 // Country domains
 
-ae		nic.ae
 ag		nic.ag
 am		isoc.am
 at		nic.at

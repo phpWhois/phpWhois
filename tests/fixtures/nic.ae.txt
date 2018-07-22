@@ -1,0 +1,23 @@
+Connecting to AE.whois-servers.net...
+
+Domain Name:                     nic.ae
+Registrar ID:                    Etisalat
+Registrar Name:                  Etisalat
+Status:                          ok
+
+Registrant Contact ID:           CX364448T
+Registrant Contact Name:         Emirates Telecommunications Corporation - Etisalat
+Registrant Contact Email:        Visit whois.aeda.ae for Web based WhoIs
+Registrant Contact Organisation: Emirates Telecommunications Corporation - Etisalat
+
+Tech Contact ID:                 CX364450T
+Tech Contact Name:               Emirates Telecommunications Corporation - Etisalat
+Tech Contact Email:              Visit whois.aeda.ae for Web based WhoIs
+Tech Contact Organisation:       Emirates Telecommunications Corporation - Etisalat
+
+Name Server:                     dxbans2.ecompany.ae
+Name Server:                     auhans1.ecompany.ae
+Name Server:                     dxbans1.ecompany.ae
+Name Server:                     auhans2.ecompany.ae
+
+Connecting to                    nic.ae...
