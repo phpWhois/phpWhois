@@ -64,6 +64,7 @@ return array(
     'de.whois-servers.net'  => '-T dn,ace $domain',
     'jp.whois-servers.net'  => 'DOM $domain/e',
     'whois.denic.de'        => '-T dn,ace $domain.$tld',
+    'whois.dk-hostmaster.dk' => '--show-handles --charset=utf8 $domain.$tld',
 ),
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
