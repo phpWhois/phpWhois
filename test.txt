@@ -37,7 +37,6 @@ pl		nic.pl
 pt		dns.pt
 ru		nic.ru
 sc		nic.sc
-se		nic-se.se
 si		arnes.si
 su		news.su
 uk		olsns.co.uk

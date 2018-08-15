@@ -1,3 +1,8 @@
+5.3.0 - 2018-08-13
+------------------
+* Support .dk domains (TorbenLundsgaard)
+* Improve support for .se domains (TorbenLundsgaard)
+
 5.2.0 - 2018-07-21
 ------------------
 * Support .app domains (fideloper)

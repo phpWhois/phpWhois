@@ -61,9 +61,10 @@ class DkHandlerTest extends HandlerTest
 
         $expected = [
             'domain'     => [
-                'domain'    => 'google.dk',
+                'domain'     => 'google.dk',
                 'registered' => '1999-01-10',
-                'status'    => 'Active',
+                'expires'    => '2019-03-31',
+                'status'     => 'Active',
             ],
             'registered' => 'yes',
         ];

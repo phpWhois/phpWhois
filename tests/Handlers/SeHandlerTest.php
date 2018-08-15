@@ -63,6 +63,8 @@ class SeHandlerTest extends HandlerTest
             'domain'     => [
                 'name'    => 'google.se',
                 'created' => '2003-08-27',
+                'changed' => '2017-09-18',
+                'expires' => '2018-10-20',
             ],
             'registered' => 'yes',
         ];
