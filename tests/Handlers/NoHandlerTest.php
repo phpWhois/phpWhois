@@ -63,6 +63,38 @@ class NoHandlerTest extends HandlerTest
             'domain'     => [
                 'name'    => 'google.no',
                 'created' => '2001-02-26',
+                'changed' => '2018-06-22',
+            ],
+            'registered' => 'yes',
+        ];
+
+        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        $this->assertArrayHasKey('rawdata', $actual);
+        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+    }
+
+    /**
+     * @return void
+     *
+     * @test
+     */
+    public function parseNoridDotNo()
+    {
+        $query = 'norid.no';
+
+        $fixture = $this->loadFixture($query);
+        $data    = [
+            'rawdata'  => $fixture,
+            'regyinfo' => [],
+        ];
+
+        $actual = $this->handler->parse($data, $query);
+
+        $expected = [
+            'domain'     => [
+                'name'    => 'norid.no',
+                'created' => '1999-11-15',
+                'changed' => '2018-05-24',
             ],
             'registered' => 'yes',
         ];
