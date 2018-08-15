@@ -1,3 +1,7 @@
+5.4.0 - 2018-08-14
+------------------
+* Support .no domains (TorbenLundsgaard)
+
 5.3.0 - 2018-08-13
 ------------------
 * Support .dk domains (TorbenLundsgaard)
