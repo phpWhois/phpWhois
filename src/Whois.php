@@ -73,7 +73,7 @@ class Whois extends WhoisClient
     public function whois($domain, $is_utf = true)
     {
         $lookup = $this->lookup($domain, $is_utf);
-        return $lookup['rawdata'];
+        return implode(PHP_EOL, $lookup['rawdata']);
     }
     
     /**
