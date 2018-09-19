@@ -64,6 +64,19 @@ class Whois extends WhoisClient
     }
 
     /**
+     *  Lookup query and return raw whois data
+     *
+     * @param string $query Domain name or other entity
+     * @param boolean $is_utf True if domain name encoding is utf-8 already, otherwise convert it with utf8_encode() first
+     *
+     */
+    public function whois($domain, $is_utf = true)
+    {
+        $lookup = $this->lookup($domain, $is_utf);
+        return implode(PHP_EOL, $lookup['rawdata']);
+    }
+    
+    /**
      *  Lookup query
      *
      * @param string $query Domain name or other entity
