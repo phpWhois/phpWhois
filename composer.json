@@ -36,8 +36,7 @@
         "mso/idna-convert": "^1.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0 || ^7.0",
-        "roave/security-advisories": "dev-master"
+        "phpunit/phpunit": "^6.0 || ^7.0"
     },
     "suggest": {
         "lib-openssl": "*"
