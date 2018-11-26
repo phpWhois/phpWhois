@@ -1,3 +1,8 @@
+5.4.1 - 2018-11-26
+------------------
+* Remove roave/security-advisories from composer.json
+* Add `whois()` helper function (TorbenLundsgaard)
+
 5.4.0 - 2018-08-14
 ------------------
 * Support .no domains (TorbenLundsgaard)
