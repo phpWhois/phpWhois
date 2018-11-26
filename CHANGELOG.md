@@ -1,3 +1,7 @@
+5.5.0 - 2018-11-26
+------------------
+* Test against PHP 7.3 and PHP 7.4 (nightly)
+
 5.4.1 - 2018-11-26
 ------------------
 * Remove roave/security-advisories from composer.json
