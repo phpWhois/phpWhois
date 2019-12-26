@@ -317,7 +317,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             'Zone Email:' => 'zone.email'
         );
 
-    $r = '';
+    $r = array();
     $disok = true;
 
     while (list($key, $val) = each($rawdata)) {
