@@ -5,6 +5,7 @@ php:
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
   - nightly
 
 matrix:
@@ -25,6 +26,7 @@ install:
   - composer self-update && composer --version
 
 before_script:
+  - php -i
   - composer validate --no-check-all --strict
   - composer update $PREFER_LOWEST
 

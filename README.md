@@ -26,7 +26,7 @@ Whois (RFC 1714/2167) is also provided.
 Requirements
 ------------
 
-phpWhois requires PHP 5.3 or better with OpenSSL support to work properly.
+phpWhois requires PHP 7.0 or better with OpenSSL support to work properly.
 
 Without SSL support you will not be able to query domains which do not have a
 whois server but that have a https based whois.

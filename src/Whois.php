@@ -24,7 +24,7 @@
 
 namespace phpWhois;
 
-use Mso\IdnaConvert\IdnaConvert;
+use Algo26\IdnaConvert\IdnaConvert;
 
 /**
  * phpWhois main class

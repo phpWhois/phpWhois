@@ -1,3 +1,9 @@
+5.6.0 - 2020-05-11
+------------------
+* Officially support PHP 7.4
+* Replace abandoned `mso/idna-convert` dependency
+* Fix _Undefined index_ notice in `.de` handler (naitsirch)
+
 5.5.0 - 2018-11-26
 ------------------
 * Test against PHP 7.3 and PHP 7.4 (nightly)
