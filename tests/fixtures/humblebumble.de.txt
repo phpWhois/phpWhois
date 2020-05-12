@@ -1,0 +1,6 @@
+Connecting to DE.whois-servers.net...
+
+Domain: humblebumble.de
+Status: free
+
+Connecting to bumble.de...

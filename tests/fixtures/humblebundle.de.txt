@@ -1,0 +1,6 @@
+Connecting to DE.whois-servers.net...
+
+Domain: humblebundle.de
+Status: connect
+
+Connecting to bundle.de...
