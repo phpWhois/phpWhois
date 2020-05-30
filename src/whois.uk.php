@@ -60,8 +60,6 @@ class uk_handler
             $r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
             $r['regrinfo']['domain']['sponsor']     = $r['regrinfo']['domain']['sponsor'][0];
             $r['regrinfo']['registered']            = 'yes';
-
-            $r = format_dates($r, 'dmy');
         } else {
             if (strpos($data_str['rawdata'][1], 'Error for ')) {
                 $r['regrinfo']['registered']       = 'yes';
@@ -70,6 +68,8 @@ class uk_handler
                 $r['regrinfo']['registered'] = 'no';
             }
         }
+
+        $r = format_dates($r, 'dmy');
 
         $r['regyinfo'] = [
             'referrer'  => 'http://www.nominet.org.uk',
