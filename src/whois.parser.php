@@ -856,15 +856,25 @@ function get_date($date, $format)
 function parseStandardDate(string $date) {
     $date = trim($date);
 
+    // 2020-01-01T00:00:00Z
     $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/';
     if (preg_match($pattern, $date)) {
         $dateTimeFormat = 'Y-m-d\TH:i:sT';
         return Datetime::createFromFormat($dateTimeFormat, $date);
     }
 
+    // 2020-01-01T00:00:00
     $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/';
     if (preg_match($pattern, $date)) {
         $dateTimeFormat = 'Y-m-d\TH:i:s';
+        $utc = new DateTimeZone('UTC');
+        return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
+    }
+
+    // 27-Jul-2016
+    $pattern = '/^\d{2}-[a-zA-Z]{3}-\d{4}$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'd-M-Y';
         $utc = new DateTimeZone('UTC');
         return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
     }
