@@ -62,7 +62,7 @@ class AppHandlerTest extends HandlerTest
         $expected = [
             'domain'     => [
                 'name'    => 'google.app',
-                'changed' => '2018-09-04',
+                'changed' => '2018-04-09',
                 'created' => '2018-03-29',
                 'expires' => '2019-03-29',
             ],
