@@ -741,6 +741,11 @@ function format_dates(&$res, $format = 'mdy') {
 
 function get_date($date, $format)
 {
+    $parsedDate = parseStandardDate($date);
+    if ($parsedDate instanceof DateTime) {
+        return $parsedDate->format('Y-m-d');
+    }
+
     $months = [
         'jan' => 1,
         'ene' => 1,
@@ -841,4 +846,28 @@ function get_date($date, $format)
         $res['y'] += 1900;
 
     return sprintf('%.4d-%02d-%02d', $res['y'], $res['m'], $res['d']);
+}
+
+/**
+ * @param string $date
+ *
+ * @return false|DateTime
+ */
+function parseStandardDate(string $date) {
+    $date = trim($date);
+
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:sT';
+        return Datetime::createFromFormat($dateTimeFormat, $date);
+    }
+
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:s';
+        $utc = new DateTimeZone('UTC');
+        return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
+    }
+
+    return false;
 }

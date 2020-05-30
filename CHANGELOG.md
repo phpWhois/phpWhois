@@ -1,6 +1,10 @@
+5.6.1 - 2020-05-30
+------------------
+* Improve date parsing when a standard format is used (jsmitty12)
+
 5.6.0 - 2020-05-11
 ------------------
-* Officially support PHP 7.4
+* Officially support PHP 7.4 (TorbenLundsgaard, jsmitty12)
 * Replace abandoned `mso/idna-convert` dependency
 * Fix _Undefined index_ notice in `.de` handler (naitsirch)
 
