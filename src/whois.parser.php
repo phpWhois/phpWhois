@@ -879,5 +879,20 @@ function parseStandardDate(string $date) {
         return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
     }
 
+    // 2020-01-01 00:00:00 CLST
+    $pattern = '/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})(?: \w+)?$/';
+    if (preg_match($pattern, $date, $matches)) {
+        $dateTimeFormat = 'Y-m-d H:i:s T';
+
+        $parsedDate = DateTime::createFromFormat($dateTimeFormat, $date);
+        if ($parsedDate instanceof DateTime) {
+            return $parsedDate;
+        }
+
+        // More than likely the timezone could not be found, so ignore it
+        $dateTimeFormat = 'Y-m-d H:i:s';
+        return DateTime::createFromFormat($dateTimeFormat, $matches[1]);
+    }
+
     return false;
 }

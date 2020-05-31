@@ -30,19 +30,29 @@ require_once('whois.parser.php');
 class cl_handler {
 
     function parse($data_str, $query) {
-        $items = array(
+        $items = [
             'admin' => '(Administrative Contact)',
             'tech' => 'Contacto Técnico (Technical Contact):',
-            'domain.nserver' => 'Servidores de nombre (Domain servers):',
-            'domain.changed' => '(Database last updated on):'
-        );
+            // 'domain.nserver' => 'Servidores de nombre (Domain servers):',
+            'domain.nserver' => 'Name server:',
+            'domain.changed' => '(Database last updated on):',
+            'domain.created' => 'Creation date:',
+            'domain.expires' => 'Expiration date:',
+        ];
 
         $trans = array(
             'organización:' => 'organization',
             'nombre      :' => 'name');
 
-        $r = array();
+        $r = [
+            'rawdata' => $data_str['rawdata'],
+        ];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'd-m-y', $trans);
+
+        if (!isset($r['regrinfo']['domain']['name'])) {
+            $r['regrinfo']['domain']['name'] = $query;
+        }
+
         $r['regyinfo'] = array(
             'referrer' => 'http://www.nic.cl',
             'registrar' => 'NIC Chile'

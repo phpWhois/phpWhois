@@ -10,6 +10,7 @@ bh		nic.bh
 br		registro.br
 ca		cira.ca
 ch		creart.ch blaueskreuz.ch
+cl      google.cl
 cn		china.cn
 co		nic.co
 cz		nic.cz
