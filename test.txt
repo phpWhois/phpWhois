@@ -33,6 +33,7 @@ mx		nic.mx
 nl		domain-registry.nl
 nu		nunames.nu
 nz		dnc.org.nz
+ph      dot.ph cityescape.ph
 pl		nic.pl
 pt		dns.pt
 ru		nic.ru
