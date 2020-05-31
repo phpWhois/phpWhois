@@ -96,6 +96,7 @@ schlund		schlund.com
 srsplus		olsns.com
 namevault	namevault.com
 tmagnic     	antiquea.com
+today       modx.today
 tvcorp		www.tv
 wwdomains	wildwestdomains.com
 corporatedomains	cscglobal.com
