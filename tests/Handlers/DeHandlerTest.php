@@ -131,4 +131,64 @@ class DeHandlerTest extends HandlerTest
         $this->assertArrayHasKey('rawdata', $actual);
         $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
+
+    /**
+     * @return void
+     *
+     * @test
+     */
+    public function parseDomainInConnectStatus()
+    {
+        $query = 'humblebundle.de';
+
+        $fixture = $this->loadFixture($query);
+        $data    = [
+            'rawdata'  => $fixture,
+            'regyinfo' => [],
+        ];
+
+        $actual = $this->handler->parse($data, $query);
+
+        $expected = [
+            'domain'     => [
+                'name'   => 'humblebundle.de',
+                'status' => 'connect',
+            ],
+            'registered' => 'yes',
+        ];
+
+        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        $this->assertArrayHasKey('rawdata', $actual);
+        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+    }
+
+    /**
+     * @return void
+     *
+     * @test
+     */
+    public function parseDomainInFreeStatus()
+    {
+        $query = 'humblebumble.de';
+
+        $fixture = $this->loadFixture($query);
+        $data    = [
+            'rawdata'  => $fixture,
+            'regyinfo' => [],
+        ];
+
+        $actual = $this->handler->parse($data, $query);
+
+        $expected = [
+            'domain'     => [
+                'name'   => 'humblebumble.de',
+                'status' => 'free',
+            ],
+            'registered' => 'no',
+        ];
+
+        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        $this->assertArrayHasKey('rawdata', $actual);
+        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+    }
 }
