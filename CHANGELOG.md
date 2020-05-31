@@ -3,6 +3,7 @@
 * Fix parsing for `.ca` domains (maxiwheat, jsmitty12)
 * Add support for `.london` domains (adamjimenez, jsmitty12)
 * Add support for `.ph` domains (jsmitty12)
+* Add support for `.dev` domains (jsmitty12)
 
 5.6.1 - 2020-05-30
 ------------------
