@@ -36,18 +36,25 @@ class edu_handler {
             'domain.nserver' => 'Name Servers:',
             'domain.changed' => 'Domain record last updated:',
             'domain.created' => 'Domain record activated:',
+            'domain.expires' => 'Domain expires:',
             'owner' => 'Registrant:',
             'admin' => 'Administrative Contact:',
             'tech' => 'Technical Contact:',
             'billing' => 'Billing Contact:'
         );
 
-        $r = array();
-        $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'dmy');
+        $r = [
+            'rawdata' => $data_str['rawdata'],
+            'regrinfo' => easy_parser($data_str['rawdata'], $items, 'dmy'),
+        ];
 
         if (isset($b['tech'])) {
             if ($r['regrinfo']['tech']['name'] == 'Same as above')
                 $r['regrinfo']['tech'] = $r['regrinfo']['admin'];
+        }
+
+        if (!isset($r['regrinfo']['domain']['name'])) {
+            $r['regrinfo']['domain']['name'] = $query;
         }
 
         $r['regyinfo']['referrer'] = 'http://whois.educause.net';

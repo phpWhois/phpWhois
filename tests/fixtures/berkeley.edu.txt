@@ -1,0 +1,36 @@
+Connecting to EDU.whois-servers.net...
+
+	University of California at Berkeley
+	Information Services & Technology
+	Telecommunications -  2484 Shattuck #4894
+	Berkeley, CA 94720-4894
+	US
+
+Administrative Contact:
+	UCB NOC Admin
+	IST-Telecommunications
+	2484 Shattuck Ave, #4894
+	Berkeley, CA 94720-4894
+	US
+	+1.5106649000
+	noc@berkeley.edu
+
+Technical Contact:
+	UCB NOC 
+	IST-Telecommunications
+	2484 Shattuck Ave, #4894
+	Berkeley, CA 94720-4894
+	US
+	+1.5106649000
+	noc@berkeley.edu
+
+Name Servers:
+	ADNS2.BERKELEY.EDU
+	ADNS3.BERKELEY.EDU
+	ADNS1.BERKELEY.EDU
+
+Domain record activated:    24-Apr-1985
+Domain record last updated: 23-Apr-2020
+Domain expires:             31-Jul-2020
+
+Connecting to  California at Berkeley...
