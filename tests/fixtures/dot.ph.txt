@@ -1,0 +1,23 @@
+WHOIS info for dot.ph
+
+Domain Name: dot.ph
+
+Creation Date: 2000-08-09T12:00:00 -04:00
+Expiration Date: 2025-08-09T12:00:00 -04:00
+Updated Date: 2016-07-25T01:38:51 -04:00
+
+Registrar: dotPH Domains Inc.
+
+Registrant Name: dotPH Private Registration
+Registrant Organization: dotPH Private Registration
+Registrant Street: dotPH Private Registration
+Registrant Street 2: dotPH Private Registration
+Registrant Street 3: dotPH Private Registration
+Registrant City: dotPH Private Registration
+Registrant State/Province: dotPH Private Registration
+Registrant Postal Code: dotPH Private Registration
+Registrant Country: dotPH Private Registration
+Registrant Email: dotPH Private Registration
+
+Name Server: chris.ns.cloudflare.com
+Name Server: serena.ns.cloudflare.com

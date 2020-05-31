@@ -407,6 +407,7 @@ return array(
     'photo'                  => 'whois.uniregistry.net',
     'photography'            => 'whois.donuts.co',
     'photos'                 => 'whois.donuts.co',
+    'ph'                     => 'whois.iana.org',
     'physio'                 => 'whois.nic.physio',
     'pics'                   => 'whois.uniregistry.net',
     'pictures'               => 'whois.donuts.co',
