@@ -198,6 +198,7 @@ return array(
     'dental'                 => 'whois.donuts.co',
     'dentist'                => 'whois.rightside.co',
     'desi'                   => 'whois.ksregistry.net',
+    'dev'                    => 'whois.nic.google',
     'diamonds'               => 'whois.donuts.co',
     'digital'                => 'whois.donuts.co',
     'direct'                 => 'whois.donuts.co',

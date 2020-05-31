@@ -19,34 +19,23 @@
  * @copyright Copyright (c) 2020 Joshua Smith
  */
 
-if (!defined('__PH_HANDLER__')) {
-    define('__PH_HANDLER__', 1);
+if (!defined('__DEV_HANDLER__')) {
+    define('__DEV_HANDLER__', 1);
 }
 
 require_once('whois.parser.php');
 
 /**
- * Class ph_handler
+ * Class dev_handler
  */
-class ph_handler
+class dev_handler
 {
     function parse($data_str, $query)
     {
-        $items = [
-            'created:' => 'domain.created',
-            'changed:' => 'domain.changed',
-            'status:' => 'domain.status',
-            'nserver:' => 'domain.nserver.'
-        ];
-
         $r = [
-            'regrinfo' => generic_parser_b($data_str['rawdata'], $items),
+            'regrinfo' => generic_parser_b($data_str['rawdata']),
             'rawdata'  => $data_str['rawdata'],
         ];
-
-        if (!isset($r['regrinfo']['domain']['name'])) {
-            $r['regrinfo']['domain']['name'] = $query;
-        }
 
         return $r;
     }

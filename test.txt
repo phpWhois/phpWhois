@@ -60,6 +60,7 @@ directnic	directnic.com
 domainbank	domainbank.com
 domaincontender domaincontender.com
 afternic	buydomains.com
+dev     ostap.dev
 domainpeople	domainpeople.com
 dotster		dotster.com namesdirect.com dotregistrar.com
 dreamhost	dreamhost.com
