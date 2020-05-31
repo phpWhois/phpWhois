@@ -30,7 +30,9 @@ require_once('whois.parser.php');
 class ca_handler {
 
     function parse($data_str, $query) {
-        $r = array();
+        $r = [
+            'rawdata' => $data_str['rawdata'],
+        ];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], [], 'ymd');
 
         $r['regyinfo'] = array(

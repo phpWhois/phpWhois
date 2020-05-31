@@ -1,3 +1,7 @@
+5.6.2 - 2020-05-31
+------------------
+* Fix parsing for `.ca` domains (maxiwheat, jsmitty12)
+
 5.6.1 - 2020-05-30
 ------------------
 * Improve date parsing when a standard format is used (jsmitty12)
