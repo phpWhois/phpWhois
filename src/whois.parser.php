@@ -6,16 +6,16 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
@@ -37,7 +37,7 @@ function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $da
     $r = $blocks['main'];
     $ret['registered'] = 'yes';
 
-    while (list($key, $val) = each($contacts))
+    foreach ($contacts as $key => $val)
         if (isset($r[$key])) {
             if (is_array($r[$key]))
                 $blk = $r[$key][count($r[$key]) - 1];
@@ -66,7 +66,7 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
     $gkey = 'main';
     $dend = false;
 
-    while (list($key, $val) = each($rawdata)) {
+    foreach ($rawdata as $key => $val) {
         $val = trim($val);
 
         if ($val != '' && ($val[0] == '%' || $val[0] == '#')) {
@@ -320,7 +320,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
     $r = '';
     $disok = true;
 
-    while (list($key, $val) = each($rawdata)) {
+    foreach ($rawdata as $key => $val) {
         if (trim($val) != '') {
             if (($val[0] == '%' || $val[0] == '#') && $disok) {
                 $r['disclaimer'][] = trim(substr($val, 1));
@@ -331,7 +331,7 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             $disok = false;
             reset($items);
 
-            while (list($match, $field) = each($items)) {
+            foreach ($items as $match => $field) {
                 $pos = strpos($val, $match);
 
                 if ($pos !== false) {
@@ -382,7 +382,7 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     $r = array();
     $endtag = '';
 
-    while (list($key, $val) = each($rawdata)) {
+    foreach ($rawdata as $key => $val) {
         $val = trim($val);
         if ($val == '')
             continue;
@@ -426,7 +426,7 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
 
         // Block found, get data ...
 
-        while (list($key, $val) = each($rawdata)) {
+        foreach ($rawdata as $key => $val) {
             $val = trim($val);
 
             if ($val == '' || $val == str_repeat($val[0], strlen($val)))
@@ -556,14 +556,14 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
         $items = $extra_items;
     }
 
-    while (list($key, $val) = each($array)) {
+    foreach ($array as $key => $val) {
         $ok = true;
 
         while ($ok) {
             reset($items);
             $ok = false;
 
-            while (list($match, $field) = each($items)) {
+            foreach ($items as $match => $field) {
                 $pos = strpos(strtolower($val), $match);
 
                 if ($pos === false)
@@ -740,7 +740,7 @@ function get_date($date, $format) {
         reset($res);
         $ok = true;
 
-        while (list($key, $val) = each($res)) {
+        foreach ($res as $key => $val) {
             if ($val == '' || $key == '')
                 continue;
 
