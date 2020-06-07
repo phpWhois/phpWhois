@@ -13,7 +13,7 @@ cl      google.cl
 cn		china.cn
 co		nic.co
 cz		nic.cz
-de		4ever.de denic.de google.de nic.de
+de		4ever.de denic.de google.de nic.de humblebundle.de a2ba91bff88c6983f6af010c41236206df64001d.de
 fi		ficora.fi
 fj		usp.ac.fj
 fm		dot.fm
@@ -41,7 +41,7 @@ sc		nic.sc
 si		arnes.si
 su		news.su
 uk		olsns.co.uk
-us		neustar.us
+us		neustar.us google.us
 ve		nic.ve
 ws		samoanic.ws surf.ws
 co.za		sex.co.za
