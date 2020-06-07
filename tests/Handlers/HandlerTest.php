@@ -42,7 +42,13 @@ abstract class HandlerTest extends TestCase
             $which
         );
         if (file_exists($fixture)) {
-            return file($fixture);
+            $raw = file_get_contents($fixture);
+
+            // Testing on Windows introduces carriage returns
+            $raw = str_replace("\r", '', $raw);
+
+            // Split the lines the same way as WhoisClient::getRawData()
+            return explode("\n", $raw);
         }
 
         throw new \InvalidArgumentException('Cannot find fixture');
