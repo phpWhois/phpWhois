@@ -59,12 +59,17 @@ class EduHandlerTest extends HandlerTest
 
         $actual = $this->handler->parse($data, $query);
 
-        $this->assertEquals('berkeley.edu', $actual['regrinfo']['domain']['name']);
-        $this->assertEquals('2020-04-23', $actual['regrinfo']['domain']['changed']);
-        $this->assertEquals('1985-04-24', $actual['regrinfo']['domain']['created']);
-        $this->assertEquals('2020-07-31', $actual['regrinfo']['domain']['expires']);
-        // $this->assertEquals('yes', $actual['regrinfo']['registered']);
+        $expected = [
+            'domain'     => [
+                'name'    => 'berkeley.edu',
+                'changed' => '2020-06-02',
+                'created' => '1985-04-24',
+                'expires' => '2020-07-31',
+            ],
+            // 'registered' => 'yes', // Currently broken
+        ];
 
+        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
         $this->assertEquals($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
