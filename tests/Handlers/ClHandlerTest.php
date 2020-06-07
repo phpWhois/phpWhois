@@ -59,12 +59,17 @@ class ClHandlerTest extends HandlerTest
 
         $actual = $this->handler->parse($data, $query);
 
-        $this->assertEquals('google.cl', $actual['regrinfo']['domain']['name']);
-        // $this->assertEquals('2020-04-23', $actual['regrinfo']['domain']['changed']);
-        $this->assertEquals('2002-10-22', $actual['regrinfo']['domain']['created']);
-        $this->assertEquals('2020-11-20', $actual['regrinfo']['domain']['expires']);
-        // $this->assertEquals('yes', $actual['regrinfo']['registered']);
+        $expected = [
+            'domain'     => [
+                'name'    => 'google.cl',
+                // 'changed' => '2020-01-13',
+                'created' => '2002-10-22',
+                'expires' => '2020-11-20',
+            ],
+            // 'registered' => 'yes', // Currently broken
+        ];
 
+        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
         $this->assertEquals($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }

@@ -1,5 +1,3 @@
-Connecting to CL.whois-servers.net...
-
 %%
 %% This is the NIC Chile Whois server (whois.nic.cl).
 %%
@@ -23,5 +21,3 @@ Name server: ns4.google.com
 %% For communication with domain contacts please use website.
 %% See https://www.nic.cl/registry/Whois.do?d=google.cl
 %%
-
-Connecting to the NIC Chile Whois server (whois.nic.cl)....
