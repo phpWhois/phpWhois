@@ -1,36 +1,17 @@
 <?php
 /**
- * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
- * @license
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
- * @link      http://phpwhois.pw
+ * @license   See LICENSE file
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
+ * @copyright Copyright (c) 2020 Joshua Smith
  */
 
-if (!defined('__DE_HANDLER__')) {
-    define('__DE_HANDLER__', 1);
-}
+namespace phpWhois\Handlers;
 
-require_once 'whois.parser.php';
-
-class de_handler
+class DeHandler extends AbstractHandler
 {
-    function parse($data_str, $query)
+    public function parse(array $data_str, string $query): array
     {
         $items = [
             'domain.name'      => 'Domain:',
@@ -54,15 +35,14 @@ class de_handler
             'type:'        => '',
         ];
 
-        $r = [
-            'rawdata' => $data_str['rawdata'],
-        ];
-
-        $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd', $extra);
-
-        $r['regyinfo'] = [
-            'registrar' => 'DENIC eG',
-            'referrer'  => 'http://www.denic.de/',
+        $rawData = $this->removeBlankLines($data_str['rawdata']);
+        $r       = [
+            'rawdata'  => $data_str['rawdata'],
+            'regrinfo' => $this->easy_parser($rawData, $items, 'ymd', $extra),
+            'regyinfo' => [
+                'registrar' => 'DENIC eG',
+                'referrer'  => 'http://www.denic.de/',
+            ],
         ];
 
         if (!isset($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] === 'free') {
