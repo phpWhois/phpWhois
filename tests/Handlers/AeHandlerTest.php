@@ -100,7 +100,7 @@ class AeHandlerTest extends HandlerTest
             'domain'     => [
                 'name'    => 'nic.ae',
                 'sponsor' => 'Etisalat',
-                'status'  => 'ok',
+                'status'  => 'clientUpdateProhibited',
             ],
             'owner'      => [
                 'name' => 'Emirates Telecommunications Corporation - Etisalat',

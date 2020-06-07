@@ -1,5 +1,3 @@
-Connecting to AE.whois-servers.net...
-
 Domain Name:                     google.ae
 Registrar ID:                    markmonitor
 Registrar Name:                  MarkMonitor
@@ -18,5 +16,3 @@ Tech Contact Organisation:       Google LLC
 
 Name Server:                     ns1.google.com
 Name Server:                     ns2.google.com
-
-Connecting to                    google.ae...

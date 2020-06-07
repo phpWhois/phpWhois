@@ -1,5 +1,3 @@
-Connecting to AE.whois-servers.net...
-
 Domain Name:                     aeda.ae
 Registrar ID:                    aeDA Regulator
 Registrar Name:                  aeDA Regulator
@@ -15,5 +13,3 @@ Tech Contact Email:              Visit whois.aeda.ae for Web based WhoIs
 
 Name Server:                     ns1.aeda.net.ae
 Name Server:                     ns2.aeda.net.ae
-
-Connecting to                    aeda.ae...
