@@ -22,6 +22,8 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
+namespace phpWhois\Handlers;
+
 if (!defined('__UK_HANDLER__')) {
     define('__UK_HANDLER__', 1);
 }
