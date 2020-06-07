@@ -1,5 +1,3 @@
-Connecting to UK.whois-servers.net...
-
 
     Domain name:
         olsns.co.uk
@@ -23,7 +21,7 @@ Connecting to UK.whois-servers.net...
         a.ns.olsns.co.uk          82.98.130.187
         b.ns.olsns.co.uk          82.98.170.158
 
-    WHOIS lookup made at 14:40:30 30-May-2020
+    WHOIS lookup made at 18:48:29 07-Jun-2020
 
 -- 
 This WHOIS information is provided for free by Nominet UK the central registry
@@ -38,5 +36,3 @@ repackaging, recompilation, redistribution or reuse (B) obscuring, removing
 or hiding any or all of this notice and (C) exceeding query rate or volume
 limits. The data is provided on an 'as-is' basis and may lag behind the
 register. Access may be withdrawn or restricted at any time. 
-
-Connecting to ame:...

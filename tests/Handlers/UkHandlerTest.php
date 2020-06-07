@@ -27,7 +27,7 @@ namespace phpWhois\Handlers;
 class UkHandlerTest extends HandlerTest
 {
     /**
-     * @var \uk_handler $handler
+     * @var UkHandler $handler
      */
     protected $handler;
 
@@ -38,7 +38,7 @@ class UkHandlerTest extends HandlerTest
     {
         parent::setUp();
 
-        $this->handler            = new \uk_handler();
+        $this->handler            = new UkHandler();
         $this->handler->deepWhois = false;
     }
 
@@ -62,9 +62,9 @@ class UkHandlerTest extends HandlerTest
         $expected = [
             'domain'     => [
                 // 'name'    => 'vibrantdigitalfuture.uk',
-                'changed' => '2017-07-28',
+                'changed' => '2019-10-30',
                 'created' => '2016-07-27',
-                'expires' => '2018-07-27',
+                // 'expires' => '2018-07-27',
             ],
             'registered' => 'yes',
         ];

@@ -40,7 +40,7 @@ ru		nic.ru
 sc		nic.sc
 si		arnes.si
 su		news.su
-uk		olsns.co.uk
+uk		olsns.co.uk google.co.uk vibrantdigitalfuture.uk
 us		neustar.us google.us
 ve		nic.ve
 ws		samoanic.ws surf.ws
