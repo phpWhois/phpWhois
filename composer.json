@@ -47,6 +47,9 @@
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "phpWhois\\": "tests/"
+        },
         "classmap": [
             "src/",
             "tests/"
