@@ -51,6 +51,6 @@ abstract class HandlerTest extends TestCase
             return explode("\n", $raw);
         }
 
-        throw new \InvalidArgumentException('Cannot find fixture');
+        throw new \InvalidArgumentException("Cannot find fixture `{$fixture}`");
     }
 }

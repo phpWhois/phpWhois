@@ -157,7 +157,12 @@ class DeHandlerTest extends HandlerTest
     {
         $query = 'a2ba91bff88c6983f6af010c41236206df64001d.de';
 
-        $fixture = $this->loadFixture($query);
+        try {
+            $fixture = $this->loadFixture($query);
+        } catch (\InvalidArgumentException $exception) {
+            $this->markTestSkipped($exception->getMessage());
+        }
+
         $data    = [
             'rawdata'  => $fixture,
             'regyinfo' => [],
