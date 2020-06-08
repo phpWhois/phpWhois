@@ -64,4 +64,9 @@ abstract class AbstractHandler implements HandlerInterface
     {
         return get_blocks($rawdata, $items, $partial_match, $def_block);
     }
+
+    protected function get_contacts($array, $extra_items = [], $has_org = false)
+    {
+        return get_contacts($array, $extra_items, $has_org);
+    }
 }
