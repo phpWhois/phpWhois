@@ -13,6 +13,8 @@ require_once __DIR__ . '/../whois.parser.php';
  */
 abstract class AbstractHandler implements HandlerInterface
 {
+    public $deepWhois;
+
     /**
      * @param string[] $lines
      *
