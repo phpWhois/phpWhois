@@ -1,0 +1,74 @@
+% Copyright (c)2020 by NIC.AT (1)                                       
+%
+% Restricted rights.
+%
+% Except  for  agreed Internet  operational  purposes, no  part  of this
+% information  may  be reproduced,  stored  in  a  retrieval  system, or
+% transmitted, in  any  form  or by  any means,  electronic, mechanical,
+% recording, or otherwise, without prior  permission of NIC.AT on behalf
+% of itself and/or the copyright  holders.  Any use of this  material to
+% target advertising  or similar activities is explicitly  forbidden and
+% can be prosecuted.
+%
+% It is furthermore strictly forbidden to use the Whois-Database in such
+% a  way  that  jeopardizes or  could jeopardize  the  stability  of the
+% technical  systems of  NIC.AT  under any circumstances. In particular,
+% this includes  any misuse  of the  Whois-Database and  any  use of the
+% Whois-Database which disturbs its operation.
+%
+% Should the  user violate  these points,  NIC.AT reserves  the right to
+% deactivate  the  Whois-Database   entirely  or  partly  for  the user.
+% Moreover,  the  user  shall be  held liable  for  any  and all  damage
+% arising from a violation of these points.
+
+domain:         nic.at
+registrar:      
+registrant:     NG8867695-NICAT
+tech-c:         UH567003-NICAT
+nserver:        ns1.nic.at
+remarks:        192.174.68.98
+nserver:        ns1.nic.at
+remarks:        2001:67c:1bc::98
+nserver:        ns10.univie.ac.at
+nserver:        ns2.nic.at
+remarks:        176.97.158.98
+nserver:        ns2.nic.at
+remarks:        2001:67c:10b8::98
+nserver:        ns5.nic.at
+remarks:        194.58.198.32
+nserver:        ns5.nic.at
+remarks:        2a01:3f1:3032::53
+nserver:        ns5.univie.ac.at
+changed:        20200427 16:03:40
+DNSSEC:         Signed
+DS key tag  1:  53116
+algorithm   1:  13
+digest type 1:  2
+digest      1:  ad2d103749d7915a92d5b2eba79db8e01fc41b2452f9bb9930b2649c70eb39fe
+source:         AT-DOM
+
+personname:     
+organization:   NIC.AT GmbH
+street address: Jakob-Haringerstrasse 8
+postal code:    A-5020
+city:           Salzburg
+country:        Austria
+phone:          +4366246690
+fax-no:         +43662466929
+e-mail:         service@nic.at
+nic-hdl:        NG8867695-NICAT
+changed:        20121116 16:58:21
+source:         AT-DOM
+
+personname:     UNIVIE Hostmaster
+organization:   
+street address: Universitaetsstrasse 7
+postal code:    A-1010
+city:           Vienna
+country:        Austria
+phone:          +431427714277
+fax-no:         +431427714279
+e-mail:         domain-admin@univie.ac.at
+nic-hdl:        UH567003-NICAT
+changed:        20100625 15:57:11
+source:         AT-DOM
