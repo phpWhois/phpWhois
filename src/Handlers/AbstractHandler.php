@@ -48,11 +48,18 @@ abstract class AbstractHandler implements HandlerInterface
         );
     }
 
-    protected function format_dates(&$res, $format = 'mdy') {
+    protected function format_dates(&$res, $format = 'mdy')
+    {
         return format_dates($res, $format);
     }
 
-    protected function get_blocks($rawdata, $items, $partial_match = false, $def_block = false) {
+    protected function generic_parser_b($rawdata, $items = [], $dateformat = 'mdy', $hasreg = true, $scanall = false)
+    {
+        return generic_parser_b($rawdata, $items, $dateformat, $hasreg, $scanall);
+    }
+
+    protected function get_blocks($rawdata, $items, $partial_match = false, $def_block = false)
+    {
         return get_blocks($rawdata, $items, $partial_match, $def_block);
     }
 }
