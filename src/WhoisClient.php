@@ -472,33 +472,26 @@ class WhoisClient
      * @return array On success, returns the result from the handler.
      * On failure, returns passed result unaltered.
      */
-
     public function process(&$result, $deep_whois = true)
     {
+        $handlerName = $this->loadHandler($this->query['handler']);
 
-        $handler_name = str_replace('.', '_', $this->query['handler']);
-
-        // If the handler has not already been included somehow, include it now
-        $HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($handler_name));
-
-        if (!defined($HANDLER_FLAG)) {
-            include($this->query['file']);
+        if ($handlerName === false) {
+            $handlerName = $this->loadLegacyHandler($this->query['handler'], $this->query['file']);
         }
 
-        // If the handler has still not been included, append to query errors list and return
-        if (!defined($HANDLER_FLAG)) {
-            $this->query['errstr'][] = "Can't find $handler_name handler: " . $this->query['file'];
+        if ($handlerName === false) {
+            $this->query['errstr'][] = "Can't find {$this->query['handler']} handler: " . $this->query['file'];
+
             return $result;
         }
 
-        if (!$this->gtldRecurse && $this->query['file'] == 'whois.gtld.php') {
+        if (!$this->gtldRecurse && $this->query['file'] === 'whois.gtld.php') {
             return $result;
         }
 
         // Pass result to handler
-        $object = $handler_name . '_handler';
-
-        $handler = new $object('');
+        $handler = new $handlerName('');
 
         // If handler returned an error, append it to the query errors list
         if (isset($handler->query['errstr'])) {
@@ -676,5 +669,41 @@ class WhoisClient
             }
         }
         return $result;
+    }
+
+    /**
+     * @return string|bool
+     */
+    protected function loadHandler(string $queryHandler)
+    {
+        $queryHandler = ucfirst($queryHandler);
+        $handlerName = "phpWhois\\Handlers\\{$queryHandler}Handler";
+        if (class_exists($handlerName)) {
+            return $handlerName;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return string|bool
+     */
+    protected function loadLegacyHandler(string $queryHandler, string $queryFile)
+    {
+        $handler_name = str_replace('.', '_', $queryHandler);
+
+        // If the handler has not already been included somehow, include it now
+        $HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($handler_name));
+
+        if (!defined($HANDLER_FLAG)) {
+            include($queryFile);
+        }
+
+        // If the handler has still not been included, append to query errors list and return
+        if (!defined($HANDLER_FLAG)) {
+            return false;
+        }
+
+        return $handler_name . '_handler';
     }
 }
