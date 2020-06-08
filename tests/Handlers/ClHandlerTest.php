@@ -27,7 +27,7 @@ namespace phpWhois\Handlers;
 class ClHandlerTest extends HandlerTest
 {
     /**
-     * @var \cl_handler $handler
+     * @var ClHandler $handler
      */
     protected $handler;
 
@@ -38,7 +38,7 @@ class ClHandlerTest extends HandlerTest
     {
         parent::setUp();
 
-        $this->handler            = new \cl_handler();
+        $this->handler            = new ClHandler();
         $this->handler->deepWhois = false;
     }
 

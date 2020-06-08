@@ -27,7 +27,7 @@ namespace phpWhois\Handlers;
 class EduHandlerTest extends HandlerTest
 {
     /**
-     * @var \edu_handler $handler
+     * @var EduHandler $handler
      */
     protected $handler;
 
@@ -38,7 +38,7 @@ class EduHandlerTest extends HandlerTest
     {
         parent::setUp();
 
-        $this->handler            = new \edu_handler();
+        $this->handler            = new EduHandler();
         $this->handler->deepWhois = false;
     }
 
