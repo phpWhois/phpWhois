@@ -24,7 +24,7 @@ class AsiaHandlerTest extends HandlerTest
         parent::setUp();
 
         $this->handler            = new AsiaHandler();
-        $this->handler->asiaepWhois = false;
+        $this->handler->deepWhois = false;
     }
 
     /**

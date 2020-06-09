@@ -24,7 +24,7 @@ class AuHandlerTest extends HandlerTest
         parent::setUp();
 
         $this->handler            = new AuHandler();
-        $this->handler->auepWhois = false;
+        $this->handler->deepWhois = false;
     }
 
     /**
