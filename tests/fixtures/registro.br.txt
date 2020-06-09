@@ -1,0 +1,54 @@
+
+% Copyright (c) Nic.br
+%  The use of the data below is only permitted as described in
+%  full by the terms of use at https://registro.br/termo/en.html ,
+%  being prohibited its distribution, commercialization or
+%  reproduction, in particular, to use it for advertising or
+%  any similar purpose.
+%  2020-06-08T11:32:11-03:00
+
+domain:      registro.br
+owner:       Núcleo de Inf. e Coord. do Ponto BR - NIC.BR
+ownerid:     05.506.560/0001-36
+responsible: Demi Getschko
+country:     BR
+owner-c:     FAN
+admin-c:     FAN
+tech-c:      FAN
+billing-c:   FAN
+nserver:     a.dns.br
+nsstat:      20200607 AA
+nslastaa:    20200607
+nserver:     b.dns.br
+nsstat:      20200607 AA
+nslastaa:    20200607
+nserver:     c.dns.br
+nsstat:      20200607 AA
+nslastaa:    20200607
+nserver:     d.dns.br
+nsstat:      20200607 AA
+nslastaa:    20200607
+nserver:     e.dns.br
+nsstat:      20200607 AA
+nslastaa:    20200607
+dsrecord:    59973 ECDSASHA256 17A233B59FE51E6205205E0556343DB121AB5023663A1B5628133AFFEA95A5C9
+dsstatus:    20200607 DSOK
+dslastok:    20200607
+created:     19990221 #142485
+changed:     20180402
+status:      published
+
+nic-hdl-br:  FAN
+person:      Frederico Augusto de Carvalho Neves
+e-mail:      fneves@registro.br
+country:     BR
+created:     19971217
+changed:     20191223
+
+% Security and mail abuse issues should also be addressed to
+% cert.br, http://www.cert.br/ , respectivelly to cert@cert.br
+% and mail-abuse@cert.br
+%
+% whois.registro.br accepts only direct match queries. Types
+% of queries are: domain (.br), registrant (tax ID), ticket,
+% provider, contact handle (ID), CIDR block, IP and ASN.
