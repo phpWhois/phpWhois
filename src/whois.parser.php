@@ -863,6 +863,13 @@ function parseStandardDate(string $date) {
         return Datetime::createFromFormat($dateTimeFormat, $date);
     }
 
+    // 2020-01-01T00:00:00.0Z
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\dZ$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:s.vT';
+        return Datetime::createFromFormat($dateTimeFormat, $date);
+    }
+
     // 2020-01-01T00:00:00
     $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/';
     if (preg_match($pattern, $date)) {
