@@ -70,6 +70,11 @@ abstract class AbstractHandler implements HandlerInterface
         return get_contacts($array, $extra_items, $has_org);
     }
 
+    protected function get_contact($array, $extra_items = [], $has_org = false)
+    {
+        return get_contact($array, $extra_items, $has_org);
+    }
+
     protected function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy')
     {
         return generic_parser_a($rawdata, $translate, $contacts, $main, $dateformat);
