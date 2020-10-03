@@ -1,3 +1,27 @@
+5.6.3 - 2020-10-03
+------------------
+* Split fixture files the same way WhoisClient splits raw whois data (naitsirch)
+* Rename handler for `.de` domains, add test cases (jsmitty12)
+* Rename and fix handler for `.uk` domains, add test cases (jsmitty12)
+* Update tests for `.us` domains, add test cases (jsmitty12)
+* Rename handler for `.cl` domains, add test cases (jsmitty12)
+* Rename handler for `.edu` domains, add test cases (jsmitty12)
+* Rename handler for `.ae` domains, add test cases (jsmitty12)
+* Rename handler for `.aero` domains, add test cases (jsmitty12)
+* Rename handler for `.ag` domains, add test cases (jsmitty12)
+* Rename handler for `.am` domains, add test cases (jsmitty12)
+* Rename handler for `.app` domains, add test cases (jsmitty12)
+* Rename handler for `.asia` domains, add test cases (jsmitty12)
+* Rename handler for `.nic` domains, add test cases (jsmitty12)
+* Rename handler for `.at` domains, add test cases (jsmitty12)
+* Rename handler for `.au` domains, add test cases (jsmitty12)
+* Rename handler for `.be` domains, add test cases (jsmitty12)
+* Rename handler for `.bh` domains, add test cases (jsmitty12)
+* Rename handler for `.biz` domains, add test cases (jsmitty12)
+* Rename handler for `.br` domains, add test cases (jsmitty12)
+* Fix date parsing in PHP 7.3 (jsmitty12)
+* Add script to generate test fixtures (jsmitty12)
+
 5.6.2 - 2020-05-31
 ------------------
 * Fix parsing for `.ca` domains (maxiwheat, jsmitty12)
