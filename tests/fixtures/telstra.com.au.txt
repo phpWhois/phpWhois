@@ -1,33 +1,33 @@
-Domain Name: TELSTRA.COM.AU
-Registry Domain ID: D407400000001493667-AU
-Registrar WHOIS Server: whois.auda.org.au
-Registrar URL: https://www.cscdigitalbrand.services
-Last Modified: 2020-04-27T08:42:13Z
-Registrar Name: Corporation Service Company (Aust) Pty Ltd
-Registrar Abuse Contact Email: domainabuse@cscglobal.com
-Registrar Abuse Contact Phone: +1.8887802723
-Reseller Name:
-Status: clientDeleteProhibited https://afilias.com.au/get-au/whois-status-codes#clientDeleteProhibited
-Status: serverDeleteProhibited https://afilias.com.au/get-au/whois-status-codes#serverDeleteProhibited
-Status: serverRenewProhibited https://afilias.com.au/get-au/whois-status-codes#serverRenewProhibited
-Status: serverUpdateProhibited https://afilias.com.au/get-au/whois-status-codes#serverUpdateProhibited
-Registrant Contact ID: TELSTRACORPLTD
-Registrant Contact Name: Domain Administrator
-Tech Contact ID: TELSTRACORPLTD
-Tech Contact Name: Domain Administrator
-Name Server: ADNS01.BIGPOND.COM
-Name Server: ADNS02.BIGPOND.COM
-Name Server: ADNS03.BIGPOND.COM
-Name Server: ADNS04.BIGPOND.COM
-DNSSEC: unsigned
-Registrant: Telstra Corporation Ltd
-Registrant ID: ABN 33 051 775 556
-Eligibility Type: Trademark Owner
-
->>> Last update of WHOIS database: 2020-06-08T14:31:59Z <<<
-
-
-
+Domain Name: TELSTRA.COM.AU
+Registry Domain ID: D407400000001493667-AU
+Registrar WHOIS Server: whois.auda.org.au
+Registrar URL: https://www.cscdigitalbrand.services
+Last Modified: 2020-04-27T08:42:13Z
+Registrar Name: Corporation Service Company (Aust) Pty Ltd
+Registrar Abuse Contact Email: domainabuse@cscglobal.com
+Registrar Abuse Contact Phone: +1.8887802723
+Reseller Name:
+Status: clientDeleteProhibited https://afilias.com.au/get-au/whois-status-codes#clientDeleteProhibited
+Status: serverDeleteProhibited https://afilias.com.au/get-au/whois-status-codes#serverDeleteProhibited
+Status: serverRenewProhibited https://afilias.com.au/get-au/whois-status-codes#serverRenewProhibited
+Status: serverUpdateProhibited https://afilias.com.au/get-au/whois-status-codes#serverUpdateProhibited
+Registrant Contact ID: TELSTRACORPLTD
+Registrant Contact Name: Domain Administrator
+Tech Contact ID: TELSTRACORPLTD
+Tech Contact Name: Domain Administrator
+Name Server: ADNS01.BIGPOND.COM
+Name Server: ADNS02.BIGPOND.COM
+Name Server: ADNS03.BIGPOND.COM
+Name Server: ADNS04.BIGPOND.COM
+DNSSEC: unsigned
+Registrant: Telstra Corporation Ltd
+Registrant ID: ABN 33 051 775 556
+Eligibility Type: Trademark Owner
+
+>>> Last update of WHOIS database: 2020-06-08T14:31:59Z <<<
+
+
+
 Afilias Australia Pty Ltd (Afilias), for itself and on behalf of .au Domain Administration Limited (auDA), makes the WHOIS registration data directory service (WHOIS Service) available solely for the purposes of:
 
 (a) querying the availability of a domain name licence;
