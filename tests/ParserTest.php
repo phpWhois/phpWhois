@@ -113,6 +113,11 @@ class ParserTest extends TestCase
                 'format'   => 'mdy',
                 'expected' => '2017-07-29',
             ],
+            'google.ws'            => [
+                'date'     => '2021-03-03T00:00:00-0800',
+                'format'   => 'mdy',
+                'expected' => '2021-03-03',
+            ],
             // '' => ['date' => '', 'format' => 'Ymd', 'expected' => ''],
         ];
     }

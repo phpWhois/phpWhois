@@ -1,6 +1,7 @@
 5.6.4 - 2020-10-03
 ------------------
 * Improve support for `.co.uk` domains (TorbenLundsgaard)
+* Improve support for `.ws` domains (sirvulcan)
 
 5.6.3 - 2020-10-03
 ------------------

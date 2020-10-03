@@ -948,6 +948,13 @@ function parseStandardDate(string $date)
         return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
     }
 
+    // 2021-03-03T00:00:00-0800
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[-+]\d{4}$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:sP';
+        return Datetime::createFromFormat($dateTimeFormat, $date);
+    }
+
     // 27-Jul-2016
     $pattern = '/^\d{2}-[a-zA-Z]{3}-\d{4}$/';
     if (preg_match($pattern, $date)) {

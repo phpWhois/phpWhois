@@ -1,0 +1,60 @@
+Domain Name: SAMOANIC.WS
+Domain ID: D865CD2902FC835CE040010AAB015FFF
+WHOIS Server: 
+Registrar URL: http://samoanic.ws/whois.dhtml
+Updated Date: 2020-03-09T09:41:00Z
+Creation Date: 2000-03-09T19:11:00Z
+Registrar Registration Expiration Date: 2021-03-09T19:11:00Z
+Registrar: Computer Services Limited
+Registrar IANA ID: 
+Registrar Abuse Contact Email: helpdesk@samoa.ws
+Registrar Abuse Contact Phone: 68520926
+Domain Status: ok
+Registry Registrant ID:
+Registrant Name: CSL
+Registrant Organization: Computer Services Limited
+Registrant Street: 701 Palomar Airport Rd. 3rd floor  
+Registrant City: Carlsbad
+Registrant State/Province: CA
+Registrant Postal Code: 92009
+Registrant Country: US
+Registrant Phone: +1.68520926
+Registrant Phone Ext: 
+Registrant Fax: 
+Registrant Fax Ext: 
+Registrant Email: domains@samoa.ws
+Registry Admin ID:
+Admin Name: CSL
+Admin Organization: Computer Services Limited
+Admin Street: 701 Palomar Airport Rd. 3rd floor  
+Admin City: Carlsbad
+Admin State/Province: CA
+Admin Postal Code: 92009
+Admin Country: US
+Admin Phone: +1.68520926
+Admin Phone Ext: 
+Admin Fax: 
+Admin Fax Ext: 
+Admin Email: domains@samoa.ws
+Registry Tech ID:
+Tech Name: CSL
+Tech Organization: Computer Services Limited
+Tech Street: 701 Palomar Airport Rd. 3rd floor  
+Tech City: Carlsbad
+Tech State/Province: CA
+Tech Postal Code: 92009
+Tech Country: US
+Tech Phone: +1.68520926
+Tech Phone Ext: 
+Tech Fax: 
+Tech Fax Ext: 
+Tech Email: domains@samoa.ws
+Name Server: ns2.ncsdi.ws.
+Name Server: ns3.ncsdi.ws.
+Name Server: ns4.ncsdi.ws.
+Name Server: ns5.ncsdi.ws.
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
+>>> Last update of WHOIS database: 2020-06-07T14:27:27Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
