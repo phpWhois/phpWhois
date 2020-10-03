@@ -1,3 +1,7 @@
+5.6.4 - 2020-10-03
+------------------
+* Improve support for `.co.uk` domains (TorbenLundsgaard)
+
 5.6.3 - 2020-10-03
 ------------------
 * Split fixture files the same way WhoisClient splits raw whois data (naitsirch)

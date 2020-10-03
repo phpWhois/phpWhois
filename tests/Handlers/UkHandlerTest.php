@@ -97,7 +97,7 @@ class UkHandlerTest extends HandlerTest
                 'created' => '1999-02-14',
                 'expires' => '2021-02-14',
             ],
-            // 'registered' => 'yes', // Currently broken
+            'registered' => 'yes',
         ];
 
         $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
@@ -128,7 +128,7 @@ class UkHandlerTest extends HandlerTest
                 'created' => '2001-02-21',
                 'expires' => '2021-02-21',
             ],
-            // 'registered' => 'yes', // Currently broken
+            'registered' => 'yes',
         ];
 
         $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');

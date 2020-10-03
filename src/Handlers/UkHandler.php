@@ -43,6 +43,10 @@ class UkHandler extends AbstractHandler
             $r['regrinfo']['owner']['organization'] = $r['regrinfo']['owner']['organization'][0];
             $r['regrinfo']['domain']['sponsor']     = $r['regrinfo']['domain']['sponsor'][0];
             $r['regrinfo']['registered']            = 'yes';
+        } elseif (strpos($query, '.co.uk') && isset($r['regrinfo']['domain']['status'][0])) {
+            if ($r['regrinfo']['domain']['status'][0] == 'Registered until expiry date.') {
+                $r['regrinfo']['registered'] = 'yes';
+            }
         } else {
             if (strpos($data_str['rawdata'][1], 'Error for ')) {
                 $r['regrinfo']['registered']       = 'yes';
