@@ -93,7 +93,7 @@ class WsHandlerTest extends HandlerTest
 
         $expected = [
             'domain'     => [
-                'name'    => 'samoanic.ws',
+                'name'    => 'SAMOANIC.WS',
                 'changed' => '2020-03-09',
                 'created' => '2000-03-09',
                 'expires' => '2021-03-09',
