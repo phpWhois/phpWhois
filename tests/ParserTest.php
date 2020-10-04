@@ -4,16 +4,14 @@
  * @license   GPL-2.0
  */
 
-namespace Whois;
-
-use PHPUnit\Framework\TestCase;
+namespace phpWhois;
 
 require_once __DIR__ . '/../src/whois.parser.php';
 
 /**
  * ParserTest
  */
-class ParserTest extends TestCase
+class ParserTest extends BaseTestCase
 {
     public function get_dateProvider()
     {
@@ -113,7 +111,7 @@ class ParserTest extends TestCase
                 'format'   => 'mdy',
                 'expected' => '2017-07-29',
             ],
-            'google.ws'            => [
+            'google.ws'              => [
                 'date'     => '2021-03-03T00:00:00-0800',
                 'format'   => 'mdy',
                 'expected' => '2021-03-03',
@@ -134,6 +132,10 @@ class ParserTest extends TestCase
      */
     public function get_date(string $date, string $format, string $expected)
     {
+        if ($date === '2017-07-29T11:00:47.438Z') {
+            $this->skipWhenPhp8();
+        }
+
         $actual = get_date($date, $format);
 
         $this->assertEquals($expected, $actual);

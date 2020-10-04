@@ -36,6 +36,7 @@ class DeHandlerTest extends HandlerTest
      */
     public function parse4EverDotDe()
     {
+        $this->skipWhenPhp8();
         $query = '4ever.de';
 
         $fixture = $this->loadFixture($query);
@@ -126,6 +127,7 @@ class DeHandlerTest extends HandlerTest
      */
     public function parseDomainInConnectStatus()
     {
+        $this->skipWhenPhp8();
         $query = 'humblebundle.de';
 
         $fixture = $this->loadFixture($query);

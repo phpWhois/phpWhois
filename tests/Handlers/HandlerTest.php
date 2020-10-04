@@ -21,12 +21,12 @@
 
 namespace phpWhois\Handlers;
 
-use PHPUnit\Framework\TestCase;
+use phpWhois\BaseTestCase;
 
 /**
  * HandlerTest
  */
-abstract class HandlerTest extends TestCase
+abstract class HandlerTest extends BaseTestCase
 {
     /**
      * @param string $which
