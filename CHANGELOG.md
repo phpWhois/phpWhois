@@ -1,6 +1,6 @@
-6.0.0 - 2020-10-
-------------------
-* Enable support for PHPUnit 8
+6.0.0-rc1 - 2020-10-04
+----------------------
+* Enable support for PHPUnit 8 & 9
 * Require PHP >7.2
 
 5.6.4 - 2020-10-03

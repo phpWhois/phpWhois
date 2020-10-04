@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "dms/phpunit-arraysubset-asserts": "~0.1",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "suggest": {
         "lib-openssl": "*"
