@@ -24,7 +24,7 @@
 
 namespace phpWhois;
 
-use Algo26\IdnaConvert\IdnaConvert;
+use Algo26\IdnaConvert\ToIdn;
 
 /**
  * phpWhois main class
@@ -90,12 +90,12 @@ class Whois extends WhoisClient
 
         $query = trim($query);
 
-        $idn = new IdnaConvert();
+        $idn = new ToIdn();
 
         if ($is_utf) {
-            $query = $idn->encode($query);
+            $query = $idn->convert($query);
         } else {
-            $query = $idn->encode(utf8_encode($query));
+            $query = $idn->convert(utf8_encode($query));
         }
 
         // If domain to query was not set

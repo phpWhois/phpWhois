@@ -33,7 +33,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "algo26-matthias/idna-convert": "^2.0"
+        "algo26-matthias/idna-convert": "^3.0"
     },
     "require-dev": {
         "dms/phpunit-arraysubset-asserts": "~0.1",
