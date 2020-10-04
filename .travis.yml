@@ -31,7 +31,7 @@ before_script:
   - composer update $PREFER_LOWEST $IGNORE_PLATFORM_REQS
 
 script:
-  - php testsuite.php --ci
+#  - php testsuite.php --ci
   - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
 
 after_script:
