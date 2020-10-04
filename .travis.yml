@@ -17,11 +17,7 @@ env:
     - PREFER_LOWEST="--prefer-lowest --prefer-stable"
     - PREFER_LOWEST=""
     - IGNORE_PLATFORM_REQS=""
-
-jobs:
-  include:
-  - php: nightly
-    env: IGNORE_PLATFORM_REQS=--ignore-platform-reqs
+    - IGNORE_PLATFORM_REQS="--ignore-platform-reqs"
 
 # faster builds on new travis containers
 sudo: false
