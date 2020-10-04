@@ -32,11 +32,11 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.2",
         "algo26-matthias/idna-convert": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0 || ^7.0"
+        "phpunit/phpunit": "^8.0"
     },
     "suggest": {
         "lib-openssl": "*"
