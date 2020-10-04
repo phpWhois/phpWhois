@@ -21,6 +21,8 @@
 
 namespace phpWhois\Handlers;
 
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
+
 /**
  * WsHandlerTest
  */
@@ -69,9 +71,9 @@ class WsHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 
     /**
@@ -101,8 +103,8 @@ class WsHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 }

@@ -21,6 +21,8 @@
 
 namespace phpWhois\Handlers;
 
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
+
 /**
  * OrgHandlerTest
  */
@@ -69,9 +71,9 @@ class OrgHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 
     /**
@@ -98,9 +100,9 @@ class OrgHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
 
         $this->assertEquals('2020-01-13', $actual['regrinfo']['domain']['changed'], 'Incorrect change date');
         $this->assertEquals('2012-10-01', $actual['regrinfo']['domain']['created'], 'Incorrect created date');

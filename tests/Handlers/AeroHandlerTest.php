@@ -6,6 +6,8 @@
 
 namespace phpWhois\Handlers;
 
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
+
 /**
  * AeroHandlerTest
  */
@@ -54,8 +56,8 @@ class AeroHandlerTest extends HandlerTest
             'registered' => 'yes', // Currently broken
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
         $this->assertArrayHasKey('rawdata', $actual);
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 }

@@ -36,6 +36,7 @@
         "algo26-matthias/idna-convert": "^2.0"
     },
     "require-dev": {
+        "dms/phpunit-arraysubset-asserts": "~0.1",
         "phpunit/phpunit": "^8.0"
     },
     "suggest": {

@@ -21,6 +21,8 @@
 
 namespace phpWhois\Handlers;
 
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
+
 /**
  * UkHandlerTest
  */
@@ -69,8 +71,8 @@ class UkHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 
     /**
@@ -100,8 +102,8 @@ class UkHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 
     /**
@@ -131,7 +133,7 @@ class UkHandlerTest extends HandlerTest
             'registered' => 'yes',
         ];
 
-        $this->assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
-        $this->assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
     }
 }
