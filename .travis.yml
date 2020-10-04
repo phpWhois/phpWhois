@@ -16,6 +16,12 @@ env:
   matrix:
     - PREFER_LOWEST="--prefer-lowest --prefer-stable"
     - PREFER_LOWEST=""
+    - IGNORE_PLATFORM_REQS=""
+
+jobs:
+  include:
+  - php: nightly
+    env: IGNORE_PLATFORM_REQS=--ignore-platform-reqs
 
 # faster builds on new travis containers
 sudo: false
@@ -26,7 +32,7 @@ install:
 before_script:
   - php -i
   - composer validate --no-check-all --strict
-  - composer update $PREFER_LOWEST
+  - composer update $PREFER_LOWEST $IGNORE_PLATFORM_REQS
 
 script:
   - php testsuite.php --ci
