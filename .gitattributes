@@ -2,6 +2,3 @@
 
 # Set the default behavior, in case someone doesn't have core.autocrlf set.
 * text=auto
-
-# Force the fixtures to always have CRLF line endings on checkout.
-*.txt text eol=lf
