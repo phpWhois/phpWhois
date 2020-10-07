@@ -58,8 +58,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "replace": {
-        "phpwhois/phpwhois": "4.2.*"
     }
 }
