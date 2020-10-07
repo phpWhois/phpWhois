@@ -1,3 +1,6 @@
+os: linux
+dist: xenial
+
 language: php
 
 php:
@@ -6,21 +9,20 @@ php:
   - 7.4
   - nightly
 
-matrix:
+jobs:
   fast_finish: true
   allow_failures:
     - php:
-        - nightly
+        nightly
+  include:
+    - php: nightly
+      env: IGNORE_PLATFORM_REQS="--ignore-platform-reqs"
 
 env:
-  matrix:
+  jobs:
     - PREFER_LOWEST="--prefer-lowest --prefer-stable"
     - PREFER_LOWEST=""
-    - IGNORE_PLATFORM_REQS=""
-    - IGNORE_PLATFORM_REQS="--ignore-platform-reqs"
 
-# faster builds on new travis containers
-sudo: false
 
 install:
   - composer self-update && composer --version
