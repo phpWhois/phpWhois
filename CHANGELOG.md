@@ -1,3 +1,9 @@
+6.0.0 - 2020-12-05
+----------------------
+* Work around deprecated PHPUnit method
+* Use `algo26-matthias/idna-convert@dev-master` while waiting for official PHP 8.0 support
+* Simplify CI testing
+
 6.0.0-rc1 - 2020-10-04
 ----------------------
 * Enable support for PHPUnit 8 & 9

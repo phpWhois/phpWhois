@@ -1,3 +1,4 @@
+# https://config.travis-ci.com/explore
 os: linux
 dist: xenial
 
@@ -7,20 +8,21 @@ php:
   - 7.2
   - 7.3
   - 7.4
+  - 8.0
   - nightly
 
 jobs:
   fast_finish: true
   allow_failures:
-    - php:
-        nightly
-  include:
+    - php: 8.0
     - php: nightly
-      env: IGNORE_PLATFORM_REQS="--ignore-platform-reqs"
+  include:
+    - php: 8.0
+    - php: nightly
 
 env:
   jobs:
-    - PREFER_LOWEST="--prefer-lowest --prefer-stable"
+#    - PREFER_LOWEST="--prefer-lowest --prefer-stable"
     - PREFER_LOWEST=""
 
 
@@ -30,7 +32,7 @@ install:
 before_script:
   - php -i
   - composer validate --no-check-all --strict
-  - composer update $PREFER_LOWEST $IGNORE_PLATFORM_REQS
+  - composer update $PREFER_LOWEST
 
 script:
 #  - php testsuite.php --ci
