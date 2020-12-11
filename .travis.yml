@@ -14,10 +14,6 @@ php:
 jobs:
   fast_finish: true
   allow_failures:
-    - php: 8.0
-    - php: nightly
-  include:
-    - php: 8.0
     - php: nightly
 
 env:

@@ -1,3 +1,7 @@
+6.0.1 - 2020-12-10
+----------------------
+* Revert using `algo26-matthias/idna-convert@dev-master`
+
 6.0.0 - 2020-12-05
 ----------------------
 * Work around deprecated PHPUnit method
