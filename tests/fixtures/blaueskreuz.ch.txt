@@ -1,0 +1,6 @@
+Connecting to CH.whois-servers.net...
+
+Requests of this client are not permitted. Please use https://www.nic.ch/whois/ for queries.
+
+
+Connecting to is client are not permitted. Please use https://www.nic.ch/whois/ for queries....

@@ -1,0 +1,72 @@
+Domain Name: NIC.COOP
+Registry Domain ID: D7902967-CNIC
+Registrar WHOIS Server: whois.nic.coop
+Registrar URL: http://www.nic.coop
+Updated Date: 2020-04-29T00:10:11.0Z
+Creation Date: 2015-05-05T10:25:12.0Z
+Registry Expiry Date: 2021-05-05T23:59:59.0Z
+Registrar: DotCooperation LLC
+Registrar IANA ID: 9999
+Domain Status: ok https://icann.org/epp#ok
+Registrant Name: Domain Administrator
+Registrant Organization: DotCooperation LLC
+Registrant Street: 1401 New York Avenue, N.W.
+Registrant Street: Suite 1100
+Registrant City: Washington DC
+Registrant State/Province:
+Registrant Postal Code: 20005
+Registrant Country: US
+Registrant Phone: +1.2023835453
+Registrant Fax: +1.2026286726
+Registrant Email: support@nic.coop
+Admin Name: Domain Administrator
+Admin Organization: DotCooperation LLC
+Admin Street: 1401 New York Avenue, N.W.
+Admin Street: Suite 1100
+Admin City: Washington DC
+Admin State/Province:
+Admin Postal Code: 20005
+Admin Country: US
+Admin Phone: +1.2023835453
+Admin Fax: +1.2026286726
+Admin Email: support@nic.coop
+Tech Name: Domain Administrator
+Tech Organization: DotCooperation LLC
+Tech Street: 1401 New York Avenue, N.W.
+Tech Street: Suite 1100
+Tech City: Washington DC
+Tech State/Province:
+Tech Postal Code: 20005
+Tech Country: US
+Tech Phone: +1.2023835453
+Tech Fax: +1.2026286726
+Tech Email: support@nic.coop
+Name Server: NS0.CENTRALNIC-DNS.COM
+Name Server: NS1.CENTRALNIC-DNS.COM
+Name Server: NS2.CENTRALNIC-DNS.COM
+Name Server: NS3.CENTRALNIC-DNS.COM
+Name Server: NS4.CENTRALNIC-DNS.COM
+Name Server: NS5.CENTRALNIC-DNS.COM
+DNSSEC: unsigned
+Registrar Abuse Contact Email: info@centralnic.com
+Registrar Abuse Contact Phone: +1.2023835453
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+>>> Last update of WHOIS database: 2020-06-07T14:28:23.0Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
+
+>>> IMPORTANT INFORMATION ABOUT THE DEPLOYMENT OF RDAP: please visit
+https://www.centralnic.com/support/rdap <<<
+
+The Whois and RDAP services are provided by CentralNic, and contain
+information pertaining to Internet domain names registered by our
+our customers. By using this service you are agreeing (1) not to use any
+information presented here for any purpose other than determining
+ownership of domain names, (2) not to store or reproduce this data in
+any way, (3) not to use any high-volume, automated, electronic processes
+to obtain data from this service. Abuse of this service is monitored and
+actions in contravention of these terms will result in being permanently
+blacklisted. All data is (c) CentralNic Ltd (https://www.centralnic.com)
+
+Access to the Whois and RDAP services is rate limited. For more
+information, visit https://registrar-console.centralnic.com/pub/whois_guidance.

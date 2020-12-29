@@ -1,0 +1,76 @@
+Connecting to CZ.whois-servers.net...
+
+domain:       nic.cz
+registrant:   CZ-NIC
+admin-c:      FEELA
+admin-c:      MAPET
+nsset:        CZ.NIC
+keyset:       CZNIC
+registrar:    REG-CZNIC
+status:       Sponsoring registrar change forbidden
+registered:   30.10.1997 01:00:00
+changed:      22.11.2016 15:07:40
+expire:       15.03.2027
+
+contact:      CZ-NIC
+org:          CZ.NIC, z.s.p.o.
+name:         CZ.NIC, z.s.p.o.
+address:      Milesovska 1136/5
+address:      Praha 3
+address:      130 00
+address:      CZ
+registrar:    REG-CZNIC
+created:      17.10.2008 12:08:21
+changed:      15.05.2018 21:32:00
+
+contact:      FEELA
+name:         ONDŘEJ FILIP
+registrar:    REG-MOJEID
+created:      04.01.2005 13:35:00
+changed:      23.09.2020 13:26:21
+
+contact:      MAPET
+name:         MARTIN PETERKA
+registrar:    REG-MOJEID
+created:      06.03.2002 18:11:00
+changed:      08.10.2020 10:39:13
+
+nsset:        CZ.NIC
+nserver:      d.ns.nic.cz (193.29.206.1, 2001:678:1::1)
+nserver:      a.ns.nic.cz (194.0.12.1, 2001:678:f::1)
+nserver:      b.ns.nic.cz (194.0.13.1, 2001:678:10::1)
+tech-c:       JTALIR
+tech-c:       JAROMIR-TALIR
+registrar:    REG-CZNIC
+created:      09.06.2008 14:30:16
+changed:      20.09.2013 11:18:20
+
+contact:      JTALIR
+name:         JAROMÍR TALÍŘ
+registrar:    REG-MOJEID
+created:      26.10.2010 10:53:34
+changed:      21.09.2020 22:11:50
+
+contact:      JAROMIR-TALIR
+name:         Jaromír Talíř
+address:      Americká 23
+address:      Praha 2
+address:      120 00
+address:      CZ
+registrar:    REG-MOJEID
+created:      01.12.2011 17:35:04
+changed:      27.09.2017 17:02:28
+
+keyset:       CZNIC
+dnskey:       257 3 13 LM4zvjUgZi2XZKsYooDE0HFYGfWp242fKB+O8sLsuox8S6MJTowY8lBDjZD7JKbmaNot3+1H8zU9TrDzWmmHwQ==
+tech-c:       JTALIR
+registrar:    REG-CZNIC
+created:      20.05.2016 16:13:26
+
+
+
+Connecting to nic.cz...
+
+Your connection limit exceeded. Please slow down and try again later.
+
+Connecting to n limit exceeded. Please slow down and try again later....

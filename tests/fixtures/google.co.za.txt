@@ -1,0 +1,79 @@
+Accounting info....
+  Date    |Type|  Cost |Invoices are E-Mail to....|Paid Date |ICnt| TrkNo  |Billing Info
+
+
+Flashing RED indicates that payment has not been received - please
+confirm with the ZACR accounting department, accounts@co.za, should this
+not be according to your records. You have been sent 0 invoices/statements.
+
+
+0a. lastupdate             :
+0b. emailsource            : REDACTED
+0c. emailposted            :
+0d. emailsubject           :
+0g. historycount           :
+0h. invoiceno              :
+0i. contracttype           :
+0j. rcsversion             :
+1a. domain                 : google.co.za
+1b. action                 :
+1c. Registrar              : MarkMonitor
+2a. registrant             : REDACTED
+2b. registrantpostaladdress: REDACTED
+2c. registrantstreetaddress: REDACTED
+2d. amount                 : REDACTED
+2e. paymenttype            : REDACTED
+2f. billingaccount         : REDACTED
+2g. billingemail           : REDACTED
+2i. invoiceaddress         : REDACTED
+2j. registrantphone        : REDACTED
+2k. registrantfax          : REDACTED
+2l. registrantemail        : REDACTED
+2n. vat                    : REDACTED
+3b. cname                  :
+3c. cnamesub1              :
+3d. cnamesub2              :
+3e. creationdate           : 2001/06/25 22:37:59
+4a. admin                  : REDACTED
+4b. admintitle             : REDACTED
+4c. admincompany           : REDACTED
+4d. adminpostaladdr        : REDACTED
+4e. adminphone             : REDACTED
+4f. adminfax               : REDACTED
+4g. adminemail             : REDACTED
+4h. adminnic               : REDACTED
+5a. tec                    : REDACTED
+5b. tectitle               : REDACTED
+5c. teccompany             : REDACTED
+5d. tecpostaladdr          : REDACTED
+5e. tecphone               : REDACTED
+5f. tecfax                 : REDACTED
+5g. tecemail               : REDACTED
+5h. tecnic                 : REDACTED
+6a. primnsfqdn             : ns1.google.com
+6b. primnsip               :
+6c. primnsipv6             :
+6e. secns1fqdn             : ns2.google.com
+6f. secns1ip               :
+6g. secns1ipv6             :
+6i. secns2fqdn             : ns3.google.com
+6j. secns2ip               :
+6k. secns2ipv6             :
+6m. secns3fqdn             : ns4.google.com
+6n. secns3ip               :
+6o. secns3ipv6             :
+6q. secns4fqdn             :
+6r. secns4ip               :
+6s. secns4ipv6             :
+8a. netblock1start         :
+8b. netblock1end           :
+8c. netblock2start         :
+8d. netblock2end           :
+8e. netblock3start         :
+8f. netblock3end           :
+9a. description1           :
+9b. description2           :
+9c. description3           :
+9d. description4           :
+9e. description5           :
+9f. description6           :

@@ -9,3 +9,7 @@ nbproject
 .idea/
 
 *.phar
+
+coverage.clover
+*.cache
+*.diff

@@ -79,4 +79,26 @@ abstract class AbstractHandler implements HandlerInterface
     {
         return generic_parser_a($rawdata, $translate, $contacts, $main, $dateformat);
     }
+
+    /**
+     * @param string[] $rawData
+     *
+     * @return array
+     */
+    protected function parseRegistryInfo(array $rawData): array
+    {
+        $registryItems = [
+            'Registrar URL:'                 => 'referrer',
+            'Registrar Name:'                => 'registrar',
+            'Registrar:'                     => 'registrar',
+            'Registrar Abuse Contact Email:' => 'abuse.email',
+            'Registrar Abuse Contact Phone:' => 'abuse.phone',
+            'Registrar WHOIS Server:'        => 'whois',
+        ];
+
+        $registryInfo = $this->generic_parser_b($rawData, $registryItems);
+        unset($registryInfo['registered']);
+
+        return $registryInfo;
+    }
 }

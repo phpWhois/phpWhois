@@ -1,0 +1,79 @@
+
+% The data in the WHOIS database of the .il registry is provided
+% by ISOC-IL for information purposes, and to assist persons in 
+% obtaining information about or related to a domain name 
+% registration record. ISOC-IL does not guarantee its accuracy.
+% By submitting a WHOIS query, you agree that you will use this
+% Data only for lawful purposes and that, under no circumstances
+% will you use this Data to: (1) allow, enable, or otherwise 
+% support the transmission of mass unsolicited, commercial 
+% advertising or solicitations via e-mail (spam); 
+% or  (2) enable high volume, automated, electronic processes that 
+% apply to ISOC-IL (or its systems).
+% ISOC-IL reserves the right to modify these terms at any time.
+% By submitting this query, you agree to abide by this policy.
+ 
+query:        tapuz.co.il
+
+reg-name:     tapuz
+domain:       tapuz.co.il
+
+descr:        Orange Holdings ltd.
+descr:        POB 2428
+descr:        kiryat ono
+descr:        5512203
+descr:        Israel
+phone:        +972 52 3444778
+e-mail:       renoch AT gmail.com
+admin-c:      DT-DA25843-IL
+tech-c:       DT-DA25844-IL
+zone-c:       DT-DA25845-IL
+nserver:      carlane.ns.cloudflare.com 
+nserver:      james.ns.cloudflare.com 
+validity:     06-11-2020
+DNSSEC:       unsigned
+status:       Transfer Locked
+changed:      domain-registrar AT isoc.org.il 20171106 (Assigned)
+changed:      domain-registrar AT isoc.org.il 20191003 (Changed)
+changed:      domain-registrar AT isoc.org.il 20191007 (Changed)
+changed:      domain-registrar AT isoc.org.il 20191007 (Changed)
+changed:      domain-registrar AT isoc.org.il 20191007 (Changed)
+changed:      domain-registrar AT isoc.org.il 20200228 (Changed)
+
+person:       Domain Admin
+address      Orange Holdings ltd.
+address      POB 2428
+address      kiryat ono
+address      5512203
+address      Israel
+phone:        +972 52 3444778
+e-mail:       renoch AT gmail.com
+nic-hdl:      DT-DA25843-IL
+changed:      Managing Registrar 20191007
+
+person:       Domain Admin
+address      Orange Holdings ltd.
+address      POB 2428
+address      kiryat ono
+address      5512203
+address      Israel
+phone:        +972 52 3444778
+e-mail:       renoch AT gmail.com
+nic-hdl:      DT-DA25844-IL
+changed:      Managing Registrar 20191007
+
+person:       Domain Admin
+address      Orange Holdings ltd.
+address      POB 2428
+address      kiryat ono
+address      5512203
+address      Israel
+phone:        +972 52 3444778
+e-mail:       renoch AT gmail.com
+nic-hdl:      DT-DA25845-IL
+changed:      Managing Registrar 20191007
+
+registrar name: Domain The Net Technologies Ltd
+registrar info: https://www.domainthenet.com
+
+% Rights to the data above are restricted by copyright.

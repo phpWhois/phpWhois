@@ -21,6 +21,8 @@
 
 namespace phpWhois\Handlers;
 
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
+
 /**
  * DevHandlerTest
  */

@@ -17,6 +17,8 @@ jobs:
     - php: nightly
 
 env:
+  global:
+    - XDEBUG_MODE="coverage"
   jobs:
 #    - PREFER_LOWEST="--prefer-lowest --prefer-stable"
     - PREFER_LOWEST=""

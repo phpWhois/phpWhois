@@ -11,16 +11,16 @@ br		registro.br
 ca		cira.ca
 ch		creart.ch blaueskreuz.ch
 cl      google.cl
-cn		china.cn
-co		nic.co
-cz		nic.cz
+cn		china.cn google.cn
+co		nic.co google.co
+cz		nic.cz google.cz
 de		4ever.de denic.de google.de nic.de humblebundle.de a2ba91bff88c6983f6af010c41236206df64001d.de
-fi		ficora.fi
+fi		ficora.fi google.fi
 fj		usp.ac.fj
-fm		dot.fm
-fr		nic.fr lemonade.fr
-hu		nic.hu
-ie		domainregistry.ie
+fm		dot.fm google.fm
+fr		nic.fr lemonade.fr google.fr
+hu		nic.hu google.hu
+ie		domainregistry.ie google.ie
 il		tapuz.co.il
 in		registry.in
 is		isnic.is
@@ -45,12 +45,13 @@ uk		olsns.co.uk google.co.uk vibrantdigitalfuture.uk
 us		neustar.us google.us
 ve		nic.ve
 ws		samoanic.ws surf.ws
-co.za		sex.co.za
+co.za		sex.co.za google.co.za
 org.za		sex.org.za
 
 // Punicode
 
-// xn--p1ai 	xn--c1ad6a.xn--p1ai
+рф  рег.рф  // xn--p1ai 	xn--c1ad6a.xn--p1ai
+
 
 // .com/.net/.tv/.jobs
 
@@ -107,12 +108,13 @@ corporatedomains	cscglobal.com
 aero		nic.aero
 asia		nic.asia
 biz		neulevel.biz
-cat		dominis.cat
+cat		dominis.cat    google.cat
 coop		smile.coop nic.coop
 edu		berkeley.edu
-eu		eurid.eu
+eu		eurid.eu google.eu
 info		afilias.info
 int		who.int
+kiwi    hello.kiwi    google.kiwi
 me		domain.me
 mobi		mtld.mobi
 museum		nic.museum

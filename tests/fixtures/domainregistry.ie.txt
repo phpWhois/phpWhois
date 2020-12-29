@@ -1,0 +1,27 @@
+
+% Rights restricted by copyright; http://iedr.ie/index.php/mnudomregs/mnudnssearch/96
+% Do not remove this notice
+
+Domain:                  domainregistry.ie
+Domain Holder:           IE Domain Registry Company Limited By Guarantee
+Admin-c:                 IH4-IEDR
+Tech-c:                  ITS2-IEDR
+Account Name:            IEDR
+Registrar Abuse Contact: abuse@iedr.ie
+Registration Date:       19-March-1999
+Renewal Date:            01-January-2025
+Holder-type:             NonBillable
+Locked status:           N
+Renewal status:          Active
+In-zone:                 1
+Nserver:                 ns0.iedr.ie  
+Nserver:                 ns3.iedr.ie  
+Nserver:                 b.ns.ie  
+Nserver:                 auth-ns2.heanet.ie  
+Nserver:                 auth-ns3.heanet.ie  
+
+
+% Important Notice
+% If you believe that information published on this page is incorrect, or should not be published, please contact your Registrar, or the IEDR Registration Services Department who will advise you further. 
+% You can also contact your Registrar or the IEDR if your domain holder name isn’t showing and you would like it to be published.
+% Our contact information is available at https://www.iedr.ie/contact-us/ 
