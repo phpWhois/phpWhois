@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -28,9 +29,11 @@ if (!defined('__DK_HANDLER__')) {
 
 require_once('whois.parser.php');
 
-class dk_handler {
+class dk_handler
+{
 
-    function parse($data_str, $query) {
+    function parse($data_str, $query)
+    {
 
         $translate = [
             'Name' => 'name',
@@ -74,7 +77,6 @@ class dk_handler {
             $reg['domain'] = $r;
 
             format_dates($reg, 'Ymd');
-
         }
 
         $r = [];
@@ -87,5 +89,4 @@ class dk_handler {
 
         return $r;
     }
-
 }

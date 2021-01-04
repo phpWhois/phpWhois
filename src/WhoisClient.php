@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -122,7 +123,8 @@ class WhoisClient
         }
 
         // Check if protocol is http
-        if (substr($this->query['server'], 0, 7) == 'http://' ||
+        if (
+            substr($this->query['server'], 0, 7) == 'http://' ||
             substr($this->query['server'], 0, 8) == 'https://'
         ) {
             $output = $this->httpQuery($this->query['server']);
@@ -152,7 +154,7 @@ class WhoisClient
                 $query_args = str_replace('{query}', $query, $query_args);
                 $query_args = str_replace('{version}', 'phpWhois' . $this->codeVersion, $query_args);
 
-                $iptools = new IpTools;
+                $iptools = new IpTools();
                 if (strpos($query_args, '{ip}') !== false) {
                     $query_args = str_replace('{ip}', $iptools->getClientIp(), $query_args);
                 }
@@ -650,7 +652,7 @@ class WhoisClient
         $server = trim($server);
 
         $server = preg_replace('/\/$/', '', $server);
-        $ipTools = new IpTools;
+        $ipTools = new IpTools();
         if ($ipTools->validIpv6($server)) {
             $result = array('host' => "[$server]");
         } else {

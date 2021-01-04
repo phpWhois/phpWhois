@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license   See LICENSE file
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
@@ -45,5 +46,4 @@ class AmHandler extends AbstractHandler
 
         return $r;
     }
-
 }

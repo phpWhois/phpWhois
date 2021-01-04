@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -54,7 +55,7 @@ class eu_handler
 
         $r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
-        if (!empty($r['regrinfo']['domain']['status']))
+        if (!empty($r['regrinfo']['domain']['status'])) {
             switch ($r['regrinfo']['domain']['status']) {
                 case 'FREE':
                 case 'AVAILABLE':
@@ -67,7 +68,8 @@ class eu_handler
 
                 default:
                     $r['regrinfo']['registered'] = 'unknown';
-            } else {
+            }
+        } else {
             $r['regrinfo']['registered'] = 'yes';
         }
 

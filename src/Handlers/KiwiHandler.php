@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license   See LICENSE file
  * @copyright Copyright (c) 2020 Joshua Smith

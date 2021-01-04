@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -75,7 +76,7 @@ class Whois extends WhoisClient
         $lookup = $this->lookup($domain, $is_utf);
         return implode(PHP_EOL, $lookup['rawdata']);
     }
-    
+
     /**
      *  Lookup query
      *
@@ -328,7 +329,7 @@ class Whois extends WhoisClient
      */
     public function getQueryType($query)
     {
-        $ipTools = new IpTools;
+        $ipTools = new IpTools();
 
         if ($ipTools->validIp($query, 'ipv4', false)) {
             if ($ipTools->validIp($query, 'ipv4')) {

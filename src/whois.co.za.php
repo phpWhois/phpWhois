@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -22,8 +23,9 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-if (!defined('__CO_ZA_HANDLER__'))
+if (!defined('__CO_ZA_HANDLER__')) {
     define('__CO_ZA_HANDLER__', 1);
+}
 
 require_once('whois.parser.php');
 
