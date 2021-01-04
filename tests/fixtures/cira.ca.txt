@@ -1,0 +1,81 @@
+Domain Name: cira.ca
+Registry Domain ID: D436-CIRA
+Registrar WHOIS Server: whois.ca.fury.ca
+Registrar URL: http://www.cira.ca
+Updated Date: 2020-02-05T05:00:19Z
+Creation Date: 1998-02-05T05:00:00Z
+Registry Expiry Date: 2050-02-05T05:00:00Z
+Registrar: CIRA Default Registrar
+Registrar IANA ID:
+Registrar Abuse Contact Email:
+Registrar Abuse Contact Phone:
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
+Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
+Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
+Registry Registrant ID: R101-CIRA
+Registrant Name: Canadian Internet Registration Authority (NFP) / Autorité Canadienne pour les enregistrements Internet (OSBL)
+Registrant Organization:
+Registrant Street: 979 Bank Street, Suite 400
+Registrant City: Ottawa
+Registrant State/Province: ON
+Registrant Postal Code: K1S5K5
+Registrant Country: CA
+Registrant Phone: +1.6132375335
+Registrant Phone Ext:
+Registrant Fax:
+Registrant Fax Ext:
+Registrant Email: domains@cira.ca
+Registry Admin ID: C847977-CIRA
+Admin Name: Tanya O'Callaghan
+Admin Organization: CIRA
+Admin Street: Canadian Internet Registration Authority, 979 Bank Street, Suite 400
+Admin City: Ottawa
+Admin State/Province: ON
+Admin Postal Code: K1S5K5
+Admin Country: CA
+Admin Phone: +1.6132375335
+Admin Phone Ext:
+Admin Fax: +1.6132370534
+Admin Fax Ext:
+Admin Email: domains@cira.ca
+Registry Tech ID: C858875-CIRA
+Tech Name: Address Reply To
+Tech Organization:
+Tech Street: 979 Bank Street, Suite 400
+Tech City: Ottawa
+Tech State/Province: ON
+Tech Postal Code: K1S5K5
+Tech Country: CA
+Tech Phone: +1.6132375335
+Tech Phone Ext:
+Tech Fax:
+Tech Fax Ext:
+Tech Email: domains@cira.ca
+Registry Billing ID:
+Billing Name:
+Billing Organization:
+Billing Street:
+Billing City:
+Billing State/Province:
+Billing Postal Code:
+Billing Country:
+Billing Phone:
+Billing Phone Ext:
+Billing Fax:
+Billing Fax Ext:
+Billing Email:
+Name Server: ns1.d-zone.ca
+Name Server: ns2.d-zone.ca
+DNSSEC: signedDelegation
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+>>> Last update of WHOIS database: 2020-06-07T14:26:32Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
+
+%
+% Use of CIRA's WHOIS service is governed by the Terms of Use in its Legal
+% Notice, available at http://www.cira.ca/legal-notice/?lang=en
+%
+% (c) 2020 Canadian Internet Registration Authority, (http://www.cira.ca/)

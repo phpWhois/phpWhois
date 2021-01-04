@@ -1,0 +1,8 @@
+% Whois server 3.0 serving the hu ccTLD
+
+domain:         google.hu
+record created: 2000-03-25 23:20:39
+Tovabbi adatokert ld.:
+http://www.domain.hu/domain/domainsearch/
+For further data see:
+http://www.domain.hu/domain/English/domainsearch/

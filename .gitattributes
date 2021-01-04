@@ -1,0 +1,4 @@
+/composer.lock -merge
+
+# Set the default behavior, in case someone doesn't have core.autocrlf set.
+* text=auto

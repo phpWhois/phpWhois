@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -122,7 +123,8 @@ class WhoisClient
         }
 
         // Check if protocol is http
-        if (substr($this->query['server'], 0, 7) == 'http://' ||
+        if (
+            substr($this->query['server'], 0, 7) == 'http://' ||
             substr($this->query['server'], 0, 8) == 'https://'
         ) {
             $output = $this->httpQuery($this->query['server']);
@@ -152,7 +154,7 @@ class WhoisClient
                 $query_args = str_replace('{query}', $query, $query_args);
                 $query_args = str_replace('{version}', 'phpWhois' . $this->codeVersion, $query_args);
 
-                $iptools = new IpTools;
+                $iptools = new IpTools();
                 if (strpos($query_args, '{ip}') !== false) {
                     $query_args = str_replace('{ip}', $iptools->getClientIp(), $query_args);
                 }
@@ -359,7 +361,7 @@ class WhoisClient
         $output = '';
         $pre = '';
 
-        while (list($key, $val) = each($lines)) {
+        foreach ($lines as $val) {
             $val = trim($val);
 
             $pos = strpos(strtoupper($val), '<PRE>');
@@ -395,7 +397,7 @@ class WhoisClient
         $rawdata = array();
         $null = 0;
 
-        while (list($key, $val) = each($output)) {
+        foreach ($output as $val) {
             $val = trim($val);
             if ($val == '') {
                 if (++$null > 2) {
@@ -406,6 +408,7 @@ class WhoisClient
             }
             $rawdata[] = $val;
         }
+
         return $rawdata;
     }
 
@@ -471,33 +474,26 @@ class WhoisClient
      * @return array On success, returns the result from the handler.
      * On failure, returns passed result unaltered.
      */
-
     public function process(&$result, $deep_whois = true)
     {
+        $handlerName = $this->loadHandler($this->query['handler']);
 
-        $handler_name = str_replace('.', '_', $this->query['handler']);
-
-        // If the handler has not already been included somehow, include it now
-        $HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($handler_name));
-
-        if (!defined($HANDLER_FLAG)) {
-            include($this->query['file']);
+        if ($handlerName === false) {
+            $handlerName = $this->loadLegacyHandler($this->query['handler'], $this->query['file']);
         }
 
-        // If the handler has still not been included, append to query errors list and return
-        if (!defined($HANDLER_FLAG)) {
-            $this->query['errstr'][] = "Can't find $handler_name handler: " . $this->query['file'];
+        if ($handlerName === false) {
+            $this->query['errstr'][] = "Can't find {$this->query['handler']} handler: " . $this->query['file'];
+
             return $result;
         }
 
-        if (!$this->gtldRecurse && $this->query['file'] == 'whois.gtld.php') {
+        if (!$this->gtldRecurse && $this->query['file'] === 'whois.gtld.php') {
             return $result;
         }
 
         // Pass result to handler
-        $object = $handler_name . '_handler';
-
-        $handler = new $object('');
+        $handler = new $handlerName('');
 
         // If handler returned an error, append it to the query errors list
         if (isset($handler->query['errstr'])) {
@@ -568,7 +564,7 @@ class WhoisClient
 
         reset($a2);
 
-        while (list($key, $val) = each($a2)) {
+        foreach ($a2 as $key => $val) {
             if (isset($a1[$key])) {
                 if (is_array($val)) {
                     if ($key != 'nserver') {
@@ -656,7 +652,7 @@ class WhoisClient
         $server = trim($server);
 
         $server = preg_replace('/\/$/', '', $server);
-        $ipTools = new IpTools;
+        $ipTools = new IpTools();
         if ($ipTools->validIpv6($server)) {
             $result = array('host' => "[$server]");
         } else {
@@ -675,5 +671,41 @@ class WhoisClient
             }
         }
         return $result;
+    }
+
+    /**
+     * @return string|bool
+     */
+    protected function loadHandler(string $queryHandler)
+    {
+        $queryHandler = ucfirst($queryHandler);
+        $handlerName = "phpWhois\\Handlers\\{$queryHandler}Handler";
+        if (class_exists($handlerName)) {
+            return $handlerName;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return string|bool
+     */
+    protected function loadLegacyHandler(string $queryHandler, string $queryFile)
+    {
+        $handler_name = str_replace('.', '_', $queryHandler);
+
+        // If the handler has not already been included somehow, include it now
+        $HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($handler_name));
+
+        if (!defined($HANDLER_FLAG)) {
+            include($queryFile);
+        }
+
+        // If the handler has still not been included, append to query errors list and return
+        if (!defined($HANDLER_FLAG)) {
+            return false;
+        }
+
+        return $handler_name . '_handler';
     }
 }

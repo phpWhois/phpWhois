@@ -1,0 +1,8 @@
+% Whois server 3.0 serving the hu ccTLD
+
+domain:         nic.hu
+record created: 1996-06-27 13:36:21
+Tovabbi adatokert ld.:
+http://www.domain.hu/domain/domainsearch/
+For further data see:
+http://www.domain.hu/domain/English/domainsearch/

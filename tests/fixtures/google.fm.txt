@@ -1,0 +1,197 @@
+Connecting to FM.whois-servers.net...
+
+WHOIS Server: whois.markmonitor.com
+Registrar URL:
+Updated Date: 2020-08-03T09:32:12.0Z
+Creation Date: 2000-09-05T23:59:59.0Z
+Registry Expiry Date: 2021-09-04T23:59:59.0Z
+Registrar: MarkMonitor, Inc.
+Registrar IANA ID: 292
+Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+Registrant Email: https://whois.nic.fm/contact/google.fm/registrant
+Admin Email: https://whois.nic.fm/contact/google.fm/admin
+Tech Email: https://whois.nic.fm/contact/google.fm/tech
+Name Server: NS1.GOOGLE.COM
+Name Server: NS3.GOOGLE.COM
+Name Server: NS2.GOOGLE.COM
+DNSSEC: unsigned
+Billing Email: https://whois.nic.fm/contact/google.fm/billing
+Registrar Abuse Contact Email: ccops@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895740
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+>>> Last update of WHOIS database: 2020-10-10T23:08:21.0Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
+
+>>> IMPORTANT INFORMATION ABOUT THE DEPLOYMENT OF RDAP: please visit
+https://www.centralnic.com/support/rdap <<<
+
+The Whois and RDAP services are provided by CentralNic, and contain
+information pertaining to Internet domain names registered by our
+our customers. By using this service you are agreeing (1) not to use any
+information presented here for any purpose other than determining
+ownership of domain names, (2) not to store or reproduce this data in
+any way, (3) not to use any high-volume, automated, electronic processes
+to obtain data from this service. Abuse of this service is monitored and
+actions in contravention of these terms will result in being permanently
+blacklisted. All data is (c) CentralNic Ltd (https://www.centralnic.com)
+
+Access to the Whois and RDAP services is rate limited. For more
+information, visit https://registrar-console.centralnic.com/pub/whois_guidance.
+
+Connecting to whois.markmonitor.com...
+
+WHOIS Server: whois.markmonitor.com
+Registrar URL: http://www.markmonitor.com
+Updated Date: 2020-08-03T02:32:12-0700
+Creation Date: 2000-09-05T16:59:59-0700
+Registrar Registration Expiration Date: 2021-09-04T00:00:00-0700
+Registrar: MarkMonitor, Inc.
+Registrar IANA ID: 292
+Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895770
+Domain Status: clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)
+Domain Status: clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)
+Domain Status: clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)
+Registrant Organization: Google Inc.
+Registrant State/Province: CA
+Registrant Country: US
+Registrant Email: Select Request Email Form at https://domains.markmonitor.com/whois/google.fm
+Admin Organization: Google Inc.
+Admin State/Province: CA
+Admin Country: US
+Admin Email: Select Request Email Form at https://domains.markmonitor.com/whois/google.fm
+Tech Organization: Google Inc.
+Tech State/Province: CA
+Tech Country: US
+Tech Email: Select Request Email Form at https://domains.markmonitor.com/whois/google.fm
+Name Server: ns3.google.com
+Name Server: ns2.google.com
+Name Server: ns1.google.com
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
+>>> Last update of WHOIS database: 2020-10-10T16:08:22-0700 <<<
+
+For more information on WHOIS status codes, please visit:
+  https://www.icann.org/resources/pages/epp-status-codes
+
+If you wish to contact this domain’s Registrant, Administrative, or Technical
+contact, and such email address is not visible above, you may do so via our web
+form, pursuant to ICANN’s Temporary Specification. To verify that you are not a
+robot, please enter your email address to receive a link to a page that
+facilitates email communication with the relevant contact(s).
+
+Web-based WHOIS:
+  https://domains.markmonitor.com/whois
+
+If you have a legitimate interest in viewing the non-public WHOIS details, send
+your request and the reasons for your request to whoisrequest@markmonitor.com
+and specify the domain name in the subject line. We will review that request and
+may ask for supporting documentation and explanation.
+
+The data in MarkMonitor’s WHOIS database is provided for information purposes,
+and to assist persons in obtaining information about or related to a domain
+name’s registration record. While MarkMonitor believes the data to be accurate,
+the data is provided "as is" with no guarantee or warranties regarding its
+accuracy.
+
+By submitting a WHOIS query, you agree that you will use this data only for
+lawful purposes and that, under no circumstances will you use this data to:
+  (1) allow, enable, or otherwise support the transmission by email, telephone,
+or facsimile of mass, unsolicited, commercial advertising, or spam; or
+  (2) enable high volume, automated, or electronic processes that send queries,
+data, or email to MarkMonitor (or its systems) or the domain name contacts (or
+its systems).
+
+MarkMonitor reserves the right to modify these terms at any time.
+
+By submitting this query, you agree to abide by this policy.
+
+MarkMonitor Domain Management(TM)
+Protecting companies and consumers in a digital world.
+
+Visit MarkMonitor at https://www.markmonitor.com
+Contact us at +1.8007459229
+In Europe, at +44.02032062220
+
+
+
+Domain Name: google.fm
+Registry Domain ID: D34865469-CNIC
+Registrar WHOIS Server: whois.markmonitor.com
+Registrar URL: http://www.markmonitor.com
+Updated Date: 2020-08-03T02:32:12-0700
+Creation Date: 2000-09-05T16:59:59-0700
+Registrar Registration Expiration Date: 2021-09-04T00:00:00-0700
+Registrar: MarkMonitor, Inc.
+Registrar IANA ID: 292
+Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895770
+Domain Status: clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)
+Domain Status: clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)
+Domain Status: clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)
+Registrant Organization: Google Inc.
+Registrant State/Province: CA
+Registrant Country: US
+Registrant Email: Select Request Email Form at https://domains.markmonitor.com/whois/google.fm
+Admin Organization: Google Inc.
+Admin State/Province: CA
+Admin Country: US
+Admin Email: Select Request Email Form at https://domains.markmonitor.com/whois/google.fm
+Tech Organization: Google Inc.
+Tech State/Province: CA
+Tech Country: US
+Tech Email: Select Request Email Form at https://domains.markmonitor.com/whois/google.fm
+Name Server: ns3.google.com
+Name Server: ns2.google.com
+Name Server: ns1.google.com
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
+>>> Last update of WHOIS database: 2020-10-10T16:08:22-0700 <<<
+
+For more information on WHOIS status codes, please visit:
+  https://www.icann.org/resources/pages/epp-status-codes
+
+If you wish to contact this domain’s Registrant, Administrative, or Technical
+contact, and such email address is not visible above, you may do so via our web
+form, pursuant to ICANN’s Temporary Specification. To verify that you are not a
+robot, please enter your email address to receive a link to a page that
+facilitates email communication with the relevant contact(s).
+
+Web-based WHOIS:
+  https://domains.markmonitor.com/whois
+
+If you have a legitimate interest in viewing the non-public WHOIS details, send
+your request and the reasons for your request to whoisrequest@markmonitor.com
+and specify the domain name in the subject line. We will review that request and
+may ask for supporting documentation and explanation.
+
+The data in MarkMonitor’s WHOIS database is provided for information purposes,
+and to assist persons in obtaining information about or related to a domain
+name’s registration record. While MarkMonitor believes the data to be accurate,
+the data is provided "as is" with no guarantee or warranties regarding its
+accuracy.
+
+By submitting a WHOIS query, you agree that you will use this data only for
+lawful purposes and that, under no circumstances will you use this data to:
+  (1) allow, enable, or otherwise support the transmission by email, telephone,
+or facsimile of mass, unsolicited, commercial advertising, or spam; or
+  (2) enable high volume, automated, or electronic processes that send queries,
+data, or email to MarkMonitor (or its systems) or the domain name contacts (or
+its systems).
+
+MarkMonitor reserves the right to modify these terms at any time.
+
+By submitting this query, you agree to abide by this policy.
+
+MarkMonitor Domain Management(TM)
+Protecting companies and consumers in a digital world.
+
+Visit MarkMonitor at https://www.markmonitor.com
+Contact us at +1.8007459229
+In Europe, at +44.02032062220
+
+

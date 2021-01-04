@@ -1,27 +1,39 @@
+# https://config.travis-ci.com/explore
+os: linux
+dist: xenial
+
 language: php
 
 php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7
-  - hhvm
-  - hhvm-nightly
+  - 7.2
+  - 7.3
+  - 7.4
+  - 8.0
+  - nightly
 
-matrix:
+jobs:
   fast_finish: true
   allow_failures:
-    - php: hhvm-nightly
+    - php: nightly
 
-# faster builds on new travis containers
-sudo: false
+env:
+  global:
+    - XDEBUG_MODE="coverage"
+  jobs:
+#    - PREFER_LOWEST="--prefer-lowest --prefer-stable"
+    - PREFER_LOWEST=""
+
 
 install:
   - composer self-update && composer --version
-  - composer install --prefer-dist
+
+before_script:
+  - php -i
+  - composer validate --no-check-all --strict
+  - composer update $PREFER_LOWEST
 
 script:
+#  - php testsuite.php --ci
   - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
 
 after_script:

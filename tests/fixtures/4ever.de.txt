@@ -1,0 +1,24 @@
+% Restricted rights.
+% 
+% Terms and Conditions of Use
+% 
+% The above data may only be used within the scope of technical or
+% administrative necessities of Internet operation or to remedy legal
+% problems.
+% The use for other purposes, in particular for advertising, is not permitted.
+% 
+% The DENIC whois service on port 43 doesn't disclose any information concerning
+% the domain holder, general request and abuse contact.
+% This information can be obtained through use of our web-based whois service
+% available at the DENIC website:
+% http://www.denic.de/en/domains/whois-service/web-whois.html
+% 
+% 
+
+Domain: 4ever.de
+Nserver: ns.4ever.de 213.239.225.238 2a01:4f8:222:1b01:0:0:eb:238
+Nserver: ns.does.not-exist.de
+Nserver: ns2.4ever.de 104.156.233.7 2001:19f0:5800:8101:0:0:0:235
+Nserver: ns3.4ever.de 107.170.225.117 2604:a880:1:20:0:0:26:3001
+Status: connect
+Changed: 2018-01-24T18:03:55+01:00

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -6,28 +7,41 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy') {
+/**
+ * @param string[] $rawdata
+ * @param string[] $translate
+ * @param string[] $contacts
+ * @param string   $main
+ * @param string   $dateformat
+ *
+ * @return array
+ *
+ * @deprecated Use AbstractHandler::generic_parser_a
+ */
+function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $dateformat = 'dmy')
+{
     $blocks = generic_parser_a_blocks($rawdata, $translate, $disclaimer);
 
     $ret = array();
-    if (isset($disclaimer) && is_array($disclaimer))
+    if (isset($disclaimer) && is_array($disclaimer)) {
         $ret['disclaimer'] = $disclaimer;
+    }
 
     if (empty($blocks) || !is_array($blocks['main'])) {
         $ret['registered'] = 'no';
@@ -37,27 +51,32 @@ function generic_parser_a($rawdata, $translate, $contacts, $main = 'domain', $da
     $r = $blocks['main'];
     $ret['registered'] = 'yes';
 
-    while (list($key, $val) = each($contacts))
+    foreach ($contacts as $key => $val) {
         if (isset($r[$key])) {
-            if (is_array($r[$key]))
+            if (is_array($r[$key])) {
                 $blk = $r[$key][count($r[$key]) - 1];
-            else
+            } else {
                 $blk = $r[$key];
+            }
 
             $blk = strtoupper(strtok($blk, ' '));
-            if (isset($blocks[$blk]))
+            if (isset($blocks[$blk])) {
                 $ret[$val] = $blocks[$blk];
+            }
             unset($r[$key]);
         }
+    }
 
-    if ($main)
+    if ($main) {
         $ret[$main] = $r;
+    }
 
     format_dates($ret, $dateformat);
     return $ret;
 }
 
-function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
+function generic_parser_a_blocks($rawdata, $translate, &$disclaimer)
+{
     $r = array();
     $newblock = false;
     $hasdata = false;
@@ -66,12 +85,13 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
     $gkey = 'main';
     $dend = false;
 
-    while (list($key, $val) = each($rawdata)) {
+    foreach ($rawdata as $val) {
         $val = trim($val);
 
         if ($val != '' && ($val[0] == '%' || $val[0] == '#')) {
-            if (!$dend)
+            if (!$dend) {
                 $disclaimer[] = trim(substr($val, 1));
+            }
             continue;
         }
         if ($val == '') {
@@ -88,33 +108,35 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
         $k = trim(strtok($val, ':'));
         $v = trim(substr(strstr($val, ':'), 1));
 
-        if ($v == '')
+        if ($v == '') {
             continue;
+        }
 
         $hasdata = true;
 
         if (isset($translate[$k])) {
             $k = $translate[$k];
-            if ($k == '')
-                continue;
-            if (strstr($k, '.')) {
-                eval("\$block" . getvarname($k) . "=\$v;");
+            if ($k == '') {
                 continue;
             }
-        } else
+            if (strstr($k, '.')) {
+                $block = assign($block, $k, $v);
+                continue;
+            }
+        } else {
             $k = strtolower($k);
+        }
 
         if ($k == 'handle') {
             $v = strtok($v, ' ');
             $gkey = strtoupper($v);
         }
 
-        if (isset($block[$k]) && is_array($block[$k]))
+        if (isset($block[$k]) && is_array($block[$k])) {
             $block[$k][] = $v;
-        else
-        if (!isset($block[$k]) || $block[$k] == '')
+        } elseif (!isset($block[$k]) || $block[$k] == '') {
             $block[$k] = $v;
-        else {
+        } else {
             $x = $block[$k];
             unset($block[$k]);
             $block[$k][] = $x;
@@ -122,18 +144,32 @@ function generic_parser_a_blocks($rawdata, $translate, &$disclaimer) {
         }
     }
 
-    if ($hasdata)
+    if ($hasdata) {
         $blocks[$gkey] = $block;
+    }
 
     return $blocks;
 }
 
-function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasreg = true, $scanall = false) {
-    if (is_array($items) && !count($items))
+/**
+ * @param        $rawdata
+ * @param array  $items
+ * @param string $dateformat
+ * @param bool   $hasreg
+ * @param bool   $scanall
+ *
+ * @return array
+ *
+ * @deprecated Use AbstractHandler::generic_parser_b
+ */
+function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasreg = true, $scanall = false)
+{
+    if (is_array($items) && !count($items)) {
         $items = array(
             'Domain Name:' => 'domain.name',
             'Domain ID:' => 'domain.handle',
             'Sponsoring Registrar:' => 'domain.sponsor',
+            'Registrar:' => 'domain.sponsor',
             'Registrar ID:' => 'domain.sponsor',
             'Domain Status:' => 'domain.status.',
             'Status:' => 'domain.status.',
@@ -144,12 +180,13 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             'Domain Create Date:' => 'domain.created',
             'Domain Expiration Date:' => 'domain.expires',
             'Domain Last Updated Date:' => 'domain.changed',
+            'Updated Date:' => 'domain.changed',
             'Creation Date:' => 'domain.created',
             'Last Modification Date:' => 'domain.changed',
             'Expiration Date:' => 'domain.expires',
             'Created On:' => 'domain.created',
             'Last Updated On:' => 'domain.changed',
-            'Expiration Date:' => 'domain.expires',
+            'Registry Expiry Date:' => 'domain.expires',
             'Registrant ID:' => 'owner.handle',
             'Registrant Name:' => 'owner.name',
             'Registrant Organization:' => 'owner.organization',
@@ -316,11 +353,12 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             'Zone Fax Number:' => 'zone.fax',
             'Zone Email:' => 'zone.email'
         );
+    }
 
-    $r = '';
+    $r = [];
     $disok = true;
 
-    while (list($key, $val) = each($rawdata)) {
+    foreach ($rawdata as $val) {
         if (trim($val) != '') {
             if (($val[0] == '%' || $val[0] == '#') && $disok) {
                 $r['disclaimer'][] = trim(substr($val, 1));
@@ -331,32 +369,34 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
             $disok = false;
             reset($items);
 
-            while (list($match, $field) = each($items)) {
+            foreach ($items as $match => $field) {
                 $pos = strpos($val, $match);
 
                 if ($pos !== false) {
                     if ($field != '') {
-                        $var = '$r' . getvarname($field);
                         $itm = trim(substr($val, $pos + strlen($match)));
 
-                        if ($itm != '')
-                            eval($var . '="' . str_replace('"', '\"', $itm) . '";');
+                        if ($itm != '') {
+                            $r = assign($r, $field, str_replace('"', '\"', $itm));
+                        }
                     }
 
-                    if (!$scanall)
+                    if (!$scanall) {
                         break;
+                    }
                 }
             }
         }
     }
 
     if (empty($r)) {
-        if ($hasreg)
+        if ($hasreg) {
             $r['registered'] = 'no';
-    }
-    else {
-        if ($hasreg)
+        }
+    } else {
+        if ($hasreg) {
             $r['registered'] = 'yes';
+        }
 
         $r = format_dates($r, $dateformat);
     }
@@ -364,28 +404,70 @@ function generic_parser_b($rawdata, $items = array(), $dateformat = 'mdy', $hasr
     return $r;
 }
 
-function getvarname($vdef) {
-    $parts = explode('.', $vdef);
-    $var = '';
+/**
+ * @param array    $array The array to populate
+ * @param string[] $parts
+ * @param mixed    $value The value to be assigned to the $vDef key
+ *
+ * @return array The updated array
+ * @see https://github.com/sparc/phpWhois.org/compare/18849d1a98b992190612cdb2561e7b4492c505f5...8c6a18686775b25f05592dd67d7706e47167a498#diff-b8adbe1292f8abca1f943aa844db52aa Original fix by David Saez PAdros sparc
+ */
+function assign_recursive(array $array, array $parts, $value)
+{
+    $key = array_shift($parts);
 
-    foreach ($parts as $mn)
-        if ($mn == '')
-            $var = $var . '[]';
-        else
-            $var = $var . '["' . $mn . '"]';
+    if (count($parts) === 0) {
+        if (!$key) {
+            $array[] = $value;
+        } else {
+            $array[$key] = $value;
+        }
+    } else {
+        if (!isset($array[$key])) {
+            $array[$key] = [];
+        }
+        $array[$key] = assign_recursive($array[$key], $parts, $value);
+    }
 
-    return $var;
+    return $array;
 }
 
-function get_blocks($rawdata, $items, $partial_match = false, $def_block = false) {
+/**
+ * @param array  $array The array to populate
+ * @param string $vDef  A period-separated string of nested array keys
+ * @param mixed  $value The value to be assigned to the $vDef key
+ *
+ * @return array The updated array
+ * @see https://github.com/sparc/phpWhois.org/compare/18849d1a98b992190612cdb2561e7b4492c505f5...8c6a18686775b25f05592dd67d7706e47167a498#diff-b8adbe1292f8abca1f943aa844db52aa Original fix by David Saez PAdros sparc
+ */
+function assign(array $array, string $vDef, $value)
+{
+    return assign_recursive($array, explode('.', $vDef), $value);
+}
+
+/**
+ * @param string[] $rawdata
+ * @param string[] $items
+ * @param bool     $partial_match
+ * @param bool     $def_block
+ *
+ * @return array
+ *
+ * @deprecated Use AbstractHandler::get_blocks
+ */
+function get_blocks($rawdata, $items, $partial_match = false, $def_block = false)
+{
 
     $r = array();
     $endtag = '';
 
-    while (list($key, $val) = each($rawdata)) {
+    while ($val = current($rawdata)) {
+        next($rawdata);
+
         $val = trim($val);
-        if ($val == '')
+        if ($val == '') {
             continue;
+        }
 
         $var = $found = false;
 
@@ -407,9 +489,8 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
                     $endtag = $last;
                     $line = $val;
                 } else {
-                    $var = getvarname(strtok($field, '#'));
-                    $itm = trim(substr($val, $pos + strlen($match)));
-                    eval('$r' . $var . '=$itm;');
+                    $var = strtok($field, '#');
+                    $r   = assign($r, $var, trim(substr($val, $pos + strlen($match))));
                 }
 
                 break;
@@ -417,8 +498,9 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
         }
 
         if (!$found) {
-            if (!$var && $def_block)
+            if (!$var && $def_block) {
                 $r[$def_block][] = $val;
+            }
             continue;
         }
 
@@ -426,11 +508,14 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
 
         // Block found, get data ...
 
-        while (list($key, $val) = each($rawdata)) {
+        while ($val = current($rawdata)) {
+            next($rawdata);
+
             $val = trim($val);
 
-            if ($val == '' || $val == str_repeat($val[0], strlen($val)))
+            if ($val == '' || $val == str_repeat($val[0], strlen($val))) {
                 continue;
+            }
 
             $last = substr($val, -1, 1);
             /*
@@ -466,16 +551,18 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
             $block[] = $val;
         }
 
-        if (empty($block))
+        if (empty($block)) {
             continue;
+        }
 
         foreach ($items as $field => $match) {
             $pos = strpos($line, $match);
 
             if ($pos !== false) {
-                $var = getvarname(strtok($field, '#'));
-                if ($var != '[]')
-                    eval('$r' . $var . '=$block;');
+                $var = strtok($field, '#');
+                if ($var != '[]') {
+                    $r = assign($r, $var, $block);
+                }
             }
         }
     }
@@ -483,39 +570,80 @@ function get_blocks($rawdata, $items, $partial_match = false, $def_block = false
     return $r;
 }
 
-function easy_parser($data_str, $items, $date_format, $translate = array(), $has_org = false, $partial_match = false, $def_block = false) {
+/**
+ * @param       $data_str
+ * @param       $items
+ * @param       $date_format
+ * @param array $translate
+ * @param bool  $has_org
+ * @param bool  $partial_match
+ * @param bool  $def_block
+ *
+ * @return mixed
+ *
+ * @deprecated Use AbstractHandler::easy_parser
+ */
+function easy_parser($data_str, $items, $date_format, $translate = array(), $has_org = false, $partial_match = false, $def_block = false)
+{
     $r = get_blocks($data_str, $items, $partial_match, $def_block);
     $r = get_contacts($r, $translate, $has_org);
     format_dates($r, $date_format);
     return $r;
 }
 
-function get_contacts($array, $extra_items = array(), $has_org = false) {
-    if (isset($array['billing']))
+/**
+ * @param       $array
+ * @param array $extra_items
+ * @param bool  $has_org
+ *
+ * @return mixed
+ *
+ * @deprecated Use AbstractHandler::get_contacts
+ */
+function get_contacts($array, $extra_items = array(), $has_org = false)
+{
+    if (isset($array['billing'])) {
         $array['billing'] = get_contact($array['billing'], $extra_items, $has_org);
+    }
 
-    if (isset($array['tech']))
+    if (isset($array['tech'])) {
         $array['tech'] = get_contact($array['tech'], $extra_items, $has_org);
+    }
 
-    if (isset($array['zone']))
+    if (isset($array['zone'])) {
         $array['zone'] = get_contact($array['zone'], $extra_items, $has_org);
+    }
 
-    if (isset($array['admin']))
+    if (isset($array['admin'])) {
         $array['admin'] = get_contact($array['admin'], $extra_items, $has_org);
+    }
 
-    if (isset($array['owner']))
+    if (isset($array['owner'])) {
         $array['owner'] = get_contact($array['owner'], $extra_items, $has_org);
+    }
 
-    if (isset($array['registrar']))
+    if (isset($array['registrar'])) {
         $array['registrar'] = get_contact($array['registrar'], $extra_items, $has_org);
+    }
 
     return $array;
 }
 
-function get_contact($array, $extra_items = array(), $has_org = false) {
+/**
+ * @param       $array
+ * @param array $extra_items
+ * @param bool  $has_org
+ *
+ * @return array
+ *
+ * @deprecated Use AbstractHandler::get_contact
+ */
+function get_contact($array, $extra_items = array(), $has_org = false)
+{
 
-    if (!is_array($array))
+    if (!is_array($array)) {
         return array();
+    }
 
     $items = array(
         'fax..:' => 'fax',
@@ -550,32 +678,33 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
     );
 
     if (is_array($extra_items) && count($extra_items)) {
-        foreach ($items as $match => $field)
-            if (!isset($extra_items[$match]))
+        foreach ($items as $match => $field) {
+            if (!isset($extra_items[$match])) {
                 $extra_items[$match] = $field;
+            }
+        }
         $items = $extra_items;
     }
 
-    while (list($key, $val) = each($array)) {
+    $r = [];
+    foreach ($array as $key => $val) {
         $ok = true;
 
         while ($ok) {
             reset($items);
             $ok = false;
 
-            while (list($match, $field) = each($items)) {
+            foreach ($items as $match => $field) {
                 $pos = strpos(strtolower($val), $match);
 
-                if ($pos === false)
+                if ($pos === false) {
                     continue;
+                }
 
                 $itm = trim(substr($val, $pos + strlen($match)));
 
-                /**
-                 * @todo Get rid of eval
-                 */
                 if ($field != '' && $itm != '') {
-                    eval('$r' . getvarname($field) . '=$itm;');
+                    $r = assign($r, $field, $itm);
                 }
 
                 $val = trim(substr($val, 0, $pos));
@@ -595,11 +724,11 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
 
                 if (strlen($phone) > 8 && !preg_match('/[0-9]{5}\-[0-9]{3}/', $phone)) {
                     if (isset($r['phone'])) {
-                        if (isset($r['fax']))
+                        if (isset($r['fax'])) {
                             continue;
+                        }
                         $r['fax'] = trim($matches[0]);
-                    }
-                    else {
+                    } else {
                         $r['phone'] = trim($matches[0]);
                     }
 
@@ -628,8 +757,9 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
                     if (!isset($r['name'])) {
                         $r['name'] = $val;
                         unset($array[$key]);
-                    } else
+                    } else {
                         $array[$key] = $val;
+                    }
 
                     $ok = true;
                 }
@@ -650,34 +780,48 @@ function get_contact($array, $extra_items = array(), $has_org = false) {
     }
 
     if (!empty($array)) {
-        if (isset($r['address']))
+        if (isset($r['address'])) {
             $r['address'] = array_merge($r['address'], $array);
-        else
+        } else {
             $r['address'] = $array;
+        }
     }
 
     return $r;
 }
 
-function format_dates(&$res, $format = 'mdy') {
-    if (!is_array($res))
+//-------------------------------------------------------------------------
+
+/**
+ * @param        $res
+ * @param string $format
+ *
+ * @return array
+ *
+ * @deprecated Use AbstractHandler::format_dates
+ */
+function format_dates(&$res, $format = 'mdy')
+{
+    if (!is_array($res)) {
         return $res;
+    }
 
     foreach ($res as $key => $val) {
         if (is_array($val)) {
             if (!is_numeric($key) && ($key == 'expires' || $key == 'created' || $key == 'changed')) {
                 $d = get_date($val[0], $format);
-                if ($d)
+                if ($d) {
                     $res[$key] = $d;
-            }
-            else {
+                }
+            } else {
                 $res[$key] = format_dates($val, $format);
             }
         } else {
             if (!is_numeric($key) && ($key == 'expires' || $key == 'created' || $key == 'changed')) {
                 $d = get_date($val, $format);
-                if ($d)
+                if ($d) {
                     $res[$key] = $d;
+                }
             }
         }
     }
@@ -685,10 +829,39 @@ function format_dates(&$res, $format = 'mdy') {
     return $res;
 }
 
-function get_date($date, $format) {
-    $months = array('jan' => 1, 'ene' => 1, 'feb' => 2, 'mar' => 3, 'apr' => 4, 'abr' => 4,
-        'may' => 5, 'jun' => 6, 'jul' => 7, 'aug' => 8, 'ago' => 8, 'sep' => 9,
-        'oct' => 10, 'nov' => 11, 'dec' => 12, 'dic' => 12);
+/**
+ * @param $date
+ * @param $format
+ *
+ * @return string|string[]
+ *
+ * @deprecated Use AbstractHandler::get_date
+ */
+function get_date($date, $format)
+{
+    $parsedDate = parseStandardDate($date);
+    if ($parsedDate instanceof DateTime) {
+        return $parsedDate->format('Y-m-d');
+    }
+
+    $months = [
+        'jan' => 1,
+        'ene' => 1,
+        'feb' => 2,
+        'mar' => 3,
+        'apr' => 4,
+        'abr' => 4,
+        'may' => 5,
+        'jun' => 6,
+        'jul' => 7,
+        'aug' => 8,
+        'ago' => 8,
+        'sep' => 9,
+        'oct' => 10,
+        'nov' => 11,
+        'dec' => 12,
+        'dic' => 12,
+    ];
 
     $parts = explode(' ', $date);
 
@@ -697,64 +870,62 @@ function get_date($date, $format) {
         $date = implode(' ', $parts);
     }
 
-    $date = str_replace(',', ' ', trim($date));
-    $date = str_replace('.', ' ', $date);
-    $date = str_replace('-', ' ', $date);
-    $date = str_replace('/', ' ', $date);
-    $date = str_replace("\t", ' ', $date);
+    $date = str_replace([',', '.', '-', '/', "\t"], ' ', trim($date));
 
     $parts = explode(' ', $date);
-    $res = false;
+    $res   = [];
 
-    if ((strlen($parts[0]) == 8 || count($parts) == 1) && is_numeric($parts[0])) {
+    if ((strlen($parts[0]) === 8 || count($parts) === 1) && is_numeric($parts[0])) {
         $val = $parts[0];
         for ($p = $i = 0; $i < 3; $i++) {
-            if ($format[$i] != 'Y') {
+            if ($format[$i] !== 'Y') {
                 $res[$format[$i]] = substr($val, $p, 2);
-                $p += 2;
+                $p                += 2;
             } else {
                 $res['y'] = substr($val, $p, 4);
-                $p += 4;
+                $p        += 4;
             }
         }
     } else {
         $format = strtolower($format);
 
         for ($p = $i = 0; $p < count($parts) && $i < strlen($format); $p++) {
-            if (trim($parts[$p]) == '')
+            if (trim($parts[$p]) === '') {
                 continue;
+            }
 
-            if ($format[$i] != '-') {
+            if ($format[$i] !== '-') {
                 $res[$format[$i]] = $parts[$p];
             }
             $i++;
         }
     }
 
-    if (!$res)
+    if (!$res) {
         return $date;
+    }
 
     $ok = false;
 
     while (!$ok) {
-        reset($res);
         $ok = true;
 
-        while (list($key, $val) = each($res)) {
-            if ($val == '' || $key == '')
+        foreach ($res as $key => $val) {
+            if ($val === '' || $key === '') {
                 continue;
+            }
 
-            if (!is_numeric($val) && isset($months[substr(strtolower($val), 0, 3)])) {
+            if (!is_numeric($val) && isset($months[strtolower(substr($val, 0, 3))])) {
                 $res[$key] = $res['m'];
-                $res['m'] = $months[substr(strtolower($val), 0, 3)];
-                $ok = false;
+                $res['m']  = $months[strtolower(substr($val, 0, 3))];
+                $ok        = false;
                 break;
             }
 
-            if ($key != 'y' && $key != 'Y' && $val > 1900) {
+            if ($key !== 'y' && $key !== 'Y' && $val > 1900) {
                 $res[$key] = $res['y'];
-                $res['y'] = $val;
-                $ok = false;
+                $res['y']  = $val;
+                $ok        = false;
                 break;
             }
         }
@@ -766,11 +937,82 @@ function get_date($date, $format) {
         $res['d'] = $v;
     }
 
-    if ($res['y'] < 70)
+    if ($res['y'] < 70) {
         $res['y'] += 2000;
-    else
-    if ($res['y'] <= 99)
+    } elseif ($res['y'] <= 99) {
         $res['y'] += 1900;
+    }
 
-    return sprintf("%.4d-%02d-%02d", $res['y'], $res['m'], $res['d']);
+    return sprintf('%.4d-%02d-%02d', $res['y'], $res['m'], $res['d']);
+}
+
+/**
+ * @param string $date
+ *
+ * @return false|DateTime
+ */
+function parseStandardDate(string $date)
+{
+    $date = trim($date);
+
+    // 2020-01-01T00:00:00.0Z
+    $pattern = '/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}).\d(Z)$/';
+    if (preg_match($pattern, $date, $matches)) {
+        if (PHP_VERSION_ID >= 70300) {
+            // The `v` format character is broken before PHP 7.3
+            $dateTimeFormat = 'Y-m-d\TH:i:s.vT';
+            return Datetime::createFromFormat($dateTimeFormat, $date);
+        }
+
+        // For PHP < 7.3, skip the milliseconds
+        $date = $matches[1] . $matches[2];
+        // Intentional fall-through--this will match the next pattern
+    }
+
+    // 2020-01-01T00:00:00Z
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:sT';
+        return Datetime::createFromFormat($dateTimeFormat, $date);
+    }
+
+    // 2020-01-01T00:00:00
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:s';
+        $utc = new DateTimeZone('UTC');
+        return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
+    }
+
+    // 2021-03-03T00:00:00-0800
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[-+]\d{4}$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'Y-m-d\TH:i:sP';
+        return Datetime::createFromFormat($dateTimeFormat, $date);
+    }
+
+    // 27-Jul-2016
+    $pattern = '/^\d{2}-[a-zA-Z]{3}-\d{4}$/';
+    if (preg_match($pattern, $date)) {
+        $dateTimeFormat = 'd-M-Y';
+        $utc = new DateTimeZone('UTC');
+        return Datetime::createFromFormat($dateTimeFormat, $date, $utc);
+    }
+
+    // 2020-01-01 00:00:00 CLST
+    $pattern = '/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})(?: \w+)?$/';
+    if (preg_match($pattern, $date, $matches)) {
+        $dateTimeFormat = 'Y-m-d H:i:s T';
+
+        $parsedDate = DateTime::createFromFormat($dateTimeFormat, $date);
+        if ($parsedDate instanceof DateTime) {
+            return $parsedDate;
+        }
+
+        // More than likely the timezone could not be found, so ignore it
+        $dateTimeFormat = 'Y-m-d H:i:s';
+        return DateTime::createFromFormat($dateTimeFormat, $matches[1]);
+    }
+
+    return false;
 }

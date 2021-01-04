@@ -2,12 +2,12 @@
 
 use phpWhois\Whois;
 
-class WhoisTest extends \PHPUnit_Framework_TestCase
+class WhoisTest extends \PHPUnit\Framework\TestCase
 {
     public function testWhois()
     {
         $whois = new Whois;
-        $result = $whois->lookup('phpwhois.pw');
+        $result = $whois->lookup('google.com');
         $this->assertEquals('yes', $result['regrinfo']['registered']);
     }
 

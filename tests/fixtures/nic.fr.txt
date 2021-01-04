@@ -1,0 +1,107 @@
+Connecting to FR.whois-servers.net...
+
+domain:      nic.fr
+status:      ACTIVE
+hold:        NO
+holder-c:    AFNI21-FRNIC
+admin-c:     NFC1-FRNIC
+tech-c:      NFC1-FRNIC
+zone-c:      NFC1-FRNIC
+nsl-id:      NSL174630-FRNIC
+dsl-id:      SIGN1781413-FRNIC
+registrar:   AFNIC
+Expiry Date: 2029-12-31T23:00:00Z
+created:     1994-12-31T23:00:00Z
+last-update: 2020-07-06T08:00:04Z
+source:      FRNIC
+
+ns-list:     NSL174630-FRNIC
+nserver:     ns1.nic.fr [192.134.4.1 2001:67c:2218:2::4:1]
+nserver:     ns2.nic.fr [192.93.0.4 2001:660:3005:1::1:2]
+nserver:     ns3.nic.fr [192.134.0.49 2001:660:3006:1::1:1]
+nserver:     ns1.ext.nic.fr [193.51.208.13]
+nserver:     ns6.ext.nic.fr [130.59.31.29 2001:620:0:ff::2f]
+source:      FRNIC
+
+ds-list:     SIGN1781413-FRNIC
+key1-tag:    21858
+key1-algo:   13 [ECDSAP256SHA256]
+key1-dgst-t: 2 [SHA-256]
+key1-dgst:   99538540239FFA95451F5A2EA98BEF757E5AC110602C7AF19B682B839F889F74
+source:      FRNIC
+
+registrar:   AFNIC
+type:        Isp Option 2
+anonymous:   YES
+registered:  1997-05-22T12:00:00Z
+source:      FRNIC
+
+nic-hdl:     AFNI21-FRNIC
+type:        ORGANIZATION
+contact:     ASS FRANC NOMMAGE INTERNET EN COOP
+address:     immeuble le Stephenson
+address:     1, rue Stephenson
+address:     Hall A2 - 3eme etage
+address:     78180 Montigny le Bretonneux
+country:     FR
+phone:       +33 1 39 30 83 00
+fax-no:      +33 1 39 30 83 01
+e-mail:      support@afnic.fr
+registrar:   AFNIC
+changed:     2017-07-17T12:38:58Z nic@nic.fr
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC
+
+nic-hdl:     NFC1-FRNIC
+type:        ROLE
+contact:     NIC France Contact
+address:     AFNIC
+address:     immeuble le Stephenson
+address:     1, rue Stephenson
+address:     Hall A2 - 3eme etage
+address:     78180 Montigny-Le-Bretonneux
+country:     FR
+phone:       +33 1 39 30 83 00
+e-mail:      hostmaster@nic.fr
+admin-c:     AI1-FRNIC
+tech-c:      VL-FRNIC
+tech-c:      JP-FRNIC
+tech-c:      MS-FRNIC
+tech-c:      BF13508-FRNIC
+registrar:   AFNIC
+changed:     2019-10-01T07:48:55Z vincent.levigneron@afnic.fr
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC
+
+nic-hdl:     NFC1-FRNIC
+type:        ROLE
+contact:     NIC France Contact
+address:     AFNIC
+address:     immeuble le Stephenson
+address:     1, rue Stephenson
+address:     Hall A2 - 3eme etage
+address:     78180 Montigny-Le-Bretonneux
+country:     FR
+phone:       +33 1 39 30 83 00
+e-mail:      hostmaster@nic.fr
+admin-c:     AI1-FRNIC
+tech-c:      VL-FRNIC
+tech-c:      JP-FRNIC
+tech-c:      MS-FRNIC
+tech-c:      BF13508-FRNIC
+registrar:   AFNIC
+changed:     2019-10-01T07:48:55Z vincent.levigneron@afnic.fr
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC
+
+
+Connecting to ic.fr...

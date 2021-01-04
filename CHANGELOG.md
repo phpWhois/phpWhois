@@ -1,6 +1,145 @@
-5.0
----
+6.0.2 - 2020-12-28
+------------------
+* Include 5.6.5 in 6.0 branch (jsmitty12)
+
+5.6.5 - 2020-12-28
+------------------
+* Remove line ending override for `.txt` fixtures (jsmitty12)
+* Add tests for .ru domains (jsmitty12)
+* Add test for .cat domains (jsmitty12)
+* Add tests for .ch domains (jsmitty12)
+* Add tests for .cn domains (jsmitty12)
+* Add tests for .co domains (jsmitty12)
+* Add tests for .co.za domains (jsmitty12)
+* Add tests for .coop domains (jsmitty12)
+* Add tests for .cz domains (jsmitty12)
+* Add tests for .eu domains (jsmitty12)
+* Add tests for .fi domains (jsmitty12)
+* Add tests for .fj domains (jsmitty12)
+* Add tests for .fm domains (jsmitty12)
+* Add tests for .fr domains (jsmitty12)
+* Add tests for .hu domains (jsmitty12)
+* Add tests for .ie domains (jsmitty12)
+* Stub tests for .il domains (jsmitty12)
+* Stub tests for gtld afternic (jsmitty12)
+* Add parser for .kiwi domains (jsmitty12)
+* Fix whois server for .kiwi domains (sirvulcan)
+* Synchronize Travis-CI config with `master` branch (jsmitty12)
+* Set xdebug.mode=coverage via global environment variable (jsmitty12)
+
+6.0.1 - 2020-12-10
+----------------------
+* Revert using `algo26-matthias/idna-convert@dev-master`
+
+6.0.0 - 2020-12-05
+----------------------
+* Work around deprecated PHPUnit method
+* Use `algo26-matthias/idna-convert@dev-master` while waiting for official PHP 8.0 support
+* Simplify CI testing
+
+6.0.0-rc1 - 2020-10-04
+----------------------
+* Enable support for PHPUnit 8 & 9
+* Require PHP >7.2
+
+5.6.4 - 2020-10-03
+------------------
+* Improve support for `.co.uk` domains (TorbenLundsgaard)
+* Improve support for `.ws` domains (sirvulcan)
+
+5.6.3 - 2020-10-03
+------------------
+* Split fixture files the same way WhoisClient splits raw whois data (naitsirch)
+* Rename handler for `.de` domains, add test cases (jsmitty12)
+* Rename and fix handler for `.uk` domains, add test cases (jsmitty12)
+* Update tests for `.us` domains, add test cases (jsmitty12)
+* Rename handler for `.cl` domains, add test cases (jsmitty12)
+* Rename handler for `.edu` domains, add test cases (jsmitty12)
+* Rename handler for `.ae` domains, add test cases (jsmitty12)
+* Rename handler for `.aero` domains, add test cases (jsmitty12)
+* Rename handler for `.ag` domains, add test cases (jsmitty12)
+* Rename handler for `.am` domains, add test cases (jsmitty12)
+* Rename handler for `.app` domains, add test cases (jsmitty12)
+* Rename handler for `.asia` domains, add test cases (jsmitty12)
+* Rename handler for `.nic` domains, add test cases (jsmitty12)
+* Rename handler for `.at` domains, add test cases (jsmitty12)
+* Rename handler for `.au` domains, add test cases (jsmitty12)
+* Rename handler for `.be` domains, add test cases (jsmitty12)
+* Rename handler for `.bh` domains, add test cases (jsmitty12)
+* Rename handler for `.biz` domains, add test cases (jsmitty12)
+* Rename handler for `.br` domains, add test cases (jsmitty12)
+* Fix date parsing in PHP 7.3 (jsmitty12)
+* Add script to generate test fixtures (jsmitty12)
+
+5.6.2 - 2020-05-31
+------------------
+* Fix parsing for `.ca` domains (maxiwheat, jsmitty12)
+* Add support for `.london` domains (adamjimenez, jsmitty12)
+* Add support for `.ph` domains (jsmitty12)
+* Add support for `.dev` domains (jsmitty12)
+* Add support for `.today` domains (jsmitty12)
+
+5.6.1 - 2020-05-30
+------------------
+* Improve date parsing when a standard format is used (jsmitty12)
+
+5.6.0 - 2020-05-11
+------------------
+* Officially support PHP 7.4 (TorbenLundsgaard, jsmitty12)
+* Replace abandoned `mso/idna-convert` dependency
+* Fix _Undefined index_ notice in `.de` handler (naitsirch)
+
+5.5.0 - 2018-11-26
+------------------
+* Test against PHP 7.3 and PHP 7.4 (nightly)
+
+5.4.1 - 2018-11-26
+------------------
+* Remove roave/security-advisories from composer.json
+* Add `whois()` helper function (TorbenLundsgaard)
+
+5.4.0 - 2018-08-14
+------------------
+* Support .no domains (TorbenLundsgaard)
+
+5.3.0 - 2018-08-13
+------------------
+* Support .dk domains (TorbenLundsgaard)
+* Improve support for .se domains (TorbenLundsgaard)
+
+5.2.0 - 2018-07-21
+------------------
+* Support .app domains (fideloper)
+
+5.1.0 - 2018-05-29
+------------------
+* Fix broken CI build (#20)
+* Fix CVE-2015-5243 (#19)
+
+5.0.2 - 2018-04-27
+------------------
+* Fix a broken variable reference in GTLD fastdomain handler
+* Update the license to GPL 2.0+
+* Update `composer.json` and `README.md` to reference this project instead of the original
+
+5.0.1 - 2018-01-18
+------------------
+* Correctly retrieve expiration date in GTLD handler
+* Fix retrieval of .uk expiry date
+* Replace broken foreach() construct in get_blocks()
+
+5.0.0 - 2017-12-21
+------------------
 * Disable support for non ICANN domains (Used new.net doesn't exist anymore)
+* Configure TravisCI
+* Eliminate PHP 4 constructors
+* PHP 7.1 compatibility
+* Fix inaccurate date formats for various TLDs
+* Add additional parse strings for domain.sponsor, domain.changed, and domain.expires
+
+v4.2.5
+------
+* New whois servers
 
 2011/07/09
 ----------

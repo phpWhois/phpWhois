@@ -1,0 +1,39 @@
+%
+%AM TLD whois server #1
+% Please see 'whois -h whois.amnic.net help' for usage.
+%
+
+   Domain name: isoc.am
+   Registrar:   amnic
+   Status:      active
+
+   Registrant:
+      Internet Society NGO
+      17/3 A. Khachatryan str.
+      Yerevan,  0012
+      AM
+
+   Administrative contact:
+      Igor Mkrtumyan
+      Internet Society NGO
+      17/3 A. Khachatryan str.
+      Yerevan, 0012
+      AM
+      imkrtumyan@isoc.am
+      +374-60-272217
+
+   Technical contact:
+      Misak Khachatryan
+      Internet Society NGO
+      17/3 A. Khachatryan str.
+      Yerevan, 0012
+      AM
+      misak@amnic.net
+      +374 93 199840
+
+   DNS servers:
+      ns10.isoc.am - 173.249.9.197
+      ns-ext.aic.net
+
+   Registered:    2000-01-01
+   Last modified: 2018-03-27

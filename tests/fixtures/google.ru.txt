@@ -1,0 +1,20 @@
+Connecting to RU.whois-servers.net...
+
+domain:        GOOGLE.RU
+nserver:       ns1.google.com.
+nserver:       ns2.google.com.
+nserver:       ns3.google.com.
+nserver:       ns4.google.com.
+state:         REGISTERED, DELEGATED, VERIFIED
+org:           Google LLC
+registrar:     RU-CENTER-RU
+admin-contact: https://www.nic.ru/whois
+created:       2004-03-03T21:00:00Z
+paid-till:     2021-03-04T21:00:00Z
+free-date:     2021-04-05
+source:        TCI
+
+Last updated on 2020-10-07T20:01:32Z
+
+
+Connecting to  GOOGLE.RU...

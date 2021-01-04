@@ -1,0 +1,22 @@
+Connecting to EU.whois-servers.net...
+
+        NOT DISCLOSED!
+        Visit www.eurid.eu for webbased WHOIS.
+
+On-site(s):
+        NOT DISCLOSED!
+        Visit www.eurid.eu for webbased WHOIS.
+
+Registrar:
+        Name: MarkMonitor Inc.
+        Website: https://www.markmonitor.com/
+
+Name servers:
+        ns3.google.com
+        ns4.google.com
+        ns1.google.com
+        ns2.google.com
+
+Please visit www.eurid.eu for more info.
+
+Connecting to SCLOSED!...

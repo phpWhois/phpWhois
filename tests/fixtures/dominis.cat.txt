@@ -1,0 +1,264 @@
+Connecting to CAT.whois-servers.net...
+
+WHOIS Server: whois.psi-usa.info
+Registrar URL: http://www.psi-usa.info/
+Updated Date: 2020-07-29T11:21:57.506Z
+Creation Date: 2011-06-14T10:57:31.926Z
+Registry Expiry Date: 2021-06-14T10:57:31.926Z
+Registrar Registration Expiration Date: 
+Registrar: InterNetX
+Registrar IANA ID: 151
+Registrar Abuse Contact Email: domain-support@internetx.com
+Registrar Abuse Contact Phone: +1.7029903672
+Reseller: 
+Domain Status: ok https://icann.org/epp#ok
+Registry Registrant ID: 
+Registrant Name: 
+Registrant Organization: Dotbinc, SL
+Registrant Street: 
+Registrant City: 
+Registrant State/Province: ES
+Registrant Postal Code: 
+Registrant Country: ES
+Registrant Phone: 
+Registrant Phone Ext: 
+Registrant Fax: 
+Registrant Fax Ext: 
+Registrant Email: Please query the Whois service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+Registry Admin ID: 
+Admin Name: 
+Admin Organization: 
+Admin Street: 
+Admin City: 
+Admin State/Province: 
+Admin Postal Code: 
+Admin Country: 
+Admin Phone: 
+Admin Phone Ext: 
+Admin Fax: 
+Admin Fax Ext: 
+Admin Email: Please query the Whois service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+Registry Tech ID: 
+Tech Name: 
+Tech Organization: 
+Tech Street: 
+Tech City: 
+Tech State/Province: 
+Tech Postal Code: 
+Tech Country: 
+Tech Phone: 
+Tech Phone Ext: 
+Tech Fax: 
+Tech Fax Ext: 
+Tech Email: Please query the Whois service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+Registry Billing ID: 
+Billing Name: 
+Billing Organization: 
+Billing Street: 
+Billing City: 
+Billing State/Province: 
+Billing Postal Code: 
+Billing Country: 
+Billing Phone: 
+Billing Phone Ext: 
+Billing Fax: 
+Billing Fax Ext: 
+Billing Email: Please query the Whois service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+Name Server: ns-837.awsdns-40.net
+Name Server: ns-1453.awsdns-53.org
+Name Server: ns-1654.awsdns-14.co.uk
+Name Server: ns-244.awsdns-30.com
+DNSSEC: unsigned
+IDN Tag:
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+>>> Last update of Whois database: 2020-10-07T21:06:01.824Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
+
+Terms and Conditions of Use
+
+The data in this record is provided by puntCAT for informational
+purposes only. puntCAT does not guarantee its accuracy and cannot,
+under any circumstances, be held liable in case the stored information would
+prove to be wrong, incomplete or not accurate in any sense.
+
+All the domain data that is visible in the Whois service is protected by
+law. It is not permitted to use it for any purpose other than technical or
+administrative requirements associated with the operation of the Internet.
+It is explicitly forbidden to extract, copy and/or use or re-utilise in any
+form and by any means (electronically or not) the whole or a quantitatively
+or qualitatively substantial part of the contents of the Whois database
+without prior and explicit written permission by puntCAT It is
+prohibited, in particular, to use it for transmission of unsolicited and/or
+commercial and/or advertising by phone, fax, e-mail or for any similar
+purposes.
+
+By maintaining the connection you assure that you have a legitimate interest
+in the data and that you will only use it for the stated purposes. You are
+aware that puntCAT maintains the right to initiate legal
+proceedings against you in the event of any breach of this assurance and to
+bar you from using its Whois service.
+
+End of Whois record.
+
+Connecting to whois.psi-usa.info...
+
+WHOIS Server: whois.psi-usa.info
+Registrar URL: https://www.psi-usa.info
+Updated Date: 2020-08-03T14:07:13Z
+Creation Date: 2011-06-14T10:57:31Z
+Registrar Registration Expiration Date: 2021-06-14T10:57:24Z
+Registrar: PSI-USA, Inc. dba Domain Robot
+Registrar IANA ID: 151
+Registrar Abuse Contact Email: domain-abuse@psi-usa.info
+Registrar Abuse Contact Phone: +49.94159559482
+Domain Status: ok https://www.icann.org/epp#OK
+Registry Registrant ID: REDACTED FOR PRIVACY
+Registrant Name: REDACTED FOR PRIVACY
+Registrant Organization: Dotbinc, SL
+Registrant Street: REDACTED FOR PRIVACY
+Registrant City: REDACTED FOR PRIVACY
+Registrant State/Province: ES
+Registrant Postal Code: REDACTED FOR PRIVACY
+Registrant Country: ES
+Registrant Phone: REDACTED FOR PRIVACY
+Registrant Phone Ext: REDACTED FOR PRIVACY
+Registrant Fax: REDACTED FOR PRIVACY
+Registrant Fax Ext: REDACTED FOR PRIVACY
+Registrant Email: https://whoispro.domain-robot.org/whois/DOMINIS.CAT 
+
+Registry Admin ID: REDACTED FOR PRIVACY
+Admin Name: REDACTED FOR PRIVACY
+Admin Organization: REDACTED FOR PRIVACY
+Admin Street: REDACTED FOR PRIVACY
+Admin City: REDACTED FOR PRIVACY
+Admin State/Province: REDACTED FOR PRIVACY
+Admin Postal Code: REDACTED FOR PRIVACY
+Admin Country: REDACTED FOR PRIVACY
+Admin Phone: REDACTED FOR PRIVACY
+Admin Phone Ext: REDACTED FOR PRIVACY
+Admin Fax: REDACTED FOR PRIVACY
+Admin Fax Ext: REDACTED FOR PRIVACY
+Admin Email: https://whoispro.domain-robot.org/whois/DOMINIS.CAT
+Registry Tech ID: REDACTED FOR PRIVACY
+Tech Name: REDACTED FOR PRIVACY
+Tech Organization: REDACTED FOR PRIVACY
+Tech Street: REDACTED FOR PRIVACY
+Tech City: REDACTED FOR PRIVACY
+Tech State/Province: REDACTED FOR PRIVACY
+Tech Postal Code: REDACTED FOR PRIVACY
+Tech Country: REDACTED FOR PRIVACY
+Tech Phone: REDACTED FOR PRIVACY
+Tech Phone Ext: REDACTED FOR PRIVACY
+Tech Fax: REDACTED FOR PRIVACY
+Tech Fax Ext: REDACTED FOR PRIVACY
+Tech Email: https://whoispro.domain-robot.org/whois/DOMINIS.CAT
+Name Server: ns-244.awsdns-30.com
+Name Server: ns-837.awsdns-40.net
+Name Server: ns-1453.awsdns-53.org
+Name Server: ns-1654.awsdns-14.co.uk
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: https://wdprs.internic.net/
+>>> Last update of WHOIS database: 2020-10-07T21:06:27Z <<<
+
+For more information on Whois status codes, please visit https://www.icann.org/epp
+
+
+# Terms and conditions:
+#
+# The data in the WHOIS database of PSI-USA, Inc. is provided by
+# PSI-USA, Inc. for information purposes, and to assist persons in
+# obtaining information about or related to a domain name registration
+# record.  PSI-USA, Inc. does not guarantee its accuracy.  By submitting
+# a WHOIS query, you agree that you will use this data only for lawful
+# purposes and that, under no circumstances, you will use this data to
+#  (1) allow, enable, or otherwise support the transmission of mass
+#      unsolicited, commercial advertising or solicitations via E-mail
+#      (spam); or
+#  (2) enable high volume, automated, electronic processes that apply to
+#      PSI-USA, Inc. or its systems.
+# PSI-USA, Inc. reserves the right to modify these terms at any time.
+# By submitting this query, you agree to abide by this policy.
+# 
+
+
+Domain Name: DOMINIS.CAT
+Registry Domain ID: 850193-D
+Registrar WHOIS Server: whois.psi-usa.info
+Registrar URL: https://www.psi-usa.info
+Updated Date: 2020-08-03T14:07:13Z
+Creation Date: 2011-06-14T10:57:31Z
+Registrar Registration Expiration Date: 2021-06-14T10:57:24Z
+Registrar: PSI-USA, Inc. dba Domain Robot
+Registrar IANA ID: 151
+Registrar Abuse Contact Email: domain-abuse@psi-usa.info
+Registrar Abuse Contact Phone: +49.94159559482
+Domain Status: ok https://www.icann.org/epp#OK
+Registry Registrant ID: REDACTED FOR PRIVACY
+Registrant Name: REDACTED FOR PRIVACY
+Registrant Organization: Dotbinc, SL
+Registrant Street: REDACTED FOR PRIVACY
+Registrant City: REDACTED FOR PRIVACY
+Registrant State/Province: ES
+Registrant Postal Code: REDACTED FOR PRIVACY
+Registrant Country: ES
+Registrant Phone: REDACTED FOR PRIVACY
+Registrant Phone Ext: REDACTED FOR PRIVACY
+Registrant Fax: REDACTED FOR PRIVACY
+Registrant Fax Ext: REDACTED FOR PRIVACY
+Registrant Email: https://whoispro.domain-robot.org/whois/DOMINIS.CAT 
+
+Registry Admin ID: REDACTED FOR PRIVACY
+Admin Name: REDACTED FOR PRIVACY
+Admin Organization: REDACTED FOR PRIVACY
+Admin Street: REDACTED FOR PRIVACY
+Admin City: REDACTED FOR PRIVACY
+Admin State/Province: REDACTED FOR PRIVACY
+Admin Postal Code: REDACTED FOR PRIVACY
+Admin Country: REDACTED FOR PRIVACY
+Admin Phone: REDACTED FOR PRIVACY
+Admin Phone Ext: REDACTED FOR PRIVACY
+Admin Fax: REDACTED FOR PRIVACY
+Admin Fax Ext: REDACTED FOR PRIVACY
+Admin Email: https://whoispro.domain-robot.org/whois/DOMINIS.CAT
+Registry Tech ID: REDACTED FOR PRIVACY
+Tech Name: REDACTED FOR PRIVACY
+Tech Organization: REDACTED FOR PRIVACY
+Tech Street: REDACTED FOR PRIVACY
+Tech City: REDACTED FOR PRIVACY
+Tech State/Province: REDACTED FOR PRIVACY
+Tech Postal Code: REDACTED FOR PRIVACY
+Tech Country: REDACTED FOR PRIVACY
+Tech Phone: REDACTED FOR PRIVACY
+Tech Phone Ext: REDACTED FOR PRIVACY
+Tech Fax: REDACTED FOR PRIVACY
+Tech Fax Ext: REDACTED FOR PRIVACY
+Tech Email: https://whoispro.domain-robot.org/whois/DOMINIS.CAT
+Name Server: ns-244.awsdns-30.com
+Name Server: ns-837.awsdns-40.net
+Name Server: ns-1453.awsdns-53.org
+Name Server: ns-1654.awsdns-14.co.uk
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: https://wdprs.internic.net/
+>>> Last update of WHOIS database: 2020-10-07T21:06:27Z <<<
+
+For more information on Whois status codes, please visit https://www.icann.org/epp
+
+
+# Terms and conditions:
+#
+# The data in the WHOIS database of PSI-USA, Inc. is provided by
+# PSI-USA, Inc. for information purposes, and to assist persons in
+# obtaining information about or related to a domain name registration
+# record.  PSI-USA, Inc. does not guarantee its accuracy.  By submitting
+# a WHOIS query, you agree that you will use this data only for lawful
+# purposes and that, under no circumstances, you will use this data to
+#  (1) allow, enable, or otherwise support the transmission of mass
+#      unsolicited, commercial advertising or solicitations via E-mail
+#      (spam); or
+#  (2) enable high volume, automated, electronic processes that apply to
+#      PSI-USA, Inc. or its systems.
+# PSI-USA, Inc. reserves the right to modify these terms at any time.
+# By submitting this query, you agree to abide by this policy.
+# 
+

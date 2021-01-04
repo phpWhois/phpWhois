@@ -1,0 +1,113 @@
+% IANA WHOIS server
+% for more information on IANA, visit http://www.iana.org
+% This query returned 1 object
+
+refer:        whois.nic.google
+
+domain:       APP
+
+organisation: Charleston Road Registry Inc.
+address:      1600 Amphitheatre Parkway Mountain View, CA 94043
+address:      United States
+
+contact:      administrative
+name:         Domains Policy and Compliance
+organisation: Google Inc.
+address:      601 N. 34th Street
+address:      Seattle, WA 98103
+address:      United States
+phone:        1 202 642 2325
+fax-no:       1 650 492 5631
+e-mail:       iana-contact@google.com
+
+contact:      technical
+name:         Richard Roberto
+organisation: Google Inc
+address:      76 9th Avenue, 4th Floor
+address:      New York, NY 10011
+address:      United States
+phone:        1 212 565 2633
+fax-no:       1 650 492 5631
+e-mail:       crr-tech@google.com
+
+nserver:      NS-TLD1.CHARLESTONROADREGISTRY.COM 2001:4860:4802:32:0:0:0:69 216.239.32.105
+nserver:      NS-TLD2.CHARLESTONROADREGISTRY.COM 2001:4860:4802:34:0:0:0:69 216.239.34.105
+nserver:      NS-TLD3.CHARLESTONROADREGISTRY.COM 2001:4860:4802:36:0:0:0:69 216.239.36.105
+nserver:      NS-TLD4.CHARLESTONROADREGISTRY.COM 2001:4860:4802:38:0:0:0:69 216.239.38.105
+nserver:      NS-TLD5.CHARLESTONROADREGISTRY.COM 2001:4860:4805:0:0:0:0:69 216.239.60.105
+ds-rdata:     23684 8 2 3a5cc8a31e02c94aba6461912fabb7e9f5e34957bb6114a55a864d96aec31836
+
+whois:        whois.nic.google
+
+status:       ACTIVE
+remarks:      Registration information: http://www.registry.google
+
+created:      2015-06-25
+changed:      2018-06-09
+source:       IANA
+
+Domain Name: google.app
+Registry Domain ID: 2C5A4BAFF-APP
+Registrar WHOIS Server: whois.nic.google
+Registrar URL: http://www.markmonitor.com
+Updated Date: 2018-04-09T14:29:14Z
+Creation Date: 2018-03-29T16:02:13Z
+Registry Expiry Date: 2019-03-29T16:02:13Z
+Registrar: MarkMonitor Inc.
+Registrar IANA ID: 292
+Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895740
+Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+Registry Registrant ID: REDACTED FOR PRIVACY
+Registrant Name: REDACTED FOR PRIVACY
+Registrant Organization: Google LLC
+Registrant Street: REDACTED FOR PRIVACY
+Registrant City: REDACTED FOR PRIVACY
+Registrant State/Province: CA
+Registrant Postal Code: REDACTED FOR PRIVACY
+Registrant Country: US
+Registrant Phone: REDACTED FOR PRIVACY
+Registrant Fax: REDACTED FOR PRIVACY
+Registrant Email: REDACTED FOR PRIVACY
+Registry Admin ID: REDACTED FOR PRIVACY
+Admin Name: REDACTED FOR PRIVACY
+Admin Organization: REDACTED FOR PRIVACY
+Admin Street: REDACTED FOR PRIVACY
+Admin City: REDACTED FOR PRIVACY
+Admin State/Province: REDACTED FOR PRIVACY
+Admin Postal Code: REDACTED FOR PRIVACY
+Admin Country: REDACTED FOR PRIVACY
+Admin Phone: REDACTED FOR PRIVACY
+Admin Fax: REDACTED FOR PRIVACY
+Admin Email: REDACTED FOR PRIVACY
+Registry Tech ID: REDACTED FOR PRIVACY
+Tech Name: REDACTED FOR PRIVACY
+Tech Organization: REDACTED FOR PRIVACY
+Tech Street: REDACTED FOR PRIVACY
+Tech City: REDACTED FOR PRIVACY
+Tech State/Province: REDACTED FOR PRIVACY
+Tech Postal Code: REDACTED FOR PRIVACY
+Tech Country: REDACTED FOR PRIVACY
+Tech Phone: REDACTED FOR PRIVACY
+Tech Fax: REDACTED FOR PRIVACY
+Tech Email: REDACTED FOR PRIVACY
+Registry Billing ID: REDACTED FOR PRIVACY
+Billing Name: REDACTED FOR PRIVACY
+Billing Organization: REDACTED FOR PRIVACY
+Billing Street: REDACTED FOR PRIVACY
+Billing City: REDACTED FOR PRIVACY
+Billing State/Province: REDACTED FOR PRIVACY
+Billing Postal Code: REDACTED FOR PRIVACY
+Billing Country: REDACTED FOR PRIVACY
+Billing Phone: REDACTED FOR PRIVACY
+Billing Fax: REDACTED FOR PRIVACY
+Billing Email: REDACTED FOR PRIVACY
+Name Server: ns1.googledomains.com
+Name Server: ns2.googledomains.com
+Name Server: ns3.googledomains.com
+Name Server: ns4.googledomains.com
+DNSSEC: unsigned
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+>>> Last update of WHOIS database: 2018-07-20T20:25:45Z <<<

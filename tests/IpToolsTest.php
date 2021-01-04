@@ -2,7 +2,7 @@
 
 use phpWhois\IpTools;
 
-class IpToolsTest extends \PHPUnit_Framework_TestCase
+class IpToolsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider validIpsProvider

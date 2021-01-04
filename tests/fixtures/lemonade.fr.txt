@@ -1,0 +1,98 @@
+Connecting to FR.whois-servers.net...
+
+domain:      lemonade.fr
+status:      ACTIVE
+hold:        NO
+holder-c:    N15377-FRNIC
+admin-c:     SW4924-FRNIC
+tech-c:      SW4925-FRNIC
+zone-c:      NFC1-FRNIC
+nsl-id:      NSL1121-FRNIC
+dsl-id:      SIGN1375180-FRNIC
+registrar:   KEY-SYSTEMS GmbH
+Expiry Date: 2021-07-04T08:09:54Z
+created:     2017-09-06T08:33:03Z
+last-update: 2020-07-04T08:35:37Z
+source:      FRNIC
+
+ns-list:     NSL1121-FRNIC
+nserver:     ns0.transip.net
+nserver:     ns1.transip.nl
+nserver:     ns2.transip.eu
+source:      FRNIC
+
+ds-list:     SIGN1375180-FRNIC
+key1-tag:    63261
+key1-algo:   7 [RSASHA1-NSEC3-SHA1]
+key1-dgst-t: 1 [SHA-1]
+key1-dgst:   11ACC65926862FFF26A82CB60FF0D1B0916B4576
+source:      FRNIC
+
+registrar:   KEY-SYSTEMS GmbH
+type:        Isp Option 1
+address:     Im Oberen Werk 1
+address:     DE-66386 Sankt INGBERT
+country:     DE
+phone:       +49  68 94 93 96 850
+fax-no:      +49  68 94 93 96 851
+e-mail:      info@key-systems.net
+website:     http://www.key-systems.net/tld/fr
+anonymous:   NO
+registered:  2006-07-25T12:00:00Z
+source:      FRNIC
+
+nic-hdl:     N15377-FRNIC
+type:        ORGANIZATION
+contact:     NetTalk
+address:     NetTalk
+address:     Postbus 447
+address:     6710BK Ede
+address:     Gelderland
+country:     NL
+phone:       +31 850160612
+fax-no:      +31 850160613
+e-mail:      info@nettalk.nl
+registrar:   KEY-SYSTEMS GmbH
+changed:     2017-03-20T16:13:06Z nic@nic.fr
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC
+
+nic-hdl:     SW4924-FRNIC
+type:        PERSON
+contact:     Shai Wininger
+address:     Woodlands 95
+address:     NW11 9QT London
+country:     GB
+phone:       +1.9175122900
+e-mail:      infra@lemonade.com
+registrar:   KEY-SYSTEMS GmbH
+changed:     2018-07-03T15:45:58Z nic@nic.fr
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  ok
+eligdate:    2018-07-03T15:45:58Z
+reachstatus: not identified
+source:      FRNIC
+
+nic-hdl:     SW4925-FRNIC
+type:        PERSON
+contact:     Shai Wininger
+address:     Woodlands 95
+address:     NW11 9QT London
+country:     GB
+phone:       +1.9175122900
+e-mail:      infra@lemonade.com
+registrar:   KEY-SYSTEMS GmbH
+changed:     2018-07-03T15:45:58Z nic@nic.fr
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  ok
+eligdate:    2018-07-03T15:45:58Z
+reachstatus: not identified
+source:      FRNIC
+
+
+Connecting to emonade.fr...

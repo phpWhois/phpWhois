@@ -1,0 +1,57 @@
+This Registry database contains ONLY .EDU domains.
+The data in the EDUCAUSE Whois database is provided
+by EDUCAUSE for information purposes in order to
+assist in the process of obtaining information about
+or related to .edu domain registration records.
+
+The EDUCAUSE Whois database is authoritative for the
+.EDU domain.
+
+A Web interface for the .EDU EDUCAUSE Whois Server is
+available at: http://whois.educause.edu
+
+By submitting a Whois query, you agree that this information
+will not be used to allow, enable, or otherwise support
+the transmission of unsolicited commercial advertising or
+solicitations via e-mail.  The use of electronic processes to
+harvest information from this server is generally prohibited
+except as reasonably necessary to register or modify .edu
+domain names.
+
+-------------------------------------------------------------
+
+Domain Name: BERKELEY.EDU
+
+Registrant:
+	University of California at Berkeley
+	Information Services & Technology
+	Telecommunications -  2484 Shattuck #4894
+	Berkeley, CA 94720-4894
+	US
+
+Administrative Contact:
+	UCB NOC Admin
+	IST-Telecommunications
+	2484 Shattuck Ave, #4894
+	Berkeley, CA 94720-4894
+	US
+	+1.5106649000
+	noc@berkeley.edu
+
+Technical Contact:
+	UCB NOC 
+	IST-Telecommunications
+	2484 Shattuck Ave, #4894
+	Berkeley, CA 94720-4894
+	US
+	+1.5106649000
+	noc@berkeley.edu
+
+Name Servers:
+	ADNS2.BERKELEY.EDU
+	ADNS3.BERKELEY.EDU
+	ADNS1.BERKELEY.EDU
+
+Domain record activated:    24-Apr-1985
+Domain record last updated: 02-Jun-2020
+Domain expires:             31-Jul-2020

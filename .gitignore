@@ -1,4 +1,15 @@
+### Composer template
 composer.lock
+composer.phar
 /vendor
+
 nbproject
-.idea
+
+### JetBrains template
+.idea/
+
+*.phar
+
+coverage.clover
+*.cache
+*.diff

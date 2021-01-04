@@ -1,0 +1,18 @@
+% By submitting a query to RIPN's Whois Service
+% you agree to abide by the following terms of use:
+% http://www.ripn.net/about/servpol.html#3.2 (in Russian) 
+% http://www.ripn.net/about/en/servpol.html#3.2 (in English).
+
+domain:        XN--C1AD6A.XN--P1AI
+nserver:       ns1.reg.ru.
+nserver:       ns2.reg.ru.
+state:         REGISTERED, DELEGATED, VERIFIED
+org:           Domain name registrar REG.RU
+registrar:     REGRU-RF
+admin-contact: http://www.reg.ru/whois/admin_contact
+created:       2009-12-11T11:53:43Z
+paid-till:     2020-12-11T11:53:43Z
+free-date:     2021-01-11
+source:        TCI
+
+Last updated on 2020-10-07T20:06:32Z

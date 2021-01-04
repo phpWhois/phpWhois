@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
@@ -23,6 +24,8 @@
  */
 
 namespace phpWhois;
+
+use Algo26\IdnaConvert\ToIdn;
 
 /**
  * phpWhois main class
@@ -62,6 +65,19 @@ class Whois extends WhoisClient
     }
 
     /**
+     *  Lookup query and return raw whois data
+     *
+     * @param string $query Domain name or other entity
+     * @param boolean $is_utf True if domain name encoding is utf-8 already, otherwise convert it with utf8_encode() first
+     *
+     */
+    public function whois($domain, $is_utf = true)
+    {
+        $lookup = $this->lookup($domain, $is_utf);
+        return implode(PHP_EOL, $lookup['rawdata']);
+    }
+
+    /**
      *  Lookup query
      *
      * @param string $query Domain name or other entity
@@ -75,12 +91,12 @@ class Whois extends WhoisClient
 
         $query = trim($query);
 
-        $idn = new \idna_convert();
+        $idn = new ToIdn();
 
         if ($is_utf) {
-            $query = $idn->encode($query);
+            $query = $idn->convert($query);
         } else {
-            $query = $idn->encode(utf8_encode($query));
+            $query = $idn->convert(utf8_encode($query));
         }
 
         // If domain to query was not set
@@ -214,7 +230,7 @@ class Whois extends WhoisClient
                 }
 
                 // Regular handler exists for the tld ?
-                if (file_exists('whois.' . $htld . '.php')) {
+                if (file_exists(__DIR__ . '/whois.' . $htld . '.php')) {
                     $handler = $htld;
                     break;
                 }
@@ -228,8 +244,10 @@ class Whois extends WhoisClient
 
             // Special parameters ?
             if (isset($this->WHOIS_PARAM[$server])) {
-                $this->query['server'] = $this->query['server'] . '?' . str_replace('$', $domain,
-                        $this->WHOIS_PARAM[$server]);
+                $param = $this->WHOIS_PARAM[$server];
+                $param = str_replace('$domain', $domain, $param);
+                $param = str_replace('$tld', $tld, $param);
+                $this->query['server'] = $this->query['server'] . '?' . $param;
             }
 
             $result = $this->getData('', $this->deepWhois);
@@ -311,7 +329,7 @@ class Whois extends WhoisClient
      */
     public function getQueryType($query)
     {
-        $ipTools = new IpTools;
+        $ipTools = new IpTools();
 
         if ($ipTools->validIp($query, 'ipv4', false)) {
             if ($ipTools->validIp($query, 'ipv4')) {
