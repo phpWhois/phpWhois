@@ -1,6 +1,243 @@
-5.0
----
+6.1.0 - 2023-04-12
+------------------
+### Improvements
+* [#92] Infinite Loop - Possible final resolution of hell problem
+* [#33] Add more patterns in AbstractHandler::parseStandardDate method
+* [#33] Less duplicated code in FrHandler class
+* [#33] Fixed version of "phpunit/phpunit" in composer.json
+* [#33] Update Tests
+* Update "fixtures" files
+* [#33] Clean up Tests folder
+* [#33] Update ParserTest
+* [#33] Rename HandlerTestTest in AbstractHandler (to solve PHPUnit warning)
+* [#33] In UnitTest, throw UnexpectedValueException when a no parsable date is found
+* [#33] Minor fixed in IpTools.php
+* [#33] Clean up code AbstractHandler.php
+* [#33] Clean up code in AeHandler.php
+* [#33] Use Handlers class instead file <code>whois.[tld].php</code>
+* [#33] Use CzHandler instead whois.cz.php
+* [#33] Use ZanetHandler instead whois.zanet.php
+* [#33] Use XxxHandler instead whois.xxx.php
+* [#33] Use WsHandler instead whois.ws.php
+* [#33] Use VeHandler instead whois.ve.php
+* [#33] Use UsHandler instead whois.us.php
+* [#33] Use TodayHandler instead whois.today.php
+* [#33] Use TodayHandler instead whois.today.php
+* [#33] Use TelHandler instead whois.tel.php
+* [#33] Use SuHandler instead whois.su.php
+* [#33] Use SiHandler instead whois.si.php
+* [#33] Use SeHandler instead whois.se.php
+* [#33] Use ScHandler instead whois.sc.php
+* [#33] Use RwhoisHandler instead whois.rwhois.php
+* [#33] Use RuHandler instead whois.ru.php
+* [#33] Use RoHandler instead whois.ro.php
+* [#33] Use PtHandler instead whois.pt.php
+* [#33] Use ProHandler instead whois.pro.php
+* [#33] Use PlHandler instead whois.pl.php
+* [#33] Use PhHandler instead whois.ph.php
+* [#33] Use OrgHandler instead whois.org.php
+* [#33] Use NuHandler instead whois.nu.php
+* [#33] Use NoHandler instead whois.no.php
+* [#33] Use EuHandler instead whois.eu.php
+* [#33] Use DeHandler instead whois.de.php
+* [#33] Use FiHandler instead whois.fi.php
+* [#33] Use NlHandler instead whois.nl.php
+* [#33] Use MxHandler instead whois.mx.php
+* [#33] Use MuseumHandler instead whois.museum.php
+* [#33] Use MobiHandler instead whois.mobi.php
+* [#33] Use MeHandler instead whois.me.php
+* [#33] Use LyHandler instead whois.ly.php
+* [#33] Use LuHandler instead whois.lu.php
+* [#33] Use LtHandler instead whois.lt.php
+* [#33] Use FjHandler instead whois.fj.php
+* [#33] Use LondonHandler instead whois.london.php
+* [#33] Use JpHandler instead whois.jp.php
+* [#33] Use ItHandler instead whois.it.php
+* [#33] Use IsHandler instead whois.is.php
+* [#33] Use IrHandler instead whois.ir.php
+* [#33] Use IpHandler instead whois.ip.php
+* [#33] Use IntHandler instead whois.int.php
+* [#33] Use InHandler instead whois.in.php
+* [#33] Use InfoHandler instead whois.info.php
+* [#33] Use IlHandler instead whois.il.php
+* [#33] Use IeHandler instead whois.ie.php
+* [#33] Use HuHandler instead whois.hu.php
+* [#33] Use FrHandler instead whois.fr.php
+* [#33] Use FmHandler instead whois.fm.php
+* [#33] Use CoopHandler instead whois.coop.php
+* [#33] Use NameHandler instead whois.name.php
+* [#33] Use DkHandler instead whois.dk.php
+* [#33] Use DevHandler instead whois.dev.php
+* [#33] Use CzHandler instead whois.cz.php
+* [#33] Use CoHandler instead whois.co.php
+* [#33] Use CnHandler instead whois.cn.php
+* [#33] Use ChHandler instead whois.ch.php
+* [#33] Use CatHandler instead whois.cat.php
+* [#33] Use CaHandler instead whois.ca.php
+### Deprecation
+* Remove obsolete file "handler.template.php"
+* [#33] Remove deprecated "generic_parser_a_blocks" function
+* [#33] Deprecated "get_contact" function
+
+
+
+---- 
+
+6.0.4 - 2023-03-21
+------------------
+* Fix date parsing that did not take microseconds into account, cause an infinite loop in get_date function
+
+6.0.3 - 2023-03-21
+------------------
+* Little fixes in NzHandler
+* Remove obsolete fr_handler file, use FrHandler class
+
+6.0.2 - 2023-03-21
+------------------
+* Fix date parsing that did not take microseconds into account, cause an infinite loop in get_date function
+
+6.0.2 - 2020-12-28
+------------------
+* Include 5.6.5 in 6.0 branch (jsmitty12)
+
+5.6.5 - 2020-12-28
+------------------
+* Remove line ending override for `.txt` fixtures (jsmitty12)
+* Add tests for .ru domains (jsmitty12)
+* Add test for .cat domains (jsmitty12)
+* Add tests for .ch domains (jsmitty12)
+* Add tests for .cn domains (jsmitty12)
+* Add tests for .co domains (jsmitty12)
+* Add tests for .co.za domains (jsmitty12)
+* Add tests for .coop domains (jsmitty12)
+* Add tests for .cz domains (jsmitty12)
+* Add tests for .eu domains (jsmitty12)
+* Add tests for .fi domains (jsmitty12)
+* Add tests for .fj domains (jsmitty12)
+* Add tests for .fm domains (jsmitty12)
+* Add tests for .fr domains (jsmitty12)
+* Add tests for .hu domains (jsmitty12)
+* Add tests for .ie domains (jsmitty12)
+* Stub tests for .il domains (jsmitty12)
+* Stub tests for gtld afternic (jsmitty12)
+* Add parser for .kiwi domains (jsmitty12)
+* Fix whois server for .kiwi domains (sirvulcan)
+* Synchronize Travis-CI config with `master` branch (jsmitty12)
+* Set xdebug.mode=coverage via global environment variable (jsmitty12)
+
+6.0.1 - 2020-12-10
+----------------------
+* Revert using `algo26-matthias/idna-convert@dev-master`
+
+6.0.0 - 2020-12-05
+----------------------
+* Work around deprecated PHPUnit method
+* Use `algo26-matthias/idna-convert@dev-master` while waiting for official PHP 8.0 support
+* Simplify CI testing
+
+6.0.0-rc1 - 2020-10-04
+----------------------
+* Enable support for PHPUnit 8 & 9
+* Require PHP >7.2
+
+5.6.4 - 2020-10-03
+------------------
+* Improve support for `.co.uk` domains (TorbenLundsgaard)
+* Improve support for `.ws` domains (sirvulcan)
+
+5.6.3 - 2020-10-03
+------------------
+* Split fixture files the same way WhoisClient splits raw whois data (naitsirch)
+* Rename handler for `.de` domains, add test cases (jsmitty12)
+* Rename and fix handler for `.uk` domains, add test cases (jsmitty12)
+* Update tests for `.us` domains, add test cases (jsmitty12)
+* Rename handler for `.cl` domains, add test cases (jsmitty12)
+* Rename handler for `.edu` domains, add test cases (jsmitty12)
+* Rename handler for `.ae` domains, add test cases (jsmitty12)
+* Rename handler for `.aero` domains, add test cases (jsmitty12)
+* Rename handler for `.ag` domains, add test cases (jsmitty12)
+* Rename handler for `.am` domains, add test cases (jsmitty12)
+* Rename handler for `.app` domains, add test cases (jsmitty12)
+* Rename handler for `.asia` domains, add test cases (jsmitty12)
+* Rename handler for `.nic` domains, add test cases (jsmitty12)
+* Rename handler for `.at` domains, add test cases (jsmitty12)
+* Rename handler for `.au` domains, add test cases (jsmitty12)
+* Rename handler for `.be` domains, add test cases (jsmitty12)
+* Rename handler for `.bh` domains, add test cases (jsmitty12)
+* Rename handler for `.biz` domains, add test cases (jsmitty12)
+* Rename handler for `.br` domains, add test cases (jsmitty12)
+* Fix date parsing in PHP 7.3 (jsmitty12)
+* Add script to generate test fixtures (jsmitty12)
+
+5.6.2 - 2020-05-31
+------------------
+* Fix parsing for `.ca` domains (maxiwheat, jsmitty12)
+* Add support for `.london` domains (adamjimenez, jsmitty12)
+* Add support for `.ph` domains (jsmitty12)
+* Add support for `.dev` domains (jsmitty12)
+* Add support for `.today` domains (jsmitty12)
+
+5.6.1 - 2020-05-30
+------------------
+* Improve date parsing when a standard format is used (jsmitty12)
+
+5.6.0 - 2020-05-11
+------------------
+* Officially support PHP 7.4 (TorbenLundsgaard, jsmitty12)
+* Replace abandoned `mso/idna-convert` dependency
+* Fix _Undefined index_ notice in `.de` handler (naitsirch)
+
+5.5.0 - 2018-11-26
+------------------
+* Test against PHP 7.3 and PHP 7.4 (nightly)
+
+5.4.1 - 2018-11-26
+------------------
+* Remove roave/security-advisories from composer.json
+* Add `whois()` helper function (TorbenLundsgaard)
+
+5.4.0 - 2018-08-14
+------------------
+* Support .no domains (TorbenLundsgaard)
+
+5.3.0 - 2018-08-13
+------------------
+* Support .dk domains (TorbenLundsgaard)
+* Improve support for .se domains (TorbenLundsgaard)
+
+5.2.0 - 2018-07-21
+------------------
+* Support .app domains (fideloper)
+
+5.1.0 - 2018-05-29
+------------------
+* Fix broken CI build (#20)
+* Fix CVE-2015-5243 (#19)
+
+5.0.2 - 2018-04-27
+------------------
+* Fix a broken variable reference in GTLD fastdomain handler
+* Update the license to GPL 2.0+
+* Update `composer.json` and `README.md` to reference this project instead of the original
+
+5.0.1 - 2018-01-18
+------------------
+* Correctly retrieve expiration date in GTLD handler
+* Fix retrieval of .uk expiry date
+* Replace broken foreach() construct in get_blocks()
+
+5.0.0 - 2017-12-21
+------------------
 * Disable support for non ICANN domains (Used new.net doesn't exist anymore)
+* Configure TravisCI
+* Eliminate PHP 4 constructors
+* PHP 7.1 compatibility
+* Fix inaccurate date formats for various TLDs
+* Add additional parse strings for domain.sponsor, domain.changed, and domain.expires
+
+v4.2.5
+------
+* New whois servers
 
 2011/07/09
 ----------
