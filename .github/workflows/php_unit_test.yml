@@ -31,9 +31,6 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-
-    - name: Make code coverage badge
-      uses: timkrase/phpunit-coverage-badge@v1.2.1
-      with:
-        coverage_badge_path: output/coverage.svg
-        push_badge: true
+      
+    - name: PHPUnit Test
+      run: vendor/bin/phpunit --verbose --coverage-clover=coverage.clover 
