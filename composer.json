@@ -43,12 +43,6 @@
         "dms/phpunit-arraysubset-asserts": "~0.4",
         "phpunit/phpunit": "^8.0 || ^9.0 || ^10.0"
     },
-    "scripts": {
-        "phpunit-tests": [
-            "vendor/bin/phpunit --verbose --coverage-clover=coverage.clover"
-        ]
-    },
-
     "suggest": {
         "lib-openssl": "*"
     },
