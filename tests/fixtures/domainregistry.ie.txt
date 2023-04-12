@@ -1,0 +1,30 @@
+Domain Name: domainregistry.ie
+Registry Domain ID: 784737-IEDR
+Registrar WHOIS Server: whois.weare.ie
+Registrar URL: www.weare.ie
+Updated Date: 2023-03-04T13:24:39Z
+Creation Date: 1999-03-19T00:00:00Z
+Registry Expiry Date: 2025-01-01T15:50:01Z
+Registrar: .ie
+Registrar IANA ID: not applicable
+Registrar Abuse Contact Email: abuse@weare.ie
+Registrar Abuse Contact Phone: +353.12365400
+Domain Status: ok https://icann.org/epp#ok
+Registry Registrant ID: 537098-IEDR
+Registrant Name: IE Domain Registry Company Limited By Guarantee
+Registry Admin ID: 540443-IEDR
+Registry Tech ID: 546686-IEDR
+Registry Billing ID: REDACTED FOR PRIVACY
+Name Server: auth-ns2.heanet.ie
+Name Server: auth-ns3.heanet.ie
+Name Server: b.ns.ie
+Name Server: ns1.weare.ie
+DNSSEC: signedDelegation
+>>> Last update of WHOIS database: 2023-04-11T10:57:45Z <<<
+
+% Important Notice
+% If you believe that information published on this page is incorrect, or should not be published,please contact your Registrar, or the .IE Registration Services Department who will advise you further.
+% You can also contact your Registrar or .IE if your Registrant name is not showing and you would like it to be published.
+% Our contact information is available at https://www.weare.ie/contact-us/
+% Rights restricted by copyright: https://www.weare.ie/registrant-terms-conditions-policy/
+% Do not remove this notice

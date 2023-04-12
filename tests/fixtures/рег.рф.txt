@@ -1,0 +1,18 @@
+% TCI Whois Service. Terms of use:
+% https://tcinet.ru/documents/whois_ru_rf.pdf (in Russian)
+% https://tcinet.ru/documents/whois_su.pdf (in Russian)
+
+domain:        XN--C1AD6A.XN--P1AI
+nserver:       ns1.reg.ru.
+nserver:       ns2.reg.ru.
+state:         REGISTERED, DELEGATED, VERIFIED
+org:           Domain name registrar REG.RU
+taxpayer-id:   7733568767
+registrar:     REGRU-RF
+admin-contact: http://www.reg.ru/whois/admin_contact
+created:       2009-12-11T11:53:43Z
+paid-till:     2023-12-11T11:53:43Z
+free-date:     2024-01-11
+source:        TCI
+
+Last updated on 2023-04-11T10:56:30Z

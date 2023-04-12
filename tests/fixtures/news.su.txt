@@ -1,0 +1,17 @@
+% TCI Whois Service. Terms of use:
+% https://tcinet.ru/documents/whois_ru_rf.pdf (in Russian)
+% https://tcinet.ru/documents/whois_su.pdf (in Russian)
+
+domain:        NEWS.SU
+nserver:       johnny.ns.cloudflare.com.
+nserver:       sarah.ns.cloudflare.com.
+state:         REGISTERED, DELEGATED
+person:        Private Person
+e-mail:        andy.brok@yandex.ru
+registrar:     DOMAINSHOP-SU
+created:       2022-08-02T14:06:50Z
+paid-till:     2023-08-02T14:06:50Z
+free-date:     2023-09-04
+source:        TCI
+
+Last updated on 2023-04-11T10:56:30Z

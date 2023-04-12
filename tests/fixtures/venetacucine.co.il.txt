@@ -1,0 +1,84 @@
+
+% The data in the WHOIS database of the .il registry is provided
+% by ISOC-IL for information purposes, and to assist persons in 
+% obtaining information about or related to a domain name 
+% registration record. ISOC-IL does not guarantee its accuracy.
+% By submitting a WHOIS query, you agree that you will use this
+% Data only for lawful purposes and that, under no circumstances
+% will you use this Data to: (1) allow, enable, or otherwise 
+% support the transmission of mass unsolicited, commercial 
+% advertising or solicitations via e-mail (spam); 
+% or  (2) enable high volume, automated, electronic processes that 
+% apply to ISOC-IL (or its systems).
+% ISOC-IL reserves the right to modify these terms at any time.
+% By submitting this query, you agree to abide by this policy.
+ 
+query:        venetacucine.co.il
+
+reg-name:     venetacucine
+domain:       venetacucine.co.il
+
+descr:        Veneta Cucine S.p.a.
+descr:        Via Paris Bordone, 84
+descr:        Biancade di Roncade
+descr:        31056
+descr:        Italy
+phone:        +39 42 2847437
+fax-no:       +39 42 2847561
+e-mail:       domain.admins AT venetacucine.com
+admin-c:      GC-RP7946-IL
+tech-c:       GC-ST6359-IL
+zone-c:       GC-SA13431-IL
+nserver:      ns1.register.it 
+nserver:      ns2.register.it 
+validity:     17-02-2024
+DNSSEC:       unsigned
+status:       Transfer Locked
+changed:      domain-registrar AT isoc.org.il 20110217 (Assigned)
+changed:      domain-registrar AT isoc.org.il 20161030 (Transferred)
+changed:      domain-registrar AT isoc.org.il 20161101 (Changed)
+changed:      domain-registrar AT isoc.org.il 20161101 (Changed)
+changed:      domain-registrar AT isoc.org.il 20161101 (Changed)
+changed:      domain-registrar AT isoc.org.il 20171017 (Transferred)
+changed:      domain-registrar AT isoc.org.il 20171017 (Changed)
+
+person:       Roberto Pellizzer
+address      Veneta Cucine Spa
+address      Via Paris Bordone, 84
+address      Biancade di Roncade
+address      31056
+address      Italy
+phone:        +3 9 042284743
+fax-no:       +3 9 042284756
+e-mail:       domain.admins AT venetacucine.com
+nic-hdl:      GC-RP7946-IL
+changed:      Managing Registrar 20171017
+
+person:       Support Technical
+address      Registerit spa
+address      via Zanchi 22
+address      Bergamo
+address      24126
+address      Italy
+phone:        +3 9 353230300
+fax-no:       +3 9 353230312
+e-mail:       corporate.support AT register.it
+nic-hdl:      GC-ST6359-IL
+changed:      Managing Registrar 20171017
+
+person:       Service Administrative
+address      Registerit spa
+address      via Zanchi 22
+address      bergamo
+address      24126
+address      Italy
+phone:        +3 9 353230300
+fax-no:       +3 9 353230312
+e-mail:       administration AT register.it
+nic-hdl:      GC-SA13431-IL
+changed:      Managing Registrar 20171017
+
+registrar name: Communigal Communication Ltd
+registrar info: http://www.galcomm.co.il/
+
+% Rights to the data above are restricted by copyright.

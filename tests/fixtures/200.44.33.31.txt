@@ -1,0 +1,52 @@
+% IP Client: 2.37.252.210
+ 
+% Joint Whois - whois.lacnic.net
+%  This server accepts single ASN, IPv4 or IPv6 queries
+
+% LACNIC resource: whois.lacnic.net
+
+
+% Copyright LACNIC lacnic.net
+%  The data below is provided for information purposes
+%  and to assist persons in obtaining information about or
+%  related to AS and IP numbers registrations
+%  By submitting a whois query, you agree to use this data
+%  only for lawful purposes.
+%  2023-04-11 08:00:54 (-03 -03:00)
+
+inetnum:     200.44.0.0/16
+status:      allocated
+aut-num:     AS8048
+owner:       CANTV Servicios, Venezuela
+ownerid:     VE-CSVE-LACNIC
+responsible: CANTV GSR
+address:     Segunda Avenida de los Palos Grandes, 000, Entre Av. Fr
+address:     1060 - Caracas - MI
+country:     VE
+phone:       +58  2095685 [0000]
+owner-c:     LUM
+tech-c:      LUM
+abuse-c:     LUM
+inetrev:     200.44.0.0/16
+nserver:     DNS1.CANTV.NET
+nsstat:      20230410 AA
+nslastaa:    20230410
+nserver:     DNS2.CANTV.NET
+nsstat:      20230410 AA
+nslastaa:    20230410
+created:     19980317
+changed:     20020114
+
+nic-hdl:     LUM
+person:      CANTV GSR
+e-mail:      ipadmin@cantv.com.ve
+address:     CANTV COR Los Palos Grandes Chacao Caracas Venezuela, 000, -
+address:     1060 - Caracas - MI
+country:     VE
+phone:       +58  2122095685 [0000]
+created:     20020911
+changed:     20220110
+
+% whois.lacnic.net accepts only direct match queries.
+% Types of queries are: POCs, ownerid, CIDR blocks, IP
+% and AS numbers.

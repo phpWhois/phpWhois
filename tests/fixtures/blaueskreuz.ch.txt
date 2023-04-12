@@ -1,0 +1,10 @@
+Lookup - Internet Domains
+EN DEFRITToggle navigationInternet DomainsLookupRegistrarsLegal InfoSecuritySupportStatisticsAbout UsEN DEFRITDomain Name Lookup
+Check availability of .ch domain namesLookupRDAPDomain CheckInformation ServiceRequest for informationRequest for information by authoritiesDomain Name Lookup
+
+Is the domain name you want still available? Who is the registrar of a registered domain name? You can check the registration of domain names with the endings .ch and .li here. If the domain name is registered you will see the registrar and technical information.
+Examples: switch.ch - admin.ch Javascript must be activated to use the Domain Name Search. .chlook up&times;Security questionPlease enter the characters displayed below in the input field.look up
+The Domain Name Lookup is subject to the provisions of our Acceptable Use Policy.
+Please note: Since 1 January 2021, personal data associated with registered domain names is no longer disclosed. Information about holders of domain names can only be obtained in exceptional cases. More infoLookupRDAPDomain CheckInformation ServiceRequest for informationRequest for information by authoritiesRegistrars for .ch
+
+Registering new .ch domain names: Please select a registrar. Domain names that are already registered: Please contact the registrar administering your domain name for any changes.List of all registrarsLegal noticeImprint&copy; 2023 for content at SWITCHvar _paq = _paq || [];_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function() {var u=(("https:" == document.location.protocol) ? "https" : "http") + "://www.switch.ch/tracker/";_paq.push(['setTrackerUrl', u+'piwik.php']);_paq.push(['setSiteId', 2]);var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);})();

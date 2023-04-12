@@ -1,0 +1,63 @@
+% This is the RIPE Database query service.
+% The objects are in RPSL format.
+%
+% The RIPE Database is subject to Terms and Conditions.
+% See http://www.ripe.net/db/support/db-terms-conditions.pdf
+
+% Note: this output has been filtered.
+%       To receive output for a database update, use the "-B" flag.
+
+% Information related to '151.99.187.0 - 151.99.187.255'
+
+% Abuse contact for '151.99.187.0 - 151.99.187.255' is 'abuse@business.telecomitalia.it'
+
+inetnum:        151.99.187.0 - 151.99.187.255
+netname:        INTERBUSINESS
+remarks:        INFRA-AW
+descr:          Telecom Italia SPA
+descr:          Provider Local Registry
+descr:          BB IBS
+country:        IT
+admin-c:        INAS1-RIPE
+tech-c:         INAS1-RIPE
+status:         ASSIGNED PA
+mnt-by:         INTERB-MNT
+created:        2015-03-31T15:29:22Z
+last-modified:  2015-03-31T15:29:22Z
+source:         RIPE # Filtered
+
+role:           Interbusiness Network Administration Staff
+address:        Telecom Italia S.p.A
+address:        Italy
+admin-c:        ESB35-RIPE
+tech-c:         ESB35-RIPE
+tech-c:         ASB144-RIPE
+tech-c:         SSB86-RIPE
+tech-c:         DSB58-RIPE
+tech-c:         ABT49-RIPE
+nic-hdl:        INAS1-RIPE
+abuse-mailbox:  abuse@business.telecomitalia.it
+mnt-by:         INTERB-MNT
+created:        2002-08-01T12:20:54Z
+last-modified:  2018-05-24T06:06:48Z
+source:         RIPE # Filtered
+
+% Information related to '151.99.0.0/16AS3269'
+
+route:          151.99.0.0/16
+descr:          INTERBUSINESS
+origin:         AS3269
+remarks:        ************************************************
+remarks:        * Pay attention *
+remarks:        * Any communication sent to email different *
+remarks:        * from the following will be ignored! *
+remarks:        * Any abuse reports, please send them to *
+remarks:        * abuse@business.telecomitalia.it *
+remarks:        ************************************************
+mnt-by:         INTERB-MNT
+created:        2001-10-09T13:12:03Z
+last-modified:  2017-07-14T11:19:47Z
+source:         RIPE # Filtered
+
+% This query was served by the RIPE Database Query Service version 1.106 (SHETLAND)
+

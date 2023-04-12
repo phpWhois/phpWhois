@@ -1,0 +1,50 @@
+
+domain.............: ficora.fi
+status.............: Registered
+created............: 29.6.2001 09:25:00
+expires............: 31.8.2027 00:00:00
+available..........: 30.9.2027 00:00:00
+modified...........: 16.10.2022 16:34:12
+RegistryLock.......: no
+
+Nameservers
+
+nserver............: ns2.traficom.fi [87.239.125.187] [2a00:13f0:0:1002:125:184:0:3] [OK]
+nserver............: ns-secondary.funet.fi [128.214.248.132] [2001:708:10:55::53] [OK]
+nserver............: nsp.dnsnode.net [OK]
+nserver............: ns2.z.fi [OK]
+nserver............: ns1.z.fi [OK]
+nserver............: ns1.traficom.fi [87.239.125.186] [2a00:13f0:0:1002:125:184:0:2] [OK]
+
+DNSSEC
+
+dnssec.............: signed delegation
+DS Key Tag  1.......: 64365
+Algorithm   1.......: 10
+Digest Type 1.......: 2
+Digest      1.......: 524596E1F7B203F3D15596811531FF4F461F0343976B9236B0186DF575D46B23
+DS Key Tag  2.......: 12891
+Algorithm   2.......: 10
+Digest Type 2.......: 2
+Digest      2.......: F69462AADFB1CF0096E1539146E85385E170A64848B1284F844029ACD0D9644C
+
+Holder
+
+name...............: Liikenne- ja viestintävirasto Traficom
+register number....: 2924753-3
+address............: PL 320
+postal.............: 00059
+city...............: TRAFICOM
+country............: Finland
+phone..............: 
+holder email.......: 
+
+Registrar
+
+registrar..........: Liikenne- ja viestintävirasto
+
+>>> Last update of WHOIS database: 11.4.2023 13:45:11 (EET) <<<
+
+
+Copyright (c) Finnish Transport and Communications Agency Traficom
+

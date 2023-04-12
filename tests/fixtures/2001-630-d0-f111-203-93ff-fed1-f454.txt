@@ -1,0 +1,88 @@
+% This is the RIPE Database query service.
+% The objects are in RPSL format.
+%
+% The RIPE Database is subject to Terms and Conditions.
+% See http://www.ripe.net/db/support/db-terms-conditions.pdf
+
+% Note: this output has been filtered.
+%       To receive output for a database update, use the "-B" flag.
+
+% Information related to '2001:630:d0::/48'
+
+% Abuse contact for '2001:630:d0::/48' is 'serviceline@soton.ac.uk'
+
+inet6num:       2001:630:d0::/48
+netname:        UNI-SOTON
+descr:          University of Southampton
+org:            ORG-UOS35-RIPE
+country:        GB
+admin-c:        ACE23-RIPE
+tech-c:         UTR2-RIPE
+abuse-c:        AR21003-RIPE
+status:         ASSIGNED
+mnt-by:         JANET-HOSTMASTER
+created:        2003-12-02T17:57:47Z
+last-modified:  2020-12-09T13:58:18Z
+source:         RIPE
+
+organisation:   ORG-UOS35-RIPE
+org-name:       University of Southampton
+org-type:       OTHER
+address:        University Road
+address:        Highfield
+address:        Southampton
+address:        S017 1BJ
+address:        United Kingdom
+phone:          +44 (0)23 8059 5000
+fax-no:         +44 (0)23 8059 3131
+abuse-c:        AR21003-RIPE
+mnt-ref:        MNT-SOTON
+mnt-ref:        JANET-HOSTMASTER
+mnt-by:         MNT-SOTON
+created:        2014-05-24T14:27:39Z
+last-modified:  2020-12-07T10:00:25Z
+source:         RIPE # Filtered
+
+role:           UOS Tech-c Role
+org:            ORG-UOS35-RIPE
+address:        University Road
+address:        Highfield
+address:        Southampton
+address:        S017 1BJ
+nic-hdl:        UTR2-RIPE
+mnt-by:         MNT-SOTON
+created:        2017-11-02T09:29:41Z
+last-modified:  2017-11-02T09:29:41Z
+source:         RIPE # Filtered
+
+person:         Andrew Everett
+address:        iSolutions
+address:        University of Southampton
+address:        Highfield
+address:        Southampton S017 1BJ
+address:        United Kingdom
+phone:          +44 23 80 596684
+nic-hdl:        ACE23-RIPE
+org:            ORG-UOS35-RIPE
+mnt-by:         MNT-SOTON
+created:        2014-12-09T20:03:53Z
+last-modified:  2017-10-30T22:41:39Z
+source:         RIPE
+
+% Information related to '2001:630::/32AS786'
+
+route6:         2001:630::/32
+descr:          JANET
+descr:          JANET(UK) Network Operations Centre
+descr:          Third floor
+descr:          15 Fetter Lane
+descr:          London EC4A 1BW
+descr:          United Kingdom
+origin:         AS786
+mnt-by:         JIPS-NOSC
+created:        2005-02-04T14:03:23Z
+last-modified:  2019-06-11T12:42:22Z
+source:         RIPE
+
+% This query was served by the RIPE Database Query Service version 1.106 (ABERDEEN)
+

@@ -1,0 +1,25 @@
+Domain: dns.pt
+Domain Status: Registered
+Creation Date: 03/10/1991 00:00:00
+Expiration Date: 31/12/2023 23:59:00
+Owner Name: Associação DNS.PT
+Owner Address: Rua Eça de Queirós  29
+Owner Locality: Lisboa
+Owner ZipCode: 1050-095
+Owner Locality ZipCode: LISBOA
+Owner Country Code: PT
+Owner Email: request@pt.pt,secretariado@pt.pt
+Admin Name: Associação DNS.PT
+Admin Address: Rua Eça de Queirós  29
+Admin Locality: Lisboa
+Admin ZipCode: 1050-095
+Admin Locality ZipCode: LISBOA
+Admin Country Code: PT
+Admin Email: request@pt.pt,secretariado@pt.pt
+Name Server: b.dns.pt | IPv4: 194.0.25.23 and IPv6: 2001:678:20::23
+Name Server: c.dns.pt | IPv4: 204.61.216.105 and IPv6: 2001:500:14:6105:ad::1
+Name Server: dns01.dns.pt | IPv4: 185.39.208.12 and IPv6: 2a04:6d80::12
+Name Server: dns02.dns.pt | IPv4: 185.39.209.4 and IPv6: 2a04:6d81::4
+Name Server: europe1.dnsnode.net | IPv4:  and IPv6: 
+Name Server: nsp.dnsnode.net | IPv4:  and IPv6: 
+dns.pt IN DS  13 2 8EFD52C77334BA92ACE2AA2940149934D229459AF6277F7324E1BC14ACB5C337

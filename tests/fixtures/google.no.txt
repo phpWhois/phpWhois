@@ -1,0 +1,36 @@
+% By looking up information in the domain registration directory
+% service, you confirm that you accept the terms and conditions of the
+% service:
+% https://www.norid.no/en/domeneoppslag/vilkar/
+%
+% UNINETT Norid AS holds the copyright to the lookup service, content,
+% layout and the underlying collections of information used in the
+% service (cf. the Act on Intellectual Property of May 2, 1961, No.
+% 2). Any commercial % use of information from the service, including
+% targeted marketing, is prohibited. Using information from the domain
+% registration directory service in % violation of the terms and
+% conditions may result in legal prosecution.
+%
+% The whois service at port 43 is intended to contribute to resolving
+% technical problems where individual domains threaten the
+% functionality, security and stability of other domains or the
+% internet as an infrastructure. It does not give any information
+% about who the holder of a domain is. To find information about a
+% domain holder, please visit our website:
+% https://www.norid.no/en/domeneoppslag/
+
+Domain Information
+
+NORID Handle...............: GOO371D-NORID
+Domain Name................: google.no
+Registrar Handle...........: REG466-NORID
+Tech-c Handle..............: GL1R-NORID
+Name Server Handle.........: NSGO26H-NORID
+Name Server Handle.........: NSGO27H-NORID
+Name Server Handle.........: NSGO28H-NORID
+Name Server Handle.........: NSGO29H-NORID
+
+Additional information:
+Created:         2001-02-26
+Last updated:    2018-06-22
+

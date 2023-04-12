@@ -1,0 +1,18 @@
+Domain Name:                     google.ae
+Registrar ID:                    markmonitor
+Registrar Name:                  MarkMonitor
+Status:                          clientDeleteProhibited
+Status:                          clientUpdateProhibited
+
+Registrant Contact ID:           MMR-171195
+Registrant Contact Name:         Domain Administrator
+Registrant Contact Email:        Visit whois.aeda.ae for Web based WhoIs
+Registrant Contact Organisation: Google LLC
+
+Tech Contact ID:                 MMR-171195
+Tech Contact Name:               Domain Administrator
+Tech Contact Email:              Visit whois.aeda.ae for Web based WhoIs
+Tech Contact Organisation:       Google LLC
+
+Name Server:                     ns1.google.com
+Name Server:                     ns2.google.com

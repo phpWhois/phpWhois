@@ -1,0 +1,127 @@
+
+#
+# ARIN WHOIS data and services are subject to the Terms of Use
+# available at: https://www.arin.net/resources/registry/whois/tou/
+#
+# If you see inaccuracies in the results, please report at
+# https://www.arin.net/resources/registry/whois/inaccuracy_reporting/
+#
+# Copyright 1997-2023, American Registry for Internet Numbers, Ltd.
+#
+
+
+NetRange:       63.95.254.0 - 63.95.255.255
+CIDR:           63.95.254.0/23
+NetName:        UU-63-95-254-D4
+NetHandle:      NET-63-95-254-0-1
+Parent:         UUNET63 (NET-63-64-0-0-1)
+NetType:        Reallocated
+OriginAS:       
+Organization:   GEORGIA PUBLIC WEB, INC. (GPW)
+RegDate:        2002-10-17
+Updated:        2018-12-21
+Comment:        Addresses within this block are non-portable.
+Ref:            https://rdap.arin.net/registry/ip/63.95.254.0
+
+
+OrgName:        GEORGIA PUBLIC WEB, INC.
+OrgId:          GPW
+Address:        1470 RIVER EDGE PARKWAY
+City:           ATLANTA
+StateProv:      GA
+PostalCode:     30328
+Country:        US
+RegDate:        2002-01-09
+Updated:        2023-03-23
+Ref:            https://rdap.arin.net/registry/entity/GPW
+
+ReferralServer:  rwhois://rwhois.gapublicweb.net:4321
+
+OrgDNSHandle: ACCEL2-ARIN
+OrgDNSName:   Accelecom NOC
+OrgDNSPhone:  +1-888-662-6324 
+OrgDNSEmail:  noc@accelecom.net
+OrgDNSRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+
+OrgTechHandle: AJM56-ARIN
+OrgTechName:   McDaniel, Akeem J
+OrgTechPhone:  +1-770-661-2783 
+OrgTechEmail:  akeem.mcdaniel@accelecom.net
+OrgTechRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
+
+OrgTechHandle: WILLI3850-ARIN
+OrgTechName:   Williams, Chris 
+OrgTechPhone:  +1-888-349-9933 
+OrgTechEmail:  chris.williams@accelecom.net
+OrgTechRef:    https://rdap.arin.net/registry/entity/WILLI3850-ARIN
+
+OrgAbuseHandle: HULLK4-ARIN
+OrgAbuseName:   Hull, Kerry  
+OrgAbusePhone:  +1-770-661-2760 
+OrgAbuseEmail:  kerry.hull@accelecom.net
+OrgAbuseRef:    https://rdap.arin.net/registry/entity/HULLK4-ARIN
+
+OrgAbuseHandle: ACCEL2-ARIN
+OrgAbuseName:   Accelecom NOC
+OrgAbusePhone:  +1-888-662-6324 
+OrgAbuseEmail:  noc@accelecom.net
+OrgAbuseRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+
+OrgNOCHandle: ACCEL2-ARIN
+OrgNOCName:   Accelecom NOC
+OrgNOCPhone:  +1-888-662-6324 
+OrgNOCEmail:  noc@accelecom.net
+OrgNOCRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+
+OrgTechHandle: HULLK4-ARIN
+OrgTechName:   Hull, Kerry  
+OrgTechPhone:  +1-770-661-2760 
+OrgTechEmail:  kerry.hull@accelecom.net
+OrgTechRef:    https://rdap.arin.net/registry/entity/HULLK4-ARIN
+
+OrgRoutingHandle: ACCEL2-ARIN
+OrgRoutingName:   Accelecom NOC
+OrgRoutingPhone:  +1-888-662-6324 
+OrgRoutingEmail:  noc@accelecom.net
+OrgRoutingRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+
+OrgTechHandle: OFKTE-ARIN
+OrgTechName:   OFK-TECH
+OrgTechPhone:  +1-502-586-7600 
+OrgTechEmail:  arin-admin@accelecom.net
+OrgTechRef:    https://rdap.arin.net/registry/entity/OFKTE-ARIN
+
+OrgAbuseHandle: OFKAB-ARIN
+OrgAbuseName:   OFK-ABUSE
+OrgAbusePhone:  +1-888-662-6324 
+OrgAbuseEmail:  ARIN-NOC@accelecom.net
+OrgAbuseRef:    https://rdap.arin.net/registry/entity/OFKAB-ARIN
+
+RAbuseHandle: AJM56-ARIN
+RAbuseName:   McDaniel, Akeem J
+RAbusePhone:  +1-770-661-2783 
+RAbuseEmail:  akeem.mcdaniel@accelecom.net
+RAbuseRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
+
+RNOCHandle: AJM56-ARIN
+RNOCName:   McDaniel, Akeem J
+RNOCPhone:  +1-770-661-2783 
+RNOCEmail:  akeem.mcdaniel@accelecom.net
+RNOCRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
+
+RTechHandle: AJM56-ARIN
+RTechName:   McDaniel, Akeem J
+RTechPhone:  +1-770-661-2783 
+RTechEmail:  akeem.mcdaniel@accelecom.net
+RTechRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
+
+
+#
+# ARIN WHOIS data and services are subject to the Terms of Use
+# available at: https://www.arin.net/resources/registry/whois/tou/
+#
+# If you see inaccuracies in the results, please report at
+# https://www.arin.net/resources/registry/whois/inaccuracy_reporting/
+#
+# Copyright 1997-2023, American Registry for Internet Numbers, Ltd.
+#

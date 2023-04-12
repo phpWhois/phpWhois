@@ -1,0 +1,44 @@
+Domain Name: dnc.org.nz
+Registrar URL: https://dnc.org.nz
+Updated Date: 2023-01-06T11:04:53Z
+Creation Date: 2002-04-22T12:00:00Z
+Original Created: 2002-04-22T12:00:00Z
+Registrar: Domain Name Commission Limited
+Domain Status: ok https://icann.org/epp#ok
+Name Server: amy.ns.cloudflare.com
+Name Server: dom.ns.cloudflare.com
+DNSSEC: signedDelegation
+URL of the Domain Name Commission Limited Inaccuracy Complaint Form: https://dnc.org.nz/enquiry-form/
+>>> Last update of WHOIS database: 2023-04-11T10:58:32Z <<<
+
+% Terms of Use
+%
+% By submitting a WHOIS query you are entering into an agreement with Domain
+% Name Commission Ltd on the following terms and conditions, and subject to
+% all relevant .nz Policies and procedures as found at https://dnc.org.nz/.
+%
+% It is prohibited to:
+% - Send high volume WHOIS queries with the effect of downloading part of or
+%   all of the .nz Register or collecting register data or records;
+% - Access the .nz Register in bulk through the WHOIS service (ie. where a
+%   user is able to access WHOIS data other than by sending individual queries
+%   to the database);
+% - Use WHOIS data to allow, enable, or otherwise support mass unsolicited
+%   commercial advertising, or mass solicitations to registrants or to
+%   undertake market research via direct mail, electronic mail, SMS, telephone
+%   or any other medium;
+% - Use WHOIS data in contravention of any applicable data and privacy laws,
+%   including the Unsolicited Electronic Messages Act 2007;
+% - Store or compile WHOIS data to build up a secondary register of
+%   information;
+% - Publish historical or non-current versions of WHOIS data; and
+% - Publish any WHOIS data in bulk.
+%
+% Copyright Domain Name Commission Limited (a company wholly-owned by Internet
+% New Zealand Incorporated) which may enforce its rights against any person or
+% entity that undertakes any prohibited activity without its written
+% permission.
+%
+% The WHOIS service is provided by Internet New Zealand Incorporated.
+%
+% Additional information may be available at https://www.dnc.org.nz

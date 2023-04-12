@@ -1,0 +1,95 @@
+
+Domain Name:                   nic.museum
+Registry Domain ID:            DOM000000000002-MUSEUM
+Registrar URL:                 
+Registrar WHOIS server:        whois.nic.museum
+Creation Date:                 2005-02-04T19:19:09Z
+Updated Date:                  2023-03-21T19:25:59.334258Z
+Registry Expiry Date:          2024-02-04T19:19:09Z
+Registrar:                     Registry Operations
+Registrar IANA ID:             9999
+Domain Status:                 active https://icann.org/epp#active
+
+Registry Tech ID:              REDACTED_FOR_PRIVACY
+Tech Name:                     REDACTED_FOR_PRIVACY
+Tech Organization:             Afnic Backend Registry Operator
+Tech Contact Status:           associated https://icann.org/epp#associated
+Tech Contact Status:           active https://icann.org/epp#active
+Tech Street:                   REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
+Tech City:                     REDACTED_FOR_PRIVACY
+Tech Postal Code:              REDACTED_FOR_PRIVACY
+Tech State/Province:           REDACTED_FOR_PRIVACY
+Tech Country:                  REDACTED_FOR_PRIVACY
+Tech Phone:                    REDACTED_FOR_PRIVACY
+Tech Fax:                      REDACTED_FOR_PRIVACY
+Tech Email:                    REDACTED_FOR_PRIVACY
+
+Registry Registrant ID:        REDACTED_FOR_PRIVACY
+Registrant Name:               REDACTED_FOR_PRIVACY
+Registrant Organization:       Afnic Backend Registry Operator
+Registrant Contact Status:     associated https://icann.org/epp#associated
+Registrant Contact Status:     active https://icann.org/epp#active
+Registrant Street:             REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
+Registrant City:               REDACTED_FOR_PRIVACY
+Registrant Postal Code:        REDACTED_FOR_PRIVACY
+Registrant State/Province:     REDACTED_FOR_PRIVACY
+Registrant Country:            REDACTED_FOR_PRIVACY
+Registrant Phone:              REDACTED_FOR_PRIVACY
+Registrant Fax:                REDACTED_FOR_PRIVACY
+Registrant Email:              REDACTED_FOR_PRIVACY
+
+Registry Billing ID:           REDACTED_FOR_PRIVACY
+Billing Name:                  REDACTED_FOR_PRIVACY
+Billing Organization:          Afnic Backend Registry Operator
+Billing Contact Status:        associated https://icann.org/epp#associated
+Billing Contact Status:        active https://icann.org/epp#active
+Billing Street:                REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
+Billing City:                  REDACTED_FOR_PRIVACY
+Billing Postal Code:           REDACTED_FOR_PRIVACY
+Billing State/Province:        REDACTED_FOR_PRIVACY
+Billing Country:               REDACTED_FOR_PRIVACY
+Billing Phone:                 REDACTED_FOR_PRIVACY
+Billing Fax:                   REDACTED_FOR_PRIVACY
+Billing Email:                 REDACTED_FOR_PRIVACY
+
+Registry Admin ID:             REDACTED_FOR_PRIVACY
+Admin Name:                    REDACTED_FOR_PRIVACY
+Admin Organization:            Afnic Backend Registry Operator
+Admin Contact Status:          associated https://icann.org/epp#associated
+Admin Contact Status:          active https://icann.org/epp#active
+Admin Street:                  REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
+Admin City:                    REDACTED_FOR_PRIVACY
+Admin Postal Code:             REDACTED_FOR_PRIVACY
+Admin State/Province:          REDACTED_FOR_PRIVACY
+Admin Country:                 REDACTED_FOR_PRIVACY
+Admin Phone:                   REDACTED_FOR_PRIVACY
+Admin Fax:                     REDACTED_FOR_PRIVACY
+Admin Email:                   REDACTED_FOR_PRIVACY
+
+Name Server:                   ns3.nic.fr
+Name Server:                   ns2.nic.fr
+Name Server:                   ns1.nic.fr
+
+DNSSEC:                        signedDelegation
+
+>>> WHOIS request date: 2023-04-11T11:00:09.521343Z <<<
+For more information on Whois status codes, please visit https://icann.org/epp
+
+Rights restricted by copyright.
+
+If you wish to access the protected data, please visit our website at the following address: www.welcome.museum
+
+Terms of Use : MuseDoma's database is protected by the provisions of the French Law of the 1st of July 1998
+transposing the European Directive of the 11th of March 1996 on database legal protection in the Intellectual Property Code.
+
+MuseDoma is the only entity to hold the producing rights of the databases as substantial investment, quantitative
+as much as qualitative, that were used to achieve this database.
+Complete or partial reproduction and/or use of MuseDoma's database without the express permission of MuseDoma's is strictly forbidden.
+
+Any breach to these rules can carry penal sanctions as counterfeit, without prejudice of a potential damages request from MuseDoma,
+holder of these rights. MuseDoma's database user commits to use the published data according to the laws
+and rules in effect. Moreover, the user is bound to respect the French Data Protection Law.
+The infringement of the French Data Protection Law can carry penal sanctions. As the user will access personal information,
+the user must refrain from collecting or misuse this information. In a more general way, the user must refrain from any act likely
+to infringe the privacy or reputation of individuals.
+

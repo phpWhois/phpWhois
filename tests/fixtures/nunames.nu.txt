@@ -1,0 +1,34 @@
+# Copyright (c) 1997- The Swedish Internet Foundation.
+# All rights reserved.
+# The information obtained through searches, or otherwise, is protected
+# by the Swedish Copyright Act (1960:729) and international conventions.
+# It is also subject to database protection according to the Swedish
+# Copyright Act.
+# Any use of this material to target advertising or
+# similar activities is forbidden and will be prosecuted.
+# If any of the information below is transferred to a third
+# party, it must be done in its entirety. This server must
+# not be used as a backend for a search engine.
+# Result of search for registered domain names under
+# the .se top level domain.
+# This whois printout is printed with UTF-8 encoding.
+#
+state:            active
+domain:           nunames.nu
+holder:           qi9c3zbvhr
+created:          1997-05-30
+modified:         2020-08-03
+expires:          2097-05-30
+nserver:          lns3.nudomain.nu 185.136.99.88 2A06:FB00:1:0:0:0:4:88
+nserver:          lns2.nudomain.nu 185.136.98.88 2A06:FB00:1:0:0:0:3:88
+nserver:          lns1.nudomain.nu 185.136.97.88 2A06:FB00:1:0:0:0:2:88
+nserver:          lns0.nudomain.nu 185.136.96.88 2A06:FB00:1:0:0:0:1:88
+nserver:          ndl3.nudomain.nu 65.61.139.19
+nserver:          ndl2.nudomain.nu 92.52.92.100
+nserver:          ndl1.nudomain.nu 207.97.208.110
+dnssec:           unsigned delegation
+registry-lock:    locked
+status:           serverUpdateProhibited
+status:           serverDeleteProhibited
+status:           serverTransferProhibited
+registrar:        NuNames.NU

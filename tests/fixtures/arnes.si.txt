@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is ARNES whois database
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rights restricted by copyright.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The WHOIS service offered by Arnes, .si Registry, is
+% provided for information purposes only. It allows persons
+% to check whether a specific domain name is still available
+% or not and to obtain information related to the registration
+% records of existing domain names.
+%
+% This WHOIS service accepts and displays only ASCII characters.
+
+% By submitting a query to our WHOIS lookup service, you agree
+% to the restrictions on the use of WHOIS and WHOIS data as follows:
+%      o You may not allow, enable or otherwise support
+%        the transmission of unsolicited, commercial advertising
+%        or other solicitations, whether via email or otherwise;
+%      o You may not use the information to target advertising
+%        in any possible way;
+%      o You may not cause inconvenience the domain name holders
+%        in any possible way by sending them messages
+%        (whether by automated, electronic processes capable of
+%        enabling high volumes or other possible means);
+%      o You may not copy, extract and/or publish contents
+%        of the WHOIS database.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+domain:		arnes.si
+registrar:	Arnes
+registrar-url:	http://www.arnes.si/storitve/splet-posta-strezniki/registracija-si-domene.html
+nameserver:	nanos.arnes.si (193.2.1.105,2001:1470:8000::105)
+nameserver:	niobe.ijs.si (193.2.4.24,2001:1470:ff80::24)
+nameserver:	ns4.arnes.eu
+nameserver:	ns8.arnes.eu
+nameserver:	si-ns.anycast.pch.net
+nameserver:	aa.arnes.si (193.2.1.87,2001:1470:8000::87)
+registrant:	G31071
+status:		ok
+created:	1992-01-01
+expire:		2023-06-06
+source:		ARNES
+
+Domain holder:
+NOT DISCLOSED
+
+Tech:
+NOT DISCLOSED
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Full domain details are available here http://www.registry.si
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

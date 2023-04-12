@@ -1,0 +1,133 @@
+% [whois.apnic.net]
+% Whois data copyright terms    http://www.apnic.net/db/dbcopyright.html
+
+% Information related to 'AS9249 - AS10239'
+
+as-block:       AS9249 - AS10239
+descr:          APNIC ASN block
+remarks:        These AS numbers are further assigned by APNIC
+remarks:        to APNIC members and end-users in the APNIC region
+admin-c:        HM20-AP
+tech-c:         HM20-AP
+mnt-by:         APNIC-HM
+mnt-lower:      APNIC-HM
+last-modified:  2022-09-22T22:36:45Z
+source:         APNIC
+
+role:           APNIC Hostmaster
+address:        6 Cordelia Street
+address:        South Brisbane
+address:        QLD 4101
+country:        AU
+phone:          +61 7 3858 3100
+fax-no:         +61 7 3858 3199
+e-mail:         helpdesk@apnic.net
+admin-c:        AMS11-AP
+tech-c:         AH256-AP
+nic-hdl:        HM20-AP
+remarks:        Administrator for APNIC
+notify:         hostmaster@apnic.net
+mnt-by:         MAINT-APNIC-AP
+last-modified:  2013-10-23T04:06:51Z
+source:         APNIC
+
+% Information related to 'AS9683 - AS9712'
+
+as-block:       AS9683 - AS9712
+descr:          KRNIC-ASBLOCK-AP
+descr:          KRNIC
+descr:          Korea Network Information Center
+country:        KR
+admin-c:        HM127-AP
+tech-c:         HM127-AP
+remarks:        Authoritative information regarding AS Number
+remarks:        assignments made from within this block can also be
+remarks:        queried at whois.nic.or.kr
+mnt-by:         APNIC-HM
+mnt-lower:      MNT-KRNIC-AP
+last-modified:  2017-06-15T04:25:41Z
+source:         APNIC
+
+person:         Host Master
+address:        Jeollanam-do Naju-si Jinheung-gil
+country:        KR
+phone:          +82-2-405-5118
+e-mail:         hostmaster@nic.or.kr
+nic-hdl:        HM127-AP
+mnt-by:         MNT-KRNIC-AP
+last-modified:  2019-05-22T01:20:31Z
+source:         APNIC
+
+% Information related to 'AS9700'
+
+% Abuse contact for 'AS9700' is 'irt@nic.or.kr'
+
+aut-num:        AS9700
+as-name:        KRNIC-AS-KR
+descr:          Korea Internet Security Agency
+country:        KR
+admin-c:        AM1069-AP
+tech-c:         AM1069-AP
+import:         from AS3786
+                action pref=10;
+                accept ANY
+import:         from AS9286
+                action pref=30;
+                accept ANY
+import:         from AS9318
+                action pref=20;
+                accept ANY
+export:         to AS3786
+                announce AS9700
+export:         to AS9286
+                announce AS9700
+export:         to AS9318
+                announce AS9700
+mnt-by:         MNT-KRNIC-AP
+mnt-irt:        IRT-KRNIC-KR
+last-modified:  2018-07-17T02:14:01Z
+source:         APNIC
+
+irt:            IRT-KRNIC-KR
+address:        Jeollanam-do Naju-si Jinheung-gil
+e-mail:         irt@nic.or.kr
+abuse-mailbox:  irt@nic.or.kr
+admin-c:        IM574-AP
+tech-c:         IM574-AP
+auth:           # Filtered
+remarks:        irt@nic.or.kr was validated on 2020-04-09
+mnt-by:         MNT-KRNIC-AP
+last-modified:  2021-06-15T06:21:49Z
+source:         APNIC
+
+person:         AS Manager
+address:        Jeollanam-do Naju-si Jinheung-gil
+country:        KR
+phone:          +82-2-405-5118
+e-mail:         hostmaster@nic.or.kr
+nic-hdl:        AM1069-AP
+mnt-by:         MNT-KRNIC-AP
+last-modified:  2018-07-17T02:14:02Z
+source:         APNIC
+
+% Information related to 'AS9700'
+
+aut-num:        AS9700
+as-name:        KRNIC-AS-KR-KR
+descr:          Korea Internet Security Agency
+country:        KR
+import:         from AS3786 action pref=10 accept ANY
+import:         from AS9318 action pref=20 accept ANY
+import:         from AS9286 action pref=30 accept ANY
+export:         to AS3786 announce AS9700
+export:         to AS9318 announce AS9700
+export:         to AS9286 announce AS9700
+admin-c:        NA145-KR
+tech-c:         NA145-KR
+mnt-by:         MNT-KRNIC-AP
+mnt-irt:        IRT-KRNIC-KR
+changed:        hostmaster@nic.or.kr
+source:         KRNIC
+
+% This query was served by the APNIC Whois Service version 1.88.16 (WHOIS-UK3)
+

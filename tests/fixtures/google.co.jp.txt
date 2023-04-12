@@ -1,0 +1,24 @@
+[ JPRS database provides information on network administration. Its use is    ]
+[ restricted to network administration purposes. For further information,     ]
+[ use 'whois -h whois.jprs.jp help'. To suppress Japanese output, add'/e'     ]
+[ at the end of command, e.g. 'whois -h whois.jprs.jp xxx/e'.                 ]
+
+Domain Information: [ドメイン情報]
+a. [ドメイン名]                 GOOGLE.CO.JP
+e. [そしきめい]                 ぐーぐるごうどうかいしゃ
+f. [組織名]                     グーグル合同会社
+g. [Organization]               Google Japan G.K.
+k. [組織種別]                   合同会社
+l. [Organization Type]          GK
+m. [登録担当者]                 YN47525JP
+n. [技術連絡担当者]             SH36113JP
+p. [ネームサーバ]               ns1.google.com
+p. [ネームサーバ]               ns2.google.com
+p. [ネームサーバ]               ns3.google.com
+p. [ネームサーバ]               ns4.google.com
+s. [署名鍵]                     
+[状態]                          Connected (2024/03/31)
+[登録年月日]                    2001/03/22
+[接続年月日]                    2001/03/22
+[最終更新]                      2023/04/01 01:05:57 (JST)
+

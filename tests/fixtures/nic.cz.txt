@@ -1,0 +1,78 @@
+%  (c) 2006-2021 CZ.NIC, z.s.p.o.
+% 
+% Intended use of supplied data and information
+% 
+% Data contained in the domain name register, as well as information
+% supplied through public information services of CZ.NIC association,
+% are appointed only for purposes connected with Internet network
+% administration and operation, or for the purpose of legal or other
+% similar proceedings, in process as regards a matter connected
+% particularly with holding and using a concrete domain name.
+% 
+% Full text available at:
+% http://www.nic.cz/page/306/intended-use-of-supplied-data-and-information/
+% 
+% See also a search service at http://www.nic.cz/whois/
+% 
+% 
+% Whoisd Server Version: 3.12.2
+% Timestamp: Tue Apr 11 10:56:58 2023
+
+domain:       nic.cz
+registrant:   CZ-NIC
+admin-c:      FEELA
+admin-c:      MAPET
+nsset:        CZ.NIC
+keyset:       AUTO-ZHHWRIDCGH9F46ZDG2K2VC284
+registrar:    REG-CZNIC
+status:       Sponsoring registrar change forbidden
+registered:   30.10.1997 01:00:00
+changed:      17.11.2020 14:25:52
+expire:       15.03.2027
+
+contact:      CZ-NIC
+org:          CZ.NIC, z.s.p.o.
+name:         CZ.NIC, z.s.p.o.
+address:      Milesovska 1136/5
+address:      Praha 3
+address:      130 00
+address:      CZ
+registrar:    REG-CZNIC
+created:      17.10.2008 12:08:21
+changed:      15.05.2018 21:32:00
+
+contact:      FEELA
+name:         Ondřej Filip
+registrar:    REG-MOJEID
+created:      04.01.2005 13:35:00
+changed:      03.12.2021 16:48:58
+
+contact:      MAPET
+name:         Martin Peterka
+registrar:    REG-MOJEID
+created:      06.03.2002 18:11:00
+changed:      19.10.2020 19:25:15
+
+nsset:        CZ.NIC
+nserver:      d.ns.nic.cz (193.29.206.1, 2001:678:1::1)
+nserver:      a.ns.nic.cz (194.0.12.1, 2001:678:f::1)
+nserver:      b.ns.nic.cz (194.0.13.1, 2001:678:10::1)
+tech-c:       JTALIR
+registrar:    REG-CZNIC
+created:      09.06.2008 14:30:16
+changed:      22.02.2022 10:33:18
+
+contact:      JTALIR
+name:         Jaromír Talíř
+registrar:    REG-MOJEID
+created:      26.10.2010 10:53:34
+changed:      21.04.2022 11:26:14
+
+keyset:       AUTO-ZHHWRIDCGH9F46ZDG2K2VC284
+dnskey:       257 3 13 41HF24l2JgkEzK8Pv/h8iiHCjzwHea/Y+4d3v1mHjFzimRiQpGYB4rodlOiqtuTJEwL94uS+/sAk749TX7NXoA==
+tech-c:       CZ-NIC
+registrar:    REG-CZNIC
+created:      17.11.2020 14:25:52
+changed:      15.03.2023 14:53:08
+
+

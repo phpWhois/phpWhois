@@ -1,0 +1,38 @@
+[ JPRS database provides information on network administration. Its use is    ]
+[ restricted to network administration purposes. For further information,     ]
+[ use 'whois -h whois.jprs.jp help'. To suppress Japanese output, add'/e'     ]
+[ at the end of command, e.g. 'whois -h whois.jprs.jp xxx/e'.                 ]
+
+Domain Information: [ドメイン情報]
+[Domain Name]                   JPRS.JP
+
+[登録者名]                      株式会社日本レジストリサービス
+[Registrant]                    Japan Registry Services Co.,Ltd.
+
+[Name Server]                   ns1.jprs.jp
+[Name Server]                   ns2.jprs.jp
+[Name Server]                   ns3.jprs.jp
+[Name Server]                   ns4.jprs.jp
+[Signing Key]                   58789 8 2 (
+                                91A58C9C8A54E4E551A4F8F507C25868
+                                EFBFE09C2CB2D81471A8BB4893895161 )
+
+[登録年月日]                    2001/02/02
+[有効期限]                      2024/02/29
+[状態]                          Active
+[最終更新]                      2023/03/31 11:11:16 (JST)
+
+Contact Information: [公開連絡窓口]
+[名前]                          株式会社日本レジストリサービス
+[Name]                          Japan Registry Services Co.,Ltd.
+[Email]                         dom-admin@jprs.co.jp
+[Web Page]                       
+[郵便番号]                      101-0065
+[住所]                          東京都千代田区西神田三丁目8番1号
+                                千代田ファーストビル東館 13F
+[Postal Address]                Chiyoda First Bldg. East 13F,
+                                3-8-1 Nishi-Kanda Chiyoda-ku,
+                                Tokyo 101-0065, JAPAN
+[電話番号]                      03-5215-8451
+[FAX番号]                       03-5215-8452
+

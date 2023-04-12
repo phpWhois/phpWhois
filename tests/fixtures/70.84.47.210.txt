@@ -1,0 +1,59 @@
+
+#
+# ARIN WHOIS data and services are subject to the Terms of Use
+# available at: https://www.arin.net/resources/registry/whois/tou/
+#
+# If you see inaccuracies in the results, please report at
+# https://www.arin.net/resources/registry/whois/inaccuracy_reporting/
+#
+# Copyright 1997-2023, American Registry for Internet Numbers, Ltd.
+#
+
+
+NetRange:       70.84.0.0 - 70.87.255.255
+CIDR:           70.84.0.0/14
+NetName:        NETBLK-THEPLANET-BLK-13
+NetHandle:      NET-70-84-0-0-1
+Parent:         NET70 (NET-70-0-0-0-0)
+NetType:        Direct Allocation
+OriginAS:       AS36420, AS30315, AS13749, AS21844
+Organization:   SoftLayer Technologies Inc. (SOFTL)
+RegDate:        2004-07-29
+Updated:        2017-04-11
+Ref:            https://rdap.arin.net/registry/ip/70.84.0.0
+
+
+OrgName:        SoftLayer Technologies Inc.
+OrgId:          SOFTL
+Address:        4849 Alpha Rd.
+City:           Dallas
+StateProv:      TX
+PostalCode:     75244
+Country:        US
+RegDate:        2005-10-26
+Updated:        2019-08-02
+Ref:            https://rdap.arin.net/registry/entity/SOFTL
+
+
+OrgTechHandle: IPADM258-ARIN
+OrgTechName:   IP Admin
+OrgTechPhone:  +1-214-442-0601 
+OrgTechEmail:  curtis1977@us.ibm.com
+OrgTechRef:    https://rdap.arin.net/registry/entity/IPADM258-ARIN
+
+OrgAbuseHandle: ABUSE1025-ARIN
+OrgAbuseName:   Abuse
+OrgAbusePhone:  +1-214-442-0601 
+OrgAbuseEmail:  abuse@softlayer.com
+OrgAbuseRef:    https://rdap.arin.net/registry/entity/ABUSE1025-ARIN
+
+
+#
+# ARIN WHOIS data and services are subject to the Terms of Use
+# available at: https://www.arin.net/resources/registry/whois/tou/
+#
+# If you see inaccuracies in the results, please report at
+# https://www.arin.net/resources/registry/whois/inaccuracy_reporting/
+#
+# Copyright 1997-2023, American Registry for Internet Numbers, Ltd.
+#

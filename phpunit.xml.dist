@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit bootstrap="./tests/bootstrap.php"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    stopOnFailure="false">
-    <testsuites>
-        <testsuite name="phpWhois Test suite">
-            <directory>./tests</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <blacklist>
-            <directory>./vendor</directory>
-            <directory>./tests</directory>
-        </blacklist>
-    </filter>
+<!--
+    You should copy this file into phpunit.xml and customize it to your needs.
+    You'll need to update the paths in here if you use a directory other than
+    one in which this file resides.
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="./tests/bootstrap.php" colors="true" convertDeprecationsToExceptions="false">
+  <coverage>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="phpWhois Test suite">
+      <directory>./tests</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>

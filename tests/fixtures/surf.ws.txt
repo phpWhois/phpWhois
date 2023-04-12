@@ -1,0 +1,19 @@
+Domain Name: SURF.WS
+Domain ID: 67ED55F393691EC6E050010AAC01EAB3
+WHOIS Server: whois.publicdomainregistry.com
+Registrar URL: http://PublicDomainRegistry.com/whois
+Updated Date: 2022-04-18T22:18:36Z
+Creation Date: 2018-04-19T08:40:58Z
+Registrar Registration Expiration Date: 2023-04-19T08:40:58Z
+Registrar: PDR Ltd.
+Registrar IANA ID: 303
+Registrar Abuse Contact Email: tldadmin@logicboxes.com
+Registrar Abuse Contact Phone: 832-295-1535
+Domain Status: clientTransferProhibited
+Name Server: ns5.mydnspt.net
+Name Server: ns6.mydnspt.net
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
+>>> Last update of WHOIS database: 2023-04-11T10:58:50Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp

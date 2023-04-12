@@ -1,0 +1,50 @@
+% This is the ISNIC Whois server.
+%
+% Rights restricted by copyright.
+% See https://www.isnic.is/en/about/copyright
+
+domain:       isnic.is
+registrant:   IIH33-IS
+admin-c:      JENS-IS
+tech-c:       ISHM-IS
+zone-c:       ISHM-IS
+billing-c:    ISBC-IS
+nserver:      ns-slave01.isnic.is
+nserver:      tg-secondary01.isnic.is
+dnssec:       signed delegation
+created:      September  5 2000
+expires:      September  5 2023
+source:       ISNIC 
+
+role:         Internet a Islandi hf.
+nic-hdl:      IIH33-IS
+address:      Katrinartuni 2
+address:      IS-105 Reykjavik
+phone:        +354 5782030
+e-mail:       isnic@isnic.is
+created:      September  5 2000
+source:       ISNIC 
+
+role:         Internet a Islandi hf.
+nic-hdl:      ISBC-IS
+address:      Katrinartuni 2
+address:      IS-105 Reykjavik
+phone:        +354 5782030
+e-mail:       innheimta@isnic.is
+created:      November  6 2000
+source:       ISNIC 
+
+role:         Internet a Islandi hf.
+nic-hdl:      ISHM-IS
+address:      Katrinartuni 2
+address:      IS-105 Reykjavik
+phone:        +354 5782030
+e-mail:       hostmaster@isnic.is
+created:      May 15 2002
+source:       ISNIC 
+
+nic-hdl:      JENS-IS
+address:      IS
+created:      December 15 1999
+source:       ISNIC 
+

@@ -1,0 +1,47 @@
+% IANA WHOIS server
+% for more information on IANA, visit http://www.iana.org
+% This query returned 1 object
+
+refer:        
+
+domain:       PH
+
+organisation: PH Domain Foundation
+address:      27/F Jollibee Plaza
+address:      F. Ortigas Ave. Ortigas Center
+address:      Pasig Metro Manila 1600
+address:      Philippines (the)
+
+contact:      administrative
+name:         DOTPH Administrative Contact
+organisation: DotPH
+address:      Room 1101, 11/F, Tai Yau Building
+address:      181 Johnston Road
+address:      Wanchai
+address:      Hong Kong
+phone:        +85258033011
+e-mail:       admin@dot.ph
+
+contact:      technical
+name:         DOTPH Technical Contact
+organisation: DotPH
+address:      Room 1101, 11/F, Tai Yau Building
+address:      181 Johnston Road
+address:      Wanchai
+address:      Hong Kong
+phone:        +639088698750
+e-mail:       sysadmin@dot.ph
+
+nserver:      1.NS.PH 206.51.255.1 2620:171:805:ad2:7068:0:0:1
+nserver:      NS2.CUHK.EDU.HK 137.189.6.21 2405:3000:3:6:0:0:0:15
+nserver:      NS4.APNIC.NET 2001:dd8:12:0:0:0:0:53 202.12.31.53
+nserver:      PH.COMMUNITYDNS.NET 194.0.1.23 2001:678:4:0:0:0:0:17
+
+whois:        
+
+status:       ACTIVE
+remarks:      Registration information: http://dot.ph
+
+created:      1990-09-14
+changed:      2023-01-18
+source:       IANA

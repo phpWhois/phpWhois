@@ -1,0 +1,57 @@
+% IP Client: 2.37.252.210
+ 
+% Copyright (c) Nic.br
+%  The use of the data below is only permitted as described in
+%  full by the Use and Privacy Policy at https://registro.br/upp ,
+%  being prohibited its distribution, commercialization or
+%  reproduction, in particular, to use it for advertising or
+%  any similar purpose.
+%  2023-04-11T08:00:56-03:00 - IP: 2.37.252.210
+
+inetnum:     200.165.0.0/16
+aut-num:     AS7738
+abuse-c:     BTC14
+owner:       V tal
+ownerid:     02.041.460/0001-93
+responsible: BTCM V.Tal
+country:     BR
+owner-c:     SEIVT1
+tech-c:      CGR13
+inetrev:     200.165.206.0/24
+nserver:     ns4.telemar.net.br
+nsstat:      20230408 AA
+nslastaa:    20230408
+nserver:     ns2.telemar.net.br
+nsstat:      20230408 AA
+nslastaa:    20230408
+created:     20010522
+changed:     20221006
+
+nic-hdl-br:  SEIVT1
+person:      Seguranï¿½a da Informaï¿½ï¿½o Vtal
+e-mail:      registroip@vtal.com
+country:     BR
+created:     20220830
+changed:     20230328
+
+nic-hdl-br:  BTC14
+person:      Brasil Telecom S. A. - CNRS
+e-mail:      ld-numeracaoip@vtal.com
+country:     BR
+created:     20031003
+changed:     20220217
+
+nic-hdl-br:  CGR13
+person:      Centro de Gerencia de Rede TELEMAR
+e-mail:      abuse@oi.net.br
+country:     BR
+created:     20000605
+changed:     20170106
+
+% Security and mail abuse issues should also be addressed to
+% cert.br, http://www.cert.br/ , respectivelly to cert@cert.br
+% and mail-abuse@cert.br
+%
+% whois.registro.br accepts only direct match queries. Types
+% of queries are: domain (.br), registrant (tax ID), ticket,
+% provider, CIDR block, IP and ASN.

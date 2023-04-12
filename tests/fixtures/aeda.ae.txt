@@ -1,0 +1,15 @@
+Domain Name:                     aeda.ae
+Registrar ID:                    aeDA Regulator
+Registrar Name:                  aeDA Regulator
+Status:                          ok
+
+Registrant Contact ID:           R085907
+Registrant Contact Name:         Telecommunication Regulatory Authority
+Registrant Contact Email:        Visit whois.aeda.ae for Web based WhoIs
+
+Tech Contact ID:                 C157151
+Tech Contact Name:               .ae Domain Administration
+Tech Contact Email:              Visit whois.aeda.ae for Web based WhoIs
+
+Name Server:                     ns1.aeda.net.ae
+Name Server:                     ns2.aeda.net.ae

@@ -1,0 +1,56 @@
+ZA NiC
+
+
+The results of your query:
+
+
+[Querying whois.za.net]
+[whois.za.net]
+
+Domain Name            : sex.za.net
+
+Registered for         : Cyberhost Internet
+42c Goldbourne St.
+Kenilworth
+7700
+ZA
+
+Administrative Contact : Ian Ward &lt;admin@cyberhost.co.za&gt;
+Cyberhost Internet
+42c Goldbourne St.
+Kenilworth
+WC
+7700
+ZA
++27 21 7628512
++27 12 7628683
+
+Technical Contact      : Ian Ward &lt;dns@cyberhost.co.za&gt;
+Cyberhost Internet
+42c Goldbourne St.
+Kenilworth
+WC
+7700
+ZA
++27 21 7628512
++27 12 7628683
+
+Record Created         : Tue Sep 15 16:56:24 BST 1998
+Record Last Updated    : Tue Sep 15 16:56:24 BST 1998
+Database Last Updated  : Tue Apr 11 06:00:08 BST 2023
+
+Domain Name Servers listed in order:
+
+cyberhost.co.za
+dinkytoy.cyberhost.co.za
+
+
+The ZA NiC whois service contains ONLY information relating to the registration
+or availability of Internet domain names under the ZA.NET and ZA.ORG namespace.
+Online registration of ZA NiC domains can be made using the automated tool
+available at http://www.za.net/
+
+
+To perform another whois lookup, enter the domain name below:
+
+&copy;1998-2002 ZA NiC

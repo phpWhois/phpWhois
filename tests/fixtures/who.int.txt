@@ -1,0 +1,41 @@
+% IANA WHOIS server
+% for more information on IANA, visit http://www.iana.org
+% This query returned 1 object
+
+domain:       WHO.INT
+
+organisation: World Health Organization (WHO)
+address:      20, Avenue Appia
+address:      Geneva 27
+address:      Geneva Geneva CH-1211
+address:      Switzerland
+
+contact:      administrative
+name:         WHO-IMT-ESS
+address:      20, Avenue Appia
+address:      Geneva 27
+address:      Geneva  CH-1211
+address:      Switzerland
+phone:        +41 22 791 2411
+fax-no:       +41 22 791 3111
+e-mail:       hostmaster@who.int
+
+contact:      technical
+name:         WHO-IMT-ESS
+address:      20, Avenue Appia
+address:      Geneva 27
+address:      Geneva  CH-1211
+address:      Switzerland
+phone:        +41 22 791 2411
+fax-no:       +41 22 791 3111
+e-mail:       hostmaster@who.int
+
+nserver:      EXT-DNS-2.CERN.CH 192.91.245.85
+nserver:      NS1.WPRO.WHO.INT 123.176.64.11
+nserver:      WHQDNS1.WHO.INT 158.232.12.5
+nserver:      WHQDNS2.WHO.INT 158.232.12.6
+nserver:      WHQDNS3.WHO.INT 211.24.11.120
+
+created:      1998-06-05
+changed:      2020-12-10
+source:       IANA

@@ -1,0 +1,45 @@
+Connecting to NO.whois-servers.net...
+
+% By looking up information in the domain registration directory
+% service, you confirm that you accept the terms and conditions of the
+% service:
+% https://www.norid.no/en/domeneoppslag/vilkar/
+%
+% UNINETT Norid AS holds the copyright to the lookup service, content,
+% layout and the underlying collections of information used in the
+% service (cf. the Act on Intellectual Property of May 2, 1961, No.
+% 2). Any commercial % use of information from the service, including
+% targeted marketing, is prohibited. Using information from the domain
+% registration directory service in % violation of the terms and
+% conditions may result in legal prosecution.
+%
+% The whois service at port 43 is intended to contribute to resolving
+% technical problems where individual domains threaten the
+% functionality, security and stability of other domains or the
+% internet as an infrastructure. It does not give any information
+% about who the holder of a domain is. To find information about a
+% domain holder, please visit our website:
+% https://www.norid.no/en/domeneoppslag/
+
+Domain Information
+
+NORID Handle...............: NOR18456D-NORID
+Domain Name................: norid.no
+Registrar Handle...........: REG2-NORID
+Tech-c Handle..............: UH9R-NORID
+Name Server Handle.........: NAC2H-NORID
+Name Server Handle.........: NN14H-NORID
+Name Server Handle.........: NSUN1239H-NORID
+Name Server Handle.........: SERV41H-NORID
+DNSSEC.....................: Signed
+DS Key Tag     1...........: 50212
+Algorithm      1...........: 8
+Digest Type    1...........: 2
+Digest         1...........: 555cd4da5203e4d74a1c94e3433502ec9d8d4a09a28e6a85f47ade020137f423
+
+Additional information:
+Created:         1999-11-15
+Last updated:    2018-05-24
+
+
+Connecting to p information in the domain registration directory...

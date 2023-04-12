@@ -1,0 +1,64 @@
+
+% The data in the WHOIS database of the .il registry is provided
+% by ISOC-IL for information purposes, and to assist persons in 
+% obtaining information about or related to a domain name 
+% registration record. ISOC-IL does not guarantee its accuracy.
+% By submitting a WHOIS query, you agree that you will use this
+% Data only for lawful purposes and that, under no circumstances
+% will you use this Data to: (1) allow, enable, or otherwise 
+% support the transmission of mass unsolicited, commercial 
+% advertising or solicitations via e-mail (spam); 
+% or  (2) enable high volume, automated, electronic processes that 
+% apply to ISOC-IL (or its systems).
+% ISOC-IL reserves the right to modify these terms at any time.
+% By submitting this query, you agree to abide by this policy.
+ 
+query:        tapuz.co.il
+
+reg-name:     tapuz
+domain:       tapuz.co.il
+
+descr:        Tapuz Media ltd.
+descr:        Yad Haruzim
+descr:        Tel Aviv
+descr:        6770005
+descr:        Israel
+phone:        +972 52 468886
+e-mail:       avishai AT bizportal.co.il
+admin-c:      DT-AO4765-IL
+tech-c:       DT-SR6267-IL
+zone-c:       DT-SR6267-IL
+nserver:      danica.ns.cloudflare.com 
+nserver:      jake.ns.cloudflare.com 
+validity:     13-09-2023
+DNSSEC:       unsigned
+status:       Transfer Locked
+changed:      domain-registrar AT isoc.org.il 20210913 (Assigned)
+changed:      domain-registrar AT isoc.org.il 20220829 (Changed)
+
+person:       Avishai Ovadia
+address      Tapuz Media ltd.
+address      Yad Haruzim
+address      Tel Aviv
+address      6770005
+address      Israel
+phone:        +972 52 468886
+e-mail:       avishai AT bizportal.co.il
+nic-hdl:      DT-AO4765-IL
+changed:      domain-registrar AT isoc.org.il 20210913
+
+person:       Sergey Rishal
+address      Tapuz People Ltd
+address      30Ben Gurion
+address      Ramat Gan IL
+address      52573
+address      Israel
+phone:        +972 3 6109608
+e-mail:       sr AT tapuz.co.il
+nic-hdl:      DT-SR6267-IL
+changed:      Managing Registrar 20070930
+
+registrar name: Domain The Net Technologies Ltd
+registrar info: https://www.domainthenet.com
+
+% Rights to the data above are restricted by copyright.

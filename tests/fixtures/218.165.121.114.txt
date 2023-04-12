@@ -1,0 +1,82 @@
+% [whois.apnic.net]
+% Whois data copyright terms    http://www.apnic.net/db/dbcopyright.html
+
+% Information related to '218.160.0.0 - 218.175.255.255'
+
+% Abuse contact for '218.160.0.0 - 218.175.255.255' is 'abuse@hinet.net'
+
+inetnum:        218.160.0.0 - 218.175.255.255
+netname:        HINET-NET
+descr:          Data Communication Business Group,
+descr:          Chunghwa Telecom Co.,Ltd.
+descr:          No.21, Sec.1, Xinyi Rd., Taipei City
+descr:          10048, Taiwan
+country:        TW
+admin-c:        HN27-AP
+tech-c:         HN27-AP
+mnt-by:         MAINT-TW-TWNIC
+mnt-irt:        IRT-HINET-AP
+status:         ALLOCATED PORTABLE
+last-modified:  2017-01-20T01:41:38Z
+source:         APNIC
+
+irt:            IRT-HINET-AP
+address:        Taipei, Taiwan, 100
+e-mail:         network-adm@hinet.net
+abuse-mailbox:  abuse@hinet.net
+admin-c:        HN27-AP
+tech-c:         HN27-AP
+auth:           # Filtered
+mnt-by:         MAINT-TW-TWNIC
+last-modified:  2017-01-20T01:39:18Z
+source:         APNIC
+
+person:         HINET Network-Adm
+address:        CHTD, Chunghwa Telecom Co., Ltd.
+address:        No. 21, Sec. 21, Hsin-Yi Rd.,
+address:        Taipei Taiwan 100
+country:        TW
+phone:          +886 2 2322 3495
+phone:          +886 2 2322 3442
+phone:          +886 2 2344 3007
+fax-no:         +886 2 2344 2513
+fax-no:         +886 2 2395 5671
+e-mail:         network-adm@hinet.net
+nic-hdl:        HN27-AP
+remarks:        same as TWNIC nic-handle HN184-TW
+mnt-by:         MAINT-TW-TWNIC
+last-modified:  2011-08-22T06:04:01Z
+source:         APNIC
+
+% Information related to '218.165.0.0 - 218.165.255.255'
+
+inetnum:        218.165.0.0 - 218.165.255.255
+netname:        HINET-NET
+descr:          Chunghwa Telecom Co.,Ltd.
+descr:          No.21-3, Sec. 1, Xinyi Rd., Taipei 10048, Taiwan, R.O.C.
+descr:          Taipei Taiwan
+country:        TW
+admin-c:        HN184-TW
+tech-c:         HN184-TW
+mnt-by:         MAINT-TW-TWNIC
+remarks:        This information has been partially mirrored by APNIC from
+remarks:        TWNIC. To obtain more specific information, please use the
+remarks:        TWNIC whois server at whois.twnic.net.
+changed:        network-adm@hinet.net 20011011
+status:         ASSIGNED NON-PORTABLE
+source:         TWNIC
+
+person:         HINET Network-Adm
+address:        CHTD, Chunghwa Telecom Co., Ltd.
+address:        Data-Bldg. 6F,  No. 21, Sec. 1, Hsin-Yi Rd.,
+address:        Taipei Taiwan
+country:        TW
+phone:          +886-2-2322-3495
+fax-no:         +886-2-2344-2513
+e-mail:         network-adm@hinet.net
+nic-hdl:        HN184-TW
+changed:        hostmaster@twnic.net 20130307
+source:         TWNIC
+
+% This query was served by the APNIC Whois Service version 1.88.16 (WHOIS-UK3)
+

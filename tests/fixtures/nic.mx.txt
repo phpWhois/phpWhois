@@ -1,0 +1,93 @@
+
+Domain Name:       nic.mx
+
+Created On:        1997-01-15
+Expiration Date:   2024-01-14
+Last Updated On:   2023-03-02
+Registrar:         Registry .MX
+URL:               http://www.registry.mx
+
+Registrant:
+   Name:           Network Information Center, S.A. de C.V.
+   City:           Monterrey
+   State:          Nuevo Leon
+   Country:        Mexico
+
+Administrative Contact:
+   Name:           Network Information Center, S.A. de C.V.
+   City:           Monterrey
+   State:          Nuevo Leon
+   Country:        Mexico
+
+Technical Contact:
+   Name:           Network Information Center, S.A. de C.V.
+   City:           Monterrey
+   State:          Nuevo Leon
+   Country:        Mexico
+
+Billing Contact:
+   Name:           Network Information Center, S.A. de C.V.
+   City:           Monterrey
+   State:          Nuevo Leon
+   Country:        Mexico
+
+Name Servers:
+   DNS:            a.nic.mx       2001:1250:a000:0:0:0:0:1, 207.248.65.1
+   DNS:            b.nic.mx       2001:1250:b000:0:0:0:0:1, 201.131.250.1
+   DNS:            m.mx-ns.mx       200.94.176.1
+   DNS:            c.mx-ns.mx       192.100.224.1, 2001:1258:0:0:0:0:0:1
+   DNS:            o.mx-ns.mx       200.23.1.1
+
+DNSSEC DS Records:
+
+
+% NOTICE: The expiration date displayed in this record is the date the
+% registrar's sponsorship of the domain name registration in the registry is
+% currently set to expire. This date does not necessarily reflect the
+% expiration date of the domain name registrant's agreement with the sponsoring
+% registrar. Users may consult the sponsoring registrar's Whois database to
+% view the registrar's reported date of expiration for this registration.
+
+% The requested information ("Information") is provided only for the delegation
+% of domain names and the operation of the DNS administered by NIC Mexico.
+
+% It is absolutely prohibited to use the Information for other purposes, 
+% including sending not requested emails for advertising or promoting products
+% and services purposes (SPAM) without the authorization of the owners of the
+% Information and NIC Mexico.
+
+% The database generated from the delegation system is protected by the
+% intellectual property laws and all international treaties on the matter.
+
+% If you need more information on the records displayed here, please contact us
+% by email at ayuda@nic.mx .
+
+% If you want notify the receipt of SPAM or unauthorized access, please send a
+% email to abuse@nic.mx .
+
+% NOTA: La fecha de expiracion mostrada en esta consulta es la fecha que el
+% registrar tiene contratada para el nombre de dominio en el registry. Esta
+% fecha no necesariamente refleja la fecha de expiracion del nombre de dominio
+% que el registrante tiene contratada con el registrar. Puede consultar la base
+% de datos de Whois del registrar para ver la fecha de expiracion reportada por
+% el registrar para este nombre de dominio.
+
+% La informacion que ha solicitado se provee exclusivamente para fines
+% relacionados con la delegacion de nombres de dominio y la operacion del DNS
+% administrado por NIC Mexico.
+
+% Queda absolutamente prohibido su uso para otros propositos, incluyendo el
+% envio de Correos Electronicos no solicitados con fines publicitarios o de
+% promocion de productos y servicios (SPAM) sin mediar la autorizacion de los
+% afectados y de NIC Mexico.
+
+% La base de datos generada a partir del sistema de delegacion, esta protegida
+% por las leyes de Propiedad Intelectual y todos los tratados internacionales
+% sobre la materia.
+
+% Si necesita mayor informacion sobre los registros aqui mostrados, favor de
+% comunicarse a ayuda@nic.mx.
+
+% Si desea notificar sobre correo no solicitado o accesos no autorizados, favor
+% de enviar su mensaje a abuse@nic.mx.
+

@@ -1,0 +1,42 @@
+%  Servidor whois del Centro de Información de Red de Venezuela (NIC.VE)
+%  Este servidor contiene información autoritativa exclusivamente de dominios .ve
+% 
+% Whoisd Server Version: 3.12.1
+% Timestamp: Tue Apr 11 06:58:43 2023
+
+domain:       nic.ve
+registrant:   CON000031823
+admin-c:      CON000031823
+nsset:        DNS000114779
+keyset:       KEY000000001
+registrar:    NIC-VE
+registered:   08.08.2019 18:04:00
+changed:      11.03.2020 12:04:21
+expire:       31.12.2029
+
+contact:      CON000031823
+address:      Definir Dirección
+address:      Caracas
+address:      1012
+address:      VE
+registrar:    NIC-VE
+created:      04.08.2019 17:18:51
+
+nsset:        DNS000114779
+nserver:      ns3.nic.ve (190.9.129.56)
+nserver:      ns4.nic.ve (190.202.128.43)
+nserver:      ns5.nic.ve (45.175.22.88, 2801:18:8800:3:18ba:beff:fe61:d08b)
+nserver:      ns6.nic.ve (45.175.22.4, 2801:18:8800:1::4)
+tech-c:       CON000031823
+registrar:    NIC-VE
+created:      08.08.2019 18:03:59
+changed:      25.09.2019 08:52:41
+
+keyset:       KEY000000001
+dnskey:       257 3 8 AwEAAa2H+gaaaqOSDyLkx5AUm7zhzNFUXOv27jQ2fGibYk89dLf487x2VeJ4Pl5z84g9Dj/EbUzo/OWI8V5z7WQryqLhE5Hut9a5qUqRepc6kjxAG2VXUOPf2P7LyE8hAPDzH/fmWkMNXdiJzJnlLq60B+WAlVyQoFHjhiduAEov7ANcyo7i4euuAFkn13K7IPtYFLZyQWX3b5GNsL5vmXbbQReLobORntxcmQto/VAvSJqe0NeuzWaTUsaQVATE2uMJlmWi9L0G4+mvXanHKidUhyWXOfMvyk3ub40vWZpPYUJdmZBJb0zpzAVf9ubmN2AC2Kk7KL3Fn56v1F+tb0gKSeS15+HN4C1CyNuBxg6SH0ouTyMjZt5dUHCJp1D4v7lCHSSGKEaO1suzVdhorDgeyc2FkP383GViYnB/gYPVuwjwVtCztXip/58fnkQ7/EfYv+mXmSp/lcZTvGMZJEZVqPjYsNkmNjzHkZNaGivmOp+I0nW/Fob6L3r1XnkV+jiQNNr+4mWw0Sw3gk7UnMYun2+qKZcSlVtbLlyHEHkyZL9UAhXJDakdx2KNJnzcMepfovpBrfHDMwOfZW4Nq7xTk1HcP7/hAxytLu93jqrAti7ixDjcuGV3Wc6f1wi2U/zwGVou1r1lAUtF3+bv//o9OHC3XmAexneospkdOiY3CLOX
+tech-c:       CON000031823
+registrar:    NIC-VE
+created:      11.03.2020 11:48:43
+changed:      19.08.2022 15:32:48
+
+

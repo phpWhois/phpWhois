@@ -1,0 +1,79 @@
+% This is the AfriNIC Whois server.
+% The AFRINIC whois database is subject to  the following terms of Use. See https://afrinic.net/whois/terms
+
+% Note: this output has been filtered.
+%       To receive output for a database update, use the "-B" flag.
+
+% Information related to '66.18.70.0 - 66.18.70.255'
+
+% No abuse contact registered for 66.18.70.0 - 66.18.70.255
+
+inetnum:        66.18.70.0 - 66.18.70.255
+netname:        SENTECH-ISP9-ZA
+descr:          Sentech Ltd - ISP Mail
+country:        ZA
+admin-c:        TC55-AFRINIC
+admin-c:        SN42-AFRINIC
+admin-c:        JM7-AFRINIC
+admin-c:        WS5-AFRINIC
+tech-c:         SN42-AFRINIC
+tech-c:         JM7-AFRINIC
+status:         ASSIGNED PA
+mnt-by:         AFRINIC-JM7-MNT
+source:         AFRINIC # Filtered
+parent:         66.18.64.0 - 66.18.95.255
+
+person:         Jack Malebatsa
+address:        Private Bag X06
+address:        Honeydew 2040
+address:        South Africa
+phone:          tel:+27-11-471-4534
+nic-hdl:        JM7-AFRINIC
+mnt-by:         GENERATED-QUP4ZFKOOIMTFEZMXKKWEU71GDUE5QZC-MNT
+source:         AFRINIC # Filtered
+
+person:         Settlers Ngobeni
+address:        Octave Street, Radiokop
+address:        Johannesburg 2040
+address:        South Africa
+address:        Johannesburg 2040
+address:        South Africa
+phone:          tel:+27-11-471-4527
+nic-hdl:        SN42-AFRINIC
+mnt-by:         GENERATED-EK6VTD79G2VK6KARFNTJ6LJR3PDQRZ9G-MNT
+source:         AFRINIC # Filtered
+
+person:         T Chisoko
+address:        Sentech Ltd
+                PrivateBag X06
+                Honeydew
+                2040
+                South Africa
+phone:          tel:+27-11-471-4625
+fax-no:         tel:+27-11-471-4791
+nic-hdl:        TC55-AFRINIC
+mnt-by:         GENERATED-G0QILFYRMJQLPF34S1ZBPXAPNWXFZJL8-MNT
+source:         AFRINIC # Filtered
+
+person:         Wynand Swanepoel
+address:        Private Bag X06
+address:        Honeydew
+address:        2040
+address:        South Africa
+address:        Johannesburg 2040
+address:        South Africa
+phone:          tel:+27-11-471-4487
+phone:          tel:+27-11-471-4646
+nic-hdl:        WS5-AFRINIC
+mnt-by:         GENERATED-WFSUCCJSZROW9TRIYQALA9KTOO4VTDUZ-MNT
+source:         AFRINIC # Filtered
+
+% Information related to '66.18.64.0/20AS22572'
+
+route:          66.18.64.0/20
+origin:         AS22572
+descr:          Sentech SoC Ltd
+mnt-by:         AFRINIC-JM7-MNT
+source:         AFRINIC # Filtered
+
+
