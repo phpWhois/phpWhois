@@ -41,7 +41,7 @@ class IsHandler extends AbstractHandler
         $r = array();
         $r['regrinfo'] = $reg;
         $r['regyinfo'] = array(
-            'referrer' => 'http://www.isnic.is',
+            'referrer' => 'https://www.isnic.is',
             'registrar' => 'ISNIC'
         );
         return $r;
