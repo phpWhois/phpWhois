@@ -25,7 +25,7 @@
 
 use phpWhois\Handlers\AbstractHandler;
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 if (!defined('__APNIC_HANDLER__')) {
     define('__APNIC_HANDLER__', 1);

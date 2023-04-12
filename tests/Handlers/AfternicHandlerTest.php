@@ -23,9 +23,7 @@ namespace Tests\Handlers;
 
 use DMS\PHPUnitExtensions\ArraySubset\Assert;
 
-/**
- * AfternicHandlerTest
- */
+
 class AfternicHandlerTest extends AbstractHandler
 {
     /**
@@ -56,12 +54,15 @@ class AfternicHandlerTest extends AbstractHandler
         $query = 'buydomains.com';
 
         $fixture = $this->loadFixture($query);
-        $data    = [
+
+        $data = [
             'rawdata'  => $fixture,
             'regyinfo' => [],
         ];
 
         $actual = $this->handler->parse($data, $query);
+
+        print_r($actual);
 
         $expected = [
             'domain'     => [

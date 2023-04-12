@@ -27,7 +27,7 @@ if (!defined('__SRSPLUS_HANDLER__')) {
     define('__SRSPLUS_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class srsplus_handler
 {

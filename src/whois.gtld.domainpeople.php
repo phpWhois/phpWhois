@@ -27,7 +27,7 @@ if (!defined('__DOMAINPEOPLE_HANDLER__')) {
     define('__DOMAINPEOPLE_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class domainpeople_handler
 {

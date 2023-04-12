@@ -23,7 +23,7 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 if (!defined('__ORG_ZA_HANDLER__')) {
     define('__ORG_ZA_HANDLER__', 1);

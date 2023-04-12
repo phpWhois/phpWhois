@@ -27,7 +27,7 @@ if (!defined('__NETWORKSOLUTIONS_HANDLER__')) {
     define('__NETWORKSOLUTIONS_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class networksolutions_handler
 {

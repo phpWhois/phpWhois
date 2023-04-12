@@ -36,25 +36,16 @@ abstract class AbstractHandler implements HandlerInterface
     }
 
     /**
-     * @param       $data_str
-     * @param       $items
-     * @param       $date_format
+     * @param array $data_str
+     * @param array $items
+     * @param string $date_format
      * @param array $translate
-     * @param bool  $has_org
-     * @param bool  $partial_match
-     * @param bool  $def_block
-     *
+     * @param bool $has_org
+     * @param bool $partial_match
+     * @param bool $def_block
      * @return mixed
      */
-    public static function easyParser(
-        $data_str,
-        $items,
-        $date_format,
-        $translate = [],
-        $has_org = false,
-        $partial_match = false,
-        $def_block = false
-    ) {
+    public static function easyParser( array $data_str, array $items, string $date_format, array $translate = [], bool $has_org=false, bool $partial_match=false, bool $def_block=false ){
         $r = static::getBlocks($data_str, $items, $partial_match, $def_block);
         $r = static::getContacts($r, $translate, $has_org);
         static::formatDates($r, $date_format);
@@ -65,7 +56,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param mixed $res
      * @param string $format
      */
-    public static function formatDates(&$res, $format='mdy'): array
+    public static function formatDates(&$res, string $format='mdy'): array
     {
         if (!is_array($res)) {
             return $res;
@@ -481,7 +472,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param bool     $partial_match
      * @param bool     $def_block
      */
-    public static function getBlocks($rawdata, $items, $partial_match = false, $def_block = false): array
+    public static function getBlocks( array $rawdata, array $items, bool $partial_match=false, bool $def_block=false ): array
     {
         $r = [];
         $endtag = '';

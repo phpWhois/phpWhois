@@ -27,7 +27,7 @@ if (!defined('__ASCIO_HANDLER__')) {
     define('__ASCIO_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class ascio_handler
 {

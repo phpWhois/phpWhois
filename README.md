@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kevinoo/phpWhois.svg?branch=master)](https://travis-ci.org/kevinoo/phpWhois)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4bab08f5469a4d0bb5c792dd1117db5d)](https://app.codacy.com/gh/kevinoo/phpWhois/dashboard)
 
 Introduction
 ------------

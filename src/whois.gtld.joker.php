@@ -27,7 +27,7 @@ if (!defined('__JOKER_HANDLER__')) {
     define('__JOKER_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class joker_handler
 {
