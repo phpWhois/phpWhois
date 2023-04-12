@@ -968,8 +968,15 @@ abstract class AbstractHandler implements HandlerInterface
             // 2019-03-31
             '/(?<datetime>\d{4}-\d{2}-\d{2})$/' => 'Y-m-d',
 
+            // 1998/02/05
+            '/(?<datetime>\d{4}\/\d{2}\/\d{2})$/' => 'Y/m/d',
+
             // 22.07.2023
             '/(?<datetime>\d{2}\.\d{2}\.\d{4})$/' => 'd.m.Y',
+
+            // 31/05/1995
+            // 23/08/2005 hostmaster@nic.fr
+            '/(?<datetime>\d{2}\/\d{2}\/\d{4})( \w+@\w+\.\w+)?$/' => 'd/m/Y',
 
             // 9.12.2001 09:25:00
             // 30.6.2006 00:00:00
@@ -980,6 +987,16 @@ abstract class AbstractHandler implements HandlerInterface
 
             // Wed Apr 1 1998
             '/[A-Za-z]{3} (?<datetime>[A-Za-z]{3} \d{1,2} \d{4})$/' => 'M d Y',
+
+            // 1996.06.27 13:36:21
+            '/(?<datetime>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2})$/' => 'Y.m.d H:i:s',
+
+            // 01-January-2025
+            '/^(?<datetime>\d{2}-[A-Z][a-z]+-\d{4})$/' => 'd-F-Y',
+
+            // November  6 2000
+            '/^(?<datetime>[A-Z][a-z]+\s+\d{1,2}\s+\d{4})$/' => 'F j Y',
+
         ];
 
         foreach( $rules as $regex => $dateTimeFormat ){
