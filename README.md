@@ -1,3 +1,4 @@
+[![PHPUnit Test](https://github.com/kevinoo/phpWhois/actions/workflows/php_unit_test.yml/badge.svg?branch=main)](https://github.com/kevinoo/phpWhois/actions/workflows/php_unit_test.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4bab08f5469a4d0bb5c792dd1117db5d)](https://app.codacy.com/gh/kevinoo/phpWhois/dashboard)
 
 Introduction
