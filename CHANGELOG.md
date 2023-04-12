@@ -1,3 +1,10 @@
+6.2.1 - 2023-04-12
+------------------
+* Add more patterns in AbstractHandler::parseStandardDate method
+* Update PHPUnit Test
+* Update .travis.yml
+* Minor fix in IsHandler - but at the moment it is still broken
+
 6.2.0 - 2023-04-12
 ------------------
 ### Improvements
