@@ -1,106 +1,103 @@
-6.1.0 - 2023-04-12
+6.2.0 - 2023-04-12
 ------------------
 ### Improvements
-* [#92] Infinite Loop - Possible final resolution of hell problem
-* [#33] Add more patterns in AbstractHandler::parseStandardDate method
-* [#33] Less duplicated code in FrHandler class
-* [#33] Fixed version of "phpunit/phpunit" in composer.json
-* [#33] Update Tests
+* [[#92](https://github.com/jsmitty12/phpWhois/issues/92)] Infinite Loop - Possible final resolution of hell problem
+* Add more patterns in AbstractHandler::parseStandardDate method
+* Less duplicated code in FrHandler class
+* Fixed version of "phpunit/phpunit" in composer.json
+* Update Tests
 * Update "fixtures" files
-* [#33] Clean up Tests folder
-* [#33] Update ParserTest
-* [#33] Rename HandlerTestTest in AbstractHandler (to solve PHPUnit warning)
-* [#33] In UnitTest, throw UnexpectedValueException when a no parsable date is found
-* [#33] Minor fixed in IpTools.php
-* [#33] Clean up code AbstractHandler.php
-* [#33] Clean up code in AeHandler.php
-* [#33] Use Handlers class instead file <code>whois.[tld].php</code>
-* [#33] Use CzHandler instead whois.cz.php
-* [#33] Use ZanetHandler instead whois.zanet.php
-* [#33] Use XxxHandler instead whois.xxx.php
-* [#33] Use WsHandler instead whois.ws.php
-* [#33] Use VeHandler instead whois.ve.php
-* [#33] Use UsHandler instead whois.us.php
-* [#33] Use TodayHandler instead whois.today.php
-* [#33] Use TodayHandler instead whois.today.php
-* [#33] Use TelHandler instead whois.tel.php
-* [#33] Use SuHandler instead whois.su.php
-* [#33] Use SiHandler instead whois.si.php
-* [#33] Use SeHandler instead whois.se.php
-* [#33] Use ScHandler instead whois.sc.php
-* [#33] Use RwhoisHandler instead whois.rwhois.php
-* [#33] Use RuHandler instead whois.ru.php
-* [#33] Use RoHandler instead whois.ro.php
-* [#33] Use PtHandler instead whois.pt.php
-* [#33] Use ProHandler instead whois.pro.php
-* [#33] Use PlHandler instead whois.pl.php
-* [#33] Use PhHandler instead whois.ph.php
-* [#33] Use OrgHandler instead whois.org.php
-* [#33] Use NuHandler instead whois.nu.php
-* [#33] Use NoHandler instead whois.no.php
-* [#33] Use EuHandler instead whois.eu.php
-* [#33] Use DeHandler instead whois.de.php
-* [#33] Use FiHandler instead whois.fi.php
-* [#33] Use NlHandler instead whois.nl.php
-* [#33] Use MxHandler instead whois.mx.php
-* [#33] Use MuseumHandler instead whois.museum.php
-* [#33] Use MobiHandler instead whois.mobi.php
-* [#33] Use MeHandler instead whois.me.php
-* [#33] Use LyHandler instead whois.ly.php
-* [#33] Use LuHandler instead whois.lu.php
-* [#33] Use LtHandler instead whois.lt.php
-* [#33] Use FjHandler instead whois.fj.php
-* [#33] Use LondonHandler instead whois.london.php
-* [#33] Use JpHandler instead whois.jp.php
-* [#33] Use ItHandler instead whois.it.php
-* [#33] Use IsHandler instead whois.is.php
-* [#33] Use IrHandler instead whois.ir.php
-* [#33] Use IpHandler instead whois.ip.php
-* [#33] Use IntHandler instead whois.int.php
-* [#33] Use InHandler instead whois.in.php
-* [#33] Use InfoHandler instead whois.info.php
-* [#33] Use IlHandler instead whois.il.php
-* [#33] Use IeHandler instead whois.ie.php
-* [#33] Use HuHandler instead whois.hu.php
-* [#33] Use FrHandler instead whois.fr.php
-* [#33] Use FmHandler instead whois.fm.php
-* [#33] Use CoopHandler instead whois.coop.php
-* [#33] Use NameHandler instead whois.name.php
-* [#33] Use DkHandler instead whois.dk.php
-* [#33] Use DevHandler instead whois.dev.php
-* [#33] Use CzHandler instead whois.cz.php
-* [#33] Use CoHandler instead whois.co.php
-* [#33] Use CnHandler instead whois.cn.php
-* [#33] Use ChHandler instead whois.ch.php
-* [#33] Use CatHandler instead whois.cat.php
-* [#33] Use CaHandler instead whois.ca.php
+* Clean up Tests folder
+* Update ParserTest
+* Rename HandlerTestTest in AbstractHandler (to solve PHPUnit warning)
+* In UnitTest, throw UnexpectedValueException when a no parsable date is found
+* Minor fixed in IpTools.php
+* Clean up code AbstractHandler.php
+* Clean up code in AeHandler.php
+* Use Handlers class instead file <code>whois.[tld].php</code>
+* Use CzHandler instead whois.cz.php
+* Use ZanetHandler instead whois.zanet.php
+* Use XxxHandler instead whois.xxx.php
+* Use WsHandler instead whois.ws.php
+* Use VeHandler instead whois.ve.php
+* Use UsHandler instead whois.us.php
+* Use TodayHandler instead whois.today.php
+* Use TodayHandler instead whois.today.php
+* Use TelHandler instead whois.tel.php
+* Use SuHandler instead whois.su.php
+* Use SiHandler instead whois.si.php
+* Use SeHandler instead whois.se.php
+* Use ScHandler instead whois.sc.php
+* Use RwhoisHandler instead whois.rwhois.php
+* Use RuHandler instead whois.ru.php
+* Use RoHandler instead whois.ro.php
+* Use PtHandler instead whois.pt.php
+* Use ProHandler instead whois.pro.php
+* Use PlHandler instead whois.pl.php
+* Use PhHandler instead whois.ph.php
+* Use OrgHandler instead whois.org.php
+* Use NuHandler instead whois.nu.php
+* Use NoHandler instead whois.no.php
+* Use EuHandler instead whois.eu.php
+* Use DeHandler instead whois.de.php
+* Use FiHandler instead whois.fi.php
+* Use NlHandler instead whois.nl.php
+* Use MxHandler instead whois.mx.php
+* Use MuseumHandler instead whois.museum.php
+* Use MobiHandler instead whois.mobi.php
+* Use MeHandler instead whois.me.php
+* Use LyHandler instead whois.ly.php
+* Use LuHandler instead whois.lu.php
+* Use LtHandler instead whois.lt.php
+* Use FjHandler instead whois.fj.php
+* Use LondonHandler instead whois.london.php
+* Use JpHandler instead whois.jp.php
+* Use ItHandler instead whois.it.php
+* Use IsHandler instead whois.is.php
+* Use IrHandler instead whois.ir.php
+* Use IpHandler instead whois.ip.php
+* Use IntHandler instead whois.int.php
+* Use InHandler instead whois.in.php
+* Use InfoHandler instead whois.info.php
+* Use IlHandler instead whois.il.php
+* Use IeHandler instead whois.ie.php
+* Use HuHandler instead whois.hu.php
+* Use FrHandler instead whois.fr.php
+* Use FmHandler instead whois.fm.php
+* Use CoopHandler instead whois.coop.php
+* Use NameHandler instead whois.name.php
+* Use DkHandler instead whois.dk.php
+* Use DevHandler instead whois.dev.php
+* Use CzHandler instead whois.cz.php
+* Use CoHandler instead whois.co.php
+* Use CnHandler instead whois.cn.php
+* Use ChHandler instead whois.ch.php
+* Use CatHandler instead whois.cat.php
+* Use CaHandler instead whois.ca.php
 ### Deprecation
 * Remove obsolete file "handler.template.php"
-* [#33] Remove deprecated "generic_parser_a_blocks" function
-* [#33] Deprecated "get_contact" function
+* Remove deprecated "generic_parser_a_blocks" function
+* Deprecated "get_contact" function
 
 
-
----- 
-
-6.0.4 - 2023-03-21
+6.0.4 - 2023-03-21 (jsmitty12)
 ------------------
 * Fix date parsing that did not take microseconds into account, cause an infinite loop in get_date function
 
-6.0.3 - 2023-03-21
+6.0.3 - 2023-03-21 (jsmitty12)
 ------------------
 * Little fixes in NzHandler
 * Remove obsolete fr_handler file, use FrHandler class
 
-6.0.2 - 2023-03-21
+6.0.2 - 2023-03-21 (jsmitty12)
 ------------------
 * Fix date parsing that did not take microseconds into account, cause an infinite loop in get_date function
 
-6.0.2 - 2020-12-28
+6.0.2 - 2020-12-28 (jsmitty12)
 ------------------
 * Include 5.6.5 in 6.0 branch (jsmitty12)
 
-5.6.5 - 2020-12-28
+5.6.5 - 2020-12-28 (jsmitty12)
 ------------------
 * Remove line ending override for `.txt` fixtures (jsmitty12)
 * Add tests for .ru domains (jsmitty12)
@@ -145,7 +142,7 @@
 * Improve support for `.co.uk` domains (TorbenLundsgaard)
 * Improve support for `.ws` domains (sirvulcan)
 
-5.6.3 - 2020-10-03
+5.6.3 - 2020-10-03  (jsmitty12)
 ------------------
 * Split fixture files the same way WhoisClient splits raw whois data (naitsirch)
 * Rename handler for `.de` domains, add test cases (jsmitty12)

@@ -38,7 +38,7 @@ Installation
 
 #### Stable version
 
-`php composer.phar require "kevinoo/phpwhois":"^6.0.4"`
+`php composer.phar require "kevinoo/phpwhois":"^6.2"`
 
 #### Latest development version
 
@@ -225,6 +225,11 @@ Credits from version v6.0.3
 -------
 
 Kevin Lucich <info@lucichkevin.it>
+
+Special Thanks
+-------
+Joshua Smith [@jsmitty12](https://github.com/jsmitty12)
+
 
 Thanks to original Authors
 -------
