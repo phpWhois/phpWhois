@@ -5,10 +5,13 @@
     one in which this file resides.
 -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="./tests/bootstrap.php" colors="true" convertDeprecationsToExceptions="false">
-  <coverage>
+  <coverage cacheDirectory=".phpunit.cache/code-coverage" processUncoveredFiles="true">
     <include>
       <directory suffix=".php">src</directory>
     </include>
+    <report>
+      <clover outputFile="clover.xml" />
+    </report>
   </coverage>
   <testsuites>
     <testsuite name="phpWhois Test suite">
