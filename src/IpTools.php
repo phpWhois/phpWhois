@@ -38,18 +38,15 @@ class IpTools
      *
      * @return boolean True if ip is valid. False otherwise
      */
-    public function validIp($ip, $type = 'any', $strict = true)
+    public function validIp(string $ip, string $type='any', bool $strict=true): bool
     {
         switch ($type) {
             case 'any':
                 return $this->validIpv4($ip, $strict) || $this->validIpv6($ip, $strict);
-                break;
             case 'ipv4':
                 return $this->validIpv4($ip, $strict);
-                break;
             case 'ipv6':
                 return $this->validIpv6($ip, $strict);
-                break;
         }
         return false;
     }
@@ -63,17 +60,14 @@ class IpTools
      *
      * @return boolean
      */
-    public function validIpv4($ip, $strict = true)
+    public function validIpv4(string $ip, bool $strict=true): bool
     {
         $flags = FILTER_FLAG_IPV4;
         if ($strict) {
             $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
         }
 
-        if (filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false) {
-            return true;
-        }
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false;
     }
 
     /**
@@ -84,18 +78,14 @@ class IpTools
      *
      * @return boolean
      */
-    public function validIpv6($ip, $strict = true)
+    public function validIpv6(string $ip, bool $strict=true): bool
     {
         $flags = FILTER_FLAG_IPV6;
         if ($strict) {
             $flags = FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE;
         }
 
-        if (filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false) {
-            return true;
-        }
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP, array('flags' => $flags)) !== false;
     }
 
     /**
@@ -139,6 +129,7 @@ class IpTools
      *
      * @param string $net
      * @return string
+     * @noinspection TypeUnsafeComparisonInspection
      */
     public function cidrConv($net)
     {
