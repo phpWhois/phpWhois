@@ -49,13 +49,12 @@ class FjHandlerTest extends AbstractHandler
     }
 
     /**
-     * @return void
-     *
      * @test
+     * @return void
      */
-    public function parseUspDotAcDotFj()
+    public function parseFijiDotGovDotFj(): void
     {
-        $query = 'usp.ac.fj';
+        $query = 'fiji.gov.fj';
 
         $fixture = $this->loadFixture($query);
         $data    = [
@@ -67,7 +66,7 @@ class FjHandlerTest extends AbstractHandler
 
         $expected = [
             'domain'     => [
-                'name'    => 'usp.ac.fj',
+                'name'    => 'fiji.gov.fj',
                 // 'changed' => '2020-08-03',
                 // 'created' => '2003-03-10',
                 'expires' => '2020-12-31',
