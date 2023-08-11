@@ -1,3 +1,10 @@
+6.3.0 - 2023-08-11
+------------------
+* Update PHPUnit Test and fixtures
+* Remove CliHelper.php - use instead json file for test 
+* Minor fixes in WsHandler.php 
+* [#1] Parse "Registry info" using raw_data in "Handlers/CoopHandler.php"
+
 6.2.1 - 2023-04-12
 ------------------
 * Add more patterns in AbstractHandler::parseStandardDate method
