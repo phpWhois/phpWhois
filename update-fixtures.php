@@ -27,18 +27,19 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
-use phpWhois\Cli\CliHelper;
 use phpWhois\Whois;
 
 $fixturePath = 'tests/fixtures/';
 
-// Read domain list to test
-$cliHelper = new CliHelper();
-$domains   = $cliHelper->loadDomainList('./test.txt');
+/**
+ * Read domain list to test
+ * @noinspection PhpComposerExtensionStubsInspection
+ */
+$rows = json_decode(file_get_contents('./test.json'),true);
 
-// Specific test ?
-if (!empty($argv[1]) && isset($domains[$argv[1]])) {
-    $domains = [$domains[$argv[1]]];
+// Specific test by TLD or key
+if (!empty($argv[1]) && isset($rows[$argv[1]])) {
+    $rows = [$rows[$argv[1]]];
 }
 
 // Test domains
@@ -46,21 +47,25 @@ $whois = new Whois();
 
 stream_set_write_buffer(STDIN, 0);
 
-$domainCount = count($domains);
-$ndx         = 1;
-foreach ($domains as $domain) {
-    try {
-        echo "[$ndx/$domainCount] Creating fixture for `$domain`\n";
-        $result = $whois->whois($domain);
+foreach ($rows as $key => $domains) {
+    $domainCount = count($domains);
 
-        $safeDomain = makePathSafe($domain);
-        file_put_contents("{$fixturePath}/{$safeDomain}.txt", $result);
-        $ndx += 1;
-    } catch (Exception $exception) {
-        echo "  Exception: {$exception->getMessage()}\n";
-    } catch (Error $error) {
-        echo "  Err: {$error->getMessage()}\n";
-    }
+	echo "\n --- [ $key => $domainCount domains ] --- \n";
+
+	foreach( $domains as $index => $domain ){
+        try {
+            ++$index;
+            echo "[$index/$domainCount] Creating fixture for $domain \n";
+            $result = $whois->whois($domain);
+
+            $safeDomain = makePathSafe($domain);
+            file_put_contents("{$fixturePath}/{$safeDomain}.txt", $result);
+        }catch( Exception $exception ){
+            echo "  Exception: {$exception->getMessage()}\n";
+        }catch( Error $error ){
+            echo "  Err: {$error->getMessage()}\n";
+        }
+	}
 }
 
 function makePathSafe(string $filename): string
