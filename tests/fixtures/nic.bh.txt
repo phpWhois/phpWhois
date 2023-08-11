@@ -59,7 +59,7 @@ Billing Email: domains@centralnic.com
 Registrar Abuse Contact Email: ops@centralnic.com
 Registrar Abuse Contact Phone: +44.2033880600
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-08-11T10:01:01.0Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:43:24.0Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

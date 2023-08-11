@@ -105,5 +105,5 @@ eligstatus:                    not identified
 reachstatus:                   not identified
 source:                        FRNIC
 
->>> WHOIS request date: 2023-08-11T10:01:48.6203Z <<<
+>>> WHOIS request date: 2023-08-11T14:44:49.113239Z <<<
 

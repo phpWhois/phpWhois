@@ -9,11 +9,11 @@ Registrar: .us Registry Services LLC
 Registrar IANA ID: 1111112
 Registrar Abuse Contact Email: abuse@about.us
 Registrar Abuse Contact Phone:
-Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
 Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
 Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
 Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
 Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
+Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
 Registry Registrant ID: C37639215-US
 Registrant Name: .US Registration Policy
 Registrant Organization: Registry Services, LLC
@@ -73,7 +73,7 @@ Name Server: pdns3.ultradns.org
 Name Server: pdns2.ultradns.net
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-08-11T10:02:35Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:45:34Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

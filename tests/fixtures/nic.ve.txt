@@ -2,7 +2,7 @@
 %  Este servidor contiene información autoritativa exclusivamente de dominios .ve
 % 
 % Whoisd Server Version: 3.12.1
-% Timestamp: Fri Aug 11 06:02:36 2023
+% Timestamp: Fri Aug 11 10:45:36 2023
 
 domain:       nic.ve
 registrant:   CON000031823

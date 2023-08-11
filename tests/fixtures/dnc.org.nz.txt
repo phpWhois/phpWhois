@@ -9,7 +9,7 @@ Name Server: amy.ns.cloudflare.com
 Name Server: dom.ns.cloudflare.com
 DNSSEC: signedDelegation
 URL of the Domain Name Commission Limited Inaccuracy Complaint Form: https://dnc.org.nz/enquiry-form/
->>> Last update of WHOIS database: 2023-08-11T10:02:27Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:45:27Z <<<
 
 % Terms of Use
 %

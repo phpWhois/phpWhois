@@ -57,7 +57,7 @@ Name Server: e.service.afiliasdns.info
 Name Server: f.service.afiliasdns.net
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-08-11T10:03:38Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:46:50Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

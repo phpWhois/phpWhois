@@ -17,7 +17,7 @@
    DNSSEC: signedDelegation
    DNSSEC DS Data: 370 13 2 BE74359954660069D5C63D200C39F5603827D7DD02B56F120EE9F3A86764247C
    URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of whois database: 2023-08-11T10:02:59Z <<<
+>>> Last update of whois database: 2023-08-11T14:45:57Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

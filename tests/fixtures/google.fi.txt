@@ -40,7 +40,7 @@ Tech
 name...............: Google LLC
 email..............: ccops@markmonitor.com
 
->>> Last update of WHOIS database: 11.8.2023 12:45:11 (EET) <<<
+>>> Last update of WHOIS database: 11.8.2023 17:00:13 (EET) <<<
 
 
 Copyright (c) Finnish Transport and Communications Agency Traficom

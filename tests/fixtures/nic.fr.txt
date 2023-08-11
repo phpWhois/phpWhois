@@ -15,8 +15,8 @@ eppstatus:                     serverDeleteProhibited
 hold:                          NO
 holder-c:                      NF100-FRNIC
 admin-c:                       AFNI30-FRNIC
-tech-c:                        VL-FRNIC
 tech-c:                        JP-FRNIC
+tech-c:                        VL-FRNIC
 registrar:                     Registry Operations
 Expiry Date:                   2029-12-31T23:00:00Z
 created:                       1995-01-01T00:00:00Z
@@ -50,47 +50,6 @@ anonymous:                     No
 registered:                    2014-07-29T15:35:33Z
 source:                        FRNIC
 
-nic-hdl:                       VL-FRNIC
-type:                          PERSON
-contact:                       Vincent Levigneron
-address:                       AFNIC
-address:                       Immeuble Le Stephenson
-address:                       1, rue Stephenson
-address:                       78180 Montigny-le-Bretonneux
-country:                       FR
-phone:                         +33.139308300
-fax-no:                        +33.139308301
-e-mail:                        vincent.levigneron@afnic.fr
-registrar:                     Registry Operations
-changed:                       2019-01-28T16:11:55Z
-anonymous:                     NO
-obsoleted:                     NO
-eppstatus:                     associated
-eppstatus:                     active
-eligstatus:                    not identified
-reachstatus:                   not identified
-source:                        FRNIC
-
-nic-hdl:                       JP-FRNIC
-type:                          PERSON
-contact:                       Jean-Philippe Pick
-address:                       AFNIC
-address:                       immeuble le Stephenson
-address:                       1, rue Stephenson
-address:                       Hall A2 - 3eme etage
-address:                       78180 Montigny-Le-Bretonneux
-country:                       FR
-phone:                         +33.139308300
-e-mail:                        nic@nic.fr
-registrar:                     Registry Operations
-anonymous:                     NO
-obsoleted:                     NO
-eppstatus:                     associated
-eppstatus:                     active
-eligstatus:                    not identified
-reachstatus:                   not identified
-source:                        FRNIC
-
 nic-hdl:                       NF100-FRNIC
 type:                          ORGANIZATION
 contact:                       Nic fr
@@ -111,6 +70,26 @@ eligstatus:                    ok
 eligdate:                      2014-12-11T00:00:00Z
 reachstatus:                   ok
 reachmedia:                    email
+source:                        FRNIC
+
+nic-hdl:                       JP-FRNIC
+type:                          PERSON
+contact:                       Jean-Philippe Pick
+address:                       AFNIC
+address:                       immeuble le Stephenson
+address:                       1, rue Stephenson
+address:                       Hall A2 - 3eme etage
+address:                       78180 Montigny-Le-Bretonneux
+country:                       FR
+phone:                         +33.139308300
+e-mail:                        nic@nic.fr
+registrar:                     Registry Operations
+anonymous:                     NO
+obsoleted:                     NO
+eppstatus:                     associated
+eppstatus:                     active
+eligstatus:                    not identified
+reachstatus:                   not identified
 source:                        FRNIC
 
 nic-hdl:                       AFNI30-FRNIC
@@ -134,5 +113,26 @@ eligstatus:                    not identified
 reachstatus:                   not identified
 source:                        FRNIC
 
->>> WHOIS request date: 2023-08-11T10:01:48.088496Z <<<
+nic-hdl:                       VL-FRNIC
+type:                          PERSON
+contact:                       Vincent Levigneron
+address:                       AFNIC
+address:                       Immeuble Le Stephenson
+address:                       1, rue Stephenson
+address:                       78180 Montigny-le-Bretonneux
+country:                       FR
+phone:                         +33.139308300
+fax-no:                        +33.139308301
+e-mail:                        vincent.levigneron@afnic.fr
+registrar:                     Registry Operations
+changed:                       2019-01-28T16:11:55Z
+anonymous:                     NO
+obsoleted:                     NO
+eppstatus:                     associated
+eppstatus:                     active
+eligstatus:                    not identified
+reachstatus:                   not identified
+source:                        FRNIC
+
+>>> WHOIS request date: 2023-08-11T14:44:48.815201Z <<<
 

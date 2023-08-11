@@ -72,7 +72,7 @@ Name Server: ns1.d-zone.ca
 Name Server: ns2.d-zone.ca
 DNSSEC: signedDelegation
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-08-11T10:01:15Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:40:15Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

@@ -1,5 +1,5 @@
 No match for "WWW.TV".
->>> Last update of WHOIS database: 2023-08-11T10:03:05Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:46:10Z <<<
 
 NOTICE: The expiration date displayed in this record is the date the
 registrar's sponsorship of the domain name registration in the registry is

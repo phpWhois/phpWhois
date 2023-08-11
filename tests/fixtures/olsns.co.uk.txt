@@ -21,7 +21,7 @@
         a.ns.olsns.co.uk          82.98.178.81
         b.ns.olsns.co.uk          82.98.170.158
 
-    WHOIS lookup made at 11:02:34 11-Aug-2023
+    WHOIS lookup made at 15:45:33 11-Aug-2023
 
 -- 
 This WHOIS information is provided for free by Nominet UK the central registry

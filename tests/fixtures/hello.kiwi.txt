@@ -67,7 +67,7 @@ Name Server: ns2142.dns.dyn.com
 Name Server: ns3198.dns.dyn.com
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-08-11T10:03:36Z <<<
+>>> Last update of WHOIS database: 2023-08-11T14:46:44Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

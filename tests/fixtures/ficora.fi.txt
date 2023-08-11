@@ -35,7 +35,7 @@ Registrar
 
 registrar..........: Liikenne- ja viestintävirasto
 
->>> Last update of WHOIS database: 11.8.2023 12:45:10 (EET) <<<
+>>> Last update of WHOIS database: 11.8.2023 17:00:11 (EET) <<<
 
 
 Copyright (c) Finnish Transport and Communications Agency Traficom

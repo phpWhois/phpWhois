@@ -16,7 +16,7 @@
 % 
 % 
 % Whoisd Server Version: 3.12.2
-% Timestamp: Fri Aug 11 10:01:22 2023
+% Timestamp: Fri Aug 11 14:44:32 2023
 
 domain:       nic.cz
 registrant:   CZ-NIC
