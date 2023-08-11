@@ -70,7 +70,7 @@ Name Server: ns3.googledomains.com
 Name Server: ns4.googledomains.com
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T10:59:52Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:03:37Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

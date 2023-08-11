@@ -2,18 +2,17 @@ Domain Name: nic.xxx
 Registry Domain ID: DDDB3C47B8F084DFE8D609BD745A0726B-NSR
 Registrar WHOIS Server: whois.nic.adult
 Registrar URL: http://nic.adult
-Updated Date: 2022-08-10T01:31:20Z
+Updated Date: 2023-05-22T04:58:35Z
 Creation Date: 2021-04-07T04:58:35Z
-Registry Expiry Date: 2023-04-07T04:58:35Z
+Registry Expiry Date: 2024-04-07T04:58:35Z
 Registrar: ICM Registry LLC
 Registrar IANA ID: 9999
 Registrar Abuse Contact Email: gtld-support@registry.godaddy
 Registrar Abuse Contact Phone: +61.123
+Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
 Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
 Domain Status: serverRenewProhibited https://icann.org/epp#serverRenewProhibited
 Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
-Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
-Domain Status: autoRenewPeriod https://icann.org/epp#autoRenewPeriod
 Registry Registrant ID: REDACTED FOR PRIVACY
 Registrant Name: REDACTED FOR PRIVACY
 Registrant Organization: REDACTED FOR PRIVACY
@@ -65,7 +64,7 @@ Name Server: c.nic.xxx
 Name Server: b.nic.xxx
 DNSSEC: signedDelegation
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T11:00:17Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:04:26Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

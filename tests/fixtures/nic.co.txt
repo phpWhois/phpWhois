@@ -2,9 +2,9 @@ Domain Name: nic.co
 Registry Domain ID: D734276-CO
 Registrar WHOIS Server:
 Registrar URL: www.cointernet.com.co
-Updated Date: 2022-06-07T00:00:04Z
+Updated Date: 2023-06-07T00:00:13Z
 Creation Date: 2010-04-23T09:12:48Z
-Registry Expiry Date: 2023-04-22T23:59:59Z
+Registry Expiry Date: 2024-04-22T23:59:59Z
 Registrar: .COInternet Restricted and Reserved names
 Registrar IANA ID: 672943168
 Registrar Abuse Contact Email:
@@ -59,7 +59,7 @@ Tech Email: Please query the RDDS service of the Registrar of Record identified 
 Name Server:
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T10:56:57Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:01:22Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

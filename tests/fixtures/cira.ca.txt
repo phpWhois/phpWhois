@@ -2,7 +2,7 @@ Domain Name: cira.ca
 Registry Domain ID: D436-CIRA
 Registrar WHOIS Server: whois.ca.fury.ca
 Registrar URL: http://www.cira.ca
-Updated Date: 2023-02-05T05:02:57Z
+Updated Date: 2023-07-05T16:06:21Z
 Creation Date: 1998-02-05T05:00:00Z
 Registry Expiry Date: 2050-02-05T05:00:00Z
 Registrar: CIRA Default Registrar
@@ -15,8 +15,8 @@ Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibit
 Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
 Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
 Registry Registrant ID: R101-CIRA
-Registrant Name: Canadian Internet Registration Authority (NFP) / Autorité Canadienne pour les enregistrements Internet (OSBL)
-Registrant Organization:
+Registrant Name: Spencer Callaghan
+Registrant Organization: Canadian Internet Registration Authority (NFP) / Autorité Canadienne pour les enregistrements Internet (OSBL)
 Registrant Street: 979 Bank Street, Suite 400
 Registrant City: Ottawa
 Registrant State/Province: ON
@@ -28,7 +28,7 @@ Registrant Fax:
 Registrant Fax Ext:
 Registrant Email: domains@cira.ca
 Registry Admin ID: C847977-CIRA
-Admin Name: Tanya O'Callaghan
+Admin Name: Spencer Callaghan
 Admin Organization: CIRA
 Admin Street: Canadian Internet Registration Authority, 979 Bank Street, Suite 400
 Admin City: Ottawa
@@ -72,7 +72,7 @@ Name Server: ns1.d-zone.ca
 Name Server: ns2.d-zone.ca
 DNSSEC: signedDelegation
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T10:56:53Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:01:15Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

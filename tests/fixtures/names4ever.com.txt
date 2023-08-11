@@ -2,9 +2,9 @@
    Registry Domain ID: 8025608_DOMAIN_COM-VRSN
    Registrar WHOIS Server: whois.names4ever.com
    Registrar URL: http://www.aplus.net
-   Updated Date: 2022-07-16T07:19:27Z
+   Updated Date: 2023-07-16T07:18:06Z
    Creation Date: 1999-07-15T14:23:10Z
-   Registry Expiry Date: 2023-07-15T14:23:10Z
+   Registry Expiry Date: 2024-07-15T14:23:10Z
    Registrar: Deluxe Small Business Sales, Inc. d/b/a Aplus.net
    Registrar IANA ID: 52
    Registrar Abuse Contact Email: dns@cs.aplus.net
@@ -14,7 +14,7 @@
    Name Server: NS2.ABAC.COM
    DNSSEC: unsigned
    URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of whois database: 2023-04-11T10:59:07Z <<<
+>>> Last update of whois database: 2023-08-11T10:02:59Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

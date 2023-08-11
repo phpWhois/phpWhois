@@ -1,4 +1,4 @@
-% IP Client: 2.37.252.210
+% IP Client: 2a01:e11:600b:280:c8d7:d17c:f327:2597
  
 % Joint Whois - whois.lacnic.net
 %  This server accepts single ASN, IPv4 or IPv6 queries
@@ -12,7 +12,7 @@
 %  related to AS and IP numbers registrations
 %  By submitting a whois query, you agree to use this data
 %  only for lawful purposes.
-%  2023-04-11 08:00:54 (-03 -03:00)
+%  2023-08-11 07:05:26 (-03 -03:00)
 
 inetnum:     200.44.0.0/16
 status:      allocated
@@ -29,11 +29,11 @@ tech-c:      LUM
 abuse-c:     LUM
 inetrev:     200.44.0.0/16
 nserver:     DNS1.CANTV.NET
-nsstat:      20230410 AA
-nslastaa:    20230410
+nsstat:      20230811 AA
+nslastaa:    20230811
 nserver:     DNS2.CANTV.NET
-nsstat:      20230410 AA
-nslastaa:    20230410
+nsstat:      20230811 AA
+nslastaa:    20230811
 created:     19980317
 changed:     20020114
 

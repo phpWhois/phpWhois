@@ -32,16 +32,28 @@ StateProv:      GA
 PostalCode:     30328
 Country:        US
 RegDate:        2002-01-09
-Updated:        2023-03-23
+Updated:        2023-05-18
 Ref:            https://rdap.arin.net/registry/entity/GPW
 
 ReferralServer:  rwhois://rwhois.gapublicweb.net:4321
 
-OrgDNSHandle: ACCEL2-ARIN
-OrgDNSName:   Accelecom NOC
-OrgDNSPhone:  +1-888-662-6324 
-OrgDNSEmail:  noc@accelecom.net
-OrgDNSRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+OrgTechHandle: OFKTE-ARIN
+OrgTechName:   OFK-TECH
+OrgTechPhone:  +1-502-586-7600 
+OrgTechEmail:  arin-admin@accelecom.net
+OrgTechRef:    https://rdap.arin.net/registry/entity/OFKTE-ARIN
+
+OrgNOCHandle: ACCEL2-ARIN
+OrgNOCName:   Accelecom NOC
+OrgNOCPhone:  +1-888-662-6324 
+OrgNOCEmail:  ARIN-NOC@accelecom.net
+OrgNOCRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+
+OrgAbuseHandle: OFKAB-ARIN
+OrgAbuseName:   OFK-ABUSE
+OrgAbusePhone:  +1-888-662-6324 
+OrgAbuseEmail:  ARIN-NOC@openfiberky.com
+OrgAbuseRef:    https://rdap.arin.net/registry/entity/OFKAB-ARIN
 
 OrgTechHandle: AJM56-ARIN
 OrgTechName:   McDaniel, Akeem J
@@ -51,9 +63,21 @@ OrgTechRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
 
 OrgTechHandle: WILLI3850-ARIN
 OrgTechName:   Williams, Chris 
-OrgTechPhone:  +1-888-349-9933 
+OrgTechPhone:  +1-502-619-0087 
 OrgTechEmail:  chris.williams@accelecom.net
 OrgTechRef:    https://rdap.arin.net/registry/entity/WILLI3850-ARIN
+
+OrgAbuseHandle: ACCEL2-ARIN
+OrgAbuseName:   Accelecom NOC
+OrgAbusePhone:  +1-888-662-6324 
+OrgAbuseEmail:  ARIN-NOC@accelecom.net
+OrgAbuseRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+
+OrgRoutingHandle: ACCEL2-ARIN
+OrgRoutingName:   Accelecom NOC
+OrgRoutingPhone:  +1-888-662-6324 
+OrgRoutingEmail:  ARIN-NOC@accelecom.net
+OrgRoutingRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
 
 OrgAbuseHandle: HULLK4-ARIN
 OrgAbuseName:   Hull, Kerry  
@@ -61,17 +85,11 @@ OrgAbusePhone:  +1-770-661-2760
 OrgAbuseEmail:  kerry.hull@accelecom.net
 OrgAbuseRef:    https://rdap.arin.net/registry/entity/HULLK4-ARIN
 
-OrgAbuseHandle: ACCEL2-ARIN
-OrgAbuseName:   Accelecom NOC
-OrgAbusePhone:  +1-888-662-6324 
-OrgAbuseEmail:  noc@accelecom.net
-OrgAbuseRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
-
-OrgNOCHandle: ACCEL2-ARIN
-OrgNOCName:   Accelecom NOC
-OrgNOCPhone:  +1-888-662-6324 
-OrgNOCEmail:  noc@accelecom.net
-OrgNOCRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
+OrgDNSHandle: ACCEL2-ARIN
+OrgDNSName:   Accelecom NOC
+OrgDNSPhone:  +1-888-662-6324 
+OrgDNSEmail:  ARIN-NOC@accelecom.net
+OrgDNSRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
 
 OrgTechHandle: HULLK4-ARIN
 OrgTechName:   Hull, Kerry  
@@ -79,23 +97,11 @@ OrgTechPhone:  +1-770-661-2760
 OrgTechEmail:  kerry.hull@accelecom.net
 OrgTechRef:    https://rdap.arin.net/registry/entity/HULLK4-ARIN
 
-OrgRoutingHandle: ACCEL2-ARIN
-OrgRoutingName:   Accelecom NOC
-OrgRoutingPhone:  +1-888-662-6324 
-OrgRoutingEmail:  noc@accelecom.net
-OrgRoutingRef:    https://rdap.arin.net/registry/entity/ACCEL2-ARIN
-
-OrgTechHandle: OFKTE-ARIN
-OrgTechName:   OFK-TECH
-OrgTechPhone:  +1-502-586-7600 
-OrgTechEmail:  arin-admin@accelecom.net
-OrgTechRef:    https://rdap.arin.net/registry/entity/OFKTE-ARIN
-
-OrgAbuseHandle: OFKAB-ARIN
-OrgAbuseName:   OFK-ABUSE
-OrgAbusePhone:  +1-888-662-6324 
-OrgAbuseEmail:  ARIN-NOC@accelecom.net
-OrgAbuseRef:    https://rdap.arin.net/registry/entity/OFKAB-ARIN
+RTechHandle: AJM56-ARIN
+RTechName:   McDaniel, Akeem J
+RTechPhone:  +1-770-661-2783 
+RTechEmail:  akeem.mcdaniel@accelecom.net
+RTechRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
 
 RAbuseHandle: AJM56-ARIN
 RAbuseName:   McDaniel, Akeem J
@@ -108,12 +114,6 @@ RNOCName:   McDaniel, Akeem J
 RNOCPhone:  +1-770-661-2783 
 RNOCEmail:  akeem.mcdaniel@accelecom.net
 RNOCRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
-
-RTechHandle: AJM56-ARIN
-RTechName:   McDaniel, Akeem J
-RTechPhone:  +1-770-661-2783 
-RTechEmail:  akeem.mcdaniel@accelecom.net
-RTechRef:    https://rdap.arin.net/registry/entity/AJM56-ARIN
 
 
 #

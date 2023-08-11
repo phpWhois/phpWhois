@@ -2,7 +2,7 @@ Domain Name: domainregistry.ie
 Registry Domain ID: 784737-IEDR
 Registrar WHOIS Server: whois.weare.ie
 Registrar URL: www.weare.ie
-Updated Date: 2023-03-04T13:24:39Z
+Updated Date: 2023-05-12T14:12:25Z
 Creation Date: 1999-03-19T00:00:00Z
 Registry Expiry Date: 2025-01-01T15:50:01Z
 Registrar: .ie
@@ -15,12 +15,12 @@ Registrant Name: IE Domain Registry Company Limited By Guarantee
 Registry Admin ID: 540443-IEDR
 Registry Tech ID: 546686-IEDR
 Registry Billing ID: REDACTED FOR PRIVACY
+Name Server: a.ns.ie
 Name Server: auth-ns2.heanet.ie
 Name Server: auth-ns3.heanet.ie
-Name Server: b.ns.ie
 Name Server: ns1.weare.ie
 DNSSEC: signedDelegation
->>> Last update of WHOIS database: 2023-04-11T10:57:45Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:01:50Z <<<
 
 % Important Notice
 % If you believe that information published on this page is incorrect, or should not be published,please contact your Registrar, or the .IE Registration Services Department who will advise you further.

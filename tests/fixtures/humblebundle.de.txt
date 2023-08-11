@@ -16,7 +16,7 @@
 % 
 
 Domain: humblebundle.de
-Nserver: ns1.parkingcrew.net
-Nserver: ns2.parkingcrew.net
+Nserver: ns1.sedoparking.com
+Nserver: ns2.sedoparking.com
 Status: connect
-Changed: 2023-04-04T05:22:50+02:00
+Changed: 2023-07-16T05:18:17+02:00

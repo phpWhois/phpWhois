@@ -2,9 +2,9 @@ Domain Name: nic.tel
 Registry Domain ID: D583364-TEL
 Registrar WHOIS Server:
 Registrar URL:
-Updated Date: 2022-05-07T00:00:07Z
+Updated Date: 2023-05-07T00:00:04Z
 Creation Date: 2009-01-21T16:50:09Z
-Registry Expiry Date: 2023-03-22T23:59:59Z
+Registry Expiry Date: 2024-03-22T23:59:59Z
 Registrar: Telnames Ltd.
 Registrar IANA ID: 9999
 Registrar Abuse Contact Email:
@@ -13,7 +13,6 @@ Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProh
 Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
 Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
 Domain Status: inactive https://icann.org/epp#inactive
-Domain Status: autoRenewPeriod https://icann.org/epp#autoRenewPeriod
 Registry Registrant ID: REDACTED FOR PRIVACY
 Registrant Name: REDACTED FOR PRIVACY
 Registrant Organization: Telnames Ltd
@@ -62,7 +61,7 @@ Tech Email: Please query the RDDS service of the Registrar of Record identified 
 Name Server:
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T11:00:15Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:04:24Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

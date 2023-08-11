@@ -38,7 +38,7 @@ nameserver:	aa.arnes.si (193.2.1.87,2001:1470:8000::87)
 registrant:	G31071
 status:		ok
 created:	1992-01-01
-expire:		2023-06-06
+expire:		2024-06-06
 source:		ARNES
 
 Domain holder:

@@ -2,9 +2,9 @@
 domain.............: google.fi
 status.............: Registered
 created............: 30.6.2006 00:00:00
-expires............: 4.7.2023 10:15:55
-available..........: 4.8.2023 10:15:55
-modified...........: 2.6.2022 12:24:38
+expires............: 4.7.2024 10:15:55
+available..........: 4.8.2024 10:15:55
+modified...........: 2.6.2023 12:52:43
 holder transfer....: 20.11.2018 00:15:59
 RegistryLock.......: locked
 
@@ -13,7 +13,7 @@ Nameservers
 nserver............: ns3.google.com [Technical Error]
 nserver............: ns4.google.com [Technical Error]
 nserver............: ns1.google.com [OK]
-nserver............: ns2.google.com [OK]
+nserver............: ns2.google.com [Technical Error]
 
 DNSSEC
 
@@ -40,7 +40,7 @@ Tech
 name...............: Google LLC
 email..............: ccops@markmonitor.com
 
->>> Last update of WHOIS database: 11.4.2023 13:45:12 (EET) <<<
+>>> Last update of WHOIS database: 11.8.2023 12:45:11 (EET) <<<
 
 
 Copyright (c) Finnish Transport and Communications Agency Traficom

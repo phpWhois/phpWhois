@@ -16,7 +16,7 @@
 % 
 % 
 % Whoisd Server Version: 3.12.2
-% Timestamp: Tue Apr 11 10:56:59 2023
+% Timestamp: Fri Aug 11 10:01:23 2023
 
 domain:       google.cz
 registrant:   MM1171195
@@ -25,7 +25,7 @@ nsset:        MM1543911
 registrar:    REG-MARKMONITOR
 registered:   21.07.2000 15:21:00
 changed:      23.04.2018 20:24:01
-expire:       22.07.2023
+expire:       22.07.2024
 
 contact:      MM1171195
 org:          Google LLC

@@ -2,14 +2,13 @@ Domain Name: ostap.dev
 Registry Domain ID: 332EC9F7F-DEV
 Registrar WHOIS Server: whois.google.com
 Registrar URL: domains.google
-Updated Date: 2023-03-03T13:47:20Z
+Updated Date: 2023-04-14T22:12:37Z
 Creation Date: 2019-02-28T22:12:37Z
 Registry Expiry Date: 2024-02-28T22:12:37Z
 Registrar: Google LLC.
 Registrar IANA ID: 895
 Registrar Abuse Contact Email: registrar-abuse@google.com
 Registrar Abuse Contact Phone: +1.8772376466
-Domain Status: autoRenewPeriod https://icann.org/epp#autoRenewPeriod
 Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
 Registry Registrant ID: REDACTED FOR PRIVACY
 Registrant Name: REDACTED FOR PRIVACY
@@ -55,7 +54,7 @@ Name Server: candy.ns.cloudflare.com
 Name Server: gerald.ns.cloudflare.com
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T10:59:11Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:03:08Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

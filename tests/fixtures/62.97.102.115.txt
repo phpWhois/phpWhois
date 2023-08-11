@@ -43,5 +43,5 @@ created:        1970-01-01T00:00:00Z
 last-modified:  2001-09-22T09:31:42Z
 source:         RIPE
 
-% This query was served by the RIPE Database Query Service version 1.106 (SHETLAND)
+% This query was served by the RIPE Database Query Service version 1.107 (BUSA)
 

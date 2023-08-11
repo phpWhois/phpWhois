@@ -25,7 +25,7 @@ documented by VeriSign, Inc. but will not be used for any commercial purpose wha
 
 No match for "PETER.MORGAN.NAME".
 
->>> Last update of whois database: 2023-04-11T10:58:53Z <<<
+>>> Last update of whois database: 2023-08-11T10:02:50Z <<<
 
 To request access to data listed as “Redacted” or “Redacted for Privacy” in the
 above WHOIS result, please contact Customer Service at info@verisign-grs.com

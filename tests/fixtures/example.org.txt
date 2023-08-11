@@ -2,7 +2,7 @@ Domain Name: example.org
 Registry Domain ID: 13a1800564ae4cf589c9f5723a630958-LROR
 Registrar WHOIS Server: 
 Registrar URL: 
-Updated Date: 2022-10-14T04:00:28Z
+Updated Date: 2023-05-23T17:10:38Z
 Creation Date: 1995-08-31T04:00:00Z
 Registry Expiry Date: 2023-08-30T04:00:00Z
 Registrar: ICANN
@@ -56,7 +56,7 @@ Name Server: a.iana-servers.net
 Name Server: b.iana-servers.net
 DNSSEC: signedDelegation
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T11:00:11Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:04:19Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

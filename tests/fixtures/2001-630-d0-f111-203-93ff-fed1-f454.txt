@@ -84,5 +84,5 @@ created:        2005-02-04T14:03:23Z
 last-modified:  2019-06-11T12:42:22Z
 source:         RIPE
 
-% This query was served by the RIPE Database Query Service version 1.106 (ABERDEEN)
+% This query was served by the RIPE Database Query Service version 1.107 (ABERDEEN)
 

@@ -129,5 +129,5 @@ mnt-irt:        IRT-KRNIC-KR
 changed:        hostmaster@nic.or.kr
 source:         KRNIC
 
-% This query was served by the APNIC Whois Service version 1.88.16 (WHOIS-UK3)
+% This query was served by the APNIC Whois Service version 1.88.16 (WHOIS-UK4)
 

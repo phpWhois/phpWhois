@@ -2,14 +2,13 @@ Domain Name: google.ie
 Registry Domain ID: 762999-IEDR
 Registrar WHOIS Server: whois.weare.ie
 Registrar URL: http://www.eMarkmonitor.com
-Updated Date: 2023-03-21T14:15:13Z
+Updated Date: 2023-05-05T14:19:12Z
 Creation Date: 2002-03-21T00:00:00Z
 Registry Expiry Date: 2024-03-21T14:13:27Z
 Registrar: Markmonitor Inc
 Registrar IANA ID: not applicable
 Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
 Registrar Abuse Contact Phone: +1.2086851865
-Domain Status: autoRenewPeriod https://icann.org/epp#autoRenewPeriod
 Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
 Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
 Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
@@ -22,7 +21,7 @@ Name Server: ns1.google.com
 Name Server: ns2.google.com
 Name Server: ns3.google.com
 DNSSEC: unsigned
->>> Last update of WHOIS database: 2023-04-11T10:57:19Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:01:50Z <<<
 
 % Important Notice
 % If you believe that information published on this page is incorrect, or should not be published,please contact your Registrar, or the .IE Registration Services Department who will advise you further.

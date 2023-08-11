@@ -52,7 +52,7 @@ phone:                         +1.2083895740
 fax-no:                        +1.2083895771
 e-mail:                        ccops@markmonitor.com
 registrar:                     MARKMONITOR Inc.
-changed:                       2023-04-08T19:35:27.516791Z
+changed:                       2023-08-09T21:25:22.173916Z
 anonymous:                     NO
 obsoleted:                     NO
 eppstatus:                     associated
@@ -105,5 +105,5 @@ eligstatus:                    not identified
 reachstatus:                   not identified
 source:                        FRNIC
 
->>> WHOIS request date: 2023-04-11T10:57:30.432446Z <<<
+>>> WHOIS request date: 2023-08-11T10:01:48.6203Z <<<
 

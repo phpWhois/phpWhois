@@ -12,86 +12,68 @@ domain:                        lemonade.fr
 status:                        ACTIVE
 eppstatus:                     active
 hold:                          NO
-holder-c:                      N15377-FRNIC
-admin-c:                       SW4924-FRNIC
-tech-c:                        SW4925-FRNIC
-registrar:                     KEY-SYSTEMS GmbH
-Expiry Date:                   2023-07-04T08:09:54Z
-created:                       2017-09-06T08:33:03Z
-last-update:                   2022-07-04T08:36:35Z
+holder-c:                      ANO00-FRNIC
+admin-c:                       ANO00-FRNIC
+tech-c:                        K6635-FRNIC
+registrar:                     KIFCORP
+Expiry Date:                   2025-07-30T22:32:03.626236Z
+created:                       2023-07-30T22:32:03.643209Z
+last-update:                   2023-08-10T07:31:29.181136Z
 source:                        FRNIC
 
-nserver:                       ns0.transip.net
-nserver:                       ns1.transip.nl
-nserver:                       ns2.transip.eu
+nserver:                       ns1.bodis.com
+nserver:                       ns2.bodis.com
 source:                        FRNIC
 
-key1-tag:                      50440
-key1-algo:                     13 [ECDSAP256SHA256]
-key1-dgst-t:                   1 [SHA1]
-key1-dgst:                     953EC0210E74329D45F2743830870A30D07E1DED
-source:                        FRNIC
-
-registrar:                     KEY-SYSTEMS GmbH
-address:                       Im Oberen Werk 1
-address:                       DE-66386 Sankt INGBERT
-country:                       DE
-phone:                         +49.68949396850
-fax-no:                        +49.68949396851
-e-mail:                        info@key-systems.net
-website:                       http://www.key-systems.net/tld/fr
+registrar:                     KIFCORP
+address:                       78 RUE D ALEMBERT
+address:                       38000 GRENOBLE
+country:                       FR
+phone:                         +33.458000007
+e-mail:                        contact@kifcorp.fr
+website:                       https://www.kifdom.com/faq.php
 anonymous:                     No
-registered:                    2006-07-24T00:00:00Z
+registered:                    2014-12-22T00:00:00Z
 source:                        FRNIC
 
-nic-hdl:                       SW4925-FRNIC
-type:                          PERSON
-contact:                       Shai Wininger
-address:                       Woodlands 95
-address:                       NW11 9QT London
-country:                       GB
-phone:                         +1.9175122900
-e-mail:                        infra@lemonade.com
-registrar:                     KEY-SYSTEMS GmbH
-anonymous:                     NO
-obsoleted:                     NO
-eppstatus:                     associated
-eppstatus:                     active
-eligstatus:                    ok
-eligdate:                      2018-07-03T00:00:00Z
-reachstatus:                   not identified
-source:                        FRNIC
-
-nic-hdl:                       SW4924-FRNIC
-type:                          PERSON
-contact:                       Shai Wininger
-address:                       Woodlands 95
-address:                       NW11 9QT London
-country:                       GB
-phone:                         +1.9175122900
-e-mail:                        infra@lemonade.com
-registrar:                     KEY-SYSTEMS GmbH
-anonymous:                     NO
-obsoleted:                     NO
-eppstatus:                     associated
-eppstatus:                     active
-eligstatus:                    ok
-eligdate:                      2018-07-03T00:00:00Z
-reachstatus:                   not identified
-source:                        FRNIC
-
-nic-hdl:                       N15377-FRNIC
+nic-hdl:                       K6635-FRNIC
 type:                          ORGANIZATION
-contact:                       NetTalk
-address:                       NetTalk
-address:                       Postbus 447
-address:                       6710BK Ede
-country:                       NL
-phone:                         +31.850160612
-fax-no:                        +31.850160613
-e-mail:                        info@nettalk.nl
-registrar:                     KEY-SYSTEMS GmbH
+contact:                       KIFCORP
+address:                       RANXPLORER
+address:                       78 rue d'Alembert
+address:                       38000 GRENOBLE
+country:                       FR
+phone:                         +33.458000007
+e-mail:                        contact@kifcorp.fr
+registrar:                     KIFCORP
+changed:                       2023-08-10T09:59:52.503749Z
 anonymous:                     NO
+obsoleted:                     NO
+eppstatus:                     associated
+eppstatus:                     active
+eligstatus:                    ok
+eligsource:                    REGISTRY
+eligdate:                      2021-08-10T00:00:00Z
+reachstatus:                   ok
+reachmedia:                    phone
+reachsource:                   REGISTRY
+reachdate:                     2021-08-10T00:00:00Z
+source:                        FRNIC
+
+nic-hdl:                       ANO00-FRNIC
+type:                          PERSON
+contact:                       Ano Nymous
+registrar:                     KIFCORP
+changed:                       2023-08-09T07:33:14.699476Z
+anonymous:                     YES
+remarks:                       -------------- WARNING --------------
+remarks:                       While the registrar knows him/her,
+remarks:                       this person chose to restrict access
+remarks:                       to his/her personal data. So PLEASE,
+remarks:                       don't send emails to Ano Nymous. This
+remarks:                       address is bogus and there is no hope
+remarks:                       of a reply.
+remarks:                       -------------- WARNING --------------
 obsoleted:                     NO
 eppstatus:                     associated
 eppstatus:                     active
@@ -99,5 +81,5 @@ eligstatus:                    not identified
 reachstatus:                   not identified
 source:                        FRNIC
 
->>> WHOIS request date: 2023-04-11T10:57:29.830087Z <<<
+>>> WHOIS request date: 2023-08-11T10:01:48.414443Z <<<
 

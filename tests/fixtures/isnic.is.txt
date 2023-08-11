@@ -9,7 +9,7 @@ admin-c:      JENS-IS
 tech-c:       ISHM-IS
 zone-c:       ISHM-IS
 billing-c:    ISBC-IS
-nserver:      ns-slave01.isnic.is
+nserver:      ht-secondary01.isnic.is
 nserver:      tg-secondary01.isnic.is
 dnssec:       signed delegation
 created:      September  5 2000

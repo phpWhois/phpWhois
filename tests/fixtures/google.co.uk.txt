@@ -23,7 +23,7 @@
         ns3.google.com
         ns4.google.com
 
-    WHOIS lookup made at 11:58:39 11-Apr-2023
+    WHOIS lookup made at 11:02:34 11-Aug-2023
 
 -- 
 This WHOIS information is provided for free by Nominet UK the central registry

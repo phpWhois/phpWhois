@@ -45,7 +45,7 @@ not be according to your records. You have been sent 0 invoices/statements.
 3b. cname                  :
 3c. cnamesub1              :
 3d. cnamesub2              :
-3e. creationdate           : 1995/01/01 00:00:00
+3e. creationdate           : 1994/12/31 22:00:00
 4a. admin                  : REDACTED
 4b. admintitle             : REDACTED
 4c. admincompany           : REDACTED
@@ -62,10 +62,10 @@ not be according to your records. You have been sent 0 invoices/statements.
 5f. tecfax                 : REDACTED
 5g. tecemail               : REDACTED
 5h. tecnic                 : REDACTED
-6a. primnsfqdn             : ns1.above.com
+6a. primnsfqdn             : ns1.abovedomains.com
 6b. primnsip               :
 6c. primnsipv6             :
-6e. secns1fqdn             : ns2.above.com
+6e. secns1fqdn             : ns2.abovedomains.com
 6f. secns1ip               :
 6g. secns1ipv6             :
 6i. secns2fqdn             :

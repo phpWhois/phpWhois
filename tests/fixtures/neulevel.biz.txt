@@ -1,20 +1,20 @@
 Domain Name: neulevel.biz
 Registry Domain ID: D592-BIZ
-Registrar WHOIS Server: whois.biz
+Registrar WHOIS Server:
 Registrar URL: registry.godaddy
 Updated Date: 2022-12-21T23:59:04Z
 Creation Date: 2001-09-30T18:12:59Z
 Registry Expiry Date: 2023-11-06T23:59:00Z
 Registrar: Registry Services, LLC
 Registrar IANA ID: 9998
-Registrar Abuse Contact Email:
-Registrar Abuse Contact Phone:
+Registrar Abuse Contact Email: reg-support@team.neustar
+Registrar Abuse Contact Phone: +1.8446772878
+Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
 Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
 Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
-Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
-Domain Status: serverTransferProhibited https://icann.org/epp#serverTransferProhibited
-Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
 Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+Domain Status: serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited
+Domain Status: serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited
 Registry Registrant ID: REDACTED FOR PRIVACY
 Registrant Name: REDACTED FOR PRIVACY
 Registrant Organization: Registry Services, LLC
@@ -68,7 +68,7 @@ Name Server: pdns3.ultradns.org
 Name Server: pdns2.ultradns.net
 DNSSEC: unsigned
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T10:59:34Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:03:24Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

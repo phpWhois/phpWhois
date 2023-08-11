@@ -10,19 +10,19 @@ Registrar:                     Registry Operations
 Registrar IANA ID:             9999
 Domain Status:                 active https://icann.org/epp#active
 
-Registry Tech ID:              REDACTED_FOR_PRIVACY
-Tech Name:                     REDACTED_FOR_PRIVACY
-Tech Organization:             Afnic Backend Registry Operator
-Tech Contact Status:           associated https://icann.org/epp#associated
-Tech Contact Status:           active https://icann.org/epp#active
-Tech Street:                   REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
-Tech City:                     REDACTED_FOR_PRIVACY
-Tech Postal Code:              REDACTED_FOR_PRIVACY
-Tech State/Province:           REDACTED_FOR_PRIVACY
-Tech Country:                  REDACTED_FOR_PRIVACY
-Tech Phone:                    REDACTED_FOR_PRIVACY
-Tech Fax:                      REDACTED_FOR_PRIVACY
-Tech Email:                    REDACTED_FOR_PRIVACY
+Registry Billing ID:           REDACTED_FOR_PRIVACY
+Billing Name:                  REDACTED_FOR_PRIVACY
+Billing Organization:          Afnic Backend Registry Operator
+Billing Contact Status:        associated https://icann.org/epp#associated
+Billing Contact Status:        active https://icann.org/epp#active
+Billing Street:                REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
+Billing City:                  REDACTED_FOR_PRIVACY
+Billing Postal Code:           REDACTED_FOR_PRIVACY
+Billing State/Province:        REDACTED_FOR_PRIVACY
+Billing Country:               REDACTED_FOR_PRIVACY
+Billing Phone:                 REDACTED_FOR_PRIVACY
+Billing Fax:                   REDACTED_FOR_PRIVACY
+Billing Email:                 REDACTED_FOR_PRIVACY
 
 Registry Registrant ID:        REDACTED_FOR_PRIVACY
 Registrant Name:               REDACTED_FOR_PRIVACY
@@ -38,19 +38,19 @@ Registrant Phone:              REDACTED_FOR_PRIVACY
 Registrant Fax:                REDACTED_FOR_PRIVACY
 Registrant Email:              REDACTED_FOR_PRIVACY
 
-Registry Billing ID:           REDACTED_FOR_PRIVACY
-Billing Name:                  REDACTED_FOR_PRIVACY
-Billing Organization:          Afnic Backend Registry Operator
-Billing Contact Status:        associated https://icann.org/epp#associated
-Billing Contact Status:        active https://icann.org/epp#active
-Billing Street:                REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
-Billing City:                  REDACTED_FOR_PRIVACY
-Billing Postal Code:           REDACTED_FOR_PRIVACY
-Billing State/Province:        REDACTED_FOR_PRIVACY
-Billing Country:               REDACTED_FOR_PRIVACY
-Billing Phone:                 REDACTED_FOR_PRIVACY
-Billing Fax:                   REDACTED_FOR_PRIVACY
-Billing Email:                 REDACTED_FOR_PRIVACY
+Registry Tech ID:              REDACTED_FOR_PRIVACY
+Tech Name:                     REDACTED_FOR_PRIVACY
+Tech Organization:             Afnic Backend Registry Operator
+Tech Contact Status:           associated https://icann.org/epp#associated
+Tech Contact Status:           active https://icann.org/epp#active
+Tech Street:                   REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY, REDACTED_FOR_PRIVACY
+Tech City:                     REDACTED_FOR_PRIVACY
+Tech Postal Code:              REDACTED_FOR_PRIVACY
+Tech State/Province:           REDACTED_FOR_PRIVACY
+Tech Country:                  REDACTED_FOR_PRIVACY
+Tech Phone:                    REDACTED_FOR_PRIVACY
+Tech Fax:                      REDACTED_FOR_PRIVACY
+Tech Email:                    REDACTED_FOR_PRIVACY
 
 Registry Admin ID:             REDACTED_FOR_PRIVACY
 Admin Name:                    REDACTED_FOR_PRIVACY
@@ -67,12 +67,12 @@ Admin Fax:                     REDACTED_FOR_PRIVACY
 Admin Email:                   REDACTED_FOR_PRIVACY
 
 Name Server:                   ns3.nic.fr
-Name Server:                   ns2.nic.fr
 Name Server:                   ns1.nic.fr
+Name Server:                   ns2.nic.fr
 
 DNSSEC:                        signedDelegation
 
->>> WHOIS request date: 2023-04-11T11:00:09.521343Z <<<
+>>> WHOIS request date: 2023-08-11T10:04:19.02107Z <<<
 For more information on Whois status codes, please visit https://icann.org/epp
 
 Rights restricted by copyright.

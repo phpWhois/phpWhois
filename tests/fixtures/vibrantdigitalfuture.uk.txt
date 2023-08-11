@@ -11,8 +11,8 @@
 
     Relevant dates:
         Registered on: 06-Jun-2022
-        Expiry date:  06-Jun-2023
-        Last updated:  31-Jul-2022
+        Expiry date:  06-Jun-2024
+        Last updated:  07-May-2023
 
     Registration status:
         Registered until expiry date.
@@ -21,7 +21,7 @@
         bella.ns.cloudflare.com
         jacob.ns.cloudflare.com
 
-    WHOIS lookup made at 11:58:39 11-Apr-2023
+    WHOIS lookup made at 11:02:34 11-Aug-2023
 
 -- 
 This WHOIS information is provided for free by Nominet UK the central registry

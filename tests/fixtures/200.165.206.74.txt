@@ -1,4 +1,4 @@
-% IP Client: 2.37.252.210
+% IP Client: 2a01:e11:600b:280:c8d7:d17c:f327:2597
  
 % Copyright (c) Nic.br
 %  The use of the data below is only permitted as described in
@@ -6,7 +6,7 @@
 %  being prohibited its distribution, commercialization or
 %  reproduction, in particular, to use it for advertising or
 %  any similar purpose.
-%  2023-04-11T08:00:56-03:00 - IP: 2.37.252.210
+%  2023-08-11T07:05:28-03:00 - IP: 2a01:e11:600b:280:c8d7:d17c:f327:2597
 
 inetnum:     200.165.0.0/16
 aut-num:     AS7738
@@ -15,24 +15,24 @@ owner:       V tal
 ownerid:     02.041.460/0001-93
 responsible: BTCM V.Tal
 country:     BR
-owner-c:     SEIVT1
+owner-c:     SEIVT2
 tech-c:      CGR13
 inetrev:     200.165.206.0/24
 nserver:     ns4.telemar.net.br
-nsstat:      20230408 AA
-nslastaa:    20230408
+nsstat:      20230811 AA
+nslastaa:    20230811
 nserver:     ns2.telemar.net.br
-nsstat:      20230408 AA
-nslastaa:    20230408
+nsstat:      20230811 AA
+nslastaa:    20230811
 created:     20010522
 changed:     20221006
 
-nic-hdl-br:  SEIVT1
+nic-hdl-br:  SEIVT2
 person:      Seguranï¿½a da Informaï¿½ï¿½o Vtal
-e-mail:      registroip@vtal.com
+e-mail:      abuse@vtal.com
 country:     BR
-created:     20220830
-changed:     20230328
+created:     20230328
+changed:     20230412
 
 nic-hdl-br:  BTC14
 person:      Brasil Telecom S. A. - CNRS

@@ -38,12 +38,12 @@ Ref:            https://rdap.arin.net/registry/entity/SOFTL
 OrgTechHandle: IPADM258-ARIN
 OrgTechName:   IP Admin
 OrgTechPhone:  +1-214-442-0601 
-OrgTechEmail:  curtis1977@us.ibm.com
+OrgTechEmail:  ipadmin@softlayer.com
 OrgTechRef:    https://rdap.arin.net/registry/entity/IPADM258-ARIN
 
 OrgAbuseHandle: ABUSE1025-ARIN
 OrgAbuseName:   Abuse
-OrgAbusePhone:  +1-214-442-0601 
+OrgAbusePhone:  +1-214-442-0605 
 OrgAbuseEmail:  abuse@softlayer.com
 OrgAbuseRef:    https://rdap.arin.net/registry/entity/ABUSE1025-ARIN
 

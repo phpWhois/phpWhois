@@ -1,8 +1,6 @@
 Domain Name: china.cn
 ROID: 20030310s10001s00012979-cn
-Domain Status: serverDeleteProhibited
-Domain Status: serverUpdateProhibited
-Domain Status: serverTransferProhibited
+Domain Status: ok
 Registrant: 中国互联网新闻中心
 Registrant Contact Email: songzh@china.org.cn
 Sponsoring Registrar: 北京中科三方网络技术有限公司
@@ -11,5 +9,5 @@ Name Server: vip2.sfndns.cn
 Name Server: ns1.china.org.cn
 Name Server: ns1.china-online.com.cn
 Registration Time: 2003-03-10 19:06:46
-Expiration Time: 2023-05-08 17:08:03
+Expiration Time: 2028-05-08 17:08:03
 DNSSEC: unsigned

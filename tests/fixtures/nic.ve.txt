@@ -2,7 +2,7 @@
 %  Este servidor contiene información autoritativa exclusivamente de dominios .ve
 % 
 % Whoisd Server Version: 3.12.1
-% Timestamp: Tue Apr 11 06:58:43 2023
+% Timestamp: Fri Aug 11 06:02:36 2023
 
 domain:       nic.ve
 registrant:   CON000031823
@@ -33,10 +33,10 @@ created:      08.08.2019 18:03:59
 changed:      25.09.2019 08:52:41
 
 keyset:       KEY000000001
-dnskey:       257 3 8 AwEAAa2H+gaaaqOSDyLkx5AUm7zhzNFUXOv27jQ2fGibYk89dLf487x2VeJ4Pl5z84g9Dj/EbUzo/OWI8V5z7WQryqLhE5Hut9a5qUqRepc6kjxAG2VXUOPf2P7LyE8hAPDzH/fmWkMNXdiJzJnlLq60B+WAlVyQoFHjhiduAEov7ANcyo7i4euuAFkn13K7IPtYFLZyQWX3b5GNsL5vmXbbQReLobORntxcmQto/VAvSJqe0NeuzWaTUsaQVATE2uMJlmWi9L0G4+mvXanHKidUhyWXOfMvyk3ub40vWZpPYUJdmZBJb0zpzAVf9ubmN2AC2Kk7KL3Fn56v1F+tb0gKSeS15+HN4C1CyNuBxg6SH0ouTyMjZt5dUHCJp1D4v7lCHSSGKEaO1suzVdhorDgeyc2FkP383GViYnB/gYPVuwjwVtCztXip/58fnkQ7/EfYv+mXmSp/lcZTvGMZJEZVqPjYsNkmNjzHkZNaGivmOp+I0nW/Fob6L3r1XnkV+jiQNNr+4mWw0Sw3gk7UnMYun2+qKZcSlVtbLlyHEHkyZL9UAhXJDakdx2KNJnzcMepfovpBrfHDMwOfZW4Nq7xTk1HcP7/hAxytLu93jqrAti7ixDjcuGV3Wc6f1wi2U/zwGVou1r1lAUtF3+bv//o9OHC3XmAexneospkdOiY3CLOX
+dnskey:       257 3 8 AwEAAbEaOv6Ua0UPEkYDZ19JQmNhmbCAjj1M4k1wQSM2fbH0GtiNgaKgQSbZZWwot4htxO9b0NMPU48rT6HPm3dJWjjraOK4kHZxDlMx1kfhK3euq/ptQd2imZsMTEyAru064zzZ5uZPwfc02uAc107/QM3r+AJtyAlqojKDycHVnXeBhm/FqOBrqE3noqWv1GNZElsvCjmvf2C4lHi9oKmjSKPX+n0ZulnrM7TORKHIFOnfAs/akrL9r2pFX4KImx8pVIwvSyWVv6CUsLMGBDRQFwFSUGSP8ySVjRmZrZzS1uB+4gN/dicILaubX7TAvXizMBR2pHkr0Rmpb611BGwBozyWWo+coY2MEodm0br7qmHdau+0EfFFb4pv51j0OxRDY3G3qa7qWrm3GOx8g9uFt5ffoE7tpmsQ9YQRolqI0RFiZvjQgbNnMm+kfqc5J/3OU4vau8Lg+6lE8jmSchKwehAcnULEhJkdf1ugq2cs2iuRXg1RGRjmTQXFKMDZ7RvBMAoXckfufPRjZKTucuwUVQcxRjRnjuHoZR93S2ZL7NkpkrFy1RJy3XXQp9pH4QYe+NdHae9g8k7BBN0a1ODmm4ioE+xsksJHjKZdFCdGHYuOhVMkWSCVo2Urtw7qS95hwZB6whF4S4Bq7Gm4mL/myQ1SyMWIZ1kfZw991ICpxFoz
 tech-c:       CON000031823
 registrar:    NIC-VE
 created:      11.03.2020 11:48:43
-changed:      19.08.2022 15:32:48
+changed:      31.07.2023 21:15:57
 
 

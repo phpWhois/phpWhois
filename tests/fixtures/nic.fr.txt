@@ -14,13 +14,13 @@ eppstatus:                     serverTransferProhibited
 eppstatus:                     serverDeleteProhibited
 hold:                          NO
 holder-c:                      NF100-FRNIC
-admin-c:                       DC7-FRNIC
-tech-c:                        JP-FRNIC
+admin-c:                       AFNI30-FRNIC
 tech-c:                        VL-FRNIC
+tech-c:                        JP-FRNIC
 registrar:                     Registry Operations
 Expiry Date:                   2029-12-31T23:00:00Z
 created:                       1995-01-01T00:00:00Z
-last-update:                   2022-10-03T13:42:28.594722Z
+last-update:                   2023-07-25T10:34:58.913794Z
 source:                        FRNIC
 
 nserver:                       ns1.ext.nic.fr
@@ -48,6 +48,27 @@ e-mail:                        support@afnic.fr
 website:                       https://www.afnic.fr
 anonymous:                     No
 registered:                    2014-07-29T15:35:33Z
+source:                        FRNIC
+
+nic-hdl:                       VL-FRNIC
+type:                          PERSON
+contact:                       Vincent Levigneron
+address:                       AFNIC
+address:                       Immeuble Le Stephenson
+address:                       1, rue Stephenson
+address:                       78180 Montigny-le-Bretonneux
+country:                       FR
+phone:                         +33.139308300
+fax-no:                        +33.139308301
+e-mail:                        vincent.levigneron@afnic.fr
+registrar:                     Registry Operations
+changed:                       2019-01-28T16:11:55Z
+anonymous:                     NO
+obsoleted:                     NO
+eppstatus:                     associated
+eppstatus:                     active
+eligstatus:                    not identified
+reachstatus:                   not identified
 source:                        FRNIC
 
 nic-hdl:                       JP-FRNIC
@@ -92,40 +113,19 @@ reachstatus:                   ok
 reachmedia:                    email
 source:                        FRNIC
 
-nic-hdl:                       DC7-FRNIC
-type:                          PERSON
-contact:                       David Chansard
-address:                       AFNIC
-address:                       immeuble le Stephenson
-address:                       1, rue Stephenson
-address:                       Hall A2 - 3eme etage
-address:                       78180 Montigny-Le-Bretonneux
-country:                       FR
-phone:                         +33.139308353
-e-mail:                        david.chansard@nic.fr
-registrar:                     Registry Operations
-changed:                       2022-09-28T11:20:41Z
-anonymous:                     NO
-obsoleted:                     NO
-eppstatus:                     associated
-eppstatus:                     active
-eligstatus:                    not identified
-reachstatus:                   not identified
-source:                        FRNIC
-
-nic-hdl:                       VL-FRNIC
-type:                          PERSON
-contact:                       Vincent Levigneron
-address:                       AFNIC
-address:                       Immeuble Le Stephenson
-address:                       1, rue Stephenson
-address:                       78180 Montigny-le-Bretonneux
+nic-hdl:                       AFNI30-FRNIC
+type:                          ORGANIZATION
+contact:                       ASS FRANC NOMMAGE INTERNET EN COOP
+address:                       Association Française pour le Nommage Internet en Coopération
+address:                       2, rue Stephenson
+address:                       Montigny le Bretonneux
+address:                       78181 Saint Quentin en Yvelines
 country:                       FR
 phone:                         +33.139308300
 fax-no:                        +33.139308301
-e-mail:                        vincent.levigneron@afnic.fr
+e-mail:                        contact@nic.fr
 registrar:                     Registry Operations
-changed:                       2019-01-28T16:11:55Z
+changed:                       2023-07-25T11:44:23.111198Z
 anonymous:                     NO
 obsoleted:                     NO
 eppstatus:                     associated
@@ -134,5 +134,5 @@ eligstatus:                    not identified
 reachstatus:                   not identified
 source:                        FRNIC
 
->>> WHOIS request date: 2023-04-11T10:57:29.454735Z <<<
+>>> WHOIS request date: 2023-08-11T10:01:48.088496Z <<<
 

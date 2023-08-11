@@ -2,7 +2,7 @@ Domain Name: TELSTRA.COM.AU
 Registry Domain ID: D407400000001493667-AU
 Registrar WHOIS Server: whois.auda.org.au
 Registrar URL: https://www.cscdigitalbrand.services
-Last Modified: 2023-03-29T00:04:15Z
+Last Modified: 2023-08-01T22:41:14Z
 Registrar Name: Corporation Service Company (Aust) Pty Ltd
 Registrar Abuse Contact Email: domainabuse@cscglobal.com
 Registrar Abuse Contact Phone: +1.8887802723
@@ -10,6 +10,8 @@ Reseller Name:
 Status: clientDeleteProhibited https://afilias.com.au/get-au/whois-status-codes#clientDeleteProhibited
 Status: serverDeleteProhibited https://afilias.com.au/get-au/whois-status-codes#serverDeleteProhibited
 Status Reason: Registry Lock
+Status: serverRenewProhibited https://afilias.com.au/get-au/whois-status-codes#serverRenewProhibited
+Status Reason: Not Currently Eligible For Renewal
 Status: serverTransferProhibited https://afilias.com.au/get-au/whois-status-codes#serverTransferProhibited
 Status Reason: Registry Lock
 Status: serverUpdateProhibited https://afilias.com.au/get-au/whois-status-codes#serverUpdateProhibited
@@ -22,13 +24,14 @@ Name Server: ADNS01.BIGPOND.COM
 Name Server: ADNS02.BIGPOND.COM
 Name Server: ADNS03.BIGPOND.COM
 Name Server: ADNS04.BIGPOND.COM
+Name Server: A1-185.AKAM.NET
 DNSSEC: unsigned
 Registrant: Telstra Corporation Ltd
 Registrant ID: ABN 33051775556
 Eligibility Type: Company
 Eligibility ID: ABN 33051775556
 
->>> Last update of WHOIS database: 2023-04-11T10:56:28Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:01:03Z <<<
 
 
 

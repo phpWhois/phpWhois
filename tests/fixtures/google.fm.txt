@@ -2,9 +2,9 @@ Domain Name: GOOGLE.FM
 Registry Domain ID: D34865469-CNIC
 Registrar WHOIS Server: whois.markmonitor.com
 Registrar URL:
-Updated Date: 2022-09-12T05:07:08.0Z
+Updated Date: 2023-08-03T09:52:02.0Z
 Creation Date: 2000-09-05T23:59:59.0Z
-Registry Expiry Date: 2023-09-04T23:59:59.0Z
+Registry Expiry Date: 2024-09-04T23:59:59.0Z
 Registrar: MarkMonitor, Inc.
 Registrar IANA ID: 292
 Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
@@ -21,7 +21,7 @@ Billing Email: https://whois.nic.fm/contact/google.fm/billing
 Registrar Abuse Contact Email: ccops@markmonitor.com
 Registrar Abuse Contact Phone: +1.2083895740
 URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of WHOIS database: 2023-04-11T10:57:28.0Z <<<
+>>> Last update of WHOIS database: 2023-08-11T10:01:47.0Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

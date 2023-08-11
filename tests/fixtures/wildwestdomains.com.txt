@@ -20,7 +20,7 @@
    Name Server: CNS2.SECURESERVER.NET
    DNSSEC: unsigned
    URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of whois database: 2023-04-11T10:59:21Z <<<
+>>> Last update of whois database: 2023-08-11T10:02:59Z <<<
 
 For more information on Whois status codes, please visit https://icann.org/epp
 

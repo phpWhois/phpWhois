@@ -60,7 +60,7 @@ Registrar:
 Name servers:
         ns2.google.com
         ns1.google.com
-        ns3.google.com
         ns4.google.com
+        ns3.google.com
 
 Please visit www.eurid.eu for more info.

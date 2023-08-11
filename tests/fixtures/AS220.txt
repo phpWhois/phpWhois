@@ -18,7 +18,6 @@ Updated:        2008-08-18
 Ref:            https://rdap.arin.net/registry/autnum/220
 
 
-
 OrgName:        Air Force Systems Networking
 OrgId:          7ESG
 Address:        501 EAST MOORE DR. BLDG 884 RM 1100 GUNTHER ANNEX
