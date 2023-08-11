@@ -23,10 +23,10 @@ class OrgHandler extends AbstractHandler
             $r['regrinfo']['registered'] = 'unknown';
         }
 
-        $r['regyinfo']['referrer']  = 'http://www.pir.org/';
+        $r['regyinfo']['referrer']  = 'https://thenew.org/org-people/';
         $r['regyinfo']['registrar'] = 'Public Interest Registry';
 
-        if (!array_key_exists('rawdata', $r) && array_key_exists('rawdata', $data_str)) {
+        if( !empty($data_str['rawdata']) ){
             $r['rawdata'] = $data_str['rawdata'];
         }
 
