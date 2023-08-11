@@ -46,7 +46,7 @@ class CoopHandler extends AbstractHandler
             'Email:'          => 'email',
         ];
 
-        $blocks = get_blocks($data_str['rawdata'], $items);
+        $blocks = AbstractHandler::getBlocks($data_str['rawdata'], $items);
 
         $r = [
             'rawdata' => $data_str['rawdata'],
