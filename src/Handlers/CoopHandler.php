@@ -77,7 +77,7 @@ class CoopHandler extends AbstractHandler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = [
+        $r['regyinfo'] = $this->parseRegistryInfo($data_str['rawdata']) ?? [
             'referrer'  => 'https://www.nic.coop',
             'registrar' => '.coop registry',
         ];
