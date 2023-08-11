@@ -99,7 +99,7 @@ class CnHandlerTest extends AbstractHandler
                 'name'    => 'china.cn',
                 // 'changed' => '2020-08-03',
                 'created' => '2003-03-10',
-                'expires' => '2023-05-08',
+                'expires' => '2028-05-08',
             ],
             'registered' => 'yes',
         ];

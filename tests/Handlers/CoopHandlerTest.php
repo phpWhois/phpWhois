@@ -22,6 +22,7 @@
 namespace Tests\Handlers;
 
 use DMS\PHPUnitExtensions\ArraySubset\Assert;
+use Exception;
 use phpWhois\Handlers\CoopHandler;
 
 /**
@@ -46,11 +47,10 @@ class CoopHandlerTest extends AbstractHandler
     }
 
     /**
-     * @return void
-     *
      * @test
+     * @throws Exception
      */
-    public function parseSmileDotCoop()
+    public function parseSmileDotCoop(): void
     {
         $query = 'smile.coop';
 
@@ -79,11 +79,10 @@ class CoopHandlerTest extends AbstractHandler
     }
 
     /**
-     * @return void
-     *
      * @test
+     * @throws Exception
      */
-    public function parseNicDotCoop()
+    public function parseNicDotCoop(): void
     {
         $query = 'nic.coop';
 
@@ -102,6 +101,38 @@ class CoopHandlerTest extends AbstractHandler
                 'changed' => '2022-12-13',
                 'created' => '2022-11-07',
                 'expires' => '2032-11-07',
+            ],
+            'registered' => 'yes',
+        ];
+
+        Assert::assertArraySubset($expected, $actual['regrinfo'], 'Whois data may have changed');
+        $this->assertArrayHasKey('rawdata', $actual);
+        Assert::assertArraySubset($fixture, $actual['rawdata'], 'Fixture data may be out of date');
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function parseDomainsDotCoop(): void
+    {
+        $query = 'domains.coop';
+
+        $fixture = $this->loadFixture($query);
+        $data    = [
+            'rawdata'  => $fixture,
+            'regyinfo' => [],
+        ];
+
+        $actual = $this->handler->parse($data, $query);
+
+        $expected = [
+            'domain'     => [
+                'name' => 'domains.coop',
+                'handle' => 'D7881481-CNIC',
+                'changed' => '2022-12-07',
+                'created' => '2002-07-09',
+                'expires' => '2024-07-09',
             ],
             'registered' => 'yes',
         ];

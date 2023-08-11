@@ -161,8 +161,8 @@ class DeHandlerTest extends AbstractHandler
             'domain' => [
                 'name' => 'humblebundle.de',
                 'nserver' => [
-                    0 => 'ns1.parkingcrew.net',
-                    1 => 'ns2.parkingcrew.net',
+                    0 => 'ns1.sedoparking.com',
+                    1 => 'ns2.sedoparking.com',
                 ],
                 'status' => 'connect',
             ],

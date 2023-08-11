@@ -89,7 +89,7 @@ class CaHandlerTest extends AbstractHandler
         $actual = $this->handler->parse($data, $query);
 
         $this->assertEquals('cira.ca', $actual['regrinfo']['domain']['name']);
-        $this->assertEquals('2023-02-05', $actual['regrinfo']['domain']['changed']);
+        $this->assertEquals('2023-07-05', $actual['regrinfo']['domain']['changed']);
         $this->assertEquals('1998-02-05', $actual['regrinfo']['domain']['created']);
         $this->assertEquals('2050-02-05', $actual['regrinfo']['domain']['expires']);
         $this->assertEquals('yes', $actual['regrinfo']['registered']);

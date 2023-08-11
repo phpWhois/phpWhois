@@ -62,7 +62,7 @@ class PhHandlerTest extends AbstractHandler
         $actual = $this->handler->parse($data, $query);
 
         $this->assertEquals('cityescape.ph', $actual['regrinfo']['domain']['name']);
-        $this->assertEquals('2023-01-18', $actual['regrinfo']['domain']['changed']);
+        $this->assertEquals('2023-08-08', $actual['regrinfo']['domain']['changed']);
         $this->assertEquals('1990-09-14', $actual['regrinfo']['domain']['created']);
         // $this->assertEquals('2021-02-25', $actual['regrinfo']['domain']['expires']);
         $this->assertEquals('yes', $actual['regrinfo']['registered']);

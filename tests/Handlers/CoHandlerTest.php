@@ -97,9 +97,9 @@ class CoHandlerTest extends AbstractHandler
         $expected = [
             'domain'     => [
                 'name'    => 'nic.co',
-                'changed' => '2022-06-07',
+                'changed' => '2023-06-07',
                 'created' => '2010-04-23',
-                'expires' => '2023-04-22',
+                'expires' => '2024-04-22',
             ],
             'registered' => 'yes',
         ];

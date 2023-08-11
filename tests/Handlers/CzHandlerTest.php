@@ -67,7 +67,7 @@ class CzHandlerTest extends AbstractHandler
                 'name'    => 'google.cz',
                 'changed' => '2018-04-23',
                 'created' => '2000-07-21',
-                'expires' => '2023-07-22',
+                'expires' => '2024-07-22',
             ],
             'registered' => 'yes',
         ];

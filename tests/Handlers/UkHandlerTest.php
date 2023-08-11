@@ -65,8 +65,8 @@ class UkHandlerTest extends AbstractHandler
         $expected = [
             'domain'     => [
                 'created' => '2022-06-06',
-                'changed' => '2022-07-31',
-                'expires' => '2023-06-06',
+                'changed' => '2023-05-07',
+                'expires' => '2024-06-06',
             ],
             'registered' => 'no',
         ];

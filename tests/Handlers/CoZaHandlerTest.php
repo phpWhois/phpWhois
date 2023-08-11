@@ -97,7 +97,7 @@ class CoZaHandlerTest extends AbstractHandler
             'domain'     => [
                 'name'    => 'sex.co.za',
                 // 'changed' => '2020-06-07',
-                'created' => '1995-01-01',
+                'created' => '1994-12-31',
                 // 'expires' => '2021-04-22',
             ],
             'registered' => 'yes',

@@ -97,9 +97,9 @@ class FrHandlerTest extends AbstractHandler
         $expected = [
             'domain'     => [
                 'name'    => 'lemonade.fr',
-                'expires' => '2023-07-04',
-                'created' => '2017-09-06',
-                'changed' => '2022-07-04',
+                'expires' => '2025-07-30',
+                'created' => '2023-07-30',
+                'changed' => '2023-08-10',
             ],
             'registered' => 'yes',
         ];
@@ -130,7 +130,7 @@ class FrHandlerTest extends AbstractHandler
             'domain'     => [
                 'name'    => 'nic.fr',
                 'created' => '1995-01-01',
-                'changed' => '2022-10-03',
+                'changed' => '2023-07-25',
                 'expires' => '2029-12-31',
             ],
             'registered' => 'yes',

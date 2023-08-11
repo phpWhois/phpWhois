@@ -65,9 +65,9 @@ class FmHandlerTest extends AbstractHandler
         $expected = [
             'domain'     => [
                 'name' => 'GOOGLE.FM',
-                'changed' => '2022-09-12',
+                'changed' => '2023-08-03',
                 'created' => '2000-09-05',
-                'expires' => '2023-09-04',
+                'expires' => '2024-09-04',
             ],
             'registered' => 'yes',
         ];

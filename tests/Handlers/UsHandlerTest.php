@@ -97,9 +97,9 @@ class UsHandlerTest extends AbstractHandler
         $expected = [
             'domain'     => [
                 'name'    => 'neustar.us',
-                'changed' => '2022-06-02',
+                'changed' => '2023-06-02',
                 'created' => '2002-04-18',
-                'expires' => '2023-04-17',
+                'expires' => '2024-04-17',
             ],
             'registered' => 'yes',
         ];

@@ -62,9 +62,9 @@ class TodayHandlerTest extends AbstractHandler
         $actual = $this->handler->parse($data, $query);
 
         $this->assertEquals('modx.today', $actual['regrinfo']['domain']['name']);
-        $this->assertEquals('2022-06-23', $actual['regrinfo']['domain']['changed']);
+        $this->assertEquals('2023-06-23', $actual['regrinfo']['domain']['changed']);
         $this->assertEquals('2014-05-09', $actual['regrinfo']['domain']['created']);
-        $this->assertEquals('2023-05-09', $actual['regrinfo']['domain']['expires']);
+        $this->assertEquals('2024-05-09', $actual['regrinfo']['domain']['expires']);
         $this->assertEquals('yes', $actual['regrinfo']['registered']);
 
         $this->assertArrayHasKey('rawdata', $actual);

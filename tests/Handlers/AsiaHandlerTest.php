@@ -49,7 +49,7 @@ class AsiaHandlerTest extends AbstractHandler
 
         $expected = [
             'domain'     => [
-                'name'    => 'NIC.ASIA',
+                'name'    => 'nic.asia',
                 'changed' => '2023-02-28',
                 'created' => '2020-02-28',
                 'expires' => '2024-02-28',

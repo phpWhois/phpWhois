@@ -49,7 +49,7 @@ class AeroHandlerTest extends AbstractHandler
 
         $expected = [
             'domain'     => [
-                'name'    => 'NIC.AERO',
+                'name'    => 'nic.aero',
                 'changed' => '2023-03-08',
                 'created' => '2002-03-08',
                 'expires' => '2024-03-08',
