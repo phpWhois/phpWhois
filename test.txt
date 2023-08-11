@@ -109,7 +109,7 @@ aero		nic.aero
 asia		nic.asia
 biz		neulevel.biz
 cat		dominis.cat    google.cat
-coop		smile.coop nic.coop
+coop		smile.coop nic.coop domains.coop
 edu		berkeley.edu
 eu		eurid.eu google.eu
 info		afilias.info
