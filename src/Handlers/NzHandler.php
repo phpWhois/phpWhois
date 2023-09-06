@@ -52,7 +52,7 @@ class NzHandler extends AbstractHandler
         );
 
         $r = array();
-        $r['regrinfo'] = $this->generic_parser_b($data_str['rawdata'], $items);
+        $r['regrinfo'] = static::generic_parser_b($data_str['rawdata'], $items);
 
         if (!empty($r['regrinfo']['domain']['status']))
             $domain_status = substr($r['regrinfo']['domain']['status'], 0, 3);

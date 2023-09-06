@@ -15,7 +15,7 @@ class BizHandler extends AbstractHandler
     public function parse(array $data_str, string $query): array
     {
         $r = [
-            'regrinfo' => $this->generic_parser_b($data_str['rawdata'], [], 'mdy'),
+            'regrinfo' => static::generic_parser_b($data_str['rawdata'], [], 'mdy'),
             'regyinfo' => [
                 'referrer'  => 'http://www.neulevel.biz',
                 'registrar' => 'NEULEVEL',

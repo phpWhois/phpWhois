@@ -44,7 +44,7 @@ class BeHandler extends AbstractHandler
         if ($domainStatus === 'REGISTERED' || $domainStatus === 'NOT AVAILABLE') {
             $r['regrinfo']['registered'] = 'yes';
 
-            $r['regrinfo'] = $this->get_contacts($r['regrinfo'], $trans);
+            $r['regrinfo'] = static::getContacts($r['regrinfo'], $trans);
 
             if (isset($r['regrinfo']['agent'])) {
                 $sponsor = $this->get_contact($r['regrinfo']['agent'], $trans);
@@ -52,7 +52,7 @@ class BeHandler extends AbstractHandler
                 $r['regrinfo']['domain']['sponsor'] = $sponsor;
             }
 
-            $r = $this->format_dates($r, '-mdy');
+            $r = static::formatDates($r, '-mdy');
         } else {
             $r['regrinfo']['registered'] = 'no';
         }

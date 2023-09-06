@@ -31,7 +31,7 @@ class BrHandler extends AbstractHandler
             'billing-c' => 'billing',
         ];
 
-        $r = $this->generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
+        $r = static::generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
         if (in_array('Permission denied.', $r['disclaimer'])) {
             $r['registered'] = 'unknown';

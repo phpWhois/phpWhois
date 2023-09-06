@@ -31,7 +31,7 @@ class AuHandler extends AbstractHandler
         ];
 
         $r = [
-            'regrinfo' => $this->generic_parser_b($data_str['rawdata'], $items),
+            'regrinfo' => static::generic_parser_b($data_str['rawdata'], $items),
             'regyinfo' => [
                 'referrer'  => 'http://www.aunic.net',
                 'registrar' => 'AU-NIC',
