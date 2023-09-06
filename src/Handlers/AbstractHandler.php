@@ -460,7 +460,7 @@ abstract class AbstractHandler implements HandlerInterface
                 $r['registered'] = 'yes';
             }
 
-            $r = format_dates($r, $dateformat);
+            $r = static::formatDates($r, $dateformat);
         }
 
         return $r;
@@ -625,7 +625,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param array $extra_items
      * @param bool  $has_org
      */
-    public static function getContact($array, $extra_items = [], bool $has_org=false): array
+    public static function getContact($array, $extra_items=[], bool $has_org=false): array
     {
         if (!is_array($array)) {
             return array();
@@ -792,7 +792,7 @@ abstract class AbstractHandler implements HandlerInterface
             'Registrar WHOIS Server:'        => 'whois',
         ];
 
-        $registryInfo = $this->generic_parser_b($rawData, $registryItems);
+        $registryInfo = static::generic_parser_b($rawData, $registryItems);
         unset($registryInfo['registered']);
 
         return $registryInfo;

@@ -42,7 +42,7 @@ class ItHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'ymd', $extra),
-            'regyinfo' => [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
                 'registrar' => 'IT-Nic',
                 'referrer' => 'https://www.nic.it/'
             ],

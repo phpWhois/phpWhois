@@ -49,6 +49,11 @@ class CoopHandler extends AbstractHandler
         $blocks = AbstractHandler::getBlocks($data_str['rawdata'], $items);
 
         $r = [
+            'regrinfo' => [],
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://www.nic.coop',
+                'registrar' => '.coop registry',
+            ],
             'rawdata' => $data_str['rawdata'],
         ];
 
@@ -76,11 +81,6 @@ class CoopHandler extends AbstractHandler
         } else {
             $r['regrinfo']['registered'] = 'no';
         }
-
-        $r['regyinfo'] = $this->parseRegistryInfo($data_str['rawdata']) ?? [
-            'referrer'  => 'https://www.nic.coop',
-            'registrar' => '.coop registry',
-        ];
 
         return $r;
     }

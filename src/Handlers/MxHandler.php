@@ -33,12 +33,13 @@ class MxHandler extends AbstractHandler
             'dns:' => '0'
         ];
 
-        $r = [];
-        $r['regrinfo'] = static::easyParser($data_str['rawdata'], $items, 'dmy', $extra);
-
-        $r['regyinfo'] = [
-            'registrar' => 'NIC Mexico',
-            'referrer' => 'https://www.nic.mx/'
+        $r = [
+            'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'dmy', $extra),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'registrar' => 'NIC Mexico',
+                'referrer' => 'https://www.nic.mx/'
+            ],
+            'rawdata'  => $data_str['rawdata'],
         ];
 
         if (empty($r['regrinfo']['domain']['created'])) {

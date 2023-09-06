@@ -63,9 +63,9 @@ class BrHandler extends AbstractHandler
 
         $a = [
             'regrinfo' => $r,
-            'regyinfo' => [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
                 'registrar' => 'BR-NIC',
-                'referrer'  => 'http://www.nic.br',
+                'referrer'  => 'https://www.nic.br',
             ],
             'rawdata'  => $data_str['rawdata'],
         ];

@@ -63,13 +63,14 @@ class RoHandler extends AbstractHandler
             $reg['registered'] = 'no';
         }
 
-        $r = array();
-        $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'https://www.nic.ro',
-            'registrar' => 'nic.ro'
-        );
 
-        return $r;
+        return [
+            'regrinfo' => $reg,
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer' => 'https://www.nic.ro',
+                'registrar' => 'nic.ro'
+            ],
+            'rawdata'  => $data_str['rawdata'],
+        ];
     }
 }

@@ -31,19 +31,17 @@ class RuHandler extends AbstractHandler
         ];
 
         $r = [
+            'regrinfo' => static::generic_parser_b($data_str['rawdata'], $items, 'dmy'),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'http://www.ripn.net',
+                'registrar' => 'RU-CENTER-REG-RIPN',
+            ],
             'rawdata' => $data_str['rawdata'],
         ];
-
-        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'dmy');
 
         if (empty($r['regrinfo']['domain']['status'])) {
             $r['regrinfo']['registered'] = 'no';
         }
-
-        $r['regyinfo'] = [
-            'referrer'  => 'http://www.ripn.net',
-            'registrar' => 'RU-CENTER-REG-RIPN',
-        ];
 
         return $r;
     }

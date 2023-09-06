@@ -27,16 +27,17 @@ class SeHandler extends AbstractHandler
             'holder:' => 'owner.handle',
         ];
 
-        $r = [];
-        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd', false);
+        $r = [
+            'regrinfo' => static::generic_parser_b($data_str['rawdata'], $items, 'ymd', false),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer' => 'https://www.nic-se.se',
+                'registrar' => 'NIC-SE'
+            ],
+            'rawdata'  => $data_str['rawdata'],
+        ];
 
         $r['regrinfo']['registered'] = isset($r['regrinfo']['domain']['name']) ? 'yes' : 'no';
 
-        $r['regyinfo'] = [
-            'referrer' => 'http://www.nic-se.se',
-            'registrar' => 'NIC-SE'
-        ];
-        $r['rawdata'] = $data_str['rawdata'];
         return $r;
     }
 }

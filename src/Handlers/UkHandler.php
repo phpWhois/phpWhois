@@ -36,8 +36,14 @@ class UkHandler extends AbstractHandler
     public function parse(array $data_str, string $query): array
     {
         $rawData = $this->removeBlankLines($data_str['rawdata']);
-        $r       = [
-            'regrinfo' => $this->get_blocks($rawData, static::ITEMS),
+
+        $r = [
+            'regrinfo' => static::getBlocks($rawData, static::ITEMS),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://www.nominet.org.uk',
+                'registrar' => 'Nominet UK',
+            ],
+            'rawdata'  => $data_str['rawdata'] ?? null,
         ];
 
         if (isset($r['regrinfo']['owner'])) {
@@ -45,29 +51,16 @@ class UkHandler extends AbstractHandler
             $r['regrinfo']['domain']['sponsor']     = $r['regrinfo']['domain']['sponsor'][0];
             $r['regrinfo']['registered']            = 'yes';
         } elseif (strpos($query, '.co.uk') && isset($r['regrinfo']['domain']['status'][0])) {
-            if ($r['regrinfo']['domain']['status'][0] == 'Registered until expiry date.') {
+            if ($r['regrinfo']['domain']['status'][0] === 'Registered until expiry date.') {
                 $r['regrinfo']['registered'] = 'yes';
             }
+        } elseif (strpos($data_str['rawdata'][1], 'Error for ')) {
+            $r['regrinfo']['registered']       = 'yes';
+            $r['regrinfo']['domain']['status'] = 'invalid';
         } else {
-            if (strpos($data_str['rawdata'][1], 'Error for ')) {
-                $r['regrinfo']['registered']       = 'yes';
-                $r['regrinfo']['domain']['status'] = 'invalid';
-            } else {
-                $r['regrinfo']['registered'] = 'no';
-            }
+            $r['regrinfo']['registered'] = 'no';
         }
 
-        $r = $this->format_dates($r, 'dmy');
-
-        $r['regyinfo'] = [
-            'referrer'  => 'http://www.nominet.org.uk',
-            'registrar' => 'Nominet UK',
-        ];
-
-        if (!array_key_exists('rawdata', $r) && array_key_exists('rawdata', $data_str)) {
-            $r['rawdata'] = $data_str['rawdata'];
-        }
-
-        return $r;
+        return static::formatDates($r, 'dmy');
     }
 }

@@ -25,13 +25,13 @@ class SiHandler extends AbstractHandler
             'tech-c' => 'tech'
         ];
 
-        $r = [];
-        $r['regrinfo'] = static::generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
-        $r['regyinfo'] = [
-            'referrer' => 'https://www.arnes.si',
-            'registrar' => 'ARNES'
+        return [
+            'regrinfo' => static::generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd'),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer' => 'https://www.arnes.si',
+                'registrar' => 'ARNES'
+            ],
+            'rawdata'  => $data_str['rawdata'],
         ];
-
-        return $r;
     }
 }

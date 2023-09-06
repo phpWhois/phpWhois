@@ -15,7 +15,7 @@ class VeHandler extends AbstractHandler
 {
     public function parse(array $data_str, string $query): array
     {
-        $items = array(
+        $items = [
             'owner' => 'Titular:',
             'domain.name' => 'Nombre de Dominio:',
             'admin' => 'Contacto Administrativo',
@@ -26,30 +26,32 @@ class VeHandler extends AbstractHandler
             'domain.expires' => 'Fecha de Vencimiento:',
             'domain.status' => 'Estatus del dominio:',
             'domain.nserver' => 'Servidor(es) de Nombres de Dominio'
-        );
+        ];
 
-        $r = array();
-        $r['regrinfo'] = static::getBlocks($data_str['rawdata'], $items);
+        $r = [
+            'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer' => 'https://registro.nic.ve',
+                'registrar' => 'NIC-Venezuela - CNTI'
+            ],
+            'rawdata'  => $data_str['rawdata'],
+        ];
 
         if (!isset($r['regrinfo']['domain']['created']) || is_array($r['regrinfo']['domain']['created'])) {
-            $r['regrinfo'] = array('registered' => 'no');
+            $r['regrinfo'] = ['registered' => 'no'];
             return $r;
         }
 
-        $dns = array();
-
+        $dns = [];
         foreach ($r['regrinfo']['domain']['nserver'] as $nserv) {
             if ($nserv[0] === '-') {
                 $dns[] = $nserv;
             }
         }
-
         $r['regrinfo']['domain']['nserver'] = $dns;
+
         $r['regrinfo'] = static::getContacts($r['regrinfo']);
-        $r['regyinfo'] = array(
-            'referrer' => 'https://registro.nic.ve',
-            'registrar' => 'NIC-Venezuela - CNTI'
-        );
+
         return $r;
     }
 }

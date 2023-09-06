@@ -34,7 +34,7 @@ class PtHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
-            'regyinfo' => [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
                 'registrar' => 'FCCN',
                 'referrer' => 'https://www.fccn.pt'
             ],

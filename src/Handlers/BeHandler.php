@@ -31,10 +31,11 @@ class BeHandler extends AbstractHandler
         ];
 
         $rawData = $this->removeBlankLines($data_str['rawdata']);
-        $r       = [
-            'regrinfo' => $this->get_blocks($rawData, $items),
-            'regyinfo' => [
-                'referrer'  => 'http://www.domain-registry.nl',
+
+        $r = [
+            'regrinfo' => static::getBlocks($rawData, $items),
+            'regyinfo' => $this->parseRegistryInfo($rawData) ?? [
+                'referrer'  => 'https://www.domain-registry.nl',
                 'registrar' => 'DNS Belgium',
             ],
             'rawdata'  => $data_str['rawdata'],

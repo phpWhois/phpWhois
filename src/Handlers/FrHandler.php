@@ -41,17 +41,14 @@ class FrHandler extends AbstractHandler
             unset($reg['nserver']);
         }
 
-        $r = [
+        return [
+            'regrinfo' => $reg,
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer' => 'https://www.nic.fr',
+                'registrar' => 'AFNIC',
+            ],
             'rawdata' => $data_str['rawdata'],
         ];
-
-        $r['regrinfo'] = $reg;
-        $r['regyinfo'] = [
-            'referrer' => 'http://www.nic.fr',
-            'registrar' => 'AFNIC',
-        ];
-
-        return $r;
     }
 
     public static function generic_parser_a_blocks(array $rawdata, array $translate, array &$disclaimer=[]): array

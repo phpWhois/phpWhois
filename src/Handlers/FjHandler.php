@@ -24,10 +24,13 @@ class FjHandler extends AbstractHandler
         ];
 
         $r = [
+            'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://www.domains.fj',
+                'registrar' => 'FJ Domain Name Registry',
+            ],
             'rawdata' => $data_str['rawdata'],
         ];
-
-        $r['regrinfo'] = static::getBlocks($data_str['rawdata'], $items);
 
         if (!empty($r['regrinfo']['domain']['status'])) {
             $r['regrinfo'] = static::getContacts($r['regrinfo']);
@@ -46,10 +49,6 @@ class FjHandler extends AbstractHandler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = [
-            'referrer'  => 'http://www.domains.fj',
-            'registrar' => 'FJ Domain Name Registry',
-        ];
 
         return $r;
     }

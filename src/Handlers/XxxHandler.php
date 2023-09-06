@@ -15,15 +15,19 @@ class XxxHandler extends AbstractHandler
 {
     public function parse(array $data_str, string $query): array
     {
-        $r = array();
-        $r['regrinfo'] = static::generic_parser_b($data_str['rawdata']);
+        $r = [
+            'regrinfo' => static::generic_parser_b($data_str['rawdata']),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer' => 'https://www.pir.org/',
+                'registrar' => 'Public Interest Registry'
+            ],
+            'rawdata'  => $data_str['rawdata'],
+        ];
 
         if (!strncmp($data_str['rawdata'][0], 'WHOIS LIMIT EXCEEDED', 20)) {
             $r['regrinfo']['registered'] = 'unknown';
         }
 
-        $r['regyinfo']['referrer'] = 'https://www.pir.org/';
-        $r['regyinfo']['registrar'] = 'Public Interest Registry';
         return $r;
     }
 }

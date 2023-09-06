@@ -43,8 +43,14 @@ class ZanetHandler extends AbstractHandler
             $rawdata[] = $line;
         }
 
-        $r = array();
-        $r['regrinfo'] = static::getBlocks($rawdata, $items);
+        $r = [
+            'regrinfo' => static::getBlocks($rawdata, $items),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://www.za.net/',   // or http://www.za.org
+                'registrar' => 'ZA NiC',
+            ],
+            'rawdata'  => $data_str['rawdata'],
+        ];
 
         if (isset($r['regrinfo']['registered'])) {
             $r['regrinfo']['registered'] = 'no';
@@ -57,9 +63,6 @@ class ZanetHandler extends AbstractHandler
                 $r['regrinfo']['tech'] = static::getContact($r['regrinfo']['tech']);
             }
         }
-
-        $r['regyinfo']['referrer'] = 'httpS://www.za.net/'; // or http://www.za.org
-        $r['regyinfo']['registrar'] = 'ZA NiC';
 
         static::formatDates($r, 'xmdxxy');
 

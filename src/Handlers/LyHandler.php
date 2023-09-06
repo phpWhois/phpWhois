@@ -31,7 +31,7 @@ class LyHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
-            'regyinfo' => [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
                 'referrer' => 'https://www.nic.ly',
                 'registrar' => 'Libya ccTLD'
             ],

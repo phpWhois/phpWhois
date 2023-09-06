@@ -32,10 +32,13 @@ class EuHandler extends AbstractHandler
         ];
 
         $r = [
+            'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://www.eurid.eu',
+                'registrar' => 'EURID',
+            ],
             'rawdata' => $data_str['rawdata'],
         ];
-
-        $r['regrinfo'] = static::getBlocks($data_str['rawdata'], $items);
 
         if (!empty($r['regrinfo']['domain']['status'])) {
             switch ($r['regrinfo']['domain']['status']) {
@@ -62,9 +65,6 @@ class EuHandler extends AbstractHandler
         if (isset($r['regrinfo']['domain']['registrar'])) {
             $r['regrinfo']['domain']['registrar'] = static::getContact($r['regrinfo']['domain']['registrar'], $extra);
         }
-
-        $r['regyinfo']['referrer']  = 'http://www.eurid.eu';
-        $r['regyinfo']['registrar'] = 'EURID';
 
         return $r;
     }

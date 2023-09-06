@@ -29,8 +29,12 @@ class EduHandler extends AbstractHandler
 
         $rawData = $this->removeBlankLines($data_str['rawdata']);
         $r = [
+            'regrinfo' => static::easyParser($rawData, $items, 'dmy'),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://whois.educause.net',
+                'registrar' => 'EDUCASE',
+            ],
             'rawdata'  => $data_str['rawdata'],
-            'regrinfo' => $this->easy_parser($rawData, $items, 'dmy'),
         ];
 
         if (isset($b['tech'])) {
@@ -42,9 +46,6 @@ class EduHandler extends AbstractHandler
         if (!isset($r['regrinfo']['domain']['name'])) {
             $r['regrinfo']['domain']['name'] = $query;
         }
-
-        $r['regyinfo']['referrer']  = 'http://whois.educause.net';
-        $r['regyinfo']['registrar'] = 'EDUCASE';
 
         return $r;
     }

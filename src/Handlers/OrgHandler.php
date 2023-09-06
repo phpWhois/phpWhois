@@ -17,17 +17,15 @@ class OrgHandler extends AbstractHandler
     {
         $r = [
             'regrinfo' => static::generic_parser_b($data_str['rawdata']),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://thenew.org/org-people/',
+                'registrar' => 'Public Interest Registry',
+            ],
+            'rawdata'  => $data_str['rawdata'] ?? null,
         ];
 
         if (!strncmp($data_str['rawdata'][0], 'WHOIS LIMIT EXCEEDED', 20)) {
             $r['regrinfo']['registered'] = 'unknown';
-        }
-
-        $r['regyinfo']['referrer']  = 'https://thenew.org/org-people/';
-        $r['regyinfo']['registrar'] = 'Public Interest Registry';
-
-        if( !empty($data_str['rawdata']) ){
-            $r['rawdata'] = $data_str['rawdata'];
         }
 
         return $r;

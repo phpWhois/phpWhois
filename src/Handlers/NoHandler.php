@@ -23,8 +23,8 @@ class NoHandler extends AbstractHandler
         ];
 
         $r = [
-            'regrinfo' => generic_parser_b($data_str['rawdata'], $items, 'ymd', false),
-            'regyinfo' => [
+            'regrinfo' => static::generic_parser_b($data_str['rawdata'], $items, 'ymd', false),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
                 'referrer'  => 'https://www.norid.no/en/',
                 'registrar' => 'Norid',
             ],

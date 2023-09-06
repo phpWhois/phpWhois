@@ -36,15 +36,13 @@ class CzHandler extends AbstractHandler
             'registrant' => 'owner',
         ];
 
-        $r             = [
+        $r = [
+            'regrinfo' => static::generic_parser_a($data_str['rawdata'], $translate, $contacts),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+                'referrer'  => 'https://www.nic.cz',
+                'registrar' => 'CZ-NIC',
+            ],
             'rawdata' => $data_str['rawdata'],
-        ];
-
-        $r['regrinfo'] = static::generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'dmy');
-
-        $r['regyinfo'] = [
-            'referrer'  => 'http://www.nic.cz',
-            'registrar' => 'CZ-NIC',
         ];
 
         if ($data_str['rawdata'][0] === 'Your connection limit exceeded. Please slow down and try again later.') {

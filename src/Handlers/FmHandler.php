@@ -17,7 +17,7 @@ class FmHandler extends AbstractHandler
     {
         $r = [
             'regrinfo' => static::generic_parser_b($data_str['rawdata']),
-            'regyinfo' => [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
                 'registrar' => 'dotFM',
                 'referrer' => 'https://www.dot.dm'
             ],

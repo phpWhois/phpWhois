@@ -37,10 +37,11 @@ class DeHandler extends AbstractHandler
         ];
 
         $rawData = $this->removeBlankLines($data_str['rawdata']);
-        $r       = [
+
+        $r = [
             'rawdata'  => $data_str['rawdata'],
             'regrinfo' => static::easyParser($rawData, $items, 'ymd', $extra),
-            'regyinfo' => [
+            'regyinfo' => $this->parseRegistryInfo($rawData) ?? [
                 'registrar' => 'DENIC eG',
                 'referrer'  => 'https://www.denic.de/',
             ],

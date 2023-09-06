@@ -23,7 +23,8 @@ class PhHandler extends AbstractHandler
         ];
 
         $r = [
-            'regrinfo' => generic_parser_b($data_str['rawdata'], $items),
+            'regrinfo' => static::generic_parser_b($data_str['rawdata'], $items),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']),
             'rawdata'  => $data_str['rawdata'],
         ];
 
