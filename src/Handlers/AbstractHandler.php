@@ -145,8 +145,8 @@ abstract class AbstractHandler implements HandlerInterface
     {
         $newblock = false;
         $hasdata = false;
-        $block = array();
-        $blocks = false;
+        $block = [];
+        $blocks = [];
         $gkey = 'main';
         $dend = false;
 
@@ -165,7 +165,7 @@ abstract class AbstractHandler implements HandlerInterface
             }
             if ($newblock && $hasdata) {
                 $blocks[$gkey] = $block;
-                $block = array();
+                $block = [];
                 $gkey = '';
             }
             $dend = true;
