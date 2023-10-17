@@ -27,12 +27,12 @@ class AmHandler extends AbstractHandler
 
         $rawData = $this->removeBlankLines($data_str['rawdata']);
         $r = [
-            'regrinfo' => $this->get_blocks($rawData, $items),
+            'regrinfo' => $this->getBlocks($rawData, $items),
             'rawdata' => $data_str['rawdata'],
         ];
 
         if (!empty($r['regrinfo']['domain']['name'])) {
-            $r['regrinfo']               = $this->get_contacts($r['regrinfo']);
+            $r['regrinfo']               = $this->getContacts($r['regrinfo']);
             $r['regrinfo']['registered'] = 'yes';
         } else {
             $r                           = [];

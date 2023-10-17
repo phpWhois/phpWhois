@@ -32,7 +32,7 @@ class ClHandler extends AbstractHandler
         $rawData = $this->removeBlankLines($data_str['rawdata']);
         $r       = [
             'rawdata'  => $data_str['rawdata'],
-            'regrinfo' => $this->easy_parser($rawData, $items, 'd-m-y', $trans),
+            'regrinfo' => $this->easyParser($rawData, $items, 'd-m-y', $trans),
         ];
 
         if (!isset($r['regrinfo']['domain']['name'])) {

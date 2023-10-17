@@ -22,17 +22,11 @@ abstract class AbstractHandler implements HandlerInterface
 
     /**
      * @param string[] $lines
-     *
      * @return string[]
      */
     protected function removeBlankLines(array $lines): array
     {
-        return array_filter(
-            $lines,
-            static function ($s) {
-                return !empty($s);
-            }
-        );
+        return array_filter($lines);
     }
 
     /**
@@ -53,8 +47,9 @@ abstract class AbstractHandler implements HandlerInterface
     }
 
     /**
-     * @param mixed $res
+     * @param mixed  $res
      * @param string $format
+     * @return array
      */
     public static function formatDates(&$res, string $format='mdy'): array
     {
@@ -63,8 +58,11 @@ abstract class AbstractHandler implements HandlerInterface
         }
 
         foreach ($res as $key => $val) {
-            if (is_array($val)) {
-                if (!is_numeric($key) && ($key === 'expires' || $key === 'created' || $key === 'changed')) {
+
+            $key_to_ignore = (!is_numeric($key) && ($key === 'expires' || $key === 'created' || $key === 'changed'));
+
+            if( is_array($val) ){
+                if( $key_to_ignore ) {
                     $d = static::getDate($val[0], $format);
                     if ($d) {
                         $res[$key] = $d;
@@ -72,12 +70,10 @@ abstract class AbstractHandler implements HandlerInterface
                 } else {
                     $res[$key] = static::formatDates($val, $format);
                 }
-            } else {
-                if (!is_numeric($key) && ($key === 'expires' || $key === 'created' || $key === 'changed')) {
-                    $d = static::getDate($val, $format);
-                    if ($d) {
-                        $res[$key] = $d;
-                    }
+            } elseif( $key_to_ignore ){
+                $d = static::getDate($val, $format);
+                if( $d ){
+                    $res[$key] = $d;
                 }
             }
         }
@@ -199,7 +195,7 @@ abstract class AbstractHandler implements HandlerInterface
 
             if (isset($block[$k]) && is_array($block[$k])) {
                 $block[$k][] = $v;
-            } elseif (!isset($block[$k]) || $block[$k] == '') {
+            } elseif (!isset($block[$k]) || $block[$k] === '') {
                 $block[$k] = $v;
             } else {
                 $x = $block[$k];
@@ -226,8 +222,8 @@ abstract class AbstractHandler implements HandlerInterface
      */
     public static function generic_parser_b( array $rawdata, array $items=[], string $dateformat='mdy', bool $hasreg=true, bool $scanall=false): array
     {
-        if (is_array($items) && !count($items)) {
-            $items = array(
+        if( empty($items) ){
+            $items = [
                 'Domain Name:' => 'domain.name',
                 'Domain ID:' => 'domain.handle',
                 'Sponsoring Registrar:' => 'domain.sponsor',
@@ -414,7 +410,7 @@ abstract class AbstractHandler implements HandlerInterface
                 'Zone Phone Number:' => 'zone.phone',
                 'Zone Fax Number:' => 'zone.fax',
                 'Zone Email:' => 'zone.email'
-            );
+            ];
         }
 
         $r = [];
@@ -469,8 +465,9 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * @param array $rawdata
      * @param array $items
-     * @param bool     $partial_match
-     * @param bool     $def_block
+     * @param bool  $partial_match
+     * @param bool  $def_block
+     * @return array
      */
     public static function getBlocks( array $rawdata, array $items, bool $partial_match=false, bool $def_block=false ): array
     {
@@ -591,7 +588,7 @@ abstract class AbstractHandler implements HandlerInterface
      *
      * @return mixed
      */
-    public static function getContacts($array, $extra_items = [], $has_org = false)
+    public static function getContacts($array, array $extra_items=[], bool $has_org=false)
     {
         if (isset($array['billing'])) {
             $array['billing'] = static::getContact($array['billing'], $extra_items, $has_org);
@@ -625,7 +622,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param array $extra_items
      * @param bool  $has_org
      */
-    public static function getContact($array, $extra_items=[], bool $has_org=false): array
+    public static function getContact($array, array $extra_items=[], bool $has_org=false): array
     {
         if (!is_array($array)) {
             return array();
@@ -1026,62 +1023,6 @@ abstract class AbstractHandler implements HandlerInterface
         }
 
         return false;
-    }
-
-
-    ////////////////
-    // Deprecated functions names
-
-    /**
-     * @deprecated Use static::get_blocks
-     */
-    function get_blocks($rawdata, $items, $partial_match = false, $def_block = false)
-    {
-        return static::getBlocks($rawdata, $items, $partial_match, $def_block);
-    }
-
-    /**
-     * @deprecated Use static::easyParser
-     */
-    function easy_parser($data_str, $items, $date_format, $translate = array(), $has_org = false, $partial_match = false, $def_block = false)
-    {
-        return static::easyParser($data_str, $items, $date_format, $translate, $has_org, $partial_match, $def_block);
-    }
-
-    /**
-     * @deprecated Use static::getContacts
-     */
-    function get_contacts($array, $extra_items = array(), $has_org = false)
-    {
-        return static::getContacts($array,$extra_items,$has_org);
-    }
-
-    /**
-     * @param       $array
-     * @param array $extra_items
-     * @param bool  $has_org
-     *
-     * @return array
-     */
-    function get_contact($array, $extra_items = array(), $has_org = false)
-    {
-        return static::getContact($array,$extra_items,$has_org);
-    }
-
-    /**
-     * @deprecated Use static::formatDates
-     */
-    function format_dates(&$res, $format = 'mdy')
-    {
-        return static::formatDates($res,$format);
-    }
-
-    /**
-     * @deprecated Use static::getDate
-     */
-    function get_date($date, $format)
-    {
-        return static::getDate($date,$format);
     }
 
 }

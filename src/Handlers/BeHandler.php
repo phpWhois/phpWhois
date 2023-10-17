@@ -48,7 +48,7 @@ class BeHandler extends AbstractHandler
             $r['regrinfo'] = static::getContacts($r['regrinfo'], $trans);
 
             if (isset($r['regrinfo']['agent'])) {
-                $sponsor = $this->get_contact($r['regrinfo']['agent'], $trans);
+                $sponsor = $this->getContact($r['regrinfo']['agent'], $trans);
                 unset($r['regrinfo']['agent']);
                 $r['regrinfo']['domain']['sponsor'] = $sponsor;
             }

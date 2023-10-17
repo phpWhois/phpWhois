@@ -27,8 +27,8 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-return array(
-'DATA' => array(
+return [
+'DATA' => [
     'bz'       => 'gtld',
     'com'      => 'gtld',
     'jobs'     => 'gtld',
@@ -40,11 +40,11 @@ return array(
     'za.net'   => 'zanet',
     // Punicode
     'xn--p1ai' => 'ru',
-),
+],
 
 /* Non UTF-8 servers */
 
-'NON_UTF8' => array(
+'NON_UTF8' => [
     'br.whois-servers.net'  => 1,
     'ca.whois-servers.net'  => 1,
     'cl.whois-servers.net'  => 1,
@@ -55,22 +55,22 @@ return array(
     'whois.lacnic.net'      => 1,
     'whois.nicline.com'     => 1,
     'whois.ripe.net'        => 1,
-),
+],
 
 /* If whois Server needs any parameters, enter it here */
 
-'WHOIS_PARAM' => array(
+'WHOIS_PARAM' => [
     'com.whois-servers.net' => 'domain =$domain',
     'net.whois-servers.net' => 'domain =$domain',
     'de.whois-servers.net'  => '-T dn,ace $domain',
     'jp.whois-servers.net'  => 'DOM $domain/e',
     'whois.denic.de'        => '-T dn,ace $domain.$tld',
     'whois.dk-hostmaster.dk' => '--show-handles --charset=utf8 $domain.$tld',
-),
+],
 
 /* TLD's that have special whois servers or that can only be reached via HTTP */
 
-'WHOIS_SPECIAL' => array(
+'WHOIS_SPECIAL' => [
     'ac'                     => 'whois.nic.ac',
     'academy'                => 'whois.donuts.co',
     'accountants'            => 'whois.donuts.co',
@@ -645,11 +645,11 @@ return array(
     'xn--yfro4i67o'          => 'whois.sgnic.sg',
     'xn--ygbi2ammx'          => 'whois.pnina.ps',
     'xn--zfr164b'            => 'whois.conac.cn',
-),
+],
 
 /* handled gTLD whois servers */
 
-'WHOIS_GTLD_HANDLER' => array(
+'WHOIS_GTLD_HANDLER' => [
     'whois.bulkregister.com' => 'enom',
     'whois.dotregistrar.com' => 'dotster',
     'whois.namesdirect.com'  => 'dotster',
@@ -660,5 +660,5 @@ return array(
     'whois.nominalia.com'    => 'genericb',
     'whois.encirca.com'      => 'genericb',
     'whois.corenic.net'      => 'genericb'
-),
-);
+],
+];

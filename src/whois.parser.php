@@ -121,19 +121,3 @@ function format_dates(&$res, $format = 'mdy')
 {
     return AbstractHandler::formatDates($res,$format);
 }
-
-/**
- * @deprecated Use AbstractHandler::getDate
- */
-function get_date($date, $format)
-{
-    return AbstractHandler::getDate($date,$format);
-}
-
-/**
- * @deprecated Use AbstractHandler::parseStandardDate
- */
-function parseStandardDate(string $date)
-{
-    return AbstractHandler::parseStandardDate($date);
-}
