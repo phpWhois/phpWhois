@@ -140,7 +140,7 @@ rules in whois.servers.php so phpWhois can do the right thing.
 
 There is also a naming schema that must be followed, country
 handlers are named whois.XX.php, where XX is the iso country
-code. The handler must also define __XX_HANDLER__ and implement
+code. The handler must also define **XX_HANDLER** and implement
 a class named xx_handler with a function named parse that takes
 two arguments: $data_str and $query. $data_str['rawdata']
 contains the raw output of the query and is what need to be parsed
