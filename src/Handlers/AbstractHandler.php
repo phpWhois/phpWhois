@@ -193,11 +193,11 @@ abstract class AbstractHandler implements HandlerInterface
                 $gkey = strtoupper($v);
             }
 
-            if (isset($block[$k]) && is_array($block[$k])) {
+            if( isset($block[$k]) && is_array($block[$k]) ){
                 $block[$k][] = $v;
-            } elseif (!isset($block[$k]) || $block[$k] === '') {
+            }elseif( empty($block[$k]) ){
                 $block[$k] = $v;
-            } else {
+            }else{
                 $x = $block[$k];
                 unset($block[$k]);
                 $block[$k][] = $x;
