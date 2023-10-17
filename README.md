@@ -197,13 +197,13 @@ the `NON_UTF8` array in `whois.servers.php`
 Workflow of getting domain info
 -------------------------------
 
-1. Call method `phpWhois\Whois::lookup()` with domain name as parameter
-2. If second parameter of method is **true** (default), phpWhois will try to
+1.  Call method `phpWhois\Whois::lookup()` with domain name as parameter
+2.  If second parameter of method is **true** (default), phpWhois will try to
     convert the domain name to punycode
-3. If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at
+3.  If domain is not listed in predefined handlers (`WHOIS_SPECIAL` at
     `src/whois.servers.php`), try to query **[tld].whois-servers.net**. If it
     has ip address, assume that it is valid whois server
-4. Try to query found whois server or fill response array with `unknown()`
+4.  Try to query found whois server or fill response array with `unknown()`
     method
 
 Notes 
