@@ -55,7 +55,7 @@ class FrHandler extends AbstractHandler
     {
         $blocks = parent::generic_parser_a_blocks($rawdata, $translate, $disclaimer);
 
-        array_walk_recursive($blocks, static function (&$v, $key){
+        array_walk_recursive($blocks, static function (&$v, $key) {
             if (!in_array($key, ['expires', 'created', 'changed'])) {
                 return;
             }
