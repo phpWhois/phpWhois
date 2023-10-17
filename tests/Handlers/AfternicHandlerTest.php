@@ -62,8 +62,6 @@ class AfternicHandlerTest extends AbstractHandler
 
         $actual = $this->handler->parse($data, $query);
 
-        print_r($actual);
-
         $expected = [
             'domain'     => [
                 'name'    => 'buydomains.com',
