@@ -4,7 +4,7 @@
     You'll need to update the paths in here if you use a directory other than
     one in which this file resides.
 -->
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd" bootstrap="./tests/bootstrap.php" colors="true" cacheDirectory=".phpunit.cache">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true" cacheDirectory=".phpunit.cache">
   <coverage>
     <report>
       <clover outputFile="clover.xml"/>
