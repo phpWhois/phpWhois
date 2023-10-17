@@ -621,6 +621,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param       $array
      * @param array $extra_items
      * @param bool  $has_org
+     * @return array
      */
     public static function getContact($array, array $extra_items=[], bool $has_org=false): array
     {
@@ -628,7 +629,7 @@ abstract class AbstractHandler implements HandlerInterface
             return array();
         }
 
-        $items = array(
+        $items = [
             'fax..:' => 'fax',
             'fax.' => 'fax',
             'fax-no:' => 'fax',
@@ -658,7 +659,7 @@ abstract class AbstractHandler implements HandlerInterface
             'country:' => 'address.country',
             'name:' => 'name',
             'last modified:' => 'changed'
-        );
+        ];
 
         if (is_array($extra_items) && count($extra_items)) {
             foreach ($items as $match => $field) {
@@ -678,7 +679,7 @@ abstract class AbstractHandler implements HandlerInterface
                 $ok = false;
 
                 foreach ($items as $match => $field) {
-                    $pos = strpos(strtolower($val), $match);
+                    $pos = stripos($val,$match);
 
                     if ($pos === false) {
                         continue;
@@ -699,7 +700,6 @@ abstract class AbstractHandler implements HandlerInterface
 
                     $array[$key] = $val;
                     $ok = true;
-                    //break;
                 }
 
                 if (preg_match("/([+]*[-(). x0-9]){7,}/", $val, $matches)) {
@@ -759,7 +759,7 @@ abstract class AbstractHandler implements HandlerInterface
         }
 
         if (isset($r['name']) && is_array($r['name'])) {
-            $r['name'] = implode($r['name'], ' ');
+            $r['name'] = implode(' ',$r['name']);
         }
 
         if (!empty($array)) {
