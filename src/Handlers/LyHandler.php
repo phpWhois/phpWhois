@@ -15,7 +15,7 @@ class LyHandler extends AbstractHandler
 {
     public function parse(array $data_str, string $query): array
     {
-        $items = array(
+        $items = [
             'owner' => 'Registrant:',
             'admin' => 'Administrative Contact:',
             'tech' => 'Technical Contact:',
@@ -25,9 +25,9 @@ class LyHandler extends AbstractHandler
             'domain.changed' => 'Updated:',
             'domain.expires' => 'Expired:',
             'domain.nserver' => 'Domain servers in listed order:'
-        );
+        ];
 
-        $extra = array('zip/postal code:' => 'address.pcode');
+        $extra = ['zip/postal code:' => 'address.pcode'];
 
         $r = [
             'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
@@ -42,7 +42,7 @@ class LyHandler extends AbstractHandler
             $r['regrinfo']['domain']['name'] = $r['regrinfo']['domain']['name'][0];
             $r['regrinfo']['registered'] = 'yes';
         } else {
-            $r = array('regrinfo' => array());
+            $r = ['regrinfo' => []];
             $r['regrinfo']['registered'] = 'no';
         }
 
