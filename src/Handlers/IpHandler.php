@@ -96,7 +96,6 @@ class IpHandler extends WhoisClient
                         list($low, $high) = explode('-', str_replace(' ', '', substr($line, $p + strlen($net) + 3)));
 
                         if (!isset($done[$net]) && $ip >= ip2long($low) && $ip <= ip2long($high)) {
-                            $owner = substr($line, 0, $p - 1);
 
                             if (!empty($this->REGISTRARS['owner'])) {
                                 $this->handle_rwhois($this->REGISTRARS['owner'], $query);
@@ -141,7 +140,6 @@ class IpHandler extends WhoisClient
 
                 $result = $this->parse_results($result, $rwdata, $query, $srv_data['reset']);
                 $result = $this->setWhoisInfo($result);
-                $reset = false;
             }
         }
 

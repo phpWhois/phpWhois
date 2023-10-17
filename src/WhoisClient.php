@@ -446,7 +446,7 @@ class WhoisClient
 
             // Failed this attempt
             $this->query['status'] = 'error';
-            $this->query['error'][] = $errstr;
+            $this->query['error'][] = "[$errno] $errstr";
             $retry++;
 
             // Sleep before retrying

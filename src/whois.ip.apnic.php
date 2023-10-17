@@ -80,7 +80,6 @@ class apnic_handler
                         $blk = $rb[$key];
                     }
 
-                    //$blk = strtoupper(strtok($blk,' '));
                     if (isset($blocks[$blk])) {
                         $r[$val] = $blocks[$blk];
                     }
