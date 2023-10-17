@@ -8,8 +8,6 @@ namespace Tests;
 
 use phpWhois\Handlers\AbstractHandler;
 
-require_once __DIR__ . '/../src/whois.parser.php';
-
 /**
  * ParserTest
  */
