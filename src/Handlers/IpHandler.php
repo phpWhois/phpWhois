@@ -180,7 +180,7 @@ class IpHandler extends WhoisClient
                 $result['rawdata'][] = $line;
             }
 
-            foreach ($rwres['regrinfo'] as $key => $data) {
+            foreach ($rwres['regrinfo'] as $key => $_) {
                 $result = $this->join_result($result, $key, $rwres);
             }
         }
