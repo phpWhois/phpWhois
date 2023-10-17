@@ -21,32 +21,35 @@ class IpHandler extends WhoisClient
      * Lucich: I ask me the same question... :-D
      */
     public $deepWhois = true;
-    public $REGISTRARS = array(
+
+    public $REGISTRARS = [
         'European Regional Internet Registry/RIPE NCC' => 'whois.ripe.net',
         'RIPE Network Coordination Centre' => 'whois.ripe.net',
         'Asia Pacific Network Information	Center' => 'whois.apnic.net',
         'Asia Pacific Network Information Centre' => 'whois.apnic.net',
         'Latin American and Caribbean IP address Regional Registry' => 'whois.lacnic.net',
         'African Network Information Center' => 'whois.afrinic.net'
-    );
-    public $HANDLERS = array(
+    ];
+
+    public $HANDLERS = [
         'whois.krnic.net' => 'krnic',
         'whois.apnic.net' => 'apnic',
         'whois.ripe.net' => 'ripe',
         'whois.arin.net' => 'arin',
         'whois.lacnic.net' => 'lacnic',
         'whois.afrinic.net' => 'afrinic'
-    );
-    public $more_data = array(); // More queries to get more accurated data
-    public $done = array();
+    ];
+
+    public $more_data = []; // More queries to get more accurated data
+    public $done = [];
 
     public function parse($data, $query)
     {
-        $result = array(
-            'regrinfo' => array(),
-            'regyinfo' => array(),
-            'rawdata' => array(),
-        );
+        $result = [
+            'regrinfo' => [],
+            'regyinfo' => [],
+            'rawdata' => [],
+        ];
         $result['regyinfo']['registrar'] = 'American Registry for Internet Numbers (ARIN)';
 
         if (strpos($query, '.') === false) {
@@ -59,7 +62,7 @@ class IpHandler extends WhoisClient
             return null;
         }
 
-        $this->query = array();
+        $this->query = [];
         $this->query['server'] = 'whois.arin.net';
         $this->query['query'] = $query;
 
@@ -69,10 +72,10 @@ class IpHandler extends WhoisClient
             return $result;
         }
 
-        $presults = array();
+        $presults = [];
         $presults[] = $rawdata;
         $ip = ip2long($query);
-        $done = array();
+        $done = [];
 
         while (count($presults) > 0) {
             $rwdata = array_shift($presults);
