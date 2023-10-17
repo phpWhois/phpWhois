@@ -37,12 +37,6 @@ class EduHandler extends AbstractHandler
             'rawdata'  => $data_str['rawdata'],
         ];
 
-        if (isset($b['tech'])) {
-            if ($r['regrinfo']['tech']['name'] === 'Same as above') {
-                $r['regrinfo']['tech'] = $r['regrinfo']['admin'];
-            }
-        }
-
         if (!isset($r['regrinfo']['domain']['name'])) {
             $r['regrinfo']['domain']['name'] = $query;
         }
